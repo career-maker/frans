@@ -117,6 +117,9 @@ function franciscan_get_default_page_content( $slug ) {
 
             // Section 5: Bible Quote
             'bible_eyebrow'          => 'WORD OF GOD',
+            'bible_quote_line1'      => 'BE STILL AND',
+            'bible_quote_highlight'  => 'KNOW',
+            'bible_quote_line2'      => 'THAT I AM GOD.',
             'bible_quote'            => '"BE STILL AND KNOW THAT I AM GOD."',
             'bible_ref'              => 'Book of Psalms',
 

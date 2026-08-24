@@ -1140,9 +1140,17 @@ function franciscan_render_dashboard_view() {
                                         <label>Scripture Reference</label>
                                         <input type="text" name="bible_ref" class="form-control" value="<?php echo esc_attr( $data['bible_ref'] ?? 'Book of Psalms' ); ?>">
                                     </div>
+                                    <div class="form-group">
+                                        <label>Quote Line 1</label>
+                                        <input type="text" name="bible_quote_line1" class="form-control" value="<?php echo esc_attr( $data['bible_quote_line1'] ?? 'BE STILL AND' ); ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Highlighted Accent Word <small>(White stroke outline)</small></label>
+                                        <input type="text" name="bible_quote_highlight" class="form-control" value="<?php echo esc_attr( $data['bible_quote_highlight'] ?? 'KNOW' ); ?>" style="border-color: var(--c-gold);">
+                                    </div>
                                     <div class="form-group full-width">
-                                        <label>Bible Quote</label>
-                                        <input type="text" name="bible_quote" class="form-control" value="<?php echo esc_attr( $data['bible_quote'] ?? '"BE STILL AND KNOW THAT I AM GOD."' ); ?>">
+                                        <label>Quote Line 2</label>
+                                        <input type="text" name="bible_quote_line2" class="form-control" value="<?php echo esc_attr( $data['bible_quote_line2'] ?? 'THAT I AM GOD.' ); ?>">
                                     </div>
                                 </div>
                             </div>

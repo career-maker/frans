@@ -335,6 +335,42 @@ get_header();
         <!-- 4. News & Events Section (Exact Reference Center-Aligned Header & Scroll Track) -->
         
           <!-- 3.5 Bible Quote Section -->
+          <?php
+          $bible_line1     = franciscan_get_page_field( 'home', 'bible_quote_line1', '' );
+          $bible_highlight = franciscan_get_page_field( 'home', 'bible_quote_highlight', '' );
+          $bible_line2     = franciscan_get_page_field( 'home', 'bible_quote_line2', '' );
+          $bible_raw       = franciscan_get_page_field( 'home', 'bible_quote', '' );
+
+          if ( ! empty( $bible_line1 ) || ! empty( $bible_highlight ) || ! empty( $bible_line2 ) ) {
+              $rendered_quote = '&ldquo;' . esc_html( $bible_line1 ?: 'BE STILL AND' ) . '<br><span style="color: #4A2A18 !important; -webkit-text-fill-color: #4A2A18 !important; -webkit-text-stroke: 1.5px #ffffff !important; display: inline-block;">' . esc_html( $bible_highlight ?: 'KNOW' ) . '</span> ' . esc_html( $bible_line2 ?: 'THAT I AM GOD.' ) . '&rdquo;';
+          } elseif ( ! empty( $bible_raw ) ) {
+              $trimmed = trim( $bible_raw, "\"'\t\n\r \v\0“”" );
+              if ( preg_match( '/\[(.*?)\]/', $trimmed ) ) {
+                  $rendered_quote = '&ldquo;' . preg_replace_callback( '/\[(.*?)\]/', function( $m ) {
+                      return '<span style="color: #4A2A18 !important; -webkit-text-fill-color: #4A2A18 !important; -webkit-text-stroke: 1.5px #ffffff !important; display: inline-block;">' . esc_html( $m[1] ) . '</span>';
+                  }, esc_html( $trimmed ) ) . '&rdquo;';
+              } else {
+                  $words = explode( ' ', $trimmed );
+                  $found_idx = false;
+                  foreach ( $words as $i => $w ) {
+                      if ( strcasecmp( preg_replace( '/[^a-zA-Z]/', '', $w ), 'KNOW' ) === 0 ) {
+                          $found_idx = $i;
+                          break;
+                      }
+                  }
+                  if ( $found_idx !== false && $found_idx > 0 ) {
+                      $p1 = implode( ' ', array_slice( $words, 0, $found_idx ) );
+                      $hw = $words[$found_idx];
+                      $p2 = implode( ' ', array_slice( $words, $found_idx + 1 ) );
+                      $rendered_quote = '&ldquo;' . esc_html( $p1 ) . '<br><span style="color: #4A2A18 !important; -webkit-text-fill-color: #4A2A18 !important; -webkit-text-stroke: 1.5px #ffffff !important; display: inline-block;">' . esc_html( $hw ) . '</span> ' . esc_html( $p2 ) . '&rdquo;';
+                  } else {
+                      $rendered_quote = '&ldquo;BE STILL AND<br><span style="color: #4A2A18 !important; -webkit-text-fill-color: #4A2A18 !important; -webkit-text-stroke: 1.5px #ffffff !important; display: inline-block;">KNOW</span> THAT I AM GOD.&rdquo;';
+                  }
+              }
+          } else {
+              $rendered_quote = '&ldquo;BE STILL AND<br><span style="color: #4A2A18 !important; -webkit-text-fill-color: #4A2A18 !important; -webkit-text-stroke: 1.5px #ffffff !important; display: inline-block;">KNOW</span> THAT I AM GOD.&rdquo;';
+          }
+          ?>
           <section id="bible-quote-section" style="padding: clamp(2rem, 4vw, 3.5rem) 0; background-color: #0a0a0a; background-image: url('<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/word-of-god-bg.jpg' ); ?>'); background-size: cover; background-position: center; background-repeat: no-repeat; color: #ffffff; text-align: center; border-radius: 32px; margin: 0 clamp(1rem, 3vw, 3rem) clamp(1.5rem, 3vw, 2.5rem) clamp(1rem, 3vw, 3rem); position: relative; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.2);">
               <!-- Black overlay so the verse stays legible over the photograph -->
               <div aria-hidden="true" style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(8,7,6,0.86) 0%, rgba(8,7,6,0.78) 50%, rgba(8,7,6,0.88) 100%); z-index: 1; pointer-events: none;"></div>
@@ -345,7 +381,7 @@ get_header();
                   </div>
                   
                   <h2 style="font-family: 'Phudu', sans-serif !important; font-size: clamp(2.8rem, 6vw, 4.5rem) !important; font-weight: 700 !important; color: #ffffff !important; text-transform: uppercase; line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 1.5rem;">
-                      <?php echo nl2br( esc_html( franciscan_get_page_field( 'home', 'bible_quote', '"BE STILL AND KNOW THAT I AM GOD."' ) ) ); ?>
+                      <?php echo $rendered_quote; ?>
                   </h2>
                   
                   <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #a8a29e; margin: 0; display: inline-flex; align-items: center; justify-content: center; gap: 0.8rem;">
