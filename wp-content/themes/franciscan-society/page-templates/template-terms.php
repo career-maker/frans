@@ -647,15 +647,23 @@ button.fs-mega-toggle:focus::after {
 
 <main id="main-content" style="padding-top: 0; background-color: #FFFFFF;">
 
+    <?php
+    $hero_badge     = function_exists('franciscan_get_page_field') ? franciscan_get_page_field( 'terms', 'hero_badge', 'LEGAL POLICIES' ) : 'LEGAL POLICIES';
+    $hero_title     = function_exists('franciscan_get_page_field') ? franciscan_get_page_field( 'terms', 'hero_title', 'TERMS & CONDITIONS' ) : 'TERMS & CONDITIONS';
+    $hero_image     = function_exists('franciscan_get_page_field') ? franciscan_get_page_field( 'terms', 'hero_image', FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_51_30_PM.png' ) : ( FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_51_30_PM.png' );
+    $eyebrow        = function_exists('franciscan_get_page_field') ? franciscan_get_page_field( 'terms', 'eyebrow', 'LEGAL' ) : 'LEGAL';
+    $custom_content = function_exists('franciscan_get_page_field') ? franciscan_get_page_field( 'terms', 'page_content', '' ) : '';
+    ?>
+
     <!-- Page Hero -->
-    <section class="page-hero-banner" style="position: relative; padding: 11rem 2rem 7rem 2rem; background: url('<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_51_30_PM.png' ); ?>') center/cover no-repeat; text-align: center; overflow: hidden;">
+    <section class="page-hero-banner" style="position: relative; padding: 11rem 2rem 7rem 2rem; background: url('<?php echo esc_url( $hero_image ); ?>') center/cover no-repeat; text-align: center; overflow: hidden;">
         <div style="position: absolute; inset: 0; background-color: rgba(12, 11, 10, 0.72);"></div>
         <div style="max-width: 800px; margin: 0 auto; position: relative; z-index: 2; text-align: center;">
             <div style="display: inline-flex; align-items: center; gap: 0.6rem; background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); padding: 0.5rem 1.2rem; border-radius: 50px; margin-bottom: 1.5rem; border: 1px solid rgba(255,255,255,0.2);">
                 <span style="width: 8px; height: 8px; background-color: #e6c888; border-radius: 50%; display: inline-block;"></span>
-                <span style="color: #ffffff; font-size: 0.85rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; font-family: 'Instrument Sans', sans-serif;">LEGAL POLICIES</span>
+                <span style="color: #ffffff; font-size: 0.85rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; font-family: 'Instrument Sans', sans-serif;"><?php echo esc_html( $hero_badge ); ?></span>
             </div>
-            <h1 style="font-family: 'Phudu', sans-serif; font-size: clamp(2.8rem, 5vw, 4.2rem); font-weight: 700; color: #ffffff; text-transform: uppercase; margin: 0;">TERMS &amp; CONDITIONS</h1>
+            <h1 style="font-family: 'Phudu', sans-serif; font-size: clamp(2.8rem, 5vw, 4.2rem); font-weight: 700; color: #ffffff; text-transform: uppercase; margin: 0;"><?php echo esc_html( $hero_title ); ?></h1>
         </div>
     </section>
 
@@ -664,49 +672,61 @@ button.fs-mega-toggle:focus::after {
 
         <div style="display: inline-flex; align-items: center; gap: 0.5rem; margin-bottom: 1.4rem;">
             <span style="width: 6px; height: 6px; background-color: #4A2A18; border-radius: 50%; display: inline-block;"></span>
-            <span style="color: #4A2A18; font-size: 0.78rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; font-family: 'Instrument Sans', sans-serif;">LEGAL</span>
+            <span style="color: #4A2A18; font-size: 0.78rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; font-family: 'Instrument Sans', sans-serif;"><?php echo esc_html( $eyebrow ); ?></span>
         </div>
 
         <div style="font-family: 'Instrument Sans', sans-serif; font-size: 1rem; color: #57534e; line-height: 1.8;">
 
-            <h2 style="font-family: 'Phudu', sans-serif; font-size: 1.5rem; font-weight: 600; color: #1c1917; text-transform: uppercase; margin-top: 2rem; margin-bottom: 1rem;">1. ACCEPTANCE OF TERMS</h2>
-            <p>By accessing and using this website, you accept and agree to be bound by the terms and provision of this agreement. If you do not agree to abide by the above, please do not use this service.</p>
+            <?php if ( ! empty( $custom_content ) ) : ?>
+                <div class="custom-legal-body">
+                    <?php echo wp_kses_post( wpautop( $custom_content ) ); ?>
+                </div>
+            <?php else : ?>
 
-            <h2 style="font-family: 'Phudu', sans-serif; font-size: 1.5rem; font-weight: 600; color: #1c1917; text-transform: uppercase; margin-top: 2rem; margin-bottom: 1rem;">2. USE LICENSE</h2>
-            <p>Permission is granted to temporarily download one copy of the materials (information or software) from the Franciscan Society website for personal, non-commercial transitory viewing only. This is the grant of a license, not a transfer of title, and under this license you may not:</p>
-            <ul style="margin: 1rem 0; padding-left: 2rem;">
-                <li>Modify or copy the materials</li>
-                <li>Use the materials for any commercial purpose or for any public display</li>
-                <li>Attempt to reverse engineer any software contained on the website</li>
-                <li>Remove any copyright or other proprietary notations from the materials</li>
-                <li>Transfer the materials to another person or "mirror" the materials on any other server</li>
-            </ul>
+                <h2 style="font-family: 'Phudu', sans-serif; font-size: 1.5rem; font-weight: 600; color: #1c1917; text-transform: uppercase; margin-top: 2rem; margin-bottom: 1rem;">1. ACCEPTANCE OF TERMS</h2>
+                <p>By accessing and using this website, you accept and agree to be bound by the terms and provision of this agreement. If you do not agree to abide by the above, please do not use this service.</p>
 
-            <h2 style="font-family: 'Phudu', sans-serif; font-size: 1.5rem; font-weight: 600; color: #1c1917; text-transform: uppercase; margin-top: 2rem; margin-bottom: 1rem;">3. DISCLAIMER</h2>
-            <p>The materials on the Franciscan Society website are provided for informational purposes only. We make no warranties, expressed or implied, and hereby disclaim and negate all other warranties including, without limitation, implied warranties or conditions of merchantability, fitness for a particular purpose, or non-infringement of intellectual property or other violation of rights.</p>
+                <h2 style="font-family: 'Phudu', sans-serif; font-size: 1.5rem; font-weight: 600; color: #1c1917; text-transform: uppercase; margin-top: 2rem; margin-bottom: 1rem;">2. USE LICENSE</h2>
+                <p>Permission is granted to temporarily download one copy of the materials (information or software) from the Franciscan Society website for personal, non-commercial transitory viewing only. This is the grant of a license, not a transfer of title, and under this license you may not:</p>
+                <ul style="margin: 1rem 0; padding-left: 2rem;">
+                    <li>Modify or copy the materials</li>
+                    <li>Use the materials for any commercial purpose or for any public display</li>
+                    <li>Attempt to reverse engineer any software contained on the website</li>
+                    <li>Remove any copyright or other proprietary notations from the materials</li>
+                    <li>Transfer the materials to another person or "mirror" the materials on any other server</li>
+                </ul>
 
-            <h2 style="font-family: 'Phudu', sans-serif; font-size: 1.5rem; font-weight: 600; color: #1c1917; text-transform: uppercase; margin-top: 2rem; margin-bottom: 1rem;">4. LIMITATIONS</h2>
-            <p>In no event shall the Franciscan Society or its suppliers be liable for any damages (including, without limitation, damages for loss of data or profit, or due to business interruption) arising out of the use or inability to use the materials on the website, even if we or our authorized representative has been notified orally or in writing of the possibility of such damage.</p>
+                <h2 style="font-family: 'Phudu', sans-serif; font-size: 1.5rem; font-weight: 600; color: #1c1917; text-transform: uppercase; margin-top: 2rem; margin-bottom: 1rem;">3. DISCLAIMER</h2>
+                <p>The materials on the Franciscan Society website are provided for informational purposes only. We make no warranties, expressed or implied, and hereby disclaim and negate all other warranties including, without limitation, implied warranties or conditions of merchantability, fitness for a particular purpose, or non-infringement of intellectual property or other violation of rights.</p>
 
-            <h2 style="font-family: 'Phudu', sans-serif; font-size: 1.5rem; font-weight: 600; color: #1c1917; text-transform: uppercase; margin-top: 2rem; margin-bottom: 1rem;">5. ACCURACY OF MATERIALS</h2>
-            <p>The materials appearing on the Franciscan Society website could include technical, typographical, or photographic errors. We do not warrant that any of the materials on the website are accurate, complete, or current. We may make changes to the materials contained on the website at any time without notice.</p>
+                <h2 style="font-family: 'Phudu', sans-serif; font-size: 1.5rem; font-weight: 600; color: #1c1917; text-transform: uppercase; margin-top: 2rem; margin-bottom: 1rem;">4. LIMITATIONS</h2>
+                <p>In no event shall the Franciscan Society or its suppliers be liable for any damages (including, without limitation, damages for loss of data or profit, or due to business interruption) arising out of the use or inability to use the materials on the website, even if we or our authorized representative has been notified orally or in writing of the possibility of such damage.</p>
 
-            <h2 style="font-family: 'Phudu', sans-serif; font-size: 1.5rem; font-weight: 600; color: #1c1917; text-transform: uppercase; margin-top: 2rem; margin-bottom: 1rem;">6. LINKS</h2>
-            <p>We have not reviewed all of the sites linked to our website and are not responsible for the contents of any such linked site. The inclusion of any link does not imply endorsement by us of the site. Use of any such linked website is at the user's own risk.</p>
+                <h2 style="font-family: 'Phudu', sans-serif; font-size: 1.5rem; font-weight: 600; color: #1c1917; text-transform: uppercase; margin-top: 2rem; margin-bottom: 1rem;">5. ACCURACY OF MATERIALS</h2>
+                <p>The materials appearing on the Franciscan Society website could include technical, typographical, or photographic errors. We do not warrant that any of the materials on the website are accurate, complete, or current. We may make changes to the materials contained on the website at any time without notice.</p>
 
-            <h2 style="font-family: 'Phudu', sans-serif; font-size: 1.5rem; font-weight: 600; color: #1c1917; text-transform: uppercase; margin-top: 2rem; margin-bottom: 1rem;">7. MODIFICATIONS</h2>
-            <p>We may revise these terms of service for our website at any time without notice. By using this website, you are agreeing to be bound by the then current version of these terms of service.</p>
+                <h2 style="font-family: 'Phudu', sans-serif; font-size: 1.5rem; font-weight: 600; color: #1c1917; text-transform: uppercase; margin-top: 2rem; margin-bottom: 1rem;">6. LINKS</h2>
+                <p>We have not reviewed all of the sites linked to our website and are not responsible for the contents of any such linked site. The inclusion of any link does not imply endorsement by us of the site. Use of any such linked website is at the user's own risk.</p>
 
-            <h2 style="font-family: 'Phudu', sans-serif; font-size: 1.5rem; font-weight: 600; color: #1c1917; text-transform: uppercase; margin-top: 2rem; margin-bottom: 1rem;">8. GOVERNING LAW</h2>
-            <p>These terms and conditions are governed by and construed in accordance with the laws of India, and you irrevocably submit to the exclusive jurisdiction of the courts in that location.</p>
+                <h2 style="font-family: 'Phudu', sans-serif; font-size: 1.5rem; font-weight: 600; color: #1c1917; text-transform: uppercase; margin-top: 2rem; margin-bottom: 1rem;">7. MODIFICATIONS</h2>
+                <p>We may revise these terms of service for our website at any time without notice. By using this website, you are agreeing to be bound by the then current version of these terms of service.</p>
 
-            <h2 style="font-family: 'Phudu', sans-serif; font-size: 1.5rem; font-weight: 600; color: #1c1917; text-transform: uppercase; margin-top: 2rem; margin-bottom: 1rem;">9. CONTACT INFORMATION</h2>
-            <p>If you have any questions about these Terms & Conditions, please contact us at:<br>
-            Email: <a href="mailto:info@franciscanranchi.org" style="color: #4A2A18; text-decoration: none;">info@franciscanranchi.org</a></p>
+                <h2 style="font-family: 'Phudu', sans-serif; font-size: 1.5rem; font-weight: 600; color: #1c1917; text-transform: uppercase; margin-top: 2rem; margin-bottom: 1rem;">8. GOVERNING LAW</h2>
+                <p>These terms and conditions are governed by and construed in accordance with the laws of India, and you irrevocably submit to the exclusive jurisdiction of the courts in that location.</p>
 
-            <p style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid #e7e5e4; color: #78716c; font-size: 0.9rem;">
-                Last updated: August 2026
-            </p>
+                <h2 style="font-family: 'Phudu', sans-serif; font-size: 1.5rem; font-weight: 600; color: #1c1917; text-transform: uppercase; margin-top: 2rem; margin-bottom: 1rem;">9. CONTACT INFORMATION</h2>
+                <p>If you have any questions about these Terms & Conditions, please contact us at:<br>
+                Email: <a href="mailto:info@franciscanranchi.org" style="color: #4A2A18; text-decoration: none;">info@franciscanranchi.org</a></p>
+
+                <p style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid #e7e5e4; color: #78716c; font-size: 0.9rem;">
+                    Last updated: August 2026
+                </p>
+
+            <?php endif; ?>
+
+        </div>
+
+    </section>
 
         </div>
 

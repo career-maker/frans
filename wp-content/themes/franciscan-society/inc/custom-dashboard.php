@@ -285,6 +285,8 @@ function franciscan_render_dashboard_view() {
         'blogs'                 => 'Blogs & Articles',
         'news_details'          => 'News & Blog Details (Single Article)',
         'contact'               => 'Contact Us',
+        'privacy'               => 'Privacy Policy',
+        'terms'                 => 'Terms & Conditions',
     );
 
     $all_posts = get_posts( array(
@@ -365,6 +367,7 @@ function franciscan_render_dashboard_view() {
                 bottom: 0;
                 left: 0;
                 z-index: 100;
+                transition: width 0.28s cubic-bezier(0.4, 0, 0.2, 1);
             }
             .admin-bar #admin-sidebar {
                 top: 32px;
@@ -376,8 +379,33 @@ function franciscan_render_dashboard_view() {
             }
 
             .sidebar-brand {
-                padding: 1.8rem 1.5rem;
+                padding: 1.5rem 1.4rem;
                 border-bottom: 1px solid var(--c-card-border);
+                transition: padding 0.28s ease;
+            }
+            .sidebar-brand-top {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 0.8rem;
+            }
+            .sidebar-toggle-btn {
+                background: rgba(197, 169, 99, 0.12);
+                border: 1px solid rgba(197, 169, 99, 0.25);
+                color: var(--c-gold);
+                width: 30px;
+                height: 30px;
+                border-radius: 6px;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                padding: 0;
+                transition: all 0.2s ease;
+            }
+            .sidebar-toggle-btn:hover {
+                background: var(--c-gold);
+                color: #0F0E0D;
             }
             .sidebar-brand h1 {
                 font-family: 'Phudu', serif;
@@ -385,11 +413,21 @@ function franciscan_render_dashboard_view() {
                 font-size: 1.2rem;
                 letter-spacing: 0.05em;
                 text-transform: uppercase;
+                white-space: nowrap;
             }
             .sidebar-brand p {
                 color: var(--c-text-muted);
                 font-size: 0.75rem;
                 margin-top: 0.2rem;
+                white-space: nowrap;
+            }
+            .sidebar-brand-mini {
+                display: none;
+                text-align: center;
+                font-family: 'Phudu', serif;
+                font-size: 1.3rem;
+                color: var(--c-gold);
+                font-weight: 700;
             }
 
             .sidebar-nav {
@@ -413,6 +451,7 @@ function franciscan_render_dashboard_view() {
                 cursor: pointer;
                 transition: all 0.2s ease;
                 border: 1px solid transparent;
+                white-space: nowrap;
             }
             .nav-item:hover {
                 color: var(--c-text);
@@ -440,6 +479,7 @@ function franciscan_render_dashboard_view() {
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
+                transition: padding 0.28s ease;
             }
             .user-tag {
                 display: flex;
@@ -447,6 +487,7 @@ function franciscan_render_dashboard_view() {
                 gap: 0.6rem;
                 font-size: 0.85rem;
                 color: var(--c-text-muted);
+                white-space: nowrap;
             }
             .btn-logout {
                 color: var(--c-danger);
@@ -462,6 +503,49 @@ function franciscan_render_dashboard_view() {
                 padding: 2.5rem 3.5rem;
                 min-height: 100vh;
                 background: #0F0E0D;
+                transition: margin-left 0.28s cubic-bezier(0.4, 0, 0.2, 1), padding 0.28s ease;
+            }
+
+            /* ========================================================== */
+            /* COLLAPSED SIDEBAR STATE */
+            /* ========================================================== */
+            #studio-app.sidebar-collapsed #admin-sidebar {
+                width: 76px;
+            }
+            #studio-app.sidebar-collapsed #admin-main {
+                margin-left: 76px;
+                padding: 2.5rem 2.2rem;
+            }
+            #studio-app.sidebar-collapsed .sidebar-brand {
+                padding: 1.2rem 0.5rem;
+                text-align: center;
+            }
+            #studio-app.sidebar-collapsed .sidebar-brand-top a,
+            #studio-app.sidebar-collapsed .sidebar-brand-full,
+            #studio-app.sidebar-collapsed .nav-item span:not(:first-child),
+            #studio-app.sidebar-collapsed .nav-badge,
+            #studio-app.sidebar-collapsed .user-tag span:last-child,
+            #studio-app.sidebar-collapsed .btn-logout {
+                display: none !important;
+            }
+            #studio-app.sidebar-collapsed .sidebar-brand-top {
+                justify-content: center;
+                margin-bottom: 0.4rem;
+            }
+            #studio-app.sidebar-collapsed .sidebar-brand-mini {
+                display: block !important;
+            }
+            #studio-app.sidebar-collapsed .nav-item {
+                justify-content: center;
+                padding: 0.85rem 0;
+                font-size: 1.25rem;
+            }
+            #studio-app.sidebar-collapsed .sidebar-footer {
+                padding: 1rem 0;
+                justify-content: center;
+            }
+            #studio-app.sidebar-collapsed .sidebar-toggle-btn svg {
+                transform: rotate(180deg);
             }
 
             .top-bar {
@@ -720,41 +804,51 @@ function franciscan_render_dashboard_view() {
         <!-- Sidebar Navigation -->
         <aside id="admin-sidebar">
             <div class="sidebar-brand">
-                <a href="<?php echo esc_url( admin_url() ); ?>" style="display:inline-flex; align-items:center; gap:0.4rem; color:var(--c-gold); font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:0.05em; text-decoration:none; margin-bottom:0.8rem;">
-                    &larr; Standard WP Admin
-                </a>
-                <h1>Franciscan Studio</h1>
-                <p>Ranchi Province Content Hub</p>
+                <div class="sidebar-brand-top">
+                    <a href="<?php echo esc_url( admin_url() ); ?>" class="sidebar-wp-back" style="display:inline-flex; align-items:center; gap:0.4rem; color:var(--c-gold); font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:0.05em; text-decoration:none;">
+                        &larr; Standard WP Admin
+                    </a>
+                    <button type="button" class="sidebar-toggle-btn" id="btn-collapse-sidebar" title="Collapse / Expand Sidebar">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                    </button>
+                </div>
+                <div class="sidebar-brand-full">
+                    <h1>Franciscan Studio</h1>
+                    <p>Ranchi Province Content Hub</p>
+                </div>
+                <div class="sidebar-brand-mini">
+                    FS
+                </div>
             </div>
 
             <nav class="sidebar-nav">
-                <a class="nav-item active" data-tab="overview">
-                    <span>📊</span> Overview
+                <a class="nav-item active" data-tab="overview" title="Overview">
+                    <span>📊</span> <span>Overview</span>
                 </a>
-                <a class="nav-item" data-tab="pages">
-                    <span>📝</span> Pages Content Editor
+                <a class="nav-item" data-tab="pages" title="Pages Content Editor">
+                    <span>📝</span> <span>Pages Content Editor</span>
                     <span class="nav-badge"><?php echo count($managed_pages); ?></span>
                 </a>
-                <a class="nav-item" data-tab="gallery">
-                    <span>🖼️</span> Photo Gallery Hub
+                <a class="nav-item" data-tab="gallery" title="Photo Gallery Hub">
+                    <span>🖼️</span> <span>Photo Gallery Hub</span>
                     <span class="nav-badge" id="gallery-count-badge"><?php echo count( franciscan_get_gallery_items() ); ?></span>
                 </a>
-                <a class="nav-item" data-tab="posts">
-                    <span>📰</span> Blog & News Posts
+                <a class="nav-item" data-tab="posts" title="Blog & News Posts">
+                    <span>📰</span> <span>Blog &amp; News Posts</span>
                     <span class="nav-badge"><?php echo $posts_count; ?></span>
                 </a>
-                <a class="nav-item" data-tab="settings">
-                    <span>⚙️</span> Website Global Settings
+                <a class="nav-item" data-tab="settings" title="Website Global Settings">
+                    <span>⚙️</span> <span>Website Global Settings</span>
                 </a>
-                <a class="nav-item" data-tab="inquiries">
-                    <span>📨</span> Inquiries & Prayers
+                <a class="nav-item" data-tab="inquiries" title="Inquiries & Prayers">
+                    <span>📨</span> <span>Inquiries &amp; Prayers</span>
                     <span class="nav-badge"><?php echo $inquiries_count; ?></span>
                 </a>
-                <a class="nav-item" data-tab="seo">
-                    <span>🔍</span> SEO & Metadata
+                <a class="nav-item" data-tab="seo" title="SEO & Metadata">
+                    <span>🔍</span> <span>SEO &amp; Metadata</span>
                 </a>
-                <a class="nav-item" data-tab="security">
-                    <span>🛡️</span> Security & Health
+                <a class="nav-item" data-tab="security" title="Security & Health">
+                    <span>🛡️</span> <span>Security &amp; Health</span>
                 </a>
             </nav>
 
@@ -774,9 +868,14 @@ function franciscan_render_dashboard_view() {
 
             <!-- Top Action Bar -->
             <div class="top-bar">
-                <div class="page-heading">
-                    <h2 id="view-title">Dashboard Overview</h2>
-                    <p id="view-subtitle">Live frontend synchronization for Franciscan Society Ranchi Province</p>
+                <div style="display:flex; align-items:center; gap:1rem;">
+                    <button type="button" class="sidebar-toggle-btn" id="btn-toggle-sidebar-top" title="Toggle Sidebar" style="width:38px; height:38px; border-radius:8px; background:var(--c-card); border:1px solid var(--c-card-border);">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                    </button>
+                    <div class="page-heading">
+                        <h2 id="view-title">Dashboard Overview</h2>
+                        <p id="view-subtitle">Live frontend synchronization for Franciscan Society Ranchi Province</p>
+                    </div>
                 </div>
                 <a href="<?php echo esc_url( home_url( '/' ) ); ?>" target="_blank" class="btn btn-secondary">
                     <span>🌐</span> View Live Website &rarr;
@@ -2531,6 +2630,26 @@ function franciscan_render_dashboard_view() {
                             </div>
                         <?php endif; ?>
 
+                        <?php if ( $slug === 'privacy' || $slug === 'terms' ) : ?>
+                            <!-- Legal Policy & Terms Content Section -->
+                            <div class="form-section">
+                                <h3 class="form-section-title">📄 Legal Content &amp; Policy Text</h3>
+                                <div class="form-grid single-col">
+                                    <div class="form-group">
+                                        <label>Intro Eyebrow Tag</label>
+                                        <input type="text" name="eyebrow" class="form-control" value="<?php echo esc_attr( $data['eyebrow'] ?? ( $slug === 'privacy' ? 'PRIVACY' : 'LEGAL' ) ); ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Complete Legal Content (HTML / Text)</label>
+                                        <textarea name="page_content" rows="18" class="form-control" placeholder="Enter your custom legal clauses here or leave blank to use the Franciscan standard template..." style="font-family: monospace; font-size: 0.9rem; line-height: 1.6;"><?php echo esc_textarea( $data['page_content'] ?? '' ); ?></textarea>
+                                        <small style="color: var(--c-text-muted); display: block; margin-top: 0.4rem;">
+                                            💡 You can customize headings, bullet points, and clauses directly here. If left empty, the official Franciscan Province standard legal text is displayed.
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endif; ?>
+
                         <!-- Page-Specific SEO & Social Sharing Metadata -->
                         <div class="form-section">
                             <h3 class="form-section-title" style="display:flex; align-items:center; gap:0.5rem;">
@@ -3093,6 +3212,19 @@ function franciscan_render_dashboard_view() {
             toast.text(msg).css('border-color', isError ? '#ef4444' : '#C5A963').fadeIn();
             setTimeout(() => { toast.fadeOut(); }, 3500);
         }
+
+        // Sidebar Collapse System (With LocalStorage Persistence)
+        const isSidebarCollapsed = localStorage.getItem('fs_studio_sidebar_collapsed') === 'true';
+        if (isSidebarCollapsed) {
+            $('#studio-app').addClass('sidebar-collapsed');
+        }
+
+        $('#btn-collapse-sidebar, #btn-toggle-sidebar-top').on('click', function(e) {
+            e.preventDefault();
+            $('#studio-app').toggleClass('sidebar-collapsed');
+            const state = $('#studio-app').hasClass('sidebar-collapsed');
+            localStorage.setItem('fs_studio_sidebar_collapsed', state);
+        });
 
         // Tab Navigation
         $('.sidebar-nav .nav-item').on('click', function() {

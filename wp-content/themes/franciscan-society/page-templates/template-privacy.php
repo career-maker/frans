@@ -647,15 +647,23 @@ button.fs-mega-toggle:focus::after {
 
 <main id="main-content" style="padding-top: 0; background-color: #FFFFFF;">
 
+    <?php
+    $hero_badge     = function_exists('franciscan_get_page_field') ? franciscan_get_page_field( 'privacy', 'hero_badge', 'LEGAL & PRIVACY' ) : 'LEGAL & PRIVACY';
+    $hero_title     = function_exists('franciscan_get_page_field') ? franciscan_get_page_field( 'privacy', 'hero_title', 'PRIVACY POLICY' ) : 'PRIVACY POLICY';
+    $hero_image     = function_exists('franciscan_get_page_field') ? franciscan_get_page_field( 'privacy', 'hero_image', FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_51_30_PM.png' ) : ( FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_51_30_PM.png' );
+    $eyebrow        = function_exists('franciscan_get_page_field') ? franciscan_get_page_field( 'privacy', 'eyebrow', 'PRIVACY' ) : 'PRIVACY';
+    $custom_content = function_exists('franciscan_get_page_field') ? franciscan_get_page_field( 'privacy', 'page_content', '' ) : '';
+    ?>
+
     <!-- Page Hero -->
-    <section class="page-hero-banner" style="position: relative; padding: 11rem 2rem 7rem 2rem; background: url('<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_51_30_PM.png' ); ?>') center/cover no-repeat; text-align: center; overflow: hidden;">
+    <section class="page-hero-banner" style="position: relative; padding: 11rem 2rem 7rem 2rem; background: url('<?php echo esc_url( $hero_image ); ?>') center/cover no-repeat; text-align: center; overflow: hidden;">
         <div style="position: absolute; inset: 0; background-color: rgba(12, 11, 10, 0.72);"></div>
         <div style="max-width: 800px; margin: 0 auto; position: relative; z-index: 2; text-align: center;">
             <div style="display: inline-flex; align-items: center; gap: 0.6rem; background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); padding: 0.5rem 1.2rem; border-radius: 50px; margin-bottom: 1.5rem; border: 1px solid rgba(255,255,255,0.2);">
                 <span style="width: 8px; height: 8px; background-color: #e6c888; border-radius: 50%; display: inline-block;"></span>
-                <span style="color: #ffffff; font-size: 0.85rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; font-family: 'Instrument Sans', sans-serif;">LEGAL &amp; PRIVACY</span>
+                <span style="color: #ffffff; font-size: 0.85rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; font-family: 'Instrument Sans', sans-serif;"><?php echo esc_html( $hero_badge ); ?></span>
             </div>
-            <h1 style="font-family: 'Phudu', sans-serif; font-size: clamp(2.8rem, 5vw, 4.2rem); font-weight: 700; color: #ffffff; text-transform: uppercase; margin: 0;">PRIVACY POLICY</h1>
+            <h1 style="font-family: 'Phudu', sans-serif; font-size: clamp(2.8rem, 5vw, 4.2rem); font-weight: 700; color: #ffffff; text-transform: uppercase; margin: 0;"><?php echo esc_html( $hero_title ); ?></h1>
         </div>
     </section>
 
@@ -664,72 +672,84 @@ button.fs-mega-toggle:focus::after {
 
         <div style="display: inline-flex; align-items: center; gap: 0.5rem; margin-bottom: 1.4rem;">
             <span style="width: 6px; height: 6px; background-color: #4A2A18; border-radius: 50%; display: inline-block;"></span>
-            <span style="color: #4A2A18; font-size: 0.78rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; font-family: 'Instrument Sans', sans-serif;">PRIVACY</span>
+            <span style="color: #4A2A18; font-size: 0.78rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; font-family: 'Instrument Sans', sans-serif;"><?php echo esc_html( $eyebrow ); ?></span>
         </div>
 
         <div style="font-family: 'Instrument Sans', sans-serif; font-size: 1rem; color: #57534e; line-height: 1.8;">
 
-            <h2 style="font-family: 'Phudu', sans-serif; font-size: 1.5rem; font-weight: 600; color: #1c1917; text-transform: uppercase; margin-top: 2rem; margin-bottom: 1rem;">1. INTRODUCTION</h2>
-            <p>The Franciscan Friars of the Third Order Regular, Province of St. Francis (hereinafter "we," "us," or "our") operates the franciscanranchi.org website. This page informs you of our policies regarding the collection, use, and disclosure of personal data when you use our website and the choices you have associated with that data.</p>
+            <?php if ( ! empty( $custom_content ) ) : ?>
+                <div class="custom-legal-body">
+                    <?php echo wp_kses_post( wpautop( $custom_content ) ); ?>
+                </div>
+            <?php else : ?>
 
-            <h2 style="font-family: 'Phudu', sans-serif; font-size: 1.5rem; font-weight: 600; color: #1c1917; text-transform: uppercase; margin-top: 2rem; margin-bottom: 1rem;">2. INFORMATION COLLECTION & USE</h2>
-            <p>We collect several different types of information for various purposes to provide and improve our service:</p>
-            <ul style="margin: 1rem 0; padding-left: 2rem;">
-                <li><strong>Personal Data:</strong> While using our site, we may ask you to provide certain personally identifiable information that can be used to contact or identify you ("Personal Data"). This may include, but is not limited to:
-                    <ul style="margin-top: 0.5rem;">
-                        <li>Email address</li>
-                        <li>Full name</li>
-                        <li>Phone number</li>
-                        <li>Cookies and usage data</li>
-                    </ul>
-                </li>
-                <li><strong>Usage Data:</strong> We may also collect information on how the website is accessed and used ("Usage Data"). This may include information such as your computer's Internet Protocol address (IP address), browser type, browser version, pages you visit, and other diagnostic data.</li>
-            </ul>
+                <h2 style="font-family: 'Phudu', sans-serif; font-size: 1.5rem; font-weight: 600; color: #1c1917; text-transform: uppercase; margin-top: 2rem; margin-bottom: 1rem;">1. INTRODUCTION</h2>
+                <p>The Franciscan Friars of the Third Order Regular, Province of St. Francis (hereinafter "we," "us," or "our") operates the franciscanranchi.org website. This page informs you of our policies regarding the collection, use, and disclosure of personal data when you use our website and the choices you have associated with that data.</p>
 
-            <h2 style="font-family: 'Phudu', sans-serif; font-size: 1.5rem; font-weight: 600; color: #1c1917; text-transform: uppercase; margin-top: 2rem; margin-bottom: 1rem;">3. COOKIES</h2>
-            <p>We use cookies and similar tracking technologies to track activity on our website and hold certain information. Cookies are files with a small amount of data which may include an anonymous unique identifier. Cookies are used for:</p>
-            <ul style="margin: 1rem 0; padding-left: 2rem;">
-                <li>Remembering your preferences</li>
-                <li>Understanding how visitors use our site</li>
-                <li>Improving the user experience</li>
-            </ul>
+                <h2 style="font-family: 'Phudu', sans-serif; font-size: 1.5rem; font-weight: 600; color: #1c1917; text-transform: uppercase; margin-top: 2rem; margin-bottom: 1rem;">2. INFORMATION COLLECTION & USE</h2>
+                <p>We collect several different types of information for various purposes to provide and improve our service:</p>
+                <ul style="margin: 1rem 0; padding-left: 2rem;">
+                    <li><strong>Personal Data:</strong> While using our site, we may ask you to provide certain personally identifiable information that can be used to contact or identify you ("Personal Data"). This may include, but is not limited to:
+                        <ul style="margin-top: 0.5rem;">
+                            <li>Email address</li>
+                            <li>Full name</li>
+                            <li>Phone number</li>
+                            <li>Cookies and usage data</li>
+                        </ul>
+                    </li>
+                    <li><strong>Usage Data:</strong> We may also collect information on how the website is accessed and used ("Usage Data"). This may include information such as your computer's Internet Protocol address (IP address), browser type, browser version, pages you visit, and other diagnostic data.</li>
+                </ul>
 
-            <h2 style="font-family: 'Phudu', sans-serif; font-size: 1.5rem; font-weight: 600; color: #1c1917; text-transform: uppercase; margin-top: 2rem; margin-bottom: 1rem;">4. USE OF DATA</h2>
-            <p>The Franciscan Society uses the collected data for various purposes:</p>
-            <ul style="margin: 1rem 0; padding-left: 2rem;">
-                <li>To provide and maintain our website</li>
-                <li>To notify you about changes to our website</li>
-                <li>To provide customer support</li>
-                <li>To gather analysis or valuable information so that we can improve our website</li>
-                <li>To monitor the usage of our website</li>
-                <li>To respond to your enquiries and messages</li>
-            </ul>
+                <h2 style="font-family: 'Phudu', sans-serif; font-size: 1.5rem; font-weight: 600; color: #1c1917; text-transform: uppercase; margin-top: 2rem; margin-bottom: 1rem;">3. COOKIES</h2>
+                <p>We use cookies and similar tracking technologies to track activity on our website and hold certain information. Cookies are files with a small amount of data which may include an anonymous unique identifier. Cookies are used for:</p>
+                <ul style="margin: 1rem 0; padding-left: 2rem;">
+                    <li>Remembering your preferences</li>
+                    <li>Understanding how visitors use our site</li>
+                    <li>Improving the user experience</li>
+                </ul>
 
-            <h2 style="font-family: 'Phudu', sans-serif; font-size: 1.5rem; font-weight: 600; color: #1c1917; text-transform: uppercase; margin-top: 2rem; margin-bottom: 1rem;">5. SECURITY OF DATA</h2>
-            <p>The security of your data is important to us but remember that no method of transmission over the Internet or method of electronic storage is 100% secure. While we strive to use commercially acceptable means to protect your Personal Data, we cannot guarantee its absolute security.</p>
+                <h2 style="font-family: 'Phudu', sans-serif; font-size: 1.5rem; font-weight: 600; color: #1c1917; text-transform: uppercase; margin-top: 2rem; margin-bottom: 1rem;">4. USE OF DATA</h2>
+                <p>The Franciscan Society uses the collected data for various purposes:</p>
+                <ul style="margin: 1rem 0; padding-left: 2rem;">
+                    <li>To provide and maintain our website</li>
+                    <li>To notify you about changes to our website</li>
+                    <li>To provide customer support</li>
+                    <li>To gather analysis or valuable information so that we can improve our website</li>
+                    <li>To monitor the usage of our website</li>
+                    <li>To respond to your enquiries and messages</li>
+                </ul>
 
-            <h2 style="font-family: 'Phudu', sans-serif; font-size: 1.5rem; font-weight: 600; color: #1c1917; text-transform: uppercase; margin-top: 2rem; margin-bottom: 1rem;">6. CHANGES TO THIS PRIVACY POLICY</h2>
-            <p>We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the "Last Updated" date at the bottom of this page.</p>
+                <h2 style="font-family: 'Phudu', sans-serif; font-size: 1.5rem; font-weight: 600; color: #1c1917; text-transform: uppercase; margin-top: 2rem; margin-bottom: 1rem;">5. SECURITY OF DATA</h2>
+                <p>The security of your data is important to us but remember that no method of transmission over the Internet or method of electronic storage is 100% secure. While we strive to use commercially acceptable means to protect your Personal Data, we cannot guarantee its absolute security.</p>
 
-            <h2 style="font-family: 'Phudu', sans-serif; font-size: 1.5rem; font-weight: 600; color: #1c1917; text-transform: uppercase; margin-top: 2rem; margin-bottom: 1rem;">7. CONTACT US</h2>
-            <p>If you have any questions about this Privacy Policy, please contact us at:<br>
-            Email: <a href="mailto:info@franciscanranchi.org" style="color: #4A2A18; text-decoration: none;">info@franciscanranchi.org</a></p>
+                <h2 style="font-family: 'Phudu', sans-serif; font-size: 1.5rem; font-weight: 600; color: #1c1917; text-transform: uppercase; margin-top: 2rem; margin-bottom: 1rem;">6. CHANGES TO THIS PRIVACY POLICY</h2>
+                <p>We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the "Last Updated" date at the bottom of this page.</p>
 
-            <h2 style="font-family: 'Phudu', sans-serif; font-size: 1.5rem; font-weight: 600; color: #1c1917; text-transform: uppercase; margin-top: 2rem; margin-bottom: 1rem;">8. EXTERNAL LINKS</h2>
-            <p>Our website may contain links to external websites that are not operated by us. Please be aware that we have no control over the content and practices of these sites, and cannot accept responsibility or liability for their respective privacy policies.</p>
+                <h2 style="font-family: 'Phudu', sans-serif; font-size: 1.5rem; font-weight: 600; color: #1c1917; text-transform: uppercase; margin-top: 2rem; margin-bottom: 1rem;">7. CONTACT US</h2>
+                <p>If you have any questions about this Privacy Policy, please contact us at:<br>
+                Email: <a href="mailto:info@franciscanranchi.org" style="color: #4A2A18; text-decoration: none;">info@franciscanranchi.org</a></p>
 
-            <h2 style="font-family: 'Phudu', sans-serif; font-size: 1.5rem; font-weight: 600; color: #1c1917; text-transform: uppercase; margin-top: 2rem; margin-bottom: 1rem;">9. YOUR RIGHTS</h2>
-            <p>You have the right to:</p>
-            <ul style="margin: 1rem 0; padding-left: 2rem;">
-                <li>Access the personal data we hold about you</li>
-                <li>Request correction of inaccurate data</li>
-                <li>Request deletion of your data</li>
-                <li>Opt-out of marketing communications</li>
-            </ul>
+                <h2 style="font-family: 'Phudu', sans-serif; font-size: 1.5rem; font-weight: 600; color: #1c1917; text-transform: uppercase; margin-top: 2rem; margin-bottom: 1rem;">8. EXTERNAL LINKS</h2>
+                <p>Our website may contain links to external websites that are not operated by us. Please be aware that we have no control over the content and practices of these sites, and cannot accept responsibility or liability for their respective privacy policies.</p>
 
-            <p style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid #e7e5e4; color: #78716c; font-size: 0.9rem;">
-                Last updated: August 2026
-            </p>
+                <h2 style="font-family: 'Phudu', sans-serif; font-size: 1.5rem; font-weight: 600; color: #1c1917; text-transform: uppercase; margin-top: 2rem; margin-bottom: 1rem;">9. YOUR RIGHTS</h2>
+                <p>You have the right to:</p>
+                <ul style="margin: 1rem 0; padding-left: 2rem;">
+                    <li>Access the personal data we hold about you</li>
+                    <li>Request correction of inaccurate data</li>
+                    <li>Request deletion of your data</li>
+                    <li>Opt-out of marketing communications</li>
+                </ul>
+
+                <p style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid #e7e5e4; color: #78716c; font-size: 0.9rem;">
+                    Last updated: August 2026
+                </p>
+
+            <?php endif; ?>
+
+        </div>
+
+    </section>
 
         </div>
 
