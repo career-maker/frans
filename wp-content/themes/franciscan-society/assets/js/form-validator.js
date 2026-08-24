@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Franciscan Society - Universal Reusable Form Validator & Security Engine
  *
  * Provides client-side validation, international formatting, accessible error
@@ -282,16 +282,16 @@
                 if (data.success) {
                     form.reset();
                     inputs.forEach(input => setFieldState(input, { isValid: true }));
+                    const successMsg = data.data?.message || 'Thank you! Your message has been received. Our friars will respond within 24–48 hours. Peace and Good.';
+                    showInlineFormFeedback(form, successMsg, false);
                     if (options.onSuccess) {
                         options.onSuccess(data.data);
-                    } else {
-                        showGlobalToast(data.data?.message || 'Form submitted successfully. Peace and Good.');
                     }
                 } else {
+                    const errorMsg = data.data?.message || 'Validation failed. Please correct any errors and retry.';
+                    showInlineFormFeedback(form, errorMsg, true);
                     if (options.onError) {
                         options.onError(data.data);
-                    } else {
-                        showGlobalToast(data.data?.message || 'Validation failed. Please correct any errors and retry.', true);
                     }
                 }
             })
@@ -301,13 +301,68 @@
                     submitBtn.classList.remove('is-loading');
                     submitBtn.innerHTML = originalBtnHtml;
                 }
+                const netErr = 'Network connection issue. Please retry in a moment.';
+                showInlineFormFeedback(form, netErr, true);
                 if (options.onError) {
-                    options.onError({ message: 'Network connection issue. Please retry in a moment.' });
-                } else {
-                    showGlobalToast('Network connection issue. Please retry in a moment.', true);
+                    options.onError({ message: netErr });
                 }
             });
         });
+    }
+
+    /**
+     * Inline Form Feedback Box (Arranged Neatly Under Submit Button)
+     */
+    function showInlineFormFeedback(form, message, isError = false) {
+        if (!form) return;
+
+        // Remove any existing feedback box
+        let feedback = form.querySelector('.fs-form-feedback');
+        if (!feedback) {
+            feedback = document.createElement('div');
+            feedback.className = 'fs-form-feedback';
+            feedback.setAttribute('role', 'alert');
+            feedback.setAttribute('aria-live', 'polite');
+            
+            // Insert directly after submit button's parent container or after button
+            const submitBtn = form.querySelector('button[type="submit"], input[type="submit"]');
+            if (submitBtn && submitBtn.parentElement && submitBtn.parentElement !== form) {
+                submitBtn.parentElement.insertAdjacentElement('afterend', feedback);
+            } else if (submitBtn) {
+                submitBtn.insertAdjacentElement('afterend', feedback);
+            } else {
+                form.appendChild(feedback);
+            }
+        }
+
+        // Determine if form is on dark or light background
+        const isDarkTheme = form.id === 'home-quick-inquiry-form' || form.closest('#inquiry-section') || form.closest('.dark-theme');
+
+        // Style container neatly
+        if (isError) {
+            feedback.style.cssText = isDarkTheme
+                ? 'margin-top: 1rem; padding: 0.95rem 1.3rem; border-radius: 12px; background: rgba(239, 68, 68, 0.15); border: 1.5px solid #ef4444; color: #fca5a5; font-family: "Instrument Sans", sans-serif; font-size: 0.9rem; font-weight: 600; line-height: 1.5; text-align: center; display: flex; align-items: center; justify-content: center; gap: 0.6rem; animation: fsFeedbackFade 0.4s ease forwards; box-shadow: 0 8px 25px rgba(0,0,0,0.3);'
+                : 'margin-top: 1rem; padding: 0.95rem 1.3rem; border-radius: 12px; background: #fef2f2; border: 1.5px solid #ef4444; color: #991b1b; font-family: "Instrument Sans", sans-serif; font-size: 0.9rem; font-weight: 600; line-height: 1.5; text-align: center; display: flex; align-items: center; justify-content: center; gap: 0.6rem; animation: fsFeedbackFade 0.4s ease forwards;';
+            feedback.innerHTML = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg><span>${message}</span>`;
+        } else {
+            feedback.style.cssText = isDarkTheme
+                ? 'margin-top: 1rem; padding: 0.95rem 1.3rem; border-radius: 12px; background: rgba(230, 200, 136, 0.12); border: 1.5px solid #e6c888; color: #ffffff; font-family: "Instrument Sans", sans-serif; font-size: 0.9rem; font-weight: 600; line-height: 1.5; text-align: center; display: flex; align-items: center; justify-content: center; gap: 0.6rem; animation: fsFeedbackFade 0.4s ease forwards; box-shadow: 0 8px 25px rgba(0,0,0,0.3);'
+                : 'margin-top: 1rem; padding: 0.95rem 1.3rem; border-radius: 12px; background: rgba(74, 42, 24, 0.06); border: 1.5px solid #4A2A18; color: #4A2A18; font-family: "Instrument Sans", sans-serif; font-size: 0.9rem; font-weight: 600; line-height: 1.5; text-align: center; display: flex; align-items: center; justify-content: center; gap: 0.6rem; animation: fsFeedbackFade 0.4s ease forwards;';
+            feedback.innerHTML = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="${isDarkTheme ? '#e6c888' : '#4A2A18'}" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg><span>${message}</span>`;
+        }
+
+        feedback.style.display = 'flex';
+
+        // Auto-dismiss feedback when user starts modifying form inputs
+        const inputs = form.querySelectorAll('input, select, textarea');
+        const clearFeedback = () => {
+            if (feedback && feedback.style.display !== 'none') {
+                feedback.style.opacity = '0';
+                setTimeout(() => { feedback.style.display = 'none'; feedback.style.opacity = '1'; }, 300);
+            }
+            inputs.forEach(inp => inp.removeEventListener('input', clearFeedback));
+        };
+        inputs.forEach(inp => inp.addEventListener('input', clearFeedback, { once: true }));
     }
 
     /**
@@ -320,7 +375,7 @@
             toast.id = 'fs-global-toast';
             toast.setAttribute('role', 'alert');
             toast.setAttribute('aria-live', 'assertive');
-            toast.style.cssText = 'position:fixed; top:90px; right:30px; padding:0.9rem 1.8rem; border-radius:12px; font-family:"Instrument Sans",sans-serif; font-weight:700; font-size:0.92rem; z-index:999999; box-shadow:0 14px 40px rgba(0,0,0,0.5); transition:opacity 0.3s ease, transform 0.3s ease; transform:translateY(0);';
+            toast.style.cssText = 'position:fixed; bottom:30px; right:30px; padding:0.9rem 1.8rem; border-radius:12px; font-family:"Instrument Sans",sans-serif; font-weight:700; font-size:0.92rem; z-index:999999; box-shadow:0 14px 40px rgba(0,0,0,0.5); transition:opacity 0.3s ease, transform 0.3s ease; transform:translateY(0);';
             document.body.appendChild(toast);
         }
 
@@ -341,37 +396,33 @@
         setTimeout(() => {
             toast.style.opacity = '0';
             setTimeout(() => { toast.style.display = 'none'; }, 300);
-        }, 3500);
+        }, 4000);
     }
 
     // Auto-bind forms on DOM ready
     document.addEventListener('DOMContentLoaded', () => {
-        // Keyframe injection for smooth loading spinner
+        // Keyframe injection for smooth loading spinner & feedback fade
         if (!document.getElementById('fs-validator-styles')) {
             const style = document.createElement('style');
             style.id = 'fs-validator-styles';
-            style.textContent = '@keyframes fsSpin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } } .is-invalid { border-color: #ef4444 !important; }';
+            style.textContent = `
+                @keyframes fsSpin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+                @keyframes fsFeedbackFade { 0% { opacity: 0; transform: translateY(-8px); } 100% { opacity: 1; transform: translateY(0); } }
+                .is-invalid { border-color: #ef4444 !important; }
+            `;
             document.head.appendChild(style);
         }
 
         // Bind main contact form if present
         const contactForm = document.getElementById('fs-contact-form');
         if (contactForm) {
-            bindForm(contactForm, {
-                onSuccess: (data) => {
-                    showGlobalToast(data.message || 'Thank you! Your message has been received. Peace and Good.');
-                }
-            });
+            bindForm(contactForm);
         }
 
         // Bind homepage quick inquiry form if present
         const homeForm = document.getElementById('home-quick-inquiry-form');
         if (homeForm) {
-            bindForm(homeForm, {
-                onSuccess: (data) => {
-                    showGlobalToast(data.message || 'Thank you! Your inquiry has been received. Peace and Good.');
-                }
-            });
+            bindForm(homeForm);
         }
     });
 
@@ -379,6 +430,7 @@
     window.FranciscanValidator = {
         validateField,
         bindForm,
+        showInlineFormFeedback,
         showGlobalToast
     };
 
