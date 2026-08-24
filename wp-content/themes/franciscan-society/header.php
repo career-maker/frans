@@ -28,7 +28,47 @@
     $meta_title = ! empty( $page_seo['meta_title'] ) ? $page_seo['meta_title'] : ( ! empty( $global_seo['seo_default_title'] ) ? $global_seo['seo_default_title'] : ( is_front_page() ? get_bloginfo( 'name' ) . ' | Third Order Regular of St. Francis - Ranchi Province' : wp_get_document_title() ) );
     $meta_desc  = ! empty( $page_seo['meta_description'] ) ? $page_seo['meta_description'] : ( ! empty( $global_seo['seo_default_desc'] ) ? $global_seo['seo_default_desc'] : 'The Franciscan Society - Third Order Regular of St. Francis in Ranchi Province. Conversion, contemplation, and service in Jharkhand and global missions.' );
     $meta_keys  = ! empty( $page_seo['meta_keywords'] ) ? $page_seo['meta_keywords'] : ( ! empty( $global_seo['seo_keywords'] ) ? $global_seo['seo_keywords'] : 'Franciscan, Third Order Regular, St. Francis, Ranchi, Catholic, religious community' );
-    $meta_image = ! empty( $page_seo['meta_og_image'] ) ? $page_seo['meta_og_image'] : FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_24_08_PM.png';
+    
+    // Determine appropriate Meta / OG Image for the current page
+    $meta_image = '';
+    if ( ! empty( $page_seo['meta_og_image'] ) ) {
+        $meta_image = $page_seo['meta_og_image'];
+    } elseif ( is_singular() && has_post_thumbnail() ) {
+        $meta_image = get_the_post_thumbnail_url( get_the_ID(), 'large' );
+    } elseif ( ! empty( $page_seo['hero_image'] ) ) {
+        $meta_image = $page_seo['hero_image'];
+    } elseif ( ! empty( $page_seo['section_1_image'] ) ) {
+        $meta_image = $page_seo['section_1_image'];
+    } else {
+        // Page-specific default imagery
+        switch ( $current_page_slug ) {
+            case 'ministries-pastoral':
+                $meta_image = FRANCISCAN_THEME_URI . '/assets/images/gallery/WhatsApp Image 2026-08-07 at 1.39.44 PM.jpeg';
+                break;
+            case 'ministries-education':
+                $meta_image = FRANCISCAN_THEME_URI . '/assets/images/gallery/WhatsApp Image 2026-08-07 at 8.39.44 AM (1).jpeg';
+                break;
+            case 'ministries-formation':
+                $meta_image = FRANCISCAN_THEME_URI . '/assets/images/gallery/WhatsApp Image 2025-09-17 at 11.30.25 AM (1).jpeg';
+                break;
+            case 'ministries':
+                $meta_image = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_51_30_PM.png';
+                break;
+            case 'about':
+                $meta_image = FRANCISCAN_THEME_URI . '/assets/images/church-bg.jpg';
+                break;
+            case 'gallery':
+                $meta_image = FRANCISCAN_THEME_URI . '/assets/images/gallery/WhatsApp Image 2026-08-07 at 8.42.19 AM (2).jpeg';
+                break;
+            case 'contact':
+                $meta_image = FRANCISCAN_THEME_URI . '/assets/images/church-bg.jpg';
+                break;
+            default:
+                // Primary Hero Banner as general fallback
+                $meta_image = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/hero-banner-aug20.jpeg';
+                break;
+        }
+    }
     $canonical_url = home_url( add_query_arg( array(), $GLOBALS['wp']->request ?? '' ) );
     ?>
     <title><?php echo esc_html( $meta_title ); ?></title>

@@ -135,56 +135,80 @@
             </div>
         </footer>
 
-        <!-- Footer Accordion for Mobile (ÃƒÂ¢Ã¢â‚¬Â°Ã‚Â¤768px only) -->
+        <!-- Footer Accordion for Mobile (<=768px only) -->
         <script>
         (function () {
+            var lastWidth = window.innerWidth;
+
             function initFooterAccordion() {
-                if (window.innerWidth > 768) {
-                    // On desktop: ensure bodies are visible, toggles hidden
+                var isMobile = window.innerWidth <= 768;
+                
+                if (!isMobile) {
+                    // Desktop: show bodies and desktop headings, hide toggle buttons
                     document.querySelectorAll('.footer-accordion-body').forEach(function(b) {
                         b.style.display = '';
+                        b.classList.remove('is-open');
                     });
                     document.querySelectorAll('.footer-accordion-toggle').forEach(function(t) {
                         t.style.display = 'none';
+                        t.classList.remove('is-open');
+                        t.setAttribute('aria-expanded', 'false');
                     });
                     document.querySelectorAll('.footer-desktop-heading').forEach(function(h) {
                         h.style.display = '';
                     });
                     return;
                 }
-                // Mobile: hide h4 desktop headings, show toggle buttons
+
+                // Mobile mode
                 document.querySelectorAll('.footer-desktop-heading').forEach(function(h) {
                     h.style.display = 'none';
                 });
-                document.querySelectorAll('.footer-accordion-toggle').forEach(function(btn) {
+
+                var toggles = document.querySelectorAll('.footer-accordion-toggle');
+                toggles.forEach(function(btn) {
                     btn.style.display = 'flex';
-                    // Remove old listener to avoid duplicates on resize
-                    btn.removeEventListener('click', btn._accHandler);
-                    btn._accHandler = function () {
-                        var bodyId = btn.getAttribute('aria-controls');
-                        var body = document.getElementById(bodyId);
-                        if (!body) return;
-                        var isOpen = btn.getAttribute('aria-expanded') === 'true';
-                        btn.setAttribute('aria-expanded', isOpen ? 'false' : 'true');
-                        btn.classList.toggle('is-open', !isOpen);
-                        body.classList.toggle('is-open', !isOpen);
-                    };
-                    btn.addEventListener('click', btn._accHandler);
-                    // Close by default on mobile
-                    var bodyId = btn.getAttribute('aria-controls');
-                    var body = document.getElementById(bodyId);
-                    if (body) {
-                        body.classList.remove('is-open');
-                        btn.setAttribute('aria-expanded', 'false');
-                        btn.classList.remove('is-open');
-                    }
+                    if (btn._hasAccordionBound) return;
+                    btn._hasAccordionBound = true;
+
+                    btn.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        var targetId = btn.getAttribute('aria-controls');
+                        var targetBody = document.getElementById(targetId);
+                        if (!targetBody) return;
+
+                        var isCurrentlyOpen = btn.classList.contains('is-open');
+
+                        // Mutually exclusive: Close all other accordion sections first
+                        toggles.forEach(function(otherBtn) {
+                            otherBtn.classList.remove('is-open');
+                            otherBtn.setAttribute('aria-expanded', 'false');
+                            var otherId = otherBtn.getAttribute('aria-controls');
+                            var otherBody = document.getElementById(otherId);
+                            if (otherBody) {
+                                otherBody.classList.remove('is-open');
+                            }
+                        });
+
+                        // Toggle current section if it was closed
+                        if (!isCurrentlyOpen) {
+                            btn.classList.add('is-open');
+                            btn.setAttribute('aria-expanded', 'true');
+                            targetBody.classList.add('is-open');
+                        }
+                    });
                 });
             }
+
             document.addEventListener('DOMContentLoaded', initFooterAccordion);
+
+            // Guard against mobile scroll URL bar height changes triggering accordion reset
             var resizeTimer;
             window.addEventListener('resize', function () {
+                if (window.innerWidth === lastWidth) return;
+                lastWidth = window.innerWidth;
                 clearTimeout(resizeTimer);
-                resizeTimer = setTimeout(initFooterAccordion, 200);
+                resizeTimer = setTimeout(initFooterAccordion, 150);
             });
         })();
         </script>
