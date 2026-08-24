@@ -209,6 +209,23 @@ function franciscan_ajax_delete_post() {
 }
 add_action( 'wp_ajax_franciscan_delete_post', 'franciscan_ajax_delete_post' );
 
+// AJAX: Delete Inquiry
+function franciscan_ajax_delete_inquiry() {
+    check_ajax_referer( 'franciscan_admin_nonce', 'security' );
+
+    if ( ! current_user_can( 'edit_theme_options' ) && ! current_user_can( 'delete_posts' ) ) {
+        wp_send_json_error( array( 'message' => 'Unauthorized.' ) );
+    }
+
+    $inquiry_id = isset( $_POST['inquiry_id'] ) ? intval( $_POST['inquiry_id'] ) : 0;
+    if ( $inquiry_id > 0 ) {
+        wp_delete_post( $inquiry_id, true );
+        wp_send_json_success( array( 'message' => 'Inquiry deleted successfully.' ) );
+    }
+    wp_send_json_error( array( 'message' => 'Invalid inquiry ID.' ) );
+}
+add_action( 'wp_ajax_franciscan_delete_inquiry', 'franciscan_ajax_delete_inquiry' );
+
 // Helper sanitization
 if ( ! function_exists( 'franciscan_sanitize_array' ) ) {
     function franciscan_sanitize_array( $array ) {
@@ -2850,18 +2867,19 @@ function franciscan_render_dashboard_view() {
             <!-- ========================================================== -->
             <section id="tab-inquiries" class="tab-content" style="display:none;">
                 <div class="form-section" style="padding:0; overflow:hidden;">
-                    <div style="padding: 1.5rem; border-bottom: 1px solid var(--c-card-border); display: flex; justify-content: space-between; align-items: center;">
-                        <h3 class="form-section-title" style="margin:0;">📨 Inquiries, Prayer Requests &amp; Mass Intentions (<?php echo esc_html( $inquiries_count ); ?>)</h3>
+                    <div style="padding: 1.5rem; border-bottom: 1px solid var(--c-card-border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+                        <h3 class="form-section-title" style="margin:0;">📨 Inquiries, Prayer Requests &amp; Mass Intentions (<span id="inquiries-total-badge"><?php echo esc_html( $inquiries_count ); ?></span>)</h3>
                         <span style="font-size: 0.82rem; color: var(--c-text-muted);">All submissions are stored securely in database &amp; delivered via SMTP</span>
                     </div>
                     <table class="data-table">
                         <thead>
                             <tr>
-                                <th style="width: 14%;">Date &amp; Time</th>
-                                <th style="width: 18%;">Name &amp; Details</th>
-                                <th style="width: 20%;">Contact Info</th>
-                                <th style="width: 14%;">Type</th>
-                                <th style="width: 34%;">Subject / Message</th>
+                                <th style="width: 13%;">Date &amp; Time</th>
+                                <th style="width: 17%;">Name &amp; Details</th>
+                                <th style="width: 18%;">Contact Info</th>
+                                <th style="width: 13%;">Type</th>
+                                <th style="width: 25%;">Subject / Message</th>
+                                <th style="width: 14%; text-align: right;">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -2873,8 +2891,9 @@ function franciscan_render_dashboard_view() {
                                     $type  = get_post_meta( $inq->ID, '_inquiry_type', true ) ?: 'Contact Form';
                                     $subj  = get_post_meta( $inq->ID, '_inquiry_subject', true ) ?: get_post_meta( $inq->ID, '_inquiry_mass_type', true );
                                     $ip    = get_post_meta( $inq->ID, '_inquiry_ip', true );
+                                    $date_full = get_the_date( 'F j, Y, g:i A', $inq->ID );
                                 ?>
-                                    <tr>
+                                    <tr id="inq-row-<?php echo esc_attr( $inq->ID ); ?>">
                                         <td style="color:var(--c-text-muted); font-size: 0.82rem;">
                                             <div><?php echo get_the_date( 'M j, Y', $inq->ID ); ?></div>
                                             <div style="font-size:0.75rem; opacity:0.7;"><?php echo get_the_date( 'h:i A', $inq->ID ); ?></div>
@@ -2912,15 +2931,36 @@ function franciscan_render_dashboard_view() {
                                                     <?php echo esc_html( $subj ); ?>
                                                 </div>
                                             <?php endif; ?>
-                                            <div style="font-size: 0.84rem; color: #d6d3d1; line-height: 1.5; max-height: 90px; overflow-y: auto;">
+                                            <div style="font-size: 0.84rem; color: #d6d3d1; line-height: 1.5; max-height: 80px; overflow-y: auto;">
                                                 <?php echo nl2br( esc_html( $inq->post_content ) ); ?>
                                             </div>
+                                        </td>
+                                        <td style="text-align: right; white-space: nowrap;">
+                                            <button type="button" class="btn btn-secondary inq-btn-view" 
+                                                data-id="<?php echo esc_attr( $inq->ID ); ?>"
+                                                data-name="<?php echo esc_attr( $name ); ?>"
+                                                data-email="<?php echo esc_attr( $email ); ?>"
+                                                data-phone="<?php echo esc_attr( $phone ); ?>"
+                                                data-type="<?php echo esc_attr( $type ); ?>"
+                                                data-subject="<?php echo esc_attr( $subj ?: 'General Inquiry' ); ?>"
+                                                data-date="<?php echo esc_attr( $date_full ); ?>"
+                                                data-ip="<?php echo esc_attr( $ip ); ?>"
+                                                data-message="<?php echo esc_attr( $inq->post_content ); ?>"
+                                                style="padding: 0.35rem 0.65rem; font-size: 0.8rem; border-radius: 6px; margin-right: 4px; display: inline-inline-block;">
+                                                👁️ View
+                                            </button>
+                                            <button type="button" class="btn inq-btn-delete" 
+                                                data-id="<?php echo esc_attr( $inq->ID ); ?>"
+                                                data-name="<?php echo esc_attr( $name ); ?>"
+                                                style="padding: 0.35rem 0.65rem; font-size: 0.8rem; border-radius: 6px; background: rgba(239,68,68,0.18); border: 1px solid #ef4444; color: #fca5a5;">
+                                                🗑️ Delete
+                                            </button>
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>
                             <?php else : ?>
-                                <tr>
-                                    <td colspan="5" style="text-align:center; padding:3rem 2rem; color:var(--c-text-muted);">No inquiries or prayer requests received yet.</td>
+                                <tr id="inq-empty-row">
+                                    <td colspan="6" style="text-align:center; padding:3rem 2rem; color:var(--c-text-muted);">No inquiries or prayer requests received yet.</td>
                                 </tr>
                             <?php endif; ?>
                         </tbody>
@@ -3294,8 +3334,176 @@ function franciscan_render_dashboard_view() {
                 });
             }
         });
+
+        // ==========================================
+        // INQUIRIES & PRAYERS: VIEW & DELETE HANDLERS
+        // ==========================================
+        
+        // 1. View Inquiry Modal Open
+        $(document).on('click', '.inq-btn-view', function() {
+            const btn = $(this);
+            const inqId = btn.data('id');
+            const name = btn.data('name') || 'Anonymous Devotee';
+            const email = btn.data('email') || '';
+            const phone = btn.data('phone') || '';
+            const type = btn.data('type') || 'Contact Form';
+            const subject = btn.data('subject') || 'General Inquiry';
+            const date = btn.data('date') || '';
+            const ip = btn.data('ip') || '';
+            const message = btn.data('message') || '';
+
+            $('#inq-modal-name').text(name);
+            $('#inq-modal-date').text(date);
+            $('#inq-modal-subject').text(subject);
+            $('#inq-modal-type-badge').text(type);
+            $('#inq-modal-message').text(message);
+            $('#inq-modal-ip').text(ip ? 'IP: ' + ip : 'IP: Not recorded');
+            $('#inq-modal-delete-btn').data('id', inqId).data('name', name);
+
+            if (email) {
+                $('#inq-modal-email').html('<a href="mailto:' + email + '" style="color:var(--c-gold); text-decoration:none; font-weight:600;">' + email + '</a>');
+                $('#inq-modal-reply-btn').attr('href', 'mailto:' + email + '?subject=' + encodeURIComponent('Re: ' + subject)).show();
+            } else {
+                $('#inq-modal-email').html('<span style="color:var(--c-text-muted);">Not provided</span>');
+                $('#inq-modal-reply-btn').hide();
+            }
+
+            if (phone) {
+                $('#inq-modal-phone').html('<a href="tel:' + phone + '" style="color:var(--c-text); text-decoration:none;">' + phone + '</a>');
+            } else {
+                $('#inq-modal-phone').html('<span style="color:var(--c-text-muted);">Not provided</span>');
+            }
+
+            $('#modal-view-inquiry').fadeIn(200).css('display', 'flex');
+        });
+
+        // Close Inquiry Modal
+        $(document).on('click', '.btn-close-inq-modal', function() {
+            $('#modal-view-inquiry').fadeOut(150);
+        });
+
+        // Close when clicking modal backdrop
+        $('#modal-view-inquiry').on('click', function(e) {
+            if ($(e.target).is('#modal-view-inquiry')) {
+                $(this).fadeOut(150);
+            }
+        });
+
+        // 2. Delete Inquiry (from Table or Modal)
+        function executeDeleteInquiry(inquiryId, senderName, callback) {
+            if (!inquiryId) return;
+            if (confirm('Are you sure you want to delete this submission from "' + senderName + '"?')) {
+                $.post(ajaxUrl, {
+                    action: 'franciscan_delete_inquiry',
+                    security: nonce,
+                    inquiry_id: inquiryId
+                }, function(res) {
+                    if (res.success) {
+                        $('#inq-row-' + inquiryId).fadeOut(300, function() {
+                            $(this).remove();
+                            const remaining = $('tr[id^="inq-row-"]').length;
+                            $('#inquiries-total-badge').text(remaining);
+                            $('.menu-item[data-tab="inquiries"] .menu-badge').text(remaining);
+                            if (remaining === 0) {
+                                $('table.data-table tbody').html('<tr id="inq-empty-row"><td colspan="6" style="text-align:center; padding:3rem 2rem; color:var(--c-text-muted);">No inquiries or prayer requests received yet.</td></tr>');
+                            }
+                        });
+                        showToast('Submission deleted successfully.');
+                        if (typeof callback === 'function') callback();
+                    } else {
+                        showToast(res.data?.message || 'Error deleting submission.', true);
+                    }
+                }).fail(function() {
+                    showToast('Server error while deleting inquiry.', true);
+                });
+            }
+        }
+
+        // Table Delete Button Click
+        $(document).on('click', '.inq-btn-delete', function() {
+            const inquiryId = $(this).data('id');
+            const senderName = $(this).data('name') || 'Visitor';
+            executeDeleteInquiry(inquiryId, senderName);
+        });
+
+        // Modal Delete Button Click
+        $('#inq-modal-delete-btn').on('click', function() {
+            const inquiryId = $(this).data('id');
+            const senderName = $(this).data('name') || 'Visitor';
+            executeDeleteInquiry(inquiryId, senderName, function() {
+                $('#modal-view-inquiry').fadeOut(150);
+            });
+        });
+
     });
     </script>
+
+    <!-- Modal: View Inquiry Details -->
+    <div id="modal-view-inquiry" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.85); backdrop-filter:blur(6px); z-index:999999; align-items:center; justify-content:center; padding:1.5rem; box-sizing:border-box;">
+        <div style="background:#181715; border:1px solid #2B2824; border-radius:18px; max-width:640px; width:100%; max-height:90vh; overflow-y:auto; box-shadow:0 25px 60px rgba(0,0,0,0.7); box-sizing:border-box;">
+            <div style="padding:1.4rem 1.8rem; border-bottom:1px solid #2B2824; display:flex; justify-content:space-between; align-items:center; background:#1e1c19; border-radius:18px 18px 0 0;">
+                <div style="display:flex; align-items:center; gap:0.75rem;">
+                    <span style="font-size:1.4rem;">📨</span>
+                    <div>
+                        <h3 id="inq-modal-title" style="font-size:1.15rem; font-weight:700; color:#F4F1EA; margin:0;">Inquiry Details</h3>
+                        <span id="inq-modal-type-badge" style="background:rgba(197,169,99,0.15); color:var(--c-gold); padding:0.2rem 0.6rem; border-radius:6px; font-size:0.75rem; font-weight:600; display:inline-block; margin-top:3px;">Contact Form</span>
+                    </div>
+                </div>
+                <button type="button" class="btn-close-inq-modal" style="background:transparent; border:none; color:#A39D93; font-size:1.6rem; cursor:pointer; line-height:1; padding:0 0.5rem;" title="Close">&times;</button>
+            </div>
+            
+            <div style="padding:1.8rem;">
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.1rem; margin-bottom:1.5rem; background:#0F0E0D; padding:1.2rem; border-radius:12px; border:1px solid #2B2824;">
+                    <div>
+                        <div style="font-size:0.72rem; text-transform:uppercase; color:var(--c-text-muted); letter-spacing:0.5px; font-weight:700;">Sender Name</div>
+                        <div id="inq-modal-name" style="font-weight:700; color:#F4F1EA; margin-top:3px; font-size:0.95rem;"></div>
+                    </div>
+                    <div>
+                        <div style="font-size:0.72rem; text-transform:uppercase; color:var(--c-text-muted); letter-spacing:0.5px; font-weight:700;">Submission Date</div>
+                        <div id="inq-modal-date" style="color:#F4F1EA; margin-top:3px; font-size:0.9rem;"></div>
+                    </div>
+                    <div>
+                        <div style="font-size:0.72rem; text-transform:uppercase; color:var(--c-text-muted); letter-spacing:0.5px; font-weight:700;">Email Address</div>
+                        <div id="inq-modal-email" style="margin-top:3px; font-size:0.9rem;"></div>
+                    </div>
+                    <div>
+                        <div style="font-size:0.72rem; text-transform:uppercase; color:var(--c-text-muted); letter-spacing:0.5px; font-weight:700;">Phone Number</div>
+                        <div id="inq-modal-phone" style="margin-top:3px; font-size:0.9rem;"></div>
+                    </div>
+                    <div style="grid-column:1/-1;">
+                        <div style="font-size:0.72rem; text-transform:uppercase; color:var(--c-text-muted); letter-spacing:0.5px; font-weight:700;">Subject / Purpose</div>
+                        <div id="inq-modal-subject" style="color:var(--c-gold); font-weight:700; margin-top:3px; font-size:0.95rem;"></div>
+                    </div>
+                    <div style="grid-column:1/-1;">
+                        <div style="font-size:0.72rem; text-transform:uppercase; color:var(--c-text-muted); letter-spacing:0.5px; font-weight:700;">Origin</div>
+                        <div id="inq-modal-ip" style="font-size:0.8rem; color:var(--c-text-muted); margin-top:3px;"></div>
+                    </div>
+                </div>
+
+                <div>
+                    <div style="font-size:0.78rem; text-transform:uppercase; color:var(--c-gold); letter-spacing:1px; font-weight:700; margin-bottom:8px;">
+                        📝 Message / Prayer Intention:
+                    </div>
+                    <div id="inq-modal-message" style="background:#0F0E0D; border-left:3px solid var(--c-gold); padding:1.2rem; border-radius:0 10px 10px 0; color:#F4F1EA; font-size:0.92rem; line-height:1.65; white-space:pre-wrap; max-height:220px; overflow-y:auto; border-top:1px solid #2B2824; border-right:1px solid #2B2824; border-bottom:1px solid #2B2824;"></div>
+                </div>
+            </div>
+
+            <div style="padding:1.2rem 1.8rem; border-top:1px solid #2B2824; display:flex; justify-content:space-between; align-items:center; background:#1e1c19; border-radius:0 0 18px 18px; flex-wrap:wrap; gap:0.8rem;">
+                <button type="button" id="inq-modal-delete-btn" class="btn" style="background:rgba(239,68,68,0.18); border:1px solid #ef4444; color:#fca5a5; padding:0.5rem 1rem; border-radius:8px; cursor:pointer; font-weight:600;">
+                    🗑️ Delete Submission
+                </button>
+                <div style="display:flex; gap:0.8rem;">
+                    <a id="inq-modal-reply-btn" href="#" class="btn btn-primary" style="display:inline-flex; align-items:center; gap:0.4rem; text-decoration:none; padding:0.5rem 1.1rem; border-radius:8px; font-weight:700;">
+                        ✉️ Reply via Email
+                    </a>
+                    <button type="button" class="btn btn-secondary btn-close-inq-modal" style="padding:0.5rem 1.1rem; border-radius:8px;">
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     </body>
     </html>
     <?php
