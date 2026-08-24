@@ -29,22 +29,21 @@ get_header();
                         <!-- Eyebrow Pill Tag -->
                         <div style="display: inline-flex; align-items: center; gap: 0.5rem; margin-bottom: 1.4rem; width: fit-content;">
                             <span style="width: 6px; height: 6px; background-color: #e6c888; border-radius: 50%; display: inline-block;"></span>
-                            <span class="eyebrow-text" style="color: #ffffff; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; font-family: 'Instrument Sans', sans-serif;">THIRD ORDER REGULAR OF ST. FRANCIS</span>
+                            <span class="eyebrow-text" style="color: #ffffff; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; font-family: 'Instrument Sans', sans-serif;"><?php echo esc_html( franciscan_get_page_field( 'home', 'hero_badge', 'THIRD ORDER REGULAR OF ST. FRANCIS' ) ); ?></span>
                         </div>
 
                         <!-- Main Title: Phudu, 600 weight, 62px size, 62px line height -->
                         <h1 class="hero-title" style="font-family: 'Phudu', sans-serif !important; font-size: clamp(2.6rem, 5.5vw, 4.8rem) !important; font-weight: 600 !important; color: #ffffff; text-transform: uppercase; line-height: 1.05; letter-spacing: -0.01em; margin-bottom: 2.2rem; text-shadow: none !important;">
-                            <?php echo nl2br( esc_html( franciscan_get_page_field( 'home', 'hero_title', "WALKING IN PEACE
-SERVED IN GOD'S LOVE" ) ) ); ?>
+                            <?php echo nl2br( esc_html( franciscan_get_page_field( 'home', 'hero_title', "WALKING IN PEACE\nSERVED IN GOD'S LOVE" ) ) ); ?>
                         </h1>
 
                         <!-- Buttons Row -->
                         <div class="hero-buttons-row" style="display: flex; gap: 1.25rem; align-items: center; flex-wrap: wrap;">
                             <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>#enquiry" class="btn-fill-animation">
-                                <span>JOIN OUR CHURCH</span> <span class="btn-arrow"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; vertical-align: text-bottom;"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></span>
+                                <span><?php echo esc_html( franciscan_get_page_field( 'home', 'hero_cta_text', 'JOIN OUR CHURCH' ) ); ?></span> <span class="btn-arrow"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; vertical-align: text-bottom;"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></span>
                             </a>
                             <a href="<?php echo esc_url( home_url( '/about/' ) ); ?>" class="btn-fill-outline">
-                                <span>GET STARTED</span> <span class="btn-arrow"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; vertical-align: text-bottom;"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></span>
+                                <span><?php echo esc_html( franciscan_get_page_field( 'home', 'hero_sec_cta_text', 'GET STARTED' ) ); ?></span> <span class="btn-arrow"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; vertical-align: text-bottom;"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></span>
                             </a>
                         </div>
                     </div>
@@ -53,7 +52,7 @@ SERVED IN GOD'S LOVE" ) ) ); ?>
                     <div class="js-hero-text" style="display: flex; flex-direction: column; justify-content: flex-end;">
                         <!-- Subtitle paragraph parallel horizontally across from line 2 of title -->
                         <p style="font-family: 'Instrument Sans', sans-serif !important; font-size: 16px !important; font-weight: 600 !important; color: #ffffff; line-height: 26px !important; margin-bottom: 2.2rem; max-width: 490px; text-shadow: 0 2px 14px rgba(0,0,0,0.9);">
-                            Conversion, contemplation, poverty, and humility lie at the heart of Franciscan identity. Walking together in penance, peace, and service across Ranchi, Jharkhand, and global missions.
+                            <?php echo esc_html( franciscan_get_page_field( 'home', 'hero_subtitle', 'Conversion, contemplation, poverty, and humility lie at the heart of Franciscan identity. Walking together in penance, peace, and service across Ranchi, Jharkhand, and global missions.' ) ); ?>
                         </p>
 
                         <!-- Stats Counter Strip -->
@@ -342,15 +341,15 @@ SERVED IN GOD'S LOVE" ) ) ); ?>
               <div style="position: relative; z-index: 2; max-width: 800px; margin: 0 auto; padding: 0 2rem;">
                   <div style="display: inline-flex; align-items: center; gap: 0.6rem; margin-bottom: 2.5rem;">
                       <span style="width: 6px; height: 6px; background-color: #ffffff; border-radius: 50%; display: inline-block;"></span>
-                      <span style="color: #ffffff; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; font-family: 'Instrument Sans', sans-serif;">WORD OF GOD</span>
+                      <span style="color: #ffffff; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; font-family: 'Instrument Sans', sans-serif;"><?php echo esc_html( franciscan_get_page_field( 'home', 'bible_eyebrow', 'WORD OF GOD' ) ); ?></span>
                   </div>
                   
                   <h2 style="font-family: 'Phudu', sans-serif !important; font-size: clamp(2.8rem, 6vw, 4.5rem) !important; font-weight: 700 !important; color: #ffffff !important; text-transform: uppercase; line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 1.5rem;">
-                      &ldquo;BE STILL AND<br><span style="color: #4A2A18 !important; -webkit-text-fill-color: #4A2A18 !important; -webkit-text-stroke: 1.5px #ffffff !important; display: inline-block;">KNOW</span> THAT I AM GOD.&rdquo;
+                      <?php echo nl2br( esc_html( franciscan_get_page_field( 'home', 'bible_quote', '"BE STILL AND KNOW THAT I AM GOD."' ) ) ); ?>
                   </h2>
                   
                   <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #a8a29e; margin: 0; display: inline-flex; align-items: center; justify-content: center; gap: 0.8rem;">
-                      <span style="display: inline-block; width: 35px; height: 1px; background-color: #a8a29e;"></span> Book of Psalms
+                      <span style="display: inline-block; width: 35px; height: 1px; background-color: #a8a29e;"></span> <?php echo esc_html( franciscan_get_page_field( 'home', 'bible_ref', 'Book of Psalms' ) ); ?>
                   </p>
               </div>
           </section>
@@ -365,12 +364,12 @@ SERVED IN GOD'S LOVE" ) ) ); ?>
                     <!-- Eyebrow Tag -->
                     <div style="display: inline-flex; align-items: center; gap: 0.5rem; margin-bottom: 1.4rem;">
                         <span style="width: 6px; height: 6px; background-color: #4A2A18; border-radius: 50%; display: inline-block;"></span>
-                        <span style="color: #4A2A18; font-size: 0.78rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; font-family: 'Instrument Sans', sans-serif;">NEWS &amp; EVENTS</span>
+                        <span style="color: #4A2A18; font-size: 0.78rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; font-family: 'Instrument Sans', sans-serif;"><?php echo esc_html( franciscan_get_page_field( 'home', 'news_eyebrow', 'NEWS & EVENTS' ) ); ?></span>
                     </div>
 
                     <!-- Main Section Title in Phudu 600 (Centered 2 Lines) -->
                     <h2 style="font-family: 'Phudu', sans-serif !important; font-size: clamp(2.3rem, 3.8vw, 3.2rem) !important; font-weight: 600 !important; color: #1c1917 !important; text-transform: uppercase; line-height: 1.15; letter-spacing: -0.01em; margin: 0 0 2rem 0; text-align: center;">
-                        INSIGHTS AND INSPIRATION FROM<br>OUR LATEST NEWS
+                        <?php echo nl2br( esc_html( franciscan_get_page_field( 'home', 'news_heading', "INSIGHTS AND INSPIRATION FROM\nOUR LATEST NEWS" ) ) ); ?>
                     </h2>
 
                     <!-- Centered Scroll Navigation Arrow Buttons -->

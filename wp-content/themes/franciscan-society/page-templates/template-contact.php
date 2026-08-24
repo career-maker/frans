@@ -485,24 +485,24 @@ $hero_subtitle = franciscan_get_page_field( 'contact', 'hero_subtitle', 'Reach o
                 <!-- State Bank of India Card -->
                 <div class="donation-bank-card">
                     <div class="donation-bank-header">
-                        <span class="donation-bank-title"><?php echo esc_html( franciscan_get_page_field( 'contact', 'bank_1_title', 'State Bank of India (SBI)' ) ); ?></span>
-                        <button type="button" class="btn-copy-action" data-copy="<?php echo esc_attr( franciscan_get_page_field( 'contact', 'bank_1_account', '34891204859' ) ); ?>">COPY A/C</button>
+                        <span class="donation-bank-title"><?php echo esc_html( franciscan_get_page_field( 'contact', 'donation_sbi_bank_name', 'State Bank of India (SBI)' ) ); ?></span>
+                        <button type="button" class="btn-copy-action" data-copy="<?php echo esc_attr( franciscan_get_page_field( 'contact', 'donation_sbi_acc_no', '12345678901' ) ); ?>">COPY A/C</button>
                     </div>
                     <p class="donation-bank-details">
-                        A/C Name: <?php echo esc_html( franciscan_get_page_field( 'contact', 'bank_1_name', 'Franciscan Society Ranchi' ) ); ?><br>
-                        A/C No: <strong><?php echo esc_html( franciscan_get_page_field( 'contact', 'bank_1_account', '34891204859' ) ); ?></strong> | IFSC: <strong><?php echo esc_html( franciscan_get_page_field( 'contact', 'bank_1_ifsc', 'SBIN0000167' ) ); ?></strong>
+                        A/C Name: <?php echo esc_html( franciscan_get_page_field( 'contact', 'donation_sbi_acc_name', 'The Franciscan Society of Ranchi' ) ); ?><br>
+                        A/C No: <strong><?php echo esc_html( franciscan_get_page_field( 'contact', 'donation_sbi_acc_no', '12345678901' ) ); ?></strong> | IFSC: <strong><?php echo esc_html( franciscan_get_page_field( 'contact', 'donation_sbi_ifsc', 'SBIN0000123' ) ); ?></strong>
                     </p>
                 </div>
 
                 <!-- Chase Bank Card -->
                 <div class="donation-bank-card">
                     <div class="donation-bank-header">
-                        <span class="donation-bank-title"><?php echo esc_html( franciscan_get_page_field( 'contact', 'bank_2_title', 'Chase Bank (USA / Wire)' ) ); ?></span>
-                        <button type="button" class="btn-copy-action" data-copy="<?php echo esc_attr( franciscan_get_page_field( 'contact', 'bank_2_account', '021000021' ) ); ?>">COPY A/C</button>
+                        <span class="donation-bank-title"><?php echo esc_html( franciscan_get_page_field( 'contact', 'donation_chase_bank_name', 'Chase Bank USA' ) ); ?></span>
+                        <button type="button" class="btn-copy-action" data-copy="<?php echo esc_attr( franciscan_get_page_field( 'contact', 'donation_chase_acc_no', '9876543210' ) ); ?>">COPY A/C</button>
                     </div>
                     <p class="donation-bank-details">
-                        A/C Name: <?php echo esc_html( franciscan_get_page_field( 'contact', 'bank_2_name', 'Franciscan Province Mission Fund' ) ); ?><br>
-                        Routing No: <strong><?php echo esc_html( franciscan_get_page_field( 'contact', 'bank_2_account', '021000021' ) ); ?></strong> | Swift: <strong><?php echo esc_html( franciscan_get_page_field( 'contact', 'bank_2_swift', 'CHASUS33' ) ); ?></strong>
+                        A/C Name: <?php echo esc_html( franciscan_get_page_field( 'contact', 'donation_chase_acc_name', 'TOR Franciscan Mission Support' ) ); ?><br>
+                        Routing No: <strong><?php echo esc_html( franciscan_get_page_field( 'contact', 'donation_chase_routing', '021000021' ) ); ?></strong> | Swift: <strong><?php echo esc_html( franciscan_get_page_field( 'contact', 'donation_chase_swift', 'CHASUS33' ) ); ?></strong>
                     </p>
                 </div>
             </div>
@@ -510,9 +510,9 @@ $hero_subtitle = franciscan_get_page_field( 'contact', 'hero_subtitle', 'Reach o
             <!-- Right Column: Send Us a Message Form -->
             <div>
                 <div class="contact-form-container">
-                    <h3 class="form-title-heading">SEND US A MESSAGE</h3>
+                    <h3 class="form-title-heading"><?php echo esc_html( franciscan_get_page_field( 'contact', 'message_title', 'SEND US A MESSAGE' ) ); ?></h3>
                     <p class="form-subtitle-text">
-                        Please complete the form below. We respond to all inquiries and prayer requests within 24–48 hours.
+                        <?php echo esc_html( franciscan_get_page_field( 'contact', 'message_text', 'Please complete the form below. We respond to all inquiries and prayer requests within 24–48 hours.' ) ); ?>
                     </p>
 
                     <form id="fs-contact-form" method="post" novalidate>
