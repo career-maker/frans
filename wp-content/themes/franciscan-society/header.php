@@ -505,7 +505,6 @@ button.slider-btn:active {
     .fs-mega-menu {
         display: none !important;
     }
-}
     .fs-mobile-toggle {
         display: inline-flex !important;
         align-items: center !important;
@@ -581,7 +580,19 @@ button.slider-btn:active {
         max-width: 1440px !important;
         width: 100% !important;
     }
+    /* Reset flex order to natural DOM order on desktop */
+    .fs-logo {
+        order: 0 !important;
+        justify-content: flex-start !important;
+    }
+    .fs-header-actions {
+        order: 0 !important;
+    }
+    .fs-logo-text {
+        display: flex !important;
+    }
 }
+
 
 @media (max-width: 1200px) {
     .fs-desktop-nav {
