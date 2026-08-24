@@ -20,12 +20,10 @@ function franciscan_register_post_types() {
             'view_item'          => __( 'View Inquiry', 'franciscan-society' ),
         ),
         'public'              => false,
+        'publicly_queryable'  => false,
         'show_ui'             => true,
         'show_in_menu'        => false, // Managed via custom dashboard
         'capability_type'     => 'post',
-        'capabilities'        => array(
-            'create_posts' => 'do_not_allow',
-        ),
         'map_meta_cap'        => true,
         'supports'            => array( 'title', 'editor', 'custom-fields' ),
         'has_archive'         => false,

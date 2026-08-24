@@ -238,7 +238,13 @@ function franciscan_render_dashboard_view() {
     // Stats
     $pages_count = count( get_pages() );
     $posts_count = wp_count_posts( 'post' )->publish;
-    $inquiries = get_posts( array( 'post_type' => 'franciscan_inquiry', 'posts_per_page' => 50 ) );
+    $inquiries = get_posts( array(
+        'post_type'      => 'franciscan_inquiry',
+        'posts_per_page' => 100,
+        'post_status'    => array( 'publish', 'private', 'pending', 'draft', 'any' ),
+        'orderby'        => 'date',
+        'order'          => 'DESC',
+    ) );
     $inquiries_count = count( $inquiries );
 
     $current_user = wp_get_current_user();
@@ -2844,14 +2850,18 @@ function franciscan_render_dashboard_view() {
             <!-- ========================================================== -->
             <section id="tab-inquiries" class="tab-content" style="display:none;">
                 <div class="form-section" style="padding:0; overflow:hidden;">
+                    <div style="padding: 1.5rem; border-bottom: 1px solid var(--c-card-border); display: flex; justify-content: space-between; align-items: center;">
+                        <h3 class="form-section-title" style="margin:0;">📨 Inquiries, Prayer Requests &amp; Mass Intentions (<?php echo esc_html( $inquiries_count ); ?>)</h3>
+                        <span style="font-size: 0.82rem; color: var(--c-text-muted);">All submissions are stored securely in database &amp; delivered via SMTP</span>
+                    </div>
                     <table class="data-table">
                         <thead>
                             <tr>
-                                <th>Date</th>
-                                <th>Name</th>
-                                <th>Email / Phone</th>
-                                <th>Type</th>
-                                <th>Message / Intention</th>
+                                <th style="width: 14%;">Date &amp; Time</th>
+                                <th style="width: 18%;">Name &amp; Details</th>
+                                <th style="width: 20%;">Contact Info</th>
+                                <th style="width: 14%;">Type</th>
+                                <th style="width: 34%;">Subject / Message</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -2859,19 +2869,58 @@ function franciscan_render_dashboard_view() {
                                 <?php foreach ( $inquiries as $inq ) :
                                     $email = get_post_meta( $inq->ID, '_inquiry_email', true );
                                     $phone = get_post_meta( $inq->ID, '_inquiry_phone', true );
-                                    $type = get_post_meta( $inq->ID, '_inquiry_type', true ) ?: 'Contact';
+                                    $name  = get_post_meta( $inq->ID, '_inquiry_name', true ) ?: $inq->post_title;
+                                    $type  = get_post_meta( $inq->ID, '_inquiry_type', true ) ?: 'Contact Form';
+                                    $subj  = get_post_meta( $inq->ID, '_inquiry_subject', true ) ?: get_post_meta( $inq->ID, '_inquiry_mass_type', true );
+                                    $ip    = get_post_meta( $inq->ID, '_inquiry_ip', true );
                                 ?>
                                     <tr>
-                                        <td style="color:var(--c-text-muted);"><?php echo get_the_date( 'M j, Y H:i', $inq->ID ); ?></td>
-                                        <td><strong><?php echo esc_html( $inq->post_title ); ?></strong></td>
-                                        <td><?php echo esc_html( $email ?: $phone ); ?></td>
-                                        <td><span style="background:rgba(197,169,99,0.15); color:var(--c-gold); padding:0.2rem 0.5rem; border-radius:8px; font-size:0.75rem;"><?php echo esc_html( ucfirst($type) ); ?></span></td>
-                                        <td><?php echo esc_html( $inq->post_content ); ?></td>
+                                        <td style="color:var(--c-text-muted); font-size: 0.82rem;">
+                                            <div><?php echo get_the_date( 'M j, Y', $inq->ID ); ?></div>
+                                            <div style="font-size:0.75rem; opacity:0.7;"><?php echo get_the_date( 'h:i A', $inq->ID ); ?></div>
+                                        </td>
+                                        <td>
+                                            <strong style="color: #ffffff; font-size: 0.92rem;"><?php echo esc_html( $name ); ?></strong>
+                                            <?php if ( $ip ) : ?>
+                                                <div style="font-size: 0.72rem; color: var(--c-text-muted); margin-top: 2px;">IP: <?php echo esc_html( $ip ); ?></div>
+                                            <?php endif; ?>
+                                        </td>
+                                        <td style="font-size: 0.85rem;">
+                                            <?php if ( $email ) : ?>
+                                                <div><a href="mailto:<?php echo esc_attr( $email ); ?>" style="color: var(--c-gold); text-decoration: none;"><?php echo esc_html( $email ); ?></a></div>
+                                            <?php endif; ?>
+                                            <?php if ( $phone ) : ?>
+                                                <div style="color: var(--c-text-muted); margin-top: 2px;"><?php echo esc_html( $phone ); ?></div>
+                                            <?php endif; ?>
+                                        </td>
+                                        <td>
+                                            <?php
+                                            $badge_style = 'background: rgba(197,169,99,0.15); color: var(--c-gold); border: 1px solid rgba(197,169,99,0.3);';
+                                            if ( stripos( $type, 'prayer' ) !== false ) {
+                                                $badge_style = 'background: rgba(59,130,246,0.15); color: #93c5fd; border: 1px solid rgba(59,130,246,0.3);';
+                                            } elseif ( stripos( $type, 'mass' ) !== false ) {
+                                                $badge_style = 'background: rgba(168,85,247,0.15); color: #d8b4fe; border: 1px solid rgba(168,85,247,0.3);';
+                                            }
+                                            ?>
+                                            <span style="<?php echo esc_attr( $badge_style ); ?> padding: 0.25rem 0.6rem; border-radius: 8px; font-size: 0.75rem; font-weight: 600; display: inline-block;">
+                                                <?php echo esc_html( $type ); ?>
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <?php if ( $subj ) : ?>
+                                                <div style="font-weight: 700; color: #ffffff; font-size: 0.85rem; margin-bottom: 4px;">
+                                                    <?php echo esc_html( $subj ); ?>
+                                                </div>
+                                            <?php endif; ?>
+                                            <div style="font-size: 0.84rem; color: #d6d3d1; line-height: 1.5; max-height: 90px; overflow-y: auto;">
+                                                <?php echo nl2br( esc_html( $inq->post_content ) ); ?>
+                                            </div>
+                                        </td>
                                     </tr>
                                 <?php endforeach; ?>
                             <?php else : ?>
                                 <tr>
-                                    <td colspan="5" style="text-align:center; padding:2rem; color:var(--c-text-muted);">No inquiries or prayer requests received yet.</td>
+                                    <td colspan="5" style="text-align:center; padding:3rem 2rem; color:var(--c-text-muted);">No inquiries or prayer requests received yet.</td>
                                 </tr>
                             <?php endif; ?>
                         </tbody>
