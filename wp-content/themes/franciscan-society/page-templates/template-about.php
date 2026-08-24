@@ -753,17 +753,17 @@ button.fs-mega-toggle:focus::after {
                     <!-- Eyebrow Tag -->
                     <div style="display: inline-flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;">
                         <span style="width: 6px; height: 6px; background-color: #4A2A18; border-radius: 50%; display: inline-block;"></span>
-                        <span style="color: #4A2A18; font-size: 0.78rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; font-family: 'Instrument Sans', sans-serif;">ABOUT US</span>
+                        <span style="color: #4A2A18; font-size: 0.78rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; font-family: 'Instrument Sans', sans-serif;"><?php echo esc_html( franciscan_get_page_field( 'about', 'about_eyebrow', 'ABOUT US' ) ); ?></span>
                     </div>
 
                     <!-- Main Section Title in Phudu 600 -->
                     <h2 style="font-family: 'Phudu', sans-serif !important; font-size: clamp(2.2rem, 3.2vw, 2.9rem) !important; font-weight: 600 !important; color: #1c1917 !important; text-transform: uppercase; line-height: 1.1; letter-spacing: -0.01em; margin-bottom: 1.4rem;">
-                        OUR STORY FAITH MISSION AND VISION TOGETHER
+                        <?php echo esc_html( franciscan_get_page_field( 'about', 'about_section_heading', 'OUR STORY FAITH MISSION AND VISION TOGETHER' ) ); ?>
                     </h2>
 
                     <!-- Body Description in Instrument Sans -->
                     <p style="font-family: 'Instrument Sans', sans-serif !important; font-size: 0.95rem; color: #57534e; line-height: 1.65; margin-bottom: 2rem;">
-                        The Third Order Regular (TOR) of St. Francis traces its origins to the ancient Order of Penance from the 4th century. Established in Ranchi in 1996 and elevated to a full Province on 20 March 2006.
+                        <?php echo esc_html( franciscan_get_page_field( 'about', 'about_section_text', 'The Third Order Regular (TOR) of St. Francis traces its origins to the ancient Order of Penance from the 4th century. Established in Ranchi in 1996 and elevated to a full Province on 20 March 2006.' ) ); ?>
                     </p>
 
                     <!-- Mission & Vision 2-Column Grid -->
@@ -771,15 +771,15 @@ button.fs-mega-toggle:focus::after {
                         <div style="display: flex; gap: 1rem; align-items: flex-start;">
                             <div style="width: 38px; height: 38px; background: #4A2A18; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 700; font-size: 0.9rem; flex-shrink: 0; box-shadow: 0 4px 10px rgba(74,42,24,0.3);">&#10013;</div>
                             <div>
-                                <h4 style="font-family: 'Phudu', sans-serif !important; font-size: 0.92rem; font-weight: 600; text-transform: uppercase; margin-bottom: 0.3rem; color: #1c1917;">OUR MISSION</h4>
-                                <p style="font-family: 'Instrument Sans', sans-serif !important; font-size: 0.8rem; color: #78716c; line-height: 1.45; margin: 0;">Serving 15 parishes &amp; 22 schools across Ranchi and global mission fields.</p>
+                                <h4 style="font-family: 'Phudu', sans-serif !important; font-size: 0.92rem; font-weight: 600; text-transform: uppercase; margin-bottom: 0.3rem; color: #1c1917;"><?php echo esc_html( franciscan_get_page_field( 'about', 'about_mission_title', 'OUR MISSION' ) ); ?></h4>
+                                <p style="font-family: 'Instrument Sans', sans-serif !important; font-size: 0.8rem; color: #78716c; line-height: 1.45; margin: 0;"><?php echo esc_html( franciscan_get_page_field( 'about', 'about_mission_text', 'Serving 15 parishes & 22 schools across Ranchi and global mission fields.' ) ); ?></p>
                             </div>
                         </div>
                         <div style="display: flex; gap: 1rem; align-items: flex-start;">
                             <div style="width: 38px; height: 38px; background: #4A2A18; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 700; font-size: 0.9rem; flex-shrink: 0; box-shadow: 0 4px 10px rgba(74,42,24,0.3);">&#10013;</div>
                             <div>
-                                <h4 style="font-family: 'Phudu', sans-serif !important; font-size: 0.92rem; font-weight: 600; text-transform: uppercase; margin-bottom: 0.3rem; color: #1c1917;">OUR VISION</h4>
-                                <p style="font-family: 'Instrument Sans', sans-serif !important; font-size: 0.8rem; color: #78716c; line-height: 1.45; margin: 0;">Promoting peace, joy, and dignity under "Peace and Joy to the World".</p>
+                                <h4 style="font-family: 'Phudu', sans-serif !important; font-size: 0.92rem; font-weight: 600; text-transform: uppercase; margin-bottom: 0.3rem; color: #1c1917;"><?php echo esc_html( franciscan_get_page_field( 'about', 'about_vision_title', 'OUR VISION' ) ); ?></h4>
+                                <p style="font-family: 'Instrument Sans', sans-serif !important; font-size: 0.8rem; color: #78716c; line-height: 1.45; margin: 0;"><?php echo esc_html( franciscan_get_page_field( 'about', 'about_vision_text', 'Promoting peace, joy, and dignity under "Peace and Joy to the World".' ) ); ?></p>
                             </div>
                         </div>
                     </div>
@@ -789,8 +789,8 @@ button.fs-mega-toggle:focus::after {
                         <div style="display: flex; align-items: center; gap: 0.85rem;">
                             <img  loading="lazy"loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/fr-manoj-vengathanam.png' ); ?>" style="width: 44px; height: 44px; border-radius: 50%; object-fit: cover;" alt="Fr. Manoj Vengathanam, TOR">
                             <div>
-                                <div style="font-family: 'Phudu', sans-serif !important; font-weight: 600; font-size: 0.85rem; text-transform: uppercase; color: #1c1917;">FR. MANOJ VENGATHANAM, TOR</div>
-                                <div style="font-family: 'Instrument Sans', sans-serif !important; font-size: 0.75rem; color: #78716c;">Minister Provincial</div>
+                                <div style="font-family: 'Phudu', sans-serif !important; font-weight: 600; font-size: 0.85rem; text-transform: uppercase; color: #1c1917;"><?php echo esc_html( franciscan_get_page_field( 'about', 'about_provincial_name', 'FR. MANOJ VENGATHANAM, TOR' ) ); ?></div>
+                                <div style="font-family: 'Instrument Sans', sans-serif !important; font-size: 0.75rem; color: #78716c;"><?php echo esc_html( franciscan_get_page_field( 'about', 'about_provincial_title', 'Minister Provincial' ) ); ?></div>
                             </div>
                         </div>
                     </div>
@@ -834,15 +834,15 @@ button.fs-mega-toggle:focus::after {
                 <div class="gsap-fade-up">
                     <div style="display: inline-flex; align-items: center; gap: 0.6rem; margin-bottom: 1.5rem;">
                         <span style="width: 8px; height: 8px; background-color: #c8102e; border-radius: 50%; display: inline-block;"></span>
-                        <span style="color: #1c1917; font-size: 0.85rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; font-family: 'Instrument Sans', sans-serif;">Our Values</span>
+                        <span style="color: #1c1917; font-size: 0.85rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; font-family: 'Instrument Sans', sans-serif;"><?php echo esc_html( franciscan_get_page_field( 'about', 'mission_eyebrow', 'Our Values' ) ); ?></span>
                     </div>
 
                     <h2 style="font-family: 'Phudu', sans-serif !important; font-size: clamp(2.5rem, 4vw, 3.8rem) !important; font-weight: 700 !important; color: #1c1917 !important; text-transform: uppercase; line-height: 1.1; letter-spacing: -0.01em; margin-bottom: 1.5rem;">
-                        OUR CHRISTIAN VALUES THAT LEAD OUR MINISTRY
+                        <?php echo esc_html( franciscan_get_page_field( 'about', 'mission_values_heading', 'OUR CHRISTIAN VALUES THAT LEAD OUR MINISTRY' ) ); ?>
                     </h2>
 
                     <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.6; margin-bottom: 3rem; max-width: 90%;">
-                        Our Christian values are the foundation of everything we do as a church. Guided by faith, love, compassion, and integrity, we are committed to serving God.
+                        <?php echo esc_html( franciscan_get_page_field( 'about', 'mission_values_text', 'Our Christian values are the foundation of everything we do as a church. Guided by faith, love, compassion, and integrity, we are committed to serving God.' ) ); ?>
                     </p>
 
                     <!-- Split Info Box -->
@@ -851,27 +851,31 @@ button.fs-mega-toggle:focus::after {
                         <div style="position: absolute; left: 0; top: 15%; bottom: 15%; width: 4px; background-color: #c8102e; border-radius: 0 4px 4px 0;"></div>
                         
                         <div style="flex: 1; padding-left: 1rem;">
-                            <h4 style="font-family: 'Phudu', sans-serif; font-size: 1.3rem; font-weight: 700; text-transform: uppercase; margin-bottom: 0.8rem; color: #1c1917;">PRAYER SUPPORT</h4>
-                            <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #78716c; line-height: 1.5; margin: 0;">Our Prayer Support you in faith during every life.</p>
+                            <h4 style="font-family: 'Phudu', sans-serif; font-size: 1.3rem; font-weight: 700; text-transform: uppercase; margin-bottom: 0.8rem; color: #1c1917;"><?php echo esc_html( franciscan_get_page_field( 'about', 'prayer_support_title', 'PRAYER SUPPORT' ) ); ?></h4>
+                            <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #78716c; line-height: 1.5; margin: 0;"><?php echo esc_html( franciscan_get_page_field( 'about', 'prayer_support_desc', 'Our Prayer Support accompanies you in faith during every stage of life.' ) ); ?></p>
                         </div>
                         <div style="width: 1px; background-color: #e7e5e4;"></div>
                         <div style="flex: 1;">
-                            <h4 style="font-family: 'Phudu', sans-serif; font-size: 1.3rem; font-weight: 700; text-transform: uppercase; margin-bottom: 0.8rem; color: #1c1917;">FELLOWSHIP GROUPS</h4>
-                            <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #78716c; line-height: 1.5; margin: 0;">Our Prayer Support you in faith during every life.</p>
+                            <h4 style="font-family: 'Phudu', sans-serif; font-size: 1.3rem; font-weight: 700; text-transform: uppercase; margin-bottom: 0.8rem; color: #1c1917;"><?php echo esc_html( franciscan_get_page_field( 'about', 'fellowship_title', 'FELLOWSHIP GROUPS' ) ); ?></h4>
+                            <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #78716c; line-height: 1.5; margin: 0;"><?php echo esc_html( franciscan_get_page_field( 'about', 'fellowship_desc', 'Join our vibrant fellowship groups and grow together in faith and community.' ) ); ?></p>
                         </div>
                     </div>
 
                     <!-- Call to Action Row -->
+                    <?php
+                    $contact_phone = franciscan_get_option( 'contact_phone', '+91 651 234 5678' );
+                    $tel_href      = 'tel:+' . preg_replace( '/[^0-9]/', '', $contact_phone );
+                    ?>
                     <div style="display: flex; align-items: center; gap: 2.5rem;">
-                        <div style="display: flex; align-items: center; gap: 1rem;">
+                        <a href="<?php echo esc_url( $tel_href ); ?>" style="display: flex; align-items: center; gap: 1rem; text-decoration: none;">
                             <div style="width: 54px; height: 54px; background-color: #1c1917; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #ffffff; font-size: 1.3rem;">
                                 &#128222;
                             </div>
                             <div>
-                                <div style="font-family: 'Phudu', sans-serif; font-weight: 700; font-size: 1.2rem; text-transform: uppercase; color: #1c1917; margin-bottom: 0.2rem;">CALL US!</div>
-                                <div style="font-family: 'Instrument Sans', sans-serif; font-size: 1.05rem; color: #78716c;">(+123) 456 789</div>
+                                <div style="font-family: 'Phudu', sans-serif; font-weight: 700; font-size: 1.2rem; text-transform: uppercase; color: #1c1917; margin-bottom: 0.2rem;"><?php echo esc_html( franciscan_get_page_field( 'about', 'call_us_label', 'CALL US!' ) ); ?></div>
+                                <div style="font-family: 'Instrument Sans', sans-serif; font-size: 1.05rem; color: #78716c;"><?php echo esc_html( $contact_phone ); ?></div>
                             </div>
-                        </div>
+                        </a>
                     </div>
                 </div>
 

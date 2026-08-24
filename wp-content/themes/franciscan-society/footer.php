@@ -23,26 +23,32 @@
                                 </a>
                             </div>
 
+                            <?php
+                            $footer_phone   = franciscan_get_option( 'contact_phone', '+91 651 234 5678' );
+                            $footer_tel_url = 'tel:+' . preg_replace( '/[^0-9]/', '', $footer_phone );
+                            $footer_email   = franciscan_get_option( 'contact_email', 'info@franciscansociety.org' );
+                            $footer_address = franciscan_get_option( 'address_text', 'TOR Provincialate, P.O. Box 14, Church Road, Ranchi, Jharkhand 834001, India' );
+                            ?>
                             <div style="display: flex; flex-direction: column; gap: 1.1rem; font-family: 'Instrument Sans', sans-serif; font-size: 0.92rem; color: #d6d3d1;">
                                 <div style="display: flex; align-items: center; gap: 0.8rem;">
                                     <span style="width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.18); display: flex; align-items: center; justify-content: center; color: #ffffff; flex-shrink: 0;">
                                         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.18 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6.29 6.29l.97-.97a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
                                     </span>
-                                    <span>(+91) 651 234 5678</span>
+                                    <a href="<?php echo esc_url( $footer_tel_url ); ?>" style="color: #d6d3d1; text-decoration: none;" onmouseover="this.style.color='#e6c888'" onmouseout="this.style.color='#d6d3d1'"><?php echo esc_html( $footer_phone ); ?></a>
                                 </div>
 
                                 <div style="display: flex; align-items: center; gap: 0.8rem;">
                                     <span style="width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.18); display: flex; align-items: center; justify-content: center; color: #ffffff; flex-shrink: 0;">
                                         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
                                     </span>
-                                    <a href="mailto:info@franciscansociety.org" style="color: #d6d3d1; text-decoration: none;" onmouseover="this.style.color='#e6c888'" onmouseout="this.style.color='#d6d3d1'">info@franciscansociety.org</a>
+                                    <a href="mailto:<?php echo esc_attr( $footer_email ); ?>" style="color: #d6d3d1; text-decoration: none;" onmouseover="this.style.color='#e6c888'" onmouseout="this.style.color='#d6d3d1'"><?php echo esc_html( $footer_email ); ?></a>
                                 </div>
 
                                 <div style="display: flex; align-items: flex-start; gap: 0.8rem; margin-top: 0.3rem;">
                                     <span style="width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.18); display: flex; align-items: center; justify-content: center; color: #ffffff; flex-shrink: 0;">
                                         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
                                     </span>
-                                    <span style="line-height: 1.5; font-size: 0.88rem;">TOR Provincialate, P.O. Box 14, Church Road, Ranchi, Jharkhand 834001, India</span>
+                                    <span style="line-height: 1.5; font-size: 0.88rem;"><?php echo esc_html( $footer_address ); ?></span>
                                 </div>
                             </div>
                         </div>

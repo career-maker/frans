@@ -431,9 +431,9 @@ $hero_subtitle = franciscan_get_page_field( 'contact', 'hero_subtitle', 'Reach o
         <!-- Top Section Header -->
         <div class="contact-eyebrow">
             <span class="contact-eyebrow-dot"></span>
-            <span class="contact-eyebrow-text">CONTACT INFORMATION</span>
+            <span class="contact-eyebrow-text"><?php echo esc_html( franciscan_get_page_field( 'contact', 'contact_eyebrow', 'CONTACT INFORMATION' ) ); ?></span>
         </div>
-        <h2 class="contact-main-heading">REACH OUT TO US</h2>
+        <h2 class="contact-main-heading"><?php echo esc_html( franciscan_get_page_field( 'contact', 'contact_heading', 'REACH OUT TO US' ) ); ?></h2>
 
         <!-- 2-Column Content Layout -->
         <div class="contact-layout-grid">
@@ -449,15 +449,20 @@ $hero_subtitle = franciscan_get_page_field( 'contact', 'hero_subtitle', 'Reach o
                         </svg>
                     </div>
                     <div class="info-card-content">
-                        <h3>PRINCIPAL ADDRESS</h3>
+                        <h3><?php echo esc_html( franciscan_get_page_field( 'contact', 'address_card_title', 'PRINCIPAL ADDRESS' ) ); ?></h3>
                         <p><?php echo nl2br( esc_html( franciscan_get_option( 'address_text', "TOR Provincialate, P.O. Box 14, Church Road\nRanchi, Jharkhand 834001, India" ) ) ); ?></p>
-                        <a href="https://maps.google.com/?q=TOR+Provincialate+Church+Road+Ranchi" target="_blank" rel="noopener noreferrer" class="map-link">
+                        <a href="<?php echo esc_url( franciscan_get_option( 'maps_url', 'https://maps.google.com/?q=TOR+Provincialate+Church+Road+Ranchi' ) ); ?>" target="_blank" rel="noopener noreferrer" class="map-link">
                             <span>VIEW ON GOOGLE MAPS</span> &rarr;
                         </a>
                     </div>
                 </div>
 
                 <!-- Card 2: Communication Channels -->
+                <?php
+                $contact_email = franciscan_get_option( 'contact_email', 'info@franciscansociety.org' );
+                $contact_phone = franciscan_get_option( 'contact_phone', '+91 651 234 5678' );
+                $tel_href      = 'tel:+' . preg_replace( '/[^0-9]/', '', $contact_phone );
+                ?>
                 <div class="info-card-ivory">
                     <div class="info-icon-badge">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -466,38 +471,38 @@ $hero_subtitle = franciscan_get_page_field( 'contact', 'hero_subtitle', 'Reach o
                         </svg>
                     </div>
                     <div class="info-card-content">
-                        <h3>COMMUNICATION CHANNELS</h3>
+                        <h3><?php echo esc_html( franciscan_get_page_field( 'contact', 'channels_card_title', 'COMMUNICATION CHANNELS' ) ); ?></h3>
                         <p>
-                            Email: <strong style="color: var(--fs-brown);"><?php echo esc_html( franciscan_get_option( 'contact_email', 'info@franciscansociety.org' ) ); ?></strong><br>
-                            WhatsApp / Phone: <strong style="color: var(--fs-brown);">+<?php echo esc_html( franciscan_get_option( 'whatsapp_number', '91 9431100000' ) ); ?></strong>
+                            Email: <a href="mailto:<?php echo esc_attr( $contact_email ); ?>" style="color: var(--fs-brown); font-weight: 700; text-decoration: none;"><?php echo esc_html( $contact_email ); ?></a><br>
+                            Phone / WhatsApp: <a href="<?php echo esc_url( $tel_href ); ?>" style="color: var(--fs-brown); font-weight: 700; text-decoration: none;"><?php echo esc_html( $contact_phone ); ?></a>
                         </p>
                     </div>
                 </div>
 
                 <!-- Section: Make a Donation -->
-                <h3 class="donation-section-heading">MAKE A DONATION</h3>
+                <h3 class="donation-section-heading"><?php echo esc_html( franciscan_get_page_field( 'contact', 'donation_heading', 'MAKE A DONATION' ) ); ?></h3>
 
                 <!-- State Bank of India Card -->
                 <div class="donation-bank-card">
                     <div class="donation-bank-header">
-                        <span class="donation-bank-title">State Bank of India (SBI)</span>
-                        <button type="button" class="btn-copy-action" data-copy="34891204859">COPY A/C</button>
+                        <span class="donation-bank-title"><?php echo esc_html( franciscan_get_page_field( 'contact', 'bank_1_title', 'State Bank of India (SBI)' ) ); ?></span>
+                        <button type="button" class="btn-copy-action" data-copy="<?php echo esc_attr( franciscan_get_page_field( 'contact', 'bank_1_account', '34891204859' ) ); ?>">COPY A/C</button>
                     </div>
                     <p class="donation-bank-details">
-                        A/C Name: Franciscan Society Ranchi<br>
-                        A/C No: <strong>34891204859</strong> | IFSC: <strong>SBIN0000167</strong>
+                        A/C Name: <?php echo esc_html( franciscan_get_page_field( 'contact', 'bank_1_name', 'Franciscan Society Ranchi' ) ); ?><br>
+                        A/C No: <strong><?php echo esc_html( franciscan_get_page_field( 'contact', 'bank_1_account', '34891204859' ) ); ?></strong> | IFSC: <strong><?php echo esc_html( franciscan_get_page_field( 'contact', 'bank_1_ifsc', 'SBIN0000167' ) ); ?></strong>
                     </p>
                 </div>
 
                 <!-- Chase Bank Card -->
                 <div class="donation-bank-card">
                     <div class="donation-bank-header">
-                        <span class="donation-bank-title">Chase Bank (USA / Wire)</span>
-                        <button type="button" class="btn-copy-action" data-copy="021000021">COPY A/C</button>
+                        <span class="donation-bank-title"><?php echo esc_html( franciscan_get_page_field( 'contact', 'bank_2_title', 'Chase Bank (USA / Wire)' ) ); ?></span>
+                        <button type="button" class="btn-copy-action" data-copy="<?php echo esc_attr( franciscan_get_page_field( 'contact', 'bank_2_account', '021000021' ) ); ?>">COPY A/C</button>
                     </div>
                     <p class="donation-bank-details">
-                        A/C Name: Franciscan Province Mission Fund<br>
-                        Routing No: <strong>021000021</strong> | Swift: <strong>CHASUS33</strong>
+                        A/C Name: <?php echo esc_html( franciscan_get_page_field( 'contact', 'bank_2_name', 'Franciscan Province Mission Fund' ) ); ?><br>
+                        Routing No: <strong><?php echo esc_html( franciscan_get_page_field( 'contact', 'bank_2_account', '021000021' ) ); ?></strong> | Swift: <strong><?php echo esc_html( franciscan_get_page_field( 'contact', 'bank_2_swift', 'CHASUS33' ) ); ?></strong>
                     </p>
                 </div>
             </div>
