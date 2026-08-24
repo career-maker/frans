@@ -1,0 +1,22 @@
+/*
+Theme Name: The Franciscan Society
+Theme URI: https://franciscansociety.org
+Author: Franciscan Society Ranchi Province
+Author URI: https://franciscansociety.org
+Description: Custom, high-performance, pixel-perfect WordPress theme for The Franciscan Society - Third Order Regular of St. Francis (Ranchi Province).
+Version: 1.0.0
+Requires at least: 6.0
+Tested up to: 6.7
+Requires PHP: 7.4
+License: GNU General Public License v2 or later
+Text Domain: franciscan-society
+*/
+
+/* Baseline theme reset and typography integration */
+:root {
+  --color-divine-gold: #C5A963;
+  --color-warm-parchment: #F4F1EA;
+  --color-vatican-black: #1A1A1A;
+  --color-antique-gold: #9B804E;
+  --color-soft-ivory: #FAF9F6;
+}

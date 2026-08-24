@@ -1,0 +1,13 @@
+# Large backup archives
+*.wpress
+wp-content/ai1wm-backups/*.wpress
+wp-content/upgrade/*
+!wp-content/upgrade/index.php
+
+# OS metadata
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Log files
+*.log
