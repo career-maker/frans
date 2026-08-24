@@ -171,44 +171,44 @@ function franciscan_ajax_contact() {
         update_post_meta( $post_id, '_inquiry_ip', franciscan_get_client_ip() );
         update_post_meta( $post_id, '_inquiry_date', current_time( 'mysql' ) );
 
-        // 8. Secure Email Notification (Strict Header Isolation)
+        // 8. Instantaneous Response + Background Email Notification
         $receiving_email = function_exists( 'franciscan_get_option' ) 
             ? franciscan_get_option( 'receiving_email', franciscan_get_option( 'smtp_recipient_email', 'abbhiram@intersmart.in' ) ) 
             : 'abbhiram@intersmart.in';
 
         $to = sanitize_email( $receiving_email );
-        if ( is_email( $to ) ) {
-            $host = isset( $_SERVER['HTTP_HOST'] ) ? preg_replace( '/[^a-zA-Z0-9.-]/', '', $_SERVER['HTTP_HOST'] ) : 'franciscansociety.org';
-            $from_name = function_exists( 'franciscan_get_option' ) ? franciscan_get_option( 'smtp_from_name', 'Franciscan Society Ranchi Province' ) : 'Franciscan Society Ranchi Province';
-            $headers = array(
-                'Content-Type: text/html; charset=UTF-8',
-                'From: ' . wp_strip_all_tags( $from_name ) . ' <no-reply@' . $host . '>',
-                'Reply-To: ' . $clean_name . ' <' . $clean_email . '>',
-            );
+        $email_subject = '✞ New Contact Inquiry: ' . $clean_subject . ' (' . $clean_name . ')';
+        $host = isset( $_SERVER['HTTP_HOST'] ) ? preg_replace( '/[^a-zA-Z0-9.-]/', '', $_SERVER['HTTP_HOST'] ) : 'franciscansociety.org';
+        $from_name = function_exists( 'franciscan_get_option' ) ? franciscan_get_option( 'smtp_from_name', 'Franciscan Society Ranchi Province' ) : 'Franciscan Society Ranchi Province';
+        $headers = array(
+            'Content-Type: text/html; charset=UTF-8',
+            'From: ' . wp_strip_all_tags( $from_name ) . ' <no-reply@' . $host . '>',
+            'Reply-To: ' . $clean_name . ' <' . $clean_email . '>',
+        );
 
-            $email_subject = '✞ New Contact Inquiry: ' . $clean_subject . ' (' . $clean_name . ')';
-            $html_body = franciscan_render_christian_email_html( array(
-                'title'           => 'New Contact Form Inquiry',
-                'subtitle'        => 'Province of St. Francis of Assisi, Ranchi • Official Portal',
-                'badge'           => 'GENERAL INQUIRY',
-                'fields'          => array(
-                    'Full Name'     => esc_html( $clean_name ),
-                    'Email Address' => '<a href="mailto:' . esc_attr( $clean_email ) . '" style="color:#4A2A18;font-weight:700;text-decoration:none;">' . esc_html( $clean_email ) . '</a>',
-                    'Phone Number'  => ! empty( $clean_phone ) ? '<a href="tel:' . esc_attr( preg_replace('/[^0-9+]/', '', $clean_phone) ) . '" style="color:#4A2A18;font-weight:700;text-decoration:none;">' . esc_html( $clean_phone ) . '</a>' : '<em>Not provided</em>',
-                    'Subject'       => esc_html( $clean_subject ),
-                    'Date & Time'   => esc_html( current_time( 'd M Y, h:i A' ) ),
-                    'Client IP'     => esc_html( franciscan_get_client_ip() ),
-                ),
-                'message_heading' => 'Inquiry / Prayer Request Message',
-                'message'         => $clean_message,
-            ) );
-
-            @wp_mail( $to, $email_subject, $html_body, $headers );
-        }
-
-        wp_send_json_success( array(
-            'message' => 'Thank you! Your message has been received. Our friars will respond within 24–48 hours. Peace and Good.'
+        $html_body = franciscan_render_christian_email_html( array(
+            'title'           => 'New Contact Form Inquiry',
+            'subtitle'        => 'Province of St. Francis of Assisi, Ranchi • Official Portal',
+            'badge'           => 'GENERAL INQUIRY',
+            'fields'          => array(
+                'Full Name'     => esc_html( $clean_name ),
+                'Email Address' => '<a href="mailto:' . esc_attr( $clean_email ) . '" style="color:#4A2A18;font-weight:700;text-decoration:none;">' . esc_html( $clean_email ) . '</a>',
+                'Phone Number'  => ! empty( $clean_phone ) ? '<a href="tel:' . esc_attr( preg_replace('/[^0-9+]/', '', $clean_phone) ) . '" style="color:#4A2A18;font-weight:700;text-decoration:none;">' . esc_html( $clean_phone ) . '</a>' : '<em>Not provided</em>',
+                'Subject'       => esc_html( $clean_subject ),
+                'Date & Time'   => esc_html( current_time( 'd M Y, h:i A' ) ),
+                'Client IP'     => esc_html( franciscan_get_client_ip() ),
+            ),
+            'message_heading' => 'Inquiry / Prayer Request Message',
+            'message'         => $clean_message,
         ) );
+
+        franciscan_send_instant_success_and_email(
+            array( 'message' => 'Thank you! Your message has been received. Our friars will respond within 24–48 hours. Peace and Good.' ),
+            $to,
+            $email_subject,
+            $html_body,
+            $headers
+        );
     } else {
         wp_send_json_error( array( 'message' => 'An error occurred while saving your inquiry. Please try again later.' ) );
     }
@@ -272,43 +272,43 @@ function franciscan_ajax_prayer() {
         update_post_meta( $post_id, '_inquiry_ip', franciscan_get_client_ip() );
         update_post_meta( $post_id, '_inquiry_date', current_time( 'mysql' ) );
 
-        // Dispatch Email Notification
+        // Instant Response + Background Email Notification
         $receiving_email = function_exists( 'franciscan_get_option' ) 
             ? franciscan_get_option( 'receiving_email', franciscan_get_option( 'smtp_recipient_email', 'abbhiram@intersmart.in' ) ) 
             : 'abbhiram@intersmart.in';
 
         $to = sanitize_email( $receiving_email );
-        if ( is_email( $to ) ) {
-            $host = isset( $_SERVER['HTTP_HOST'] ) ? preg_replace( '/[^a-zA-Z0-9.-]/', '', $_SERVER['HTTP_HOST'] ) : 'franciscansociety.org';
-            $from_name = function_exists( 'franciscan_get_option' ) ? franciscan_get_option( 'smtp_from_name', 'Franciscan Society Ranchi Province' ) : 'Franciscan Society Ranchi Province';
-            $headers = array(
-                'Content-Type: text/html; charset=UTF-8',
-                'From: ' . wp_strip_all_tags( $from_name ) . ' <no-reply@' . $host . '>',
-                'Reply-To: ' . ( ! empty( $clean_email ) ? $clean_name . ' <' . $clean_email . '>' : 'no-reply@' . $host ),
-            );
+        $email_subject = '🕊️ New Prayer Request: ' . $clean_name;
+        $host = isset( $_SERVER['HTTP_HOST'] ) ? preg_replace( '/[^a-zA-Z0-9.-]/', '', $_SERVER['HTTP_HOST'] ) : 'franciscansociety.org';
+        $from_name = function_exists( 'franciscan_get_option' ) ? franciscan_get_option( 'smtp_from_name', 'Franciscan Society Ranchi Province' ) : 'Franciscan Society Ranchi Province';
+        $headers = array(
+            'Content-Type: text/html; charset=UTF-8',
+            'From: ' . wp_strip_all_tags( $from_name ) . ' <no-reply@' . $host . '>',
+            'Reply-To: ' . ( ! empty( $clean_email ) ? $clean_name . ' <' . $clean_email . '>' : 'no-reply@' . $host ),
+        );
 
-            $email_subject = '🕊️ New Prayer Request: ' . $clean_name;
-            $html_body = franciscan_render_christian_email_html( array(
-                'title'           => 'New Holy Prayer Intention',
-                'subtitle'        => 'Province of St. Francis of Assisi, Ranchi • Intercessory Ministry',
-                'badge'           => 'PRAYER INTENTION',
-                'fields'          => array(
-                    'Devotee Name'  => esc_html( $clean_name ),
-                    'Email Address' => ! empty( $clean_email ) ? '<a href="mailto:' . esc_attr( $clean_email ) . '" style="color:#4A2A18;font-weight:700;text-decoration:none;">' . esc_html( $clean_email ) . '</a>' : '<em>Anonymous</em>',
-                    'Phone Number'  => ! empty( $clean_phone ) ? esc_html( $clean_phone ) : '<em>Not provided</em>',
-                    'Type'          => 'Community Daily Prayer & Mass Intercession',
-                    'Date & Time'   => esc_html( current_time( 'd M Y, h:i A' ) ),
-                ),
-                'message_heading' => 'Holy Prayer Intention',
-                'message'         => $clean_intentions,
-            ) );
-
-            @wp_mail( $to, $email_subject, $html_body, $headers );
-        }
-
-        wp_send_json_success( array(
-            'message' => 'Your prayer request has been received. Our friars will remember your intention in our daily community Holy Mass and Liturgy of the Hours.'
+        $html_body = franciscan_render_christian_email_html( array(
+            'title'           => 'New Holy Prayer Intention',
+            'subtitle'        => 'Province of St. Francis of Assisi, Ranchi • Intercessory Ministry',
+            'badge'           => 'PRAYER INTENTION',
+            'fields'          => array(
+                'Devotee Name'  => esc_html( $clean_name ),
+                'Email Address' => ! empty( $clean_email ) ? '<a href="mailto:' . esc_attr( $clean_email ) . '" style="color:#4A2A18;font-weight:700;text-decoration:none;">' . esc_html( $clean_email ) . '</a>' : '<em>Anonymous</em>',
+                'Phone Number'  => ! empty( $clean_phone ) ? esc_html( $clean_phone ) : '<em>Not provided</em>',
+                'Type'          => 'Community Daily Prayer & Mass Intercession',
+                'Date & Time'   => esc_html( current_time( 'd M Y, h:i A' ) ),
+            ),
+            'message_heading' => 'Holy Prayer Intention',
+            'message'         => $clean_intentions,
         ) );
+
+        franciscan_send_instant_success_and_email(
+            array( 'message' => 'Your prayer request has been received. Our friars will remember your intention in our daily community Holy Mass and Liturgy of the Hours.' ),
+            $to,
+            $email_subject,
+            $html_body,
+            $headers
+        );
     } else {
         wp_send_json_error( array( 'message' => 'Failed to submit prayer request. Please try again.' ) );
     }
@@ -385,50 +385,79 @@ function franciscan_ajax_mass_intention() {
         update_post_meta( $post_id, '_inquiry_ip', franciscan_get_client_ip() );
         update_post_meta( $post_id, '_inquiry_date', current_time( 'mysql' ) );
 
-        // Dispatch Email Notification
+        // Instant Response + Background Email Notification
         $receiving_email = function_exists( 'franciscan_get_option' ) 
             ? franciscan_get_option( 'receiving_email', franciscan_get_option( 'smtp_recipient_email', 'abbhiram@intersmart.in' ) ) 
             : 'abbhiram@intersmart.in';
 
         $to = sanitize_email( $receiving_email );
-        if ( is_email( $to ) ) {
-            $host = isset( $_SERVER['HTTP_HOST'] ) ? preg_replace( '/[^a-zA-Z0-9.-]/', '', $_SERVER['HTTP_HOST'] ) : 'franciscansociety.org';
-            $from_name = function_exists( 'franciscan_get_option' ) ? franciscan_get_option( 'smtp_from_name', 'Franciscan Society Ranchi Province' ) : 'Franciscan Society Ranchi Province';
-            $headers = array(
-                'Content-Type: text/html; charset=UTF-8',
-                'From: ' . wp_strip_all_tags( $from_name ) . ' <no-reply@' . $host . '>',
-                'Reply-To: ' . ( ! empty( $clean_email ) ? $clean_name . ' <' . $clean_email . '>' : 'no-reply@' . $host ),
-            );
+        $email_subject = '⛪ New Holy Mass Intention: ' . $clean_mass_type . ' (' . $clean_name . ')';
+        $host = isset( $_SERVER['HTTP_HOST'] ) ? preg_replace( '/[^a-zA-Z0-9.-]/', '', $_SERVER['HTTP_HOST'] ) : 'franciscansociety.org';
+        $from_name = function_exists( 'franciscan_get_option' ) ? franciscan_get_option( 'smtp_from_name', 'Franciscan Society Ranchi Province' ) : 'Franciscan Society Ranchi Province';
+        $headers = array(
+            'Content-Type: text/html; charset=UTF-8',
+            'From: ' . wp_strip_all_tags( $from_name ) . ' <no-reply@' . $host . '>',
+            'Reply-To: ' . ( ! empty( $clean_email ) ? $clean_name . ' <' . $clean_email . '>' : 'no-reply@' . $host ),
+        );
 
-            $email_subject = '⛪ New Holy Mass Intention: ' . $clean_mass_type . ' (' . $clean_name . ')';
-            $html_body = franciscan_render_christian_email_html( array(
-                'title'           => 'New Holy Mass Intention',
-                'subtitle'        => 'Province of St. Francis of Assisi, Ranchi • Holy Eucharist Ministry',
-                'badge'           => 'HOLY MASS OFFERING',
-                'fields'          => array(
-                    'Petitioner Name'  => esc_html( $clean_name ),
-                    'Email Address'    => ! empty( $clean_email ) ? '<a href="mailto:' . esc_attr( $clean_email ) . '" style="color:#4A2A18;font-weight:700;text-decoration:none;">' . esc_html( $clean_email ) . '</a>' : '<em>Not provided</em>',
-                    'Phone Number'     => ! empty( $clean_phone ) ? esc_html( $clean_phone ) : '<em>Not provided</em>',
-                    'Mass Purpose'     => esc_html( $clean_mass_type ),
-                    'Preferred Date'   => ! empty( $clean_mass_date ) ? esc_html( date( 'd M Y', strtotime( $clean_mass_date ) ) ) : '<em>Next available Holy Mass</em>',
-                    'Date & Time'      => esc_html( current_time( 'd M Y, h:i A' ) ),
-                ),
-                'message_heading' => 'Intention Description & Prayer',
-                'message'         => $clean_intention,
-            ) );
-
-            @wp_mail( $to, $email_subject, $html_body, $headers );
-        }
-
-        wp_send_json_success( array(
-            'message' => 'Holy Mass intention submitted successfully. Our Provincial Procurator and friars will offer this Holy Sacrifice of the Mass.'
+        $html_body = franciscan_render_christian_email_html( array(
+            'title'           => 'New Holy Mass Intention',
+            'subtitle'        => 'Province of St. Francis of Assisi, Ranchi • Holy Eucharist Ministry',
+            'badge'           => 'HOLY MASS OFFERING',
+            'fields'          => array(
+                'Petitioner Name'  => esc_html( $clean_name ),
+                'Email Address'    => ! empty( $clean_email ) ? '<a href="mailto:' . esc_attr( $clean_email ) . '" style="color:#4A2A18;font-weight:700;text-decoration:none;">' . esc_html( $clean_email ) . '</a>' : '<em>Not provided</em>',
+                'Phone Number'     => ! empty( $clean_phone ) ? esc_html( $clean_phone ) : '<em>Not provided</em>',
+                'Mass Purpose'     => esc_html( $clean_mass_type ),
+                'Preferred Date'   => ! empty( $clean_mass_date ) ? esc_html( date( 'd M Y', strtotime( $clean_mass_date ) ) ) : '<em>Next available Holy Mass</em>',
+                'Date & Time'      => esc_html( current_time( 'd M Y, h:i A' ) ),
+            ),
+            'message_heading' => 'Intention Description & Prayer',
+            'message'         => $clean_intention,
         ) );
+
+        franciscan_send_instant_success_and_email(
+            array( 'message' => 'Holy Mass intention submitted successfully. Our Provincial Procurator and friars will offer this Holy Sacrifice of the Mass.' ),
+            $to,
+            $email_subject,
+            $html_body,
+            $headers
+        );
     } else {
         wp_send_json_error( array( 'message' => 'Failed to submit Holy Mass intention. Please try again.' ) );
     }
 }
 add_action( 'wp_ajax_franciscan_submit_mass_intention', 'franciscan_ajax_mass_intention' );
 add_action( 'wp_ajax_nopriv_franciscan_submit_mass_intention', 'franciscan_ajax_mass_intention' );
+
+/**
+ * Ultra-fast JSON response flusher with background email dispatch
+ */
+function franciscan_send_instant_success_and_email( $response_data, $to, $subject, $body, $headers ) {
+    if ( function_exists( 'fastcgi_finish_request' ) ) {
+        @header( 'Content-Type: application/json; charset=' . get_option( 'blog_charset', 'UTF-8' ) );
+        echo wp_json_encode( array(
+            'success' => true,
+            'data'    => $response_data,
+        ) );
+        if ( function_exists( 'ob_flush' ) && ob_get_length() ) {
+            @ob_flush();
+        }
+        @flush();
+        @fastcgi_finish_request(); // Flushes 200 OK instantly to browser (< 100ms)
+
+        // Background asynchronous email delivery (zero waiting time for the user):
+        if ( is_email( $to ) ) {
+            @wp_mail( $to, $subject, $body, $headers );
+        }
+        exit;
+    } else {
+        if ( is_email( $to ) ) {
+            @wp_mail( $to, $subject, $body, $headers );
+        }
+        wp_send_json_success( $response_data );
+    }
+}
 
 /**
  * Render a beautiful, responsive Christian & Franciscan themed HTML email template

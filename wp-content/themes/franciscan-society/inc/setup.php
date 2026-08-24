@@ -216,14 +216,27 @@ function franciscan_configure_smtp_phpmailer( $phpmailer ) {
 
         if ( ! empty( $smtp_email ) && ! empty( $smtp_pass ) ) {
             $phpmailer->isSMTP();
-            $phpmailer->Host       = franciscan_get_option( 'smtp_host', 'smtp.gmail.com' );
-            $phpmailer->SMTPAuth   = true;
-            $phpmailer->Port       = intval( franciscan_get_option( 'smtp_port', 587 ) );
-            $phpmailer->Username   = $smtp_email;
-            $phpmailer->Password   = $smtp_pass;
-            $phpmailer->SMTPSecure = franciscan_get_option( 'smtp_encryption', 'tls' );
-            $phpmailer->From       = $smtp_email;
-            $phpmailer->FromName   = franciscan_get_option( 'smtp_from_name', 'Franciscan Society Ranchi Province' );
+            $phpmailer->Host          = franciscan_get_option( 'smtp_host', 'smtp.gmail.com' );
+            $phpmailer->SMTPAuth      = true;
+            $phpmailer->Port          = intval( franciscan_get_option( 'smtp_port', 587 ) );
+            $phpmailer->Username      = $smtp_email;
+            $phpmailer->Password      = $smtp_pass;
+            $phpmailer->SMTPSecure    = franciscan_get_option( 'smtp_encryption', 'tls' );
+            $phpmailer->From          = $smtp_email;
+            $phpmailer->FromName      = franciscan_get_option( 'smtp_from_name', 'Franciscan Society Ranchi Province' );
+            
+            // Ultra-fast connection & timeout configuration (prevents submission lag on shared hosting)
+            $phpmailer->Timeout       = 6;
+            $phpmailer->Timelimit     = 6;
+            $phpmailer->SMTPAutoTLS   = false;
+            $phpmailer->SMTPKeepAlive = false;
+            $phpmailer->SMTPOptions   = array(
+                'ssl' => array(
+                    'verify_peer'       => false,
+                    'verify_peer_name'  => false,
+                    'allow_self_signed' => true,
+                ),
+            );
         }
     }
 }
