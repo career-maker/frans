@@ -929,6 +929,145 @@ function franciscan_render_dashboard_view() {
                                     </div>
                                 </div>
                             </div>
+
+                            <!-- Welcome Section (Section 2) -->
+                            <div class="form-section">
+                                <h3 class="form-section-title">👋 Welcome Section (Section 2)</h3>
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label>Eyebrow Badge</label>
+                                        <input type="text" name="welcome_eyebrow" class="form-control" value="<?php echo esc_attr( $data['welcome_eyebrow'] ?? 'WELCOME TO THE FRANCISCAN SOCIETY' ); ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Section Heading</label>
+                                        <input type="text" name="welcome_section_heading" class="form-control" value="<?php echo esc_attr( $data['welcome_section_heading'] ?? 'WALKING TOGETHER IN FAITH, PENANCE, AND SERVICE' ); ?>">
+                                    </div>
+                                    <div class="form-group full-width">
+                                        <label>Welcome Message Text</label>
+                                        <textarea name="welcome_section_text" class="form-control"><?php echo esc_textarea( $data['welcome_section_text'] ?? '' ); ?></textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- About Section (Section 3) -->
+                            <div class="form-section">
+                                <h3 class="form-section-title">🏛️ About Section (Section 3)</h3>
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label>Eyebrow Badge</label>
+                                        <input type="text" name="about_eyebrow" class="form-control" value="<?php echo esc_attr( $data['about_eyebrow'] ?? 'ABOUT US' ); ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Section Heading</label>
+                                        <input type="text" name="about_section_heading" class="form-control" value="<?php echo esc_attr( $data['about_section_heading'] ?? 'OUR STORY FAITH MISSION AND VISION TOGETHER' ); ?>">
+                                    </div>
+                                    <div class="form-group full-width">
+                                        <label>Section Description</label>
+                                        <textarea name="about_section_text" class="form-control"><?php echo esc_textarea( $data['about_section_text'] ?? '' ); ?></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Mission Box Title</label>
+                                        <input type="text" name="about_mission_title" class="form-control" value="<?php echo esc_attr( $data['about_mission_title'] ?? 'OUR MISSION' ); ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Mission Box Text</label>
+                                        <input type="text" name="about_mission_text" class="form-control" value="<?php echo esc_attr( $data['about_mission_text'] ?? '' ); ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Vision Box Title</label>
+                                        <input type="text" name="about_vision_title" class="form-control" value="<?php echo esc_attr( $data['about_vision_title'] ?? 'OUR VISION' ); ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Vision Box Text</label>
+                                        <input type="text" name="about_vision_text" class="form-control" value="<?php echo esc_attr( $data['about_vision_text'] ?? '' ); ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Minister Provincial Name</label>
+                                        <input type="text" name="about_provincial_name" class="form-control" value="<?php echo esc_attr( $data['about_provincial_name'] ?? 'FR. MANOJ VENGATHANAM, TOR' ); ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Minister Provincial Title</label>
+                                        <input type="text" name="about_provincial_title" class="form-control" value="<?php echo esc_attr( $data['about_provincial_title'] ?? 'Minister Provincial' ); ?>">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Mission & Values Section -->
+                            <div class="form-section">
+                                <h3 class="form-section-title">&#x271D;&#xFE0F; Mission &amp; Values Section</h3>
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label>Eyebrow Badge</label>
+                                        <input type="text" name="mission_eyebrow" class="form-control" value="<?php echo esc_attr( $data['mission_eyebrow'] ?? 'Our Values' ); ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Section Heading</label>
+                                        <input type="text" name="mission_values_heading" class="form-control" value="<?php echo esc_attr( $data['mission_values_heading'] ?? 'OUR CHRISTIAN VALUES THAT LEAD OUR MINISTRY' ); ?>">
+                                    </div>
+                                    <div class="form-group full-width">
+                                        <label>Section Description</label>
+                                        <textarea name="mission_values_text" class="form-control"><?php echo esc_textarea( $data['mission_values_text'] ?? '' ); ?></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Prayer Support - Title</label>
+                                        <input type="text" name="prayer_support_title" class="form-control" value="<?php echo esc_attr( $data['prayer_support_title'] ?? 'PRAYER SUPPORT' ); ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Prayer Support - Description</label>
+                                        <input type="text" name="prayer_support_desc" class="form-control" value="<?php echo esc_attr( $data['prayer_support_desc'] ?? 'Our Prayer Support accompanies you in faith during every stage of life.' ); ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Fellowship Groups - Title</label>
+                                        <input type="text" name="fellowship_title" class="form-control" value="<?php echo esc_attr( $data['fellowship_title'] ?? 'FELLOWSHIP GROUPS' ); ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Fellowship Groups - Description</label>
+                                        <input type="text" name="fellowship_desc" class="form-control" value="<?php echo esc_attr( $data['fellowship_desc'] ?? 'Join our vibrant fellowship groups and grow together in faith and community.' ); ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Call Us - Button Label</label>
+                                        <input type="text" name="call_us_label" class="form-control" value="<?php echo esc_attr( $data['call_us_label'] ?? 'CALL US!' ); ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Call Us - Phone <small>(edit in Settings tab)</small></label>
+                                        <input type="text" class="form-control" value="<?php echo esc_attr( franciscan_get_option( 'contact_phone', '+91 651 234 5678' ) ); ?>" disabled style="opacity:0.6; cursor:not-allowed;">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Bible / Word of God Section -->
+                            <div class="form-section">
+                                <h3 class="form-section-title">&#x1F4D6; Bible / Word of God Section</h3>
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label>Eyebrow Badge</label>
+                                        <input type="text" name="bible_eyebrow" class="form-control" value="<?php echo esc_attr( $data['bible_eyebrow'] ?? 'WORD OF GOD' ); ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Scripture Reference</label>
+                                        <input type="text" name="bible_ref" class="form-control" value="<?php echo esc_attr( $data['bible_ref'] ?? 'Book of Psalms' ); ?>">
+                                    </div>
+                                    <div class="form-group full-width">
+                                        <label>Bible Quote</label>
+                                        <input type="text" name="bible_quote" class="form-control" value="<?php echo esc_attr( $data['bible_quote'] ?? '"BE STILL AND KNOW THAT I AM GOD."' ); ?>">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- News & Events Section Header -->
+                            <div class="form-section">
+                                <h3 class="form-section-title">&#x1F4F0; News &amp; Events Section Header</h3>
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label>Eyebrow Badge</label>
+                                        <input type="text" name="news_eyebrow class="form-control" value="<?php echo esc_attr( $data['news_eyebrow'] ?? 'NEWS & EVENTS' ); ); ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Section Heading</label>
+                                        <input type="text" name="news_heading" class="form-control" value="<?php echo esc_attr( $data['news_heading'] ?? 'INSIGHTS AND INSPIRATION FROM OUR LATEST NEWS' ); ?>">
+                                    </div>
+                                </div>
+                            </div>
                         <?php endif; ?>
 
                         <?php if ( $slug === 'ministries' ) : ?>
