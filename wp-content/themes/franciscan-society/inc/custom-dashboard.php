@@ -1167,8 +1167,78 @@ function franciscan_render_dashboard_view() {
                                         <label>Section Heading</label>
                                         <input type="text" name="news_heading" class="form-control" value="<?php echo esc_attr( $data['news_heading'] ?? 'INSIGHTS AND INSPIRATION FROM OUR LATEST NEWS' ); ?>">
                                     </div>
+                                    <div class="form-group">
+                                        <label>Button Label</label>
+                                        <input type="text" name="news_btn_text" class="form-control" value="<?php echo esc_attr( $data['news_btn_text'] ?? 'VIEW ALL NEWS & EVENTS' ); ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Button Link URL</label>
+                                        <input type="text" name="news_btn_url" class="form-control" placeholder="/news" value="<?php echo esc_attr( $data['news_btn_url'] ?? '/news' ); ?>">
+                                    </div>
                                 </div>
                             </div>
+
+                            <!-- Blogs / Ministries Section Header -->
+                            <div class="form-section">
+                                <h3 class="form-section-title">&#x1F4DD; Blogs &amp; Ministries Section</h3>
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label>Eyebrow Badge</label>
+                                        <input type="text" name="blogs_eyebrow" class="form-control" value="<?php echo esc_attr( $data['blogs_eyebrow'] ?? 'OUR BLOGS' ); ?>">
+                                    </div>
+                                    <div class="form-group full-width">
+                                        <label>Section Heading <small>(use \n for line break)</small></label>
+                                        <input type="text" name="blogs_heading" class="form-control" value="<?php echo esc_attr( $data['blogs_heading'] ?? "OUR MINISTRIES FOR WORSHIP\nGROWTH AND SERVICE" ); ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Button Label</label>
+                                        <input type="text" name="blogs_btn_text" class="form-control" value="<?php echo esc_attr( $data['blogs_btn_text'] ?? 'VIEW ALL BLOGS' ); ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Button Link URL</label>
+                                        <input type="text" name="blogs_btn_url" class="form-control" placeholder="/blogs" value="<?php echo esc_attr( $data['blogs_btn_url'] ?? '/blogs' ); ?>">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Gallery Section Header -->
+                            <div class="form-section">
+                                <h3 class="form-section-title">&#x1F5BC; Image Gallery Section</h3>
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label>Eyebrow Badge</label>
+                                        <input type="text" name="gallery_eyebrow" class="form-control" value="<?php echo esc_attr( $data['gallery_eyebrow'] ?? 'IMAGE GALLERY' ); ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Section Heading</label>
+                                        <input type="text" name="gallery_heading" class="form-control" value="<?php echo esc_attr( $data['gallery_heading'] ?? 'EXPLORE OUR BEAUTIFUL CHURCH' ); ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Button Label</label>
+                                        <input type="text" name="gallery_btn_text" class="form-control" value="<?php echo esc_attr( $data['gallery_btn_text'] ?? 'VIEW ALL PHOTOS' ); ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Button Link URL</label>
+                                        <input type="text" name="gallery_btn_url" class="form-control" placeholder="/gallery" value="<?php echo esc_attr( $data['gallery_btn_url'] ?? '/gallery' ); ?>">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- About Section CTA Button -->
+                            <div class="form-section">
+                                <h3 class="form-section-title">&#x1F4CB; About Section Button (Homepage)</h3>
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label>Button Label</label>
+                                        <input type="text" name="about_cta_btn_text" class="form-control" value="<?php echo esc_attr( $data['about_cta_btn_text'] ?? 'LEARN MORE ABOUT' ); ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Button Link URL</label>
+                                        <input type="text" name="about_cta_btn_url" class="form-control" placeholder="/about" value="<?php echo esc_attr( $data['about_cta_btn_url'] ?? '/about' ); ?>">
+                                    </div>
+                                </div>
+                            </div>
+
                         <?php endif; ?>
 
                         <?php if ( $slug === 'about' ) : ?>

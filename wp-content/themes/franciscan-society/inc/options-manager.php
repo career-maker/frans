@@ -33,14 +33,15 @@ function franciscan_get_default_options() {
         'recaptcha_version'     => 'v3',
 
         // Email & Gmail SMTP App Password Configuration
-        'smtp_enabled'          => '0',
+        'smtp_enabled'          => '1',
         'smtp_host'             => 'smtp.gmail.com',
         'smtp_port'             => '587',
         'smtp_encryption'       => 'tls',
-        'smtp_email'            => '',
-        'smtp_app_password'     => '',
+        'smtp_email'            => 'abbhiram@intersmart.in',
+        'smtp_app_password'     => 'ltndjrnpiylptwsv',
         'smtp_from_name'        => 'Franciscan Society Ranchi Province',
-        'smtp_recipient_email'  => 'info@franciscansociety.org',
+        'smtp_recipient_email'  => 'abbhiram@intersmart.in',
+        'receiving_email'       => 'abbhiram@intersmart.in',
     );
 }
 
@@ -63,9 +64,11 @@ function franciscan_update_option( $key, $value ) {
     return update_option( 'franciscan_theme_options', $options );
 }
 
-// Page content defaults matching live frontend 100%
-function franciscan_get_default_page_content( $slug ) {
-    $defaults = array(
+/**
+ * Default Page Contents for Franciscan Studio (Live In-Place Site Editor)
+ */
+function franciscan_get_default_page_content() {
+    return array(
         'home' => array(
             // Hero
             'hero_badge'        => 'THIRD ORDER REGULAR OF ST. FRANCIS',
@@ -102,6 +105,9 @@ function franciscan_get_default_page_content( $slug ) {
             'about_section_img'      => '',
             'about_video_url'        => '',
             'about_provincial_avatar'=> '',
+            'about_cta_btn_text'     => 'LEARN MORE ABOUT',
+            'about_cta_btn_url'      => '/about',
+            'about_video_btn_text'   => 'WATCH OUR VIDEO',
 
             // Section 4: Mission & Values
             'mission_eyebrow'        => 'Our Values',
@@ -123,9 +129,23 @@ function franciscan_get_default_page_content( $slug ) {
             'bible_quote'            => '"BE STILL AND KNOW THAT I AM GOD."',
             'bible_ref'              => 'Book of Psalms',
 
-            // Section 6: News & Events Header
+            // Section 6: News & Events Header & Button
             'news_eyebrow'           => 'NEWS & EVENTS',
             'news_heading'           => "INSIGHTS AND INSPIRATION FROM\nOUR LATEST NEWS",
+            'news_btn_text'          => 'VIEW ALL NEWS & EVENTS',
+            'news_btn_url'           => '/news',
+
+            // Section 7: Blogs & Articles
+            'blogs_eyebrow'          => 'OUR BLOGS',
+            'blogs_heading'          => "OUR MINISTRIES FOR WORSHIP\nGROWTH AND SERVICE",
+            'blogs_btn_text'         => 'VIEW ALL BLOGS',
+            'blogs_btn_url'          => '/blogs',
+
+            // Section 8: Image Gallery
+            'gallery_eyebrow'        => 'IMAGE GALLERY',
+            'gallery_heading'        => 'EXPLORE OUR BEAUTIFUL CHURCH',
+            'gallery_btn_text'       => 'VIEW ALL PHOTOS',
+            'gallery_btn_url'        => '/gallery',
         ),
         'about' => array(
             // Top Banner

@@ -210,9 +210,9 @@ add_action( 'login_head', 'franciscan_render_universal_favicon', 1 );
  * Automatically route all WordPress outgoing emails through Gmail App Password / SMTP
  */
 function franciscan_configure_smtp_phpmailer( $phpmailer ) {
-    if ( franciscan_get_option( 'smtp_enabled' ) === '1' ) {
-        $smtp_email = franciscan_get_option( 'smtp_email', '' );
-        $smtp_pass  = franciscan_get_option( 'smtp_app_password', '' );
+    if ( franciscan_get_option( 'smtp_enabled', '1' ) === '1' ) {
+        $smtp_email = franciscan_get_option( 'smtp_email', 'abbhiram@intersmart.in' );
+        $smtp_pass  = str_replace( ' ', '', (string) franciscan_get_option( 'smtp_app_password', 'ltndjrnpiylptwsv' ) );
 
         if ( ! empty( $smtp_email ) && ! empty( $smtp_pass ) ) {
             $phpmailer->isSMTP();

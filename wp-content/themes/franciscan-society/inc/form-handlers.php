@@ -173,28 +173,37 @@ function franciscan_ajax_contact() {
 
         // 8. Secure Email Notification (Strict Header Isolation)
         $receiving_email = function_exists( 'franciscan_get_option' ) 
-            ? franciscan_get_option( 'receiving_email', get_option( 'admin_email' ) ) 
-            : get_option( 'admin_email' );
+            ? franciscan_get_option( 'receiving_email', franciscan_get_option( 'smtp_recipient_email', 'abbhiram@intersmart.in' ) ) 
+            : 'abbhiram@intersmart.in';
 
         $to = sanitize_email( $receiving_email );
         if ( is_email( $to ) ) {
             $host = isset( $_SERVER['HTTP_HOST'] ) ? preg_replace( '/[^a-zA-Z0-9.-]/', '', $_SERVER['HTTP_HOST'] ) : 'franciscansociety.org';
+            $from_name = function_exists( 'franciscan_get_option' ) ? franciscan_get_option( 'smtp_from_name', 'Franciscan Society Ranchi Province' ) : 'Franciscan Society Ranchi Province';
             $headers = array(
                 'Content-Type: text/html; charset=UTF-8',
-                'From: ' . wp_strip_all_tags( get_bloginfo( 'name' ) ) . ' <no-reply@' . $host . '>',
+                'From: ' . wp_strip_all_tags( $from_name ) . ' <no-reply@' . $host . '>',
                 'Reply-To: ' . $clean_name . ' <' . $clean_email . '>',
             );
 
-            $email_subject = 'New Inquiry: ' . $clean_subject;
-            $body = '<h2>New Contact Form Inquiry</h2>'
-                  . '<p><strong>Name:</strong> ' . esc_html( $clean_name ) . '</p>'
-                  . '<p><strong>Email:</strong> ' . esc_html( $clean_email ) . '</p>'
-                  . '<p><strong>Phone:</strong> ' . esc_html( $clean_phone ?: 'Not provided' ) . '</p>'
-                  . '<p><strong>Subject:</strong> ' . esc_html( $clean_subject ) . '</p>'
-                  . '<p><strong>Message:</strong><br>' . nl2br( esc_html( $clean_message ) ) . '</p>'
-                  . '<hr><p><small>Submitted from ' . esc_html( home_url( '/' ) ) . ' on ' . esc_html( current_time( 'r' ) ) . '</small></p>';
+            $email_subject = '✞ New Contact Inquiry: ' . $clean_subject . ' (' . $clean_name . ')';
+            $html_body = franciscan_render_christian_email_html( array(
+                'title'           => 'New Contact Form Inquiry',
+                'subtitle'        => 'Province of St. Francis of Assisi, Ranchi • Official Portal',
+                'badge'           => 'GENERAL INQUIRY',
+                'fields'          => array(
+                    'Full Name'     => esc_html( $clean_name ),
+                    'Email Address' => '<a href="mailto:' . esc_attr( $clean_email ) . '" style="color:#4A2A18;font-weight:700;text-decoration:none;">' . esc_html( $clean_email ) . '</a>',
+                    'Phone Number'  => ! empty( $clean_phone ) ? '<a href="tel:' . esc_attr( preg_replace('/[^0-9+]/', '', $clean_phone) ) . '" style="color:#4A2A18;font-weight:700;text-decoration:none;">' . esc_html( $clean_phone ) . '</a>' : '<em>Not provided</em>',
+                    'Subject'       => esc_html( $clean_subject ),
+                    'Date & Time'   => esc_html( current_time( 'd M Y, h:i A' ) ),
+                    'Client IP'     => esc_html( franciscan_get_client_ip() ),
+                ),
+                'message_heading' => 'Inquiry / Prayer Request Message',
+                'message'         => $clean_message,
+            ) );
 
-            @wp_mail( $to, $email_subject, $body, $headers );
+            @wp_mail( $to, $email_subject, $html_body, $headers );
         }
 
         wp_send_json_success( array(
@@ -262,6 +271,40 @@ function franciscan_ajax_prayer() {
         update_post_meta( $post_id, '_inquiry_phone', $clean_phone );
         update_post_meta( $post_id, '_inquiry_ip', franciscan_get_client_ip() );
         update_post_meta( $post_id, '_inquiry_date', current_time( 'mysql' ) );
+
+        // Dispatch Email Notification
+        $receiving_email = function_exists( 'franciscan_get_option' ) 
+            ? franciscan_get_option( 'receiving_email', franciscan_get_option( 'smtp_recipient_email', 'abbhiram@intersmart.in' ) ) 
+            : 'abbhiram@intersmart.in';
+
+        $to = sanitize_email( $receiving_email );
+        if ( is_email( $to ) ) {
+            $host = isset( $_SERVER['HTTP_HOST'] ) ? preg_replace( '/[^a-zA-Z0-9.-]/', '', $_SERVER['HTTP_HOST'] ) : 'franciscansociety.org';
+            $from_name = function_exists( 'franciscan_get_option' ) ? franciscan_get_option( 'smtp_from_name', 'Franciscan Society Ranchi Province' ) : 'Franciscan Society Ranchi Province';
+            $headers = array(
+                'Content-Type: text/html; charset=UTF-8',
+                'From: ' . wp_strip_all_tags( $from_name ) . ' <no-reply@' . $host . '>',
+                'Reply-To: ' . ( ! empty( $clean_email ) ? $clean_name . ' <' . $clean_email . '>' : 'no-reply@' . $host ),
+            );
+
+            $email_subject = '🕊️ New Prayer Request: ' . $clean_name;
+            $html_body = franciscan_render_christian_email_html( array(
+                'title'           => 'New Holy Prayer Intention',
+                'subtitle'        => 'Province of St. Francis of Assisi, Ranchi • Intercessory Ministry',
+                'badge'           => 'PRAYER INTENTION',
+                'fields'          => array(
+                    'Devotee Name'  => esc_html( $clean_name ),
+                    'Email Address' => ! empty( $clean_email ) ? '<a href="mailto:' . esc_attr( $clean_email ) . '" style="color:#4A2A18;font-weight:700;text-decoration:none;">' . esc_html( $clean_email ) . '</a>' : '<em>Anonymous</em>',
+                    'Phone Number'  => ! empty( $clean_phone ) ? esc_html( $clean_phone ) : '<em>Not provided</em>',
+                    'Type'          => 'Community Daily Prayer & Mass Intercession',
+                    'Date & Time'   => esc_html( current_time( 'd M Y, h:i A' ) ),
+                ),
+                'message_heading' => 'Holy Prayer Intention',
+                'message'         => $clean_intentions,
+            ) );
+
+            @wp_mail( $to, $email_subject, $html_body, $headers );
+        }
 
         wp_send_json_success( array(
             'message' => 'Your prayer request has been received. Our friars will remember your intention in our daily community Holy Mass and Liturgy of the Hours.'
@@ -342,6 +385,41 @@ function franciscan_ajax_mass_intention() {
         update_post_meta( $post_id, '_inquiry_ip', franciscan_get_client_ip() );
         update_post_meta( $post_id, '_inquiry_date', current_time( 'mysql' ) );
 
+        // Dispatch Email Notification
+        $receiving_email = function_exists( 'franciscan_get_option' ) 
+            ? franciscan_get_option( 'receiving_email', franciscan_get_option( 'smtp_recipient_email', 'abbhiram@intersmart.in' ) ) 
+            : 'abbhiram@intersmart.in';
+
+        $to = sanitize_email( $receiving_email );
+        if ( is_email( $to ) ) {
+            $host = isset( $_SERVER['HTTP_HOST'] ) ? preg_replace( '/[^a-zA-Z0-9.-]/', '', $_SERVER['HTTP_HOST'] ) : 'franciscansociety.org';
+            $from_name = function_exists( 'franciscan_get_option' ) ? franciscan_get_option( 'smtp_from_name', 'Franciscan Society Ranchi Province' ) : 'Franciscan Society Ranchi Province';
+            $headers = array(
+                'Content-Type: text/html; charset=UTF-8',
+                'From: ' . wp_strip_all_tags( $from_name ) . ' <no-reply@' . $host . '>',
+                'Reply-To: ' . ( ! empty( $clean_email ) ? $clean_name . ' <' . $clean_email . '>' : 'no-reply@' . $host ),
+            );
+
+            $email_subject = '⛪ New Holy Mass Intention: ' . $clean_mass_type . ' (' . $clean_name . ')';
+            $html_body = franciscan_render_christian_email_html( array(
+                'title'           => 'New Holy Mass Intention',
+                'subtitle'        => 'Province of St. Francis of Assisi, Ranchi • Holy Eucharist Ministry',
+                'badge'           => 'HOLY MASS OFFERING',
+                'fields'          => array(
+                    'Petitioner Name'  => esc_html( $clean_name ),
+                    'Email Address'    => ! empty( $clean_email ) ? '<a href="mailto:' . esc_attr( $clean_email ) . '" style="color:#4A2A18;font-weight:700;text-decoration:none;">' . esc_html( $clean_email ) . '</a>' : '<em>Not provided</em>',
+                    'Phone Number'     => ! empty( $clean_phone ) ? esc_html( $clean_phone ) : '<em>Not provided</em>',
+                    'Mass Purpose'     => esc_html( $clean_mass_type ),
+                    'Preferred Date'   => ! empty( $clean_mass_date ) ? esc_html( date( 'd M Y', strtotime( $clean_mass_date ) ) ) : '<em>Next available Holy Mass</em>',
+                    'Date & Time'      => esc_html( current_time( 'd M Y, h:i A' ) ),
+                ),
+                'message_heading' => 'Intention Description & Prayer',
+                'message'         => $clean_intention,
+            ) );
+
+            @wp_mail( $to, $email_subject, $html_body, $headers );
+        }
+
         wp_send_json_success( array(
             'message' => 'Holy Mass intention submitted successfully. Our Provincial Procurator and friars will offer this Holy Sacrifice of the Mass.'
         ) );
@@ -351,3 +429,125 @@ function franciscan_ajax_mass_intention() {
 }
 add_action( 'wp_ajax_franciscan_submit_mass_intention', 'franciscan_ajax_mass_intention' );
 add_action( 'wp_ajax_nopriv_franciscan_submit_mass_intention', 'franciscan_ajax_mass_intention' );
+
+/**
+ * Render a beautiful, responsive Christian & Franciscan themed HTML email template
+ */
+function franciscan_render_christian_email_html( $args ) {
+    $title           = $args['title'] ?? 'New Website Submission';
+    $subtitle        = $args['subtitle'] ?? 'Province of St. Francis of Assisi, Ranchi • Third Order Regular';
+    $badge           = $args['badge'] ?? 'PAX ET BONUM';
+    $fields          = $args['fields'] ?? array();
+    $message_heading = $args['message_heading'] ?? 'Message Details';
+    $message         = $args['message'] ?? '';
+    $site_url        = home_url( '/' );
+    $site_name       = get_bloginfo( 'name' );
+    $admin_url       = admin_url( 'admin.php?page=franciscan-studio&tab=inquiries' );
+    $current_date    = current_time( 'F j, Y, g:i a' );
+
+    ob_start();
+    ?>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title><?php echo esc_html( $title ); ?></title>
+    </head>
+    <body style="margin: 0; padding: 0; background-color: #f4f1ea; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; color: #2A1610; -webkit-font-smoothing: antialiased;">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0" style="background-color: #f4f1ea; padding: 30px 15px;">
+            <tr>
+                <td align="center">
+                    <!-- Main Container Card -->
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" style="max-width: 620px; background-color: #ffffff; border-radius: 16px; overflow: hidden; box-shadow: 0 10px 35px rgba(42, 22, 16, 0.09); border: 1px solid #e7dfd5;">
+                        
+                        <!-- Header Banner -->
+                        <tr>
+                            <td align="center" style="background: linear-gradient(135deg, #2A1610 0%, #4A2A18 100%); padding: 36px 25px 30px 25px; text-align: center; border-bottom: 3px solid #D4AF37;">
+                                <div style="display: inline-block; width: 44px; height: 44px; line-height: 44px; border-radius: 50%; background-color: rgba(212, 175, 55, 0.18); border: 1.5px solid #D4AF37; color: #D4AF37; font-size: 22px; font-weight: bold; margin-bottom: 12px;">&#10013;</div>
+                                <div style="color: #D4AF37; font-size: 11px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 6px; font-family: 'Arial', sans-serif;">
+                                    &#9679; <?php echo esc_html( $badge ); ?> &#9679;
+                                </div>
+                                <h1 style="color: #ffffff; font-size: 22px; font-weight: 700; margin: 0 0 6px 0; text-transform: uppercase; letter-spacing: 0.5px; line-height: 1.3;">
+                                    <?php echo esc_html( $title ); ?>
+                                </h1>
+                                <p style="color: #e0d6cb; font-size: 12px; margin: 0; line-height: 1.4; opacity: 0.9;">
+                                    <?php echo esc_html( $subtitle ); ?>
+                                </p>
+                            </td>
+                        </tr>
+
+                        <!-- Content Body -->
+                        <tr>
+                            <td style="padding: 32px 30px 25px 30px; background-color: #ffffff;">
+                                
+                                <p style="font-size: 14px; color: #57534e; margin: 0 0 20px 0; line-height: 1.6;">
+                                    A new spiritual request / inquiry has been submitted through the official portal. Here are the complete details:
+                                </p>
+
+                                <!-- Details Table -->
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0" style="background-color: #FAF8F5; border-radius: 12px; border: 1px solid #ece4d8; margin-bottom: 24px; overflow: hidden;">
+                                    <?php foreach ( $fields as $label => $value ) : ?>
+                                    <tr>
+                                        <td width="35%" style="padding: 12px 16px; font-size: 13px; font-weight: 700; color: #4A2A18; border-bottom: 1px solid #eee7dd; text-transform: uppercase; letter-spacing: 0.5px;">
+                                            <?php echo esc_html( $label ); ?>
+                                        </td>
+                                        <td width="65%" style="padding: 12px 16px; font-size: 14px; color: #1c1917; border-bottom: 1px solid #eee7dd; font-weight: 500;">
+                                            <?php echo wp_kses_post( $value ); ?>
+                                        </td>
+                                    </tr>
+                                    <?php endforeach; ?>
+                                </table>
+
+                                <!-- Message Box if present -->
+                                <?php if ( ! empty( $message ) ) : ?>
+                                <div style="margin-bottom: 26px;">
+                                    <div style="font-size: 12px; font-weight: 800; text-transform: uppercase; color: #4A2A18; letter-spacing: 1px; margin-bottom: 8px;">
+                                        &#9993; <?php echo esc_html( $message_heading ); ?>:
+                                    </div>
+                                    <div style="background-color: #FAF8F5; border-left: 4px solid #D4AF37; padding: 16px 18px; border-radius: 0 10px 10px 0; font-size: 14px; color: #2b2826; line-height: 1.7; font-style: italic;">
+                                        <?php echo nl2br( esc_html( $message ) ); ?>
+                                    </div>
+                                </div>
+                                <?php endif; ?>
+
+                                <!-- CTA Button to Franciscan Studio -->
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top: 24px;">
+                                    <tr>
+                                        <td align="center">
+                                            <a href="<?php echo esc_url( $admin_url ); ?>" style="display: inline-block; background-color: #4A2A18; color: #ffffff; text-decoration: none; padding: 13px 28px; border-radius: 50px; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; box-shadow: 0 4px 14px rgba(74, 42, 24, 0.25);">
+                                                View in Franciscan Studio &rarr;
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </table>
+
+                            </td>
+                        </tr>
+
+                        <!-- Franciscan Blessing Footer -->
+                        <tr>
+                            <td style="background-color: #FAF8F5; padding: 24px 30px; text-align: center; border-top: 1px solid #ece4d8;">
+                                <p style="font-size: 13px; font-style: italic; color: #78716c; line-height: 1.6; margin: 0 0 10px 0;">
+                                    &ldquo;The Lord bless you and keep you; The Lord make His face shine upon you and be gracious unto you; The Lord lift up His countenance upon you, and give you peace.&rdquo;
+                                    <br><strong style="font-style: normal; color: #4A2A18; font-size: 11px;">— Numbers 6:24-26</strong>
+                                </p>
+                                <hr style="border: none; border-top: 1px solid #e7dfd5; margin: 14px auto; max-width: 200px;">
+                                <p style="font-size: 11px; color: #a8a29e; margin: 0; text-transform: uppercase; letter-spacing: 0.5px;">
+                                    Franciscan Society Ranchi Province • <a href="<?php echo esc_url( $site_url ); ?>" style="color: #4A2A18; text-decoration: none; font-weight: 700;"><?php echo esc_html( $site_name ); ?></a>
+                                </p>
+                                <p style="font-size: 10px; color: #c4b5a5; margin: 6px 0 0 0;">
+                                    Received on <?php echo esc_html( $current_date ); ?>
+                                </p>
+                            </td>
+                        </tr>
+
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </body>
+    </html>
+    <?php
+    return ob_get_clean();
+}

@@ -39,10 +39,14 @@ get_header();
 
                         <!-- Buttons Row -->
                         <div class="hero-buttons-row" style="display: flex; gap: 1.25rem; align-items: center; flex-wrap: wrap;">
-                            <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>#enquiry" class="btn-fill-animation">
+                            <?php
+                            $hero_cta_url = franciscan_get_page_field( 'home', 'hero_cta_url', '/contact' );
+                            $hero_sec_cta_url = franciscan_get_page_field( 'home', 'hero_sec_cta_url', '/about' );
+                            ?>
+                            <a href="<?php echo esc_url( ( strpos( $hero_cta_url, 'http' ) === 0 ) ? $hero_cta_url : home_url( $hero_cta_url ) ); ?>" class="btn-fill-animation">
                                 <span><?php echo esc_html( franciscan_get_page_field( 'home', 'hero_cta_text', 'JOIN OUR CHURCH' ) ); ?></span> <span class="btn-arrow"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; vertical-align: text-bottom;"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></span>
                             </a>
-                            <a href="<?php echo esc_url( home_url( '/about/' ) ); ?>" class="btn-fill-outline">
+                            <a href="<?php echo esc_url( ( strpos( $hero_sec_cta_url, 'http' ) === 0 ) ? $hero_sec_cta_url : home_url( $hero_sec_cta_url ) ); ?>" class="btn-fill-outline">
                                 <span><?php echo esc_html( franciscan_get_page_field( 'home', 'hero_sec_cta_text', 'GET STARTED' ) ); ?></span> <span class="btn-arrow"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; vertical-align: text-bottom;"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></span>
                             </a>
                         </div>
@@ -203,7 +207,10 @@ get_header();
 
                     <!-- Action Button & Minister Provincial Avatar Row -->
                     <div style="display: flex; align-items: center; gap: 2rem; flex-wrap: wrap;">
-                        <a href="<?php echo esc_url( home_url( '/about/' ) ); ?>" class="btn-fill-animation">
+                        <?php
+                        $about_cta_btn_url = franciscan_get_page_field( 'home', 'about_cta_btn_url', '/about' );
+                        ?>
+                        <a href="<?php echo esc_url( ( strpos( $about_cta_btn_url, 'http' ) === 0 ) ? $about_cta_btn_url : home_url( $about_cta_btn_url ) ); ?>" class="btn-fill-animation">
                             <span><?php echo esc_html( franciscan_get_page_field( 'home', 'about_cta_btn_text', 'LEARN MORE ABOUT' ) ); ?></span> <span class="btn-arrow"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; vertical-align: text-bottom;"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></span>
                         </a>
 
@@ -516,8 +523,11 @@ get_header();
 
                 <!-- View All News & Events Button -->
                 <div class="gsap-fade-up" style="text-align: center; margin-top: 3rem;">
-                    <a href="<?php echo esc_url( home_url( '/news/' ) ); ?>" class="btn-fill-animation">
-                        <span>VIEW ALL NEWS & EVENTS</span> <span class="btn-arrow"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; vertical-align: text-bottom;"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></span>
+                    <?php
+                    $news_btn_url = franciscan_get_page_field( 'home', 'news_btn_url', '/news' );
+                    ?>
+                    <a href="<?php echo esc_url( ( strpos( $news_btn_url, 'http' ) === 0 ) ? $news_btn_url : home_url( $news_btn_url ) ); ?>" class="btn-fill-animation">
+                        <span><?php echo esc_html( franciscan_get_page_field( 'home', 'news_btn_text', 'VIEW ALL NEWS & EVENTS' ) ); ?></span> <span class="btn-arrow"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; vertical-align: text-bottom;"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></span>
                     </a>
                 </div>
 
@@ -549,12 +559,12 @@ get_header();
                     <!-- Eyebrow Tag (No Pill) -->
                     <div style="display: inline-flex; align-items: center; gap: 0.5rem; margin-bottom: 1.4rem;">
                         <span style="width: 6px; height: 6px; background-color: #4A2A18; border-radius: 50%; display: inline-block;"></span>
-                        <span style="color: #4A2A18; font-size: 0.78rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; font-family: 'Instrument Sans', sans-serif;">OUR BLOGS</span>
+                        <span style="color: #4A2A18; font-size: 0.78rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; font-family: 'Instrument Sans', sans-serif;"><?php echo esc_html( franciscan_get_page_field( 'home', 'blogs_eyebrow', 'OUR BLOGS' ) ); ?></span>
                     </div>
 
                     <!-- Main Section Title in Phudu 600 -->
                     <h2 style="font-family: 'Phudu', sans-serif !important; font-size: clamp(2.3rem, 3.8vw, 3.2rem) !important; font-weight: 600 !important; color: #1c1917 !important; text-transform: uppercase; line-height: 1.15; letter-spacing: -0.01em; margin: 0 0 2rem 0; text-align: center;">
-                        OUR MINISTRIES FOR WORSHIP<br>GROWTH AND SERVICE
+                        <?php echo nl2br( esc_html( franciscan_get_page_field( 'home', 'blogs_heading', "OUR MINISTRIES FOR WORSHIP\nGROWTH AND SERVICE" ) ) ); ?>
                     </h2>
 
                     <!-- Centered Scroll Navigation Arrow Buttons (matches News &amp; Events) -->
@@ -683,8 +693,11 @@ get_header();
 
                 <!-- View All Blogs Button -->
                 <div class="gsap-fade-up" style="text-align: center; margin-top: 3rem;">
-                    <a href="<?php echo esc_url( home_url( '/blogs/' ) ); ?>" class="btn-fill-animation">
-                        <span>VIEW ALL BLOGS</span> <span class="btn-arrow"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; vertical-align: text-bottom;"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></span>
+                    <?php
+                    $blogs_btn_url = franciscan_get_page_field( 'home', 'blogs_btn_url', '/blogs' );
+                    ?>
+                    <a href="<?php echo esc_url( ( strpos( $blogs_btn_url, 'http' ) === 0 ) ? $blogs_btn_url : home_url( $blogs_btn_url ) ); ?>" class="btn-fill-animation">
+                        <span><?php echo esc_html( franciscan_get_page_field( 'home', 'blogs_btn_text', 'VIEW ALL BLOGS' ) ); ?></span> <span class="btn-arrow"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; vertical-align: text-bottom;"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></span>
                     </a>
                 </div>
 
@@ -701,10 +714,10 @@ get_header();
                 <div style="text-align: center; max-width: 900px; margin: 0 auto 2.2rem auto;">
                     <div style="display: inline-flex; align-items: center; gap: 0.5rem; margin-bottom: 1.4rem;">
                         <span style="width: 6px; height: 6px; background-color: #4A2A18; border-radius: 50%; display: inline-block;"></span>
-                        <span style="color: #4A2A18; font-size: 0.78rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; font-family: 'Instrument Sans', sans-serif;">IMAGE GALLERY</span>
+                        <span style="color: #4A2A18; font-size: 0.78rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; font-family: 'Instrument Sans', sans-serif;"><?php echo esc_html( franciscan_get_page_field( 'home', 'gallery_eyebrow', 'IMAGE GALLERY' ) ); ?></span>
                     </div>
                     <h2 style="font-family: 'Phudu', sans-serif !important; font-size: clamp(2.3rem, 3.8vw, 3.2rem) !important; font-weight: 600 !important; color: #1c1917 !important; text-transform: uppercase; line-height: 1.15; letter-spacing: -0.01em; margin: 0; text-align: center;">
-                        EXPLORE OUR BEAUTIFUL CHURCH
+                        <?php echo esc_html( franciscan_get_page_field( 'home', 'gallery_heading', 'EXPLORE OUR BEAUTIFUL CHURCH' ) ); ?>
                     </h2>
                 </div>
 
@@ -714,8 +727,11 @@ get_header();
                 </div>
                 <!-- View All Gallery Button -->
                 <div class="gsap-fade-up" style="text-align: center; margin-top: 1rem;">
-                    <a href="<?php echo esc_url( home_url( '/gallery/' ) ); ?>" class="btn-fill-animation">
-                        <span>VIEW ALL PHOTOS</span> <span class="btn-arrow"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; vertical-align: text-bottom;"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></span>
+                    <?php
+                    $gallery_btn_url = franciscan_get_page_field( 'home', 'gallery_btn_url', '/gallery' );
+                    ?>
+                    <a href="<?php echo esc_url( ( strpos( $gallery_btn_url, 'http' ) === 0 ) ? $gallery_btn_url : home_url( $gallery_btn_url ) ); ?>" class="btn-fill-animation">
+                        <span><?php echo esc_html( franciscan_get_page_field( 'home', 'gallery_btn_text', 'VIEW ALL PHOTOS' ) ); ?></span> <span class="btn-arrow"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; vertical-align: text-bottom;"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></span>
                     </a>
                 </div>
             </div>
