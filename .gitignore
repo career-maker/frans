@@ -1,3 +1,7 @@
+# Server specific configs (Never overwrite live server configs)
+wp-config.php
+.htaccess
+
 # Large backup archives
 *.wpress
 wp-content/ai1wm-backups/*.wpress
