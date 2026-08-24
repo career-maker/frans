@@ -161,7 +161,7 @@ get_header();
                                 </svg>
                             </a>
                         </div>
-                        <span style="display: block; margin-top: 8px; font-weight: 800; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: #1c1917; font-family: 'Instrument Sans', sans-serif;">WATCH OUR VIDEO</span>
+                        <span style="display: block; margin-top: 8px; font-weight: 800; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: #1c1917; font-family: 'Instrument Sans', sans-serif;"><?php echo esc_html( franciscan_get_page_field( 'home', 'about_video_btn_text', 'WATCH OUR VIDEO' ) ); ?></span>
                     </div>
                 </div>
 
@@ -204,7 +204,7 @@ get_header();
                     <!-- Action Button & Minister Provincial Avatar Row -->
                     <div style="display: flex; align-items: center; gap: 2rem; flex-wrap: wrap;">
                         <a href="<?php echo esc_url( home_url( '/about/' ) ); ?>" class="btn-fill-animation">
-                            <span>LEARN MORE ABOUT</span> <span class="btn-arrow"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; vertical-align: text-bottom;"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></span>
+                            <span><?php echo esc_html( franciscan_get_page_field( 'home', 'about_cta_btn_text', 'LEARN MORE ABOUT' ) ); ?></span> <span class="btn-arrow"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; vertical-align: text-bottom;"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></span>
                         </a>
 
                         <?php
