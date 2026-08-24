@@ -117,7 +117,13 @@ SERVED IN GOD'S LOVE" ) ) ); ?>
 
                 <!-- Right Column: Mosaic Photograph -->
                 <div class="welcome-media">
-                    <img  loading="lazy"loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_24_08_PM.png' ); ?>" alt="Mosaic frescoes covering the vaulted ceiling of a church">
+                    <?php
+                    $welcome_mosaic = franciscan_get_page_field( 'home', 'welcome_mosaic_img', '' );
+                    if ( empty( $welcome_mosaic ) ) {
+                        $welcome_mosaic = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_24_08_PM.png';
+                    }
+                    ?>
+                    <img loading="lazy" decoding="async" src="<?php echo esc_url( $welcome_mosaic ); ?>" alt="Mosaic frescoes covering the vaulted ceiling of a church">
                 </div>
 
             </div>
@@ -131,15 +137,25 @@ SERVED IN GOD'S LOVE" ) ) ); ?>
             <div class="responsive-grid-about" style="max-width: 1320px; margin: 0 auto; padding: 0 clamp(1rem, 5vw, 3rem); display: grid; gap: 4.5rem; align-items: center;">
                 
                 <!-- Left Column: Main Image with Working Video Card Overlay -->
+                <?php
+                $about_img = franciscan_get_page_field( 'home', 'about_section_img', '' );
+                if ( empty( $about_img ) ) {
+                    $about_img = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_48_39_PM.png';
+                }
+                $about_video = franciscan_get_page_field( 'home', 'about_video_url', '' );
+                if ( empty( $about_video ) ) {
+                    $about_video = FRANCISCAN_THEME_URI . '/assets/videos/hero-bg.mp4';
+                }
+                ?>
                 <div style="position: relative; border-radius: 24px;">
                     <div class="about-img-container" style="position: relative; border-radius: 24px; overflow: hidden; box-shadow: 0 20px 45px rgba(0, 0, 0, 0.08);">
-                        <img  loading="lazy"loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_48_39_PM.png' ); ?>" style="width: 100%; height: 460px; object-fit: cover; border-radius: 24px; display: block;" alt="Franciscan Rosary & Prayer">
+                        <img loading="lazy" decoding="async" src="<?php echo esc_url( $about_img ); ?>" style="width: 100%; height: 460px; object-fit: cover; border-radius: 24px; display: block;" alt="Franciscan Rosary & Prayer">
                     </div>
                     
                     <!-- Inset Video Overlay Card (Positioned inside bottom-right corner) -->
                     <div class="about-video-card" style="position: absolute; bottom: 20px; right: 20px; background: #ffffff; padding: 10px; border-radius: 16px; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.18); width: 185px; text-align: center; z-index: 10;">
                         <div style="position: relative; border-radius: 12px; overflow: hidden; height: 95px; background-color: #1c1917;">
-                            <video src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/videos/hero-bg.mp4' ); ?>" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" autoplay loop muted playsinline></video>
+                            <video src="<?php echo esc_url( $about_video ); ?>" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" autoplay loop muted playsinline></video>
                             <a rel="noopener noreferrer" href="https://youtube.com/@tormediaranchi3804?si=UPTCSJUSj9tbcjeB" target="_blank" class="video-play-btn" aria-label="Watch our video on YouTube">
                                 <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16" aria-hidden="true">
                                     <path d="M8 5v14l11-7z"/>
@@ -192,8 +208,14 @@ SERVED IN GOD'S LOVE" ) ) ); ?>
                             <span>LEARN MORE ABOUT</span> <span class="btn-arrow"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; vertical-align: text-bottom;"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></span>
                         </a>
 
+                        <?php
+                        $provincial_avatar = franciscan_get_page_field( 'home', 'about_provincial_avatar', '' );
+                        if ( empty( $provincial_avatar ) ) {
+                            $provincial_avatar = FRANCISCAN_THEME_URI . '/assets/images/fr-manoj-vengathanam.png';
+                        }
+                        ?>
                         <div style="display: flex; align-items: center; gap: 0.85rem;">
-                            <img  loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/fr-manoj-vengathanam.png' ); ?>" style="width: 44px; height: 44px; border-radius: 50%; object-fit: cover;" alt="<?php echo esc_attr( franciscan_get_page_field( 'home', 'about_provincial_name', 'Fr. Manoj Vengathanam, TOR' ) ); ?>">
+                            <img loading="lazy" decoding="async" src="<?php echo esc_url( $provincial_avatar ); ?>" style="width: 44px; height: 44px; border-radius: 50%; object-fit: cover;" alt="<?php echo esc_attr( franciscan_get_page_field( 'home', 'about_provincial_name', 'Fr. Manoj Vengathanam, TOR' ) ); ?>">
                             <div>
                                 <div style="font-family: 'Phudu', sans-serif !important; font-weight: 600; font-size: 0.85rem; text-transform: uppercase; color: #1c1917;"><?php echo esc_html( franciscan_get_page_field( 'home', 'about_provincial_name', 'FR. MANOJ VENGATHANAM, TOR' ) ); ?></div>
                                 <div style="font-family: 'Instrument Sans', sans-serif !important; font-size: 0.75rem; color: #78716c;"><?php echo esc_html( franciscan_get_page_field( 'home', 'about_provincial_title', 'Minister Provincial' ) ); ?></div>
@@ -286,15 +308,25 @@ SERVED IN GOD'S LOVE" ) ) ); ?>
                 </div>
 
                 <!-- Right Images -->
+                <?php
+                $mission_church = franciscan_get_page_field( 'home', 'mission_church_img', '' );
+                if ( empty( $mission_church ) ) {
+                    $mission_church = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_51_30_PM.png';
+                }
+                $mission_priest = franciscan_get_page_field( 'home', 'mission_priest_img', '' );
+                if ( empty( $mission_priest ) ) {
+                    $mission_priest = FRANCISCAN_THEME_URI . '/assets/images/mission-father.png';
+                }
+                ?>
                 <div class="gsap-fade-left hover-trigger" style="position: relative; height: 650px;">
                     <!-- Left Church Image -->
                     <div class="about-img-container mission-church-img">
-                        <img  loading="lazy"loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_51_30_PM.png' ); ?>" alt="Church Interior" style="width: 100%; height: 100%; object-fit: cover;">
+                        <img loading="lazy" decoding="async" src="<?php echo esc_url( $mission_church ); ?>" alt="Church Interior" style="width: 100%; height: 100%; object-fit: cover;">
                     </div>
                     
                     <!-- Right Father Image -->
                     <div class="mission-priest-container">
-                        <img loading="lazy" decoding="async" class="priest-zoom" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/mission-father.png' ); ?>" alt="Priest" style="width: 100%; height: auto; object-fit: contain; object-position: bottom center; max-height: 100%;">
+                        <img loading="lazy" decoding="async" class="priest-zoom" src="<?php echo esc_url( $mission_priest ); ?>" alt="Priest" style="width: 100%; height: auto; object-fit: contain; object-position: bottom center; max-height: 100%;">
                     </div>
                 </div>
 

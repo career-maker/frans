@@ -247,11 +247,15 @@ function franciscan_render_dashboard_view() {
     $managed_pages = array(
         'home'                  => 'Homepage (Front Page)',
         'about'                 => 'About Us',
+        'community-history'     => 'Community — Our History',
+        'community-rule'        => 'Community — Third Order Rule',
+        'community-leadership'  => 'Community — Leadership',
+        'community-friars'      => 'Community — Our Friars',
+        'community-friaries'    => 'Community — Our Friaries',
         'ministries'            => 'Ministries — Overview Hub',
         'ministries-pastoral'   => 'Ministries — Pastoral Ministry',
         'ministries-education'  => 'Ministries — Education Ministry',
         'ministries-formation'  => 'Ministries — Formation Ministry',
-        'community'             => 'Community Hub',
         'publications'          => 'Publications & Resources',
         'gallery'               => 'Our Gallery',
         'news'                  => 'News & Updates',
@@ -946,6 +950,23 @@ function franciscan_render_dashboard_view() {
                                         <label>Welcome Message Text</label>
                                         <textarea name="welcome_section_text" class="form-control"><?php echo esc_textarea( $data['welcome_section_text'] ?? '' ); ?></textarea>
                                     </div>
+                                    <div class="form-group full-width">
+                                        <label>Welcome Mosaic Image</label>
+                                        <?php
+                                        $def_h_mosaic = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_24_08_PM.png';
+                                        $cur_h_mosaic = ! empty( $data['welcome_mosaic_img'] ) ? $data['welcome_mosaic_img'] : $def_h_mosaic;
+                                        ?>
+                                        <div class="image-uploader-box">
+                                            <div style="width: 100px; height: 64px; border-radius: 8px; overflow: hidden; background: #0c1727; border: 1px solid var(--c-gold); flex-shrink: 0; display: flex; align-items: center; justify-content: center;">
+                                                <img src="<?php echo esc_url( $cur_h_mosaic ); ?>" class="image-preview-thumb" id="preview-welcome_mosaic_img-home" style="width: 100%; height: 100%; object-fit: cover; display: block;" onerror="this.src='<?php echo esc_url( $def_h_mosaic ); ?>';">
+                                            </div>
+                                            <input type="hidden" name="welcome_mosaic_img" id="input-welcome_mosaic_img-home" value="<?php echo esc_attr( $data['welcome_mosaic_img'] ?? '' ); ?>">
+                                            <div style="display: flex; gap: 0.8rem; align-items: center; flex-wrap: wrap;">
+                                                <button type="button" class="btn btn-secondary btn-upload-media" data-target="welcome_mosaic_img-home">Choose Image</button>
+                                                <button type="button" class="btn btn-secondary btn-reset-media" data-target="welcome_mosaic_img-home" data-default="<?php echo esc_url( $def_h_mosaic ); ?>" style="<?php echo empty( $data['welcome_mosaic_img'] ) ? 'display:none;' : ''; ?>">Reset to Default</button>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
@@ -964,6 +985,27 @@ function franciscan_render_dashboard_view() {
                                     <div class="form-group full-width">
                                         <label>Section Description</label>
                                         <textarea name="about_section_text" class="form-control"><?php echo esc_textarea( $data['about_section_text'] ?? '' ); ?></textarea>
+                                    </div>
+                                    <div class="form-group full-width">
+                                        <label>About Rosary &amp; Prayer Image</label>
+                                        <?php
+                                        $def_h_about_img = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_48_39_PM.png';
+                                        $cur_h_about_img = ! empty( $data['about_section_img'] ) ? $data['about_section_img'] : $def_h_about_img;
+                                        ?>
+                                        <div class="image-uploader-box">
+                                            <div style="width: 100px; height: 64px; border-radius: 8px; overflow: hidden; background: #0c1727; border: 1px solid var(--c-gold); flex-shrink: 0; display: flex; align-items: center; justify-content: center;">
+                                                <img src="<?php echo esc_url( $cur_h_about_img ); ?>" class="image-preview-thumb" id="preview-about_section_img-home" style="width: 100%; height: 100%; object-fit: cover; display: block;" onerror="this.src='<?php echo esc_url( $def_h_about_img ); ?>';">
+                                            </div>
+                                            <input type="hidden" name="about_section_img" id="input-about_section_img-home" value="<?php echo esc_attr( $data['about_section_img'] ?? '' ); ?>">
+                                            <div style="display: flex; gap: 0.8rem; align-items: center; flex-wrap: wrap;">
+                                                <button type="button" class="btn btn-secondary btn-upload-media" data-target="about_section_img-home">Choose Image</button>
+                                                <button type="button" class="btn btn-secondary btn-reset-media" data-target="about_section_img-home" data-default="<?php echo esc_url( $def_h_about_img ); ?>" style="<?php echo empty( $data['about_section_img'] ) ? 'display:none;' : ''; ?>">Reset to Default</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Video Loop URL</label>
+                                        <input type="text" name="about_video_url" class="form-control" value="<?php echo esc_attr( $data['about_video_url'] ?? '' ); ?>">
                                     </div>
                                     <div class="form-group">
                                         <label>Mission Box Title</label>
@@ -988,6 +1030,23 @@ function franciscan_render_dashboard_view() {
                                     <div class="form-group">
                                         <label>Minister Provincial Title</label>
                                         <input type="text" name="about_provincial_title" class="form-control" value="<?php echo esc_attr( $data['about_provincial_title'] ?? 'Minister Provincial' ); ?>">
+                                    </div>
+                                    <div class="form-group full-width">
+                                        <label>Minister Provincial Avatar</label>
+                                        <?php
+                                        $def_h_prov_av = FRANCISCAN_THEME_URI . '/assets/images/fr-manoj-vengathanam.png';
+                                        $cur_h_prov_av = ! empty( $data['about_provincial_avatar'] ) ? $data['about_provincial_avatar'] : $def_h_prov_av;
+                                        ?>
+                                        <div class="image-uploader-box">
+                                            <div style="width: 64px; height: 64px; border-radius: 50%; overflow: hidden; background: #0c1727; border: 1px solid var(--c-gold); flex-shrink: 0; display: flex; align-items: center; justify-content: center;">
+                                                <img src="<?php echo esc_url( $cur_h_prov_av ); ?>" class="image-preview-thumb" id="preview-about_provincial_avatar-home" style="width: 100%; height: 100%; object-fit: cover; display: block;" onerror="this.src='<?php echo esc_url( $def_h_prov_av ); ?>';">
+                                            </div>
+                                            <input type="hidden" name="about_provincial_avatar" id="input-about_provincial_avatar-home" value="<?php echo esc_attr( $data['about_provincial_avatar'] ?? '' ); ?>">
+                                            <div style="display: flex; gap: 0.8rem; align-items: center; flex-wrap: wrap;">
+                                                <button type="button" class="btn btn-secondary btn-upload-media" data-target="about_provincial_avatar-home">Choose Avatar</button>
+                                                <button type="button" class="btn btn-secondary btn-reset-media" data-target="about_provincial_avatar-home" data-default="<?php echo esc_url( $def_h_prov_av ); ?>" style="<?php echo empty( $data['about_provincial_avatar'] ) ? 'display:none;' : ''; ?>">Reset to Default</button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -1032,6 +1091,40 @@ function franciscan_render_dashboard_view() {
                                         <label>Call Us - Phone <small>(edit in Settings tab)</small></label>
                                         <input type="text" class="form-control" value="<?php echo esc_attr( franciscan_get_option( 'contact_phone', '+91 651 234 5678' ) ); ?>" disabled style="opacity:0.6; cursor:not-allowed;">
                                     </div>
+                                    <div class="form-group full-width">
+                                        <label>Mission Church Image</label>
+                                        <?php
+                                        $def_h_mchurch = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_51_30_PM.png';
+                                        $cur_h_mchurch = ! empty( $data['mission_church_img'] ) ? $data['mission_church_img'] : $def_h_mchurch;
+                                        ?>
+                                        <div class="image-uploader-box">
+                                            <div style="width: 100px; height: 64px; border-radius: 8px; overflow: hidden; background: #0c1727; border: 1px solid var(--c-gold); flex-shrink: 0; display: flex; align-items: center; justify-content: center;">
+                                                <img src="<?php echo esc_url( $cur_h_mchurch ); ?>" class="image-preview-thumb" id="preview-mission_church_img-home" style="width: 100%; height: 100%; object-fit: cover; display: block;" onerror="this.src='<?php echo esc_url( $def_h_mchurch ); ?>';">
+                                            </div>
+                                            <input type="hidden" name="mission_church_img" id="input-mission_church_img-home" value="<?php echo esc_attr( $data['mission_church_img'] ?? '' ); ?>">
+                                            <div style="display: flex; gap: 0.8rem; align-items: center; flex-wrap: wrap;">
+                                                <button type="button" class="btn btn-secondary btn-upload-media" data-target="mission_church_img-home">Choose Church Image</button>
+                                                <button type="button" class="btn btn-secondary btn-reset-media" data-target="mission_church_img-home" data-default="<?php echo esc_url( $def_h_mchurch ); ?>" style="<?php echo empty( $data['mission_church_img'] ) ? 'display:none;' : ''; ?>">Reset to Default</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group full-width">
+                                        <label>Mission Priest Image</label>
+                                        <?php
+                                        $def_h_mpriest = FRANCISCAN_THEME_URI . '/assets/images/mission-father.png';
+                                        $cur_h_mpriest = ! empty( $data['mission_priest_img'] ) ? $data['mission_priest_img'] : $def_h_mpriest;
+                                        ?>
+                                        <div class="image-uploader-box">
+                                            <div style="width: 64px; height: 64px; border-radius: 8px; overflow: hidden; background: #0c1727; border: 1px solid var(--c-gold); flex-shrink: 0; display: flex; align-items: center; justify-content: center;">
+                                                <img src="<?php echo esc_url( $cur_h_mpriest ); ?>" class="image-preview-thumb" id="preview-mission_priest_img-home" style="width: 100%; height: 100%; object-fit: contain; display: block;" onerror="this.src='<?php echo esc_url( $def_h_mpriest ); ?>';">
+                                            </div>
+                                            <input type="hidden" name="mission_priest_img" id="input-mission_priest_img-home" value="<?php echo esc_attr( $data['mission_priest_img'] ?? '' ); ?>">
+                                            <div style="display: flex; gap: 0.8rem; align-items: center; flex-wrap: wrap;">
+                                                <button type="button" class="btn btn-secondary btn-upload-media" data-target="mission_priest_img-home">Choose Priest Image</button>
+                                                <button type="button" class="btn btn-secondary btn-reset-media" data-target="mission_priest_img-home" data-default="<?php echo esc_url( $def_h_mpriest ); ?>" style="<?php echo empty( $data['mission_priest_img'] ) ? 'display:none;' : ''; ?>">Reset to Default</button>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
@@ -1065,6 +1158,770 @@ function franciscan_render_dashboard_view() {
                                     <div class="form-group">
                                         <label>Section Heading</label>
                                         <input type="text" name="news_heading" class="form-control" value="<?php echo esc_attr( $data['news_heading'] ?? 'INSIGHTS AND INSPIRATION FROM OUR LATEST NEWS' ); ?>">
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endif; ?>
+
+                        <?php if ( $slug === 'about' ) : ?>
+                            <!-- About Page Specific Sections -->
+                            <div class="form-section">
+                                <h3 class="form-section-title">🌟 Hero Banner &amp; Story</h3>
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label>Hero Badge</label>
+                                        <input type="text" name="hero_badge" class="form-control" value="<?php echo esc_attr( $data['hero_badge'] ?? 'WHO WE ARE' ); ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Hero Title</label>
+                                        <input type="text" name="hero_title" class="form-control" value="<?php echo esc_attr( $data['hero_title'] ?? 'ABOUT US' ); ?>">
+                                    </div>
+                                    <div class="form-group full-width">
+                                        <label>Hero Background Image</label>
+                                        <?php
+                                        $def_ab_hero = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_51_30_PM.png';
+                                        $cur_ab_hero = ! empty( $data['hero_image'] ) ? $data['hero_image'] : $def_ab_hero;
+                                        ?>
+                                        <div class="image-uploader-box">
+                                            <div style="width: 100px; height: 64px; border-radius: 8px; overflow: hidden; background: #0c1727; border: 1px solid var(--c-gold); flex-shrink: 0; display: flex; align-items: center; justify-content: center;">
+                                                <img src="<?php echo esc_url( $cur_ab_hero ); ?>" class="image-preview-thumb" id="preview-hero_image-about" style="width: 100%; height: 100%; object-fit: cover; display: block;" onerror="this.src='<?php echo esc_url( $def_ab_hero ); ?>';">
+                                            </div>
+                                            <input type="hidden" name="hero_image" id="input-hero_image-about" value="<?php echo esc_attr( $data['hero_image'] ?? '' ); ?>">
+                                            <div style="display: flex; gap: 0.8rem; align-items: center; flex-wrap: wrap;">
+                                                <button type="button" class="btn btn-secondary btn-upload-media" data-target="hero_image-about">Choose Image from Library</button>
+                                                <button type="button" class="btn btn-secondary btn-reset-media" data-target="hero_image-about" data-default="<?php echo esc_url( $def_ab_hero ); ?>" style="<?php echo empty( $data['hero_image'] ) ? 'display:none;' : ''; ?>">Reset to Default</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Story Eyebrow Badge</label>
+                                        <input type="text" name="about_eyebrow" class="form-control" value="<?php echo esc_attr( $data['about_eyebrow'] ?? 'ABOUT US' ); ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Story Heading</label>
+                                        <input type="text" name="about_section_heading" class="form-control" value="<?php echo esc_attr( $data['about_section_heading'] ?? 'OUR STORY FAITH MISSION AND VISION TOGETHER' ); ?>">
+                                    </div>
+                                    <div class="form-group full-width">
+                                        <label>Story Main Text</label>
+                                        <textarea name="about_section_text" class="form-control"><?php echo esc_textarea( $data['about_section_text'] ?? '' ); ?></textarea>
+                                    </div>
+                                    <div class="form-group full-width">
+                                        <label>Story Main Image</label>
+                                        <?php
+                                        $def_ab_img = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_48_39_PM.png';
+                                        $cur_ab_img = ! empty( $data['about_section_img'] ) ? $data['about_section_img'] : $def_ab_img;
+                                        ?>
+                                        <div class="image-uploader-box">
+                                            <div style="width: 100px; height: 64px; border-radius: 8px; overflow: hidden; background: #0c1727; border: 1px solid var(--c-gold); flex-shrink: 0; display: flex; align-items: center; justify-content: center;">
+                                                <img src="<?php echo esc_url( $cur_ab_img ); ?>" class="image-preview-thumb" id="preview-about_section_img-about" style="width: 100%; height: 100%; object-fit: cover; display: block;" onerror="this.src='<?php echo esc_url( $def_ab_img ); ?>';">
+                                            </div>
+                                            <input type="hidden" name="about_section_img" id="input-about_section_img-about" value="<?php echo esc_attr( $data['about_section_img'] ?? '' ); ?>">
+                                            <div style="display: flex; gap: 0.8rem; align-items: center; flex-wrap: wrap;">
+                                                <button type="button" class="btn btn-secondary btn-upload-media" data-target="about_section_img-about">Choose Image from Library</button>
+                                                <button type="button" class="btn btn-secondary btn-reset-media" data-target="about_section_img-about" data-default="<?php echo esc_url( $def_ab_img ); ?>" style="<?php echo empty( $data['about_section_img'] ) ? 'display:none;' : ''; ?>">Reset to Default</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Video Loop URL</label>
+                                        <input type="text" name="about_video_url" class="form-control" value="<?php echo esc_attr( $data['about_video_url'] ?? '' ); ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Mission Box Title</label>
+                                        <input type="text" name="about_mission_title" class="form-control" value="<?php echo esc_attr( $data['about_mission_title'] ?? 'OUR MISSION' ); ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Mission Box Text</label>
+                                        <input type="text" name="about_mission_text" class="form-control" value="<?php echo esc_attr( $data['about_mission_text'] ?? '' ); ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Vision Box Title</label>
+                                        <input type="text" name="about_vision_title" class="form-control" value="<?php echo esc_attr( $data['about_vision_title'] ?? 'OUR VISION' ); ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Vision Box Text</label>
+                                        <input type="text" name="about_vision_text" class="form-control" value="<?php echo esc_attr( $data['about_vision_text'] ?? '' ); ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Minister Provincial Name</label>
+                                        <input type="text" name="about_provincial_name" class="form-control" value="<?php echo esc_attr( $data['about_provincial_name'] ?? 'FR. MANOJ VENGATHANAM, TOR' ); ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Minister Provincial Title</label>
+                                        <input type="text" name="about_provincial_title" class="form-control" value="<?php echo esc_attr( $data['about_provincial_title'] ?? 'Minister Provincial' ); ?>">
+                                    </div>
+                                    <div class="form-group full-width">
+                                        <label>Minister Provincial Avatar</label>
+                                        <?php
+                                        $def_ab_av = FRANCISCAN_THEME_URI . '/assets/images/fr-manoj-vengathanam.png';
+                                        $cur_ab_av = ! empty( $data['about_provincial_avatar'] ) ? $data['about_provincial_avatar'] : $def_ab_av;
+                                        ?>
+                                        <div class="image-uploader-box">
+                                            <div style="width: 64px; height: 64px; border-radius: 50%; overflow: hidden; background: #0c1727; border: 1px solid var(--c-gold); flex-shrink: 0; display: flex; align-items: center; justify-content: center;">
+                                                <img src="<?php echo esc_url( $cur_ab_av ); ?>" class="image-preview-thumb" id="preview-about_provincial_avatar-about" style="width: 100%; height: 100%; object-fit: cover; display: block;" onerror="this.src='<?php echo esc_url( $def_ab_av ); ?>';">
+                                            </div>
+                                            <input type="hidden" name="about_provincial_avatar" id="input-about_provincial_avatar-about" value="<?php echo esc_attr( $data['about_provincial_avatar'] ?? '' ); ?>">
+                                            <div style="display: flex; gap: 0.8rem; align-items: center; flex-wrap: wrap;">
+                                                <button type="button" class="btn btn-secondary btn-upload-media" data-target="about_provincial_avatar-about">Choose Avatar</button>
+                                                <button type="button" class="btn btn-secondary btn-reset-media" data-target="about_provincial_avatar-about" data-default="<?php echo esc_url( $def_ab_av ); ?>" style="<?php echo empty( $data['about_provincial_avatar'] ) ? 'display:none;' : ''; ?>">Reset to Default</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-section">
+                                <h3 class="form-section-title">⛪ Mission &amp; Values Section</h3>
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label>Values Eyebrow Badge</label>
+                                        <input type="text" name="mission_eyebrow" class="form-control" value="<?php echo esc_attr( $data['mission_eyebrow'] ?? 'Our Values' ); ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Values Section Heading</label>
+                                        <input type="text" name="mission_values_heading" class="form-control" value="<?php echo esc_attr( $data['mission_values_heading'] ?? 'OUR CHRISTIAN VALUES THAT LEAD OUR MINISTRY' ); ?>">
+                                    </div>
+                                    <div class="form-group full-width">
+                                        <label>Values Section Description</label>
+                                        <textarea name="mission_values_text" class="form-control"><?php echo esc_textarea( $data['mission_values_text'] ?? '' ); ?></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Prayer Support - Title</label>
+                                        <input type="text" name="prayer_support_title" class="form-control" value="<?php echo esc_attr( $data['prayer_support_title'] ?? 'PRAYER SUPPORT' ); ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Prayer Support - Description</label>
+                                        <input type="text" name="prayer_support_desc" class="form-control" value="<?php echo esc_attr( $data['prayer_support_desc'] ?? 'Our Prayer Support accompanies you in faith during every stage of life.' ); ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Fellowship Groups - Title</label>
+                                        <input type="text" name="fellowship_title" class="form-control" value="<?php echo esc_attr( $data['fellowship_title'] ?? 'FELLOWSHIP GROUPS' ); ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Fellowship Groups - Description</label>
+                                        <input type="text" name="fellowship_desc" class="form-control" value="<?php echo esc_attr( $data['fellowship_desc'] ?? 'Join our vibrant fellowship groups and grow together in faith and community.' ); ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Call Us - Label</label>
+                                        <input type="text" name="call_us_label" class="form-control" value="<?php echo esc_attr( $data['call_us_label'] ?? 'CALL US!' ); ?>">
+                                    </div>
+                                    <div class="form-group full-width">
+                                        <label>Mission Church Image</label>
+                                        <?php
+                                        $def_ab_mchurch = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_51_30_PM.png';
+                                        $cur_ab_mchurch = ! empty( $data['mission_church_img'] ) ? $data['mission_church_img'] : $def_ab_mchurch;
+                                        ?>
+                                        <div class="image-uploader-box">
+                                            <div style="width: 100px; height: 64px; border-radius: 8px; overflow: hidden; background: #0c1727; border: 1px solid var(--c-gold); flex-shrink: 0; display: flex; align-items: center; justify-content: center;">
+                                                <img src="<?php echo esc_url( $cur_ab_mchurch ); ?>" class="image-preview-thumb" id="preview-mission_church_img-about" style="width: 100%; height: 100%; object-fit: cover; display: block;" onerror="this.src='<?php echo esc_url( $def_ab_mchurch ); ?>';">
+                                            </div>
+                                            <input type="hidden" name="mission_church_img" id="input-mission_church_img-about" value="<?php echo esc_attr( $data['mission_church_img'] ?? '' ); ?>">
+                                            <div style="display: flex; gap: 0.8rem; align-items: center; flex-wrap: wrap;">
+                                                <button type="button" class="btn btn-secondary btn-upload-media" data-target="mission_church_img-about">Choose Image</button>
+                                                <button type="button" class="btn btn-secondary btn-reset-media" data-target="mission_church_img-about" data-default="<?php echo esc_url( $def_ab_mchurch ); ?>" style="<?php echo empty( $data['mission_church_img'] ) ? 'display:none;' : ''; ?>">Reset to Default</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group full-width">
+                                        <label>Mission Priest Image</label>
+                                        <?php
+                                        $def_ab_mpriest = FRANCISCAN_THEME_URI . '/assets/images/mission-father.png';
+                                        $cur_ab_mpriest = ! empty( $data['mission_priest_img'] ) ? $data['mission_priest_img'] : $def_ab_mpriest;
+                                        ?>
+                                        <div class="image-uploader-box">
+                                            <div style="width: 64px; height: 64px; border-radius: 8px; overflow: hidden; background: #0c1727; border: 1px solid var(--c-gold); flex-shrink: 0; display: flex; align-items: center; justify-content: center;">
+                                                <img src="<?php echo esc_url( $cur_ab_mpriest ); ?>" class="image-preview-thumb" id="preview-mission_priest_img-about" style="width: 100%; height: 100%; object-fit: contain; display: block;" onerror="this.src='<?php echo esc_url( $def_ab_mpriest ); ?>';">
+                                            </div>
+                                            <input type="hidden" name="mission_priest_img" id="input-mission_priest_img-about" value="<?php echo esc_attr( $data['mission_priest_img'] ?? '' ); ?>">
+                                            <div style="display: flex; gap: 0.8rem; align-items: center; flex-wrap: wrap;">
+                                                <button type="button" class="btn btn-secondary btn-upload-media" data-target="mission_priest_img-about">Choose Priest Image</button>
+                                                <button type="button" class="btn btn-secondary btn-reset-media" data-target="mission_priest_img-about" data-default="<?php echo esc_url( $def_ab_mpriest ); ?>" style="<?php echo empty( $data['mission_priest_img'] ) ? 'display:none;' : ''; ?>">Reset to Default</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-section">
+                                <h3 class="form-section-title">🕊️ Our Charism Section</h3>
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label>Charism Heading</label>
+                                        <input type="text" name="charism_heading" class="form-control" value="<?php echo esc_attr( $data['charism_heading'] ?? 'OUR CHARISM' ); ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Charism Eyebrow</label>
+                                        <input type="text" name="charism_eyebrow" class="form-control" value="<?php echo esc_attr( $data['charism_eyebrow'] ?? 'CORE FRANCISCAN IDENTITY' ); ?>">
+                                    </div>
+                                    <div class="form-group full-width">
+                                        <label>Charism Statement Headline</label>
+                                        <textarea name="charism_statement" class="form-control"><?php echo esc_textarea( $data['charism_statement'] ?? "Conversion, contemplation,\npoverty, and humility" ); ?></textarea>
+                                    </div>
+                                    <div class="form-group full-width">
+                                        <label>Charism Narrative Text</label>
+                                        <textarea name="charism_text" class="form-control"><?php echo esc_textarea( $data['charism_text'] ?? '' ); ?></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Pillar 1 Title</label>
+                                        <input type="text" name="charism_p1_title" class="form-control" value="<?php echo esc_attr( $data['charism_p1_title'] ?? "Ongoing\nConversion" ); ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Pillar 2 Title</label>
+                                        <input type="text" name="charism_p2_title" class="form-control" value="<?php echo esc_attr( $data['charism_p2_title'] ?? "Poverty &\nHumility" ); ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Pillar 3 Title</label>
+                                        <input type="text" name="charism_p3_title" class="form-control" value="<?php echo esc_attr( $data['charism_p3_title'] ?? "Charity\nto All" ); ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Pillar 4 Title</label>
+                                        <input type="text" name="charism_p4_title" class="form-control" value="<?php echo esc_attr( $data['charism_p4_title'] ?? "Reconciled\nin Love" ); ?>">
+                                    </div>
+                                    <div class="form-group full-width">
+                                        <label>Charism Arched Artwork Image</label>
+                                        <?php
+                                        $def_ab_charism = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_24_08_PM.png';
+                                        $cur_ab_charism = ! empty( $data['charism_image'] ) ? $data['charism_image'] : $def_ab_charism;
+                                        ?>
+                                        <div class="image-uploader-box">
+                                            <div style="width: 100px; height: 64px; border-radius: 8px; overflow: hidden; background: #0c1727; border: 1px solid var(--c-gold); flex-shrink: 0; display: flex; align-items: center; justify-content: center;">
+                                                <img src="<?php echo esc_url( $cur_ab_charism ); ?>" class="image-preview-thumb" id="preview-charism_image-about" style="width: 100%; height: 100%; object-fit: cover; display: block;" onerror="this.src='<?php echo esc_url( $def_ab_charism ); ?>';">
+                                            </div>
+                                            <input type="hidden" name="charism_image" id="input-charism_image-about" value="<?php echo esc_attr( $data['charism_image'] ?? '' ); ?>">
+                                            <div style="display: flex; gap: 0.8rem; align-items: center; flex-wrap: wrap;">
+                                                <button type="button" class="btn btn-secondary btn-upload-media" data-target="charism_image-about">Choose Image</button>
+                                                <button type="button" class="btn btn-secondary btn-reset-media" data-target="charism_image-about" data-default="<?php echo esc_url( $def_ab_charism ); ?>" style="<?php echo empty( $data['charism_image'] ) ? 'display:none;' : ''; ?>">Reset to Default</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Charism Badge Text</label>
+                                        <input type="text" name="charism_badge_text" class="form-control" value="<?php echo esc_attr( $data['charism_badge_text'] ?? 'TOR FRANCISCAN CHARISM' ); ?>">
+                                    </div>
+                                    <div class="form-group full-width">
+                                        <label>Bottom Community CTA Text</label>
+                                        <textarea name="community_cta_text" class="form-control"><?php echo esc_textarea( $data['community_cta_text'] ?? '' ); ?></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Bottom Community CTA Button Text</label>
+                                        <input type="text" name="community_cta_btn_text" class="form-control" value="<?php echo esc_attr( $data['community_cta_btn_text'] ?? 'EXPLORE THE HISTORY' ); ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Bottom Community CTA Button URL</label>
+                                        <input type="text" name="community_cta_btn_url" class="form-control" value="<?php echo esc_attr( $data['community_cta_btn_url'] ?? '/community-history/' ); ?>">
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endif; ?>
+
+                        <?php if ( $slug === 'contact' ) : ?>
+                            <!-- Contact Page Specific Sections -->
+                            <div class="form-section">
+                                <h3 class="form-section-title">📍 Hero &amp; Contact Header</h3>
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label>Hero Badge</label>
+                                        <input type="text" name="hero_badge" class="form-control" value="<?php echo esc_attr( $data['hero_badge'] ?? 'GET IN TOUCH' ); ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Hero Title</label>
+                                        <input type="text" name="hero_title" class="form-control" value="<?php echo esc_attr( $data['hero_title'] ?? 'CONTACT US' ); ?>">
+                                    </div>
+                                    <div class="form-group full-width">
+                                        <label>Hero Subtitle</label>
+                                        <input type="text" name="hero_subtitle" class="form-control" value="<?php echo esc_attr( $data['hero_subtitle'] ?? 'Connect with our fraternity, request prayers, or enquire about our ministries.' ); ?>">
+                                    </div>
+                                    <div class="form-group full-width">
+                                        <label>Hero Background Image</label>
+                                        <?php
+                                        $def_ct_hero = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_51_30_PM.png';
+                                        $cur_ct_hero = ! empty( $data['hero_image'] ) ? $data['hero_image'] : $def_ct_hero;
+                                        ?>
+                                        <div class="image-uploader-box">
+                                            <div style="width: 100px; height: 64px; border-radius: 8px; overflow: hidden; background: #0c1727; border: 1px solid var(--c-gold); flex-shrink: 0; display: flex; align-items: center; justify-content: center;">
+                                                <img src="<?php echo esc_url( $cur_ct_hero ); ?>" class="image-preview-thumb" id="preview-hero_image-contact" style="width: 100%; height: 100%; object-fit: cover; display: block;" onerror="this.src='<?php echo esc_url( $def_ct_hero ); ?>';">
+                                            </div>
+                                            <input type="hidden" name="hero_image" id="input-hero_image-contact" value="<?php echo esc_attr( $data['hero_image'] ?? '' ); ?>">
+                                            <div style="display: flex; gap: 0.8rem; align-items: center; flex-wrap: wrap;">
+                                                <button type="button" class="btn btn-secondary btn-upload-media" data-target="hero_image-contact">Choose Image</button>
+                                                <button type="button" class="btn btn-secondary btn-reset-media" data-target="hero_image-contact" data-default="<?php echo esc_url( $def_ct_hero ); ?>" style="<?php echo empty( $data['hero_image'] ) ? 'display:none;' : ''; ?>">Reset to Default</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Main Section Heading</label>
+                                        <input type="text" name="main_heading" class="form-control" value="<?php echo esc_attr( $data['main_heading'] ?? 'REACH OUT TO US' ); ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Channels Title</label>
+                                        <input type="text" name="contact_details_title" class="form-control" value="<?php echo esc_attr( $data['contact_details_title'] ?? 'OUR CHANNELS' ); ?>">
+                                    </div>
+                                    <div class="form-group full-width">
+                                        <label>Main Intro Text</label>
+                                        <textarea name="main_text" class="form-control"><?php echo esc_textarea( $data['main_text'] ?? '' ); ?></textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-section">
+                                <h3 class="form-section-title">🏦 Bank Donation Details (SBI &amp; Chase)</h3>
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label>SBI Bank Name</label>
+                                        <input type="text" name="donation_sbi_bank_name" class="form-control" value="<?php echo esc_attr( $data['donation_sbi_bank_name'] ?? 'State Bank of India' ); ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>SBI Account Name</label>
+                                        <input type="text" name="donation_sbi_acc_name" class="form-control" value="<?php echo esc_attr( $data['donation_sbi_acc_name'] ?? 'The Franciscan Society of Ranchi' ); ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>SBI Account Number</label>
+                                        <input type="text" name="donation_sbi_acc_no" class="form-control" value="<?php echo esc_attr( $data['donation_sbi_acc_no'] ?? '12345678901' ); ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>SBI IFSC Code</label>
+                                        <input type="text" name="donation_sbi_ifsc" class="form-control" value="<?php echo esc_attr( $data['donation_sbi_ifsc'] ?? 'SBIN0000123' ); ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>SBI Branch</label>
+                                        <input type="text" name="donation_sbi_branch" class="form-control" value="<?php echo esc_attr( $data['donation_sbi_branch'] ?? 'Main Branch, Ranchi' ); ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Chase Bank Name</label>
+                                        <input type="text" name="donation_chase_bank_name" class="form-control" value="<?php echo esc_attr( $data['donation_chase_bank_name'] ?? 'Chase Bank USA' ); ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Chase Account Name</label>
+                                        <input type="text" name="donation_chase_acc_name" class="form-control" value="<?php echo esc_attr( $data['donation_chase_acc_name'] ?? 'TOR Franciscan Mission Support' ); ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Chase Account Number</label>
+                                        <input type="text" name="donation_chase_acc_no" class="form-control" value="<?php echo esc_attr( $data['donation_chase_acc_no'] ?? '9876543210' ); ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Chase Routing Number</label>
+                                        <input type="text" name="donation_chase_routing" class="form-control" value="<?php echo esc_attr( $data['donation_chase_routing'] ?? '021000021' ); ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Chase SWIFT Code</label>
+                                        <input type="text" name="donation_chase_swift" class="form-control" value="<?php echo esc_attr( $data['donation_chase_swift'] ?? 'CHASUS33' ); ?>">
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endif; ?>
+
+                        <?php if ( $slug === 'community-history' ) : ?>
+                            <!-- Community History Page Specific Sections -->
+                            <div class="form-section">
+                                <h3 class="form-section-title">🏛️ Hero Banner &amp; Heritage Card</h3>
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label>Hero Badge</label>
+                                        <input type="text" name="hero_badge" class="form-control" value="<?php echo esc_attr( $data['hero_badge'] ?? 'HERITAGE' ); ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Hero Title</label>
+                                        <input type="text" name="hero_title" class="form-control" value="<?php echo esc_attr( $data['hero_title'] ?? 'HISTORY OF THE PROVINCE' ); ?>">
+                                    </div>
+                                    <div class="form-group full-width">
+                                        <label>Hero Background Image</label>
+                                        <?php
+                                        $def_ch_hero = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_51_30_PM.png';
+                                        $cur_ch_hero = ! empty( $data['hero_image'] ) ? $data['hero_image'] : $def_ch_hero;
+                                        ?>
+                                        <div class="image-uploader-box">
+                                            <div style="width: 100px; height: 64px; border-radius: 8px; overflow: hidden; background: #0c1727; border: 1px solid var(--c-gold); flex-shrink: 0; display: flex; align-items: center; justify-content: center;">
+                                                <img src="<?php echo esc_url( $cur_ch_hero ); ?>" class="image-preview-thumb" id="preview-hero_image-community-history" style="width: 100%; height: 100%; object-fit: cover; display: block;" onerror="this.src='<?php echo esc_url( $def_ch_hero ); ?>';">
+                                            </div>
+                                            <input type="hidden" name="hero_image" id="input-hero_image-community-history" value="<?php echo esc_attr( $data['hero_image'] ?? '' ); ?>">
+                                            <div style="display: flex; gap: 0.8rem; align-items: center; flex-wrap: wrap;">
+                                                <button type="button" class="btn btn-secondary btn-upload-media" data-target="hero_image-community-history">Choose Image</button>
+                                                <button type="button" class="btn btn-secondary btn-reset-media" data-target="hero_image-community-history" data-default="<?php echo esc_url( $def_ch_hero ); ?>" style="<?php echo empty( $data['hero_image'] ) ? 'display:none;' : ''; ?>">Reset to Default</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Heritage Card Badge</label>
+                                        <input type="text" name="heritage_badge" class="form-control" value="<?php echo esc_attr( $data['heritage_badge'] ?? 'OUR HERITAGE' ); ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Heritage Card Title</label>
+                                        <input type="text" name="heritage_title" class="form-control" value="<?php echo esc_attr( $data['heritage_title'] ?? 'A LEGACY OF FAITH AND SERVICE' ); ?>">
+                                    </div>
+                                    <div class="form-group full-width">
+                                        <label>Heritage Card Text</label>
+                                        <textarea name="heritage_text" class="form-control"><?php echo esc_textarea( $data['heritage_text'] ?? '' ); ?></textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-section">
+                                <h3 class="form-section-title">📜 Era 1: Origins &amp; St. Francis</h3>
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label>Era 1 Badge</label>
+                                        <input type="text" name="era1_badge" class="form-control" value="<?php echo esc_attr( $data['era1_badge'] ?? 'ORIGINS & ROOTS' ); ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Era 1 Title</label>
+                                        <input type="text" name="era1_title" class="form-control" value="<?php echo esc_attr( $data['era1_title'] ?? 'The Order of Penance & St. Francis of Assisi' ); ?>">
+                                    </div>
+                                    <div class="form-group full-width">
+                                        <label>Paragraph 1</label>
+                                        <textarea name="era1_p1" class="form-control"><?php echo esc_textarea( $data['era1_p1'] ?? '' ); ?></textarea>
+                                    </div>
+                                    <div class="form-group full-width">
+                                        <label>Paragraph 2</label>
+                                        <textarea name="era1_p2" class="form-control"><?php echo esc_textarea( $data['era1_p2'] ?? '' ); ?></textarea>
+                                    </div>
+                                    <div class="form-group full-width">
+                                        <label>Paragraph 3</label>
+                                        <textarea name="era1_p3" class="form-control"><?php echo esc_textarea( $data['era1_p3'] ?? '' ); ?></textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-section">
+                                <h3 class="form-section-title">👑 Era 2: Papal Confirmation &amp; Generalate</h3>
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label>Era 2 Badge</label>
+                                        <input type="text" name="era2_badge" class="form-control" value="<?php echo esc_attr( $data['era2_badge'] ?? 'PAPAL CONFIRMATION' ); ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Era 2 Title</label>
+                                        <input type="text" name="era2_title" class="form-control" value="<?php echo esc_attr( $data['era2_title'] ?? 'Unification & The Generalate in Rome' ); ?>">
+                                    </div>
+                                    <div class="form-group full-width">
+                                        <label>Paragraph 1</label>
+                                        <textarea name="era2_p1" class="form-control"><?php echo esc_textarea( $data['era2_p1'] ?? '' ); ?></textarea>
+                                    </div>
+                                    <div class="form-group full-width">
+                                        <label>Paragraph 2</label>
+                                        <textarea name="era2_p2" class="form-control"><?php echo esc_textarea( $data['era2_p2'] ?? '' ); ?></textarea>
+                                    </div>
+                                    <div class="form-group full-width">
+                                        <label>Era 2 Section Image</label>
+                                        <?php
+                                        $def_ch_era2 = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_24_08_PM.png';
+                                        $cur_ch_era2 = ! empty( $data['era2_image'] ) ? $data['era2_image'] : $def_ch_era2;
+                                        ?>
+                                        <div class="image-uploader-box">
+                                            <div style="width: 100px; height: 64px; border-radius: 8px; overflow: hidden; background: #0c1727; border: 1px solid var(--c-gold); flex-shrink: 0; display: flex; align-items: center; justify-content: center;">
+                                                <img src="<?php echo esc_url( $cur_ch_era2 ); ?>" class="image-preview-thumb" id="preview-era2_image-community-history" style="width: 100%; height: 100%; object-fit: cover; display: block;" onerror="this.src='<?php echo esc_url( $def_ch_era2 ); ?>';">
+                                            </div>
+                                            <input type="hidden" name="era2_image" id="input-era2_image-community-history" value="<?php echo esc_attr( $data['era2_image'] ?? '' ); ?>">
+                                            <div style="display: flex; gap: 0.8rem; align-items: center; flex-wrap: wrap;">
+                                                <button type="button" class="btn btn-secondary btn-upload-media" data-target="era2_image-community-history">Choose Image</button>
+                                                <button type="button" class="btn btn-secondary btn-reset-media" data-target="era2_image-community-history" data-default="<?php echo esc_url( $def_ch_era2 ); ?>" style="<?php echo empty( $data['era2_image'] ) ? 'display:none;' : ''; ?>">Reset to Default</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-section">
+                                <h3 class="form-section-title">🇮🇳 Era 3: History in India &amp; Ranchi Province</h3>
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label>Era 3 Badge</label>
+                                        <input type="text" name="era3_badge" class="form-control" value="<?php echo esc_attr( $data['era3_badge'] ?? 'THE INDIAN MISSION' ); ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Era 3 Title</label>
+                                        <input type="text" name="era3_title" class="form-control" value="<?php echo esc_attr( $data['era3_title'] ?? 'The History of the TOR in India & Ranchi Province' ); ?>">
+                                    </div>
+                                    <div class="form-group full-width">
+                                        <label>Paragraph 1 (Origins in Bihar 1938)</label>
+                                        <textarea name="era3_p1" class="form-control"><?php echo esc_textarea( $data['era3_p1'] ?? '' ); ?></textarea>
+                                    </div>
+                                    <div class="form-group full-width">
+                                        <label>Paragraph 2 (Ranchi 1996–1999)</label>
+                                        <textarea name="era3_p2" class="form-control"><?php echo esc_textarea( $data['era3_p2'] ?? '' ); ?></textarea>
+                                    </div>
+                                    <div class="form-group full-width">
+                                        <label>Paragraph 3 (Elevation to Province 2006)</label>
+                                        <textarea name="era3_p3" class="form-control"><?php echo esc_textarea( $data['era3_p3'] ?? '' ); ?></textarea>
+                                    </div>
+                                    <div class="form-group full-width">
+                                        <label>Paragraph 4 (Personnel &amp; Formation Numbers)</label>
+                                        <textarea name="era3_p4" class="form-control"><?php echo esc_textarea( $data['era3_p4'] ?? '' ); ?></textarea>
+                                    </div>
+                                    <div class="form-group full-width">
+                                        <label>Paragraph 5 (Parishes, Schools &amp; Houses)</label>
+                                        <textarea name="era3_p5" class="form-control"><?php echo esc_textarea( $data['era3_p5'] ?? '' ); ?></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endif; ?>
+
+                        <?php if ( $slug === 'community-rule' ) : ?>
+                            <!-- Community Rule Page Specific Sections -->
+                            <div class="form-section">
+                                <h3 class="form-section-title">📖 Hero Banner &amp; Principles Card</h3>
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label>Hero Title</label>
+                                        <input type="text" name="hero_title" class="form-control" value="<?php echo esc_attr( $data['hero_title'] ?? 'RULE & CONSTITUTIONS' ); ?>">
+                                    </div>
+                                    <div class="form-group full-width">
+                                        <label>Hero Background Image</label>
+                                        <?php
+                                        $def_cr_hero = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_51_30_PM.png';
+                                        $cur_cr_hero = ! empty( $data['hero_image'] ) ? $data['hero_image'] : $def_cr_hero;
+                                        ?>
+                                        <div class="image-uploader-box">
+                                            <div style="width: 100px; height: 64px; border-radius: 8px; overflow: hidden; background: #0c1727; border: 1px solid var(--c-gold); flex-shrink: 0; display: flex; align-items: center; justify-content: center;">
+                                                <img src="<?php echo esc_url( $cur_cr_hero ); ?>" class="image-preview-thumb" id="preview-hero_image-community-rule" style="width: 100%; height: 100%; object-fit: cover; display: block;" onerror="this.src='<?php echo esc_url( $def_cr_hero ); ?>';">
+                                            </div>
+                                            <input type="hidden" name="hero_image" id="input-hero_image-community-rule" value="<?php echo esc_attr( $data['hero_image'] ?? '' ); ?>">
+                                            <div style="display: flex; gap: 0.8rem; align-items: center; flex-wrap: wrap;">
+                                                <button type="button" class="btn btn-secondary btn-upload-media" data-target="hero_image-community-rule">Choose Image</button>
+                                                <button type="button" class="btn btn-secondary btn-reset-media" data-target="hero_image-community-rule" data-default="<?php echo esc_url( $def_cr_hero ); ?>" style="<?php echo empty( $data['hero_image'] ) ? 'display:none;' : ''; ?>">Reset to Default</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Card Badge</label>
+                                        <input type="text" name="card_badge" class="form-control" value="<?php echo esc_attr( $data['card_badge'] ?? 'THIRD ORDER RULE' ); ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Card Title</label>
+                                        <input type="text" name="card_title" class="form-control" value="<?php echo esc_attr( $data['card_title'] ?? 'GUIDING PRINCIPLES OF OUR FAITH' ); ?>">
+                                    </div>
+                                    <div class="form-group full-width">
+                                        <label>Card Subtitle</label>
+                                        <input type="text" name="card_subtitle" class="form-control" value="<?php echo esc_attr( $data['card_subtitle'] ?? 'Rooted in Franciscan spirituality and commitment to Christ-centered living.' ); ?>">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-section">
+                                <h3 class="form-section-title">📜 The Franciscan Rule &amp; Principles</h3>
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label>Rule Heading</label>
+                                        <input type="text" name="rule_heading" class="form-control" value="<?php echo esc_attr( $data['rule_heading'] ?? 'THE FRANCISCAN RULE' ); ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Core Principles Heading</label>
+                                        <input type="text" name="principles_heading" class="form-control" value="<?php echo esc_attr( $data['principles_heading'] ?? 'CORE PRINCIPLES' ); ?>">
+                                    </div>
+                                    <div class="form-group full-width">
+                                        <label>Rule Description Text</label>
+                                        <textarea name="rule_text" class="form-control"><?php echo esc_textarea( $data['rule_text'] ?? '' ); ?></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Living the Rule Heading</label>
+                                        <input type="text" name="living_heading" class="form-control" value="<?php echo esc_attr( $data['living_heading'] ?? 'LIVING THE RULE TODAY' ); ?>">
+                                    </div>
+                                    <div class="form-group full-width">
+                                        <label>Living the Rule Text</label>
+                                        <textarea name="living_text" class="form-control"><?php echo esc_textarea( $data['living_text'] ?? '' ); ?></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Inquiry Box Title</label>
+                                        <input type="text" name="inquire_title" class="form-control" value="<?php echo esc_attr( $data['inquire_title'] ?? 'LEARN MORE' ); ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Inquiry Button Text</label>
+                                        <input type="text" name="inquire_btn_text" class="form-control" value="<?php echo esc_attr( $data['inquire_btn_text'] ?? 'Inquire' ); ?>">
+                                    </div>
+                                    <div class="form-group full-width">
+                                        <label>Inquiry Box Text</label>
+                                        <textarea name="inquire_text" class="form-control"><?php echo esc_textarea( $data['inquire_text'] ?? '' ); ?></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endif; ?>
+
+                        <?php if ( $slug === 'community-leadership' ) : ?>
+                            <!-- Community Leadership Page Specific Sections -->
+                            <div class="form-section">
+                                <h3 class="form-section-title">🏛️ Hero Banner &amp; Governance Card</h3>
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label>Hero Badge</label>
+                                        <input type="text" name="hero_badge" class="form-control" value="<?php echo esc_attr( $data['hero_badge'] ?? 'PROVINCIAL ADMINISTRATION' ); ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Hero Title</label>
+                                        <input type="text" name="hero_title" class="form-control" value="<?php echo esc_attr( $data['hero_title'] ?? 'PROVINCIAL LEADERSHIP' ); ?>">
+                                    </div>
+                                    <div class="form-group full-width">
+                                        <label>Hero Background Image</label>
+                                        <?php
+                                        $def_cl_hero = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_51_30_PM.png';
+                                        $cur_cl_hero = ! empty( $data['hero_image'] ) ? $data['hero_image'] : $def_cl_hero;
+                                        ?>
+                                        <div class="image-uploader-box">
+                                            <div style="width: 100px; height: 64px; border-radius: 8px; overflow: hidden; background: #0c1727; border: 1px solid var(--c-gold); flex-shrink: 0; display: flex; align-items: center; justify-content: center;">
+                                                <img src="<?php echo esc_url( $cur_cl_hero ); ?>" class="image-preview-thumb" id="preview-hero_image-community-leadership" style="width: 100%; height: 100%; object-fit: cover; display: block;" onerror="this.src='<?php echo esc_url( $def_cl_hero ); ?>';">
+                                            </div>
+                                            <input type="hidden" name="hero_image" id="input-hero_image-community-leadership" value="<?php echo esc_attr( $data['hero_image'] ?? '' ); ?>">
+                                            <div style="display: flex; gap: 0.8rem; align-items: center; flex-wrap: wrap;">
+                                                <button type="button" class="btn btn-secondary btn-upload-media" data-target="hero_image-community-leadership">Choose Image</button>
+                                                <button type="button" class="btn btn-secondary btn-reset-media" data-target="hero_image-community-leadership" data-default="<?php echo esc_url( $def_cl_hero ); ?>" style="<?php echo empty( $data['hero_image'] ) ? 'display:none;' : ''; ?>">Reset to Default</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Card Badge</label>
+                                        <input type="text" name="card_badge" class="form-control" value="<?php echo esc_attr( $data['card_badge'] ?? 'GOVERNANCE' ); ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Card Title</label>
+                                        <input type="text" name="card_title" class="form-control" value="<?php echo esc_attr( $data['card_title'] ?? 'SERVING IN COMMUNION' ); ?>">
+                                    </div>
+                                    <div class="form-group full-width">
+                                        <label>Card Subtitle</label>
+                                        <input type="text" name="card_subtitle" class="form-control" value="<?php echo esc_attr( $data['card_subtitle'] ?? 'Led by the Minister Provincial and provincial leadership team committed to spiritual excellence.' ); ?>">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-section">
+                                <h3 class="form-section-title">👑 General &amp; Provincial Council Headers</h3>
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label>General Council Eyebrow</label>
+                                        <input type="text" name="general_eyebrow" class="form-control" value="<?php echo esc_attr( $data['general_eyebrow'] ?? 'LEADERSHIP OF THE ORDER' ); ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>General Council Heading</label>
+                                        <input type="text" name="general_heading" class="form-control" value="<?php echo esc_attr( $data['general_heading'] ?? 'GENERAL COUNCIL' ); ?>">
+                                    </div>
+                                    <div class="form-group full-width">
+                                        <label>General Council Subtitle</label>
+                                        <textarea name="general_subtitle" class="form-control"><?php echo esc_textarea( $data['general_subtitle'] ?? '' ); ?></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Provincial Council Eyebrow</label>
+                                        <input type="text" name="provincial_eyebrow" class="form-control" value="<?php echo esc_attr( $data['provincial_eyebrow'] ?? 'RANCHI PROVINCE LEADERSHIP' ); ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Provincial Council Heading</label>
+                                        <input type="text" name="provincial_heading" class="form-control" value="<?php echo esc_attr( $data['provincial_heading'] ?? 'PROVINCIAL COUNCIL' ); ?>">
+                                    </div>
+                                    <div class="form-group full-width">
+                                        <label>Provincial Council Subtitle</label>
+                                        <textarea name="provincial_subtitle" class="form-control"><?php echo esc_textarea( $data['provincial_subtitle'] ?? '' ); ?></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endif; ?>
+
+                        <?php if ( $slug === 'community-friars' ) : ?>
+                            <!-- Community Friars Page Specific Sections -->
+                            <div class="form-section">
+                                <h3 class="form-section-title">👥 Hero Banner &amp; Stats Strip</h3>
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label>Hero Title</label>
+                                        <input type="text" name="hero_title" class="form-control" value="<?php echo esc_attr( $data['hero_title'] ?? 'OUR FRIARS' ); ?>">
+                                    </div>
+                                    <div class="form-group full-width">
+                                        <label>Hero Background Image</label>
+                                        <?php
+                                        $def_cfr_hero = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_51_30_PM.png';
+                                        $cur_cfr_hero = ! empty( $data['hero_image'] ) ? $data['hero_image'] : $def_cfr_hero;
+                                        ?>
+                                        <div class="image-uploader-box">
+                                            <div style="width: 100px; height: 64px; border-radius: 8px; overflow: hidden; background: #0c1727; border: 1px solid var(--c-gold); flex-shrink: 0; display: flex; align-items: center; justify-content: center;">
+                                                <img src="<?php echo esc_url( $cur_cfr_hero ); ?>" class="image-preview-thumb" id="preview-hero_image-community-friars" style="width: 100%; height: 100%; object-fit: cover; display: block;" onerror="this.src='<?php echo esc_url( $def_cfr_hero ); ?>';">
+                                            </div>
+                                            <input type="hidden" name="hero_image" id="input-hero_image-community-friars" value="<?php echo esc_attr( $data['hero_image'] ?? '' ); ?>">
+                                            <div style="display: flex; gap: 0.8rem; align-items: center; flex-wrap: wrap;">
+                                                <button type="button" class="btn btn-secondary btn-upload-media" data-target="hero_image-community-friars">Choose Image</button>
+                                                <button type="button" class="btn btn-secondary btn-reset-media" data-target="hero_image-community-friars" data-default="<?php echo esc_url( $def_cfr_hero ); ?>" style="<?php echo empty( $data['hero_image'] ) ? 'display:none;' : ''; ?>">Reset to Default</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Card Badge</label>
+                                        <input type="text" name="card_badge" class="form-control" value="<?php echo esc_attr( $data['card_badge'] ?? 'OUR FRIARS' ); ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Card Title</label>
+                                        <input type="text" name="card_title" class="form-control" value="<?php echo esc_attr( $data['card_title'] ?? 'BROTHERS IN CHRIST' ); ?>">
+                                    </div>
+                                    <div class="form-group full-width">
+                                        <label>Card Subtitle</label>
+                                        <input type="text" name="card_subtitle" class="form-control" value="<?php echo esc_attr( $data['card_subtitle'] ?? 'Over 104 professed friars dedicated to prayer, community, and active ministry.' ); ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Stat 1 Number</label>
+                                        <input type="text" name="stat_friars_num" class="form-control" value="<?php echo esc_attr( $data['stat_friars_num'] ?? '104+' ); ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Stat 1 Label</label>
+                                        <input type="text" name="stat_friars_lbl" class="form-control" value="<?php echo esc_attr( $data['stat_friars_lbl'] ?? 'Professed Friars' ); ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Stat 2 Number</label>
+                                        <input type="text" name="stat_priests_num" class="form-control" value="<?php echo esc_attr( $data['stat_priests_num'] ?? '71' ); ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Stat 2 Label</label>
+                                        <input type="text" name="stat_priests_lbl" class="form-control" value="<?php echo esc_attr( $data['stat_priests_lbl'] ?? 'Ordained Priests' ); ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Stat 3 Number</label>
+                                        <input type="text" name="stat_formation_num" class="form-control" value="<?php echo esc_attr( $data['stat_formation_num'] ?? '77+' ); ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Stat 3 Label</label>
+                                        <input type="text" name="stat_formation_lbl" class="form-control" value="<?php echo esc_attr( $data['stat_formation_lbl'] ?? 'Brothers in Formation' ); ?>">
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endif; ?>
+
+                        <?php if ( $slug === 'community-friaries' ) : ?>
+                            <!-- Community Friaries Page Specific Sections -->
+                            <div class="form-section">
+                                <h3 class="form-section-title">🏡 Hero Banner &amp; Overview Card</h3>
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label>Hero Title</label>
+                                        <input type="text" name="hero_title" class="form-control" value="<?php echo esc_attr( $data['hero_title'] ?? 'OUR FRIARIES & ASHRAMS' ); ?>">
+                                    </div>
+                                    <div class="form-group full-width">
+                                        <label>Hero Background Image</label>
+                                        <?php
+                                        $def_cfy_hero = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_51_30_PM.png';
+                                        $cur_cfy_hero = ! empty( $data['hero_image'] ) ? $data['hero_image'] : $def_cfy_hero;
+                                        ?>
+                                        <div class="image-uploader-box">
+                                            <div style="width: 100px; height: 64px; border-radius: 8px; overflow: hidden; background: #0c1727; border: 1px solid var(--c-gold); flex-shrink: 0; display: flex; align-items: center; justify-content: center;">
+                                                <img src="<?php echo esc_url( $cur_cfy_hero ); ?>" class="image-preview-thumb" id="preview-hero_image-community-friaries" style="width: 100%; height: 100%; object-fit: cover; display: block;" onerror="this.src='<?php echo esc_url( $def_cfy_hero ); ?>';">
+                                            </div>
+                                            <input type="hidden" name="hero_image" id="input-hero_image-community-friaries" value="<?php echo esc_attr( $data['hero_image'] ?? '' ); ?>">
+                                            <div style="display: flex; gap: 0.8rem; align-items: center; flex-wrap: wrap;">
+                                                <button type="button" class="btn btn-secondary btn-upload-media" data-target="hero_image-community-friaries">Choose Image</button>
+                                                <button type="button" class="btn btn-secondary btn-reset-media" data-target="hero_image-community-friaries" data-default="<?php echo esc_url( $def_cfy_hero ); ?>" style="<?php echo empty( $data['hero_image'] ) ? 'display:none;' : ''; ?>">Reset to Default</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Card Badge</label>
+                                        <input type="text" name="card_badge" class="form-control" value="<?php echo esc_attr( $data['card_badge'] ?? 'OUR FRIARIES' ); ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Card Title</label>
+                                        <input type="text" name="card_title" class="form-control" value="<?php echo esc_attr( $data['card_title'] ?? 'HOUSES OF PRAYER AND SERVICE' ); ?>">
+                                    </div>
+                                    <div class="form-group full-width">
+                                        <label>Card Subtitle</label>
+                                        <input type="text" name="card_subtitle" class="form-control" value="<?php echo esc_attr( $data['card_subtitle'] ?? 'Communities across India and beyond, rooted in the Franciscan charism of poverty, prayer, and service.' ); ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Overview Section Title</label>
+                                        <input type="text" name="friaries_overview_title" class="form-control" value="<?php echo esc_attr( $data['friaries_overview_title'] ?? 'OUR FRIARIES' ); ?>">
+                                    </div>
+                                    <div class="form-group full-width">
+                                        <label>Overview Subtitle Text</label>
+                                        <textarea name="friaries_overview_text" class="form-control"><?php echo esc_textarea( $data['friaries_overview_text'] ?? 'The Province maintains houses in Archdiocese of Ranchi, Khunti, Simdega, Rourkela, Jalpaiguri, Bagdogra, Gumla, Purnea, and Bongaigaon.' ); ?></textarea>
                                     </div>
                                 </div>
                             </div>

@@ -755,18 +755,22 @@ button.fs-mega-toggle:focus::after {
             color: #0c1727 !important;
             transform: rotate(90deg) !important;
         }
-    </style>
-
-<main id="main-content" style="padding-top: 0; background-color: #FFFFFF;">
+    </style><main id="main-content" style="padding-top: 0; background-color: #FFFFFF;">
     <!-- Page Hero Banner -->
-    <section class="page-hero-banner" style="background-image: url('<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_51_30_PM.png' ); ?>');">
+    <?php
+    $hist_hero_bg = franciscan_get_page_field( 'community-history', 'hero_image', '' );
+    if ( empty( $hist_hero_bg ) ) {
+        $hist_hero_bg = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_51_30_PM.png';
+    }
+    ?>
+    <section class="page-hero-banner" style="background-image: url('<?php echo esc_url( $hist_hero_bg ); ?>');">
         <div style="position: absolute; inset: 0; background-color: rgba(12, 11, 10, 0.74);"></div>
         <div style="max-width: 900px; margin: 0 auto; position: relative; z-index: 2; text-align: center;">
             <div style="display: inline-flex; align-items: center; gap: 0.6rem; background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); padding: 0.5rem 1.2rem; border-radius: 50px; margin-bottom: 1.5rem; border: 1px solid rgba(255,255,255,0.2);">
                 <span style="width: 8px; height: 8px; background-color: #e6c888; border-radius: 50%; display: inline-block;"></span>
-                <span style="color: #ffffff; font-size: 0.85rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; font-family: 'Instrument Sans', sans-serif;"><?php echo esc_html( franciscan_get_page_field( "community", "hero_badge", "HERITAGE" ) ); ?>
+                <span style="color: #ffffff; font-size: 0.85rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; font-family: 'Instrument Sans', sans-serif;"><?php echo esc_html( franciscan_get_page_field( 'community-history', 'hero_badge', 'HERITAGE' ) ); ?></span>
             </div>
-            <h1 style="font-family: 'Phudu', sans-serif; font-size: clamp(2.8rem, 5.2vw, 4.5rem); font-weight: 700; color: #ffffff; text-transform: uppercase; margin: 0 0 1rem 0; line-height: 1.1;"><?php echo esc_html( franciscan_get_page_field( "community", "hero_title", "HISTORY OF THE PROVINCE" ) ); ?></h1>
+            <h1 style="font-family: 'Phudu', sans-serif; font-size: clamp(2.8rem, 5.2vw, 4.5rem); font-weight: 700; color: #ffffff; text-transform: uppercase; margin: 0 0 1rem 0; line-height: 1.1;"><?php echo esc_html( franciscan_get_page_field( 'community-history', 'hero_title', 'HISTORY OF THE PROVINCE' ) ); ?></h1>
         </div>
     </section>
 
@@ -777,13 +781,13 @@ button.fs-mega-toggle:focus::after {
             <div style="position: relative; z-index: 2;">
                 <div style="display: inline-flex; align-items: center; gap: 0.5rem; margin-bottom: 1.2rem;">
                     <span style="width: 6px; height: 6px; background-color: #e6c888; border-radius: 50%; display: inline-block;"></span>
-                    <span style="color: #ffffff; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; font-family: 'Instrument Sans', sans-serif;">OUR HERITAGE</span>
+                    <span style="color: #ffffff; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; font-family: 'Instrument Sans', sans-serif;"><?php echo esc_html( franciscan_get_page_field( 'community-history', 'heritage_badge', 'OUR HERITAGE' ) ); ?></span>
                 </div>
                 <h2 style="font-family: 'Phudu', sans-serif; font-size: clamp(2rem, 3.8vw, 44px); font-weight: 600; color: #ffffff; text-transform: uppercase; line-height: 1.15; letter-spacing: -0.01em; margin-bottom: 1.2rem; max-width: 800px;">
-                    A LEGACY OF FAITH AND SERVICE
+                    <?php echo esc_html( franciscan_get_page_field( 'community-history', 'heritage_title', 'A LEGACY OF FAITH AND SERVICE' ) ); ?>
                 </h2>
                 <p style="font-family: 'Instrument Sans', sans-serif; font-size: 1.05rem; font-weight: 400; color: rgba(255, 255, 255, 0.9); line-height: 1.7; max-width: 650px; margin: 0;">
-                    Tracing our origins from the ancient 4th-century Order of Penance, to St. Francis of Assisi, to thirty years of dedicated growth in Ranchi Province.
+                    <?php echo esc_html( franciscan_get_page_field( 'community-history', 'heritage_text', 'Tracing our origins from the ancient 4th-century Order of Penance, to St. Francis of Assisi, to thirty years of dedicated growth in Ranchi Province.' ) ); ?>
                 </p>
             </div>
         </div>
@@ -797,19 +801,19 @@ button.fs-mega-toggle:focus::after {
             <div style="background: #FAF7F0; border-radius: 24px; padding: clamp(2rem, 5vw, 3.5rem); border: 1px solid rgba(74,42,24,0.08); margin-bottom: 3rem;">
                 <div style="display: inline-flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;">
                     <span style="width: 6px; height: 6px; background-color: #4A2A18; border-radius: 50%;"></span>
-                    <span style="color: #4A2A18; font-size: 0.8rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; font-family: 'Instrument Sans', sans-serif;">ORIGINS &amp; ROOTS</span>
+                    <span style="color: #4A2A18; font-size: 0.8rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; font-family: 'Instrument Sans', sans-serif;"><?php echo esc_html( franciscan_get_page_field( 'community-history', 'era1_badge', 'ORIGINS & ROOTS' ) ); ?></span>
                 </div>
                 <h3 style="font-family: 'Phudu', sans-serif; font-size: clamp(1.6rem, 2.6vw, 2.1rem); font-weight: 700; color: #1c1917; text-transform: uppercase; margin: 0 0 1.5rem 0;">
-                    The Order of Penance &amp; St. Francis of Assisi
+                    <?php echo esc_html( franciscan_get_page_field( 'community-history', 'era1_title', 'The Order of Penance & St. Francis of Assisi' ) ); ?>
                 </h3>
                 <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.85; margin-bottom: 1.25rem;">
-                    The Third Order Regular (TOR) of St. Francis traces its origins to the ancient Order of Penance, which dates back to the fourth century AD. Men and women voluntarily embraced lives of penance for the sake of the Kingdom of God and their own spiritual growth. Some penitents were married and lived with their families, while others chose the life of hermits or formed communities dedicated to the service of the Church.
+                    <?php echo esc_html( franciscan_get_page_field( 'community-history', 'era1_p1', 'The Third Order Regular (TOR) of St. Francis traces its origins to the ancient Order of Penance, which dates back to the fourth century AD. Men and women voluntarily embraced lives of penance for the sake of the Kingdom of God and their own spiritual growth.' ) ); ?>
                 </p>
                 <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.85; margin-bottom: 1.25rem;">
-                    During his early conversion experience, St. Francis of Assisi (1181–1226) became associated with the Order of Penance, an itinerant movement known as the Penitents of Assisi. He addressed them through an Exhortation, encouraging them to lead holy lives of penance. It is within this movement that the Third Order Regular of St. Francis finds its roots. The penitents received a way of life from St. Francis around 1209–1210, and their Rule was formally approved by the Church through <em>Supra Montem</em>, promulgated by Pope Nicholas IV in 1289.
+                    <?php echo esc_html( franciscan_get_page_field( 'community-history', 'era1_p2', 'During his early conversion experience, St. Francis of Assisi (1181–1226) became associated with the Order of Penance, an itinerant movement known as the Penitents of Assisi. He addressed them through an Exhortation, encouraging them to lead holy lives of penance.' ) ); ?>
                 </p>
                 <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.85; margin: 0;">
-                    Among the early Franciscan penitents were both Seculars (Third Order Seculars), who continued to live with their families, and Regulars, who lived according to a <em>regula</em> (rule of life). The Regulars embraced religious life characterized by the profession of vows, observance of the Third Order Rule, and communal living in hermitages or communities devoted to works of mercy. The practice of professing the vows of poverty, chastity, and obedience received papal approval in 1321 through Pope John XXII’s letter <em>Altissimo in Divinis</em>.
+                    <?php echo esc_html( franciscan_get_page_field( 'community-history', 'era1_p3', 'Among the early Franciscan penitents were both Seculars and Regulars who lived according to a regula (rule of life). The Regulars embraced religious life characterized by the profession of vows, observance of the Third Order Rule, and communal living in hermitages.' ) ); ?>
                 </p>
             </div>
 

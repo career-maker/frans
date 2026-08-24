@@ -706,10 +706,16 @@ button.fs-mega-toggle:focus::after {
 
 <main id="main-content" style="padding-top: 0; background-color: #FFF;">
     <!-- Page Hero -->
-    <section style="padding: 12rem 2rem 8rem 2rem; background-image: url('<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_51_30_PM.png' ); ?>'); background-size: cover; background-position: center; position: relative; overflow: hidden;">
+    <?php
+    $friars_hero_bg = franciscan_get_page_field( 'community-friars', 'hero_image', '' );
+    if ( empty( $friars_hero_bg ) ) {
+        $friars_hero_bg = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_51_30_PM.png';
+    }
+    ?>
+    <section style="padding: 12rem 2rem 8rem 2rem; background-image: url('<?php echo esc_url( $friars_hero_bg ); ?>'); background-size: cover; background-position: center; position: relative; overflow: hidden;">
         <div style="position: absolute; inset: 0; background-color: rgba(12, 11, 10, 0.7);"></div>
         <div style="max-width: 800px; margin: 0 auto; position: relative; z-index: 2; text-align: center;">
-            <h1 style="font-family: 'Phudu', sans-serif; font-size: clamp(2.8rem, 5.2vw, 4.5rem); font-weight: 700; color: #ffffff; text-transform: uppercase; margin: 0 0 1rem 0; line-height: 1.1;"><?php echo esc_html( franciscan_get_page_field( "community", "hero_title", "OUR FRIARS" ) ); ?></h1>
+            <h1 style="font-family: 'Phudu', sans-serif; font-size: clamp(2.8rem, 5.2vw, 4.5rem); font-weight: 700; color: #ffffff; text-transform: uppercase; margin: 0 0 1rem 0; line-height: 1.1;"><?php echo esc_html( franciscan_get_page_field( 'community-friars', 'hero_title', 'OUR FRIARS' ) ); ?></h1>
         </div>
     </section>
 
@@ -721,13 +727,13 @@ button.fs-mega-toggle:focus::after {
             <div style="position: relative; z-index: 2;">
                 <div style="display: inline-flex; align-items: center; gap: 0.5rem; margin-bottom: 1.4rem;">
                     <span style="width: 6px; height: 6px; background-color: #e6c888; border-radius: 50%;"></span>
-                    <span style="color: #fff; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; font-family: 'Instrument Sans';">OUR FRIARS</span>
+                    <span style="color: #fff; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; font-family: 'Instrument Sans';"><?php echo esc_html( franciscan_get_page_field( 'community-friars', 'card_badge', 'OUR FRIARS' ) ); ?></span>
                 </div>
                 <h2 style="font-family: 'Phudu'; font-size: clamp(2.6rem, 4.2vw, 62px); font-weight: 600; color: #fff; text-transform: uppercase; line-height: 1.05; margin-bottom: 1.5rem;">
-                    BROTHERS IN CHRIST
+                    <?php echo esc_html( franciscan_get_page_field( 'community-friars', 'card_title', 'BROTHERS IN CHRIST' ) ); ?>
                 </h2>
                 <p style="font-family: 'Instrument Sans'; font-size: 1.1rem; color: rgba(255,255,255,0.9); max-width: 600px;">
-                    Over 104 professed friars dedicated to prayer, community, and active ministry.
+                    <?php echo esc_html( franciscan_get_page_field( 'community-friars', 'card_subtitle', 'Over 104 professed friars dedicated to prayer, community, and active ministry.' ) ); ?>
                 </p>
             </div>
         </div>

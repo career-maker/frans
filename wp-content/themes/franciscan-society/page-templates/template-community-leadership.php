@@ -743,18 +743,22 @@ button.fs-mega-toggle:focus::after {
             color: #0c1727 !important;
             transform: rotate(90deg) !important;
         }
-    </style>
-
-<main id="main-content" style="padding-top: 0; background-color: #FFFFFF;">
+    </style><main id="main-content" style="padding-top: 0; background-color: #FFFFFF;">
     <!-- Page Hero Banner -->
-    <section class="page-hero-banner" style="background-image: url('<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_51_30_PM.png' ); ?>');">
+    <?php
+    $ldr_hero_bg = franciscan_get_page_field( 'community-leadership', 'hero_image', '' );
+    if ( empty( $ldr_hero_bg ) ) {
+        $ldr_hero_bg = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_51_30_PM.png';
+    }
+    ?>
+    <section class="page-hero-banner" style="background-image: url('<?php echo esc_url( $ldr_hero_bg ); ?>');">
         <div style="position: absolute; inset: 0; background-color: rgba(12, 11, 10, 0.74);"></div>
         <div style="max-width: 900px; margin: 0 auto; position: relative; z-index: 2; text-align: center;">
             <div style="display: inline-flex; align-items: center; gap: 0.6rem; background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); padding: 0.5rem 1.2rem; border-radius: 50px; margin-bottom: 1.5rem; border: 1px solid rgba(255,255,255,0.2);">
                 <span style="width: 8px; height: 8px; background-color: #e6c888; border-radius: 50%; display: inline-block;"></span>
-                <span style="color: #ffffff; font-size: 0.85rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; font-family: 'Instrument Sans', sans-serif;"><?php echo esc_html( franciscan_get_page_field( "community", "hero_badge", "PROVINCIAL ADMINISTRATION" ) ); ?>
+                <span style="color: #ffffff; font-size: 0.85rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; font-family: 'Instrument Sans', sans-serif;"><?php echo esc_html( franciscan_get_page_field( 'community-leadership', 'hero_badge', 'PROVINCIAL ADMINISTRATION' ) ); ?></span>
             </div>
-            <h1 style="font-family: 'Phudu', sans-serif; font-size: clamp(2.8rem, 5.2vw, 4.5rem); font-weight: 700; color: #ffffff; text-transform: uppercase; margin: 0 0 1rem 0; line-height: 1.1;"><?php echo esc_html( franciscan_get_page_field( "community", "hero_title", "PROVINCIAL LEADERSHIP" ) ); ?></h1>
+            <h1 style="font-family: 'Phudu', sans-serif; font-size: clamp(2.8rem, 5.2vw, 4.5rem); font-weight: 700; color: #ffffff; text-transform: uppercase; margin: 0 0 1rem 0; line-height: 1.1;"><?php echo esc_html( franciscan_get_page_field( 'community-leadership', 'hero_title', 'PROVINCIAL LEADERSHIP' ) ); ?></h1>
         </div>
     </section>
 
@@ -785,11 +789,11 @@ button.fs-mega-toggle:focus::after {
             <div style="text-align: center; margin-bottom: 2.5rem;">
                 <div style="display: inline-flex; align-items: center; gap: 0.5rem; margin-bottom: 0.8rem;">
                     <span style="width: 6px; height: 6px; background-color: #4A2A18; border-radius: 50%;"></span>
-                    <span style="color: #4A2A18; font-size: 0.78rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; font-family: 'Instrument Sans', sans-serif;">LEADERSHIP OF THE ORDER</span>
+                    <span style="color: #4A2A18; font-size: 0.78rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; font-family: 'Instrument Sans', sans-serif;"><?php echo esc_html( franciscan_get_page_field( 'community-leadership', 'general_eyebrow', 'LEADERSHIP OF THE ORDER' ) ); ?></span>
                 </div>
-                <h2 style="font-family: 'Phudu', sans-serif; font-size: clamp(2rem, 3.5vw, 2.6rem); font-weight: 700; color: #1c1917; text-transform: uppercase; margin: 0 0 1rem 0;">GENERAL COUNCIL</h2>
+                <h2 style="font-family: 'Phudu', sans-serif; font-size: clamp(2rem, 3.5vw, 2.6rem); font-weight: 700; color: #1c1917; text-transform: uppercase; margin: 0 0 1rem 0;"><?php echo esc_html( franciscan_get_page_field( 'community-leadership', 'general_heading', 'GENERAL COUNCIL' ) ); ?></h2>
                 <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.85; max-width: 750px; margin: 0 auto;">
-                    The General Council guides the Franciscan Third Order Regular globally, ensuring fidelity to our charism and mission across all provinces and regions.
+                    <?php echo esc_html( franciscan_get_page_field( 'community-leadership', 'general_subtitle', 'The General Council guides the Franciscan Third Order Regular globally, ensuring fidelity to our charism and mission across all provinces and regions.' ) ); ?>
                 </p>
             </div>
 
@@ -862,11 +866,11 @@ button.fs-mega-toggle:focus::after {
             <div style="text-align: center; margin-bottom: 2.5rem; padding-top: 3rem; border-top: 1px solid rgba(74,42,24,0.1);">
                 <div style="display: inline-flex; align-items: center; gap: 0.5rem; margin-bottom: 0.8rem;">
                     <span style="width: 6px; height: 6px; background-color: #4A2A18; border-radius: 50%;"></span>
-                    <span style="color: #4A2A18; font-size: 0.78rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; font-family: 'Instrument Sans', sans-serif;">RANCHI PROVINCE LEADERSHIP</span>
+                    <span style="color: #4A2A18; font-size: 0.78rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; font-family: 'Instrument Sans', sans-serif;"><?php echo esc_html( franciscan_get_page_field( 'community-leadership', 'provincial_eyebrow', 'RANCHI PROVINCE LEADERSHIP' ) ); ?></span>
                 </div>
-                <h2 style="font-family: 'Phudu', sans-serif; font-size: clamp(2rem, 3.5vw, 2.6rem); font-weight: 700; color: #1c1917; text-transform: uppercase; margin: 0 0 1rem 0;">PROVINCIAL COUNCIL</h2>
+                <h2 style="font-family: 'Phudu', sans-serif; font-size: clamp(2rem, 3.5vw, 2.6rem); font-weight: 700; color: #1c1917; text-transform: uppercase; margin: 0 0 1rem 0;"><?php echo esc_html( franciscan_get_page_field( 'community-leadership', 'provincial_heading', 'PROVINCIAL COUNCIL' ) ); ?></h2>
                 <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.85; max-width: 750px; margin: 0 auto;">
-                    The Provincial Council oversees the spiritual and apostolic life of our community in Ranchi Province, ensuring our friars flourish in their vocations and effectively serve the Church's mission across India.
+                    <?php echo esc_html( franciscan_get_page_field( 'community-leadership', 'provincial_subtitle', "The Provincial Council oversees the spiritual and apostolic life of our community in Ranchi Province, ensuring our friars flourish in their vocations and effectively serve the Church's mission across India." ) ); ?>
                 </p>
             </div>
 

@@ -715,12 +715,18 @@ button.fs-mega-toggle:focus::after {
         <!-- 1. Hero Section (Rounded Card Container on Cream Canvas) -->
         
     <!-- Page Hero -->
-    <section style="padding: 12rem 2rem 8rem 2rem; background-image: url('<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_51_30_PM.png' ); ?>'); background-size: cover; background-position: center; position: relative; overflow: hidden;">
+    <?php
+    $about_hero_bg = franciscan_get_page_field( 'about', 'hero_image', '' );
+    if ( empty( $about_hero_bg ) ) {
+        $about_hero_bg = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_51_30_PM.png';
+    }
+    ?>
+    <section style="padding: 12rem 2rem 8rem 2rem; background-image: url('<?php echo esc_url( $about_hero_bg ); ?>'); background-size: cover; background-position: center; position: relative; overflow: hidden;">
         <div style="position: absolute; inset: 0; background-color: rgba(12, 11, 10, 0.7);"></div>
         <div style="max-width: 800px; margin: 0 auto; position: relative; z-index: 2; text-align: center;">
             <div style="display: inline-flex; align-items: center; gap: 0.6rem; background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); padding: 0.5rem 1rem; border-radius: 50px; margin-bottom: 1.5rem; border: 1px solid rgba(255,255,255,0.2);">
                 <span style="width: 8px; height: 8px; background-color: #c8102e; border-radius: 50%; display: inline-block;"></span>
-                <span style="color: #ffffff; font-size: 0.85rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; font-family: 'Instrument Sans', sans-serif;"><?php echo esc_html( franciscan_get_page_field( "about", "hero_badge", "WHO WE ARE" ) ); ?>
+                <span style="color: #ffffff; font-size: 0.85rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; font-family: 'Instrument Sans', sans-serif;"><?php echo esc_html( franciscan_get_page_field( "about", "hero_badge", "WHO WE ARE" ) ); ?></span>
             </div>
             <h1 style="font-family: 'Phudu', sans-serif; font-size: clamp(2.8rem, 5.2vw, 4.5rem); font-weight: 700; color: #ffffff; text-transform: uppercase; margin: 0 0 1rem 0; line-height: 1.1;"><?php echo esc_html( franciscan_get_page_field( "about", "hero_title", "ABOUT US" ) ); ?></h1>
         </div>
@@ -729,15 +735,25 @@ button.fs-mega-toggle:focus::after {
             <div class="responsive-grid-about" style="max-width: 1320px; margin: 0 auto; padding: 0 clamp(1rem, 5vw, 3rem); display: grid; gap: 4.5rem; align-items: center;">
                 
                 <!-- Left Column: Main Image with Working Video Card Overlay -->
+                <?php
+                $about_sec_img = franciscan_get_page_field( 'about', 'about_section_img', '' );
+                if ( empty( $about_sec_img ) ) {
+                    $about_sec_img = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_48_39_PM.png';
+                }
+                $about_sec_video = franciscan_get_page_field( 'about', 'about_video_url', '' );
+                if ( empty( $about_sec_video ) ) {
+                    $about_sec_video = FRANCISCAN_THEME_URI . '/assets/videos/hero-bg.mp4';
+                }
+                ?>
                 <div style="position: relative; border-radius: 24px;">
                     <div class="about-img-container" style="position: relative; border-radius: 24px; overflow: hidden; box-shadow: 0 20px 45px rgba(0, 0, 0, 0.08);">
-                        <img  loading="lazy"loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_48_39_PM.png' ); ?>" style="width: 100%; height: 460px; object-fit: cover; border-radius: 24px; display: block;" alt="Franciscan Rosary & Prayer">
+                        <img loading="lazy" decoding="async" src="<?php echo esc_url( $about_sec_img ); ?>" style="width: 100%; height: 460px; object-fit: cover; border-radius: 24px; display: block;" alt="Franciscan Rosary & Prayer">
                     </div>
                     
                     <!-- Inset Video Overlay Card (Positioned inside bottom-right corner) -->
                     <div class="about-video-card" style="position: absolute; bottom: 20px; right: 20px; background: #ffffff; padding: 10px; border-radius: 16px; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.18); width: 185px; text-align: center; z-index: 10;">
                         <div style="position: relative; border-radius: 12px; overflow: hidden; height: 95px; background-color: #1c1917;">
-                            <video src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/videos/hero-bg.mp4' ); ?>" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" autoplay loop muted playsinline></video>
+                            <video src="<?php echo esc_url( $about_sec_video ); ?>" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" autoplay loop muted playsinline></video>
                             <a rel="noopener noreferrer" href="https://youtube.com/@tormediaranchi3804?si=UPTCSJUSj9tbcjeB" target="_blank" class="video-play-btn" aria-label="Watch our video on YouTube">
                                 <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16" aria-hidden="true">
                                     <path d="M8 5v14l11-7z"/>
@@ -785,9 +801,15 @@ button.fs-mega-toggle:focus::after {
                     </div>
 
                     <!-- Minister Provincial Avatar Row -->
+                    <?php
+                    $about_prov_avatar = franciscan_get_page_field( 'about', 'about_provincial_avatar', '' );
+                    if ( empty( $about_prov_avatar ) ) {
+                        $about_prov_avatar = FRANCISCAN_THEME_URI . '/assets/images/fr-manoj-vengathanam.png';
+                    }
+                    ?>
                     <div style="display: flex; align-items: center; gap: 2rem; flex-wrap: wrap;">
                         <div style="display: flex; align-items: center; gap: 0.85rem;">
-                            <img  loading="lazy"loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/fr-manoj-vengathanam.png' ); ?>" style="width: 44px; height: 44px; border-radius: 50%; object-fit: cover;" alt="Fr. Manoj Vengathanam, TOR">
+                            <img loading="lazy" decoding="async" src="<?php echo esc_url( $about_prov_avatar ); ?>" style="width: 44px; height: 44px; border-radius: 50%; object-fit: cover;" alt="<?php echo esc_attr( franciscan_get_page_field( 'about', 'about_provincial_name', 'Fr. Manoj Vengathanam, TOR' ) ); ?>">
                             <div>
                                 <div style="font-family: 'Phudu', sans-serif !important; font-weight: 600; font-size: 0.85rem; text-transform: uppercase; color: #1c1917;"><?php echo esc_html( franciscan_get_page_field( 'about', 'about_provincial_name', 'FR. MANOJ VENGATHANAM, TOR' ) ); ?></div>
                                 <div style="font-family: 'Instrument Sans', sans-serif !important; font-size: 0.75rem; color: #78716c;"><?php echo esc_html( franciscan_get_page_field( 'about', 'about_provincial_title', 'Minister Provincial' ) ); ?></div>
@@ -880,15 +902,25 @@ button.fs-mega-toggle:focus::after {
                 </div>
 
                 <!-- Right Images -->
+                <?php
+                $about_mission_church = franciscan_get_page_field( 'about', 'mission_church_img', '' );
+                if ( empty( $about_mission_church ) ) {
+                    $about_mission_church = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_51_30_PM.png';
+                }
+                $about_mission_priest = franciscan_get_page_field( 'about', 'mission_priest_img', '' );
+                if ( empty( $about_mission_priest ) ) {
+                    $about_mission_priest = FRANCISCAN_THEME_URI . '/assets/images/mission-father.png';
+                }
+                ?>
                 <div class="gsap-fade-left hover-trigger" style="position: relative; height: 650px;">
                     <!-- Left Church Image -->
                     <div class="about-img-container mission-church-img">
-                        <img  loading="lazy"loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_51_30_PM.png' ); ?>" alt="Church Interior" style="width: 100%; height: 100%; object-fit: cover;">
+                        <img loading="lazy" decoding="async" src="<?php echo esc_url( $about_mission_church ); ?>" alt="Church Interior" style="width: 100%; height: 100%; object-fit: cover;">
                     </div>
                     
                     <!-- Right Father Image -->
                     <div class="mission-priest-container">
-                        <img loading="lazy" decoding="async" class="priest-zoom" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/mission-father.png' ); ?>" alt="Priest" style="width: 100%; height: auto; object-fit: contain; object-position: bottom center; max-height: 100%;">
+                        <img loading="lazy" decoding="async" class="priest-zoom" src="<?php echo esc_url( $about_mission_priest ); ?>" alt="Priest" style="width: 100%; height: auto; object-fit: contain; object-position: bottom center; max-height: 100%;">
                     </div>
                 </div>
 
@@ -905,7 +937,7 @@ button.fs-mega-toggle:focus::after {
             <!-- Section Header: Centered Heading & Accent Bar -->
             <div style="text-align: center; margin-bottom: clamp(2.5rem, 5vw, 4rem);">
                 <h2 style="font-family: 'Phudu', sans-serif; font-size: clamp(2.2rem, 4.5vw, 3.2rem); font-weight: 800; color: #1c1917; text-transform: uppercase; margin: 0; letter-spacing: -0.01em;">
-                    OUR CHARISM
+                    <?php echo esc_html( franciscan_get_page_field( 'about', 'charism_heading', 'OUR CHARISM' ) ); ?>
                 </h2>
                 <div style="width: 42px; height: 3.5px; background: #4A2A18; margin: 0.85rem auto 0 auto; border-radius: 2px;"></div>
             </div>
@@ -919,13 +951,13 @@ button.fs-mega-toggle:focus::after {
                     <div style="display: inline-flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;">
                         <span style="color: #4A2A18; font-size: 1.1rem; font-weight: bold; line-height: 1;">&#8224;</span>
                         <span style="font-family: 'Montserrat', sans-serif; font-size: 0.78rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; color: #4A2A18;">
-                            CORE FRANCISCAN IDENTITY
+                            <?php echo esc_html( franciscan_get_page_field( 'about', 'charism_eyebrow', 'CORE FRANCISCAN IDENTITY' ) ); ?>
                         </span>
                     </div>
 
                     <!-- Statement Headline (High-Contrast Serif: Cormorant Garamond) -->
                     <h3 style="font-family: 'Cormorant Garamond', 'Playfair Display', serif; font-size: clamp(2.2rem, 3.6vw, 3rem); font-weight: 600; color: #1c1917; line-height: 1.2; margin: 0 0 0.5rem 0; letter-spacing: -0.01em;">
-                        Conversion, contemplation,<br>poverty, and humility
+                        <?php echo nl2br( esc_html( franciscan_get_page_field( 'about', 'charism_statement', "Conversion, contemplation,\npoverty, and humility" ) ) ); ?>
                     </h3>
 
                     <!-- Brown Underline Bar -->
@@ -933,7 +965,7 @@ button.fs-mega-toggle:focus::after {
 
                     <!-- Paragraph Text (Montserrat clean sans) -->
                     <p style="font-family: 'Montserrat', sans-serif; font-size: 0.95rem; line-height: 1.75; color: #57534e; margin: 0 0 2.5rem 0;">
-                        lie at the heart of Franciscan identity. The fundamental charism of the Third Order Regular is <strong style="color: #4A2A18; font-weight: 700;">penance</strong>, understood as ongoing conversion. This involves turning to God in love, reconciliation with Him, harmony with oneself, and charity toward one's neighbour.
+                        <?php echo esc_html( franciscan_get_page_field( 'about', 'charism_text', "lie at the heart of Franciscan identity. The fundamental charism of the Third Order Regular is penance, understood as ongoing conversion. This involves turning to God in love, reconciliation with Him, harmony with oneself, and charity toward one's neighbour." ) ); ?>
                     </p>
 
                     <!-- 4 Core Pillars Grid (2x2) -->
@@ -945,7 +977,7 @@ button.fs-mega-toggle:focus::after {
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L14.4 9.6L22 12L14.4 14.4L12 22L9.6 14.4L2 12L9.6 9.6L12 2Z"/></svg>
                             </div>
                             <span style="font-family: 'Montserrat', sans-serif; font-size: 0.88rem; font-weight: 700; color: #1c1917; line-height: 1.3;">
-                                Ongoing<br>Conversion
+                                <?php echo nl2br( esc_html( franciscan_get_page_field( 'about', 'charism_p1_title', "Ongoing\nConversion" ) ) ); ?>
                             </span>
                         </div>
 
@@ -955,7 +987,7 @@ button.fs-mega-toggle:focus::after {
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.38 3.46L16 2a4 4 0 01-8 0L3.62 3.46a2 2 0 00-1.34 2.23l.58 3.47a1 1 0 00.99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 002-2V10h2.15a1 1 0 00.99-.84l.58-3.47a2 2 0 00-1.34-2.23z"/></svg>
                             </div>
                             <span style="font-family: 'Montserrat', sans-serif; font-size: 0.88rem; font-weight: 700; color: #1c1917; line-height: 1.3;">
-                                Poverty &amp;<br>Humility
+                                <?php echo nl2br( esc_html( franciscan_get_page_field( 'about', 'charism_p2_title', "Poverty &\nHumility" ) ) ); ?>
                             </span>
                         </div>
 
@@ -965,7 +997,7 @@ button.fs-mega-toggle:focus::after {
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
                             </div>
                             <span style="font-family: 'Montserrat', sans-serif; font-size: 0.88rem; font-weight: 700; color: #1c1917; line-height: 1.3;">
-                                Charity<br>to All
+                                <?php echo nl2br( esc_html( franciscan_get_page_field( 'about', 'charism_p3_title', "Charity\nto All" ) ) ); ?>
                             </span>
                         </div>
 
@@ -975,7 +1007,7 @@ button.fs-mega-toggle:focus::after {
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M10 2v6H4v4h6v10h4v-10h6V8h-6V2h-4z"/></svg>
                             </div>
                             <span style="font-family: 'Montserrat', sans-serif; font-size: 0.88rem; font-weight: 700; color: #1c1917; line-height: 1.3;">
-                                Reconciled<br>in Love
+                                <?php echo nl2br( esc_html( franciscan_get_page_field( 'about', 'charism_p4_title', "Reconciled\nin Love" ) ) ); ?>
                             </span>
                         </div>
 
@@ -983,10 +1015,16 @@ button.fs-mega-toggle:focus::after {
                 </div>
 
                 <!-- Right Column: Asymmetric Arched Artwork Image -->
+                <?php
+                $charism_img = franciscan_get_page_field( 'about', 'charism_image', '' );
+                if ( empty( $charism_img ) ) {
+                    $charism_img = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_24_08_PM.png';
+                }
+                ?>
                 <div class="charism-image-col">
                     <div class="charism-image-frame" style="border-top-left-radius: 140px; border-bottom-left-radius: 24px; border-top-right-radius: 24px; border-bottom-right-radius: 24px; overflow: hidden; position: relative; min-height: 490px; height: 100%; box-shadow: 0 20px 50px rgba(0,0,0,0.12); background-color: #2A1610;">
                         <img 
-                            src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_24_08_PM.png' ); ?>" 
+                            src="<?php echo esc_url( $charism_img ); ?>" 
                             alt="Franciscan Friars TOR Charism Sanctuary" 
                             style="width: 100%; height: 100%; min-height: 490px; object-fit: cover; display: block;"
                         >
@@ -994,7 +1032,7 @@ button.fs-mega-toggle:focus::after {
                         <div style="position: absolute; bottom: 0; left: 0; right: 0; padding: 2.5rem 2rem 1.8rem 2rem; background: linear-gradient(to top, rgba(12, 10, 8, 0.90) 0%, rgba(12, 10, 8, 0.4) 60%, transparent 100%); display: flex; align-items: center; justify-content: center; gap: 0.6rem;">
                             <span style="width: 7px; height: 7px; background-color: #e6c888; border-radius: 50%; display: inline-block;"></span>
                             <span style="font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; font-weight: 700; color: #e6c888; text-transform: uppercase; letter-spacing: 0.16em;">
-                                TOR FRANCISCAN CHARISM
+                                <?php echo esc_html( franciscan_get_page_field( 'about', 'charism_badge_text', 'TOR FRANCISCAN CHARISM' ) ); ?>
                             </span>
                         </div>
                     </div>
@@ -1047,10 +1085,10 @@ button.fs-mega-toggle:focus::after {
     <!-- CTA to Community Page -->
     <section style="padding: clamp(2rem, 4vw, 3.5rem) 2rem; background-color: #FFFFFF; text-align: center; max-width: 900px; margin: 0 auto;">
         <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.8; margin-bottom: 1.5rem;">
-            To learn more about our leadership, friaries across India, and the friars serving in our Province, visit our Community page.
+            <?php echo esc_html( franciscan_get_page_field( 'about', 'community_cta_text', 'To learn more about our leadership, friaries across India, and the friars serving in our Province, visit our Community page.' ) ); ?>
         </p>
-        <a href="<?php echo esc_url( home_url( '/community-history/' ) ); ?>" style="display: inline-block; background: #4A2A18; color: white; padding: 1rem 2rem; border-radius: 8px; font-family: 'Instrument Sans', sans-serif; font-weight: 800; font-size: 0.88rem; text-transform: uppercase; letter-spacing: 0.06em; text-decoration: none; transition: all 0.3s ease;">
-            EXPLORE THE HISTORY
+        <a href="<?php echo esc_url( home_url( franciscan_get_page_field( 'about', 'community_cta_btn_url', '/community-history/' ) ) ); ?>" style="display: inline-block; background: #4A2A18; color: white; padding: 1rem 2rem; border-radius: 8px; font-family: 'Instrument Sans', sans-serif; font-weight: 800; font-size: 0.88rem; text-transform: uppercase; letter-spacing: 0.06em; text-decoration: none; transition: all 0.3s ease;">
+            <?php echo esc_html( franciscan_get_page_field( 'about', 'community_cta_btn_text', 'EXPLORE THE HISTORY' ) ); ?>
         </a>
     </section>
 
