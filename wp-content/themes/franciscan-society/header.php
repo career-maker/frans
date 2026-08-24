@@ -484,16 +484,20 @@ button.slider-btn:active {
     }
 }
 
-@media (max-width: 1200px) {
-  .fs-mega-menu::before {
-      content: "";
-      position: absolute;
-      top: -12px;
-      left: 0;
-      right: 0;
-      height: 12px;
-      background: transparent;
-  }
+/* Invisible hover bridge between navbar toggle and dropdown menu */
+.fs-mega-menu::before {
+    content: "" !important;
+    position: absolute !important;
+    top: -20px !important;
+    left: -15px !important;
+    right: -15px !important;
+    height: 25px !important;
+    background: transparent !important;
+    display: block !important;
+    pointer-events: auto !important;
+    z-index: 1000000 !important;
+}
+
 @media (max-width: 1200px) {
     .fs-desktop-nav {
         display: none !important;
@@ -1312,13 +1316,14 @@ button.fs-mega-toggle:focus::after {
     display: none;
     position: fixed;
     top: 80px;
-    width: 220px;
+    width: 230px;
     background: rgba(12, 23, 39, 0.98);
-    padding: 0.8rem 0;
-    z-index: 101;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.3);
-    backdrop-filter: blur(10px);
-    border-radius: 4px;
+    padding: 0.6rem 0;
+    z-index: 999999 !important;
+    box-shadow: 0 12px 36px rgba(0,0,0,0.45);
+    backdrop-filter: blur(12px);
+    border-radius: 6px;
+    pointer-events: auto !important;
   }
 
   #ministries-mega {
@@ -1803,12 +1808,12 @@ button.fs-mega-toggle:focus::after {
 
     // Desktop dropdown menu hover with dynamic viewport positioning
     const megaToggles = document.querySelectorAll('.fs-mega-toggle');
-    let hoverTimeout;
+    let activeHoverTimeout = null;
 
     function positionDropdown(toggle, megaMenu) {
       const toggleRect = toggle.getBoundingClientRect();
-      megaMenu.style.left = (toggleRect.left - 10) + "px";
-      megaMenu.style.top = (toggleRect.bottom + 8) + "px";
+      megaMenu.style.left = Math.max(10, (toggleRect.left - 6)) + "px";
+      megaMenu.style.top = (toggleRect.bottom + 2) + "px";
     }
 
     megaToggles.forEach(toggle => {
@@ -1816,39 +1821,80 @@ button.fs-mega-toggle:focus::after {
       const megaMenu = document.getElementById(menuId);
       if (!megaMenu) return;
 
-      // Show menu on button hover
-      toggle.addEventListener('mouseenter', function() {
-        clearTimeout(hoverTimeout);
+      const openDropdown = function() {
+        if (activeHoverTimeout) {
+          clearTimeout(activeHoverTimeout);
+          activeHoverTimeout = null;
+        }
         document.querySelectorAll('.fs-mega-menu').forEach(menu => {
-          if (menu.id !== menuId) menu.classList.remove('show');
+          if (menu.id !== menuId) {
+            menu.classList.remove('show');
+          }
+        });
+        document.querySelectorAll('.fs-mega-toggle').forEach(t => {
+          if (t !== toggle) t.classList.remove('active');
         });
         
         positionDropdown(toggle, megaMenu);
         megaMenu.classList.add('show');
-      });
-
-      // Keep menu open when hovering over dropdown
-      megaMenu.addEventListener('mouseenter', function() {
-        clearTimeout(hoverTimeout);
-        this.classList.add('show');
-      });
-
-      // Close menu with gentle delay for smooth mouse travel
-      const closeMenu = function() {
-        hoverTimeout = setTimeout(() => {
-          megaMenu.classList.remove('show');
-        }, 300);
+        toggle.classList.add('active');
       };
 
-      toggle.addEventListener('mouseleave', closeMenu);
-      megaMenu.addEventListener('mouseleave', closeMenu);
+      const queueCloseDropdown = function() {
+        if (activeHoverTimeout) clearTimeout(activeHoverTimeout);
+        activeHoverTimeout = setTimeout(() => {
+          megaMenu.classList.remove('show');
+          toggle.classList.remove('active');
+        }, 350);
+      };
 
+      // Hover on Toggle Button
+      toggle.addEventListener('mouseenter', openDropdown);
+      toggle.addEventListener('mouseover', openDropdown);
       toggle.addEventListener('mousemove', function() {
-        clearTimeout(hoverTimeout);
+        if (activeHoverTimeout) {
+          clearTimeout(activeHoverTimeout);
+          activeHoverTimeout = null;
+        }
+      });
+      toggle.addEventListener('mouseleave', queueCloseDropdown);
+
+      // Click on Toggle to Toggle / Keep Open
+      toggle.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        if (megaMenu.classList.contains('show')) {
+          megaMenu.classList.remove('show');
+          toggle.classList.remove('active');
+        } else {
+          openDropdown();
+        }
+      });
+
+      // Hover on Dropdown Menu & Child Items
+      megaMenu.addEventListener('mouseenter', function() {
+        if (activeHoverTimeout) {
+          clearTimeout(activeHoverTimeout);
+          activeHoverTimeout = null;
+        }
+        megaMenu.classList.add('show');
+        toggle.classList.add('active');
+      });
+      megaMenu.addEventListener('mouseover', function() {
+        if (activeHoverTimeout) {
+          clearTimeout(activeHoverTimeout);
+          activeHoverTimeout = null;
+        }
+        megaMenu.classList.add('show');
+        toggle.classList.add('active');
       });
       megaMenu.addEventListener('mousemove', function() {
-        clearTimeout(hoverTimeout);
+        if (activeHoverTimeout) {
+          clearTimeout(activeHoverTimeout);
+          activeHoverTimeout = null;
+        }
       });
+      megaMenu.addEventListener('mouseleave', queueCloseDropdown);
     });
 
     // Reposition open menus on window resize or scroll
@@ -1865,6 +1911,9 @@ button.fs-mega-toggle:focus::after {
       if (!e.target.closest('.fs-desktop-nav') && !e.target.closest('.fs-mega-menu')) {
         document.querySelectorAll('.fs-mega-menu').forEach(menu => {
           menu.classList.remove('show');
+        });
+        document.querySelectorAll('.fs-mega-toggle').forEach(t => {
+          t.classList.remove('active');
         });
       }
     });
