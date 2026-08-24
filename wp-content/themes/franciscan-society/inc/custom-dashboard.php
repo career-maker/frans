@@ -1060,7 +1060,7 @@ function franciscan_render_dashboard_view() {
                                 <div class="form-grid">
                                     <div class="form-group">
                                         <label>Eyebrow Badge</label>
-                                        <input type="text" name="news_eyebrow class="form-control" value="<?php echo esc_attr( $data['news_eyebrow'] ?? 'NEWS & EVENTS' ); ); ?>">
+                                        <input type="text" name="news_eyebrow" class="form-control" value="<?php echo esc_attr( $data['news_eyebrow'] ?? 'NEWS & EVENTS' ); ?>">
                                     </div>
                                     <div class="form-group">
                                         <label>Section Heading</label>
