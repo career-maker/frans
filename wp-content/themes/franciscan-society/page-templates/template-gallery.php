@@ -789,95 +789,48 @@ button.fs-mega-toggle:focus::after {
         <div style="max-width: 1320px; margin: 0 auto;">
 
             <!-- Gallery Tabs -->
-            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; margin-bottom: 3rem;">
-                <button class="gallery-tab active" data-filter="all" style="padding: 0.8rem 1.5rem; border: 2px solid #e6c888; background: #e6c888; color: #1c1917; font-family: 'Instrument Sans', sans-serif; font-weight: 700; border-radius: 30px; cursor: pointer; transition: all 0.3s ease; white-space: nowrap;">All</button>
-                <button class="gallery-tab" data-filter="formation" style="padding: 0.8rem 1.5rem; border: 2px solid #e6c888; background: rgba(230, 200, 136, 0.15); font-family: 'Instrument Sans', sans-serif; font-weight: 700; border-radius: 30px; cursor: pointer; transition: all 0.3s ease; white-space: nowrap; line-height: 1.4;">Formation Ministry</button>
-                <button class="gallery-tab" data-filter="education" style="padding: 0.8rem 1.5rem; border: 2px solid #e6c888; background: rgba(230, 200, 136, 0.15); font-family: 'Instrument Sans', sans-serif; font-weight: 700; border-radius: 30px; cursor: pointer; transition: all 0.3s ease; white-space: nowrap; line-height: 1.4;">Education Ministry</button>
-                <button class="gallery-tab" data-filter="pastoral" style="padding: 0.8rem 1.5rem; border: 2px solid #e6c888; background: rgba(230, 200, 136, 0.15); font-family: 'Instrument Sans', sans-serif; font-weight: 700; border-radius: 30px; cursor: pointer; transition: all 0.3s ease; white-space: nowrap; line-height: 1.4;">Pastoral Ministry</button>
-                </div>
+            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 0.85rem; margin-bottom: 3rem;">
+                <button type="button" class="gallery-tab active" data-filter="all" style="padding: 0.8rem 1.5rem; border: 2px solid #e6c888; background: #e6c888; color: #1c1917; font-family: 'Instrument Sans', sans-serif; font-weight: 700; border-radius: 30px; cursor: pointer; transition: all 0.3s ease; white-space: nowrap;">All</button>
+                <button type="button" class="gallery-tab" data-filter="formation" style="padding: 0.8rem 1.5rem; border: 2px solid #e6c888; background: rgba(230, 200, 136, 0.15); font-family: 'Instrument Sans', sans-serif; font-weight: 700; border-radius: 30px; cursor: pointer; transition: all 0.3s ease; white-space: nowrap; line-height: 1.4;">Formation Ministry</button>
+                <button type="button" class="gallery-tab" data-filter="education" style="padding: 0.8rem 1.5rem; border: 2px solid #e6c888; background: rgba(230, 200, 136, 0.15); font-family: 'Instrument Sans', sans-serif; font-weight: 700; border-radius: 30px; cursor: pointer; transition: all 0.3s ease; white-space: nowrap; line-height: 1.4;">Education Ministry</button>
+                <button type="button" class="gallery-tab" data-filter="pastoral" style="padding: 0.8rem 1.5rem; border: 2px solid #e6c888; background: rgba(230, 200, 136, 0.15); font-family: 'Instrument Sans', sans-serif; font-weight: 700; border-radius: 30px; cursor: pointer; transition: all 0.3s ease; white-space: nowrap; line-height: 1.4;">Pastoral Ministry</button>
+                <button type="button" class="gallery-tab" data-filter="Provincial Assembly" style="padding: 0.8rem 1.5rem; border: 2px solid #e6c888; background: rgba(230, 200, 136, 0.15); font-family: 'Instrument Sans', sans-serif; font-weight: 700; border-radius: 30px; cursor: pointer; transition: all 0.3s ease; white-space: nowrap; line-height: 1.4;">Provincial Assembly</button>
+                <button type="button" class="gallery-tab" data-filter="Sacred Ordination" style="padding: 0.8rem 1.5rem; border: 2px solid #e6c888; background: rgba(230, 200, 136, 0.15); font-family: 'Instrument Sans', sans-serif; font-weight: 700; border-radius: 30px; cursor: pointer; transition: all 0.3s ease; white-space: nowrap; line-height: 1.4;">Sacred Ordination</button>
+                <button type="button" class="gallery-tab" data-filter="Mission Apostolate" style="padding: 0.8rem 1.5rem; border: 2px solid #e6c888; background: rgba(230, 200, 136, 0.15); font-family: 'Instrument Sans', sans-serif; font-weight: 700; border-radius: 30px; cursor: pointer; transition: all 0.3s ease; white-space: nowrap; line-height: 1.4;">Mission Apostolate</button>
+                <button type="button" class="gallery-tab" data-filter="Community Fellowship" style="padding: 0.8rem 1.5rem; border: 2px solid #e6c888; background: rgba(230, 200, 136, 0.15); font-family: 'Instrument Sans', sans-serif; font-weight: 700; border-radius: 30px; cursor: pointer; transition: all 0.3s ease; white-space: nowrap; line-height: 1.4;">Community Fellowship</button>
+                <button type="button" class="gallery-tab" data-filter="Youth Ministry" style="padding: 0.8rem 1.5rem; border: 2px solid #e6c888; background: rgba(230, 200, 136, 0.15); font-family: 'Instrument Sans', sans-serif; font-weight: 700; border-radius: 30px; cursor: pointer; transition: all 0.3s ease; white-space: nowrap; line-height: 1.4;">Youth Ministry</button>
+            </div>
 
             <div id="gallery-container" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem;">
                 <!-- Images will be dynamically loaded here -->
             </div>
 
             <script>
-                // Gallery data with categorization
-                const galleryData = [
-                { src: '<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/Fr. Manoj Vengathanam Minister Provincial.jpg' ); ?>', alt: 'Pastoral Ministry' },
-                { src: '<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/IMG20230215103348.jpg.jpeg' ); ?>', alt: 'Formation Ministry' },
-                { src: '<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/IMG_1013.JPG' ); ?>', alt: 'Provincial Assembly' },
-                { src: '<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/IMG_1016.JPG' ); ?>', alt: 'Sacred Ordination' },
-                { src: '<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/IMG_1017.JPG' ); ?>', alt: 'Mission Apostolate' },
-                { src: '<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/IMG_1018.JPG' ); ?>', alt: 'Community Fellowship' },
-                { src: '<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/IMG_1019.JPG' ); ?>', alt: 'Youth Ministry' },
-                { src: '<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/IMG_1020.JPG' ); ?>', alt: 'Parish Service' },
-                { src: '<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/IMG_1157.JPG' ); ?>', alt: 'Pastoral Ministry' },
-                { src: '<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/IMG_1163.JPG' ); ?>', alt: 'Formation Ministry' },
-                { src: '<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/IMG_1166.JPG' ); ?>', alt: 'Provincial Assembly' },
-                { src: '<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/IMG_1169.JPG' ); ?>', alt: 'Sacred Ordination' },
-                { src: '<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/IMG_1236.JPG' ); ?>', alt: 'Mission Apostolate' },
-                { src: '<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/IMG_1288.JPG' ); ?>', alt: 'Community Fellowship' },
-                { src: '<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/IMG_2012.JPG' ); ?>', alt: 'Youth Ministry' },
-                { src: '<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/IMG_2015.JPG' ); ?>', alt: 'Parish Service' },
-                { src: '<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/IMG_2023.JPG' ); ?>', alt: 'Pastoral Ministry' },
-                { src: '<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/IMG_2095.JPG' ); ?>', alt: 'Formation Ministry' },
-                { src: '<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/IMG_2529.JPG' ); ?>', alt: 'Provincial Assembly' },
-                { src: '<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/IMG_2531.JPG' ); ?>', alt: 'Sacred Ordination' },
-                { src: '<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/IMG_2601.JPG' ); ?>', alt: 'Mission Apostolate' },
-                { src: '<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/IMG_2619.JPG' ); ?>', alt: 'Community Fellowship' },
-                { src: '<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/WhatsApp Image 2025-02-15 at 9.44.56 AM (1).jpeg' ); ?>', alt: 'Youth Ministry' },
-                { src: '<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/WhatsApp Image 2025-02-15 at 9.44.56 AM.jpeg' ); ?>', alt: 'Parish Service' },
-                { src: '<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/WhatsApp Image 2025-03-29 at 5.41.00 AM.jpeg' ); ?>', alt: 'Pastoral Ministry' },
-                { src: '<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/WhatsApp Image 2025-04-04 at 11.06.38 AM.jpeg' ); ?>', alt: 'Formation Ministry' },
-                { src: '<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/WhatsApp Image 2025-08-02 at 10.29.49 AM.jpeg' ); ?>', alt: 'Provincial Assembly' },
-                { src: '<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/WhatsApp Image 2025-09-10 at 4.28.51 AM.jpeg' ); ?>', alt: 'Sacred Ordination' },
-                { src: '<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/WhatsApp Image 2025-09-10 at 4.28.52 AM.jpeg' ); ?>', alt: 'Mission Apostolate' },
-                { src: '<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/WhatsApp Image 2025-09-17 at 11.30.24 AM.jpeg' ); ?>', alt: 'Community Fellowship' },
-                { src: '<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/WhatsApp Image 2025-09-17 at 11.30.25 AM (1).jpeg' ); ?>', alt: 'Youth Ministry' },
-                { src: '<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/WhatsApp Image 2025-09-17 at 11.30.25 AM (2).jpeg' ); ?>', alt: 'Parish Service' },
-                { src: '<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/WhatsApp Image 2025-09-17 at 11.30.25 AM.jpeg' ); ?>', alt: 'Pastoral Ministry' },
-                { src: '<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/WhatsApp Image 2025-09-17 at 11.31.44 AM.jpeg' ); ?>', alt: 'Formation Ministry' },
-                { src: '<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/WhatsApp Image 2025-10-29 at 9.39.17 AM.jpeg' ); ?>', alt: 'Provincial Assembly' },
-                { src: '<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/WhatsApp Image 2025-10-30 at 5.33.02 PM (1).jpeg' ); ?>', alt: 'Sacred Ordination' },
-                { src: '<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/WhatsApp Image 2025-11-08 at 7.53.37 PM.jpeg' ); ?>', alt: 'Mission Apostolate' },
-                { src: '<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/WhatsApp Image 2025-11-16 at 8.21.35 PM.jpeg' ); ?>', alt: 'Community Fellowship' },
-                { src: '<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/WhatsApp Image 2025-11-18 at 10.31.20 AM (1).jpeg' ); ?>', alt: 'Youth Ministry' },
-                { src: '<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/WhatsApp Image 2025-11-25 at 3.18.49 PM.jpeg' ); ?>', alt: 'Parish Service' },
-                { src: '<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/WhatsApp Image 2026-08-07 at 1.39.44 PM.jpeg' ); ?>', alt: 'Pastoral Ministry' },
-                { src: '<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/WhatsApp Image 2026-08-07 at 1.39.48 PM (1).jpeg' ); ?>', alt: 'Formation Ministry' },
-                { src: '<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/WhatsApp Image 2026-08-07 at 10.00.06 AM (1).jpeg' ); ?>', alt: 'Provincial Assembly' },
-                { src: '<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/WhatsApp Image 2026-08-07 at 10.00.06 AM.jpeg' ); ?>', alt: 'Sacred Ordination' },
-                { src: '<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/WhatsApp Image 2026-08-07 at 10.00.07 AM.jpeg' ); ?>', alt: 'Mission Apostolate' },
-                { src: '<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/WhatsApp Image 2026-08-07 at 10.18.28 AM (1).jpeg' ); ?>', alt: 'Community Fellowship' },
-                { src: '<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/WhatsApp Image 2026-08-07 at 10.18.28 AM.jpeg' ); ?>', alt: 'Youth Ministry' },
-                { src: '<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/WhatsApp Image 2026-08-07 at 10.18.29 AM (1).jpeg' ); ?>', alt: 'Parish Service' },
-                { src: '<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/WhatsApp Image 2026-08-07 at 10.18.29 AM (2).jpeg' ); ?>', alt: 'Pastoral Ministry' },
-                { src: '<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/WhatsApp Image 2026-08-07 at 10.18.29 AM (3).jpeg' ); ?>', alt: 'Formation Ministry' },
-                { src: '<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/WhatsApp Image 2026-08-07 at 10.18.29 AM (4).jpeg' ); ?>', alt: 'Provincial Assembly' },
-                { src: '<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/WhatsApp Image 2026-08-07 at 10.18.29 AM.jpeg' ); ?>', alt: 'Sacred Ordination' },
-                { src: '<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/WhatsApp Image 2026-08-07 at 8.37.03 AM (2).jpeg' ); ?>', alt: 'Mission Apostolate' },
-                { src: '<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/WhatsApp Image 2026-08-07 at 8.37.03 AM (3).jpeg' ); ?>', alt: 'Community Fellowship' },
-                { src: '<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/WhatsApp Image 2026-08-07 at 8.37.04 AM (1).jpeg' ); ?>', alt: 'Youth Ministry' },
-                { src: '<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/WhatsApp Image 2026-08-07 at 8.39.44 AM (1).jpeg' ); ?>', alt: 'Parish Service' },
-                { src: '<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/WhatsApp Image 2026-08-07 at 8.39.45 AM (1).jpeg' ); ?>', alt: 'Pastoral Ministry' },
-                { src: '<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/WhatsApp Image 2026-08-07 at 8.39.46 AM (3).jpeg' ); ?>', alt: 'Formation Ministry' },
-                { src: '<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/WhatsApp Image 2026-08-07 at 8.40.15 AM (3).jpeg' ); ?>', alt: 'Provincial Assembly' },
-                { src: '<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/WhatsApp Image 2026-08-07 at 8.41.33 AM (2).jpeg' ); ?>', alt: 'Sacred Ordination' },
-                { src: '<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/WhatsApp Image 2026-08-07 at 8.42.19 AM (2).jpeg' ); ?>', alt: 'Mission Apostolate' },
-                { src: '<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/WhatsApp Image 2026-08-07 at 8.42.19 AM (3).jpeg' ); ?>', alt: 'Community Fellowship' },
-                { src: '<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/WhatsApp Image 2026-08-07 at 8.42.19 AM (4).jpeg' ); ?>', alt: 'Youth Ministry' },
-                { src: '<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/WhatsApp Image 2026-08-07 at 8.42.51 AM.jpeg' ); ?>', alt: 'Parish Service' },
-                { src: '<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/WhatsApp Image 2026-08-10 at 2.17.24 PM.jpeg' ); ?>', alt: 'Pastoral Ministry' },
-                { src: '<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/WhatsApp Image 2026-08-10 at 2.17.27 PM (1).jpeg' ); ?>', alt: 'Formation Ministry' },
-                { src: '<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/WhatsApp Image 2026-08-10 at 2.17.28 PM (1).jpeg' ); ?>', alt: 'Provincial Assembly' },
-                { src: '<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/WhatsApp Image 2026-08-10 at 2.17.28 PM.jpeg' ); ?>', alt: 'Sacred Ordination' },
-                { src: '<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/WhatsApp Image 2026-08-10 at 2.17.29 PM (1).jpeg' ); ?>', alt: 'Mission Apostolate' },
-                { src: '<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/WhatsApp Image 2026-08-10 at 2.17.29 PM.jpeg' ); ?>', alt: 'Community Fellowship' },
-                { src: '<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/WhatsApp Image 2026-08-10 at 2.17.30 PM (1).jpeg' ); ?>', alt: 'Youth Ministry' },
-                { src: '<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/WhatsApp Image 2026-08-10 at 2.17.30 PM (2).jpeg' ); ?>', alt: 'Parish Service' },
-                { src: '<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/WhatsApp Image 2026-08-10 at 2.17.30 PM.jpeg' ); ?>', alt: 'Pastoral Ministry' },
-                { src: '<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/WhatsApp Image 2026-08-10 at 2.17.31 PM.jpeg' ); ?>', alt: 'Formation Ministry' }
-            ];
+                // Gallery dynamic data loaded from PHP
+                const galleryData = <?php 
+                    $gal_items = function_exists( 'franciscan_get_gallery_items' ) ? franciscan_get_gallery_items() : array();
+                    echo json_encode( array_values( $gal_items ) );
+                ?>;
+
+                // Category filter matcher
+                function matchesFilter(img, filter) {
+                    if (!filter || filter === 'all') return true;
+                    const f = filter.toLowerCase().replace(/[-_]/g, ' ').trim();
+                    const cat = ((img && img.category) || '').toLowerCase();
+                    const alt = ((img && img.alt) || '').toLowerCase();
+                    const fn  = ((img && img.filename) || '').toLowerCase();
+
+                    if (f === 'formation' || f === 'formation ministry') {
+                        return cat.includes('formation') || alt.includes('formation');
+                    }
+                    if (f === 'education' || f === 'education ministry') {
+                        return cat.includes('education') || alt.includes('education') || cat.includes('school') || alt.includes('school');
+                    }
+                    if (f === 'pastoral' || f === 'pastoral ministry') {
+                        return cat.includes('pastoral') || alt.includes('pastoral') || cat.includes('parish') || alt.includes('parish');
+                    }
+                    return cat.includes(f) || alt.includes(f) || fn.includes(f);
+                }
 
                 // Initialize gallery
                 
@@ -946,18 +899,30 @@ button.fs-mega-toggle:focus::after {
 
                     function renderImages(filter = 'all') {
                         container.innerHTML = '';
-                        activeFilteredList = filter === 'all'
+                        activeFilteredList = (filter === 'all')
                             ? galleryData
-                            : galleryData.filter(img => img.category.includes(filter));
+                            : galleryData.filter(img => matchesFilter(img, filter));
+
+                        if (activeFilteredList.length === 0) {
+                            container.innerHTML = `
+                                <div style="grid-column: 1 / -1; text-align: center; padding: 4rem 1rem;">
+                                    <div style="font-size: 2.5rem; margin-bottom: 0.8rem;">📷</div>
+                                    <h3 style="font-family: 'Phudu', sans-serif; color: #1c1917; font-size: 1.4rem; margin-bottom: 0.4rem;">No Photos Found</h3>
+                                    <p style="color: #78716c; font-family: 'Instrument Sans', sans-serif;">Browse all photos or select another category above.</p>
+                                </div>
+                            `;
+                            return;
+                        }
 
                         activeFilteredList.forEach((img, idx) => {
                             const card = document.createElement('div');
                             card.className = 'gallery-img-card';
+                            const displayLabel = img.category || img.alt || 'Gallery Photo';
                             card.innerHTML = `
-                                <img loading="lazy" decoding="async" src="${img.src}" alt="${img.alt}" style="width: 100%; height: 100%; object-fit: cover; aspect-ratio: 4/3; display: block; transition: transform 0.5s ease;">
+                                <img loading="lazy" decoding="async" src="${img.src}" alt="${displayLabel}" style="width: 100%; height: 100%; object-fit: cover; aspect-ratio: 4/3; display: block; transition: transform 0.5s ease;">
                                 <div class="gallery-card-overlay">
                                     <div class="zoom-icon-badge" title="Click to zoom">&#128269;</div>
-                                    <span style="color: #e6c888; font-family: 'Phudu', sans-serif; font-size: 0.95rem; font-weight: 700; text-transform: uppercase;">${img.alt}</span>
+                                    <span style="color: #e6c888; font-family: 'Phudu', sans-serif; font-size: 0.95rem; font-weight: 700; text-transform: uppercase;">${displayLabel}</span>
                                     <span style="color: rgba(255,255,255,0.7); font-family: 'Instrument Sans', sans-serif; font-size: 0.78rem; margin-top: 2px;">Click to enlarge</span>
                                 </div>
                             `;
