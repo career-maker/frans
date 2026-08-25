@@ -671,8 +671,8 @@ add_action( 'admin_init', 'franciscan_resync_legacy_content_options' );
  * Retrieve curated/custom gallery items.
  */
 function franciscan_get_gallery_items() {
-    $custom = get_option( 'franciscan_custom_gallery', array() );
-    if ( ! empty( $custom ) && is_array( $custom ) ) {
+    $custom = get_option( 'franciscan_custom_gallery', false );
+    if ( false !== $custom && is_array( $custom ) ) {
         return $custom;
     }
 

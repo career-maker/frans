@@ -4152,6 +4152,156 @@ function franciscan_render_dashboard_view() {
             });
         });
 
+        // ==========================================
+        // PHOTO GALLERY MANAGEMENT HANDLERS
+        // ==========================================
+
+        // 1. Delete Photo from Gallery
+        $(document).on('click', '.btn-delete-gal-item', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            const photoId = $(this).data('id');
+            const card = $(this).closest('.dash-gal-card');
+
+            if (!photoId) {
+                showToast('Invalid photo identifier.', true);
+                return;
+            }
+
+            if (confirm('Are you sure you want to delete this photo from the gallery?')) {
+                const btn = $(this);
+                btn.prop('disabled', true).css('opacity', '0.4');
+
+                $.post(ajaxUrl, {
+                    action: 'franciscan_delete_gallery_photo',
+                    security: nonce,
+                    id: String(photoId)
+                }, function(res) {
+                    if (res.success) {
+                        card.fadeOut(250, function() {
+                            $(this).remove();
+                            if ($('.dash-gal-card').length === 0) {
+                                $('#dashboard-gallery-grid').html('<div style="grid-column: 1/-1; text-align: center; padding: 3rem; color: var(--c-text-muted);">No gallery photos found. Add photos above to populate the gallery.</div>');
+                            }
+                        });
+                        showToast(res.data && res.data.message ? res.data.message : 'Photo removed from gallery.');
+                    } else {
+                        btn.prop('disabled', false).css('opacity', '1');
+                        showToast(res.data && res.data.message ? res.data.message : 'Error deleting photo.', true);
+                    }
+                }).fail(function() {
+                    btn.prop('disabled', false).css('opacity', '1');
+                    showToast('Server error while deleting photo.', true);
+                });
+            }
+        });
+
+        // 2. Upload / Browse Media for Gallery Photo
+        let galleryMediaFrame;
+        $(document).on('click', '#btn-upload-gallery-photo', function(e) {
+            e.preventDefault();
+            galleryMediaFrame = wp.media({
+                title: 'Select or Upload Gallery Photo',
+                library: { type: 'image' },
+                button: { text: 'Choose Photo' },
+                multiple: false
+            });
+
+            galleryMediaFrame.on('select', function() {
+                const attachment = galleryMediaFrame.state().get('selection').first().toJSON();
+                $('#new-photo-url').val(attachment.url);
+                $('#gallery-preview-img').attr('src', attachment.url);
+                $('#gallery-upload-preview').fadeIn(150);
+                if (!$('#new-photo-title').val().trim() && attachment.title) {
+                    $('#new-photo-title').val(attachment.title);
+                }
+            });
+
+            galleryMediaFrame.open();
+        });
+
+        // 3. Add Photo to Gallery
+        $(document).on('click', '#btn-add-gallery-item', function(e) {
+            e.preventDefault();
+            const photoUrl   = $('#new-photo-url').val().trim();
+            const photoCat   = $('#new-photo-category').val();
+            const photoTitle = $('#new-photo-title').val().trim() || 'Franciscan Photo';
+
+            if (!photoUrl) {
+                showToast('Please select or upload an image first.', true);
+                return;
+            }
+
+            const btn = $(this);
+            const origHtml = btn.html();
+            btn.prop('disabled', true).text('Adding...');
+
+            $.post(ajaxUrl, {
+                action: 'franciscan_add_gallery_photo',
+                security: nonce,
+                src: photoUrl,
+                category: photoCat,
+                alt: photoTitle
+            }, function(res) {
+                btn.prop('disabled', false).html(origHtml);
+                if (res.success && res.data && res.data.item) {
+                    showToast(res.data.message || 'Photo added to gallery!');
+                    $('#new-photo-url').val('');
+                    $('#new-photo-title').val('');
+                    $('#gallery-upload-preview').hide();
+
+                    const item = res.data.item;
+                    const safeCat = $('<div>').text(item.category || 'Pastoral Ministry').html();
+                    const safeAlt = $('<div>').text(item.alt || 'Franciscan Photo').html();
+                    const safeSrc = $('<div>').text(item.src).html();
+                    const safeId  = $('<div>').text(item.id).html();
+
+                    const newCard = `
+                        <div class="dash-gal-card" data-cat="${safeCat}" data-id="${safeId}" style="background: var(--c-card); border: 1px solid var(--c-card-border); border-radius: 12px; overflow: hidden; position: relative; transition: transform 0.2s ease;">
+                            <img src="${safeSrc}" style="width: 100%; height: 150px; object-fit: cover; display: block;" loading="lazy">
+                            <div style="padding: 0.8rem;">
+                                <span style="display: inline-block; background: rgba(197, 169, 99, 0.15); color: var(--c-gold); font-size: 0.72rem; font-weight: 700; padding: 0.2rem 0.6rem; border-radius: 10px; text-transform: uppercase; margin-bottom: 0.4rem;">
+                                    ${safeCat}
+                                </span>
+                                <div style="font-size: 0.82rem; font-weight: 600; color: var(--c-text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                    ${safeAlt}
+                                </div>
+                            </div>
+                            <button type="button" class="btn-delete-gal-item" data-id="${safeId}" title="Delete Photo" style="position: absolute; top: 8px; right: 8px; background: rgba(200, 16, 46, 0.85); color: #fff; border: none; border-radius: 50%; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 0.8rem; box-shadow: 0 2px 6px rgba(0,0,0,0.4);">
+                                &times;
+                            </button>
+                        </div>
+                    `;
+                    $('#dashboard-gallery-grid').prepend(newCard);
+                } else {
+                    showToast(res.data && res.data.message ? res.data.message : 'Error adding photo.', true);
+                }
+            }).fail(function() {
+                btn.prop('disabled', false).html(origHtml);
+                showToast('Server error while adding photo.', true);
+            });
+        });
+
+        // 4. Category Filter Tabs in Gallery Tab
+        $(document).on('click', '#gallery-category-filter-bar button', function() {
+            $('#gallery-category-filter-bar button').removeClass('active-cat-filter').css({ 'background': '', 'color': '' });
+            $(this).addClass('active-cat-filter').css({ 'background': 'var(--c-gold)', 'color': '#12100e' });
+
+            const selectedCat = $(this).data('cat');
+            if (selectedCat === 'all') {
+                $('.dash-gal-card').fadeIn(150);
+            } else {
+                $('.dash-gal-card').each(function() {
+                    const cardCat = $(this).data('cat');
+                    if (cardCat === selectedCat) {
+                        $(this).fadeIn(150);
+                    } else {
+                        $(this).hide();
+                    }
+                });
+            }
+        });
+
     });
     </script>
 
@@ -4231,7 +4381,7 @@ function franciscan_render_dashboard_view() {
 function franciscan_ajax_add_gallery_photo() {
     check_ajax_referer( 'franciscan_admin_nonce', 'security' );
     if ( ! current_user_can( 'edit_posts' ) ) {
-        wp_send_json_error( array( 'message' => 'Unauthorized.' ) );
+        wp_send_json_error( array( 'message' => 'Unauthorized access.' ) );
     }
 
     $src      = isset( $_POST['src'] ) ? esc_url_raw( $_POST['src'] ) : '';
@@ -4239,7 +4389,7 @@ function franciscan_ajax_add_gallery_photo() {
     $alt      = isset( $_POST['alt'] ) ? sanitize_text_field( $_POST['alt'] ) : 'Franciscan Photo';
 
     if ( empty( $src ) ) {
-        wp_send_json_error( array( 'message' => 'Please select an image.' ) );
+        wp_send_json_error( array( 'message' => 'Please select or upload an image.' ) );
     }
 
     $items = franciscan_get_gallery_items();
@@ -4252,33 +4402,40 @@ function franciscan_ajax_add_gallery_photo() {
     array_unshift( $items, $new_item );
     franciscan_save_gallery_items( $items );
 
-    wp_send_json_success( array( 'message' => 'Photo added to gallery successfully!', 'item' => $new_item, 'total' => count( $items ) ) );
+    wp_send_json_success( array(
+        'message' => 'Photo added to gallery successfully!',
+        'item'    => $new_item,
+        'total'   => count( $items )
+    ) );
 }
 add_action( 'wp_ajax_franciscan_add_gallery_photo', 'franciscan_ajax_add_gallery_photo' );
 
 // AJAX: Delete Photo from Gallery
 function franciscan_ajax_delete_gallery_photo() {
     check_ajax_referer( 'franciscan_admin_nonce', 'security' );
-    if ( ! current_user_can( 'delete_posts' ) ) {
-        wp_send_json_error( array( 'message' => 'Unauthorized.' ) );
+    if ( ! current_user_can( 'edit_posts' ) ) {
+        wp_send_json_error( array( 'message' => 'Unauthorized access.' ) );
     }
 
     $id = isset( $_POST['id'] ) ? sanitize_text_field( $_POST['id'] ) : '';
     if ( empty( $id ) ) {
-        wp_send_json_error( array( 'message' => 'Invalid photo ID.' ) );
+        wp_send_json_error( array( 'message' => 'Invalid photo identifier.' ) );
     }
 
     $items = franciscan_get_gallery_items();
     $filtered = array();
     foreach ( $items as $it ) {
-        if ( isset( $it['id'] ) && $it['id'] === $id ) {
+        if ( isset( $it['id'] ) && (string) $it['id'] === (string) $id ) {
             continue;
         }
         $filtered[] = $it;
     }
     franciscan_save_gallery_items( $filtered );
 
-    wp_send_json_success( array( 'message' => 'Photo removed from gallery.', 'total' => count( $filtered ) ) );
+    wp_send_json_success( array(
+        'message' => 'Photo removed from gallery successfully.',
+        'total'   => count( $filtered )
+    ) );
 }
 add_action( 'wp_ajax_franciscan_delete_gallery_photo', 'franciscan_ajax_delete_gallery_photo' );
 
