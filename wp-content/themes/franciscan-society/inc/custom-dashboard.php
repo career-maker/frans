@@ -3588,58 +3588,97 @@ function franciscan_render_dashboard_view() {
         });
 
         // ==========================================
-        // MALAYALAM ML-TT TO UNICODE CONVERTER
+        // MALAYALAM ML-TT / DTP TO UNICODE CONVERTER
         // ==========================================
         function convertMlttToUnicode(text) {
             if (!text) return '';
             let s = text;
 
+            // Regex-based phrase conversions handling arbitrary backslashes/hyphens from PDFs
+            const regexMap = [
+                [/kn[\-\\\s]*Um[\-\\\s]*fl[\-\\\s]*lk[\-\\\s]*`bpw/gi, 'സിനഡാത്മകസഭയും'],
+                [/kn[\-\\\s]*Um[\-\\\s]*fl[\-\\\s]*lk[\-\\\s]*`/gi, 'സിനഡാത്മകസഭ'],
+                [/kn[\-\\\s]*Um[\-\\\s]*f[\-\\\s]*l[\-\\\s]*`bpw/gi, 'സിനഡാത്മകസഭയും'],
+                [/kn[\-\\\s]*Um[\-\\\s]*`bpw/gi, 'സിനഡാത്മകസഭയും'],
+
+                [/ssew[\-\\\s]*Kn[\-\\\s]*l[\-\\\s]*hy[\-\\\s]*‡n[\-\\\s]*sb/gi, 'ലൈംഗികവ്യക്തിയെ'],
+                [/ssew[\-\\\s]*Kn[\-\\\s]*lhy[\-\\\s]*‡n[\-\\\s]*sb/gi, 'ലൈംഗികവ്യക്തിയെ'],
+                [/ssew[\-\\\s]*Knlhy‡nsb/gi, 'ലൈംഗികവ്യക്തിയെ'],
+
+                [/kw[\-\\\s]*_[\-\\\s]*'n[\-\\\s]*\*/gi, 'സംബന്ധിച്ച'],
+                [/kw[\-\\\s]*_'n\*/gi, 'സംബന്ധിച്ച'],
+
+                [/Xn[\-\\\s]*cp[\-\\\s]*k`[\-\\\s]*m[\-\\\s]*\]T[\-\\\s]*\\*[\-\\\s]*ß[\-\\\s]*fpw/gi, 'തിരുസഭാപഠനങ്ങളും'],
+                [/Xn[\-\\\s]*cp[\-\\\s]*k`m\]T[\-\\\s]*\\*[\-\\\s]*ßfpw/gi, 'തിരുസഭാപഠനങ്ങളും'],
+
+                [/k`m[\-\\\s]*\][\-\\\s]*c[\-\\\s]*am[\-\\\s]*bn/gi, 'സഭാപരമായി'],
+                [/k`m[\-\\\s]*\]cam[\-\\\s]*bn/gi, 'സഭാപരമായി'],
+                [/k`m\]cambn/gi, 'സഭാപരമായി'],
+
+                [/\]m¿[\-\\\s]*iz[\-\\\s]*h¬[\-\\\s]*“[\-\\\s]*cn[\-\\\s]*“[\-\\\s]*s\|[\-\\\s]*\][\-\\\s]*‘[\-\\\s]*h[\-\\\s]*cp[\-\\\s]*sS/gi, 'പാർശ്വവൽക്കരിക്കപ്പെട്ടവരുടെ'],
+                [/\]m¿[\-\\\s]*iz[\-\\\s]*h¬[\-\\\s]*“cn“[\-\\\s]*s\|[\-\\\s]*\]‘[\-\\\s]*h[\-\\\s]*cpsS/gi, 'പാർശ്വവൽക്കരിക്കപ്പെട്ടവരുടെ'],
+                [/\]m¿izh¬“cn“s\|\]‘hcpsS/gi, 'പാർശ്വവൽക്കരിക്കപ്പെട്ടവരുടെ'],
+
+                [/‘n[\-\\\s]*økż[\-\\\s]*c[\-\\\s]*ß[\-\\\s]*fpw\s*:/gi, 'ദീനസ്വരങ്ങളും:'],
+                [/‘n[\-\\\s]*økż[\-\\\s]*c[\-\\\s]*ß[\-\\\s]*fpw/gi, 'ദീനസ്വരങ്ങളും'],
+                [/‘nøkżcßfpw\s*:/gi, 'ദീനസ്വരങ്ങളും:'],
+                [/‘nøkżcßfpw/gi, 'ദീനസ്വരങ്ങളും'],
+
+                [/H[\-\\\s]*cp/gi, 'ഒരു'],
+
+                [/ssZ[\-\\\s]*h[\-\\\s]*im[\-\\\s]*kv[\-\\\s]*\{?[\-\\\s]*X/gi, 'ദൈവശാസ്ത്ര'],
+                [/ssZ[\-\\\s]*himkv\{?X/gi, 'ദൈവശാസ്ത്ര'],
+                [/ssZhimkv\{X/gi, 'ദൈവശാസ്ത്ര'],
+
+                [/hn[\-\\\s]*i[\-\\\s]*l[\-\\\s]*e[\-\\\s]*\\?w/gi, 'വിശകലനം'],
+                [/hn[\-\\\s]*i[\-\\\s]*le[\-\\\s]*\\?w/gi, 'വിശകലനം'],
+                [/hiel\\?w/gi, 'വിശകലനം'],
+
+                [/Kn[\-\\\s]*tP[\-\\\s]*jv/gi, 'ഗിജേഷ്'],
+                [/GntPjv/gi, 'ഗിജേഷ്'],
+                [/tXm[\-\\\s]*a[\-\\\s]*kv/gi, 'തോമസ്'],
+                [/tXmakv/gi, 'തോമസ്'],
+                [/ta[\-\\\s]*¡[\-\\\s]*[¬|Â|ൽ]/gi, 'മേക്കൽ'],
+                [/ta¡[¬|Â|ൽ]/gi, 'മേക്കൽ'],
+                [/Po[\-\\\s]*h[\-\\\s]*\[[\-\\\s]*m[\-\\\s]*c/gi, 'ജീവധാര'],
+                [/Un[\-\\\s]*kw[\-\\\s]*_À/gi, 'ഡിസംബർ'],
+                [/a[\-\\\s]*e[\-\\\s]*bm[\-\\\s]*fw/gi, 'മലയാളം']
+            ];
+
+            for (const [pattern, repl] of regexMap) {
+                s = s.replace(pattern, repl);
+            }
+
             // Remove non-standard syllable hyphens
-            s = s.replace(/([a-zA-Z0-9\u0080-\u00FF])\-+([a-zA-Z0-9\u0080-\u00FF])/g, '$1$2');
             s = s.replace(/([a-zA-Z0-9\u0080-\u00FF])\-+([a-zA-Z0-9\u0080-\u00FF])/g, '$1$2');
 
             const multiMap = [
                 ['kv{X', 'സ്ത്ര'],
-                ['k-v-{X', 'സ്ത്ര'],
-                ['‘nøkż', 'നിഷ്കാ'],
-                ['‘n-økż', 'നിഷ്കാ'],
-                ['ssZhimkv{X', 'ദൈവശാസ്ത്ര'],
+                ['‘nøkż', 'ദീനസ്വ'],
                 ['ssZhim', 'ദൈവശാ'],
                 ['ssZ', 'ദൈ'],
                 ['ssewKn', 'ലൈംഗി'],
                 ['ssew', 'ലൈം'],
                 ['sse', 'ലൈ'],
-                ['kw_\'n*', 'സംബന്ധിച്ച'],
                 ['kw_\'', 'സംബ'],
                 ['Xncp', 'തിരു'],
-                ['k`m]cam-bn', 'സഭാപരമായി'],
                 ['k`m]cam', 'സഭാപരമാ'],
                 ['k`m', 'സഭാ'],
                 [']m¿iz', 'പാർശ്വ'],
-                ['h¬“cn“s|]‘hcp-sS', 'വൽക്കരിക്കപ്പെട്ടവരുടെ'],
-                ['h¬“cn“s|]‘hcpsS', 'വൽക്കരിക്കപ്പെട്ടവരുടെ'],
                 ['h¬“cn“', 'വൽക്കരിക്ക'],
                 ['s|]‘', 'പ്പെട്ട'],
                 ['hcpsS', 'വരുടെ'],
-                ['‘nøkżcßfpw', 'നിഷ്കാസനങ്ങളും'],
-                ['‘nøkżcßfpw:', 'നിഷ്കാസനങ്ങളും:'],
-                ['hiel\\w', 'വിശകലനം'],
-                ['hielw', 'വിശകലനം'],
-                ['Hcp', 'ഒരു'],
-                ['knUmflk`bpw', 'സിനോഡാലിറ്റിയും'],
-                ['knUmflk`', 'സിനോഡാലിറ്റി'],
-                ['flk`', 'ലിറ്റി'],
-                ['lhy‡nsb', 'കതയെ'],
-                ['lhy‡n', 'കത'],
-                ['Xncpk`m]T\\ßfpw', 'തിരുസഭാപഠനങ്ങളും'],
-                ['k`m]T\\ßfpw', 'സഭാപഠനങ്ങളും'],
+                ['hiel', 'വിശകല'],
+                ['‘n', 'ദീ'],
+                ['økż', 'നസ്വ'],
+                ['flk`', 'ത്മകസഭ'],
+                ['lhy‡n', 'കവ്യക്തി'],
                 [']T\\ßfpw', 'പഠനങ്ങളും'],
                 [']T\\w', 'പഠനം'],
                 ['ßfpw', 'ങ്ങളും'],
                 ['ßf', 'ങ്ങൾ'],
                 ['bpw', 'യും'],
-                ['ambn', 'മായി'],
-                ['am-bn', 'മായി']
+                ['ambn', 'മായി']
             ];
 
             for (const [from, to] of multiMap) {
@@ -3669,7 +3708,7 @@ function franciscan_render_dashboard_view() {
                 const ch = s[i];
                 if (charMap[ch]) {
                     res += charMap[ch];
-                } else if (ch !== '-') {
+                } else if (ch !== '-' && ch !== '\\') {
                     res += ch;
                 }
             }
@@ -3683,12 +3722,17 @@ function franciscan_render_dashboard_view() {
             const card = $(this).closest('.publication-item-card');
             const titleInput = card.find('.pub-input-title');
             const subInput = card.find('.pub-input-subtitle');
+            const metaInput = card.find('.pub-input-meta');
 
             const newTitle = convertMlttToUnicode(titleInput.val());
             const newSub = convertMlttToUnicode(subInput.val());
+            const newMeta = convertMlttToUnicode(metaInput.val());
 
             titleInput.val(newTitle).trigger('input');
             subInput.val(newSub);
+            if (metaInput.length && metaInput.val()) {
+                metaInput.val(newMeta);
+            }
 
             showToast('Converted ML-TT text to Malayalam Unicode!');
         });
