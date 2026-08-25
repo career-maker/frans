@@ -247,7 +247,20 @@ if ( ! function_exists( 'franciscan_sanitize_array' ) ) {
 // Render Dashboard Interface
 function franciscan_render_dashboard_view() {
     $nonce = wp_create_nonce( 'franciscan_admin_nonce' );
-    $options = get_option( 'franciscan_theme_options', franciscan_get_default_options() );
+    
+    // Global options with clean default merging (including Gmail SMTP app credentials)
+    $default_options = franciscan_get_default_options();
+    $saved_options   = get_option( 'franciscan_theme_options', array() );
+    if ( ! is_array( $saved_options ) ) {
+        $saved_options = array();
+    }
+    $clean_opts = array();
+    foreach ( $saved_options as $k => $v ) {
+        if ( $v !== '' && $v !== null ) {
+            $clean_opts[ $k ] = $v;
+        }
+    }
+    $options = wp_parse_args( $clean_opts, $default_options );
 
     // Enqueue Media Library Uploader Scripts
     wp_enqueue_media();
@@ -990,6 +1003,27 @@ function franciscan_render_dashboard_view() {
                                         </div>
                                     </div>
                                 </div>
+                                <?php if ( $slug === 'home' ) : ?>
+                                    <div class="form-group full-width">
+                                        <label>Hero Background Video (Optional MP4 video banner)</label>
+                                        <div class="image-uploader-box">
+                                            <div style="width: 100px; height: 64px; border-radius: 8px; overflow: hidden; background: #0c1727; border: 1px solid var(--c-gold); flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 1.6rem;">
+                                                🎬
+                                            </div>
+                                            <input type="text" name="hero_video" id="input-hero_video-home" class="form-control" placeholder="Upload MP4 video from media library or paste URL" value="<?php echo esc_attr( $data['hero_video'] ?? '' ); ?>" style="flex:1; min-width:260px;">
+                                            <div style="display: flex; gap: 0.8rem; align-items: center; flex-wrap: wrap;">
+                                                <button type="button" class="btn btn-secondary btn-upload-media" data-target="hero_video-home" data-type="video">
+                                                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle; margin-right:4px;"><polygon points="23 7 16 12 23 17 23 7"></polygon><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg>
+                                                    Upload / Choose Video
+                                                </button>
+                                                <button type="button" class="btn btn-secondary btn-reset-media" data-target="hero_video-home" data-default="" style="<?php echo empty( $data['hero_video'] ) ? 'display:none;' : ''; ?>" title="Clear Video">
+                                                    ✕ Remove Video
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <small style="color: var(--c-text-muted); display: block; margin-top: 0.4rem;">Select an MP4 video from your WordPress Media Library. When set, it loops as the hero background on the homepage.</small>
+                                    </div>
+                                <?php endif; ?>
                             </div>
                         </div>
 
@@ -3193,10 +3227,12 @@ function franciscan_render_dashboard_view() {
         $(document).on('click', '.btn-upload-media', function(e) {
             e.preventDefault();
             const targetKey = $(this).data('target');
+            const mediaType = $(this).data('type') || 'image';
 
             mediaFrame = wp.media({
-                title: 'Select or Upload Image',
-                button: { text: 'Use this Image' },
+                title: mediaType === 'video' ? 'Select or Upload Video' : 'Select or Upload Image',
+                library: { type: mediaType === 'video' ? 'video' : 'image' },
+                button: { text: 'Use this Media' },
                 multiple: false
             });
 
@@ -3207,8 +3243,11 @@ function franciscan_render_dashboard_view() {
                     $('#preview-post-thumb').attr('src', attachment.url);
                 } else {
                     $('#input-' + targetKey).val(attachment.url);
-                    $('#preview-' + targetKey).attr('src', attachment.url);
+                    if ($('#preview-' + targetKey).length) {
+                        $('#preview-' + targetKey).attr('src', attachment.url);
+                    }
                 }
+                $(`button.btn-reset-media[data-target="${targetKey}"]`).show();
             });
 
             mediaFrame.open();

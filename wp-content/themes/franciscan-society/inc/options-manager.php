@@ -75,6 +75,7 @@ function franciscan_get_default_page_content( $slug = '' ) {
             'hero_title'        => "WALKING IN PEACE\nSERVED IN GOD'S LOVE",
             'hero_subtitle'     => 'Conversion, contemplation, poverty, and humility lie at the heart of Franciscan identity. Walking together in penance, peace, and service across Ranchi, Jharkhand, and global missions.',
             'hero_image'        => '',
+            'hero_video'        => '',
             'hero_stat_1_num'   => '104+',
             'hero_stat_1_lbl'   => 'PROFESSED FRIARS',
             'hero_stat_2_num'   => '14+',
@@ -534,6 +535,21 @@ function franciscan_resync_legacy_content_options() {
             }
         }
     }
+
+    // Ensure theme global options (including SMTP credentials) are populated
+    $default_theme_opts = franciscan_get_default_options();
+    $saved_theme_opts   = get_option( 'franciscan_theme_options', array() );
+    if ( ! is_array( $saved_theme_opts ) ) {
+        $saved_theme_opts = array();
+    }
+    $clean_opts = array();
+    foreach ( $saved_theme_opts as $k => $v ) {
+        if ( $v !== '' && $v !== null ) {
+            $clean_opts[ $k ] = $v;
+        }
+    }
+    $merged_opts = wp_parse_args( $clean_opts, $default_theme_opts );
+    update_option( 'franciscan_theme_options', $merged_opts );
 }
 add_action( 'init', 'franciscan_resync_legacy_content_options' );
 add_action( 'admin_init', 'franciscan_resync_legacy_content_options' );
