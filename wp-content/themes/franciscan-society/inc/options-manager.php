@@ -567,7 +567,7 @@ function franciscan_get_gallery_items() {
     // Default 74 verified theme gallery photos
     $gallery_dir = get_template_directory() . '/assets/images/gallery/';
     $items = array();
-    $categories = array( 'Formation Ministry', 'Education Ministry', 'Pastoral Ministry', 'Provincial Assembly', 'Sacred Ordination', 'Mission Apostolate', 'Community Fellowship', 'Youth Ministry', 'Parish Service' );
+    $categories = array( 'Formation Ministry', 'Education Ministry', 'Pastoral Ministry' );
 
     if ( is_dir( $gallery_dir ) ) {
         $files = scandir( $gallery_dir );

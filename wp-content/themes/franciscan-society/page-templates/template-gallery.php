@@ -790,15 +790,10 @@ button.fs-mega-toggle:focus::after {
 
             <!-- Gallery Tabs -->
             <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 0.85rem; margin-bottom: 3rem;">
-                <button type="button" class="gallery-tab active" data-filter="all" style="padding: 0.8rem 1.5rem; border: 2px solid #e6c888; background: #e6c888; color: #1c1917; font-family: 'Instrument Sans', sans-serif; font-weight: 700; border-radius: 30px; cursor: pointer; transition: all 0.3s ease; white-space: nowrap;">All</button>
-                <button type="button" class="gallery-tab" data-filter="formation" style="padding: 0.8rem 1.5rem; border: 2px solid #e6c888; background: rgba(230, 200, 136, 0.15); font-family: 'Instrument Sans', sans-serif; font-weight: 700; border-radius: 30px; cursor: pointer; transition: all 0.3s ease; white-space: nowrap; line-height: 1.4;">Formation Ministry</button>
-                <button type="button" class="gallery-tab" data-filter="education" style="padding: 0.8rem 1.5rem; border: 2px solid #e6c888; background: rgba(230, 200, 136, 0.15); font-family: 'Instrument Sans', sans-serif; font-weight: 700; border-radius: 30px; cursor: pointer; transition: all 0.3s ease; white-space: nowrap; line-height: 1.4;">Education Ministry</button>
-                <button type="button" class="gallery-tab" data-filter="pastoral" style="padding: 0.8rem 1.5rem; border: 2px solid #e6c888; background: rgba(230, 200, 136, 0.15); font-family: 'Instrument Sans', sans-serif; font-weight: 700; border-radius: 30px; cursor: pointer; transition: all 0.3s ease; white-space: nowrap; line-height: 1.4;">Pastoral Ministry</button>
-                <button type="button" class="gallery-tab" data-filter="Provincial Assembly" style="padding: 0.8rem 1.5rem; border: 2px solid #e6c888; background: rgba(230, 200, 136, 0.15); font-family: 'Instrument Sans', sans-serif; font-weight: 700; border-radius: 30px; cursor: pointer; transition: all 0.3s ease; white-space: nowrap; line-height: 1.4;">Provincial Assembly</button>
-                <button type="button" class="gallery-tab" data-filter="Sacred Ordination" style="padding: 0.8rem 1.5rem; border: 2px solid #e6c888; background: rgba(230, 200, 136, 0.15); font-family: 'Instrument Sans', sans-serif; font-weight: 700; border-radius: 30px; cursor: pointer; transition: all 0.3s ease; white-space: nowrap; line-height: 1.4;">Sacred Ordination</button>
-                <button type="button" class="gallery-tab" data-filter="Mission Apostolate" style="padding: 0.8rem 1.5rem; border: 2px solid #e6c888; background: rgba(230, 200, 136, 0.15); font-family: 'Instrument Sans', sans-serif; font-weight: 700; border-radius: 30px; cursor: pointer; transition: all 0.3s ease; white-space: nowrap; line-height: 1.4;">Mission Apostolate</button>
-                <button type="button" class="gallery-tab" data-filter="Community Fellowship" style="padding: 0.8rem 1.5rem; border: 2px solid #e6c888; background: rgba(230, 200, 136, 0.15); font-family: 'Instrument Sans', sans-serif; font-weight: 700; border-radius: 30px; cursor: pointer; transition: all 0.3s ease; white-space: nowrap; line-height: 1.4;">Community Fellowship</button>
-                <button type="button" class="gallery-tab" data-filter="Youth Ministry" style="padding: 0.8rem 1.5rem; border: 2px solid #e6c888; background: rgba(230, 200, 136, 0.15); font-family: 'Instrument Sans', sans-serif; font-weight: 700; border-radius: 30px; cursor: pointer; transition: all 0.3s ease; white-space: nowrap; line-height: 1.4;">Youth Ministry</button>
+                <button type="button" class="gallery-tab active" data-filter="all" style="padding: 0.8rem 1.8rem; border: 2px solid #e6c888; background: #e6c888; color: #1c1917; font-family: 'Instrument Sans', sans-serif; font-weight: 700; border-radius: 30px; cursor: pointer; transition: all 0.3s ease; white-space: nowrap;">All</button>
+                <button type="button" class="gallery-tab" data-filter="Formation Ministry" style="padding: 0.8rem 1.8rem; border: 2px solid #e6c888; background: rgba(230, 200, 136, 0.15); font-family: 'Instrument Sans', sans-serif; font-weight: 700; border-radius: 30px; cursor: pointer; transition: all 0.3s ease; white-space: nowrap; line-height: 1.4;">Formation Ministry</button>
+                <button type="button" class="gallery-tab" data-filter="Education Ministry" style="padding: 0.8rem 1.8rem; border: 2px solid #e6c888; background: rgba(230, 200, 136, 0.15); font-family: 'Instrument Sans', sans-serif; font-weight: 700; border-radius: 30px; cursor: pointer; transition: all 0.3s ease; white-space: nowrap; line-height: 1.4;">Education Ministry</button>
+                <button type="button" class="gallery-tab" data-filter="Pastoral Ministry" style="padding: 0.8rem 1.8rem; border: 2px solid #e6c888; background: rgba(230, 200, 136, 0.15); font-family: 'Instrument Sans', sans-serif; font-weight: 700; border-radius: 30px; cursor: pointer; transition: all 0.3s ease; white-space: nowrap; line-height: 1.4;">Pastoral Ministry</button>
             </div>
 
             <div id="gallery-container" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem;">
@@ -820,13 +815,13 @@ button.fs-mega-toggle:focus::after {
                     const alt = ((img && img.alt) || '').toLowerCase();
                     const fn  = ((img && img.filename) || '').toLowerCase();
 
-                    if (f === 'formation' || f === 'formation ministry') {
+                    if (f.includes('formation')) {
                         return cat.includes('formation') || alt.includes('formation');
                     }
-                    if (f === 'education' || f === 'education ministry') {
+                    if (f.includes('education')) {
                         return cat.includes('education') || alt.includes('education') || cat.includes('school') || alt.includes('school');
                     }
-                    if (f === 'pastoral' || f === 'pastoral ministry') {
+                    if (f.includes('pastoral')) {
                         return cat.includes('pastoral') || alt.includes('pastoral') || cat.includes('parish') || alt.includes('parish');
                     }
                     return cat.includes(f) || alt.includes(f) || fn.includes(f);
