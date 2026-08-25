@@ -211,8 +211,8 @@ add_action( 'login_head', 'franciscan_render_universal_favicon', 1 );
  */
 function franciscan_configure_smtp_phpmailer( $phpmailer ) {
     if ( franciscan_get_option( 'smtp_enabled', '1' ) === '1' ) {
-        $smtp_email = franciscan_get_option( 'smtp_email', 'abbhiram@intersmart.in' );
-        $smtp_pass  = str_replace( ' ', '', (string) franciscan_get_option( 'smtp_app_password', 'ltndjrnpiylptwsv' ) );
+        $smtp_email = franciscan_get_option( 'smtp_email', 'sectorranchi09@gmail.com' );
+        $smtp_pass  = str_replace( ' ', '', (string) franciscan_get_option( 'smtp_app_password', 'jvvb fhvb xods okst' ) );
 
         if ( ! empty( $smtp_email ) && ! empty( $smtp_pass ) ) {
             $phpmailer->isSMTP();

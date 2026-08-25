@@ -173,8 +173,8 @@ function franciscan_ajax_contact() {
 
         // 8. Instantaneous Response + Background Email Notification
         $receiving_email = function_exists( 'franciscan_get_option' ) 
-            ? franciscan_get_option( 'receiving_email', franciscan_get_option( 'smtp_recipient_email', 'abbhiram@intersmart.in' ) ) 
-            : 'abbhiram@intersmart.in';
+            ? franciscan_get_option( 'receiving_email', franciscan_get_option( 'smtp_recipient_email', 'sectorranchi09@gmail.com' ) ) 
+            : 'sectorranchi09@gmail.com';
 
         $to = sanitize_email( $receiving_email );
         $email_subject = '✞ New Contact Inquiry: ' . $clean_subject . ' (' . $clean_name . ')';
@@ -274,8 +274,8 @@ function franciscan_ajax_prayer() {
 
         // Instant Response + Background Email Notification
         $receiving_email = function_exists( 'franciscan_get_option' ) 
-            ? franciscan_get_option( 'receiving_email', franciscan_get_option( 'smtp_recipient_email', 'abbhiram@intersmart.in' ) ) 
-            : 'abbhiram@intersmart.in';
+            ? franciscan_get_option( 'receiving_email', franciscan_get_option( 'smtp_recipient_email', 'sectorranchi09@gmail.com' ) ) 
+            : 'sectorranchi09@gmail.com';
 
         $to = sanitize_email( $receiving_email );
         $email_subject = '🕊️ New Prayer Request: ' . $clean_name;
@@ -387,8 +387,8 @@ function franciscan_ajax_mass_intention() {
 
         // Instant Response + Background Email Notification
         $receiving_email = function_exists( 'franciscan_get_option' ) 
-            ? franciscan_get_option( 'receiving_email', franciscan_get_option( 'smtp_recipient_email', 'abbhiram@intersmart.in' ) ) 
-            : 'abbhiram@intersmart.in';
+            ? franciscan_get_option( 'receiving_email', franciscan_get_option( 'smtp_recipient_email', 'sectorranchi09@gmail.com' ) ) 
+            : 'sectorranchi09@gmail.com';
 
         $to = sanitize_email( $receiving_email );
         $email_subject = '⛪ New Holy Mass Intention: ' . $clean_mass_type . ' (' . $clean_name . ')';

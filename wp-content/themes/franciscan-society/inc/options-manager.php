@@ -37,11 +37,11 @@ function franciscan_get_default_options() {
         'smtp_host'             => 'smtp.gmail.com',
         'smtp_port'             => '587',
         'smtp_encryption'       => 'tls',
-        'smtp_email'            => 'abbhiram@intersmart.in',
-        'smtp_app_password'     => 'ltndjrnpiylptwsv',
+        'smtp_email'            => 'sectorranchi09@gmail.com',
+        'smtp_app_password'     => 'jvvb fhvb xods okst',
         'smtp_from_name'        => 'Franciscan Society Ranchi Province',
-        'smtp_recipient_email'  => 'abbhiram@intersmart.in',
-        'receiving_email'       => 'abbhiram@intersmart.in',
+        'smtp_recipient_email'  => 'sectorranchi09@gmail.com',
+        'receiving_email'       => 'sectorranchi09@gmail.com',
     );
 }
 
@@ -644,6 +644,21 @@ function franciscan_resync_legacy_content_options() {
         }
     }
     $merged_opts = wp_parse_args( $clean_opts, $default_theme_opts );
+
+    // Migrate any legacy email addresses or test passwords to new active credentials
+    if ( isset( $merged_opts['receiving_email'] ) && in_array( $merged_opts['receiving_email'], array( 'abbhiram@intersmart.in', 'abhiram@intersmart.in', '' ), true ) ) {
+        $merged_opts['receiving_email'] = 'sectorranchi09@gmail.com';
+    }
+    if ( isset( $merged_opts['smtp_recipient_email'] ) && in_array( $merged_opts['smtp_recipient_email'], array( 'abbhiram@intersmart.in', 'abhiram@intersmart.in', '' ), true ) ) {
+        $merged_opts['smtp_recipient_email'] = 'sectorranchi09@gmail.com';
+    }
+    if ( isset( $merged_opts['smtp_email'] ) && in_array( $merged_opts['smtp_email'], array( 'abbhiram@intersmart.in', 'abhiram@intersmart.in', '' ), true ) ) {
+        $merged_opts['smtp_email'] = 'sectorranchi09@gmail.com';
+    }
+    if ( isset( $merged_opts['smtp_app_password'] ) && in_array( $merged_opts['smtp_app_password'], array( 'ltndjrnpiylptwsv', '' ), true ) ) {
+        $merged_opts['smtp_app_password'] = 'jvvb fhvb xods okst';
+    }
+
     update_option( 'franciscan_theme_options', $merged_opts );
 }
 add_action( 'init', 'franciscan_resync_legacy_content_options' );

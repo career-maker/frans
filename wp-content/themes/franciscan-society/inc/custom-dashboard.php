@@ -2993,7 +2993,7 @@ function franciscan_render_dashboard_view() {
                             </div>
                             <div class="form-group">
                                 <label>Inquiry Receiving Email</label>
-                                <input type="email" name="receiving_email" class="form-control" value="<?php echo esc_attr( $options['receiving_email'] ?? 'abhiram@intersmart.in' ); ?>">
+                                <input type="email" name="receiving_email" class="form-control" value="<?php echo esc_attr( $options['receiving_email'] ?? 'sectorranchi09@gmail.com' ); ?>">
                             </div>
                             <div class="form-group">
                                 <label>Contact Phone Number</label>
@@ -3065,9 +3065,9 @@ function franciscan_render_dashboard_view() {
                     <!-- 📧 Gmail App Password & SMTP Email Delivery -->
                     <?php
                     $smtp_enabled_val = ( isset( $options['smtp_enabled'] ) && $options['smtp_enabled'] !== '' ) ? $options['smtp_enabled'] : '1';
-                    $smtp_recip_val   = ! empty( $options['smtp_recipient_email'] ) ? $options['smtp_recipient_email'] : 'abbhiram@intersmart.in';
-                    $smtp_email_val   = ! empty( $options['smtp_email'] ) ? $options['smtp_email'] : 'abbhiram@intersmart.in';
-                    $smtp_pass_val    = ! empty( $options['smtp_app_password'] ) ? $options['smtp_app_password'] : 'ltndjrnpiylptwsv';
+                    $smtp_recip_val   = ! empty( $options['smtp_recipient_email'] ) ? $options['smtp_recipient_email'] : 'sectorranchi09@gmail.com';
+                    $smtp_email_val   = ! empty( $options['smtp_email'] ) ? $options['smtp_email'] : 'sectorranchi09@gmail.com';
+                    $smtp_pass_val    = ! empty( $options['smtp_app_password'] ) ? $options['smtp_app_password'] : 'jvvb fhvb xods okst';
                     $smtp_from_val    = ! empty( $options['smtp_from_name'] ) ? $options['smtp_from_name'] : 'Franciscan Society Ranchi Province';
                     $smtp_host_val    = ! empty( $options['smtp_host'] ) ? $options['smtp_host'] : 'smtp.gmail.com';
                     $smtp_port_val    = ! empty( $options['smtp_port'] ) ? $options['smtp_port'] : '587';
@@ -3085,15 +3085,15 @@ function franciscan_render_dashboard_view() {
                             </div>
                             <div class="form-group">
                                 <label>Notification Recipient Email (Where Inquiries are Delivered)</label>
-                                <input type="email" name="smtp_recipient_email" class="form-control" placeholder="abbhiram@intersmart.in" value="<?php echo esc_attr( $smtp_recip_val ); ?>">
+                                <input type="email" name="smtp_recipient_email" class="form-control" placeholder="sectorranchi09@gmail.com" value="<?php echo esc_attr( $smtp_recip_val ); ?>">
                             </div>
                             <div class="form-group">
                                 <label>Sender Gmail / Email Address</label>
-                                <input type="email" name="smtp_email" class="form-control" placeholder="abbhiram@intersmart.in" value="<?php echo esc_attr( $smtp_email_val ); ?>">
+                                <input type="email" name="smtp_email" class="form-control" placeholder="sectorranchi09@gmail.com" value="<?php echo esc_attr( $smtp_email_val ); ?>">
                             </div>
                             <div class="form-group">
                                 <label>Gmail 16-Character App Password</label>
-                                <input type="password" name="smtp_app_password" class="form-control" placeholder="ltndjrnpiylptwsv" value="<?php echo esc_attr( $smtp_pass_val ); ?>">
+                                <input type="password" name="smtp_app_password" class="form-control" placeholder="jvvb fhvb xods okst" value="<?php echo esc_attr( $smtp_pass_val ); ?>">
                             </div>
                             <div class="form-group">
                                 <label>Sender From Name</label>
