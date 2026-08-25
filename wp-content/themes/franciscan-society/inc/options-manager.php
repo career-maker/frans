@@ -67,8 +67,8 @@ function franciscan_update_option( $key, $value ) {
 /**
  * Default Page Contents for Franciscan Studio (Live In-Place Site Editor)
  */
-function franciscan_get_default_page_content() {
-    return array(
+function franciscan_get_default_page_content( $slug = '' ) {
+    $defaults = array(
         'home' => array(
             // Hero
             'hero_badge'        => 'THIRD ORDER REGULAR OF ST. FRANCIS',
@@ -421,19 +421,19 @@ function franciscan_get_default_page_content() {
         'gallery' => array(
             'hero_badge'    => 'MOMENTS OF GRACE',
             'hero_title'    => 'PHOTO & VIDEO GALLERY',
-            'hero_subtitle' => 'Visual chronicles of feast days, ordinations, jubilees, and missions.',
+            'hero_subtitle' => 'Visual chronicles of feast days, ordinations, jubilees, missions, and community living across Ranchi Province.',
             'hero_image'    => '',
         ),
         'news' => array(
             'hero_badge'    => 'PROVINCE CHRONICLES',
             'hero_title'    => 'NEWS & UPDATES',
-            'hero_subtitle' => 'Stay informed with the latest updates, feast days, and missionary reports.',
+            'hero_subtitle' => 'Stay informed with the latest updates, feast days, community celebrations, and missionary reports.',
             'hero_image'    => '',
         ),
         'blogs' => array(
             'hero_badge'    => 'FRANCISCAN REFLECTIONS',
             'hero_title'    => 'BLOGS & ARTICLES',
-            'hero_subtitle' => 'Spiritual reflections, theological essays, and Franciscan wisdom.',
+            'hero_subtitle' => 'Spiritual reflections, theological essays, and Franciscan wisdom from our friars.',
             'hero_image'    => '',
         ),
         'news_details' => array(
@@ -448,19 +448,47 @@ function franciscan_get_default_page_content() {
             'hero_subtitle' => 'We welcome your inquiries, prayer intentions, and pastoral visits.',
             'hero_image'    => '',
         ),
+        'privacy' => array(
+            'hero_badge'    => 'LEGAL & PRIVACY',
+            'hero_title'    => 'PRIVACY POLICY',
+            'hero_subtitle' => 'Learn how we protect and respect your privacy, personal data, and security on our website.',
+            'hero_image'    => '',
+            'eyebrow'       => 'PRIVACY',
+        ),
+        'terms' => array(
+            'hero_badge'    => 'LEGAL POLICIES',
+            'hero_title'    => 'TERMS & CONDITIONS',
+            'hero_subtitle' => 'Terms of service, usage guidelines, and legal provisions for franciscanranchi.org.',
+            'hero_image'    => '',
+            'eyebrow'       => 'LEGAL',
+        ),
     );
 
-    return isset( $defaults[$slug] ) ? $defaults[$slug] : array();
+    if ( ! empty( $slug ) ) {
+        return isset( $defaults[ $slug ] ) ? $defaults[ $slug ] : array();
+    }
+
+    return $defaults;
 }
 
 function franciscan_get_page_content( $slug ) {
     $saved = get_option( 'franciscan_page_' . $slug, array() );
     $defaults = franciscan_get_default_page_content( $slug );
-    $merged = wp_parse_args( $saved, $defaults );
+    if ( ! is_array( $saved ) ) {
+        $saved = array();
+    }
+    // Filter out empty string or null values so default values are preserved and prefilled in editor
+    $filtered_saved = array();
+    foreach ( $saved as $k => $v ) {
+        if ( $v !== '' && $v !== null ) {
+            $filtered_saved[ $k ] = $v;
+        }
+    }
+    $merged = wp_parse_args( $filtered_saved, $defaults );
     if ( is_array( $merged ) ) {
         foreach ( $merged as $k => $v ) {
             if ( is_string( $v ) ) {
-                $merged[$k] = stripslashes( $v );
+                $merged[ $k ] = stripslashes( $v );
             }
         }
     }
