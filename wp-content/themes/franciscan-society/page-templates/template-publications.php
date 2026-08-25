@@ -711,14 +711,28 @@ button.fs-mega-toggle:focus::after {
 
 <main id="main-content" style="padding-top: 0; background-color: #FFFFFF;">
     <!-- Page Hero -->
-    <section class="page-hero-banner" style="padding: 11rem 2rem 7rem 2rem; background-image: url('<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_51_30_PM.png' ); ?>'); background-size: cover; background-position: center; position: relative; overflow: hidden;">
+    <?php
+    $pub_hero_bg = franciscan_get_page_field( "publications", "hero_image", FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_51_30_PM.png' );
+    if ( empty( $pub_hero_bg ) ) {
+        $pub_hero_bg = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_51_30_PM.png';
+    }
+    ?>
+    <section class="page-hero-banner" style="padding: 11rem 2rem 7rem 2rem; background-image: url('<?php echo esc_url( $pub_hero_bg ); ?>'); background-size: cover; background-position: center; position: relative; overflow: hidden;">
         <div style="position: absolute; inset: 0; background-color: rgba(12, 11, 10, 0.72);"></div>
         <div style="max-width: 800px; margin: 0 auto; position: relative; z-index: 2; text-align: center;">
             <div style="display: inline-flex; align-items: center; gap: 0.6rem; background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); padding: 0.5rem 1.2rem; border-radius: 50px; margin-bottom: 1.5rem; border: 1px solid rgba(255,255,255,0.2);">
                 <span style="width: 8px; height: 8px; background-color: #e6c888; border-radius: 50%; display: inline-block;"></span>
-                <span style="color: #ffffff; font-size: 0.85rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; font-family: 'Instrument Sans', sans-serif;"><?php echo esc_html( franciscan_get_page_field( "publications", "hero_badge", "PROVINCIAL CHRONICLES" ) ); ?>
+                <span style="color: #ffffff; font-size: 0.85rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; font-family: 'Instrument Sans', sans-serif;"><?php echo esc_html( franciscan_get_page_field( "publications", "hero_badge", "PROVINCIAL CHRONICLES" ) ); ?></span>
             </div>
             <h1 style="font-family: 'Phudu', sans-serif; font-size: clamp(2.8rem, 5.2vw, 4.5rem); font-weight: 700; color: #ffffff; text-transform: uppercase; margin: 0 0 1rem 0; line-height: 1.1;"><?php echo esc_html( franciscan_get_page_field( "publications", "hero_title", "PUBLICATIONS & MEDIA" ) ); ?></h1>
+            <?php 
+            $pub_hero_sub = franciscan_get_page_field( "publications", "hero_subtitle", "" );
+            if ( ! empty( $pub_hero_sub ) ) :
+            ?>
+                <p style="font-family: 'Instrument Sans', sans-serif; font-size: clamp(1rem, 1.8vw, 1.2rem); color: #e6c888; max-width: 680px; margin: 0 auto; line-height: 1.5; font-weight: 500;">
+                    <?php echo esc_html( $pub_hero_sub ); ?>
+                </p>
+            <?php endif; ?>
         </div>
     </section>
         <!-- Publications & Articles List -->
@@ -729,192 +743,86 @@ button.fs-mega-toggle:focus::after {
                 <!-- Section Header -->
                 <div style="text-align: center; margin-bottom: clamp(3rem, 6vw, 4.5rem);">
                     <h2 style="font-family: 'Phudu', sans-serif; font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 700; color: #1c1917; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 0.8rem;">
-                        ARTICLES &amp; RESEARCH
+                        <?php echo esc_html( franciscan_get_page_field( 'publications', 'section_title', 'ARTICLES & RESEARCH' ) ); ?>
                     </h2>
                     <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #78716c; max-width: 650px; margin: 0 auto;">
-                        Scholarly papers, theological treatises, and peer-reviewed publications authored by our Franciscan Friars.
+                        <?php echo esc_html( franciscan_get_page_field( 'publications', 'section_subtitle', 'Scholarly papers, theological treatises, and peer-reviewed publications authored by our Franciscan Friars.' ) ); ?>
                     </p>
                 </div>
 
                 <!-- Articles Container -->
                 <div style="display: flex; flex-direction: column; gap: 0;">
-
-                    <!-- Publication: Between Post-Critical Pedagogy and Critical Theory -->
-                    <div style="display: grid; grid-template-columns: minmax(80px, 120px) minmax(140px, 200px) 1fr auto; gap: clamp(1.2rem, 3vw, 2.5rem); align-items: center; padding: clamp(2rem, 4vw, 3rem) 0; border-top: 1px solid #f0ece1;" class="publication-item">
-                        <div style="display: flex; flex-direction: column; align-items: flex-start; justify-content: center; font-family: 'Phudu', sans-serif;">
-                            <span style="font-size: clamp(2.4rem, 4vw, 3.4rem); font-weight: 300; line-height: 1; color: #4A2A18;">20</span>
-                            <span style="font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #78716c; margin-top: 0.35rem; font-family: 'Instrument Sans', sans-serif;">AUG<br>2026</span>
-                        </div>
-                        <div style="width: 100%; aspect-ratio: 4/3; border-radius: 12px; overflow: hidden; box-shadow: 0 8px 20px rgba(74,42,24,0.12); border: 1px solid rgba(230,200,136,0.3); background: #FAF7F0;">
-                            <img loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/between-post-critical-pedagogy.jpg' ); ?>" alt="Between Post-Critical Pedagogy and Critical Theory" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-                        </div>
-                        <div>
-                            <h3 style="font-family: 'Phudu', sans-serif; font-size: clamp(1.15rem, 2.2vw, 1.4rem); font-weight: 700; color: #1c1917; text-transform: uppercase; letter-spacing: 0.02em; margin: 0 0 0.65rem 0; line-height: 1.35;">
-                                Between Post-Critical Pedagogy and Critical Theory: An Educational Response to the Post-Truth Phenomenon
-                            </h3>
-                            <p style="font-family: 'Instrument Sans', sans-serif; font-size: clamp(0.92rem, 1.6vw, 1rem); color: #57534e; line-height: 1.65; margin: 0 0 0.85rem 0; font-weight: 400;">
-                                This article examines cogently what educational strategy is the most appropriate in the climate of truth crisis with rising polarization encountered in the post-truth world.
-                            </p>
-                            <div style="display: flex; align-items: center; gap: 0.5rem; font-family: 'Instrument Sans', sans-serif; font-size: 0.84rem; color: #78716c; font-weight: 500;">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
-                                <span>Educational Philosophy &amp; Critical Pedagogy • PDF Document</span>
+                    <?php
+                    $publications = franciscan_get_publications_list();
+                    if ( ! empty( $publications ) ) :
+                        $total_pubs = count( $publications );
+                        foreach ( $publications as $pub_idx => $pub ) :
+                            $day         = isset( $pub['day'] ) ? trim( $pub['day'] ) : '';
+                            $month_year  = isset( $pub['month_year'] ) ? trim( $pub['month_year'] ) : '';
+                            $img_src     = ! empty( $pub['image'] ) ? $pub['image'] : ( FRANCISCAN_THEME_URI . '/assets/images/gallery/between-post-critical-pedagogy.jpg' );
+                            $img_alt     = ! empty( $pub['image_alt'] ) ? $pub['image_alt'] : ( ! empty( $pub['title'] ) ? $pub['title'] : 'Franciscan Publication' );
+                            $title       = isset( $pub['title'] ) ? trim( $pub['title'] ) : '';
+                            $subtitle    = isset( $pub['subtitle'] ) ? trim( $pub['subtitle'] ) : '';
+                            $meta_info   = isset( $pub['meta_info'] ) ? trim( $pub['meta_info'] ) : '';
+                            $link_type   = isset( $pub['link_type'] ) && $pub['link_type'] === 'link' ? 'link' : 'pdf';
+                            $file_url    = ! empty( $pub['file_url'] ) ? $pub['file_url'] : '#';
+                            $btn_label   = ! empty( $pub['button_label'] ) ? $pub['button_label'] : ( $link_type === 'link' ? 'VIEW ARTICLE' : 'VIEW PDF' );
+                            $is_last     = ( $pub_idx === $total_pubs - 1 );
+                            
+                            $formatted_my = nl2br( esc_html( $month_year ) );
+                            if ( strpos( $formatted_my, '<br' ) === false && preg_match( '/^([A-Za-z\s\-]+)\s+(\d{4})$/', $month_year, $my_matches ) ) {
+                                $formatted_my = esc_html( trim( $my_matches[1] ) ) . '<br>' . esc_html( trim( $my_matches[2] ) );
+                            }
+                    ?>
+                        <!-- Publication Item #<?php echo esc_attr( $pub_idx + 1 ); ?> -->
+                        <div style="display: grid; grid-template-columns: minmax(80px, 120px) minmax(140px, 200px) 1fr auto; gap: clamp(1.2rem, 3vw, 2.5rem); align-items: center; padding: clamp(2rem, 4vw, 3rem) 0; border-top: 1px solid #f0ece1;<?php echo $is_last ? ' border-bottom: 1px solid #f0ece1;' : ''; ?>" class="publication-item">
+                            <div style="display: flex; flex-direction: column; align-items: flex-start; justify-content: center; font-family: 'Phudu', sans-serif;">
+                                <?php if ( ! empty( $day ) ) : ?>
+                                    <span style="font-size: clamp(2.4rem, 4vw, 3.4rem); font-weight: 300; line-height: 1; color: #4A2A18;"><?php echo esc_html( $day ); ?></span>
+                                <?php endif; ?>
+                                <?php if ( ! empty( $month_year ) ) : ?>
+                                    <span style="font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #78716c; margin-top: 0.35rem; font-family: 'Instrument Sans', sans-serif;"><?php echo $formatted_my; ?></span>
+                                <?php endif; ?>
+                            </div>
+                            <div style="width: 100%; aspect-ratio: 4/3; border-radius: 12px; overflow: hidden; box-shadow: 0 8px 20px rgba(74,42,24,0.12); border: 1px solid rgba(230,200,136,0.3); background: #FAF7F0;">
+                                <img loading="lazy" decoding="async" src="<?php echo esc_url( $img_src ); ?>" alt="<?php echo esc_attr( $img_alt ); ?>" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                            </div>
+                            <div>
+                                <?php if ( ! empty( $title ) ) : ?>
+                                    <h3 style="font-family: 'Phudu', sans-serif; font-size: clamp(1.15rem, 2.2vw, 1.4rem); font-weight: 700; color: #1c1917; text-transform: uppercase; letter-spacing: 0.02em; margin: 0 0 0.65rem 0; line-height: 1.35;">
+                                        <?php echo esc_html( $title ); ?>
+                                    </h3>
+                                <?php endif; ?>
+                                <?php if ( ! empty( $subtitle ) ) : ?>
+                                    <p style="font-family: 'Instrument Sans', sans-serif; font-size: clamp(0.92rem, 1.6vw, 1rem); color: #57534e; line-height: 1.65; margin: 0 0 0.85rem 0; font-weight: 400;">
+                                        <?php echo esc_html( $subtitle ); ?>
+                                    </p>
+                                <?php endif; ?>
+                                <?php if ( ! empty( $meta_info ) ) : ?>
+                                    <div style="display: flex; align-items: center; gap: 0.5rem; font-family: 'Instrument Sans', sans-serif; font-size: 0.84rem; color: #78716c; font-weight: 500;">
+                                        <?php if ( $link_type === 'link' ) : ?>
+                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+                                        <?php elseif ( stripos( $meta_info, 'Fr.' ) !== false || stripos( $meta_info, 'Father' ) !== false || stripos( $meta_info, 'Brother' ) !== false || stripos( $meta_info, 'Br.' ) !== false ) : ?>
+                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                                        <?php else : ?>
+                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                                        <?php endif; ?>
+                                        <span><?php echo esc_html( $meta_info ); ?></span>
+                                    </div>
+                                <?php endif; ?>
+                            </div>
+                            <div style="white-space: nowrap;">
+                                <a href="<?php echo esc_url( $file_url ); ?>" target="_blank" rel="noopener noreferrer" class="pub-btn" style="display: inline-flex; align-items: center; gap: 0.6rem; padding: 0.8rem 1.8rem; border: 1.5px solid #c4a45a; border-radius: 4px; background: transparent; color: #4A2A18; font-family: 'Instrument Sans', sans-serif; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; text-decoration: none; transition: all 0.3s ease;" onmouseover="this.style.background='#4A2A18'; this.style.color='#ffffff'; this.style.borderColor='#4A2A18';" onmouseout="this.style.background='transparent'; this.style.color='#4A2A18'; this.style.borderColor='#c4a45a';">
+                                    <?php echo esc_html( $btn_label ); ?>
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                                </a>
                             </div>
                         </div>
-                        <div style="white-space: nowrap;">
-                            <a href="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/pdf/between-post-critical-pedagogy-and-critical-theory.pdf' ); ?>" target="_blank" class="pub-btn" style="display: inline-flex; align-items: center; gap: 0.6rem; padding: 0.8rem 1.8rem; border: 1.5px solid #c4a45a; border-radius: 4px; background: transparent; color: #4A2A18; font-family: 'Instrument Sans', sans-serif; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; text-decoration: none; transition: all 0.3s ease;" onmouseover="this.style.background='#4A2A18'; this.style.color='#ffffff'; this.style.borderColor='#4A2A18';" onmouseout="this.style.background='transparent'; this.style.color='#4A2A18'; this.style.borderColor='#c4a45a';">
-                                VIEW PDF
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- Publication 1: Jnanadeepa Marriage and Family -->
-                    <div style="display: grid; grid-template-columns: minmax(80px, 120px) minmax(140px, 200px) 1fr auto; gap: clamp(1.2rem, 3vw, 2.5rem); align-items: center; padding: clamp(2rem, 4vw, 3rem) 0; border-top: 1px solid #f0ece1;" class="publication-item">
-                        <div style="display: flex; flex-direction: column; align-items: flex-start; justify-content: center; font-family: 'Phudu', sans-serif;">
-                            <span style="font-size: clamp(2.4rem, 4vw, 3.4rem); font-weight: 300; line-height: 1; color: #4A2A18;">05</span>
-                            <span style="font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #78716c; margin-top: 0.35rem; font-family: 'Instrument Sans', sans-serif;">MAY - AUG<br>2025</span>
-                        </div>
-                        <div style="width: 100%; aspect-ratio: 4/3; border-radius: 12px; overflow: hidden; box-shadow: 0 8px 20px rgba(74,42,24,0.12); border: 1px solid rgba(230,200,136,0.3); background: #FAF7F0;">
-                            <img loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/WhatsApp Image 2026-08-07 at 10.18.29 AM.jpeg' ); ?>" alt="Pope Francis Teachings on Marriage and Family" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-                        </div>
-                        <div>
-                            <h3 style="font-family: 'Phudu', sans-serif; font-size: clamp(1.15rem, 2.2vw, 1.4rem); font-weight: 700; color: #1c1917; text-transform: uppercase; letter-spacing: 0.02em; margin: 0 0 0.65rem 0; line-height: 1.35;">
-                                Jnanadeepa: Pune Journal of Religious Studies
-                            </h3>
-                            <p style="font-family: 'Instrument Sans', sans-serif; font-size: clamp(0.92rem, 1.6vw, 1rem); color: #57534e; line-height: 1.65; margin: 0 0 0.85rem 0; font-weight: 400;">
-                                Pope Francis’ Teachings on Marriage and Family
-                            </p>
-                            <div style="display: flex; align-items: center; gap: 0.5rem; font-family: 'Instrument Sans', sans-serif; font-size: 0.84rem; color: #78716c; font-weight: 500;">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
-                                <span>Religious Studies &amp; Theology • PDF Document</span>
-                            </div>
-                        </div>
-                        <div style="white-space: nowrap;">
-                            <a href="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/pdf/jnanadeepa-may-aug-2025.pdf' ); ?>" target="_blank" class="pub-btn" style="display: inline-flex; align-items: center; gap: 0.6rem; padding: 0.8rem 1.8rem; border: 1.5px solid #c4a45a; border-radius: 4px; background: transparent; color: #4A2A18; font-family: 'Instrument Sans', sans-serif; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; text-decoration: none; transition: all 0.3s ease;" onmouseover="this.style.background='#4A2A18'; this.style.color='#ffffff'; this.style.borderColor='#4A2A18';" onmouseout="this.style.background='transparent'; this.style.color='#4A2A18'; this.style.borderColor='#c4a45a';">
-                                VIEW PDF
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- Publication 2: Jnanadeepa Pastoral Conversion -->
-                    <div style="display: grid; grid-template-columns: minmax(80px, 120px) minmax(140px, 200px) 1fr auto; gap: clamp(1.2rem, 3vw, 2.5rem); align-items: center; padding: clamp(2rem, 4vw, 3rem) 0; border-top: 1px solid #f0ece1;" class="publication-item">
-                        <div style="display: flex; flex-direction: column; align-items: flex-start; justify-content: center; font-family: 'Phudu', sans-serif;">
-                            <span style="font-size: clamp(2.4rem, 4vw, 3.4rem); font-weight: 300; line-height: 1; color: #4A2A18;">15</span>
-                            <span style="font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #78716c; margin-top: 0.35rem; font-family: 'Instrument Sans', sans-serif;">MAY - AUG<br>2025</span>
-                        </div>
-                        <div style="width: 100%; aspect-ratio: 4/3; border-radius: 12px; overflow: hidden; box-shadow: 0 8px 20px rgba(74,42,24,0.12); border: 1px solid rgba(230,200,136,0.3); background: #FAF7F0;">
-                            <img loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/WhatsApp Image 2026-08-07 at 8.42.19 AM (3).jpeg' ); ?>" alt="Pastoral Conversion in Shaping Pastoral Ministry" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-                        </div>
-                        <div>
-                            <h3 style="font-family: 'Phudu', sans-serif; font-size: clamp(1.15rem, 2.2vw, 1.4rem); font-weight: 700; color: #1c1917; text-transform: uppercase; letter-spacing: 0.02em; margin: 0 0 0.65rem 0; line-height: 1.35;">
-                                Jnanadeepa: Pune Journal of Religious Studies
-                            </h3>
-                            <p style="font-family: 'Instrument Sans', sans-serif; font-size: clamp(0.92rem, 1.6vw, 1rem); color: #57534e; line-height: 1.65; margin: 0 0 0.85rem 0; font-weight: 400;">
-                                The Central Role of Pastoral Conversion in Shaping Pastoral Ministry
-                            </p>
-                            <div style="display: flex; align-items: center; gap: 0.5rem; font-family: 'Instrument Sans', sans-serif; font-size: 0.84rem; color: #78716c; font-weight: 500;">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                                <span>Fr. Gigesh Meckel, TOR • Vol. 29/2</span>
-                            </div>
-                        </div>
-                        <div style="white-space: nowrap;">
-                            <a href="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/pdf/jnanadeepa-may-aug-2025-pastoral-conversion.pdf' ); ?>" target="_blank" class="pub-btn" style="display: inline-flex; align-items: center; gap: 0.6rem; padding: 0.8rem 1.8rem; border: 1.5px solid #c4a45a; border-radius: 4px; background: transparent; color: #4A2A18; font-family: 'Instrument Sans', sans-serif; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; text-decoration: none; transition: all 0.3s ease;" onmouseover="this.style.background='#4A2A18'; this.style.color='#ffffff'; this.style.borderColor='#4A2A18';" onmouseout="this.style.background='transparent'; this.style.color='#4A2A18'; this.style.borderColor='#c4a45a';">
-                                VIEW PDF
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- Publication 3: Jnanadeepa Eco-Theology -->
-                    <div style="display: grid; grid-template-columns: minmax(80px, 120px) minmax(140px, 200px) 1fr auto; gap: clamp(1.2rem, 3vw, 2.5rem); align-items: center; padding: clamp(2rem, 4vw, 3rem) 0; border-top: 1px solid #f0ece1;" class="publication-item">
-                        <div style="display: flex; flex-direction: column; align-items: flex-start; justify-content: center; font-family: 'Phudu', sans-serif;">
-                            <span style="font-size: clamp(2.4rem, 4vw, 3.4rem); font-weight: 300; line-height: 1; color: #4A2A18;">20</span>
-                            <span style="font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #78716c; margin-top: 0.35rem; font-family: 'Instrument Sans', sans-serif;">SEP - DEC<br>2025</span>
-                        </div>
-                        <div style="width: 100%; aspect-ratio: 4/3; border-radius: 12px; overflow: hidden; box-shadow: 0 8px 20px rgba(74,42,24,0.12); border: 1px solid rgba(230,200,136,0.3); background: #FAF7F0;">
-                            <img loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/WhatsApp Image 2026-08-07 at 8.42.19 AM (2).jpeg' ); ?>" alt="Harmonizing Human Welfare and Intrinsic Value" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-                        </div>
-                        <div>
-                            <h3 style="font-family: 'Phudu', sans-serif; font-size: clamp(1.15rem, 2.2vw, 1.4rem); font-weight: 700; color: #1c1917; text-transform: uppercase; letter-spacing: 0.02em; margin: 0 0 0.65rem 0; line-height: 1.35;">
-                                Jnanadeepa: Pune Journal of Religious Studies
-                            </h3>
-                            <p style="font-family: 'Instrument Sans', sans-serif; font-size: clamp(0.92rem, 1.6vw, 1rem); color: #57534e; line-height: 1.65; margin: 0 0 0.85rem 0; font-weight: 400;">
-                                Harmonizing Human Welfare and Intrinsic Value: Hierarchical Theology in Catholic Eco-Theology
-                            </p>
-                            <div style="display: flex; align-items: center; gap: 0.5rem; font-family: 'Instrument Sans', sans-serif; font-size: 0.84rem; color: #78716c; font-weight: 500;">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                                <span>Fr. Gigesh Thomas Meckel, TOR • Vol. 29/3</span>
-                            </div>
-                        </div>
-                        <div style="white-space: nowrap;">
-                            <a href="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/pdf/jnanadeepa-oct-dec-2025-eco-theology.pdf' ); ?>" target="_blank" class="pub-btn" style="display: inline-flex; align-items: center; gap: 0.6rem; padding: 0.8rem 1.8rem; border: 1.5px solid #c4a45a; border-radius: 4px; background: transparent; color: #4A2A18; font-family: 'Instrument Sans', sans-serif; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; text-decoration: none; transition: all 0.3s ease;" onmouseover="this.style.background='#4A2A18'; this.style.color='#ffffff'; this.style.borderColor='#4A2A18';" onmouseout="this.style.background='transparent'; this.style.color='#4A2A18'; this.style.borderColor='#c4a45a';">
-                                VIEW PDF
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- Publication 4: Word & Worship -->
-                    <div style="display: grid; grid-template-columns: minmax(80px, 120px) minmax(140px, 200px) 1fr auto; gap: clamp(1.2rem, 3vw, 2.5rem); align-items: center; padding: clamp(2rem, 4vw, 3rem) 0; border-top: 1px solid #f0ece1;" class="publication-item">
-                        <div style="display: flex; flex-direction: column; align-items: flex-start; justify-content: center; font-family: 'Phudu', sans-serif;">
-                            <span style="font-size: clamp(2.4rem, 4vw, 3.4rem); font-weight: 300; line-height: 1; color: #4A2A18;">01</span>
-                            <span style="font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #78716c; margin-top: 0.35rem; font-family: 'Instrument Sans', sans-serif;">JAN - JUN<br>2026</span>
-                        </div>
-                        <div style="width: 100%; aspect-ratio: 4/3; border-radius: 12px; overflow: hidden; box-shadow: 0 8px 20px rgba(74,42,24,0.12); border: 1px solid rgba(230,200,136,0.3); background: #FAF7F0;">
-                            <img loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/IMG_1157.JPG' ); ?>" alt="Word and Worship Theological Perspectives" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-                        </div>
-                        <div>
-                            <h3 style="font-family: 'Phudu', sans-serif; font-size: clamp(1.15rem, 2.2vw, 1.4rem); font-weight: 700; color: #1c1917; text-transform: uppercase; letter-spacing: 0.02em; margin: 0 0 0.65rem 0; line-height: 1.35;">
-                                Word &amp; Worship: Journal of Pastoral Liturgy &amp; Catechetics
-                            </h3>
-                            <p style="font-family: 'Instrument Sans', sans-serif; font-size: clamp(0.92rem, 1.6vw, 1rem); color: #57534e; line-height: 1.65; margin: 0 0 0.85rem 0; font-weight: 400;">
-                                The Poor as Sacrament of Divine Encounter: Liberationist and Thomistic Perspectives
-                            </p>
-                            <div style="display: flex; align-items: center; gap: 0.5rem; font-family: 'Instrument Sans', sans-serif; font-size: 0.84rem; color: #78716c; font-weight: 500;">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                                <span>Fr. Gigesh Meckel, TOR • Vol. 59, No. 1</span>
-                            </div>
-                        </div>
-                        <div style="white-space: nowrap;">
-                            <a href="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/pdf/word-and-worship-2026.pdf' ); ?>" target="_blank" class="pub-btn" style="display: inline-flex; align-items: center; gap: 0.6rem; padding: 0.8rem 1.8rem; border: 1.5px solid #c4a45a; border-radius: 4px; background: transparent; color: #4A2A18; font-family: 'Instrument Sans', sans-serif; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; text-decoration: none; transition: all 0.3s ease;" onmouseover="this.style.background='#4A2A18'; this.style.color='#ffffff'; this.style.borderColor='#4A2A18';" onmouseout="this.style.background='transparent'; this.style.color='#4A2A18'; this.style.borderColor='#c4a45a';">
-                                VIEW PDF
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- Publication 5: PubMed Peer-Reviewed Paper -->
-                    <div style="display: grid; grid-template-columns: minmax(80px, 120px) minmax(140px, 200px) 1fr auto; gap: clamp(1.2rem, 3vw, 2.5rem); align-items: center; padding: clamp(2rem, 4vw, 3rem) 0; border-top: 1px solid #f0ece1; border-bottom: 1px solid #f0ece1;" class="publication-item">
-                        <div style="display: flex; flex-direction: column; align-items: flex-start; justify-content: center; font-family: 'Phudu', sans-serif;">
-                            <span style="font-size: clamp(2.4rem, 4vw, 3.4rem); font-weight: 300; line-height: 1; color: #4A2A18;">11</span>
-                            <span style="font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #78716c; margin-top: 0.35rem; font-family: 'Instrument Sans', sans-serif;">MAY<br>2017</span>
-                        </div>
-                        <div style="width: 100%; aspect-ratio: 4/3; border-radius: 12px; overflow: hidden; box-shadow: 0 8px 20px rgba(74,42,24,0.12); border: 1px solid rgba(230,200,136,0.3); background: #FAF7F0;">
-                            <img loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_24_08_PM.png' ); ?>" alt="Farmer suicide in India biotechnology research" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-                        </div>
-                        <div>
-                            <h3 style="font-family: 'Phudu', sans-serif; font-size: clamp(1.15rem, 2.2vw, 1.4rem); font-weight: 700; color: #1c1917; text-transform: uppercase; letter-spacing: 0.02em; margin: 0 0 0.65rem 0; line-height: 1.35;">
-                                Farmer-suicide in India: debating the role of biotechnology
-                            </h3>
-                            <p style="font-family: 'Instrument Sans', sans-serif; font-size: clamp(0.92rem, 1.6vw, 1rem); color: #57534e; line-height: 1.65; margin: 0 0 0.85rem 0; font-weight: 400;">
-                                Indian Biotech opponents have attributed the increase of suicides to the monopolization of GM seeds, centering on patent control, application of terminator technology, marketing strategy, and increased production costs.
-                            </p>
-                            <div style="display: flex; align-items: center; gap: 0.5rem; font-family: 'Instrument Sans', sans-serif; font-size: 0.84rem; color: #78716c; font-weight: 500;">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-                                <span>National Library of Medicine (PubMed: 28497354) • Peer-Reviewed Paper</span>
-                            </div>
-                        </div>
-                        <div style="white-space: nowrap;">
-                            <a href="https://pubmed.ncbi.nlm.nih.gov/28497354/" target="_blank" rel="noopener noreferrer" class="pub-btn" style="display: inline-flex; align-items: center; gap: 0.6rem; padding: 0.8rem 1.8rem; border: 1.5px solid #c4a45a; border-radius: 4px; background: transparent; color: #4A2A18; font-family: 'Instrument Sans', sans-serif; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; text-decoration: none; transition: all 0.3s ease;" onmouseover="this.style.background='#4A2A18'; this.style.color='#ffffff'; this.style.borderColor='#4A2A18';" onmouseout="this.style.background='transparent'; this.style.color='#4A2A18'; this.style.borderColor='#c4a45a';">
-                                VIEW ARTICLE
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-                            </a>
-                        </div>
-                    </div>
-
+                    <?php 
+                        endforeach; 
+                    endif; 
+                    ?>
                 </div>
-
             </div>
         </section>
     </main>

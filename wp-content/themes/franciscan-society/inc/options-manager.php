@@ -414,10 +414,92 @@ function franciscan_get_default_page_content( $slug = '' ) {
             'meta_og_image'     => '',
         ),
         'publications' => array(
-            'hero_badge'    => 'PROVINCIAL CHRONICLES',
-            'hero_title'    => 'PUBLICATIONS & MEDIA',
-            'hero_subtitle' => 'Books, newsletters, pastoral letters, and audio-visual releases.',
-            'hero_image'    => '',
+            'hero_badge'        => 'PROVINCIAL CHRONICLES',
+            'hero_title'        => 'PUBLICATIONS & MEDIA',
+            'hero_subtitle'     => 'Books, newsletters, pastoral letters, and audio-visual releases.',
+            'hero_image'        => '',
+            'section_title'     => 'ARTICLES & RESEARCH',
+            'section_subtitle'  => 'Scholarly papers, theological treatises, and peer-reviewed publications authored by our Franciscan Friars.',
+            'publications_list' => array(
+                array(
+                    'id'           => 'pub_1',
+                    'day'          => '20',
+                    'month_year'   => 'AUG 2026',
+                    'image'        => defined( 'FRANCISCAN_THEME_URI' ) ? FRANCISCAN_THEME_URI . '/assets/images/gallery/between-post-critical-pedagogy.jpg' : '',
+                    'image_alt'    => 'Between Post-Critical Pedagogy and Critical Theory',
+                    'title'        => 'Between Post-Critical Pedagogy and Critical Theory: An Educational Response to the Post-Truth Phenomenon',
+                    'subtitle'     => 'This article examines cogently what educational strategy is the most appropriate in the climate of truth crisis with rising polarization encountered in the post-truth world.',
+                    'meta_info'    => 'Educational Philosophy & Critical Pedagogy • PDF Document',
+                    'link_type'    => 'pdf',
+                    'file_url'     => defined( 'FRANCISCAN_THEME_URI' ) ? FRANCISCAN_THEME_URI . '/assets/pdf/between-post-critical-pedagogy-and-critical-theory.pdf' : '',
+                    'button_label' => 'VIEW PDF',
+                ),
+                array(
+                    'id'           => 'pub_2',
+                    'day'          => '05',
+                    'month_year'   => 'MAY - AUG 2025',
+                    'image'        => defined( 'FRANCISCAN_THEME_URI' ) ? FRANCISCAN_THEME_URI . '/assets/images/gallery/WhatsApp Image 2026-08-07 at 10.18.29 AM.jpeg' : '',
+                    'image_alt'    => 'Pope Francis Teachings on Marriage and Family',
+                    'title'        => 'Jnanadeepa: Pune Journal of Religious Studies',
+                    'subtitle'     => 'Pope Francis’ Teachings on Marriage and Family',
+                    'meta_info'    => 'Religious Studies & Theology • PDF Document',
+                    'link_type'    => 'pdf',
+                    'file_url'     => defined( 'FRANCISCAN_THEME_URI' ) ? FRANCISCAN_THEME_URI . '/assets/pdf/jnanadeepa-may-aug-2025.pdf' : '',
+                    'button_label' => 'VIEW PDF',
+                ),
+                array(
+                    'id'           => 'pub_3',
+                    'day'          => '15',
+                    'month_year'   => 'MAY - AUG 2025',
+                    'image'        => defined( 'FRANCISCAN_THEME_URI' ) ? FRANCISCAN_THEME_URI . '/assets/images/gallery/WhatsApp Image 2026-08-07 at 8.42.19 AM (3).jpeg' : '',
+                    'image_alt'    => 'Pastoral Conversion in Shaping Pastoral Ministry',
+                    'title'        => 'Jnanadeepa: Pune Journal of Religious Studies',
+                    'subtitle'     => 'The Central Role of Pastoral Conversion in Shaping Pastoral Ministry',
+                    'meta_info'    => 'Fr. Gigesh Meckel, TOR • Vol. 29/2',
+                    'link_type'    => 'pdf',
+                    'file_url'     => defined( 'FRANCISCAN_THEME_URI' ) ? FRANCISCAN_THEME_URI . '/assets/pdf/jnanadeepa-may-aug-2025-pastoral-conversion.pdf' : '',
+                    'button_label' => 'VIEW PDF',
+                ),
+                array(
+                    'id'           => 'pub_4',
+                    'day'          => '20',
+                    'month_year'   => 'SEP - DEC 2025',
+                    'image'        => defined( 'FRANCISCAN_THEME_URI' ) ? FRANCISCAN_THEME_URI . '/assets/images/gallery/WhatsApp Image 2026-08-07 at 8.42.19 AM (2).jpeg' : '',
+                    'image_alt'    => 'Harmonizing Human Welfare and Intrinsic Value',
+                    'title'        => 'Jnanadeepa: Pune Journal of Religious Studies',
+                    'subtitle'     => 'Harmonizing Human Welfare and Intrinsic Value: Hierarchical Theology in Catholic Eco-Theology',
+                    'meta_info'    => 'Fr. Gigesh Thomas Meckel, TOR • Vol. 29/3',
+                    'link_type'    => 'pdf',
+                    'file_url'     => defined( 'FRANCISCAN_THEME_URI' ) ? FRANCISCAN_THEME_URI . '/assets/pdf/jnanadeepa-oct-dec-2025-eco-theology.pdf' : '',
+                    'button_label' => 'VIEW PDF',
+                ),
+                array(
+                    'id'           => 'pub_5',
+                    'day'          => '01',
+                    'month_year'   => 'JAN - JUN 2026',
+                    'image'        => defined( 'FRANCISCAN_THEME_URI' ) ? FRANCISCAN_THEME_URI . '/assets/images/gallery/IMG_1157.JPG' : '',
+                    'image_alt'    => 'Word and Worship Theological Perspectives',
+                    'title'        => 'Word & Worship: Journal of Pastoral Liturgy & Catechetics',
+                    'subtitle'     => 'The Poor as Sacrament of Divine Encounter: Liberationist and Thomistic Perspectives',
+                    'meta_info'    => 'Fr. Gigesh Meckel, TOR • Vol. 59, No. 1',
+                    'link_type'    => 'pdf',
+                    'file_url'     => defined( 'FRANCISCAN_THEME_URI' ) ? FRANCISCAN_THEME_URI . '/assets/pdf/word-and-worship-2026.pdf' : '',
+                    'button_label' => 'VIEW PDF',
+                ),
+                array(
+                    'id'           => 'pub_6',
+                    'day'          => '11',
+                    'month_year'   => 'MAY 2017',
+                    'image'        => defined( 'FRANCISCAN_THEME_URI' ) ? FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_24_08_PM.png' : '',
+                    'image_alt'    => 'Farmer suicide in India biotechnology research',
+                    'title'        => 'Farmer-suicide in India: debating the role of biotechnology',
+                    'subtitle'     => 'Indian Biotech opponents have attributed the increase of suicides to the monopolization of GM seeds, centering on patent control, application of terminator technology, marketing strategy, and increased production costs.',
+                    'meta_info'    => 'National Library of Medicine (PubMed: 28497354) • Peer-Reviewed Paper',
+                    'link_type'    => 'link',
+                    'file_url'     => 'https://pubmed.ncbi.nlm.nih.gov/28497354/',
+                    'button_label' => 'VIEW ARTICLE',
+                ),
+            ),
         ),
         'gallery' => array(
             'hero_badge'    => 'MOMENTS OF GRACE',
@@ -592,4 +674,29 @@ function franciscan_get_gallery_items() {
 function franciscan_save_gallery_items( $items ) {
     return update_option( 'franciscan_custom_gallery', $items );
 }
+
+/**
+ * Retrieve curated/custom publications list.
+ */
+function franciscan_get_publications_list() {
+    $data = franciscan_get_page_content( 'publications' );
+    if ( isset( $data['publications_list'] ) && is_array( $data['publications_list'] ) && ! empty( $data['publications_list'] ) ) {
+        return array_values( $data['publications_list'] );
+    }
+    $defaults = franciscan_get_default_page_content( 'publications' );
+    if ( isset( $defaults['publications_list'] ) && is_array( $defaults['publications_list'] ) && ! empty( $defaults['publications_list'] ) ) {
+        return array_values( $defaults['publications_list'] );
+    }
+    return array();
+}
+
+function franciscan_save_publications_list( $items ) {
+    $current = get_option( 'franciscan_page_publications', array() );
+    if ( ! is_array( $current ) ) {
+        $current = array();
+    }
+    $current['publications_list'] = is_array( $items ) ? array_values( $items ) : array();
+    return update_option( 'franciscan_page_publications', $current );
+}
+
 

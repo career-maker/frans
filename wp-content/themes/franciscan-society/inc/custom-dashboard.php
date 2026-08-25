@@ -984,7 +984,9 @@ function franciscan_render_dashboard_view() {
                                     <?php
                                     $default_banner = ( $slug === "home" ) 
                                         ? ( FRANCISCAN_THEME_URI . "/assets/images/new_uploads/hero-banner-aug20.jpeg" )
-                                        : ( FRANCISCAN_THEME_URI . "/assets/images/church-bg.jpg" );
+                                        : ( $slug === "publications"
+                                            ? ( FRANCISCAN_THEME_URI . "/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_51_30_PM.png" )
+                                            : ( FRANCISCAN_THEME_URI . "/assets/images/church-bg.jpg" ) );
                                     $current_banner = ! empty( $data["hero_image"] ) ? $data["hero_image"] : $default_banner;
                                     ?>
                                     <div class="image-uploader-box">
@@ -2598,6 +2600,157 @@ function franciscan_render_dashboard_view() {
                             </div>
                         <?php endif; ?>
 
+                        <?php if ( $slug === 'publications' ) : ?>
+                            <!-- Publications Section Header -->
+                            <div class="form-section">
+                                <h3 class="form-section-title">📑 Articles &amp; Research Section Intro</h3>
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label>Section Heading</label>
+                                        <input type="text" name="section_title" class="form-control" value="<?php echo esc_attr( $data['section_title'] ?? 'ARTICLES & RESEARCH' ); ?>">
+                                    </div>
+                                    <div class="form-group full-width">
+                                        <label>Section Subtitle / Description</label>
+                                        <textarea name="section_subtitle" class="form-control" rows="2"><?php echo esc_textarea( $data['section_subtitle'] ?? 'Scholarly papers, theological treatises, and peer-reviewed publications authored by our Franciscan Friars.' ); ?></textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Publications List Manager -->
+                            <div class="form-section">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem;">
+                                    <div>
+                                        <h3 class="form-section-title" style="margin-bottom: 0.3rem;">
+                                            📚 Provincial Publications, Articles &amp; PDF Documents
+                                        </h3>
+                                        <p style="color: var(--c-text-muted); font-size: 0.88rem; margin: 0;">
+                                            Add, edit, or remove publications. Attach downloadable PDFs or external web links (e.g. PubMed, journals).
+                                        </p>
+                                    </div>
+                                    <button type="button" class="btn btn-primary" id="btn-add-publication" style="display: inline-flex; align-items: center; gap: 0.5rem;">
+                                        <span>➕</span> Add New Publication
+                                    </button>
+                                </div>
+
+                                <?php 
+                                $current_pubs = franciscan_get_publications_list();
+                                ?>
+
+                                <div id="publications-list-container" style="display: flex; flex-direction: column; gap: 1.2rem;">
+                                    <?php foreach ( $current_pubs as $p_idx => $p_item ) : 
+                                        $p_id         = $p_item['id'] ?? ( 'pub_' . ($p_idx + 1) );
+                                        $p_day        = $p_item['day'] ?? '20';
+                                        $p_my         = $p_item['month_year'] ?? 'AUG 2026';
+                                        $p_img        = $p_item['image'] ?? '';
+                                        $p_alt        = $p_item['image_alt'] ?? '';
+                                        $p_title      = $p_item['title'] ?? '';
+                                        $p_sub        = $p_item['subtitle'] ?? '';
+                                        $p_meta       = $p_item['meta_info'] ?? '';
+                                        $p_type       = $p_item['link_type'] ?? 'pdf';
+                                        $p_url        = $p_item['file_url'] ?? '';
+                                        $p_btn        = $p_item['button_label'] ?? ( $p_type === 'link' ? 'VIEW ARTICLE' : 'VIEW PDF' );
+                                        $def_pub_img  = defined( 'FRANCISCAN_THEME_URI' ) ? ( FRANCISCAN_THEME_URI . '/assets/images/gallery/between-post-critical-pedagogy.jpg' ) : '';
+                                        $preview_img  = ! empty( $p_img ) ? $p_img : $def_pub_img;
+                                    ?>
+                                        <div class="publication-item-card" data-index="<?php echo esc_attr( $p_idx ); ?>" style="background: rgba(255,255,255,0.02); border: 1px solid var(--c-card-border); border-radius: 12px; padding: 1.4rem; position: relative; transition: border-color 0.2s ease;">
+                                            <input type="hidden" name="publications_list[<?php echo esc_attr( $p_idx ); ?>][id]" value="<?php echo esc_attr( $p_id ); ?>" class="pub-input-id">
+                                            
+                                            <!-- Card Top Header Bar -->
+                                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(255,255,255,0.06); flex-wrap: wrap; gap: 0.8rem;">
+                                                <div style="display: flex; align-items: center; gap: 0.8rem;">
+                                                    <span class="pub-card-num-badge" style="background: var(--c-gold); color: #12100e; font-weight: 800; font-size: 0.8rem; padding: 0.25rem 0.65rem; border-radius: 6px;">
+                                                        #<?php echo esc_html( $p_idx + 1 ); ?>
+                                                    </span>
+                                                    <strong class="pub-card-title-preview" style="color: var(--c-text); font-size: 0.95rem; max-width: 480px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: inline-block;">
+                                                        <?php echo esc_html( ! empty( $p_title ) ? $p_title : 'Untitled Publication' ); ?>
+                                                    </strong>
+                                                    <span class="pub-card-type-badge" style="background: <?php echo $p_type === 'link' ? 'rgba(59, 130, 246, 0.2)' : 'rgba(230, 200, 136, 0.2)'; ?>; color: <?php echo $p_type === 'link' ? '#60a5fa' : '#e6c888'; ?>; font-size: 0.75rem; font-weight: 700; padding: 0.2rem 0.6rem; border-radius: 10px; text-transform: uppercase;">
+                                                        <?php echo $p_type === 'link' ? '🔗 External Link' : '📄 PDF Document'; ?>
+                                                    </span>
+                                                </div>
+                                                <div style="display: flex; gap: 0.5rem; align-items: center;">
+                                                    <button type="button" class="btn btn-secondary btn-move-pub-up" title="Move Up" style="padding: 0.35rem 0.65rem; font-size: 0.8rem;">▲</button>
+                                                    <button type="button" class="btn btn-secondary btn-move-pub-down" title="Move Down" style="padding: 0.35rem 0.65rem; font-size: 0.8rem;">▼</button>
+                                                    <button type="button" class="btn btn-secondary btn-delete-pub-item" style="padding: 0.35rem 0.75rem; font-size: 0.8rem; background: rgba(239, 68, 68, 0.15); color: #fca5a5; border-color: rgba(239, 68, 68, 0.4);" title="Delete Publication">
+                                                        🗑️ Remove
+                                                    </button>
+                                                </div>
+                                            </div>
+
+                                            <!-- Fields Grid -->
+                                            <div class="form-grid">
+                                                <div class="form-group">
+                                                    <label>Publication Day (e.g. 20, 05, 15)</label>
+                                                    <input type="text" name="publications_list[<?php echo esc_attr( $p_idx ); ?>][day]" class="form-control pub-input-day" value="<?php echo esc_attr( $p_day ); ?>" placeholder="e.g. 20">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Month &amp; Year (e.g. AUG 2026 or MAY - AUG 2025)</label>
+                                                    <input type="text" name="publications_list[<?php echo esc_attr( $p_idx ); ?>][month_year]" class="form-control pub-input-my" value="<?php echo esc_attr( $p_my ); ?>" placeholder="e.g. AUG 2026">
+                                                </div>
+                                                
+                                                <div class="form-group full-width">
+                                                    <label>Publication Title <span style="color:var(--c-danger);">*</span></label>
+                                                    <input type="text" name="publications_list[<?php echo esc_attr( $p_idx ); ?>][title]" class="form-control pub-input-title" value="<?php echo esc_attr( $p_title ); ?>" placeholder="e.g. Jnanadeepa: Pune Journal of Religious Studies" required>
+                                                </div>
+
+                                                <div class="form-group full-width">
+                                                    <label>Subtitle / Article Topic / Abstract</label>
+                                                    <textarea name="publications_list[<?php echo esc_attr( $p_idx ); ?>][subtitle]" class="form-control pub-input-subtitle" rows="2" placeholder="e.g. Pope Francis' Teachings on Marriage and Family..."><?php echo esc_textarea( $p_sub ); ?></textarea>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label>Author / Journal / Volume Details</label>
+                                                    <input type="text" name="publications_list[<?php echo esc_attr( $p_idx ); ?>][meta_info]" class="form-control pub-input-meta" value="<?php echo esc_attr( $p_meta ); ?>" placeholder="e.g. Fr. Gigesh Meckel, TOR • Vol. 29/2">
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label>Resource / Attachment Type</label>
+                                                    <select name="publications_list[<?php echo esc_attr( $p_idx ); ?>][link_type]" class="form-control pub-select-type">
+                                                        <option value="pdf" <?php selected( $p_type, 'pdf' ); ?>>📄 PDF Document (Upload or Media PDF)</option>
+                                                        <option value="link" <?php selected( $p_type, 'link' ); ?>>🔗 External Web Link (PubMed, DOI, Website)</option>
+                                                    </select>
+                                                </div>
+
+                                                <div class="form-group full-width">
+                                                    <label class="pub-url-label"><?php echo $p_type === 'link' ? 'Website / Article URL (e.g. https://...)' : 'PDF Document File URL'; ?></label>
+                                                    <div style="display: flex; gap: 0.8rem; align-items: center; flex-wrap: wrap;">
+                                                        <input type="text" name="publications_list[<?php echo esc_attr( $p_idx ); ?>][file_url]" class="form-control pub-input-file-url" value="<?php echo esc_attr( $p_url ); ?>" placeholder="<?php echo $p_type === 'link' ? 'https://pubmed.ncbi.nlm.nih.gov/...' : 'https://... or click Upload / Choose PDF'; ?>" style="flex: 1 1 320px;">
+                                                        <button type="button" class="btn btn-secondary btn-upload-pub-pdf" style="<?php echo $p_type === 'link' ? 'display:none;' : ''; ?>">
+                                                            📁 Upload / Choose PDF
+                                                        </button>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label>Button Label Text</label>
+                                                    <input type="text" name="publications_list[<?php echo esc_attr( $p_idx ); ?>][button_label]" class="form-control pub-input-btn-label" value="<?php echo esc_attr( $p_btn ); ?>" placeholder="<?php echo $p_type === 'link' ? 'VIEW ARTICLE' : 'VIEW PDF'; ?>">
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label>Cover / Thumbnail Image</label>
+                                                    <div class="image-uploader-box">
+                                                        <div style="width: 80px; height: 60px; border-radius: 6px; overflow: hidden; background: #0c1727; border: 1px solid var(--c-gold); flex-shrink: 0; display: flex; align-items: center; justify-content: center;">
+                                                            <img src="<?php echo esc_url( $preview_img ); ?>" class="pub-img-preview" style="width: 100%; height: 100%; object-fit: cover; display: block;" onerror="this.src='<?php echo esc_url( $def_pub_img ); ?>';">
+                                                        </div>
+                                                        <input type="hidden" name="publications_list[<?php echo esc_attr( $p_idx ); ?>][image]" class="pub-input-image" value="<?php echo esc_attr( $p_img ); ?>">
+                                                        <div style="display: flex; gap: 0.6rem; align-items: center; flex-wrap: wrap;">
+                                                            <button type="button" class="btn btn-secondary btn-upload-pub-img" style="padding: 0.4rem 0.8rem; font-size: 0.82rem;">Choose Image</button>
+                                                            <button type="button" class="btn btn-secondary btn-reset-pub-img" data-default="<?php echo esc_url( $def_pub_img ); ?>" style="padding: 0.4rem 0.8rem; font-size: 0.82rem; <?php echo empty( $p_img ) ? 'display:none;' : ''; ?>">Reset</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group full-width">
+                                                    <label>Cover Image Alt Text</label>
+                                                    <input type="text" name="publications_list[<?php echo esc_attr( $p_idx ); ?>][image_alt]" class="form-control pub-input-image-alt" value="<?php echo esc_attr( $p_alt ); ?>" placeholder="e.g. Cover image for this publication">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <?php endforeach; ?>
+                                </div>
+                            </div>
+                        <?php endif; ?>
+
                         <?php if ( $slug === 'privacy' || $slug === 'terms' ) : ?>
                             <!-- Legal Policy & Terms Content Section -->
                             <div class="form-section">
@@ -3184,6 +3337,7 @@ function franciscan_render_dashboard_view() {
     jQuery(document).ready(function($) {
         const ajaxUrl = '<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>';
         const nonce = '<?php echo esc_js( $nonce ); ?>';
+        const defaultThemeUri = '<?php echo esc_js( defined( 'FRANCISCAN_THEME_URI' ) ? FRANCISCAN_THEME_URI : '' ); ?>';
 
         function showToast(msg, isError = false) {
             const toast = $('#studio-toast');
@@ -3217,6 +3371,7 @@ function franciscan_render_dashboard_view() {
             const titles = {
                 overview: 'Dashboard Overview',
                 pages: 'Pages Content Editor',
+                gallery: 'Photo Gallery Hub',
                 posts: 'News & Blog Management',
                 settings: 'Website Global Settings',
                 inquiries: 'Inquiries & Prayer Requests',
@@ -3286,6 +3441,266 @@ function franciscan_render_dashboard_view() {
             $(this).hide();
         });
 
+        // ==========================================
+        // PUBLICATIONS LIST MANAGER
+        // ==========================================
+        function getNewPublicationCardHtml(index) {
+            const defaultImg = defaultThemeUri ? defaultThemeUri + '/assets/images/gallery/between-post-critical-pedagogy.jpg' : '';
+            return `
+                <div class="publication-item-card" data-index="${index}" style="background: rgba(255,255,255,0.02); border: 1px solid var(--c-gold); border-radius: 12px; padding: 1.4rem; position: relative; transition: border-color 0.2s ease;">
+                    <input type="hidden" name="publications_list[${index}][id]" value="pub_${Date.now()}" class="pub-input-id">
+                    
+                    <!-- Card Top Header Bar -->
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(255,255,255,0.06); flex-wrap: wrap; gap: 0.8rem;">
+                        <div style="display: flex; align-items: center; gap: 0.8rem;">
+                            <span class="pub-card-num-badge" style="background: var(--c-gold); color: #12100e; font-weight: 800; font-size: 0.8rem; padding: 0.25rem 0.65rem; border-radius: 6px;">
+                                #${index + 1}
+                            </span>
+                            <strong class="pub-card-title-preview" style="color: var(--c-text); font-size: 0.95rem; max-width: 480px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: inline-block;">
+                                New Publication
+                            </strong>
+                            <span class="pub-card-type-badge" style="background: rgba(230, 200, 136, 0.2); color: #e6c888; font-size: 0.75rem; font-weight: 700; padding: 0.2rem 0.6rem; border-radius: 10px; text-transform: uppercase;">
+                                📄 PDF Document
+                            </span>
+                        </div>
+                        <div style="display: flex; gap: 0.5rem; align-items: center;">
+                            <button type="button" class="btn btn-secondary btn-move-pub-up" title="Move Up" style="padding: 0.35rem 0.65rem; font-size: 0.8rem;">▲</button>
+                            <button type="button" class="btn btn-secondary btn-move-pub-down" title="Move Down" style="padding: 0.35rem 0.65rem; font-size: 0.8rem;">▼</button>
+                            <button type="button" class="btn btn-secondary btn-delete-pub-item" style="padding: 0.35rem 0.75rem; font-size: 0.8rem; background: rgba(239, 68, 68, 0.15); color: #fca5a5; border-color: rgba(239, 68, 68, 0.4);" title="Delete Publication">
+                                🗑️ Remove
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Fields Grid -->
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Publication Day (e.g. 20, 05, 15)</label>
+                            <input type="text" name="publications_list[${index}][day]" class="form-control pub-input-day" value="" placeholder="e.g. 20">
+                        </div>
+                        <div class="form-group">
+                            <label>Month &amp; Year (e.g. AUG 2026 or MAY - AUG 2025)</label>
+                            <input type="text" name="publications_list[${index}][month_year]" class="form-control pub-input-my" value="" placeholder="e.g. AUG 2026">
+                        </div>
+                        
+                        <div class="form-group full-width">
+                            <label>Publication Title <span style="color:var(--c-danger);">*</span></label>
+                            <input type="text" name="publications_list[${index}][title]" class="form-control pub-input-title" value="" placeholder="e.g. Title of the Book, Treatise or Journal Article" required>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label>Subtitle / Article Topic / Abstract</label>
+                            <textarea name="publications_list[${index}][subtitle]" class="form-control pub-input-subtitle" rows="2" placeholder="Brief summary, description or topic of this publication..."></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Author / Journal / Volume Details</label>
+                            <input type="text" name="publications_list[${index}][meta_info]" class="form-control pub-input-meta" value="" placeholder="e.g. Fr. Gigesh Meckel, TOR • Vol. 29/2">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Resource / Attachment Type</label>
+                            <select name="publications_list[${index}][link_type]" class="form-control pub-select-type">
+                                <option value="pdf" selected>📄 PDF Document (Upload or Media PDF)</option>
+                                <option value="link">🔗 External Web Link (PubMed, DOI, Website)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label class="pub-url-label">PDF Document File URL</label>
+                            <div style="display: flex; gap: 0.8rem; align-items: center; flex-wrap: wrap;">
+                                <input type="text" name="publications_list[${index}][file_url]" class="form-control pub-input-file-url" value="" placeholder="https://... or click Upload / Choose PDF" style="flex: 1 1 320px;">
+                                <button type="button" class="btn btn-secondary btn-upload-pub-pdf">
+                                    📁 Upload / Choose PDF
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Button Label Text</label>
+                            <input type="text" name="publications_list[${index}][button_label]" class="form-control pub-input-btn-label" value="VIEW PDF" placeholder="VIEW PDF">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Cover / Thumbnail Image</label>
+                            <div class="image-uploader-box">
+                                <div style="width: 80px; height: 60px; border-radius: 6px; overflow: hidden; background: #0c1727; border: 1px solid var(--c-gold); flex-shrink: 0; display: flex; align-items: center; justify-content: center;">
+                                    <img src="${defaultImg}" class="pub-img-preview" style="width: 100%; height: 100%; object-fit: cover; display: block;" onerror="this.src='${defaultImg}';">
+                                </div>
+                                <input type="hidden" name="publications_list[${index}][image]" class="pub-input-image" value="">
+                                <div style="display: flex; gap: 0.6rem; align-items: center; flex-wrap: wrap;">
+                                    <button type="button" class="btn btn-secondary btn-upload-pub-img" style="padding: 0.4rem 0.8rem; font-size: 0.82rem;">Choose Image</button>
+                                    <button type="button" class="btn btn-secondary btn-reset-pub-img" data-default="${defaultImg}" style="padding: 0.4rem 0.8rem; font-size: 0.82rem; display: none;">Reset</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label>Cover Image Alt Text</label>
+                            <input type="text" name="publications_list[${index}][image_alt]" class="form-control pub-input-image-alt" value="" placeholder="e.g. Cover image for this publication">
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function reindexPublicationsList() {
+            $('#publications-list-container .publication-item-card').each(function(newIdx) {
+                const card = $(this);
+                card.attr('data-index', newIdx);
+                card.find('.pub-card-num-badge').text('#' + (newIdx + 1));
+                
+                card.find('input, textarea, select').each(function() {
+                    const name = $(this).attr('name');
+                    if (name && name.startsWith('publications_list[')) {
+                        const updatedName = name.replace(/publications_list\[\d+\]/, 'publications_list[' + newIdx + ']');
+                        $(this).attr('name', updatedName);
+                    }
+                });
+            });
+        }
+
+        // Add Publication Card
+        $(document).on('click', '#btn-add-publication', function(e) {
+            e.preventDefault();
+            const count = $('#publications-list-container .publication-item-card').length;
+            const newHtml = $(getNewPublicationCardHtml(count));
+            $('#publications-list-container').append(newHtml);
+            newHtml.hide().fadeIn(300);
+            $('html, body').animate({
+                scrollTop: newHtml.offset().top - 120
+            }, 400);
+            newHtml.find('.pub-input-title').focus();
+        });
+
+        // Delete Publication Card
+        $(document).on('click', '.btn-delete-pub-item', function(e) {
+            e.preventDefault();
+            const card = $(this).closest('.publication-item-card');
+            const title = card.find('.pub-input-title').val() || 'this publication';
+            if (confirm('Are you sure you want to remove "' + title + '"?')) {
+                card.fadeOut(250, function() {
+                    $(this).remove();
+                    reindexPublicationsList();
+                });
+            }
+        });
+
+        // Move Publication Up / Down
+        $(document).on('click', '.btn-move-pub-up', function(e) {
+            e.preventDefault();
+            const card = $(this).closest('.publication-item-card');
+            const prev = card.prev('.publication-item-card');
+            if (prev.length) {
+                card.insertBefore(prev);
+                reindexPublicationsList();
+                card.css('border-color', 'var(--c-gold)');
+                setTimeout(() => card.css('border-color', 'var(--c-card-border)'), 600);
+            }
+        });
+
+        $(document).on('click', '.btn-move-pub-down', function(e) {
+            e.preventDefault();
+            const card = $(this).closest('.publication-item-card');
+            const next = card.next('.publication-item-card');
+            if (next.length) {
+                card.insertAfter(next);
+                reindexPublicationsList();
+                card.css('border-color', 'var(--c-gold)');
+                setTimeout(() => card.css('border-color', 'var(--c-card-border)'), 600);
+            }
+        });
+
+        // Type Change (PDF vs Link)
+        $(document).on('change', '.pub-select-type', function() {
+            const card = $(this).closest('.publication-item-card');
+            const type = $(this).val();
+            const badge = card.find('.pub-card-type-badge');
+            const urlLabel = card.find('.pub-url-label');
+            const urlInput = card.find('.pub-input-file-url');
+            const btnLabelInput = card.find('.pub-input-btn-label');
+            const uploadPdfBtn = card.find('.btn-upload-pub-pdf');
+
+            if (type === 'link') {
+                badge.css({ background: 'rgba(59, 130, 246, 0.2)', color: '#60a5fa' }).text('🔗 External Link');
+                urlLabel.text('Website / Article URL (e.g. https://...)');
+                urlInput.attr('placeholder', 'https://pubmed.ncbi.nlm.nih.gov/...');
+                uploadPdfBtn.hide();
+                if (btnLabelInput.val() === 'VIEW PDF' || btnLabelInput.val() === '') {
+                    btnLabelInput.val('VIEW ARTICLE').attr('placeholder', 'VIEW ARTICLE');
+                }
+            } else {
+                badge.css({ background: 'rgba(230, 200, 136, 0.2)', color: '#e6c888' }).text('📄 PDF Document');
+                urlLabel.text('PDF Document File URL');
+                urlInput.attr('placeholder', 'https://... or click Upload / Choose PDF');
+                uploadPdfBtn.show();
+                if (btnLabelInput.val() === 'VIEW ARTICLE' || btnLabelInput.val() === '') {
+                    btnLabelInput.val('VIEW PDF').attr('placeholder', 'VIEW PDF');
+                }
+            }
+        });
+
+        // Live Title Preview Update
+        $(document).on('input', '.pub-input-title', function() {
+            const val = $(this).val().trim();
+            const preview = $(this).closest('.publication-item-card').find('.pub-card-title-preview');
+            preview.text(val || 'Untitled Publication');
+        });
+
+        // Upload / Choose PDF via Media Library
+        $(document).on('click', '.btn-upload-pub-pdf', function(e) {
+            e.preventDefault();
+            const card = $(this).closest('.publication-item-card');
+            const inputUrl = card.find('.pub-input-file-url');
+
+            const pdfFrame = wp.media({
+                title: 'Select or Upload Publication PDF',
+                button: { text: 'Use this File' },
+                multiple: false
+            });
+
+            pdfFrame.on('select', function() {
+                const attachment = pdfFrame.state().get('selection').first().toJSON();
+                inputUrl.val(attachment.url);
+            });
+
+            pdfFrame.open();
+        });
+
+        // Upload / Choose Publication Cover Image
+        $(document).on('click', '.btn-upload-pub-img', function(e) {
+            e.preventDefault();
+            const card = $(this).closest('.publication-item-card');
+            const inputImg = card.find('.pub-input-image');
+            const previewImg = card.find('.pub-img-preview');
+            const resetBtn = card.find('.btn-reset-pub-img');
+
+            const imgFrame = wp.media({
+                title: 'Select or Upload Cover Image',
+                library: { type: 'image' },
+                button: { text: 'Use this Image' },
+                multiple: false
+            });
+
+            imgFrame.on('select', function() {
+                const attachment = imgFrame.state().get('selection').first().toJSON();
+                inputImg.val(attachment.url);
+                previewImg.attr('src', attachment.url);
+                resetBtn.show();
+            });
+
+            imgFrame.open();
+        });
+
+        $(document).on('click', '.btn-reset-pub-img', function(e) {
+            e.preventDefault();
+            const card = $(this).closest('.publication-item-card');
+            const defaultUrl = $(this).data('default') || '';
+            card.find('.pub-input-image').val('');
+            card.find('.pub-img-preview').attr('src', defaultUrl);
+            $(this).hide();
+        });
+
         // Save Page Content Form
         $('.page-editor-form').on('submit', function(e) {
             e.preventDefault();
@@ -3295,8 +3710,24 @@ function franciscan_render_dashboard_view() {
 
             form.find('input, textarea, select').each(function() {
                 const name = $(this).attr('name');
-                if (name) {
-                    pageData[name] = $(this).val();
+                if (!name) return;
+                const val = $(this).val();
+
+                // Check for nested array syntax like publications_list[0][title]
+                const match = name.match(/^([a-zA-Z0-9_-]+)\[(\d+)\]\[([a-zA-Z0-9_-]+)\]$/);
+                if (match) {
+                    const listKey = match[1];
+                    const idx = parseInt(match[2], 10);
+                    const subKey = match[3];
+                    if (!pageData[listKey]) {
+                        pageData[listKey] = [];
+                    }
+                    if (!pageData[listKey][idx]) {
+                        pageData[listKey][idx] = {};
+                    }
+                    pageData[listKey][idx][subKey] = val;
+                } else {
+                    pageData[name] = val;
                 }
             });
 
