@@ -889,6 +889,9 @@ button.fs-mega-toggle:focus::after {
                     if (!activeFilteredList || activeFilteredList.length === 0) return;
                     currentLightboxIndex = index;
                     const modal = document.getElementById('fs-gallery-lightbox');
+                    if (modal && modal.parentElement !== document.body) {
+                        document.body.appendChild(modal);
+                    }
                     updateLightboxContent();
                     modal.classList.add('active');
                     document.body.style.overflow = 'hidden';
@@ -896,7 +899,7 @@ button.fs-mega-toggle:focus::after {
 
                 function closeLightbox() {
                     const modal = document.getElementById('fs-gallery-lightbox');
-                    modal.classList.remove('active');
+                    if (modal) modal.classList.remove('active');
                     document.body.style.overflow = '';
                 }
 
@@ -918,18 +921,23 @@ button.fs-mega-toggle:focus::after {
                     const imgEl = document.getElementById('fs-lightbox-img');
                     const captionEl = document.getElementById('fs-lightbox-caption');
                     const counterEl = document.getElementById('fs-lightbox-counter');
+                    const mobileCounterEl = document.getElementById('fs-lightbox-mobile-counter');
 
-                    imgEl.style.opacity = '0';
-                    imgEl.style.transform = 'scale(0.96)';
-                    
-                    setTimeout(() => {
-                        imgEl.src = item.src;
-                        imgEl.alt = item.alt;
-                        captionEl.textContent = item.alt;
-                        counterEl.textContent = `${currentLightboxIndex + 1} / ${activeFilteredList.length}`;
-                        imgEl.style.opacity = '1';
-                        imgEl.style.transform = 'scale(1)';
-                    }, 120);
+                    if (imgEl) {
+                        imgEl.style.opacity = '0';
+                        imgEl.style.transform = 'scale(0.96)';
+                        
+                        setTimeout(() => {
+                            imgEl.src = item.src;
+                            imgEl.alt = item.alt;
+                            if (captionEl) captionEl.textContent = item.alt;
+                            const countText = `${currentLightboxIndex + 1} / ${activeFilteredList.length}`;
+                            if (counterEl) counterEl.textContent = countText;
+                            if (mobileCounterEl) mobileCounterEl.textContent = countText;
+                            imgEl.style.opacity = '1';
+                            imgEl.style.transform = 'scale(1)';
+                        }, 100);
+                    }
                 }
 
                 // Initialize gallery with interactive cards
@@ -988,9 +996,12 @@ button.fs-mega-toggle:focus::after {
                     if (prevBtn) prevBtn.addEventListener('click', (e) => { e.stopPropagation(); prevLightboxImage(); });
                     if (nextBtn) nextBtn.addEventListener('click', (e) => { e.stopPropagation(); nextLightboxImage(); });
                     
+                    document.querySelectorAll('.fs-lightbox-prev-btn').forEach(b => b.addEventListener('click', (e) => { e.stopPropagation(); prevLightboxImage(); }));
+                    document.querySelectorAll('.fs-lightbox-next-btn').forEach(b => b.addEventListener('click', (e) => { e.stopPropagation(); nextLightboxImage(); }));
+
                     if (modal) {
                         modal.addEventListener('click', (e) => {
-                            if (e.target === modal || e.target.id === 'fs-lightbox-close') {
+                            if (e.target === modal || e.target.classList.contains('fs-lightbox-stage')) {
                                 closeLightbox();
                             }
                         });
@@ -1019,9 +1030,9 @@ button.fs-mega-toggle:focus::after {
                         }, { passive: true });
                         modal.addEventListener('touchend', (e) => {
                             touchEndX = e.changedTouches[0].screenX;
-                            if (touchStartX - touchEndX > 50) {
+                            if (touchStartX - touchEndX > 40) {
                                 nextLightboxImage(); // Swipe left
-                            } else if (touchEndX - touchStartX > 50) {
+                            } else if (touchEndX - touchStartX > 40) {
                                 prevLightboxImage(); // Swipe right
                             }
                         }, { passive: true });
@@ -1033,101 +1044,221 @@ button.fs-mega-toggle:focus::after {
         </div>
     </section>
 
-
-
 <!-- Gallery Lightbox Modal -->
 <style>
-    #fs-gallery-lightbox {
+    #fs-gallery-lightbox.fs-lightbox-modal {
         display: none;
-        position: fixed;
-        inset: 0;
-        background: rgba(8, 14, 26, 0.96);
-        backdrop-filter: blur(16px);
-        -webkit-backdrop-filter: blur(16px);
-        z-index: 999999;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        padding: 1.5rem;
-        user-select: none;
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        bottom: 0 !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        background: rgba(8, 14, 26, 0.97) !important;
+        backdrop-filter: blur(20px) !important;
+        -webkit-backdrop-filter: blur(20px) !important;
+        z-index: 99999999 !important;
+        box-sizing: border-box !important;
+        margin: 0 !important;
+        padding: 0 !important;
         opacity: 0;
-        transition: opacity 0.3s ease;
+        transition: opacity 0.25s ease-out;
     }
-    #fs-gallery-lightbox.active {
+    #fs-gallery-lightbox.fs-lightbox-modal.active {
         display: flex !important;
-        opacity: 1;
+        flex-direction: column !important;
+        justify-content: space-between !important;
+        align-items: stretch !important;
+        opacity: 1 !important;
     }
-    .fs-lightbox-btn {
-        background: rgba(255, 255, 255, 0.12);
-        border: 1px solid rgba(230, 200, 136, 0.35);
-        color: #ffffff;
-        border-radius: 50%;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: all 0.2s ease;
-        z-index: 1000002;
+    .fs-lightbox-header {
+        width: 100% !important;
+        padding: 1.2rem 2rem !important;
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        box-sizing: border-box !important;
+        z-index: 10 !important;
     }
-    .fs-lightbox-btn:hover {
-        background: #e6c888;
-        color: #0c1727;
-        transform: scale(1.1);
-        box-shadow: 0 0 20px rgba(230, 200, 136, 0.5);
+    .fs-lightbox-count-badge {
+        background: rgba(230, 200, 136, 0.15) !important;
+        border: 1px solid rgba(230, 200, 136, 0.4) !important;
+        color: #e6c888 !important;
+        font-family: 'Instrument Sans', sans-serif !important;
+        font-size: 0.85rem !important;
+        font-weight: 700 !important;
+        padding: 0.35rem 1rem !important;
+        border-radius: 50px !important;
+        letter-spacing: 0.08em !important;
     }
-    #fs-lightbox-close {
-        position: absolute;
-        top: 1.5rem;
-        right: 1.5rem;
-        width: 48px;
-        height: 48px;
-        font-size: 1.8rem;
-        font-weight: 300;
-        line-height: 1;
+    .fs-lightbox-close-btn {
+        width: 44px !important;
+        height: 44px !important;
+        background: rgba(255, 255, 255, 0.1) !important;
+        border: 1px solid rgba(255, 255, 255, 0.25) !important;
+        color: #ffffff !important;
+        border-radius: 50% !important;
+        cursor: pointer !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        transition: all 0.2s ease !important;
+        padding: 0 !important;
     }
-    #fs-lightbox-prev {
-        position: absolute;
-        left: 1.5rem;
-        top: 50%;
-        transform: translateY(-50%);
-        width: 52px;
-        height: 52px;
-        font-size: 1.8rem;
+    .fs-lightbox-close-btn:hover {
+        background: #e6c888 !important;
+        color: #0c1727 !important;
+        transform: rotate(90deg) scale(1.1) !important;
+        border-color: #e6c888 !important;
     }
-    #fs-lightbox-prev:hover {
-        transform: translateY(-50%) scale(1.1);
+    .fs-lightbox-stage {
+        position: relative !important;
+        flex: 1 1 auto !important;
+        width: 100% !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        padding: 0 1.5rem !important;
+        box-sizing: border-box !important;
+        min-height: 0 !important;
     }
-    #fs-lightbox-next {
-        position: absolute;
-        right: 1.5rem;
-        top: 50%;
-        transform: translateY(-50%);
-        width: 52px;
-        height: 52px;
-        font-size: 1.8rem;
+    .fs-lightbox-media-wrap {
+        max-width: 86vw !important;
+        max-height: 72vh !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        position: relative !important;
     }
-    #fs-lightbox-next:hover {
-        transform: translateY(-50%) scale(1.1);
+    .fs-lightbox-image {
+        max-width: 100% !important;
+        max-height: 72vh !important;
+        width: auto !important;
+        height: auto !important;
+        object-fit: contain !important;
+        border-radius: 12px !important;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8) !important;
+        border: 1px solid rgba(230, 200, 136, 0.25) !important;
+        display: block !important;
+        user-select: none !important;
+        transition: transform 0.25s ease, opacity 0.2s ease !important;
+    }
+    .fs-lightbox-nav-btn {
+        position: absolute !important;
+        top: 50% !important;
+        transform: translateY(-50%) !important;
+        width: 56px !important;
+        height: 56px !important;
+        background: rgba(12, 23, 39, 0.85) !important;
+        border: 1.5px solid rgba(230, 200, 136, 0.5) !important;
+        color: #e6c888 !important;
+        border-radius: 50% !important;
+        cursor: pointer !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        transition: all 0.2s ease !important;
+        z-index: 20 !important;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5) !important;
+        padding: 0 !important;
+    }
+    .fs-lightbox-nav-btn:hover {
+        background: #e6c888 !important;
+        color: #0c1727 !important;
+        transform: translateY(-50%) scale(1.12) !important;
+        box-shadow: 0 0 25px rgba(230, 200, 136, 0.6) !important;
+    }
+    .fs-lightbox-prev {
+        left: 2rem !important;
+    }
+    .fs-lightbox-next {
+        right: 2rem !important;
+    }
+    .fs-lightbox-footer {
+        width: 100% !important;
+        padding: 1rem 1.5rem 1.8rem 1.5rem !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 0.6rem !important;
+        box-sizing: border-box !important;
+        z-index: 10 !important;
+    }
+    .fs-lightbox-caption-text {
+        color: #e6c888 !important;
+        font-family: 'Phudu', sans-serif !important;
+        font-size: 1.15rem !important;
+        font-weight: 700 !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.04em !important;
+        text-align: center !important;
+    }
+    .fs-lightbox-mobile-nav {
+        display: none !important;
     }
     @media (max-width: 768px) {
-        #fs-lightbox-prev {
-            left: 0.8rem;
-            width: 42px;
-            height: 42px;
-            font-size: 1.4rem;
+        .fs-lightbox-header {
+            padding: 0.8rem 1rem !important;
         }
-        #fs-lightbox-next {
-            right: 0.8rem;
-            width: 42px;
-            height: 42px;
-            font-size: 1.4rem;
+        .fs-lightbox-stage {
+            padding: 0 0.5rem !important;
         }
-        #fs-lightbox-close {
-            top: 1rem;
-            right: 1rem;
-            width: 40px;
-            height: 40px;
-            font-size: 1.5rem;
+        .fs-lightbox-media-wrap {
+            max-width: 96vw !important;
+            max-height: 62vh !important;
+        }
+        .fs-lightbox-image {
+            max-height: 62vh !important;
+        }
+        .fs-lightbox-nav-btn {
+            width: 44px !important;
+            height: 44px !important;
+            background: rgba(12, 23, 39, 0.9) !important;
+        }
+        .fs-lightbox-prev {
+            left: 0.4rem !important;
+        }
+        .fs-lightbox-next {
+            right: 0.4rem !important;
+        }
+        .fs-lightbox-footer {
+            padding: 0.6rem 1rem 1.4rem 1rem !important;
+        }
+        .fs-lightbox-caption-text {
+            font-size: 1rem !important;
+        }
+        .fs-lightbox-mobile-nav {
+            display: flex !important;
+            align-items: center !important;
+            gap: 1.2rem !important;
+            margin-top: 0.3rem !important;
+        }
+        .fs-lightbox-mobile-arrow {
+            background: rgba(230, 200, 136, 0.18) !important;
+            border: 1px solid rgba(230, 200, 136, 0.45) !important;
+            color: #e6c888 !important;
+            border-radius: 50px !important;
+            padding: 0.45rem 1.2rem !important;
+            font-family: 'Instrument Sans', sans-serif !important;
+            font-size: 0.85rem !important;
+            font-weight: 700 !important;
+            text-transform: uppercase !important;
+            letter-spacing: 0.05em !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            gap: 0.35rem !important;
+            cursor: pointer !important;
+        }
+        .fs-lightbox-mobile-arrow:active {
+            background: #e6c888 !important;
+            color: #0c1727 !important;
+        }
+        .fs-lightbox-mobile-counter {
+            color: rgba(255, 255, 255, 0.75) !important;
+            font-family: 'Instrument Sans', sans-serif !important;
+            font-size: 0.9rem !important;
+            font-weight: 600 !important;
         }
     }
     .gallery-img-card {
@@ -1177,18 +1308,44 @@ button.fs-mega-toggle:focus::after {
     }
 </style>
 
-<div id="fs-gallery-lightbox" role="dialog" aria-modal="true" aria-label="Photo Lightbox">
-    <button id="fs-lightbox-close" class="fs-lightbox-btn" title="Close (Esc)">&times;</button>
-    <button id="fs-lightbox-prev" class="fs-lightbox-btn" title="Previous (Left Arrow)">&#10094;</button>
-    <button id="fs-lightbox-next" class="fs-lightbox-btn" title="Next (Right Arrow)">&#10095;</button>
-
-    <div style="max-width: 90vw; max-height: 80vh; display: flex; justify-content: center; align-items: center; position: relative;">
-        <img id="fs-lightbox-img" src="" alt="Gallery Image" style="max-width: 100%; max-height: 76vh; object-fit: contain; border-radius: 12px; box-shadow: 0 25px 60px rgba(0,0,0,0.7); border: 1px solid rgba(230,200,136,0.3); transition: transform 0.3s ease, opacity 0.25s ease;">
+<div id="fs-gallery-lightbox" class="fs-lightbox-modal" role="dialog" aria-modal="true" aria-label="Photo Lightbox">
+    <!-- Header Bar -->
+    <div class="fs-lightbox-header">
+        <div class="fs-lightbox-count-badge" id="fs-lightbox-counter">1 / 74</div>
+        <button type="button" id="fs-lightbox-close" class="fs-lightbox-close-btn" title="Close (Esc)">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
     </div>
 
-    <div style="margin-top: 1.2rem; display: flex; flex-direction: column; align-items: center; gap: 0.3rem; text-align: center;">
-        <div id="fs-lightbox-caption" style="color: #e6c888; font-family: 'Phudu', sans-serif; font-size: 1.15rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.03em;"></div>
-        <div id="fs-lightbox-counter" style="color: rgba(255,255,255,0.75); font-family: 'Instrument Sans', sans-serif; font-size: 0.88rem; font-weight: 500;"></div>
+    <!-- Main Stage -->
+    <div class="fs-lightbox-stage">
+        <button type="button" id="fs-lightbox-prev" class="fs-lightbox-nav-btn fs-lightbox-prev fs-lightbox-prev-btn" title="Previous (Left Arrow)">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        </button>
+
+        <div class="fs-lightbox-media-wrap">
+            <img id="fs-lightbox-img" src="" alt="Gallery Image" class="fs-lightbox-image">
+        </div>
+
+        <button type="button" id="fs-lightbox-next" class="fs-lightbox-nav-btn fs-lightbox-next fs-lightbox-next-btn" title="Next (Right Arrow)">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </button>
+    </div>
+
+    <!-- Footer Bar -->
+    <div class="fs-lightbox-footer">
+        <div id="fs-lightbox-caption" class="fs-lightbox-caption-text"></div>
+        <div class="fs-lightbox-mobile-nav">
+            <button type="button" class="fs-lightbox-mobile-arrow fs-lightbox-prev-btn" aria-label="Previous">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                <span>Prev</span>
+            </button>
+            <span class="fs-lightbox-mobile-counter" id="fs-lightbox-mobile-counter">1 / 74</span>
+            <button type="button" class="fs-lightbox-mobile-arrow fs-lightbox-next-btn" aria-label="Next">
+                <span>Next</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </button>
+        </div>
     </div>
 </div>
 
