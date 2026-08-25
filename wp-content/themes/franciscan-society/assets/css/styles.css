@@ -1,12 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Phudu:wght@400..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anek+Malayalam:wght@400;500;600;700;800&family=Gayathri:wght@400;700&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Manjari:wght@400;700&family=Noto+Sans+Malayalam:wght@300;400;500;600;700;800&family=Phudu:wght@400..900&display=swap');
 
-/* Force exact fonts globally */
+/* Force exact fonts globally with Malayalam support */
 h1, h2, h3, h4, h5, h6, .hero-title {
-    font-family: 'Phudu', sans-serif !important;
+    font-family: 'Phudu', 'Noto Sans Malayalam', 'Manjari', 'Gayathri', sans-serif !important;
 }
 
-body, p, span, a, button, input {
-    font-family: 'Instrument Sans', sans-serif !important;
+body, p, span, a, button, input, textarea, select {
+    font-family: 'Instrument Sans', 'Noto Sans Malayalam', 'Manjari', 'Gayathri', sans-serif !important;
 }
 
 /* Header — minimal: logo + single pill Menu trigger at every breakpoint */

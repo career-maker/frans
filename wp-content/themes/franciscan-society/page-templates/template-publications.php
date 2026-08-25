@@ -707,6 +707,18 @@ button.fs-mega-toggle:focus::after {
             color: #0c1727 !important;
             transform: rotate(90deg) !important;
         }
+
+        /* Malayalam Font & Typography Styles */
+        .publication-item h3,
+        .publication-item h3 * {
+            font-family: 'Phudu', 'Noto Sans Malayalam', 'Manjari', 'Gayathri', sans-serif !important;
+            line-height: 1.45 !important;
+        }
+        .publication-item p,
+        .publication-item .pub-meta,
+        .publication-item .pub-btn {
+            font-family: 'Instrument Sans', 'Noto Sans Malayalam', 'Manjari', 'Gayathri', sans-serif !important;
+        }
     </style>
 
 <main id="main-content" style="padding-top: 0; background-color: #FFFFFF;">

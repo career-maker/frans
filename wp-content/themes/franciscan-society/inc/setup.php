@@ -45,10 +45,10 @@ function franciscan_theme_setup() {
 add_action( 'after_setup_theme', 'franciscan_theme_setup' );
 
 function franciscan_enqueue_assets() {
-    // 1. Google Fonts
+    // 1. Google Fonts (including Malayalam)
     wp_enqueue_style(
         'franciscan-google-fonts',
-        'https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Phudu:wght@400..900&family=DM+Sans:wght@400..900&family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Cinzel:wght@400..700&display=swap',
+        'https://fonts.googleapis.com/css2?family=Anek+Malayalam:wght@400;500;600;700;800&family=Cinzel:wght@400..700&family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=DM+Sans:wght@400..900&family=Gayathri:wght@400;700&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Manjari:wght@400;700&family=Noto+Sans+Malayalam:wght@300;400;500;600;700;800&family=Phudu:wght@400..900&display=swap',
         array(),
         null
     );

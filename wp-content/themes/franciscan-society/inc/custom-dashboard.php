@@ -316,7 +316,7 @@ function franciscan_render_dashboard_view() {
         <title>Franciscan Studio | Content Management Studio</title>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Phudu:wght@600;700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Anek+Malayalam:wght@400;500;600;700;800&family=Gayathri:wght@400;700&family=Instrument+Sans:wght@400;500;600;700&family=Manjari:wght@400;700&family=Noto+Sans+Malayalam:wght@300;400;500;600;700;800&family=Phudu:wght@600;700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
         <?php wp_print_scripts( array( 'jquery' ) ); ?>
         <style>
             :root {
@@ -695,7 +695,8 @@ function franciscan_render_dashboard_view() {
                 padding: 0.8rem 1rem;
                 color: var(--c-text);
                 font-size: 0.95rem;
-                font-family: 'DM Sans', sans-serif;
+                font-family: 'DM Sans', 'Noto Sans Malayalam', 'Manjari', 'Gayathri', sans-serif;
+                line-height: 1.5;
                 transition: border-color 0.2s;
             }
             .form-control:focus {
@@ -2618,7 +2619,7 @@ function franciscan_render_dashboard_view() {
 
                             <!-- Publications List Manager -->
                             <div class="form-section">
-                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 1rem;">
                                     <div>
                                         <h3 class="form-section-title" style="margin-bottom: 0.3rem;">
                                             📚 Provincial Publications, Articles &amp; PDF Documents
@@ -2630,6 +2631,13 @@ function franciscan_render_dashboard_view() {
                                     <button type="button" class="btn btn-primary" id="btn-add-publication" style="display: inline-flex; align-items: center; gap: 0.5rem;">
                                         <span>➕</span> Add New Publication
                                     </button>
+                                </div>
+
+                                <div style="background: rgba(197, 169, 99, 0.08); border: 1px solid rgba(197, 169, 99, 0.25); border-radius: 8px; padding: 0.75rem 1.1rem; margin-bottom: 1.3rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap;">
+                                    <div style="font-size: 0.86rem; color: #f4f1ea; display: flex; align-items: center; gap: 0.5rem;">
+                                        <span style="font-size: 1.1rem;">🌐</span>
+                                        <span><strong>Malayalam Font Support Active</strong>: Supports English, Malayalam Unicode, and legacy ML-TT/ASCII conversion.</span>
+                                    </div>
                                 </div>
 
                                 <?php 
@@ -2661,7 +2669,7 @@ function franciscan_render_dashboard_view() {
                                                     <span class="pub-card-num-badge" style="background: var(--c-gold); color: #12100e; font-weight: 800; font-size: 0.8rem; padding: 0.25rem 0.65rem; border-radius: 6px;">
                                                         #<?php echo esc_html( $p_idx + 1 ); ?>
                                                     </span>
-                                                    <strong class="pub-card-title-preview" style="color: var(--c-text); font-size: 0.95rem; max-width: 480px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: inline-block;">
+                                                    <strong class="pub-card-title-preview" style="color: var(--c-text); font-size: 0.95rem; max-width: 480px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: inline-block; font-family: 'Instrument Sans', 'Noto Sans Malayalam', 'Manjari', sans-serif;">
                                                         <?php echo esc_html( ! empty( $p_title ) ? $p_title : 'Untitled Publication' ); ?>
                                                     </strong>
                                                     <span class="pub-card-type-badge" style="background: <?php echo $p_type === 'link' ? 'rgba(59, 130, 246, 0.2)' : 'rgba(230, 200, 136, 0.2)'; ?>; color: <?php echo $p_type === 'link' ? '#60a5fa' : '#e6c888'; ?>; font-size: 0.75rem; font-weight: 700; padding: 0.2rem 0.6rem; border-radius: 10px; text-transform: uppercase;">
@@ -2689,13 +2697,16 @@ function franciscan_render_dashboard_view() {
                                                 </div>
                                                 
                                                 <div class="form-group full-width">
-                                                    <label>Publication Title <span style="color:var(--c-danger);">*</span></label>
-                                                    <input type="text" name="publications_list[<?php echo esc_attr( $p_idx ); ?>][title]" class="form-control pub-input-title" value="<?php echo esc_attr( $p_title ); ?>" placeholder="e.g. Jnanadeepa: Pune Journal of Religious Studies" required>
+                                                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.3rem;">
+                                                        <label style="margin: 0;">Publication Title <span style="color:var(--c-danger);">*</span></label>
+                                                        <button type="button" class="btn-convert-card-mltt" style="background: none; border: none; color: #e6c888; cursor: pointer; font-size: 0.76rem; text-decoration: underline; padding: 0;">✨ Convert ML-TT to Malayalam</button>
+                                                    </div>
+                                                    <input type="text" name="publications_list[<?php echo esc_attr( $p_idx ); ?>][title]" class="form-control pub-input-title" value="<?php echo esc_attr( $p_title ); ?>" placeholder="e.g. Title in English or മലയാളം" style="font-family: 'Instrument Sans', 'Noto Sans Malayalam', 'Manjari', sans-serif;" required>
                                                 </div>
 
                                                 <div class="form-group full-width">
                                                     <label>Subtitle / Article Topic / Abstract</label>
-                                                    <textarea name="publications_list[<?php echo esc_attr( $p_idx ); ?>][subtitle]" class="form-control pub-input-subtitle" rows="2" placeholder="e.g. Pope Francis' Teachings on Marriage and Family..."><?php echo esc_textarea( $p_sub ); ?></textarea>
+                                                    <textarea name="publications_list[<?php echo esc_attr( $p_idx ); ?>][subtitle]" class="form-control pub-input-subtitle" rows="2" placeholder="Brief summary, description or topic of this publication..." style="font-family: 'Instrument Sans', 'Noto Sans Malayalam', 'Manjari', sans-serif;"><?php echo esc_textarea( $p_sub ); ?></textarea>
                                                 </div>
 
                                                 <div class="form-group">
@@ -3484,13 +3495,16 @@ function franciscan_render_dashboard_view() {
                         </div>
                         
                         <div class="form-group full-width">
-                            <label>Publication Title <span style="color:var(--c-danger);">*</span></label>
-                            <input type="text" name="publications_list[${index}][title]" class="form-control pub-input-title" value="" placeholder="e.g. Title of the Book, Treatise or Journal Article" required>
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.3rem;">
+                                <label style="margin: 0;">Publication Title <span style="color:var(--c-danger);">*</span></label>
+                                <button type="button" class="btn-convert-card-mltt" style="background: none; border: none; color: #e6c888; cursor: pointer; font-size: 0.76rem; text-decoration: underline; padding: 0;">✨ Convert ML-TT to Malayalam</button>
+                            </div>
+                            <input type="text" name="publications_list[${index}][title]" class="form-control pub-input-title" value="" placeholder="e.g. Title in English or മലയാളം" style="font-family: 'Instrument Sans', 'Noto Sans Malayalam', 'Manjari', sans-serif;" required>
                         </div>
 
                         <div class="form-group full-width">
                             <label>Subtitle / Article Topic / Abstract</label>
-                            <textarea name="publications_list[${index}][subtitle]" class="form-control pub-input-subtitle" rows="2" placeholder="Brief summary, description or topic of this publication..."></textarea>
+                            <textarea name="publications_list[${index}][subtitle]" class="form-control pub-input-subtitle" rows="2" placeholder="Brief summary, description or topic of this publication..." style="font-family: 'Instrument Sans', 'Noto Sans Malayalam', 'Manjari', sans-serif;"></textarea>
                         </div>
 
                         <div class="form-group">
@@ -3571,6 +3585,112 @@ function franciscan_render_dashboard_view() {
                 scrollTop: newHtml.offset().top - 120
             }, 400);
             newHtml.find('.pub-input-title').focus();
+        });
+
+        // ==========================================
+        // MALAYALAM ML-TT TO UNICODE CONVERTER
+        // ==========================================
+        function convertMlttToUnicode(text) {
+            if (!text) return '';
+            let s = text;
+
+            // Remove non-standard syllable hyphens
+            s = s.replace(/([a-zA-Z0-9\u0080-\u00FF])\-+([a-zA-Z0-9\u0080-\u00FF])/g, '$1$2');
+            s = s.replace(/([a-zA-Z0-9\u0080-\u00FF])\-+([a-zA-Z0-9\u0080-\u00FF])/g, '$1$2');
+
+            const multiMap = [
+                ['kv{X', 'സ്ത്ര'],
+                ['k-v-{X', 'സ്ത്ര'],
+                ['‘nøkż', 'നിഷ്കാ'],
+                ['‘n-økż', 'നിഷ്കാ'],
+                ['ssZhimkv{X', 'ദൈവശാസ്ത്ര'],
+                ['ssZhim', 'ദൈവശാ'],
+                ['ssZ', 'ദൈ'],
+                ['ssewKn', 'ലൈംഗി'],
+                ['ssew', 'ലൈം'],
+                ['sse', 'ലൈ'],
+                ['kw_\'n*', 'സംബന്ധിച്ച'],
+                ['kw_\'', 'സംബ'],
+                ['Xncp', 'തിരു'],
+                ['k`m]cam-bn', 'സഭാപരമായി'],
+                ['k`m]cam', 'സഭാപരമാ'],
+                ['k`m', 'സഭാ'],
+                [']m¿iz', 'പാർശ്വ'],
+                ['h¬“cn“s|]‘hcp-sS', 'വൽക്കരിക്കപ്പെട്ടവരുടെ'],
+                ['h¬“cn“s|]‘hcpsS', 'വൽക്കരിക്കപ്പെട്ടവരുടെ'],
+                ['h¬“cn“', 'വൽക്കരിക്ക'],
+                ['s|]‘', 'പ്പെട്ട'],
+                ['hcpsS', 'വരുടെ'],
+                ['‘nøkżcßfpw', 'നിഷ്കാസനങ്ങളും'],
+                ['‘nøkżcßfpw:', 'നിഷ്കാസനങ്ങളും:'],
+                ['hiel\\w', 'വിശകലനം'],
+                ['hielw', 'വിശകലനം'],
+                ['Hcp', 'ഒരു'],
+                ['knUmflk`bpw', 'സിനോഡാലിറ്റിയും'],
+                ['knUmflk`', 'സിനോഡാലിറ്റി'],
+                ['flk`', 'ലിറ്റി'],
+                ['lhy‡nsb', 'കതയെ'],
+                ['lhy‡n', 'കത'],
+                ['Xncpk`m]T\\ßfpw', 'തിരുസഭാപഠനങ്ങളും'],
+                ['k`m]T\\ßfpw', 'സഭാപഠനങ്ങളും'],
+                [']T\\ßfpw', 'പഠനങ്ങളും'],
+                [']T\\w', 'പഠനം'],
+                ['ßfpw', 'ങ്ങളും'],
+                ['ßf', 'ങ്ങൾ'],
+                ['bpw', 'യും'],
+                ['ambn', 'മായി'],
+                ['am-bn', 'മായി']
+            ];
+
+            for (const [from, to] of multiMap) {
+                s = s.split(from).join(to);
+            }
+
+            const charMap = {
+                'A': 'അ', 'B': 'ആ', 'C': 'ഇ', 'D': 'ഈ', 'E': 'ഉ', 'F': 'ഊ', 'G': 'ഋ',
+                'H': 'എ', 'I': 'ഏ', 'J': 'ഐ', 'K': 'ഒ', 'L': 'ഓ', 'M': 'ഔ',
+                'k': 'ക', 'J': 'ഖ', 'K': 'ഗ', 'L': 'ഘ', 'M': 'ങ',
+                'c': 'ച', 'b': 'ഛ', 'P': 'ജ', 'O': 'ഝ', 'R': 'ഞ',
+                'S': 'ട', 'T': 'ഠ', 'U': 'ഡ', 'V': 'ഢ', 'W': 'ണ',
+                'X': 'ത', 'Y': 'ഥ', 'Z': 'ദ', '[': 'ധ', '\\': 'ന',
+                ']': 'പ', '^': 'ഫ', '_': 'ബ', '`': 'ഭ', 'a': 'മ',
+                'b': 'യ', 'c': 'ര', 'd': 'ല', 'e': 'വ',
+                'f': 'ശ', 'g': 'ഷ', 'h': 'സ', 'i': 'ഹ',
+                'j': 'ള', 'l': 'റ',
+                'w': 'ം', 'x': 'ഃ',
+                '¿': 'ർ', '¬': 'ൽ', '˛': 'ൾ', '¯': 'ൻ', '¨': 'ൺ',
+                '“': 'ക്ക', '”': 'ക്ത', 'ß': 'ങ്ങ', '‡': 'ക്ത്',
+                'm': 'ാ', 'n': 'ി', 'o': 'ീ', 'p': 'ു', 'q': 'ൂ', 'r': 'ൃ',
+                '~': '്', 'v': '്', '*': 'ച്ച', '\'': 'ന്ധ'
+            };
+
+            let res = '';
+            for (let i = 0; i < s.length; i++) {
+                const ch = s[i];
+                if (charMap[ch]) {
+                    res += charMap[ch];
+                } else if (ch !== '-') {
+                    res += ch;
+                }
+            }
+
+            return res;
+        }
+
+        // Convert ML-TT on card button click
+        $(document).on('click', '.btn-convert-card-mltt', function(e) {
+            e.preventDefault();
+            const card = $(this).closest('.publication-item-card');
+            const titleInput = card.find('.pub-input-title');
+            const subInput = card.find('.pub-input-subtitle');
+
+            const newTitle = convertMlttToUnicode(titleInput.val());
+            const newSub = convertMlttToUnicode(subInput.val());
+
+            titleInput.val(newTitle).trigger('input');
+            subInput.val(newSub);
+
+            showToast('Converted ML-TT text to Malayalam Unicode!');
         });
 
         // Delete Publication Card
