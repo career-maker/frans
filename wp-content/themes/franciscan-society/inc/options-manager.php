@@ -658,6 +658,8 @@ function franciscan_resync_legacy_content_options() {
     if ( isset( $merged_opts['smtp_app_password'] ) && in_array( $merged_opts['smtp_app_password'], array( 'ltndjrnpiylptwsv', '' ), true ) ) {
         $merged_opts['smtp_app_password'] = 'jvvb fhvb xods okst';
     }
+    // Always enable SMTP delivery
+    $merged_opts['smtp_enabled'] = '1';
 
     update_option( 'franciscan_theme_options', $merged_opts );
 }

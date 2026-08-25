@@ -641,38 +641,20 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 
-    // Form Submission
-    const form = document.getElementById("fs-contact-form");
-    const submitBtn = document.getElementById("btn-submit-contact");
-    if (form && submitBtn) {
-        form.addEventListener("submit", function(e) {
-            e.preventDefault();
-            const prevText = submitBtn.innerHTML;
-            submitBtn.innerHTML = "<span>SENDING...</span>";
-            submitBtn.disabled = true;
-
-            const formData = new FormData(form);
-            const ajaxUrl = (typeof franciscan_ajax !== "undefined" && franciscan_ajax.ajax_url) ? franciscan_ajax.ajax_url : "/wp-admin/admin-ajax.php";
-
-            fetch(ajaxUrl, {
-                method: "POST",
-                body: formData
-            })
-            .then(res => res.json())
-            .then(data => {
-                submitBtn.disabled = false;
-                submitBtn.innerHTML = prevText;
-                showToast("Message Received! May God bless you.");
-                form.reset();
-            })
-            .catch(() => {
-                submitBtn.disabled = false;
-                submitBtn.innerHTML = prevText;
-                showToast("Message Received! May God bless you.");
-                form.reset();
+    // Franciscan Universal Form Validator handles validation, anti-spam, and AJAX submission.
+    // Toast notification hook for contact page
+    window.addEventListener("DOMContentLoaded", function() {
+        if (window.FranciscanValidator && form) {
+            window.FranciscanValidator.bindForm(form, {
+                onSuccess: function(res) {
+                    showToast(res && res.message ? res.message : "Message Received! May God bless you.");
+                },
+                onError: function(err) {
+                    showToast(err && err.message ? err.message : "Submission failed. Please check the fields.");
+                }
             });
-        });
-    }
+        }
+    });
 });
 </script>
 

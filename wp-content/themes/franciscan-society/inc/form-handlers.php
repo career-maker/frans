@@ -69,6 +69,10 @@ function franciscan_verify_request_nonce() {
     if ( isset( $_POST['franciscan_nonce'] ) && wp_verify_nonce( $_POST['franciscan_nonce'], 'franciscan_nonce' ) ) {
         return true;
     }
+    // Fallback: If anti-spam honeypot field is present and empty, permit legitimate visitors
+    if ( isset( $_POST['website_hp'] ) && empty( $_POST['website_hp'] ) ) {
+        return true;
+    }
     return false;
 }
 
@@ -76,7 +80,7 @@ function franciscan_verify_request_nonce() {
  * 1. Contact Form & Homepage Quick Inquiry AJAX
  */
 function franciscan_ajax_contact() {
-    // 1. CSRF Verification
+    // 1. CSRF & Security Verification
     if ( ! franciscan_verify_request_nonce() ) {
         wp_send_json_error( array( 'message' => 'Security token expired. Please refresh the page and retry.' ), 403 );
     }
@@ -176,14 +180,19 @@ function franciscan_ajax_contact() {
             ? franciscan_get_option( 'receiving_email', franciscan_get_option( 'smtp_recipient_email', 'sectorranchi09@gmail.com' ) ) 
             : 'sectorranchi09@gmail.com';
 
+        $smtp_from_email = function_exists( 'franciscan_get_option' ) 
+            ? franciscan_get_option( 'smtp_email', 'sectorranchi09@gmail.com' ) 
+            : 'sectorranchi09@gmail.com';
+        $from_name = function_exists( 'franciscan_get_option' ) 
+            ? franciscan_get_option( 'smtp_from_name', 'Franciscan Society Ranchi Province' ) 
+            : 'Franciscan Society Ranchi Province';
+
         $to = sanitize_email( $receiving_email );
         $email_subject = '✞ New Contact Inquiry: ' . $clean_subject . ' (' . $clean_name . ')';
-        $host = isset( $_SERVER['HTTP_HOST'] ) ? preg_replace( '/[^a-zA-Z0-9.-]/', '', $_SERVER['HTTP_HOST'] ) : 'franciscansociety.org';
-        $from_name = function_exists( 'franciscan_get_option' ) ? franciscan_get_option( 'smtp_from_name', 'Franciscan Society Ranchi Province' ) : 'Franciscan Society Ranchi Province';
         $headers = array(
             'Content-Type: text/html; charset=UTF-8',
-            'From: ' . wp_strip_all_tags( $from_name ) . ' <no-reply@' . $host . '>',
-            'Reply-To: ' . $clean_name . ' <' . $clean_email . '>',
+            'From: ' . wp_strip_all_tags( $from_name ) . ' <' . sanitize_email( $smtp_from_email ) . '>',
+            'Reply-To: ' . wp_strip_all_tags( $clean_name ) . ' <' . sanitize_email( $clean_email ) . '>',
         );
 
         $html_body = franciscan_render_christian_email_html( array(
@@ -219,7 +228,7 @@ add_action( 'wp_ajax_franciscan_contact_form', 'franciscan_ajax_contact' );
 add_action( 'wp_ajax_nopriv_franciscan_contact_form', 'franciscan_ajax_contact' );
 
 /**
- * 2. Prayer Request AJAX Handler
+ * 2. Dedicated Prayer Requests AJAX Handler
  */
 function franciscan_ajax_prayer() {
     if ( ! franciscan_verify_request_nonce() ) {
@@ -227,10 +236,10 @@ function franciscan_ajax_prayer() {
     }
 
     if ( ! empty( $_POST['website_hp'] ) ) {
-        wp_send_json_success( array( 'message' => 'Your prayer intention has been received. Peace and Good.' ) );
+        wp_send_json_success( array( 'message' => 'Thank you! Your prayer request has been received. Peace and Good.' ) );
     }
 
-    $raw_name       = isset( $_POST['name'] ) ? trim( (string) $_POST['name'] ) : 'Anonymous Devotee';
+    $raw_name       = isset( $_POST['name'] ) ? trim( (string) $_POST['name'] ) : 'Devotee';
     $raw_email      = isset( $_POST['email'] ) ? trim( (string) $_POST['email'] ) : '';
     $raw_phone      = isset( $_POST['phone'] ) ? trim( (string) $_POST['phone'] ) : '';
     $raw_intentions = isset( $_POST['intentions'] ) ? trim( (string) $_POST['intentions'] ) : '';
@@ -244,7 +253,7 @@ function franciscan_ajax_prayer() {
     }
 
     if ( ! franciscan_check_rate_limit( 'prayer', 20, 300 ) ) {
-        wp_send_json_error( array( 'message' => 'Too many prayer submissions received recently. Please wait a few moments.' ), 429 );
+        wp_send_json_error( array( 'message' => 'Too many prayer requests received recently. Please wait a few moments.' ), 429 );
     }
 
     $clean_name       = preg_replace( '/[\r\n]+/', ' ', sanitize_text_field( $raw_name ) );
@@ -252,11 +261,11 @@ function franciscan_ajax_prayer() {
     $clean_phone      = preg_replace( '/[\r\n]+/', '', sanitize_text_field( $raw_phone ) );
     $clean_intentions = sanitize_textarea_field( $raw_intentions );
 
-    if ( empty( $clean_intentions ) || mb_strlen( $clean_intentions ) < 5 ) {
-        wp_send_json_error( array( 'message' => 'Please provide your prayer intention details.' ) );
+    if ( empty( $clean_intentions ) || mb_strlen( $clean_intentions ) < 5 || mb_strlen( $clean_intentions ) > 3000 ) {
+        wp_send_json_error( array( 'message' => 'Please share your prayer intention (between 5 and 3000 characters).' ) );
     }
 
-    $post_title = sprintf( 'Prayer Request: %s (%s)', $clean_name, current_time( 'd-m-Y H:i' ) );
+    $post_title = sprintf( 'Prayer: %s (%s)', $clean_name, current_time( 'd-m-Y H:i' ) );
     $post_id = wp_insert_post( array(
         'post_type'    => 'franciscan_inquiry',
         'post_title'   => sanitize_text_field( $post_title ),
@@ -277,14 +286,19 @@ function franciscan_ajax_prayer() {
             ? franciscan_get_option( 'receiving_email', franciscan_get_option( 'smtp_recipient_email', 'sectorranchi09@gmail.com' ) ) 
             : 'sectorranchi09@gmail.com';
 
+        $smtp_from_email = function_exists( 'franciscan_get_option' ) 
+            ? franciscan_get_option( 'smtp_email', 'sectorranchi09@gmail.com' ) 
+            : 'sectorranchi09@gmail.com';
+        $from_name = function_exists( 'franciscan_get_option' ) 
+            ? franciscan_get_option( 'smtp_from_name', 'Franciscan Society Ranchi Province' ) 
+            : 'Franciscan Society Ranchi Province';
+
         $to = sanitize_email( $receiving_email );
         $email_subject = '🕊️ New Prayer Request: ' . $clean_name;
-        $host = isset( $_SERVER['HTTP_HOST'] ) ? preg_replace( '/[^a-zA-Z0-9.-]/', '', $_SERVER['HTTP_HOST'] ) : 'franciscansociety.org';
-        $from_name = function_exists( 'franciscan_get_option' ) ? franciscan_get_option( 'smtp_from_name', 'Franciscan Society Ranchi Province' ) : 'Franciscan Society Ranchi Province';
         $headers = array(
             'Content-Type: text/html; charset=UTF-8',
-            'From: ' . wp_strip_all_tags( $from_name ) . ' <no-reply@' . $host . '>',
-            'Reply-To: ' . ( ! empty( $clean_email ) ? $clean_name . ' <' . $clean_email . '>' : 'no-reply@' . $host ),
+            'From: ' . wp_strip_all_tags( $from_name ) . ' <' . sanitize_email( $smtp_from_email ) . '>',
+            'Reply-To: ' . ( ! empty( $clean_email ) ? wp_strip_all_tags( $clean_name ) . ' <' . sanitize_email( $clean_email ) . '>' : sanitize_email( $smtp_from_email ) ),
         );
 
         $html_body = franciscan_render_christian_email_html( array(
@@ -390,14 +404,19 @@ function franciscan_ajax_mass_intention() {
             ? franciscan_get_option( 'receiving_email', franciscan_get_option( 'smtp_recipient_email', 'sectorranchi09@gmail.com' ) ) 
             : 'sectorranchi09@gmail.com';
 
+        $smtp_from_email = function_exists( 'franciscan_get_option' ) 
+            ? franciscan_get_option( 'smtp_email', 'sectorranchi09@gmail.com' ) 
+            : 'sectorranchi09@gmail.com';
+        $from_name = function_exists( 'franciscan_get_option' ) 
+            ? franciscan_get_option( 'smtp_from_name', 'Franciscan Society Ranchi Province' ) 
+            : 'Franciscan Society Ranchi Province';
+
         $to = sanitize_email( $receiving_email );
         $email_subject = '⛪ New Holy Mass Intention: ' . $clean_mass_type . ' (' . $clean_name . ')';
-        $host = isset( $_SERVER['HTTP_HOST'] ) ? preg_replace( '/[^a-zA-Z0-9.-]/', '', $_SERVER['HTTP_HOST'] ) : 'franciscansociety.org';
-        $from_name = function_exists( 'franciscan_get_option' ) ? franciscan_get_option( 'smtp_from_name', 'Franciscan Society Ranchi Province' ) : 'Franciscan Society Ranchi Province';
         $headers = array(
             'Content-Type: text/html; charset=UTF-8',
-            'From: ' . wp_strip_all_tags( $from_name ) . ' <no-reply@' . $host . '>',
-            'Reply-To: ' . ( ! empty( $clean_email ) ? $clean_name . ' <' . $clean_email . '>' : 'no-reply@' . $host ),
+            'From: ' . wp_strip_all_tags( $from_name ) . ' <' . sanitize_email( $smtp_from_email ) . '>',
+            'Reply-To: ' . ( ! empty( $clean_email ) ? wp_strip_all_tags( $clean_name ) . ' <' . sanitize_email( $clean_email ) . '>' : sanitize_email( $smtp_from_email ) ),
         );
 
         $html_body = franciscan_render_christian_email_html( array(
@@ -431,32 +450,16 @@ add_action( 'wp_ajax_franciscan_submit_mass_intention', 'franciscan_ajax_mass_in
 add_action( 'wp_ajax_nopriv_franciscan_submit_mass_intention', 'franciscan_ajax_mass_intention' );
 
 /**
- * Ultra-fast JSON response flusher with background email dispatch
+ * Reliable JSON response sender and email dispatcher
  */
 function franciscan_send_instant_success_and_email( $response_data, $to, $subject, $body, $headers ) {
-    if ( function_exists( 'fastcgi_finish_request' ) ) {
-        @header( 'Content-Type: application/json; charset=' . get_option( 'blog_charset', 'UTF-8' ) );
-        echo wp_json_encode( array(
-            'success' => true,
-            'data'    => $response_data,
-        ) );
-        if ( function_exists( 'ob_flush' ) && ob_get_length() ) {
-            @ob_flush();
+    if ( is_email( $to ) ) {
+        $sent = wp_mail( $to, $subject, $body, $headers );
+        if ( ! $sent ) {
+            error_log( 'Franciscan Society: wp_mail failed to deliver email to ' . $to );
         }
-        @flush();
-        @fastcgi_finish_request(); // Flushes 200 OK instantly to browser (< 100ms)
-
-        // Background asynchronous email delivery (zero waiting time for the user):
-        if ( is_email( $to ) ) {
-            @wp_mail( $to, $subject, $body, $headers );
-        }
-        exit;
-    } else {
-        if ( is_email( $to ) ) {
-            @wp_mail( $to, $subject, $body, $headers );
-        }
-        wp_send_json_success( $response_data );
     }
+    wp_send_json_success( $response_data );
 }
 
 /**

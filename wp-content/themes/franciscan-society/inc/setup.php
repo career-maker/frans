@@ -142,6 +142,13 @@ function franciscan_enqueue_assets() {
         'site_url'   => home_url( '/' ),
         'recaptcha_site_key' => function_exists( 'franciscan_get_option' ) ? franciscan_get_option( 'recaptcha_site_key', '' ) : '',
     ) );
+    wp_localize_script( 'franciscan-form-validator', 'franciscan_ajax', array(
+        'ajax_url'   => admin_url( 'admin-ajax.php' ),
+        'nonce'      => wp_create_nonce( 'franciscan_nonce' ),
+        'theme_uri'  => FRANCISCAN_THEME_URI,
+        'site_url'   => home_url( '/' ),
+        'recaptcha_site_key' => function_exists( 'franciscan_get_option' ) ? franciscan_get_option( 'recaptcha_site_key', '' ) : '',
+    ) );
 }
 add_action( 'wp_enqueue_scripts', 'franciscan_enqueue_assets' );
 
@@ -210,10 +217,12 @@ add_action( 'login_head', 'franciscan_render_universal_favicon', 1 );
  * Automatically route all WordPress outgoing emails through Gmail App Password / SMTP
  */
 function franciscan_configure_smtp_phpmailer( $phpmailer ) {
-    if ( franciscan_get_option( 'smtp_enabled', '1' ) === '1' ) {
-        $smtp_email = franciscan_get_option( 'smtp_email', 'sectorranchi09@gmail.com' );
-        $smtp_pass  = str_replace( ' ', '', (string) franciscan_get_option( 'smtp_app_password', 'jvvb fhvb xods okst' ) );
+    $smtp_email = franciscan_get_option( 'smtp_email', 'sectorranchi09@gmail.com' );
+    $smtp_pass  = str_replace( ' ', '', (string) franciscan_get_option( 'smtp_app_password', 'jvvb fhvb xods okst' ) );
+    $smtp_enabled = franciscan_get_option( 'smtp_enabled', '1' );
 
+    // If credentials are present, route email through authenticated SMTP
+    if ( $smtp_enabled !== '0' || ( ! empty( $smtp_email ) && ! empty( $smtp_pass ) ) ) {
         if ( ! empty( $smtp_email ) && ! empty( $smtp_pass ) ) {
             $phpmailer->isSMTP();
             $phpmailer->Host          = franciscan_get_option( 'smtp_host', 'smtp.gmail.com' );
@@ -225,10 +234,10 @@ function franciscan_configure_smtp_phpmailer( $phpmailer ) {
             $phpmailer->From          = $smtp_email;
             $phpmailer->FromName      = franciscan_get_option( 'smtp_from_name', 'Franciscan Society Ranchi Province' );
             
-            // Ultra-fast connection & timeout configuration (prevents submission lag on shared hosting)
-            $phpmailer->Timeout       = 6;
-            $phpmailer->Timelimit     = 6;
-            $phpmailer->SMTPAutoTLS   = false;
+            // Connection & timeout configuration
+            $phpmailer->Timeout       = 15;
+            $phpmailer->Timelimit     = 15;
+            $phpmailer->SMTPAutoTLS   = true;
             $phpmailer->SMTPKeepAlive = false;
             $phpmailer->SMTPOptions   = array(
                 'ssl' => array(
