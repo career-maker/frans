@@ -713,12 +713,23 @@ button.fs-mega-toggle:focus::after {
 <main id="main-content" style="padding-top: 0; background-color: #FFFFFF;">
 
     <!-- Gallery Hero Section -->
-    <section class="page-hero-banner" style="position: relative; padding-top: 180px; padding-bottom: 120px; background: url('<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_51_30_PM.png' ); ?>') center/cover no-repeat;">
+    <?php
+    $gal_hero_bg    = franciscan_get_page_field( 'gallery', 'hero_image', FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_51_30_PM.png' );
+    $gal_hero_badge = franciscan_get_page_field( 'gallery', 'hero_badge', 'MOMENTS OF GRACE' );
+    $gal_hero_title = franciscan_get_page_field( 'gallery', 'hero_title', 'PHOTO & VIDEO GALLERY' );
+    $gal_hero_sub   = franciscan_get_page_field( 'gallery', 'hero_subtitle', 'Visual chronicles of feast days, ordinations, jubilees, missions, and community living across Ranchi Province.' );
+    ?>
+    <section class="page-hero-banner" style="position: relative; padding-top: 180px; padding-bottom: 120px; background: url('<?php echo esc_url( $gal_hero_bg ); ?>') center/cover no-repeat;">
         <div style="position: absolute; inset: 0; background: rgba(20, 33, 58, 0.75);"></div>
         <div style="position: relative; z-index: 10; max-width: 1200px; margin: 0 auto; padding: 0 2rem; text-align: center;">
-            <h1 style="font-family: 'Phudu', sans-serif; font-size: clamp(2.8rem, 5.2vw, 4.5rem); font-weight: 700; color: #ffffff; text-transform: uppercase; margin: 0 0 1rem 0; line-height: 1.1;"><?php echo esc_html( franciscan_get_page_field( "gallery", "hero_title", "PHOTO & VIDEO GALLERY" ) ); ?></h1>
+            <?php if ( ! empty( $gal_hero_badge ) ) : ?>
+                <div style="display: inline-block; padding: 0.35rem 1.1rem; background: rgba(230, 200, 136, 0.18); border: 1px solid rgba(230, 200, 136, 0.4); border-radius: 50px; font-family: 'Instrument Sans', sans-serif; font-size: 0.85rem; font-weight: 700; color: #e6c888; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.85rem;">
+                    <?php echo esc_html( $gal_hero_badge ); ?>
+                </div>
+            <?php endif; ?>
+            <h1 style="font-family: 'Phudu', sans-serif; font-size: clamp(2.8rem, 5.2vw, 4.5rem); font-weight: 700; color: #ffffff; text-transform: uppercase; margin: 0 0 1rem 0; line-height: 1.1;"><?php echo esc_html( $gal_hero_title ); ?></h1>
             <div style="font-family: 'Instrument Sans', sans-serif; font-size: 1.05rem; font-weight: 600; color: #e7e2d6;">
-                Home / Image Gallery
+                <?php echo esc_html( $gal_hero_sub ); ?>
             </div>
         </div>
     </section>

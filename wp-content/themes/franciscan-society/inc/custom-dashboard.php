@@ -939,7 +939,14 @@ function franciscan_render_dashboard_view() {
 
                 <!-- Page Forms -->
                 <?php foreach ( $managed_pages as $slug => $label ) :
-                    $data = franciscan_get_page_content( $slug );
+                    $defaults = franciscan_get_default_page_content( $slug );
+                    $data     = franciscan_get_page_content( $slug );
+                    if ( ! is_array( $data ) ) {
+                        $data = array();
+                    }
+                    $hero_badge_val = ( isset( $data['hero_badge'] ) && $data['hero_badge'] !== '' ) ? $data['hero_badge'] : ( $defaults['hero_badge'] ?? '' );
+                    $hero_title_val = ( isset( $data['hero_title'] ) && $data['hero_title'] !== '' ) ? $data['hero_title'] : ( $defaults['hero_title'] ?? '' );
+                    $hero_sub_val   = ( isset( $data['hero_subtitle'] ) && $data['hero_subtitle'] !== '' ) ? $data['hero_subtitle'] : ( $defaults['hero_subtitle'] ?? '' );
                 ?>
                     <form class="page-editor-form" id="form-page-<?php echo esc_attr( $slug ); ?>" data-slug="<?php echo esc_attr( $slug ); ?>" style="<?php echo $slug === 'home' ? '' : 'display:none;'; ?>">
                         
@@ -949,15 +956,15 @@ function franciscan_render_dashboard_view() {
                             <div class="form-grid">
                                 <div class="form-group">
                                     <label>Hero Badge / Eyebrow Text</label>
-                                    <input type="text" name="hero_badge" class="form-control" value="<?php echo esc_attr( $data['hero_badge'] ?? '' ); ?>">
+                                    <input type="text" name="hero_badge" class="form-control" value="<?php echo esc_attr( $hero_badge_val ); ?>" placeholder="<?php echo esc_attr( $defaults['hero_badge'] ?? '' ); ?>">
                                 </div>
                                 <div class="form-group">
                                     <label>Hero Main Heading (Title)</label>
-                                    <input type="text" name="hero_title" class="form-control" value="<?php echo esc_attr( $data['hero_title'] ?? '' ); ?>">
+                                    <input type="text" name="hero_title" class="form-control" value="<?php echo esc_attr( $hero_title_val ); ?>" placeholder="<?php echo esc_attr( $defaults['hero_title'] ?? '' ); ?>">
                                 </div>
                                 <div class="form-group full-width">
                                     <label>Hero Subtitle / Description</label>
-                                    <textarea name="hero_subtitle" class="form-control"><?php echo esc_textarea( $data['hero_subtitle'] ?? '' ); ?></textarea>
+                                    <textarea name="hero_subtitle" class="form-control" placeholder="<?php echo esc_attr( $defaults['hero_subtitle'] ?? '' ); ?>"><?php echo esc_textarea( $hero_sub_val ); ?></textarea>
                                 </div>
                                 <div class="form-group full-width">
                                     <label>Hero Banner Image (Replaces default background)</label>
@@ -980,11 +987,11 @@ function franciscan_render_dashboard_view() {
                                             <button type="button" class="btn btn-secondary btn-reset-media" data-target="hero_image-<?php echo esc_attr( $slug ); ?>" data-default="<?php echo esc_url( $default_banner ); ?>" style="<?php echo empty( $data["hero_image"] ) ? "display:none;" : ""; ?>" title="Reset to default theme banner">
                                                 ? Reset to Default
                                             </button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
                         <?php if ( $slug === 'home' ) : ?>
                             <!-- Home Specific Sections -->
@@ -1366,33 +1373,8 @@ function franciscan_render_dashboard_view() {
                         <?php if ( $slug === 'about' ) : ?>
                             <!-- About Page Specific Sections -->
                             <div class="form-section">
-                                <h3 class="form-section-title">🌟 Hero Banner &amp; Story</h3>
+                                <h3 class="form-section-title">🏛️ Story &amp; Heritage Section</h3>
                                 <div class="form-grid">
-                                    <div class="form-group">
-                                        <label>Hero Badge</label>
-                                        <input type="text" name="hero_badge" class="form-control" value="<?php echo esc_attr( $data['hero_badge'] ?? 'WHO WE ARE' ); ?>">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Hero Title</label>
-                                        <input type="text" name="hero_title" class="form-control" value="<?php echo esc_attr( $data['hero_title'] ?? 'ABOUT US' ); ?>">
-                                    </div>
-                                    <div class="form-group full-width">
-                                        <label>Hero Background Image</label>
-                                        <?php
-                                        $def_ab_hero = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_51_30_PM.png';
-                                        $cur_ab_hero = ! empty( $data['hero_image'] ) ? $data['hero_image'] : $def_ab_hero;
-                                        ?>
-                                        <div class="image-uploader-box">
-                                            <div style="width: 100px; height: 64px; border-radius: 8px; overflow: hidden; background: #0c1727; border: 1px solid var(--c-gold); flex-shrink: 0; display: flex; align-items: center; justify-content: center;">
-                                                <img src="<?php echo esc_url( $cur_ab_hero ); ?>" class="image-preview-thumb" id="preview-hero_image-about" style="width: 100%; height: 100%; object-fit: cover; display: block;" onerror="this.src='<?php echo esc_url( $def_ab_hero ); ?>';">
-                                            </div>
-                                            <input type="hidden" name="hero_image" id="input-hero_image-about" value="<?php echo esc_attr( $data['hero_image'] ?? '' ); ?>">
-                                            <div style="display: flex; gap: 0.8rem; align-items: center; flex-wrap: wrap;">
-                                                <button type="button" class="btn btn-secondary btn-upload-media" data-target="hero_image-about">Choose Image from Library</button>
-                                                <button type="button" class="btn btn-secondary btn-reset-media" data-target="hero_image-about" data-default="<?php echo esc_url( $def_ab_hero ); ?>" style="<?php echo empty( $data['hero_image'] ) ? 'display:none;' : ''; ?>">Reset to Default</button>
-                                            </div>
-                                        </div>
-                                    </div>
                                     <div class="form-group">
                                         <label>Story Eyebrow Badge</label>
                                         <input type="text" name="about_eyebrow" class="form-control" value="<?php echo esc_attr( $data['about_eyebrow'] ?? 'ABOUT US' ); ?>">
@@ -1617,37 +1599,8 @@ function franciscan_render_dashboard_view() {
                         <?php if ( $slug === 'contact' ) : ?>
                             <!-- Contact Page Specific Sections -->
                             <div class="form-section">
-                                <h3 class="form-section-title">📍 Hero &amp; Contact Header</h3>
+                                <h3 class="form-section-title">📍 Contact Information &amp; Channels</h3>
                                 <div class="form-grid">
-                                    <div class="form-group">
-                                        <label>Hero Badge</label>
-                                        <input type="text" name="hero_badge" class="form-control" value="<?php echo esc_attr( $data['hero_badge'] ?? 'GET IN TOUCH' ); ?>">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Hero Title</label>
-                                        <input type="text" name="hero_title" class="form-control" value="<?php echo esc_attr( $data['hero_title'] ?? 'CONTACT US' ); ?>">
-                                    </div>
-                                    <div class="form-group full-width">
-                                        <label>Hero Subtitle</label>
-                                        <input type="text" name="hero_subtitle" class="form-control" value="<?php echo esc_attr( $data['hero_subtitle'] ?? 'Connect with our fraternity, request prayers, or enquire about our ministries.' ); ?>">
-                                    </div>
-                                    <div class="form-group full-width">
-                                        <label>Hero Background Image</label>
-                                        <?php
-                                        $def_ct_hero = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_51_30_PM.png';
-                                        $cur_ct_hero = ! empty( $data['hero_image'] ) ? $data['hero_image'] : $def_ct_hero;
-                                        ?>
-                                        <div class="image-uploader-box">
-                                            <div style="width: 100px; height: 64px; border-radius: 8px; overflow: hidden; background: #0c1727; border: 1px solid var(--c-gold); flex-shrink: 0; display: flex; align-items: center; justify-content: center;">
-                                                <img src="<?php echo esc_url( $cur_ct_hero ); ?>" class="image-preview-thumb" id="preview-hero_image-contact" style="width: 100%; height: 100%; object-fit: cover; display: block;" onerror="this.src='<?php echo esc_url( $def_ct_hero ); ?>';">
-                                            </div>
-                                            <input type="hidden" name="hero_image" id="input-hero_image-contact" value="<?php echo esc_attr( $data['hero_image'] ?? '' ); ?>">
-                                            <div style="display: flex; gap: 0.8rem; align-items: center; flex-wrap: wrap;">
-                                                <button type="button" class="btn btn-secondary btn-upload-media" data-target="hero_image-contact">Choose Image</button>
-                                                <button type="button" class="btn btn-secondary btn-reset-media" data-target="hero_image-contact" data-default="<?php echo esc_url( $def_ct_hero ); ?>" style="<?php echo empty( $data['hero_image'] ) ? 'display:none;' : ''; ?>">Reset to Default</button>
-                                            </div>
-                                        </div>
-                                    </div>
                                     <div class="form-group">
                                         <label>Main Section Heading</label>
                                         <input type="text" name="main_heading" class="form-control" value="<?php echo esc_attr( $data['main_heading'] ?? 'REACH OUT TO US' ); ?>">
@@ -1713,33 +1666,8 @@ function franciscan_render_dashboard_view() {
                         <?php if ( $slug === 'community-history' ) : ?>
                             <!-- Community History Page Specific Sections -->
                             <div class="form-section">
-                                <h3 class="form-section-title">🏛️ Hero Banner &amp; Heritage Card</h3>
+                                <h3 class="form-section-title">🏛️ Heritage Overview Card</h3>
                                 <div class="form-grid">
-                                    <div class="form-group">
-                                        <label>Hero Badge</label>
-                                        <input type="text" name="hero_badge" class="form-control" value="<?php echo esc_attr( $data['hero_badge'] ?? 'HERITAGE' ); ?>">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Hero Title</label>
-                                        <input type="text" name="hero_title" class="form-control" value="<?php echo esc_attr( $data['hero_title'] ?? 'HISTORY OF THE PROVINCE' ); ?>">
-                                    </div>
-                                    <div class="form-group full-width">
-                                        <label>Hero Background Image</label>
-                                        <?php
-                                        $def_ch_hero = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_51_30_PM.png';
-                                        $cur_ch_hero = ! empty( $data['hero_image'] ) ? $data['hero_image'] : $def_ch_hero;
-                                        ?>
-                                        <div class="image-uploader-box">
-                                            <div style="width: 100px; height: 64px; border-radius: 8px; overflow: hidden; background: #0c1727; border: 1px solid var(--c-gold); flex-shrink: 0; display: flex; align-items: center; justify-content: center;">
-                                                <img src="<?php echo esc_url( $cur_ch_hero ); ?>" class="image-preview-thumb" id="preview-hero_image-community-history" style="width: 100%; height: 100%; object-fit: cover; display: block;" onerror="this.src='<?php echo esc_url( $def_ch_hero ); ?>';">
-                                            </div>
-                                            <input type="hidden" name="hero_image" id="input-hero_image-community-history" value="<?php echo esc_attr( $data['hero_image'] ?? '' ); ?>">
-                                            <div style="display: flex; gap: 0.8rem; align-items: center; flex-wrap: wrap;">
-                                                <button type="button" class="btn btn-secondary btn-upload-media" data-target="hero_image-community-history">Choose Image</button>
-                                                <button type="button" class="btn btn-secondary btn-reset-media" data-target="hero_image-community-history" data-default="<?php echo esc_url( $def_ch_hero ); ?>" style="<?php echo empty( $data['hero_image'] ) ? 'display:none;' : ''; ?>">Reset to Default</button>
-                                            </div>
-                                        </div>
-                                    </div>
                                     <div class="form-group">
                                         <label>Heritage Card Badge</label>
                                         <input type="text" name="heritage_badge" class="form-control" value="<?php echo esc_attr( $data['heritage_badge'] ?? 'OUR HERITAGE' ); ?>">

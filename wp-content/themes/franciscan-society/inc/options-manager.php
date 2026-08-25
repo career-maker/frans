@@ -515,10 +515,24 @@ function franciscan_update_page_content( $slug, $data ) {
  * Auto-resync legacy database placeholders with 100% exact live frontend content.
  */
 function franciscan_resync_legacy_content_options() {
-    $home = get_option( 'franciscan_page_home', array() );
-    if ( empty( $home ) || ( isset( $home['hero_title'] ) && strpos( $home['hero_title'], 'Called to Rebuild' ) !== false ) ) {
-        $exact_defaults = franciscan_get_default_page_content( 'home' );
-        update_option( 'franciscan_page_home', $exact_defaults );
+    $all_defaults = franciscan_get_default_page_content();
+    if ( is_array( $all_defaults ) ) {
+        foreach ( $all_defaults as $slug => $def_values ) {
+            $saved = get_option( 'franciscan_page_' . $slug, null );
+            if ( empty( $saved ) || ! is_array( $saved ) ) {
+                update_option( 'franciscan_page_' . $slug, $def_values );
+            } else {
+                // If saved option exists, merge missing or empty fields with live defaults
+                $clean = array();
+                foreach ( $saved as $k => $v ) {
+                    if ( $v !== '' && $v !== null ) {
+                        $clean[ $k ] = $v;
+                    }
+                }
+                $merged = wp_parse_args( $clean, $def_values );
+                update_option( 'franciscan_page_' . $slug, $merged );
+            }
+        }
     }
 }
 add_action( 'init', 'franciscan_resync_legacy_content_options' );
