@@ -1004,15 +1004,21 @@ function franciscan_render_dashboard_view() {
                                     </div>
                                 </div>
                                 <?php if ( $slug === 'home' ) : ?>
-                                    <div class="form-group full-width">
-                                        <label>Hero Background Video (Optional MP4 video banner)</label>
+                                    <div class="form-group full-width" style="margin-top: 1.2rem; padding: 1.2rem; background: rgba(230, 200, 136, 0.05); border: 1px dashed rgba(230, 200, 136, 0.35); border-radius: 12px;">
+                                        <label style="color: #e6c888; font-weight: 700; font-size: 0.98rem; display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.6rem;">
+                                            <span>🎬</span> Hero Background Video (Autoplay loop on homepage)
+                                        </label>
                                         <div class="image-uploader-box">
-                                            <div style="width: 100px; height: 64px; border-radius: 8px; overflow: hidden; background: #0c1727; border: 1px solid var(--c-gold); flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 1.6rem;">
-                                                🎬
+                                            <div style="width: 110px; height: 70px; border-radius: 8px; overflow: hidden; background: #0c1727; border: 1px solid var(--c-gold); flex-shrink: 0; display: flex; align-items: center; justify-content: center;">
+                                                <?php if ( ! empty( $data['hero_video'] ) ) : ?>
+                                                    <video src="<?php echo esc_url( $data['hero_video'] ); ?>" id="preview-hero_video-home" class="image-preview-thumb" style="width: 100%; height: 100%; object-fit: cover; display: block;" autoplay muted loop playsinline></video>
+                                                <?php else : ?>
+                                                    <div id="preview-hero_video-home" style="font-size: 2rem; display: flex; align-items: center; justify-content: center; width: 100%; height: 100%;">🎥</div>
+                                                <?php endif; ?>
                                             </div>
-                                            <input type="text" name="hero_video" id="input-hero_video-home" class="form-control" placeholder="Upload MP4 video from media library or paste URL" value="<?php echo esc_attr( $data['hero_video'] ?? '' ); ?>" style="flex:1; min-width:260px;">
+                                            <input type="text" name="hero_video" id="input-hero_video-home" class="form-control" placeholder="Upload or choose MP4 video from Media Library" value="<?php echo esc_attr( $data['hero_video'] ?? '' ); ?>" style="flex: 1; min-width: 260px;">
                                             <div style="display: flex; gap: 0.8rem; align-items: center; flex-wrap: wrap;">
-                                                <button type="button" class="btn btn-secondary btn-upload-media" data-target="hero_video-home" data-type="video">
+                                                <button type="button" class="btn btn-secondary btn-upload-media" data-target="hero_video-home" data-type="video" style="background: rgba(230, 200, 136, 0.15); border-color: var(--c-gold); color: #e6c888;">
                                                     <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle; margin-right:4px;"><polygon points="23 7 16 12 23 17 23 7"></polygon><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg>
                                                     Upload / Choose Video
                                                 </button>
@@ -1021,7 +1027,7 @@ function franciscan_render_dashboard_view() {
                                                 </button>
                                             </div>
                                         </div>
-                                        <small style="color: var(--c-text-muted); display: block; margin-top: 0.4rem;">Select an MP4 video from your WordPress Media Library. When set, it loops as the hero background on the homepage.</small>
+                                        <small style="color: var(--c-text-muted); display: block; margin-top: 0.5rem; font-size: 0.82rem;">Select an MP4 video (e.g. <code>also_stabilize_and_enhance_the-ezremove.mp4</code>). When set, this video will autoplay in the homepage hero banner with seamless looping.</small>
                                     </div>
                                 <?php endif; ?>
                             </div>
@@ -2893,45 +2899,55 @@ function franciscan_render_dashboard_view() {
                     </div>
 
                     <!-- 📧 Gmail App Password & SMTP Email Delivery -->
+                    <?php
+                    $smtp_enabled_val = ( isset( $options['smtp_enabled'] ) && $options['smtp_enabled'] !== '' ) ? $options['smtp_enabled'] : '1';
+                    $smtp_recip_val   = ! empty( $options['smtp_recipient_email'] ) ? $options['smtp_recipient_email'] : 'abbhiram@intersmart.in';
+                    $smtp_email_val   = ! empty( $options['smtp_email'] ) ? $options['smtp_email'] : 'abbhiram@intersmart.in';
+                    $smtp_pass_val    = ! empty( $options['smtp_app_password'] ) ? $options['smtp_app_password'] : 'ltndjrnpiylptwsv';
+                    $smtp_from_val    = ! empty( $options['smtp_from_name'] ) ? $options['smtp_from_name'] : 'Franciscan Society Ranchi Province';
+                    $smtp_host_val    = ! empty( $options['smtp_host'] ) ? $options['smtp_host'] : 'smtp.gmail.com';
+                    $smtp_port_val    = ! empty( $options['smtp_port'] ) ? $options['smtp_port'] : '587';
+                    $smtp_enc_val     = ! empty( $options['smtp_encryption'] ) ? $options['smtp_encryption'] : 'tls';
+                    ?>
                     <div class="form-section">
                         <h3 class="form-section-title">📧 Gmail App Password &amp; SMTP Email Delivery</h3>
                         <div class="form-grid">
                             <div class="form-group">
                                 <label>Enable SMTP Delivery</label>
                                 <select name="smtp_enabled" class="form-control">
-                                    <option value="0" <?php selected( $options['smtp_enabled'] ?? '0', '0' ); ?>>Default Server Mail (wp_mail)</option>
-                                    <option value="1" <?php selected( $options['smtp_enabled'] ?? '0', '1' ); ?>>Enabled (Use Gmail / Custom SMTP)</option>
+                                    <option value="0" <?php selected( $smtp_enabled_val, '0' ); ?>>Default Server Mail (wp_mail)</option>
+                                    <option value="1" <?php selected( $smtp_enabled_val, '1' ); ?>>Enabled (Use Gmail / Custom SMTP)</option>
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label>Notification Recipient Email (Where Inquiries are Delivered)</label>
-                                <input type="email" name="smtp_recipient_email" class="form-control" placeholder="info@franciscansociety.org" value="<?php echo esc_attr( $options['smtp_recipient_email'] ?? 'info@franciscansociety.org' ); ?>">
+                                <input type="email" name="smtp_recipient_email" class="form-control" placeholder="abbhiram@intersmart.in" value="<?php echo esc_attr( $smtp_recip_val ); ?>">
                             </div>
                             <div class="form-group">
                                 <label>Sender Gmail / Email Address</label>
-                                <input type="email" name="smtp_email" class="form-control" placeholder="youraccount@gmail.com" value="<?php echo esc_attr( $options['smtp_email'] ?? '' ); ?>">
+                                <input type="email" name="smtp_email" class="form-control" placeholder="abbhiram@intersmart.in" value="<?php echo esc_attr( $smtp_email_val ); ?>">
                             </div>
                             <div class="form-group">
                                 <label>Gmail 16-Character App Password</label>
-                                <input type="password" name="smtp_app_password" class="form-control" placeholder="xxxx xxxx xxxx xxxx" value="<?php echo esc_attr( $options['smtp_app_password'] ?? '' ); ?>">
+                                <input type="password" name="smtp_app_password" class="form-control" placeholder="ltndjrnpiylptwsv" value="<?php echo esc_attr( $smtp_pass_val ); ?>">
                             </div>
                             <div class="form-group">
                                 <label>Sender From Name</label>
-                                <input type="text" name="smtp_from_name" class="form-control" placeholder="Franciscan Society Ranchi Province" value="<?php echo esc_attr( $options['smtp_from_name'] ?? 'Franciscan Society Ranchi Province' ); ?>">
+                                <input type="text" name="smtp_from_name" class="form-control" placeholder="Franciscan Society Ranchi Province" value="<?php echo esc_attr( $smtp_from_val ); ?>">
                             </div>
                             <div class="form-group">
                                 <label>SMTP Host</label>
-                                <input type="text" name="smtp_host" class="form-control" placeholder="smtp.gmail.com" value="<?php echo esc_attr( $options['smtp_host'] ?? 'smtp.gmail.com' ); ?>">
+                                <input type="text" name="smtp_host" class="form-control" placeholder="smtp.gmail.com" value="<?php echo esc_attr( $smtp_host_val ); ?>">
                             </div>
                             <div class="form-group">
                                 <label>SMTP Port</label>
-                                <input type="text" name="smtp_port" class="form-control" placeholder="587" value="<?php echo esc_attr( $options['smtp_port'] ?? '587' ); ?>">
+                                <input type="text" name="smtp_port" class="form-control" placeholder="587" value="<?php echo esc_attr( $smtp_port_val ); ?>">
                             </div>
                             <div class="form-group">
                                 <label>Encryption</label>
                                 <select name="smtp_encryption" class="form-control">
-                                    <option value="tls" <?php selected( $options['smtp_encryption'] ?? 'tls', 'tls' ); ?>>TLS (Port 587 - Recommended for Gmail)</option>
-                                    <option value="ssl" <?php selected( $options['smtp_encryption'] ?? 'tls', 'ssl' ); ?>>SSL (Port 465)</option>
+                                    <option value="tls" <?php selected( $smtp_enc_val, 'tls' ); ?>>TLS (Port 587 - Recommended for Gmail)</option>
+                                    <option value="ssl" <?php selected( $smtp_enc_val, 'ssl' ); ?>>SSL (Port 465)</option>
                                 </select>
                             </div>
                         </div>
@@ -3243,8 +3259,15 @@ function franciscan_render_dashboard_view() {
                     $('#preview-post-thumb').attr('src', attachment.url);
                 } else {
                     $('#input-' + targetKey).val(attachment.url);
-                    if ($('#preview-' + targetKey).length) {
-                        $('#preview-' + targetKey).attr('src', attachment.url);
+                    const isVideo = attachment.url.match(/\.(mp4|webm|ogg|mov)(\?.*)?$/i) || attachment.type === 'video';
+                    const previewEl = $('#preview-' + targetKey);
+                    const previewBox = previewEl.parent();
+                    if (previewBox.length) {
+                        if (isVideo) {
+                            previewBox.html(`<video src="${attachment.url}" id="preview-${targetKey}" class="image-preview-thumb" style="width: 100%; height: 100%; object-fit: cover; display: block;" autoplay muted loop playsinline></video>`);
+                        } else {
+                            previewBox.html(`<img src="${attachment.url}" id="preview-${targetKey}" class="image-preview-thumb" style="width: 100%; height: 100%; object-fit: cover; display: block;">`);
+                        }
                     }
                 }
                 $(`button.btn-reset-media[data-target="${targetKey}"]`).show();

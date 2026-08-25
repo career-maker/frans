@@ -20,10 +20,16 @@ get_header();
             <?php 
             $hero_img = franciscan_get_page_field( 'home', 'hero_image', FRANCISCAN_THEME_URI . '/assets/images/new_uploads/hero-banner-aug20.jpeg' );
             $hero_vid = franciscan_get_page_field( 'home', 'hero_video', '' );
-            if ( ! empty( $hero_vid ) ) : ?>
-                <video id="hero-bg-video" autoplay muted loop playsinline poster="<?php echo esc_url( $hero_img ); ?>" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; border-radius: 24px;">
-                    <source src="<?php echo esc_url( $hero_vid ); ?>" type="video/mp4">
-                    <img src="<?php echo esc_url( $hero_img ); ?>" alt="Franciscan Friars Hero" style="width: 100%; height: 100%; object-fit: cover;">
+            
+            // Check if hero_image itself was set to a video file (.mp4, .webm, etc.)
+            $is_img_video = preg_match( '/\.(mp4|webm|ogg|mov)(\?.*)?$/i', $hero_img );
+            $active_video = ! empty( $hero_vid ) ? $hero_vid : ( $is_img_video ? $hero_img : '' );
+            $poster_img   = ! $is_img_video ? $hero_img : ( FRANCISCAN_THEME_URI . '/assets/images/new_uploads/hero-banner-aug20.jpeg' );
+
+            if ( ! empty( $active_video ) ) : ?>
+                <video id="hero-bg-video" autoplay muted loop playsinline poster="<?php echo esc_url( $poster_img ); ?>" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; border-radius: 24px;">
+                    <source src="<?php echo esc_url( $active_video ); ?>" type="video/mp4">
+                    <img src="<?php echo esc_url( $poster_img ); ?>" alt="Franciscan Friars Hero" style="width: 100%; height: 100%; object-fit: cover;">
                 </video>
             <?php else : ?>
                 <img id="hero-bg-video" src="<?php echo esc_url( $hero_img ); ?>" alt="Franciscan Friars Hero" style="z-index: 1;">
