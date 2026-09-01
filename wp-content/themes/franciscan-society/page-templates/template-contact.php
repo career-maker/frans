@@ -479,6 +479,7 @@ $hero_subtitle = franciscan_get_page_field( 'contact', 'hero_subtitle', 'Reach o
                     </div>
                 </div>
 
+                <?php if ( '1' === (string) franciscan_get_option( 'show_donation_section', '0' ) ) : ?>
                 <!-- Section: Make a Donation -->
                 <h3 class="donation-section-heading"><?php echo esc_html( franciscan_get_page_field( 'contact', 'donation_heading', 'MAKE A DONATION' ) ); ?></h3>
 
@@ -505,6 +506,7 @@ $hero_subtitle = franciscan_get_page_field( 'contact', 'hero_subtitle', 'Reach o
                         Routing No: <strong><?php echo esc_html( franciscan_get_page_field( 'contact', 'donation_chase_routing', '021000021' ) ); ?></strong> | Swift: <strong><?php echo esc_html( franciscan_get_page_field( 'contact', 'donation_chase_swift', 'CHASUS33' ) ); ?></strong>
                     </p>
                 </div>
+                <?php endif; ?>
             </div>
 
             <!-- Right Column: Send Us a Message Form -->
@@ -545,7 +547,9 @@ $hero_subtitle = franciscan_get_page_field( 'contact', 'hero_subtitle', 'Reach o
                                 <option value="Vocation Guidance">Vocation Guidance</option>
                                 <option value="Pastoral Ministry">Pastoral Ministry</option>
                                 <option value="Social Outreach">Social Outreach</option>
+                                <?php if ( '1' === (string) franciscan_get_option( 'show_donation_section', '0' ) ) : ?>
                                 <option value="Donation &amp; Contribution Support">Donation &amp; Contribution Support</option>
+                                <?php endif; ?>
                             </select>
                         </div>
 

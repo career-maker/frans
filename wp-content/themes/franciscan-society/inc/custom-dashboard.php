@@ -1660,7 +1660,18 @@ function franciscan_render_dashboard_view() {
                             </div>
 
                             <div class="form-section">
-                                <h3 class="form-section-title">🏦 Bank Donation Details (SBI &amp; Chase)</h3>
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; flex-wrap: wrap; gap: 0.5rem;">
+                                    <h3 class="form-section-title" style="margin: 0;">🏦 Bank Donation Details (SBI &amp; Chase)</h3>
+                                    <?php
+                                    $is_don_visible = ( '1' === (string) franciscan_get_option( 'show_donation_section', '0' ) );
+                                    ?>
+                                    <span style="font-size: 0.8rem; padding: 0.25rem 0.75rem; border-radius: 12px; font-weight: 700; background: <?php echo $is_don_visible ? 'rgba(16,185,129,0.15)' : 'rgba(239,68,68,0.15)'; ?>; color: <?php echo $is_don_visible ? '#10b981' : '#f87171'; ?>; border: 1px solid <?php echo $is_don_visible ? 'rgba(16,185,129,0.3)' : 'rgba(239,68,68,0.3)'; ?>;">
+                                        <?php echo $is_don_visible ? '👁️ Currently Visible on Website' : '🙈 Currently Hidden on Website'; ?>
+                                    </span>
+                                </div>
+                                <p style="font-size: 0.82rem; color: var(--c-text-muted); margin-bottom: 1rem;">
+                                    Configure bank account details for donation and mass intention offerings. Visibility toggle can be adjusted anytime in <a href="#" class="switch-tab-btn" data-target="settings" style="color: var(--c-gold); text-decoration: underline;">Website Global Settings</a>.
+                                </p>
                                 <div class="form-grid">
                                     <div class="form-group">
                                         <label>SBI Bank Name</label>
@@ -3028,6 +3039,23 @@ function franciscan_render_dashboard_view() {
                             <div class="form-group">
                                 <label>Twitter / X URL</label>
                                 <input type="url" name="twitter_url" class="form-control" value="<?php echo esc_attr( $options['twitter_url'] ?? '' ); ?>">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 💰 Donation & Mass Intention Visibility Toggle -->
+                    <div class="form-section">
+                        <h3 class="form-section-title">💰 Donation &amp; Mass Intention Bank Details Visibility</h3>
+                        <div class="form-grid">
+                            <div class="form-group full-width">
+                                <label>Donation &amp; Bank Account Sections Display (Homepage &amp; Contact Page)</label>
+                                <select name="show_donation_section" class="form-control" style="max-width: 440px; font-weight: 600;">
+                                    <option value="0" <?php selected( $options['show_donation_section'] ?? '0', '0' ); ?>>🙈 Hidden (Hide donation &amp; bank details everywhere on website)</option>
+                                    <option value="1" <?php selected( $options['show_donation_section'] ?? '0', '1' ); ?>>👁️ Visible (Show donation &amp; bank details on website)</option>
+                                </select>
+                                <p style="font-size: 0.84rem; color: var(--c-text-muted); margin-top: 0.6rem; line-height: 1.5;">
+                                    When set to <strong>Hidden</strong>, the Donation and Mass Intention bank details cards (on both Homepage and Contact page) are completely hidden from public visitors. You can unhide and restore their display at any time by choosing <strong>Visible</strong> and saving.
+                                </p>
                             </div>
                         </div>
                     </div>

@@ -836,7 +836,9 @@ get_header();
                                         <option value="Prayer Request / Intercession">Prayer Request &amp; Intentions</option>
                                         <option value="Vocation Guidance">Vocational &amp; Priesthood Guidance</option>
                                         <option value="Holy Mass Intention">Holy Mass Intention</option>
+                                        <?php if ( '1' === (string) franciscan_get_option( 'show_donation_section', '0' ) ) : ?>
                                         <option value="Donation &amp; Contribution Support">Donation &amp; Mission Support</option>
+                                        <?php endif; ?>
                                     </select>
                                 </div>
 
@@ -1543,6 +1545,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
         
+        <?php if ( '1' === (string) franciscan_get_option( 'show_donation_section', '0' ) ) : ?>
         <!-- Mass Intention in USA Section -->
         <section style="padding: clamp(2rem, 4vw, 3.5rem) 0 clamp(1.5rem, 3vw, 2.5rem) 0; background-color: #FAFAFA; box-sizing: border-box;">
             <!-- Rounded Card Container -->
@@ -1668,6 +1671,7 @@ document.addEventListener("DOMContentLoaded", function() {
             </div>
             </div>
         </section>
+        <?php endif; ?>
          <!-- 6. Footer (Exact Reference Screenshot Inset Rounded Card with Dark Texture, Links, Socials & Map) -->
         
 

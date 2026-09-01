@@ -42,6 +42,9 @@ function franciscan_get_default_options() {
         'smtp_from_name'        => 'Franciscan Society Ranchi Province',
         'smtp_recipient_email'  => 'sectorranchi09@gmail.com',
         'receiving_email'       => 'sectorranchi09@gmail.com',
+
+        // Donation & Bank Details Visibility (0 = Hidden, 1 = Visible)
+        'show_donation_section' => '0',
     );
 }
 
