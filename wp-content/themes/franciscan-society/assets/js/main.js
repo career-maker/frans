@@ -37,6 +37,17 @@ document.addEventListener("DOMContentLoaded", () => {
     const header = document.querySelector('.js-header');
     let lastScrollY = window.scrollY;
     let scrollAccumulator = 0;
+
+    // Apply correct state immediately on load (fixes grey flash on refresh)
+    if (header) {
+        if (window.scrollY > 50) {
+            header.classList.add('is-scrolled');
+        } else {
+            header.classList.remove('is-scrolled');
+            header.classList.remove('is-hidden');
+        }
+    }
+
     if (header) window.addEventListener('scroll', () => {
         const currentScrollY = window.scrollY;
         const delta = currentScrollY - lastScrollY;
