@@ -515,7 +515,7 @@ get_header();
 
                 </div>
 
-                <div id="news-scroll-track" style="display: flex; gap: 2.2rem; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 1.5rem; scrollbar-width: none; -ms-overflow-style: none;">
+                <div id="news-scroll-track" style="display: flex; justify-content: center; gap: 2.2rem; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 1.5rem; scrollbar-width: none; -ms-overflow-style: none;">
 
                     <!-- Seminar on New Labour Code -->
                     <div class="blog-card" style="flex: 0 0 min(540px, 90vw); scroll-snap-align: start; display: flex; flex-direction: column; background: transparent;">
