@@ -143,24 +143,29 @@ get_header();
                     }
                     $welcome_slides = array(
                         array(
-                            'url' => $welcome_mosaic,
-                            'alt' => 'Franciscan Society Cathedral and Mosaic Sanctuary',
+                            'url'   => $welcome_mosaic,
+                            'alt'   => 'Franciscan Society Cathedral and Mosaic Sanctuary',
+                            'title' => 'Cathedral & Mosaic Sanctuary',
                         ),
                         array(
-                            'url' => FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_48_39_PM.png',
-                            'alt' => 'Franciscan Rosary and Contemplative Prayer',
+                            'url'   => FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_48_39_PM.png',
+                            'alt'   => 'Franciscan Rosary and Contemplative Prayer',
+                            'title' => 'Contemplative Prayer & Rosary',
                         ),
                         array(
-                            'url' => FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_51_30_PM.png',
-                            'alt' => 'Franciscan Church Altar and Sacred Architecture',
+                            'url'   => FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_51_30_PM.png',
+                            'alt'   => 'Franciscan Church Altar and Sacred Architecture',
+                            'title' => 'Sacred Altar & Architecture',
                         ),
                         array(
-                            'url' => FRANCISCAN_THEME_URI . '/assets/images/new_uploads/hero-banner-aug20.jpeg',
-                            'alt' => 'Franciscan Friars Community Gathering',
+                            'url'   => FRANCISCAN_THEME_URI . '/assets/images/new_uploads/hero-banner-aug20.jpeg',
+                            'alt'   => 'Franciscan Friars Community Gathering',
+                            'title' => 'Friars Community Gathering',
                         ),
                         array(
-                            'url' => FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_20_2026_02_25_29_PM.png',
-                            'alt' => 'Franciscan Community Eucharistic Celebration',
+                            'url'   => FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_20_2026_02_25_29_PM.png',
+                            'alt'   => 'Franciscan Community Eucharistic Celebration',
+                            'title' => 'Eucharistic Celebration',
                         ),
                     );
                     ?>
@@ -169,7 +174,13 @@ get_header();
                             <?php foreach ( $welcome_slides as $index => $slide ) : $is_active = ( 0 === $index ); ?>
                                 <div class="welcome-slide <?php echo $is_active ? 'is-active' : ''; ?>">
                                     <img loading="<?php echo $index === 0 ? 'eager' : 'lazy'; ?>" decoding="async" src="<?php echo esc_url( $slide['url'] ); ?>" alt="<?php echo esc_attr( $slide['alt'] ); ?>">
-                                    <div style="position: absolute; inset: 0; background: linear-gradient(to top, rgba(12, 23, 39, 0.4) 0%, transparent 65%); pointer-events: none;"></div>
+                                    <div style="position: absolute; inset: 0; background: linear-gradient(to top, rgba(12, 23, 39, 0.5) 0%, transparent 65%); pointer-events: none;"></div>
+                                    <div class="welcome-slide-caption">
+                                        <div class="welcome-slide-tag">
+                                            <span class="dot"></span>
+                                            <span class="title"><?php echo esc_html( $slide['title'] ); ?></span>
+                                        </div>
+                                    </div>
                                 </div>
                             <?php endforeach; ?>
                         </div>

@@ -746,24 +746,29 @@ button.fs-mega-toggle:focus::after {
                 }
                 $about_slides = array(
                     array(
-                        'url' => $about_sec_img,
-                        'alt' => 'Franciscan Rosary and Contemplative Prayer',
+                        'url'   => $about_sec_img,
+                        'alt'   => 'Franciscan Rosary and Contemplative Prayer',
+                        'title' => 'Contemplative Prayer & Rosary',
                     ),
                     array(
-                        'url' => FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_24_08_PM.png',
-                        'alt' => 'Franciscan Society Cathedral Sanctuary',
+                        'url'   => FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_24_08_PM.png',
+                        'alt'   => 'Franciscan Society Cathedral Sanctuary',
+                        'title' => 'Cathedral & Mosaic Sanctuary',
                     ),
                     array(
-                        'url' => FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_51_30_PM.png',
-                        'alt' => 'Franciscan Church Altar Architecture',
+                        'url'   => FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_51_30_PM.png',
+                        'alt'   => 'Franciscan Church Altar Architecture',
+                        'title' => 'Sacred Altar & Architecture',
                     ),
                     array(
-                        'url' => FRANCISCAN_THEME_URI . '/assets/images/new_uploads/hero-banner-aug20.jpeg',
-                        'alt' => 'Franciscan Friars Community Gathering',
+                        'url'   => FRANCISCAN_THEME_URI . '/assets/images/new_uploads/hero-banner-aug20.jpeg',
+                        'alt'   => 'Franciscan Friars Community Gathering',
+                        'title' => 'Friars Community Gathering',
                     ),
                     array(
-                        'url' => FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_20_2026_02_25_29_PM.png',
-                        'alt' => 'Franciscan Community Prayer Celebration',
+                        'url'   => FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_20_2026_02_25_29_PM.png',
+                        'alt'   => 'Franciscan Community Prayer Celebration',
+                        'title' => 'Eucharistic Celebration',
                     ),
                 );
                 ?>
@@ -773,7 +778,13 @@ button.fs-mega-toggle:focus::after {
                             <?php foreach ( $about_slides as $index => $slide ) : $is_active = ( 0 === $index ); ?>
                                 <div class="welcome-slide <?php echo $is_active ? 'is-active' : ''; ?>">
                                     <img loading="<?php echo $index === 0 ? 'eager' : 'lazy'; ?>" decoding="async" src="<?php echo esc_url( $slide['url'] ); ?>" alt="<?php echo esc_attr( $slide['alt'] ); ?>">
-                                    <div style="position: absolute; inset: 0; background: linear-gradient(to top, rgba(12, 23, 39, 0.4) 0%, transparent 65%); pointer-events: none;"></div>
+                                    <div style="position: absolute; inset: 0; background: linear-gradient(to top, rgba(12, 23, 39, 0.5) 0%, transparent 65%); pointer-events: none;"></div>
+                                    <div class="welcome-slide-caption">
+                                        <div class="welcome-slide-tag">
+                                            <span class="dot"></span>
+                                            <span class="title"><?php echo esc_html( $slide['title'] ); ?></span>
+                                        </div>
+                                    </div>
                                 </div>
                             <?php endforeach; ?>
                         </div>
