@@ -1689,11 +1689,52 @@ button.fs-mega-toggle:focus::after {
   }
 </style>
 
+<?php
+// Dynamic Navigation Links & Labels
+$opt = franciscan_get_options();
+
+$nav_lbl_home        = ! empty( $opt['nav_label_home'] ) ? $opt['nav_label_home'] : 'Home';
+$nav_url_home        = franciscan_resolve_nav_url( $opt['nav_link_home'] ?? '/', '/' );
+
+$nav_lbl_about       = ! empty( $opt['nav_label_about'] ) ? $opt['nav_label_about'] : 'About Us';
+$nav_url_about       = franciscan_resolve_nav_url( $opt['nav_link_about'] ?? '/about/', '/about/' );
+
+$nav_lbl_gallery     = ! empty( $opt['nav_label_gallery'] ) ? $opt['nav_label_gallery'] : 'Gallery';
+$nav_url_gallery      = franciscan_resolve_nav_url( $opt['nav_link_gallery'] ?? '/gallery/', '/gallery/' );
+
+$nav_lbl_ministries  = ! empty( $opt['nav_label_ministries'] ) ? $opt['nav_label_ministries'] : 'Ministries';
+$nav_lbl_m_pastoral  = ! empty( $opt['nav_label_ministries_pastoral'] ) ? $opt['nav_label_ministries_pastoral'] : 'Pastoral Ministry';
+$nav_url_m_pastoral  = franciscan_resolve_nav_url( $opt['nav_link_ministries_pastoral'] ?? '/ministries-pastoral/', '/ministries-pastoral/' );
+$nav_lbl_m_formation = ! empty( $opt['nav_label_ministries_formation'] ) ? $opt['nav_label_ministries_formation'] : 'Formation Ministry';
+$nav_url_m_formation = franciscan_resolve_nav_url( $opt['nav_link_ministries_formation'] ?? '/ministries-formation/', '/ministries-formation/' );
+$nav_lbl_m_education = ! empty( $opt['nav_label_ministries_education'] ) ? $opt['nav_label_ministries_education'] : 'Education Ministry';
+$nav_url_m_education = franciscan_resolve_nav_url( $opt['nav_link_ministries_education'] ?? '/ministries-education/', '/ministries-education/' );
+$nav_lbl_publication = ! empty( $opt['nav_label_publications'] ) ? $opt['nav_label_publications'] : 'Publications';
+$nav_url_publication = franciscan_resolve_nav_url( $opt['nav_link_publications'] ?? '/publications/', '/publications/' );
+
+$nav_lbl_community   = ! empty( $opt['nav_label_community'] ) ? $opt['nav_label_community'] : 'Community';
+$nav_lbl_c_history   = ! empty( $opt['nav_label_community_history'] ) ? $opt['nav_label_community_history'] : 'Our History';
+$nav_url_c_history   = franciscan_resolve_nav_url( $opt['nav_link_community_history'] ?? '/community-history/', '/community-history/' );
+$nav_lbl_c_rule      = ! empty( $opt['nav_label_community_rule'] ) ? $opt['nav_label_community_rule'] : 'Third Order Rule';
+$nav_url_c_rule      = franciscan_resolve_nav_url( $opt['nav_link_community_rule'] ?? '/community-rule/', '/community-rule/' );
+$nav_lbl_c_leader    = ! empty( $opt['nav_label_community_leadership'] ) ? $opt['nav_label_community_leadership'] : 'Leadership';
+$nav_url_c_leader    = franciscan_resolve_nav_url( $opt['nav_link_community_leadership'] ?? '/community-leadership/', '/community-leadership/' );
+$nav_lbl_c_friars    = ! empty( $opt['nav_label_community_friars'] ) ? $opt['nav_label_community_friars'] : 'Our Friars';
+$nav_url_c_friars    = franciscan_resolve_nav_url( $opt['nav_link_community_friars'] ?? '/community-friars/', '/community-friars/' );
+$nav_lbl_c_friaries  = ! empty( $opt['nav_label_community_friaries'] ) ? $opt['nav_label_community_friaries'] : 'Our Friaries';
+$nav_url_c_friaries  = franciscan_resolve_nav_url( $opt['nav_link_community_friaries'] ?? '/community-friaries/', '/community-friaries/' );
+
+$nav_lbl_news        = ! empty( $opt['nav_label_news'] ) ? $opt['nav_label_news'] : 'News';
+$nav_url_news        = franciscan_resolve_nav_url( $opt['nav_link_news'] ?? '/news/', '/news/' );
+
+$nav_lbl_contact     = ! empty( $opt['nav_label_contact'] ) ? $opt['nav_label_contact'] : 'Contact Us';
+$nav_url_contact     = franciscan_resolve_nav_url( $opt['nav_link_contact'] ?? '/contact/', '/contact/' );
+?>
 <!-- Header -->
 <header class="fs-header fs-menu">
   <div class="fs-header-inner">
     <!-- Logo -->
-    <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="fs-logo">
+    <a href="<?php echo esc_url( $nav_url_home ); ?>" class="fs-logo">
       <img  loading="lazy" decoding="async"src="<?php echo esc_url( FRANCISCAN_THEME_URI . "/assets/images/logo.svg" ); ?>" alt="Franciscan Society" width="48" height="58">
       <div class="fs-logo-text">
         <span class="fs-logo-name">Franciscan Friars of the Third Order Regular</span>
@@ -1703,13 +1744,13 @@ button.fs-mega-toggle:focus::after {
 
     <!-- Desktop Navigation -->
     <nav class="fs-desktop-nav">
-      <a href="<?php echo esc_url( home_url( '/' ) ); ?>">Home</a>
-      <a href="<?php echo esc_url( home_url( '/about/' ) ); ?>">About Us</a>
-      <a href="<?php echo esc_url( home_url( '/gallery/' ) ); ?>">Gallery</a>
-      <button class="fs-mega-toggle" data-menu="ministries">Ministries</button>
-      <button class="fs-mega-toggle" data-menu="community">Community</button>
-      <a href="<?php echo esc_url( home_url( '/news/' ) ); ?>">News</a>
-      <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>">Contact Us</a>
+      <a href="<?php echo esc_url( $nav_url_home ); ?>"><?php echo esc_html( $nav_lbl_home ); ?></a>
+      <a href="<?php echo esc_url( $nav_url_about ); ?>"><?php echo esc_html( $nav_lbl_about ); ?></a>
+      <a href="<?php echo esc_url( $nav_url_gallery ); ?>"><?php echo esc_html( $nav_lbl_gallery ); ?></a>
+      <button class="fs-mega-toggle" data-menu="ministries"><?php echo esc_html( $nav_lbl_ministries ); ?></button>
+      <button class="fs-mega-toggle" data-menu="community"><?php echo esc_html( $nav_lbl_community ); ?></button>
+      <a href="<?php echo esc_url( $nav_url_news ); ?>"><?php echo esc_html( $nav_lbl_news ); ?></a>
+      <a href="<?php echo esc_url( $nav_url_contact ); ?>"><?php echo esc_html( $nav_lbl_contact ); ?></a>
     </nav>
 
     <!-- Header Actions -->
@@ -1725,11 +1766,11 @@ button.fs-mega-toggle:focus::after {
 <div class="fs-mega-menu" id="ministries-mega">
   <div class="fs-mega-grid">
     <div class="fs-mega-col">
-      <h3>Ministries</h3>
-      <a href="<?php echo esc_url( home_url( '/ministries-pastoral/' ) ); ?>">Pastoral Ministry</a>
-      <a href="<?php echo esc_url( home_url( '/ministries-formation/' ) ); ?>">Formation Ministry</a>
-      <a href="<?php echo esc_url( home_url( '/ministries-education/' ) ); ?>">Education Ministry</a>
-      <a href="<?php echo esc_url( home_url( '/publications/' ) ); ?>">Publications</a>
+      <h3><?php echo esc_html( $nav_lbl_ministries ); ?></h3>
+      <a href="<?php echo esc_url( $nav_url_m_pastoral ); ?>"><?php echo esc_html( $nav_lbl_m_pastoral ); ?></a>
+      <a href="<?php echo esc_url( $nav_url_m_formation ); ?>"><?php echo esc_html( $nav_lbl_m_formation ); ?></a>
+      <a href="<?php echo esc_url( $nav_url_m_education ); ?>"><?php echo esc_html( $nav_lbl_m_education ); ?></a>
+      <a href="<?php echo esc_url( $nav_url_publication ); ?>"><?php echo esc_html( $nav_lbl_publication ); ?></a>
     </div>
   </div>
 </div>
@@ -1737,12 +1778,12 @@ button.fs-mega-toggle:focus::after {
 <div class="fs-mega-menu" id="community-mega">
   <div class="fs-mega-grid">
     <div class="fs-mega-col">
-      <h3>Community</h3>
-      <a href="<?php echo esc_url( home_url( '/community-history/' ) ); ?>">Our History</a>
-      <a href="<?php echo esc_url( home_url( '/community-rule/' ) ); ?>">Third Order Rule</a>
-      <a href="<?php echo esc_url( home_url( '/community-leadership/' ) ); ?>">Leadership</a>
-      <a href="<?php echo esc_url( home_url( '/community-friars/' ) ); ?>">Our Friars</a>
-      <a href="<?php echo esc_url( home_url( '/community-friaries/' ) ); ?>">Our Friaries</a>
+      <h3><?php echo esc_html( $nav_lbl_community ); ?></h3>
+      <a href="<?php echo esc_url( $nav_url_c_history ); ?>"><?php echo esc_html( $nav_lbl_c_history ); ?></a>
+      <a href="<?php echo esc_url( $nav_url_c_rule ); ?>"><?php echo esc_html( $nav_lbl_c_rule ); ?></a>
+      <a href="<?php echo esc_url( $nav_url_c_leader ); ?>"><?php echo esc_html( $nav_lbl_c_leader ); ?></a>
+      <a href="<?php echo esc_url( $nav_url_c_friars ); ?>"><?php echo esc_html( $nav_lbl_c_friars ); ?></a>
+      <a href="<?php echo esc_url( $nav_url_c_friaries ); ?>"><?php echo esc_html( $nav_lbl_c_friaries ); ?></a>
     </div>
   </div>
 </div>
@@ -1751,36 +1792,34 @@ button.fs-mega-toggle:focus::after {
 <nav class="fs-mobile-nav" id="mobile-nav">
   <button class="fs-mobile-close">&times;</button>
 
-  <a href="<?php echo esc_url( home_url( '/' ) ); ?>">Home</a>
-  <a href="<?php echo esc_url( home_url( '/about/' ) ); ?>">About Us</a>
-  <a href="<?php echo esc_url( home_url( '/gallery/' ) ); ?>">Gallery</a>
+  <a href="<?php echo esc_url( $nav_url_home ); ?>"><?php echo esc_html( $nav_lbl_home ); ?></a>
+  <a href="<?php echo esc_url( $nav_url_about ); ?>"><?php echo esc_html( $nav_lbl_about ); ?></a>
+  <a href="<?php echo esc_url( $nav_url_gallery ); ?>"><?php echo esc_html( $nav_lbl_gallery ); ?></a>
 
   <button class="fs-mobile-submenu-toggle" data-target="ministries-submenu">
-    Ministries
+    <?php echo esc_html( $nav_lbl_ministries ); ?>
     <span class="fs-mobile-submenu-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span>
   </button>
   <div class="fs-mobile-submenu" id="ministries-submenu">
-    
-    <a href="<?php echo esc_url( home_url( '/ministries-pastoral/' ) ); ?>">Pastoral Ministry</a>
-    <a href="<?php echo esc_url( home_url( '/ministries-formation/' ) ); ?>">Formation Ministry</a>
-    <a href="<?php echo esc_url( home_url( '/ministries-education/' ) ); ?>">Education Ministry</a>
-    <a href="<?php echo esc_url( home_url( '/publications/' ) ); ?>">Publications</a>
+    <a href="<?php echo esc_url( $nav_url_m_pastoral ); ?>"><?php echo esc_html( $nav_lbl_m_pastoral ); ?></a>
+    <a href="<?php echo esc_url( $nav_url_m_formation ); ?>"><?php echo esc_html( $nav_lbl_m_formation ); ?></a>
+    <a href="<?php echo esc_url( $nav_url_m_education ); ?>"><?php echo esc_html( $nav_lbl_m_education ); ?></a>
+    <a href="<?php echo esc_url( $nav_url_publication ); ?>"><?php echo esc_html( $nav_lbl_publication ); ?></a>
   </div>
 
   <button class="fs-mobile-submenu-toggle" data-target="community-submenu">
-    Community
+    <?php echo esc_html( $nav_lbl_community ); ?>
     <span class="fs-mobile-submenu-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span>
   </button>
   <div class="fs-mobile-submenu" id="community-submenu">
-    
-    <a href="<?php echo esc_url( home_url( '/community-history/' ) ); ?>">Our History</a>
-    <a href="<?php echo esc_url( home_url( '/community-rule/' ) ); ?>">Third Order Rule</a>
-    <a href="<?php echo esc_url( home_url( '/community-leadership/' ) ); ?>">Leadership</a>
-    <a href="<?php echo esc_url( home_url( '/community-friars/' ) ); ?>">Our Friars</a>
-    <a href="<?php echo esc_url( home_url( '/community-friaries/' ) ); ?>">Our Friaries</a>
+    <a href="<?php echo esc_url( $nav_url_c_history ); ?>"><?php echo esc_html( $nav_lbl_c_history ); ?></a>
+    <a href="<?php echo esc_url( $nav_url_c_rule ); ?>"><?php echo esc_html( $nav_lbl_c_rule ); ?></a>
+    <a href="<?php echo esc_url( $nav_url_c_leader ); ?>"><?php echo esc_html( $nav_lbl_c_leader ); ?></a>
+    <a href="<?php echo esc_url( $nav_url_c_friars ); ?>"><?php echo esc_html( $nav_lbl_c_friars ); ?></a>
+    <a href="<?php echo esc_url( $nav_url_c_friaries ); ?>"><?php echo esc_html( $nav_lbl_c_friaries ); ?></a>
   </div>
-  <a href="<?php echo esc_url( home_url( '/news/' ) ); ?>">News</a>
-  <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>">Contact Us</a>
+  <a href="<?php echo esc_url( $nav_url_news ); ?>"><?php echo esc_html( $nav_lbl_news ); ?></a>
+  <a href="<?php echo esc_url( $nav_url_contact ); ?>"><?php echo esc_html( $nav_lbl_contact ); ?></a>
 </nav>
 
 <script>

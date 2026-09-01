@@ -60,11 +60,16 @@ function franciscan_ajax_save_dashboard() {
 
     $tab = isset( $_POST['tab'] ) ? sanitize_key( $_POST['tab'] ) : 'settings';
 
-    if ( 'settings' === $tab && isset( $_POST['settings'] ) ) {
-        $settings = franciscan_sanitize_array( $_POST['settings'] );
+    if ( ( 'settings' === $tab || 'navigation' === $tab ) && ( isset( $_POST['settings'] ) || isset( $_POST['navigation'] ) ) ) {
+        $settings_raw = isset( $_POST['navigation'] ) ? $_POST['navigation'] : $_POST['settings'];
+        $settings = franciscan_sanitize_array( $settings_raw );
         $current_options = get_option( 'franciscan_theme_options', array() );
         $updated_options = array_merge( $current_options, $settings );
         update_option( 'franciscan_theme_options', $updated_options );
+
+        if ( 'navigation' === $tab ) {
+            wp_send_json_success( array( 'message' => 'Navigation & Menu custom links updated successfully!' ) );
+        }
 
         if ( isset( $settings['site_title'] ) ) {
             update_option( 'blogname', sanitize_text_field( $settings['site_title'] ) );
@@ -853,6 +858,9 @@ function franciscan_render_dashboard_view() {
                 </a>
                 <a class="nav-item" data-tab="settings" title="Website Global Settings">
                     <span>⚙️</span> <span>Website Global Settings</span>
+                </a>
+                <a class="nav-item" data-tab="navigation" title="Header Menu & Navigation Links">
+                    <span>🧭</span> <span>Menu &amp; Navigation</span>
                 </a>
                 <a class="nav-item" data-tab="inquiries" title="Inquiries & Prayers">
                     <span>📨</span> <span>Inquiries &amp; Prayers</span>
@@ -3152,6 +3160,199 @@ function franciscan_render_dashboard_view() {
             </section>
 
             <!-- ========================================================== -->
+            <!-- TAB: HEADER MENU & NAVIGATION CUSTOM LINKS -->
+            <!-- ========================================================== -->
+            <section id="tab-navigation" class="tab-content" style="display:none;">
+                <form id="form-navigation-settings">
+                    <div class="form-section">
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem; flex-wrap:wrap; gap:1rem;">
+                            <div>
+                                <h3 class="form-section-title" style="margin-bottom:0.25rem;">🧭 Main Navigation Menu Items</h3>
+                                <p style="color:var(--c-text-muted); font-size:0.85rem; margin:0;">Configure custom link URLs and button labels for primary top-bar navigation items. Supports relative paths (e.g. <code>/custom-page/</code>), external links (e.g. <code>https://...</code>), or anchors (e.g. <code>#contact</code>).</p>
+                            </div>
+                            <button type="submit" class="btn btn-primary">
+                                💾 Save Menu Links
+                            </button>
+                        </div>
+
+                        <div class="form-grid">
+                            <!-- Home -->
+                            <div class="form-group">
+                                <label>1. Home - Display Label</label>
+                                <input type="text" name="nav_label_home" class="form-control" value="<?php echo esc_attr( $options['nav_label_home'] ?? 'Home' ); ?>" placeholder="Home">
+                            </div>
+                            <div class="form-group">
+                                <label>1. Home - Custom Link URL</label>
+                                <input type="text" name="nav_link_home" class="form-control" value="<?php echo esc_attr( $options['nav_link_home'] ?? '/' ); ?>" placeholder="/">
+                            </div>
+
+                            <!-- About Us -->
+                            <div class="form-group">
+                                <label>2. About Us - Display Label</label>
+                                <input type="text" name="nav_label_about" class="form-control" value="<?php echo esc_attr( $options['nav_label_about'] ?? 'About Us' ); ?>" placeholder="About Us">
+                            </div>
+                            <div class="form-group">
+                                <label>2. About Us - Custom Link URL</label>
+                                <input type="text" name="nav_link_about" class="form-control" value="<?php echo esc_attr( $options['nav_link_about'] ?? '/about/' ); ?>" placeholder="/about/">
+                            </div>
+
+                            <!-- Gallery -->
+                            <div class="form-group">
+                                <label>3. Gallery - Display Label</label>
+                                <input type="text" name="nav_label_gallery" class="form-control" value="<?php echo esc_attr( $options['nav_label_gallery'] ?? 'Gallery' ); ?>" placeholder="Gallery">
+                            </div>
+                            <div class="form-group">
+                                <label>3. Gallery - Custom Link URL</label>
+                                <input type="text" name="nav_link_gallery" class="form-control" value="<?php echo esc_attr( $options['nav_link_gallery'] ?? '/gallery/' ); ?>" placeholder="/gallery/">
+                            </div>
+
+                            <!-- News -->
+                            <div class="form-group">
+                                <label>4. News - Display Label</label>
+                                <input type="text" name="nav_label_news" class="form-control" value="<?php echo esc_attr( $options['nav_label_news'] ?? 'News' ); ?>" placeholder="News">
+                            </div>
+                            <div class="form-group">
+                                <label>4. News - Custom Link URL</label>
+                                <input type="text" name="nav_link_news" class="form-control" value="<?php echo esc_attr( $options['nav_link_news'] ?? '/news/' ); ?>" placeholder="/news/">
+                            </div>
+
+                            <!-- Contact Us -->
+                            <div class="form-group">
+                                <label>5. Contact Us - Display Label</label>
+                                <input type="text" name="nav_label_contact" class="form-control" value="<?php echo esc_attr( $options['nav_label_contact'] ?? 'Contact Us' ); ?>" placeholder="Contact Us">
+                            </div>
+                            <div class="form-group">
+                                <label>5. Contact Us - Custom Link URL</label>
+                                <input type="text" name="nav_link_contact" class="form-control" value="<?php echo esc_attr( $options['nav_link_contact'] ?? '/contact/' ); ?>" placeholder="/contact/">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- MINISTRIES DROPDOWN & SUBMENU -->
+                    <div class="form-section">
+                        <h3 class="form-section-title">✝️ Ministries Dropdown &amp; Submenu Items</h3>
+                        <p style="color:var(--c-text-muted); font-size:0.85rem; margin-top:-0.5rem; margin-bottom:1.5rem;">Configure the main dropdown label and all 4 individual ministry submenu destination links.</p>
+
+                        <div class="form-grid">
+                            <div class="form-group full-width">
+                                <label>Main Dropdown Header Label</label>
+                                <input type="text" name="nav_label_ministries" class="form-control" value="<?php echo esc_attr( $options['nav_label_ministries'] ?? 'Ministries' ); ?>" placeholder="Ministries">
+                            </div>
+
+                            <!-- Pastoral Ministry -->
+                            <div class="form-group">
+                                <label>Submenu 1: Pastoral Ministry - Label</label>
+                                <input type="text" name="nav_label_ministries_pastoral" class="form-control" value="<?php echo esc_attr( $options['nav_label_ministries_pastoral'] ?? 'Pastoral Ministry' ); ?>" placeholder="Pastoral Ministry">
+                            </div>
+                            <div class="form-group">
+                                <label>Submenu 1: Pastoral Ministry - Link URL</label>
+                                <input type="text" name="nav_link_ministries_pastoral" class="form-control" value="<?php echo esc_attr( $options['nav_link_ministries_pastoral'] ?? '/ministries-pastoral/' ); ?>" placeholder="/ministries-pastoral/">
+                            </div>
+
+                            <!-- Formation Ministry -->
+                            <div class="form-group">
+                                <label>Submenu 2: Formation Ministry - Label</label>
+                                <input type="text" name="nav_label_ministries_formation" class="form-control" value="<?php echo esc_attr( $options['nav_label_ministries_formation'] ?? 'Formation Ministry' ); ?>" placeholder="Formation Ministry">
+                            </div>
+                            <div class="form-group">
+                                <label>Submenu 2: Formation Ministry - Link URL</label>
+                                <input type="text" name="nav_link_ministries_formation" class="form-control" value="<?php echo esc_attr( $options['nav_link_ministries_formation'] ?? '/ministries-formation/' ); ?>" placeholder="/ministries-formation/">
+                            </div>
+
+                            <!-- Education Ministry -->
+                            <div class="form-group">
+                                <label>Submenu 3: Education Ministry - Label</label>
+                                <input type="text" name="nav_label_ministries_education" class="form-control" value="<?php echo esc_attr( $options['nav_label_ministries_education'] ?? 'Education Ministry' ); ?>" placeholder="Education Ministry">
+                            </div>
+                            <div class="form-group">
+                                <label>Submenu 3: Education Ministry - Link URL</label>
+                                <input type="text" name="nav_link_ministries_education" class="form-control" value="<?php echo esc_attr( $options['nav_link_ministries_education'] ?? '/ministries-education/' ); ?>" placeholder="/ministries-education/">
+                            </div>
+
+                            <!-- Publications -->
+                            <div class="form-group">
+                                <label>Submenu 4: Publications - Label</label>
+                                <input type="text" name="nav_label_publications" class="form-control" value="<?php echo esc_attr( $options['nav_label_publications'] ?? 'Publications' ); ?>" placeholder="Publications">
+                            </div>
+                            <div class="form-group">
+                                <label>Submenu 4: Publications - Link URL</label>
+                                <input type="text" name="nav_link_publications" class="form-control" value="<?php echo esc_attr( $options['nav_link_publications'] ?? '/publications/' ); ?>" placeholder="/publications/">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- COMMUNITY DROPDOWN & SUBMENU -->
+                    <div class="form-section">
+                        <h3 class="form-section-title">👥 Community Dropdown &amp; Submenu Items</h3>
+                        <p style="color:var(--c-text-muted); font-size:0.85rem; margin-top:-0.5rem; margin-bottom:1.5rem;">Configure the community dropdown title and all 5 community submenu destination links.</p>
+
+                        <div class="form-grid">
+                            <div class="form-group full-width">
+                                <label>Main Dropdown Header Label</label>
+                                <input type="text" name="nav_label_community" class="form-control" value="<?php echo esc_attr( $options['nav_label_community'] ?? 'Community' ); ?>" placeholder="Community">
+                            </div>
+
+                            <!-- Our History -->
+                            <div class="form-group">
+                                <label>Submenu 1: Our History - Label</label>
+                                <input type="text" name="nav_label_community_history" class="form-control" value="<?php echo esc_attr( $options['nav_label_community_history'] ?? 'Our History' ); ?>" placeholder="Our History">
+                            </div>
+                            <div class="form-group">
+                                <label>Submenu 1: Our History - Link URL</label>
+                                <input type="text" name="nav_link_community_history" class="form-control" value="<?php echo esc_attr( $options['nav_link_community_history'] ?? '/community-history/' ); ?>" placeholder="/community-history/">
+                            </div>
+
+                            <!-- Third Order Rule -->
+                            <div class="form-group">
+                                <label>Submenu 2: Third Order Rule - Label</label>
+                                <input type="text" name="nav_label_community_rule" class="form-control" value="<?php echo esc_attr( $options['nav_label_community_rule'] ?? 'Third Order Rule' ); ?>" placeholder="Third Order Rule">
+                            </div>
+                            <div class="form-group">
+                                <label>Submenu 2: Third Order Rule - Link URL</label>
+                                <input type="text" name="nav_link_community_rule" class="form-control" value="<?php echo esc_attr( $options['nav_link_community_rule'] ?? '/community-rule/' ); ?>" placeholder="/community-rule/">
+                            </div>
+
+                            <!-- Leadership -->
+                            <div class="form-group">
+                                <label>Submenu 3: Leadership - Label</label>
+                                <input type="text" name="nav_label_community_leadership" class="form-control" value="<?php echo esc_attr( $options['nav_label_community_leadership'] ?? 'Leadership' ); ?>" placeholder="Leadership">
+                            </div>
+                            <div class="form-group">
+                                <label>Submenu 3: Leadership - Link URL</label>
+                                <input type="text" name="nav_link_community_leadership" class="form-control" value="<?php echo esc_attr( $options['nav_link_community_leadership'] ?? '/community-leadership/' ); ?>" placeholder="/community-leadership/">
+                            </div>
+
+                            <!-- Our Friars -->
+                            <div class="form-group">
+                                <label>Submenu 4: Our Friars - Label</label>
+                                <input type="text" name="nav_label_community_friars" class="form-control" value="<?php echo esc_attr( $options['nav_label_community_friars'] ?? 'Our Friars' ); ?>" placeholder="Our Friars">
+                            </div>
+                            <div class="form-group">
+                                <label>Submenu 4: Our Friars - Link URL</label>
+                                <input type="text" name="nav_link_community_friars" class="form-control" value="<?php echo esc_attr( $options['nav_link_community_friars'] ?? '/community-friars/' ); ?>" placeholder="/community-friars/">
+                            </div>
+
+                            <!-- Our Friaries -->
+                            <div class="form-group">
+                                <label>Submenu 5: Our Friaries - Label</label>
+                                <input type="text" name="nav_label_community_friaries" class="form-control" value="<?php echo esc_attr( $options['nav_label_community_friaries'] ?? 'Our Friaries' ); ?>" placeholder="Our Friaries">
+                            </div>
+                            <div class="form-group">
+                                <label>Submenu 5: Our Friaries - Link URL</label>
+                                <input type="text" name="nav_link_community_friaries" class="form-control" value="<?php echo esc_attr( $options['nav_link_community_friaries'] ?? '/community-friaries/' ); ?>" placeholder="/community-friaries/">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="display:flex; justify-content:flex-end; gap:1rem; margin-top:2rem;">
+                        <button type="submit" class="btn btn-primary" style="padding:0.9rem 2.2rem; font-size:1rem; font-weight:700;">
+                            💾 Save All Menu Links &amp; Labels
+                        </button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- ========================================================== -->
             <!-- TAB 5: INQUIRIES & PRAYERS -->
             <!-- ========================================================== -->
             <section id="tab-inquiries" class="tab-content" style="display:none;">
@@ -3413,6 +3614,7 @@ function franciscan_render_dashboard_view() {
                 gallery: 'Photo Gallery Hub',
                 posts: 'News & Blog Management',
                 settings: 'Website Global Settings',
+                navigation: 'Header Menu & Navigation Links',
                 inquiries: 'Inquiries & Prayer Requests',
                 seo: 'SEO & Metadata Configuration',
                 security: 'Security & System Diagnostics'
@@ -3962,6 +4164,33 @@ function franciscan_render_dashboard_view() {
             }, function(res) {
                 if (res.success) showToast(res.data.message);
                 else showToast('Error saving settings.', true);
+            });
+        });
+
+        // Save Header Menu & Navigation Links Form
+        $('#form-navigation-settings').on('submit', function(e) {
+            e.preventDefault();
+            const btn = $(this).find('button[type="submit"]');
+            const origHtml = btn.html();
+            btn.prop('disabled', true).html('💾 Saving Menu Links...');
+            const navData = {};
+            $(this).find('input, textarea, select').each(function() {
+                const name = $(this).attr('name');
+                if (name) navData[name] = $(this).val();
+            });
+
+            $.post(ajaxUrl, {
+                action: 'franciscan_save_dashboard',
+                security: nonce,
+                tab: 'navigation',
+                navigation: navData
+            }, function(res) {
+                btn.prop('disabled', false).html(origHtml);
+                if (res.success) showToast(res.data.message);
+                else showToast('Error saving menu links.', true);
+            }).fail(function() {
+                btn.prop('disabled', false).html(origHtml);
+                showToast('Server error while saving menu links.', true);
             });
         });
 

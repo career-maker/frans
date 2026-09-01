@@ -45,7 +45,59 @@ function franciscan_get_default_options() {
 
         // Donation & Bank Details Visibility (0 = Hidden, 1 = Visible)
         'show_donation_section' => '0',
+
+        // Navigation & Menu Custom Links & Labels
+        'nav_label_home'                => 'Home',
+        'nav_link_home'                 => '/',
+        
+        'nav_label_about'               => 'About Us',
+        'nav_link_about'                => '/about/',
+        
+        'nav_label_gallery'             => 'Gallery',
+        'nav_link_gallery'              => '/gallery/',
+        
+        'nav_label_ministries'          => 'Ministries',
+        'nav_label_ministries_pastoral' => 'Pastoral Ministry',
+        'nav_link_ministries_pastoral'  => '/ministries-pastoral/',
+        'nav_label_ministries_formation'=> 'Formation Ministry',
+        'nav_link_ministries_formation' => '/ministries-formation/',
+        'nav_label_ministries_education'=> 'Education Ministry',
+        'nav_link_ministries_education' => '/ministries-education/',
+        'nav_label_publications'        => 'Publications',
+        'nav_link_publications'         => '/publications/',
+        
+        'nav_label_community'           => 'Community',
+        'nav_label_community_history'   => 'Our History',
+        'nav_link_community_history'    => '/community-history/',
+        'nav_label_community_rule'      => 'Third Order Rule',
+        'nav_link_community_rule'       => '/community-rule/',
+        'nav_label_community_leadership'=> 'Leadership',
+        'nav_link_community_leadership' => '/community-leadership/',
+        'nav_label_community_friars'    => 'Our Friars',
+        'nav_link_community_friars'     => '/community-friars/',
+        'nav_label_community_friaries'  => 'Our Friaries',
+        'nav_link_community_friaries'   => '/community-friaries/',
+        
+        'nav_label_news'                => 'News',
+        'nav_link_news'                 => '/news/',
+        
+        'nav_label_contact'             => 'Contact Us',
+        'nav_link_contact'              => '/contact/',
     );
+}
+
+/**
+ * Helper to resolve dynamic menu URLs (relative paths, absolute URLs, hashes, mailto, tel)
+ */
+function franciscan_resolve_nav_url( $path_or_url, $default = '/' ) {
+    if ( empty( $path_or_url ) ) {
+        $path_or_url = $default;
+    }
+    $path_or_url = trim( $path_or_url );
+    if ( preg_match( '#^(https?:)?//#i', $path_or_url ) || strpos( $path_or_url, '#' ) === 0 || strpos( $path_or_url, 'mailto:' ) === 0 || strpos( $path_or_url, 'tel:' ) === 0 ) {
+        return $path_or_url;
+    }
+    return home_url( '/' . ltrim( $path_or_url, '/' ) );
 }
 
 function franciscan_get_option( $key, $default = '' ) {
