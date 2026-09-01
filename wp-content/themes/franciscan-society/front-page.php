@@ -72,7 +72,7 @@ get_header();
                     <div class="js-hero-text" style="display: flex; flex-direction: column; justify-content: flex-end;">
                         <!-- Subtitle paragraph parallel horizontally across from line 2 of title -->
                         <p style="font-family: 'Instrument Sans', sans-serif !important; font-size: 16px !important; font-weight: 600 !important; color: #ffffff; line-height: 26px !important; margin-bottom: 2.2rem; max-width: 490px; text-shadow: 0 2px 14px rgba(0,0,0,0.9);">
-                            <?php echo nl2br( esc_html( franciscan_get_page_field( 'home', 'hero_subtitle', "WELCOME TO THE FRANCISCAN SOCIETY\nWALKING TOGETHER IN FAITH, PENANCE, AND SERVICE\nWe warmly welcome you to India, and global missions." ) ) ); ?>
+                            <?php echo nl2br( esc_html( franciscan_get_page_field( 'home', 'hero_subtitle', 'In the spirit of the Seraphic Minstrel of Divine Love, we walk the way of the Gospel—our hearts rooted in prayer, our lives woven together in fraternity, and our footsteps shaped by the simplicity and humility of Christ. Drawn to the least, we seek to become gentle instruments of His peace, singing into the world the melody of mercy, hope, and love.' ) ) ); ?>
                         </p>
 
                         <!-- Stats Counter Strip -->
@@ -137,35 +137,52 @@ get_header();
                 <!-- Right Column: Welcome Image Slider -->
                 <div class="welcome-media" style="border-radius: 24px; overflow: hidden; box-shadow: 0 20px 45px rgba(0, 0, 0, 0.12);">
                     <?php
-                    $welcome_mosaic = franciscan_get_page_field( 'home', 'welcome_mosaic_img', '' );
-                    if ( empty( $welcome_mosaic ) ) {
-                        $welcome_mosaic = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_24_08_PM.png';
+                    $slide1_img = franciscan_get_page_field( 'home', 'welcome_slide_1_img', '' );
+                    if ( empty( $slide1_img ) ) {
+                        $slide1_img = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/fraternity.jpeg';
                     }
+                    $slide2_img = franciscan_get_page_field( 'home', 'welcome_slide_2_img', '' );
+                    if ( empty( $slide2_img ) ) {
+                        $slide2_img = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_24_08_PM.png';
+                    }
+                    $slide3_img = franciscan_get_page_field( 'home', 'welcome_slide_3_img', '' );
+                    if ( empty( $slide3_img ) ) {
+                        $slide3_img = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_51_30_PM.png';
+                    }
+                    $slide4_img = franciscan_get_page_field( 'home', 'welcome_slide_4_img', '' );
+                    if ( empty( $slide4_img ) ) {
+                        $slide4_img = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_48_39_PM.png';
+                    }
+                    $slide5_img = franciscan_get_page_field( 'home', 'welcome_slide_5_img', '' );
+                    if ( empty( $slide5_img ) ) {
+                        $slide5_img = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/hero-banner-aug20.jpeg';
+                    }
+
                     $welcome_slides = array(
                         array(
-                            'url'   => $welcome_mosaic,
-                            'alt'   => 'Franciscan Society Cathedral and Mosaic Sanctuary',
-                            'title' => 'Cathedral & Mosaic Sanctuary',
+                            'url'   => $slide1_img,
+                            'title' => 'Fraternity',
+                            'alt'   => 'Franciscan Fraternity',
                         ),
                         array(
-                            'url'   => FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_48_39_PM.png',
-                            'alt'   => 'Franciscan Rosary and Contemplative Prayer',
-                            'title' => 'Contemplative Prayer & Rosary',
+                            'url'   => $slide2_img,
+                            'title' => 'Tradition',
+                            'alt'   => 'Franciscan Tradition',
                         ),
                         array(
-                            'url'   => FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_51_30_PM.png',
-                            'alt'   => 'Franciscan Church Altar and Sacred Architecture',
-                            'title' => 'Sacred Altar & Architecture',
+                            'url'   => $slide3_img,
+                            'title' => 'Service',
+                            'alt'   => 'Franciscan Service',
                         ),
                         array(
-                            'url'   => FRANCISCAN_THEME_URI . '/assets/images/new_uploads/hero-banner-aug20.jpeg',
-                            'alt'   => 'Franciscan Friars Community Gathering',
-                            'title' => 'Friars Community Gathering',
+                            'url'   => $slide4_img,
+                            'title' => 'Humility',
+                            'alt'   => 'Franciscan Humility',
                         ),
                         array(
-                            'url'   => FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_20_2026_02_25_29_PM.png',
-                            'alt'   => 'Franciscan Community Eucharistic Celebration',
-                            'title' => 'Eucharistic Celebration',
+                            'url'   => $slide5_img,
+                            'title' => 'Conversion',
+                            'alt'   => 'Franciscan Conversion',
                         ),
                     );
                     ?>
@@ -174,12 +191,10 @@ get_header();
                             <?php foreach ( $welcome_slides as $index => $slide ) : $is_active = ( 0 === $index ); ?>
                                 <div class="welcome-slide <?php echo $is_active ? 'is-active' : ''; ?>">
                                     <img loading="<?php echo $index === 0 ? 'eager' : 'lazy'; ?>" decoding="async" src="<?php echo esc_url( $slide['url'] ); ?>" alt="<?php echo esc_attr( $slide['alt'] ); ?>">
-                                    <div style="position: absolute; inset: 0; background: linear-gradient(to top, rgba(12, 23, 39, 0.5) 0%, transparent 65%); pointer-events: none;"></div>
-                                    <div class="welcome-slide-caption">
-                                        <div class="welcome-slide-tag">
-                                            <span class="dot"></span>
-                                            <span class="title"><?php echo esc_html( $slide['title'] ); ?></span>
-                                        </div>
+                                    <div class="welcome-slide-overlay"></div>
+                                    <div class="welcome-slide-center-title">
+                                        <span class="cross-mark">&#10013;</span>
+                                        <h3 class="slide-title-text"><?php echo esc_html( $slide['title'] ); ?></h3>
                                     </div>
                                 </div>
                             <?php endforeach; ?>

@@ -138,7 +138,7 @@ function franciscan_get_default_page_content( $slug = '' ) {
             // Hero
             'hero_badge'        => 'THIRD ORDER REGULAR OF ST. FRANCIS',
             'hero_title'        => "Let us begin again,\nfor we have only begun to serve the Lord.",
-            'hero_subtitle'     => "WELCOME TO THE FRANCISCAN SOCIETY\nWALKING TOGETHER IN FAITH, PENANCE, AND SERVICE\nWe warmly welcome you to India, and global missions.",
+            'hero_subtitle'     => 'In the spirit of the Seraphic Minstrel of Divine Love, we walk the way of the Gospel—our hearts rooted in prayer, our lives woven together in fraternity, and our footsteps shaped by the simplicity and humility of Christ. Drawn to the least, we seek to become gentle instruments of His peace, singing into the world the melody of mercy, hope, and love.',
             'hero_image'        => '',
             'hero_video'        => '',
             'hero_stat_1_num'   => '104+',
@@ -157,6 +157,11 @@ function franciscan_get_default_page_content( $slug = '' ) {
             'welcome_section_heading'=> 'WALKING TOGETHER IN FAITH, PENANCE, AND SERVICE',
             'welcome_section_text'   => 'In the spirit of the Poverello of Assisi, we journey along the Gospel path—rooted in prayer, sustained by fraternity, and shaped by the simplicity and humility of Christ. With hearts open to God and attentive to our brothers and sisters, we seek to serve with compassion, draw near to the least, and carry into the world the peace, mercy, and hope of Christ.',
             'welcome_mosaic_img'     => '',
+            'welcome_slide_1_img'    => '',
+            'welcome_slide_2_img'    => '',
+            'welcome_slide_3_img'    => '',
+            'welcome_slide_4_img'    => '',
+            'welcome_slide_5_img'    => '',
 
             // Section 3: About
             'about_eyebrow'          => 'ABOUT US',
@@ -233,6 +238,11 @@ function franciscan_get_default_page_content( $slug = '' ) {
             'about_section_img'      => '',
             'about_video_url'        => '',
             'about_provincial_avatar'=> '',
+            'welcome_slide_1_img'    => '',
+            'welcome_slide_2_img'    => '',
+            'welcome_slide_3_img'    => '',
+            'welcome_slide_4_img'    => '',
+            'welcome_slide_5_img'    => '',
 
             // Values & Mission
             'mission_eyebrow'        => 'Our Values',

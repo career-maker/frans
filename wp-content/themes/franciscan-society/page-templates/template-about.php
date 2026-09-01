@@ -737,38 +737,75 @@ button.fs-mega-toggle:focus::after {
                 <!-- Left Column: Image Slider with Working Video Card Overlay -->
                 <?php
                 $about_sec_img = franciscan_get_page_field( 'about', 'about_section_img', '' );
-                if ( empty( $about_sec_img ) ) {
-                    $about_sec_img = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_48_39_PM.png';
+                $slide1_img = franciscan_get_page_field( 'about', 'welcome_slide_1_img', '' );
+                if ( empty( $slide1_img ) ) {
+                    $slide1_img = franciscan_get_page_field( 'home', 'welcome_slide_1_img', '' );
                 }
+                if ( empty( $slide1_img ) ) {
+                    $slide1_img = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/fraternity.jpeg';
+                }
+
+                $slide2_img = franciscan_get_page_field( 'about', 'welcome_slide_2_img', '' );
+                if ( empty( $slide2_img ) ) {
+                    $slide2_img = franciscan_get_page_field( 'home', 'welcome_slide_2_img', '' );
+                }
+                if ( empty( $slide2_img ) ) {
+                    $slide2_img = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_24_08_PM.png';
+                }
+
+                $slide3_img = franciscan_get_page_field( 'about', 'welcome_slide_3_img', '' );
+                if ( empty( $slide3_img ) ) {
+                    $slide3_img = franciscan_get_page_field( 'home', 'welcome_slide_3_img', '' );
+                }
+                if ( empty( $slide3_img ) ) {
+                    $slide3_img = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_51_30_PM.png';
+                }
+
+                $slide4_img = franciscan_get_page_field( 'about', 'welcome_slide_4_img', '' );
+                if ( empty( $slide4_img ) ) {
+                    $slide4_img = franciscan_get_page_field( 'home', 'welcome_slide_4_img', '' );
+                }
+                if ( empty( $slide4_img ) ) {
+                    $slide4_img = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_48_39_PM.png';
+                }
+
+                $slide5_img = franciscan_get_page_field( 'about', 'welcome_slide_5_img', '' );
+                if ( empty( $slide5_img ) ) {
+                    $slide5_img = franciscan_get_page_field( 'home', 'welcome_slide_5_img', '' );
+                }
+                if ( empty( $slide5_img ) ) {
+                    $slide5_img = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/hero-banner-aug20.jpeg';
+                }
+
                 $about_sec_video = franciscan_get_page_field( 'about', 'about_video_url', '' );
                 if ( empty( $about_sec_video ) ) {
                     $about_sec_video = FRANCISCAN_THEME_URI . '/assets/videos/hero-bg.mp4';
                 }
                 $about_slides = array(
                     array(
-                        'url'   => $about_sec_img,
-                        'alt'   => 'Franciscan Rosary and Contemplative Prayer',
-                        'title' => 'Contemplative Prayer & Rosary',
+                        'url'   => $slide1_img,
+                        'title' => 'Fraternity',
+                        'alt'   => 'Franciscan Fraternity',
                     ),
                     array(
-                        'url'   => FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_24_08_PM.png',
-                        'alt'   => 'Franciscan Society Cathedral Sanctuary',
-                        'title' => 'Cathedral & Mosaic Sanctuary',
+                        'url'   => $slide2_img,
+                        'title' => 'Tradition',
+                        'alt'   => 'Franciscan Tradition',
                     ),
                     array(
-                        'url'   => FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_51_30_PM.png',
-                        'alt'   => 'Franciscan Church Altar Architecture',
-                        'title' => 'Sacred Altar & Architecture',
+                        'url'   => $slide3_img,
+                        'title' => 'Service',
+                        'alt'   => 'Franciscan Service',
                     ),
                     array(
-                        'url'   => FRANCISCAN_THEME_URI . '/assets/images/new_uploads/hero-banner-aug20.jpeg',
-                        'alt'   => 'Franciscan Friars Community Gathering',
-                        'title' => 'Friars Community Gathering',
+                        'url'   => $slide4_img,
+                        'title' => 'Humility',
+                        'alt'   => 'Franciscan Humility',
                     ),
                     array(
-                        'url'   => FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_20_2026_02_25_29_PM.png',
-                        'alt'   => 'Franciscan Community Prayer Celebration',
-                        'title' => 'Eucharistic Celebration',
+                        'url'   => $slide5_img,
+                        'title' => 'Conversion',
+                        'alt'   => 'Franciscan Conversion',
                     ),
                 );
                 ?>
@@ -778,12 +815,10 @@ button.fs-mega-toggle:focus::after {
                             <?php foreach ( $about_slides as $index => $slide ) : $is_active = ( 0 === $index ); ?>
                                 <div class="welcome-slide <?php echo $is_active ? 'is-active' : ''; ?>">
                                     <img loading="<?php echo $index === 0 ? 'eager' : 'lazy'; ?>" decoding="async" src="<?php echo esc_url( $slide['url'] ); ?>" alt="<?php echo esc_attr( $slide['alt'] ); ?>">
-                                    <div style="position: absolute; inset: 0; background: linear-gradient(to top, rgba(12, 23, 39, 0.5) 0%, transparent 65%); pointer-events: none;"></div>
-                                    <div class="welcome-slide-caption">
-                                        <div class="welcome-slide-tag">
-                                            <span class="dot"></span>
-                                            <span class="title"><?php echo esc_html( $slide['title'] ); ?></span>
-                                        </div>
+                                    <div class="welcome-slide-overlay"></div>
+                                    <div class="welcome-slide-center-title">
+                                        <span class="cross-mark">&#10013;</span>
+                                        <h3 class="slide-title-text"><?php echo esc_html( $slide['title'] ); ?></h3>
                                     </div>
                                 </div>
                             <?php endforeach; ?>

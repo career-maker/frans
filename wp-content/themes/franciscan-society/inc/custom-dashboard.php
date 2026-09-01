@@ -1130,23 +1130,36 @@ function franciscan_render_dashboard_view() {
                                         <label>Welcome Message Text</label>
                                         <textarea name="welcome_section_text" class="form-control"><?php echo esc_textarea( $data['welcome_section_text'] ?? '' ); ?></textarea>
                                     </div>
-                                    <div class="form-group full-width">
-                                        <label>Welcome Mosaic Image</label>
-                                        <?php
-                                        $def_h_mosaic = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_24_08_PM.png';
-                                        $cur_h_mosaic = ! empty( $data['welcome_mosaic_img'] ) ? $data['welcome_mosaic_img'] : $def_h_mosaic;
-                                        ?>
-                                        <div class="image-uploader-box">
-                                            <div style="width: 100px; height: 64px; border-radius: 8px; overflow: hidden; background: #0c1727; border: 1px solid var(--c-gold); flex-shrink: 0; display: flex; align-items: center; justify-content: center;">
-                                                <img src="<?php echo esc_url( $cur_h_mosaic ); ?>" class="image-preview-thumb" id="preview-welcome_mosaic_img-home" style="width: 100%; height: 100%; object-fit: cover; display: block;" onerror="this.src='<?php echo esc_url( $def_h_mosaic ); ?>';">
-                                            </div>
-                                            <input type="hidden" name="welcome_mosaic_img" id="input-welcome_mosaic_img-home" value="<?php echo esc_attr( $data['welcome_mosaic_img'] ?? '' ); ?>">
-                                            <div style="display: flex; gap: 0.8rem; align-items: center; flex-wrap: wrap;">
-                                                <button type="button" class="btn btn-secondary btn-upload-media" data-target="welcome_mosaic_img-home">Choose Image</button>
-                                                <button type="button" class="btn btn-secondary btn-reset-media" data-target="welcome_mosaic_img-home" data-default="<?php echo esc_url( $def_h_mosaic ); ?>" style="<?php echo empty( $data['welcome_mosaic_img'] ) ? 'display:none;' : ''; ?>">Reset to Default</button>
+                                    <div class="form-group full-width" style="margin-top: 1rem; border-top: 1px dashed rgba(255,255,255,0.1); padding-top: 1rem;">
+                                        <h4 style="color: var(--c-gold); font-size: 0.95rem; margin-bottom: 1rem;">🖼️ Welcome Slider Images (5 Franciscan Pillars)</h4>
+                                    </div>
+                                    <?php
+                                    $home_slider_items = array(
+                                        '1' => array( 'label' => '1. Fraternity Image', 'key' => 'welcome_slide_1_img', 'default' => FRANCISCAN_THEME_URI . '/assets/images/new_uploads/fraternity.jpeg' ),
+                                        '2' => array( 'label' => '2. Tradition Image', 'key' => 'welcome_slide_2_img', 'default' => FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_24_08_PM.png' ),
+                                        '3' => array( 'label' => '3. Service Image', 'key' => 'welcome_slide_3_img', 'default' => FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_51_30_PM.png' ),
+                                        '4' => array( 'label' => '4. Humility Image', 'key' => 'welcome_slide_4_img', 'default' => FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_48_39_PM.png' ),
+                                        '5' => array( 'label' => '5. Conversion Image', 'key' => 'welcome_slide_5_img', 'default' => FRANCISCAN_THEME_URI . '/assets/images/new_uploads/hero-banner-aug20.jpeg' ),
+                                    );
+                                    foreach ( $home_slider_items as $s_num => $s_info ) :
+                                        $s_key = $s_info['key'];
+                                        $s_def = $s_info['default'];
+                                        $s_cur = ! empty( $data[$s_key] ) ? $data[$s_key] : $s_def;
+                                    ?>
+                                        <div class="form-group full-width">
+                                            <label><?php echo esc_html( $s_info['label'] ); ?></label>
+                                            <div class="image-uploader-box">
+                                                <div style="width: 100px; height: 64px; border-radius: 8px; overflow: hidden; background: #0c1727; border: 1px solid var(--c-gold); flex-shrink: 0; display: flex; align-items: center; justify-content: center;">
+                                                    <img src="<?php echo esc_url( $s_cur ); ?>" class="image-preview-thumb" id="preview-<?php echo esc_attr( $s_key ); ?>-home" style="width: 100%; height: 100%; object-fit: cover; display: block;" onerror="this.src='<?php echo esc_url( $s_def ); ?>';">
+                                                </div>
+                                                <input type="hidden" name="<?php echo esc_attr( $s_key ); ?>" id="input-<?php echo esc_attr( $s_key ); ?>-home" value="<?php echo esc_attr( $data[$s_key] ?? '' ); ?>">
+                                                <div style="display: flex; gap: 0.8rem; align-items: center; flex-wrap: wrap;">
+                                                    <button type="button" class="btn btn-secondary btn-upload-media" data-target="<?php echo esc_attr( $s_key ); ?>-home">Choose Image</button>
+                                                    <button type="button" class="btn btn-secondary btn-reset-media" data-target="<?php echo esc_attr( $s_key ); ?>-home" data-default="<?php echo esc_url( $s_def ); ?>" style="<?php echo empty( $data[$s_key] ) ? 'display:none;' : ''; ?>">Reset to Default</button>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    <?php endforeach; ?>
                                 </div>
                             </div>
 
@@ -1438,23 +1451,36 @@ function franciscan_render_dashboard_view() {
                                         <label>Story Main Text</label>
                                         <textarea name="about_section_text" class="form-control"><?php echo esc_textarea( $data['about_section_text'] ?? '' ); ?></textarea>
                                     </div>
-                                    <div class="form-group full-width">
-                                        <label>Story Main Image</label>
-                                        <?php
-                                        $def_ab_img = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_48_39_PM.png';
-                                        $cur_ab_img = ! empty( $data['about_section_img'] ) ? $data['about_section_img'] : $def_ab_img;
-                                        ?>
-                                        <div class="image-uploader-box">
-                                            <div style="width: 100px; height: 64px; border-radius: 8px; overflow: hidden; background: #0c1727; border: 1px solid var(--c-gold); flex-shrink: 0; display: flex; align-items: center; justify-content: center;">
-                                                <img src="<?php echo esc_url( $cur_ab_img ); ?>" class="image-preview-thumb" id="preview-about_section_img-about" style="width: 100%; height: 100%; object-fit: cover; display: block;" onerror="this.src='<?php echo esc_url( $def_ab_img ); ?>';">
-                                            </div>
-                                            <input type="hidden" name="about_section_img" id="input-about_section_img-about" value="<?php echo esc_attr( $data['about_section_img'] ?? '' ); ?>">
-                                            <div style="display: flex; gap: 0.8rem; align-items: center; flex-wrap: wrap;">
-                                                <button type="button" class="btn btn-secondary btn-upload-media" data-target="about_section_img-about">Choose Image from Library</button>
-                                                <button type="button" class="btn btn-secondary btn-reset-media" data-target="about_section_img-about" data-default="<?php echo esc_url( $def_ab_img ); ?>" style="<?php echo empty( $data['about_section_img'] ) ? 'display:none;' : ''; ?>">Reset to Default</button>
+                                    <div class="form-group full-width" style="margin-top: 1rem; border-top: 1px dashed rgba(255,255,255,0.1); padding-top: 1rem;">
+                                        <h4 style="color: var(--c-gold); font-size: 0.95rem; margin-bottom: 1rem;">🖼️ Welcome Slider Images (5 Franciscan Pillars)</h4>
+                                    </div>
+                                    <?php
+                                    $about_slider_items = array(
+                                        '1' => array( 'label' => '1. Fraternity Image', 'key' => 'welcome_slide_1_img', 'default' => FRANCISCAN_THEME_URI . '/assets/images/new_uploads/fraternity.jpeg' ),
+                                        '2' => array( 'label' => '2. Tradition Image', 'key' => 'welcome_slide_2_img', 'default' => FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_24_08_PM.png' ),
+                                        '3' => array( 'label' => '3. Service Image', 'key' => 'welcome_slide_3_img', 'default' => FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_51_30_PM.png' ),
+                                        '4' => array( 'label' => '4. Humility Image', 'key' => 'welcome_slide_4_img', 'default' => FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_48_39_PM.png' ),
+                                        '5' => array( 'label' => '5. Conversion Image', 'key' => 'welcome_slide_5_img', 'default' => FRANCISCAN_THEME_URI . '/assets/images/new_uploads/hero-banner-aug20.jpeg' ),
+                                    );
+                                    foreach ( $about_slider_items as $s_num => $s_info ) :
+                                        $s_key = $s_info['key'];
+                                        $s_def = $s_info['default'];
+                                        $s_cur = ! empty( $data[$s_key] ) ? $data[$s_key] : $s_def;
+                                    ?>
+                                        <div class="form-group full-width">
+                                            <label><?php echo esc_html( $s_info['label'] ); ?></label>
+                                            <div class="image-uploader-box">
+                                                <div style="width: 100px; height: 64px; border-radius: 8px; overflow: hidden; background: #0c1727; border: 1px solid var(--c-gold); flex-shrink: 0; display: flex; align-items: center; justify-content: center;">
+                                                    <img src="<?php echo esc_url( $s_cur ); ?>" class="image-preview-thumb" id="preview-<?php echo esc_attr( $s_key ); ?>-about" style="width: 100%; height: 100%; object-fit: cover; display: block;" onerror="this.src='<?php echo esc_url( $s_def ); ?>';">
+                                                </div>
+                                                <input type="hidden" name="<?php echo esc_attr( $s_key ); ?>" id="input-<?php echo esc_attr( $s_key ); ?>-about" value="<?php echo esc_attr( $data[$s_key] ?? '' ); ?>">
+                                                <div style="display: flex; gap: 0.8rem; align-items: center; flex-wrap: wrap;">
+                                                    <button type="button" class="btn btn-secondary btn-upload-media" data-target="<?php echo esc_attr( $s_key ); ?>-about">Choose Image</button>
+                                                    <button type="button" class="btn btn-secondary btn-reset-media" data-target="<?php echo esc_attr( $s_key ); ?>-about" data-default="<?php echo esc_url( $s_def ); ?>" style="<?php echo empty( $data[$s_key] ) ? 'display:none;' : ''; ?>">Reset to Default</button>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    <?php endforeach; ?>
                                     <div class="form-group">
                                         <label>Video Loop URL</label>
                                         <input type="text" name="about_video_url" class="form-control" value="<?php echo esc_attr( $data['about_video_url'] ?? '' ); ?>">
