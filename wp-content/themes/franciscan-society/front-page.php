@@ -50,7 +50,7 @@ get_header();
 
                         <!-- Main Title: Phudu, 600 weight, 62px size, 62px line height -->
                         <h1 class="hero-title" style="font-family: 'Phudu', sans-serif !important; font-size: clamp(2.6rem, 5.5vw, 4.8rem) !important; font-weight: 600 !important; color: #ffffff; text-transform: uppercase; line-height: 1.05; letter-spacing: -0.01em; margin-bottom: 2.2rem; text-shadow: none !important;">
-                            <?php echo nl2br( esc_html( franciscan_get_page_field( 'home', 'hero_title', "WALKING IN PEACE\nSERVED IN GOD'S LOVE" ) ) ); ?>
+                            <?php echo nl2br( esc_html( franciscan_get_page_field( 'home', 'hero_title', "Let us begin again,\nfor we have only begun to serve the Lord." ) ) ); ?>
                         </h1>
 
                         <!-- Buttons Row -->

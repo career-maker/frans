@@ -137,7 +137,7 @@ function franciscan_get_default_page_content( $slug = '' ) {
         'home' => array(
             // Hero
             'hero_badge'        => 'THIRD ORDER REGULAR OF ST. FRANCIS',
-            'hero_title'        => "WALKING IN PEACE\nSERVED IN GOD'S LOVE",
+            'hero_title'        => "Let us begin again,\nfor we have only begun to serve the Lord.",
             'hero_subtitle'     => "WELCOME TO THE FRANCISCAN SOCIETY\nWALKING TOGETHER IN FAITH, PENANCE, AND SERVICE\nWe warmly welcome you to India, and global missions.",
             'hero_image'        => '',
             'hero_video'        => '',
