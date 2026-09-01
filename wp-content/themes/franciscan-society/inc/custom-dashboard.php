@@ -1240,20 +1240,20 @@ function franciscan_render_dashboard_view() {
                                         <textarea name="mission_values_text" class="form-control"><?php echo esc_textarea( $data['mission_values_text'] ?? '' ); ?></textarea>
                                     </div>
                                     <div class="form-group">
-                                        <label>Prayer Support - Title</label>
-                                        <input type="text" name="prayer_support_title" class="form-control" value="<?php echo esc_attr( $data['prayer_support_title'] ?? 'PRAYER SUPPORT' ); ?>">
+                                        <label>Faith & Trust - Title</label>
+                                        <input type="text" name="prayer_support_title" class="form-control" value="<?php echo esc_attr( $data['prayer_support_title'] ?? 'FAITH & TRUST' ); ?>">
                                     </div>
                                     <div class="form-group">
-                                        <label>Prayer Support - Description</label>
-                                        <input type="text" name="prayer_support_desc" class="form-control" value="<?php echo esc_attr( $data['prayer_support_desc'] ?? 'Our Prayer Support accompanies you in faith during every stage of life.' ); ?>">
+                                        <label>Faith & Trust - Description</label>
+                                        <input type="text" name="prayer_support_desc" class="form-control" value="<?php echo esc_attr( $data['prayer_support_desc'] ?? 'We place our faith in God and trust His guidance in every aspect of our ministry.' ); ?>">
                                     </div>
                                     <div class="form-group">
-                                        <label>Fellowship Groups - Title</label>
-                                        <input type="text" name="fellowship_title" class="form-control" value="<?php echo esc_attr( $data['fellowship_title'] ?? 'FELLOWSHIP GROUPS' ); ?>">
+                                        <label>Love & Compassion - Title</label>
+                                        <input type="text" name="fellowship_title" class="form-control" value="<?php echo esc_attr( $data['fellowship_title'] ?? 'LOVE & COMPASSION' ); ?>">
                                     </div>
                                     <div class="form-group">
-                                        <label>Fellowship Groups - Description</label>
-                                        <input type="text" name="fellowship_desc" class="form-control" value="<?php echo esc_attr( $data['fellowship_desc'] ?? 'Join our vibrant fellowship groups and grow together in faith and community.' ); ?>">
+                                        <label>Love & Compassion - Description</label>
+                                        <input type="text" name="fellowship_desc" class="form-control" value="<?php echo esc_attr( $data['fellowship_desc'] ?? 'We serve others with genuine love, kindness, compassion, and a heart for those in need.' ); ?>">
                                     </div>
                                     <div class="form-group">
                                         <label>Call Us - Button Label</label>
@@ -1511,20 +1511,20 @@ function franciscan_render_dashboard_view() {
                                         <textarea name="mission_values_text" class="form-control"><?php echo esc_textarea( $data['mission_values_text'] ?? '' ); ?></textarea>
                                     </div>
                                     <div class="form-group">
-                                        <label>Prayer Support - Title</label>
-                                        <input type="text" name="prayer_support_title" class="form-control" value="<?php echo esc_attr( $data['prayer_support_title'] ?? 'PRAYER SUPPORT' ); ?>">
+                                        <label>Faith & Trust - Title</label>
+                                        <input type="text" name="prayer_support_title" class="form-control" value="<?php echo esc_attr( $data['prayer_support_title'] ?? 'FAITH & TRUST' ); ?>">
                                     </div>
                                     <div class="form-group">
-                                        <label>Prayer Support - Description</label>
-                                        <input type="text" name="prayer_support_desc" class="form-control" value="<?php echo esc_attr( $data['prayer_support_desc'] ?? 'Our Prayer Support accompanies you in faith during every stage of life.' ); ?>">
+                                        <label>Faith & Trust - Description</label>
+                                        <input type="text" name="prayer_support_desc" class="form-control" value="<?php echo esc_attr( $data['prayer_support_desc'] ?? 'We place our faith in God and trust His guidance in every aspect of our ministry.' ); ?>">
                                     </div>
                                     <div class="form-group">
-                                        <label>Fellowship Groups - Title</label>
-                                        <input type="text" name="fellowship_title" class="form-control" value="<?php echo esc_attr( $data['fellowship_title'] ?? 'FELLOWSHIP GROUPS' ); ?>">
+                                        <label>Love & Compassion - Title</label>
+                                        <input type="text" name="fellowship_title" class="form-control" value="<?php echo esc_attr( $data['fellowship_title'] ?? 'LOVE & COMPASSION' ); ?>">
                                     </div>
                                     <div class="form-group">
-                                        <label>Fellowship Groups - Description</label>
-                                        <input type="text" name="fellowship_desc" class="form-control" value="<?php echo esc_attr( $data['fellowship_desc'] ?? 'Join our vibrant fellowship groups and grow together in faith and community.' ); ?>">
+                                        <label>Love & Compassion - Description</label>
+                                        <input type="text" name="fellowship_desc" class="form-control" value="<?php echo esc_attr( $data['fellowship_desc'] ?? 'We serve others with genuine love, kindness, compassion, and a heart for those in need.' ); ?>">
                                     </div>
                                     <div class="form-group">
                                         <label>Call Us - Label</label>

@@ -117,10 +117,10 @@ function franciscan_get_default_page_content( $slug = '' ) {
             'mission_eyebrow'        => 'Our Values',
             'mission_values_heading' => 'OUR CHRISTIAN VALUES THAT LEAD OUR MINISTRY',
             'mission_values_text'    => 'Our Christian values are the foundation of everything we do as a church. Guided by faith, love, compassion, and integrity, we are committed to serving God.',
-            'prayer_support_title'   => 'PRAYER SUPPORT',
-            'prayer_support_desc'    => 'Our Prayer Support accompanies you in faith during every stage of life.',
-            'fellowship_title'       => 'FELLOWSHIP GROUPS',
-            'fellowship_desc'        => 'Join our vibrant fellowship groups and grow together in faith and community.',
+            'prayer_support_title'   => 'FAITH & TRUST',
+            'prayer_support_desc'    => 'We place our faith in God and trust His guidance in every aspect of our ministry.',
+            'fellowship_title'       => 'LOVE & COMPASSION',
+            'fellowship_desc'        => 'We serve others with genuine love, kindness, compassion, and a heart for those in need.',
             'call_us_label'          => 'CALL US!',
             'mission_church_img'     => '',
             'mission_priest_img'     => '',
@@ -176,10 +176,10 @@ function franciscan_get_default_page_content( $slug = '' ) {
             'mission_eyebrow'        => 'Our Values',
             'mission_values_heading' => 'OUR CHRISTIAN VALUES THAT LEAD OUR MINISTRY',
             'mission_values_text'    => 'Our Christian values are the foundation of everything we do as a church. Guided by faith, love, compassion, and integrity, we are committed to serving God.',
-            'prayer_support_title'   => 'PRAYER SUPPORT',
-            'prayer_support_desc'    => 'Our Prayer Support accompanies you in faith during every stage of life.',
-            'fellowship_title'       => 'FELLOWSHIP GROUPS',
-            'fellowship_desc'        => 'Join our vibrant fellowship groups and grow together in faith and community.',
+            'prayer_support_title'   => 'FAITH & TRUST',
+            'prayer_support_desc'    => 'We place our faith in God and trust His guidance in every aspect of our ministry.',
+            'fellowship_title'       => 'LOVE & COMPASSION',
+            'fellowship_desc'        => 'We serve others with genuine love, kindness, compassion, and a heart for those in need.',
             'call_us_label'          => 'CALL US!',
             'mission_church_img'     => '',
             'mission_priest_img'     => '',
@@ -627,6 +627,15 @@ function franciscan_resync_legacy_content_options() {
                     if ( $v !== '' && $v !== null ) {
                         $clean[ $k ] = $v;
                     }
+                }
+                // Resync legacy Prayer Support & Fellowship Groups values to Faith & Trust / Love & Compassion
+                if ( isset( $clean['prayer_support_title'] ) && 'PRAYER SUPPORT' === $clean['prayer_support_title'] ) {
+                    $clean['prayer_support_title'] = 'FAITH & TRUST';
+                    $clean['prayer_support_desc']  = 'We place our faith in God and trust His guidance in every aspect of our ministry.';
+                }
+                if ( isset( $clean['fellowship_title'] ) && 'FELLOWSHIP GROUPS' === $clean['fellowship_title'] ) {
+                    $clean['fellowship_title'] = 'LOVE & COMPASSION';
+                    $clean['fellowship_desc']  = 'We serve others with genuine love, kindness, compassion, and a heart for those in need.';
                 }
                 $merged = wp_parse_args( $clean, $def_values );
                 update_option( 'franciscan_page_' . $slug, $merged );

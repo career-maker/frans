@@ -305,13 +305,13 @@ get_header();
                         <div style="position: absolute; left: 0; top: 15%; bottom: 15%; width: 4px; background-color: #4A2A18; border-radius: 0 4px 4px 0;"></div>
                         
                         <div style="flex: 1; padding-left: 1rem;">
-                            <h4 style="font-family: 'Phudu', sans-serif; font-size: 1.3rem; font-weight: 700; text-transform: uppercase; margin-bottom: 0.8rem; color: #1c1917;"><?php echo esc_html( franciscan_get_page_field( 'home', 'prayer_support_title', 'PRAYER SUPPORT' ) ); ?></h4>
-                            <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #78716c; line-height: 1.5; margin: 0;"><?php echo esc_html( franciscan_get_page_field( 'home', 'prayer_support_desc', 'Our Prayer Support accompanies you in faith during every stage of life.' ) ); ?></p>
+                            <h4 style="font-family: 'Phudu', sans-serif; font-size: 1.3rem; font-weight: 700; text-transform: uppercase; margin-bottom: 0.8rem; color: #1c1917;"><?php echo esc_html( franciscan_get_page_field( 'home', 'prayer_support_title', 'FAITH & TRUST' ) ); ?></h4>
+                            <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #78716c; line-height: 1.5; margin: 0;"><?php echo esc_html( franciscan_get_page_field( 'home', 'prayer_support_desc', 'We place our faith in God and trust His guidance in every aspect of our ministry.' ) ); ?></p>
                         </div>
                         <div style="width: 1px; background-color: #e7e5e4;"></div>
                         <div style="flex: 1;">
-                            <h4 style="font-family: 'Phudu', sans-serif; font-size: 1.3rem; font-weight: 700; text-transform: uppercase; margin-bottom: 0.8rem; color: #1c1917;"><?php echo esc_html( franciscan_get_page_field( 'home', 'fellowship_title', 'FELLOWSHIP GROUPS' ) ); ?></h4>
-                            <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #78716c; line-height: 1.5; margin: 0;"><?php echo esc_html( franciscan_get_page_field( 'home', 'fellowship_desc', 'Join our vibrant fellowship groups and grow together in faith and community.' ) ); ?></p>
+                            <h4 style="font-family: 'Phudu', sans-serif; font-size: 1.3rem; font-weight: 700; text-transform: uppercase; margin-bottom: 0.8rem; color: #1c1917;"><?php echo esc_html( franciscan_get_page_field( 'home', 'fellowship_title', 'LOVE & COMPASSION' ) ); ?></h4>
+                            <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #78716c; line-height: 1.5; margin: 0;"><?php echo esc_html( franciscan_get_page_field( 'home', 'fellowship_desc', 'We serve others with genuine love, kindness, compassion, and a heart for those in need.' ) ); ?></p>
                         </div>
                     </div>
 
