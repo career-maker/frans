@@ -269,8 +269,8 @@ function franciscan_get_default_page_content( $slug = '' ) {
             'inquiry_btn_url'        => '/contact/#enquiry',
         ),
         'community-leadership' => array(
-            'hero_badge'             => 'SERVANT LEADERSHIP',
-            'hero_title'             => 'LEADERSHIP & COUNCILS',
+            'hero_badge'             => 'To lead is to serve; to be greater is to become lesser.',
+            'hero_title'             => 'LEADERSHIP',
             'hero_subtitle'          => 'Guiding the Province in fraternity, governance, and mission.',
             'hero_image'             => '',
             'general_council_badge'  => 'GENERAL COUNCIL',
@@ -636,6 +636,15 @@ function franciscan_resync_legacy_content_options() {
                 if ( isset( $clean['fellowship_title'] ) && 'FELLOWSHIP GROUPS' === $clean['fellowship_title'] ) {
                     $clean['fellowship_title'] = 'LOVE & COMPASSION';
                     $clean['fellowship_desc']  = 'We serve others with genuine love, kindness, compassion, and a heart for those in need.';
+                }
+                // Resync leadership legacy badge and title
+                if ( 'community-leadership' === $slug ) {
+                    if ( ! isset( $clean['hero_title'] ) || in_array( $clean['hero_title'], array( 'LEADERSHIP & COUNCILS', 'PROVINCIAL LEADERSHIP' ), true ) ) {
+                        $clean['hero_title'] = 'LEADERSHIP';
+                    }
+                    if ( ! isset( $clean['hero_badge'] ) || in_array( $clean['hero_badge'], array( 'SERVANT LEADERSHIP', 'PROVINCIAL ADMINISTRATION' ), true ) ) {
+                        $clean['hero_badge'] = 'To lead is to serve; to be greater is to become lesser.';
+                    }
                 }
                 $merged = wp_parse_args( $clean, $def_values );
                 update_option( 'franciscan_page_' . $slug, $merged );
