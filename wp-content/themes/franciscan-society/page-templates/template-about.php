@@ -929,7 +929,7 @@ button.fs-mega-toggle:focus::after {
 
                     <!-- Call to Action Row -->
                     <?php
-                    $contact_phone = franciscan_get_option( 'contact_phone', '+91 651 234 5678' );
+                    $contact_phone = franciscan_get_option( 'contact_phone', '+91 95726 35314' );
                     $tel_href      = 'tel:+' . preg_replace( '/[^0-9]/', '', $contact_phone );
                     ?>
                     <div style="display: flex; align-items: center; gap: 2.5rem;">

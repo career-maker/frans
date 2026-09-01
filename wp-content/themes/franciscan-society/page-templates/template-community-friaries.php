@@ -702,6 +702,11 @@ button.fs-mega-toggle:focus::after {
             color: #0c1727 !important;
             transform: rotate(90deg) !important;
         }
+        .friary-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 16px 32px rgba(0, 0, 0, 0.08) !important;
+            border-color: #d6d1c8 !important;
+        }
     </style>
 
 <main id="main-content" style="padding-top: 0; background-color: #FFF;">
@@ -740,193 +745,197 @@ button.fs-mega-toggle:focus::after {
 
     
 
-        <div style="max-width: 1200px; margin: 0 auto; padding: clamp(3rem, 8vw, 5rem) 2rem;">
+    <div style="max-width: 1200px; margin: 0 auto; padding: clamp(3rem, 8vw, 5rem) 2rem;">
         <h2 style="font-family: 'Phudu', sans-serif; font-size: 2.2rem; font-weight: 900; color: #1c1917; margin-bottom: 2.5rem; text-align: center;">OUR FRIARIES</h2>
-        <h3 style="font-family: 'Phudu', sans-serif; font-size: 1.5rem; font-weight: 700; color: #4a2a18; margin-top: 3rem; margin-bottom: 1.5rem; border-bottom: 2px solid #e5e5e5; padding-bottom: 0.5rem;">ARCHDIOCESE OF RANCHI</h3>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-bottom: 2rem;">
-            <div style="border-radius: 12px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.05); display: flex; flex-direction: column; background: #fff;">
-                <img loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/IMG_1157.JPG' ); ?>" alt="Franciscan Ashram (Provincial Residence)" style="width: 100%; height: 200px; object-fit: cover;">
-                <div style="padding: 1.5rem;">
-                    <h4 style="font-family: 'Phudu', sans-serif; font-size: 1.1rem; font-weight: 700; color: #1c1917; margin-top: 0; margin-bottom: 0.5rem;">Franciscan Ashram (Provincial Residence)</h4>
-                    <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.5; margin: 0;">P.O. Harmu Housing Colony, Ranchi – 834002, JHARKHAND, Estd. 1978</p>
-                </div>
-            </div>
-            <div style="border-radius: 12px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.05); display: flex; flex-direction: column; background: #fff;">
-                <img loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/WhatsApp Image 2026-08-10 at 2.17.28 PM (1).jpeg' ); ?>" alt="Franciscan Training Institute" style="width: 100%; height: 200px; object-fit: cover;">
-                <div style="padding: 1.5rem;">
-                    <h4 style="font-family: 'Phudu', sans-serif; font-size: 1.1rem; font-weight: 700; color: #1c1917; margin-top: 0; margin-bottom: 0.5rem;">Franciscan Training Institute</h4>
-                    <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.5; margin: 0;">Purulia Road (Dr. Camil Bulcke Path), P. Box No. 123, Ranchi – 834001, JHARKHAND, Estd. 1954</p>
-                </div>
-            </div>
-            <div style="border-radius: 12px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.05); display: flex; flex-direction: column; background: #fff;">
-                <img loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/IMG_1157.JPG' ); ?>" alt="Franciscan Ashram Banhora" style="width: 100%; height: 200px; object-fit: cover;">
-                <div style="padding: 1.5rem;">
-                    <h4 style="font-family: 'Phudu', sans-serif; font-size: 1.1rem; font-weight: 700; color: #1c1917; margin-top: 0; margin-bottom: 0.5rem;">Franciscan Ashram Banhora</h4>
-                    <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.5; margin: 0;">P.O. Hehel, Ranchi – 834005, JHARKHAND, Estd. 1988</p>
-                </div>
-            </div>
-            <div style="border-radius: 12px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.05); display: flex; flex-direction: column; background: #fff;">
-                <img loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/WhatsApp Image 2025-09-17 at 11.30.24 AM.jpeg' ); ?>" alt="Franciscan Ashram" style="width: 100%; height: 200px; object-fit: cover;">
-                <div style="padding: 1.5rem;">
-                    <h4 style="font-family: 'Phudu', sans-serif; font-size: 1.1rem; font-weight: 700; color: #1c1917; margin-top: 0; margin-bottom: 0.5rem;">Franciscan Ashram</h4>
-                    <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.5; margin: 0;">P.O. Getalsud (Via – Tatisilwai), Ranchi – 835101, JHARKHAND, Estd. 2002</p>
-                </div>
-            </div>
-        </div>
-        <h3 style="font-family: 'Phudu', sans-serif; font-size: 1.5rem; font-weight: 700; color: #4a2a18; margin-top: 3rem; margin-bottom: 1.5rem; border-bottom: 2px solid #e5e5e5; padding-bottom: 0.5rem;">DIOCESE OF KHUNTI</h3>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-bottom: 2rem;">
-            <div style="border-radius: 12px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.05); display: flex; flex-direction: column; background: #fff;">
-                <img loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/WhatsApp Image 2026-08-07 at 8.42.19 AM (2).jpeg' ); ?>" alt="St. Anthony’s Monastery" style="width: 100%; height: 200px; object-fit: cover;">
-                <div style="padding: 1.5rem;">
-                    <h4 style="font-family: 'Phudu', sans-serif; font-size: 1.1rem; font-weight: 700; color: #1c1917; margin-top: 0; margin-bottom: 0.5rem;">St. Anthony’s Monastery</h4>
-                    <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.5; margin: 0;">P.O. Dorma (Via – Torpa), Khunti – 835227, JHARKHAND, Estd. 1970</p>
-                </div>
-            </div>
-            <div style="border-radius: 12px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.05); display: flex; flex-direction: column; background: #fff;">
-                <img loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/IMG_2531.JPG' ); ?>" alt="Franciscan Ashram Gaurbera" style="width: 100%; height: 200px; object-fit: cover;">
-                <div style="padding: 1.5rem;">
-                    <h4 style="font-family: 'Phudu', sans-serif; font-size: 1.1rem; font-weight: 700; color: #1c1917; margin-top: 0; margin-bottom: 0.5rem;">Franciscan Ashram Gaurbera</h4>
-                    <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.5; margin: 0;">P.O. Bhamini (Via - Muruhu), Khunti – 835216, JHARKHAND, Estd. 1986</p>
-                </div>
-            </div>
-            <div style="border-radius: 12px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.05); display: flex; flex-direction: column; background: #fff;">
-                <img loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/IMG_1166.JPG' ); ?>" alt="Assisi Bhavan" style="width: 100%; height: 200px; object-fit: cover;">
-                <div style="padding: 1.5rem;">
-                    <h4 style="font-family: 'Phudu', sans-serif; font-size: 1.1rem; font-weight: 700; color: #1c1917; margin-top: 0; margin-bottom: 0.5rem;">Assisi Bhavan</h4>
-                    <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.5; margin: 0;">P.O. Dorma (Via – Torpa), Khunti – 835227, JHARKHAND, Estd. 2006</p>
-                </div>
-            </div>
-            <div style="border-radius: 12px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.05); display: flex; flex-direction: column; background: #fff;">
-                <img loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/WhatsApp Image 2025-02-15 at 9.44.56 AM (1).jpeg' ); ?>" alt="Vinay Bhavan" style="width: 100%; height: 200px; object-fit: cover;">
-                <div style="padding: 1.5rem;">
-                    <h4 style="font-family: 'Phudu', sans-serif; font-size: 1.1rem; font-weight: 700; color: #1c1917; margin-top: 0; margin-bottom: 0.5rem;">Vinay Bhavan</h4>
-                    <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.5; margin: 0;">P.O. Bichna, Khunti - 835210, Jharkhand, Estd. 2009</p>
-                </div>
-            </div>
-        </div>
-        <h3 style="font-family: 'Phudu', sans-serif; font-size: 1.5rem; font-weight: 700; color: #4a2a18; margin-top: 3rem; margin-bottom: 1.5rem; border-bottom: 2px solid #e5e5e5; padding-bottom: 0.5rem;">DIOCESE OF SIMDEGA</h3>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-bottom: 2rem;">
-            <div style="border-radius: 12px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.05); display: flex; flex-direction: column; background: #fff;">
-                <img loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/Fr. Manoj Vengathanam Minister Provincial.jpg' ); ?>" alt="Franciscan Ashram Bhukumunda" style="width: 100%; height: 200px; object-fit: cover;">
-                <div style="padding: 1.5rem;">
-                    <h4 style="font-family: 'Phudu', sans-serif; font-size: 1.1rem; font-weight: 700; color: #1c1917; margin-top: 0; margin-bottom: 0.5rem;">Franciscan Ashram Bhukumunda</h4>
-                    <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.5; margin: 0;">P.O. Targa, Simdega – 835226, JHARKHAND, Estd. 1987</p>
-                </div>
-            </div>
-            <div style="border-radius: 12px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.05); display: flex; flex-direction: column; background: #fff;">
-                <img loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/IMG_1018.JPG' ); ?>" alt="St. Joseph’s Church Kuruskela" style="width: 100%; height: 200px; object-fit: cover;">
-                <div style="padding: 1.5rem;">
-                    <h4 style="font-family: 'Phudu', sans-serif; font-size: 1.1rem; font-weight: 700; color: #1c1917; margin-top: 0; margin-bottom: 0.5rem;">St. Joseph’s Church Kuruskela</h4>
-                    <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.5; margin: 0;">Simdega - 835228, JHARKHAND, Estd. 2012</p>
-                </div>
-            </div>
-            <div style="border-radius: 12px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.05); display: flex; flex-direction: column; background: #fff;">
-                <img loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/IMG_2012.JPG' ); ?>" alt="Catholic Church Behrinbasa" style="width: 100%; height: 200px; object-fit: cover;">
-                <div style="padding: 1.5rem;">
-                    <h4 style="font-family: 'Phudu', sans-serif; font-size: 1.1rem; font-weight: 700; color: #1c1917; margin-top: 0; margin-bottom: 0.5rem;">Catholic Church Behrinbasa</h4>
-                    <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.5; margin: 0;">P.O. Behrinbasa, Simdega – 835226, JHARKHAND, Estd. 2013</p>
-                </div>
-            </div>
-        </div>
-        <!-- Single Friary Dioceses Grouped in a 3-Column Row -->
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; margin-top: 3rem; margin-bottom: 2rem; align-items: start;">
-            <!-- Diocese of Gumla -->
-            <div>
-                <h3 style="font-family: 'Phudu', sans-serif; font-size: 1.35rem; font-weight: 700; color: #4a2a18; margin-top: 0; margin-bottom: 1.2rem; border-bottom: 2px solid #e5e5e5; padding-bottom: 0.5rem;">DIOCESE OF GUMLA</h3>
-                <div style="border-radius: 12px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.05); display: flex; flex-direction: column; background: #fff; height: 100%;">
-                    <img loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/IMG_2531.JPG' ); ?>" alt="Franciscan Ashram Murumkela" style="width: 100%; height: 200px; object-fit: cover;">
-                    <div style="padding: 1.5rem; flex-grow: 1;">
-                        <h4 style="font-family: 'Phudu', sans-serif; font-size: 1.1rem; font-weight: 700; color: #1c1917; margin-top: 0; margin-bottom: 0.5rem;">Franciscan Ashram Murumkela</h4>
-                        <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.5; margin: 0;">P.O. Kansir (Via – Chainpur), Gumla – 835206, JHARKHAND, Estd. 1998</p>
-                    </div>
-                </div>
-            </div>
 
-            <!-- Diocese of Purnea -->
-            <div>
-                <h3 style="font-family: 'Phudu', sans-serif; font-size: 1.35rem; font-weight: 700; color: #4a2a18; margin-top: 0; margin-bottom: 1.2rem; border-bottom: 2px solid #e5e5e5; padding-bottom: 0.5rem;">DIOCESE OF PURNEA</h3>
-                <div style="border-radius: 12px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.05); display: flex; flex-direction: column; background: #fff; height: 100%;">
-                    <img loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/WhatsApp Image 2026-08-10 at 2.17.28 PM (1).jpeg' ); ?>" alt="Franciscan Ashram Thakurganj" style="width: 100%; height: 200px; object-fit: cover;">
-                    <div style="padding: 1.5rem; flex-grow: 1;">
-                        <h4 style="font-family: 'Phudu', sans-serif; font-size: 1.1rem; font-weight: 700; color: #1c1917; margin-top: 0; margin-bottom: 0.5rem;">Franciscan Ashram Thakurganj</h4>
-                        <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.5; margin: 0;">P.O. Thakurganj, Kishanganj – 855116, BIHAR, Estd. 1996</p>
-                    </div>
-                </div>
-            </div>
+        <?php
+        // Refined light pastel color palettes (background, border, stroke, text)
+        $pastel_palettes = array(
+            array( 'bg' => '#EBF3ED', 'border' => '#D1E6D6', 'stroke' => '#3D6348', 'text' => '#24432C' ), // Sage
+            array( 'bg' => '#FDF0EA', 'border' => '#F7D6C7', 'stroke' => '#9E583F', 'text' => '#6A311D' ), // Peach / Warm Earth
+            array( 'bg' => '#EAF3FA', 'border' => '#CDE1F3', 'stroke' => '#3C6C97', 'text' => '#1F476B' ), // Sky Blue
+            array( 'bg' => '#F4EEF9', 'border' => '#E1D1F3', 'stroke' => '#6C4887', 'text' => '#44265A' ), // Lavender
+            array( 'bg' => '#FAF5E8', 'border' => '#EFE1BF', 'stroke' => '#876936', 'text' => '#5C4318' ), // Sand / Cream
+            array( 'bg' => '#FDEEF2', 'border' => '#F8CCD7', 'stroke' => '#9B455B', 'text' => '#691F32' ), // Rose
+            array( 'bg' => '#E8F6F1', 'border' => '#C9EDE0', 'stroke' => '#32745F', 'text' => '#174D3D' ), // Mint
+            array( 'bg' => '#FFF2E6', 'border' => '#FCD4B6', 'stroke' => '#9C5824', 'text' => '#6B350C' ), // Apricot
+            array( 'bg' => '#F6EFF9', 'border' => '#E5CEF3', 'stroke' => '#5E3C7A', 'text' => '#3B2052' ), // Violet Haze
+            array( 'bg' => '#EEF3F7', 'border' => '#D2DFEB', 'stroke' => '#47637C', 'text' => '#284157' ), // Slate Pearl
+        );
 
-            <!-- Diocese of Bagdogra -->
-            <div>
-                <h3 style="font-family: 'Phudu', sans-serif; font-size: 1.35rem; font-weight: 700; color: #4a2a18; margin-top: 0; margin-bottom: 1.2rem; border-bottom: 2px solid #e5e5e5; padding-bottom: 0.5rem;">DIOCESE OF BAGDOGRA</h3>
-                <div style="border-radius: 12px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.05); display: flex; flex-direction: column; background: #fff; height: 100%;">
-                    <img loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/WhatsApp Image 2026-08-10 at 2.17.26 PM.jpeg' ); ?>" alt="Franciscan Ashram Adhikari" style="width: 100%; height: 200px; object-fit: cover;">
-                    <div style="padding: 1.5rem; flex-grow: 1;">
-                        <h4 style="font-family: 'Phudu', sans-serif; font-size: 1.1rem; font-weight: 700; color: #1c1917; margin-top: 0; margin-bottom: 0.5rem;">Franciscan Ashram Adhikari</h4>
-                        <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.5; margin: 0;">P.O. Adhikari (Via – Khoribari), Darjeeling – 734427, WEST BENGAL, Estd. 1982.</p>
+        $dioceses = array(
+            'ARCHDIOCESE OF RANCHI' => array(
+                array(
+                    'title' => 'Franciscan Ashram (Provincial Residence)',
+                    'desc'  => 'P.O. Harmu Housing Colony, Ranchi – 834002, JHARKHAND, Estd. 1978',
+                    'image' => '',
+                ),
+                array(
+                    'title' => 'Franciscan Training Institute',
+                    'desc'  => 'Purulia Road (Dr. Camil Bulcke Path), P. Box No. 123, Ranchi – 834001, JHARKHAND, Estd. 1954',
+                    'image' => '',
+                ),
+                array(
+                    'title' => 'Franciscan Ashram Banhora',
+                    'desc'  => 'P.O. Hehel, Ranchi – 834005, JHARKHAND, Estd. 1988',
+                    'image' => '',
+                ),
+                array(
+                    'title' => 'Franciscan Ashram Getalsud',
+                    'desc'  => 'P.O. Getalsud (Via – Tatisilwai), Ranchi – 835101, JHARKHAND, Estd. 2002',
+                    'image' => '',
+                ),
+            ),
+            'DIOCESE OF KHUNTI' => array(
+                array(
+                    'title' => "St. Anthony’s Monastery",
+                    'desc'  => 'P.O. Dorma (Via – Torpa), Khunti – 835227, JHARKHAND, Estd. 1970',
+                    'image' => '',
+                ),
+                array(
+                    'title' => 'Franciscan Ashram Gaurbera',
+                    'desc'  => 'P.O. Bhamini (Via - Muruhu), Khunti – 835216, JHARKHAND, Estd. 1986',
+                    'image' => '',
+                ),
+                array(
+                    'title' => 'Assisi Bhavan',
+                    'desc'  => 'P.O. Dorma (Via – Torpa), Khunti – 835227, JHARKHAND, Estd. 2006',
+                    'image' => '',
+                ),
+                array(
+                    'title' => 'Vinay Bhavan',
+                    'desc'  => 'P.O. Bichna, Khunti - 835210, Jharkhand, Estd. 2009',
+                    'image' => '',
+                ),
+            ),
+            'DIOCESE OF SIMDEGA' => array(
+                array(
+                    'title' => 'Franciscan Ashram Bhukumunda',
+                    'desc'  => 'P.O. Targa, Simdega – 835226, JHARKHAND, Estd. 1987',
+                    'image' => '',
+                ),
+                array(
+                    'title' => "St. Joseph’s Church Kuruskela",
+                    'desc'  => 'Simdega - 835228, JHARKHAND, Estd. 2012',
+                    'image' => '',
+                ),
+                array(
+                    'title' => 'Catholic Church Behrinbasa',
+                    'desc'  => 'P.O. Behrinbasa, Simdega – 835226, JHARKHAND, Estd. 2013',
+                    'image' => '',
+                ),
+            ),
+            'DIOCESE OF GUMLA' => array(
+                array(
+                    'title' => 'Franciscan Ashram Murumkela',
+                    'desc'  => 'P.O. Kansir (Via – Chainpur), Gumla – 835206, JHARKHAND, Estd. 1998',
+                    'image' => '',
+                ),
+            ),
+            'DIOCESE OF PURNEA' => array(
+                array(
+                    'title' => 'Franciscan Ashram Thakurganj',
+                    'desc'  => 'P.O. Thakurganj, Kishanganj – 855116, BIHAR, Estd. 1996',
+                    'image' => '',
+                ),
+            ),
+            'DIOCESE OF BAGDOGRA' => array(
+                array(
+                    'title' => 'Franciscan Ashram Adhikari',
+                    'desc'  => 'P.O. Adhikari (Via – Khoribari), Darjeeling – 734427, WEST BENGAL, Estd. 1982.',
+                    'image' => '',
+                ),
+            ),
+            'DIOCESE OF JALPAIGURI' => array(
+                array(
+                    'title' => 'Franciscan Ashram Hasimara',
+                    'desc'  => 'P.O. Hasimara, Jalpaiguri – 735215, WEST BENGAL, Estd. 1984',
+                    'image' => '',
+                ),
+                array(
+                    'title' => 'Franciscan Ashram Chel-Line',
+                    'desc'  => 'Sylee, P.O. Mal, Jalpaiguri - 735221, WEST BENGAL, Estd. 2018',
+                    'image' => '',
+                ),
+            ),
+            'DIOCESE OF ROURKELA' => array(
+                array(
+                    'title' => 'Franciscan Ashram Deorapara (St. Francis Xavier Church)',
+                    'desc'  => 'P.O. Lohondabud, Sundergarh – 700022, ODISHA, Estd. 2003',
+                    'image' => '',
+                ),
+                array(
+                    'title' => 'Sneh Bhavan Jamunadipa',
+                    'desc'  => 'P.O. Kuarmunda, Rourkela, ODISHA-770039, Estd. 2014',
+                    'image' => '',
+                ),
+            ),
+            'DIOCESE OF BONGAIGAON' => array(
+                array(
+                    'title' => 'Franciscan Ashram Kashiabari',
+                    'desc'  => 'Village Sindrijhora, P.O. Kashiabari Kokrajhar, ASSAM - 783360',
+                    'image' => '',
+                ),
+            ),
+            'OUTSIDE INDIA' => array(
+                array(
+                    'title' => 'Pater Nicholas Tudu',
+                    'desc'  => 'TOR, Pfarrei Mariä Himmelfahrt, Schulstr.1, 84051 Essenbach, Germany',
+                    'image' => '',
+                ),
+                array(
+                    'title' => 'Pater Daison Thaikkattil',
+                    'desc'  => 'TOR, Kirch Strasse 3a, 79793 Wutoeschingen, Germany',
+                    'image' => '',
+                ),
+            ),
+        );
+
+        $color_index = 0;
+        foreach ( $dioceses as $diocese_title => $friary_list ) :
+        ?>
+            <h3 style="font-family: 'Phudu', sans-serif; font-size: 1.5rem; font-weight: 700; color: #4a2a18; margin-top: 3rem; margin-bottom: 1.5rem; border-bottom: 2px solid #e5e5e5; padding-bottom: 0.5rem; letter-spacing: 0.02em;">
+                <?php echo esc_html( $diocese_title ); ?>
+            </h3>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-bottom: 2.5rem;">
+                <?php foreach ( $friary_list as $friary ) :
+                    $pal = $pastel_palettes[$color_index % count( $pastel_palettes )];
+                    $color_index++;
+                ?>
+                    <div class="friary-card" style="border-radius: 16px; overflow: hidden; box-shadow: 0 10px 24px rgba(0,0,0,0.04); display: flex; flex-direction: column; background: #ffffff; border: 1px solid #ebe8e3; transition: transform 0.3s ease, box-shadow 0.3s ease;">
+                        <?php if ( ! empty( $friary['image'] ) ) : ?>
+                            <div style="height: 200px; width: 100%; overflow: hidden; position: relative;">
+                                <img loading="lazy" decoding="async" src="<?php echo esc_url( $friary['image'] ); ?>" alt="<?php echo esc_attr( $friary['title'] ); ?>" style="width: 100%; height: 100%; object-fit: cover;">
+                            </div>
+                        <?php else : ?>
+                            <!-- Fallback Big Outline Text with Pastel Palette -->
+                            <div style="height: 200px; width: 100%; background-color: <?php echo esc_attr( $pal['bg'] ); ?>; border-bottom: 1px solid <?php echo esc_attr( $pal['border'] ); ?>; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; padding: 1.5rem; text-align: center;">
+                                <!-- Subtle Decorative Cross Watermark -->
+                                <svg style="position: absolute; right: -15px; bottom: -20px; width: 130px; height: 130px; opacity: 0.12; color: <?php echo esc_attr( $pal['stroke'] ); ?>; pointer-events: none;" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M11 2h2v7h7v2h-7v11h-2V11H4V9h7V2z"/>
+                                </svg>
+                                <!-- Big Outline Title -->
+                                <span style="font-family: 'Phudu', sans-serif; font-size: clamp(1.25rem, 2vw, 1.6rem); font-weight: 900; line-height: 1.2; text-transform: uppercase; letter-spacing: 0.02em; color: transparent; -webkit-text-stroke: 1.5px <?php echo esc_attr( $pal['stroke'] ); ?>; position: relative; z-index: 2; word-break: break-word;">
+                                    <?php echo esc_html( $friary['title'] ); ?>
+                                </span>
+                            </div>
+                        <?php endif; ?>
+
+                        <div style="padding: 1.6rem; display: flex; flex-direction: column; flex-grow: 1; justify-content: space-between;">
+                            <div>
+                                <h4 style="font-family: 'Phudu', sans-serif; font-size: 1.15rem; font-weight: 700; color: #1c1917; margin-top: 0; margin-bottom: 0.5rem; line-height: 1.35;">
+                                    <?php echo esc_html( $friary['title'] ); ?>
+                                </h4>
+                                <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.55; margin: 0;">
+                                    <?php echo esc_html( $friary['desc'] ); ?>
+                                </p>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                <?php endforeach; ?>
             </div>
-        </div>
-        <h3 style="font-family: 'Phudu', sans-serif; font-size: 1.5rem; font-weight: 700; color: #4a2a18; margin-top: 3rem; margin-bottom: 1.5rem; border-bottom: 2px solid #e5e5e5; padding-bottom: 0.5rem;">DIOCESE OF JALPAIGURI</h3>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-bottom: 2rem;">
-            <div style="border-radius: 12px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.05); display: flex; flex-direction: column; background: #fff;">
-                <img loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/IMG_1166.JPG' ); ?>" alt="Franciscan Ashram Hasimara" style="width: 100%; height: 200px; object-fit: cover;">
-                <div style="padding: 1.5rem;">
-                    <h4 style="font-family: 'Phudu', sans-serif; font-size: 1.1rem; font-weight: 700; color: #1c1917; margin-top: 0; margin-bottom: 0.5rem;">Franciscan Ashram Hasimara</h4>
-                    <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.5; margin: 0;">P.O. Hasimara, Jalpaiguri – 735215, WEST BENGAL, Estd. 1984</p>
-                </div>
-            </div>
-            <div style="border-radius: 12px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.05); display: flex; flex-direction: column; background: #fff;">
-                <img loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/WhatsApp Image 2025-09-10 at 4.28.52 AM.jpeg' ); ?>" alt="Franciscan Ashram Chel-Line" style="width: 100%; height: 200px; object-fit: cover;">
-                <div style="padding: 1.5rem;">
-                    <h4 style="font-family: 'Phudu', sans-serif; font-size: 1.1rem; font-weight: 700; color: #1c1917; margin-top: 0; margin-bottom: 0.5rem;">Franciscan Ashram Chel-Line</h4>
-                    <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.5; margin: 0;">Sylee, P.O. Mal, Jalpaiguri - 735221, WEST BENGAL, Estd. 2018</p>
-                </div>
-            </div>
-        </div>
-        <h3 style="font-family: 'Phudu', sans-serif; font-size: 1.5rem; font-weight: 700; color: #4a2a18; margin-top: 3rem; margin-bottom: 1.5rem; border-bottom: 2px solid #e5e5e5; padding-bottom: 0.5rem;">DIOCESE OF ROURKELA</h3>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-bottom: 2rem;">
-            <div style="border-radius: 12px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.05); display: flex; flex-direction: column; background: #fff;">
-                <img loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/IMG_2529.JPG' ); ?>" alt="Franciscan Ashram (St. Francis Xavier Church) Deorapara" style="width: 100%; height: 200px; object-fit: cover;">
-                <div style="padding: 1.5rem;">
-                    <h4 style="font-family: 'Phudu', sans-serif; font-size: 1.1rem; font-weight: 700; color: #1c1917; margin-top: 0; margin-bottom: 0.5rem;">Franciscan Ashram (St. Francis Xavier Church) Deorapara</h4>
-                    <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.5; margin: 0;">P.O. Lohondabud, Sundergarh – 700022, ODISHA, Estd. 2003</p>
-                </div>
-            </div>
-            <div style="border-radius: 12px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.05); display: flex; flex-direction: column; background: #fff;">
-                <img loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/IMG_1018.JPG' ); ?>" alt="Sneh Bhavan Jamunadipa" style="width: 100%; height: 200px; object-fit: cover;">
-                <div style="padding: 1.5rem;">
-                    <h4 style="font-family: 'Phudu', sans-serif; font-size: 1.1rem; font-weight: 700; color: #1c1917; margin-top: 0; margin-bottom: 0.5rem;">Sneh Bhavan Jamunadipa</h4>
-                    <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.5; margin: 0;">P.O. Kuarmunda, Rourkela, ODISHA-770039, Estd. 2014</p>
-                </div>
-            </div>
-        </div>
-        <h3 style="font-family: 'Phudu', sans-serif; font-size: 1.5rem; font-weight: 700; color: #4a2a18; margin-top: 3rem; margin-bottom: 1.5rem; border-bottom: 2px solid #e5e5e5; padding-bottom: 0.5rem;">DIOCESE OF BONGAIGAON</h3>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 580px)); gap: 2rem; margin-bottom: 2rem;">
-            <div style="border-radius: 12px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.05); display: flex; flex-direction: column; background: #fff;">
-                <img loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/WhatsApp Image 2026-08-07 at 1.39.48 PM (1).jpeg' ); ?>" alt="Franciscan Ashram Kashiabari" style="width: 100%; height: 200px; object-fit: cover;">
-                <div style="padding: 1.5rem;">
-                    <h4 style="font-family: 'Phudu', sans-serif; font-size: 1.1rem; font-weight: 700; color: #1c1917; margin-top: 0; margin-bottom: 0.5rem;">Franciscan Ashram Kashiabari</h4>
-                    <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.5; margin: 0;">Village Sindrijhora, P.O. Kashiabari Kokrajhar, ASSAM - 783360</p>
-                </div>
-            </div>
-        </div>
-        <h3 style="font-family: 'Phudu', sans-serif; font-size: 1.5rem; font-weight: 700; color: #4a2a18; margin-top: 3rem; margin-bottom: 1.5rem; border-bottom: 2px solid #e5e5e5; padding-bottom: 0.5rem;">OUTSIDE INDIA</h3>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-bottom: 2rem;">
-            <div style="border-radius: 12px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.05); display: flex; flex-direction: column; background: #fff;">
-                <img loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/WhatsApp Image 2026-08-10 at 2.17.26 PM (2).jpeg' ); ?>" alt="Pater Nicholas Tudu" style="width: 100%; height: 200px; object-fit: cover;">
-                <div style="padding: 1.5rem;">
-                    <h4 style="font-family: 'Phudu', sans-serif; font-size: 1.1rem; font-weight: 700; color: #1c1917; margin-top: 0; margin-bottom: 0.5rem;">Pater Nicholas Tudu</h4>
-                    <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.5; margin: 0;">TOR, Pfarrei Mariä Himmelfahrt, Schulstr.1, 84051 Essenbach</p>
-                </div>
-            </div>
-            <div style="border-radius: 12px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.05); display: flex; flex-direction: column; background: #fff;">
-                <img loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/IMG20230215103348.jpg.jpeg' ); ?>" alt="Pater Daison Thaikkattil" style="width: 100%; height: 200px; object-fit: cover;">
-                <div style="padding: 1.5rem;">
-                    <h4 style="font-family: 'Phudu', sans-serif; font-size: 1.1rem; font-weight: 700; color: #1c1917; margin-top: 0; margin-bottom: 0.5rem;">Pater Daison Thaikkattil</h4>
-                    <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.5; margin: 0;">TOR, Kirch Strasse 3a, 79793 Wutoeschingen, Germany</p>
-                </div>
-            </div>
-        </div>
+        <?php endforeach; ?>
     </div>
     <!-- FOOTER + BOTTOM WIDGETS + BIBLE MODAL UNIFIED SECTION -->
 <!-- Use exact copy from home page for all inner pages -->

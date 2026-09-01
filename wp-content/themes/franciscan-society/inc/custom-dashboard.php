@@ -1269,7 +1269,7 @@ function franciscan_render_dashboard_view() {
                                     </div>
                                     <div class="form-group">
                                         <label>Call Us - Phone <small>(edit in Settings tab)</small></label>
-                                        <input type="text" class="form-control" value="<?php echo esc_attr( franciscan_get_option( 'contact_phone', '+91 651 234 5678' ) ); ?>" disabled style="opacity:0.6; cursor:not-allowed;">
+                                        <input type="text" class="form-control" value="<?php echo esc_attr( franciscan_get_option( 'contact_phone', '+91 95726 35314' ) ); ?>" disabled style="opacity:0.6; cursor:not-allowed;">
                                     </div>
                                     <div class="form-group full-width">
                                         <label>Mission Church Image</label>
@@ -3007,8 +3007,8 @@ function franciscan_render_dashboard_view() {
                         <h3 class="form-section-title">📞 Contact Details & WhatsApp Integration</h3>
                         <div class="form-grid">
                             <div class="form-group">
-                                <label>WhatsApp Chat Number (with country code, e.g. 917012649326)</label>
-                                <input type="text" name="whatsapp_number" class="form-control" value="<?php echo esc_attr( $options['whatsapp_number'] ?? '917012649326' ); ?>">
+                                <label>WhatsApp Chat Number (with country code, e.g. 919572635314)</label>
+                                <input type="text" name="whatsapp_number" class="form-control" value="<?php echo esc_attr( $options['whatsapp_number'] ?? '919572635314' ); ?>">
                             </div>
                             <div class="form-group">
                                 <label>Inquiry Receiving Email</label>
@@ -3016,7 +3016,7 @@ function franciscan_render_dashboard_view() {
                             </div>
                             <div class="form-group">
                                 <label>Contact Phone Number</label>
-                                <input type="text" name="contact_phone" class="form-control" value="<?php echo esc_attr( $options['contact_phone'] ?? '+91 94311 00000' ); ?>">
+                                <input type="text" name="contact_phone" class="form-control" value="<?php echo esc_attr( $options['contact_phone'] ?? '+91 95726 35314' ); ?>">
                             </div>
                             <div class="form-group">
                                 <label>Public Contact Email</label>

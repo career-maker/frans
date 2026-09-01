@@ -450,8 +450,8 @@ $hero_subtitle = franciscan_get_page_field( 'contact', 'hero_subtitle', 'Reach o
                     </div>
                     <div class="info-card-content">
                         <h3><?php echo esc_html( franciscan_get_page_field( 'contact', 'address_card_title', 'PRINCIPAL ADDRESS' ) ); ?></h3>
-                        <p><?php echo nl2br( esc_html( franciscan_get_option( 'address_text', "TOR Provincialate, P.O. Box 14, Church Road\nRanchi, Jharkhand 834001, India" ) ) ); ?></p>
-                        <a href="<?php echo esc_url( franciscan_get_option( 'maps_url', 'https://maps.google.com/?q=TOR+Provincialate+Church+Road+Ranchi' ) ); ?>" target="_blank" rel="noopener noreferrer" class="map-link">
+                        <p><?php echo nl2br( esc_html( franciscan_get_option( 'address_text', "Franciscan Ashram (Provincial Residence)\nP.O. Harmu Housing Colony, Ranchi – 834002, JHARKHAND" ) ) ); ?></p>
+                        <a href="<?php echo esc_url( franciscan_get_option( 'maps_url', 'https://maps.google.com/?q=Franciscan+Ashram+Harmu+Housing+Colony+Ranchi+Jharkhand' ) ); ?>" target="_blank" rel="noopener noreferrer" class="map-link">
                             <span>VIEW ON GOOGLE MAPS</span> &rarr;
                         </a>
                     </div>
@@ -460,7 +460,7 @@ $hero_subtitle = franciscan_get_page_field( 'contact', 'hero_subtitle', 'Reach o
                 <!-- Card 2: Communication Channels -->
                 <?php
                 $contact_email = franciscan_get_option( 'contact_email', 'info@franciscansociety.org' );
-                $contact_phone = franciscan_get_option( 'contact_phone', '+91 651 234 5678' );
+                $contact_phone = franciscan_get_option( 'contact_phone', '+91 95726 35314' );
                 $tel_href      = 'tel:+' . preg_replace( '/[^0-9]/', '', $contact_phone );
                 ?>
                 <div class="info-card-ivory">

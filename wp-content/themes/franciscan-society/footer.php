@@ -24,10 +24,10 @@
                             </div>
 
                             <?php
-                            $footer_phone   = franciscan_get_option( 'contact_phone', '+91 651 234 5678' );
+                            $footer_phone   = franciscan_get_option( 'contact_phone', '+91 95726 35314' );
                             $footer_tel_url = 'tel:+' . preg_replace( '/[^0-9]/', '', $footer_phone );
                             $footer_email   = franciscan_get_option( 'contact_email', 'info@franciscansociety.org' );
-                            $footer_address = franciscan_get_option( 'address_text', 'TOR Provincialate, P.O. Box 14, Church Road, Ranchi, Jharkhand 834001, India' );
+                            $footer_address = franciscan_get_option( 'address_text', "Franciscan Ashram (Provincial Residence), P.O. Harmu Housing Colony, Ranchi – 834002, JHARKHAND" );
                             ?>
                             <div style="display: flex; flex-direction: column; gap: 1.1rem; font-family: 'Instrument Sans', sans-serif; font-size: 0.92rem; color: #d6d3d1;">
                                 <div style="display: flex; align-items: center; gap: 0.8rem;">
@@ -114,7 +114,7 @@
                                     <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58zM9.75 15.02V8.98L15.5 12l-5.75 3.02z"/></svg>
                                 </a>
                                 <!-- WhatsApp -->
-                                <a rel="noopener noreferrer" href="https://wa.me/<?php echo esc_attr( franciscan_get_option( 'whatsapp_number', '917012649326' ) ); ?>" target="_blank" rel="noopener" aria-label="WhatsApp" class="footer-social-btn">
+                                <a rel="noopener noreferrer" href="https://wa.me/<?php echo esc_attr( franciscan_get_option( 'whatsapp_number', '919572635314' ) ); ?>" target="_blank" rel="noopener" aria-label="WhatsApp" class="footer-social-btn">
                                     <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.570-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
                                 </a>
                             </div>
@@ -124,7 +124,11 @@
 
                     <!-- Bottom Divider & Copyright Row -->
                     <div style="border-top: 1px solid rgba(255, 255, 255, 0.08); padding-top: 2rem; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; font-family: 'Instrument Sans', sans-serif; font-size: 0.88rem; color: #78716c;">
-                        <p style="margin: 0;">Copyright &copy; 2026 Franciscan Society, TOR Province of St. Francis, Ranchi. All rights reserved.</p>
+                        <p style="margin: 0; display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
+                            <span>Copyright &copy; 2026 Franciscan Society, TOR Province of St. Francis, Ranchi. All rights reserved.</span>
+                            <span style="color: rgba(255, 255, 255, 0.2);">|</span>
+                            <span style="color: #a8a29e;">Designed By <strong style="color: #e6c888; font-weight: 700;">InterSmart</strong></span>
+                        </p>
                         <div style="display: flex; gap: 1.25rem; align-items: center; justify-content: center; flex-wrap: wrap;">
                             <a href="<?php echo esc_url( home_url( '/privacy/' ) ); ?>" style="color: #a8a29e; text-decoration: none; transition: color 0.3s ease;" onmouseover="this.style.color='#e6c888'" onmouseout="this.style.color='#a8a29e'">Privacy Policy</a>
                             <span style="color: rgba(255, 255, 255, 0.2);">|</span>
@@ -548,7 +552,7 @@
 
         <!-- Right Action Buttons -->
         <div id="prayer-chat-menu">
-            <a rel="noopener noreferrer" href="https://wa.me/<?php echo esc_attr( franciscan_get_option( 'whatsapp_number', '917012649326' ) ); ?>" target="_blank" title="Chat on WhatsApp" class="chat-icon whatsapp-icon">
+            <a rel="noopener noreferrer" href="https://wa.me/<?php echo esc_attr( franciscan_get_option( 'whatsapp_number', '919572635314' ) ); ?>" target="_blank" title="Chat on WhatsApp" class="chat-icon whatsapp-icon">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12.031 21.46c-1.6 0-3.15-.43-4.5-1.25L3 21l.8-4.3c-.9-1.4-1.37-3.05-1.37-4.73C2.43 6.47 6.74 2.16 12.21 2.16c2.66 0 5.16 1.04 7.03 2.92a9.92 9.92 0 0 1 2.93 7.04c0 5.48-4.31 9.34-10.14 9.34zm-4.76-2.58l.28.17c1.3.77 2.82 1.18 4.38 1.18 4.88 0 8.85-3.23 8.85-8.1 0-2.17-.85-4.2-2.38-5.74a7.86 7.86 0 0 0-5.63-2.33c-4.94 0-8.96 4-8.96 8.94 0 1.63.43 3.2 1.25 4.54l.2.32-.47 2.53 2.58-.5z"/><path d="M17.43 14.36c-.3-.15-1.78-.88-2.05-.98-.28-.1-.47-.15-.68.15-.2.3-.77.98-.95 1.18-.17.2-.35.23-.65.08-.3-.15-1.27-.47-2.42-1.5-.9-.8-1.5-1.79-1.68-2.1-.18-.3-.02-.45.13-.6.13-.13.3-.35.45-.53.15-.17.2-.3.3-.5.1-.2.05-.38-.03-.53-.08-.15-.68-1.63-.93-2.23-.24-.59-.48-.5-.68-.52h-.58c-.2 0-.53.08-.8.38-.28.3-1.05 1.03-1.05 2.5 0 1.5 1.08 2.93 1.23 3.13.15.2 2.13 3.25 5.15 4.55 2.05.88 2.58.93 3.4.78.85-.15 1.78-.73 2.03-1.43.25-.7.25-1.3.18-1.43-.08-.13-.28-.2-.58-.35z"/></svg>
             </a>
             

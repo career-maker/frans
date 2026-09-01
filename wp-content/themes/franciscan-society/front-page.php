@@ -328,7 +328,7 @@ get_header();
                 
                 <!-- Left Content -->
                 <?php
-                $contact_phone    = franciscan_get_option( 'contact_phone', '+91 651 234 5678' );
+                $contact_phone    = franciscan_get_option( 'contact_phone', '+91 95726 35314' );
                 $tel_href         = 'tel:+' . preg_replace( '/[^0-9]/', '', $contact_phone );
                 ?>
                 <div class="gsap-fade-up">
@@ -963,9 +963,9 @@ document.addEventListener("DOMContentLoaded", function() {
     <ul class="cta-dock__menu" id="cta-dock-menu">
         <?php
         $dock_email    = franciscan_get_option( 'contact_email', 'info@franciscansociety.org' );
-        $dock_phone    = franciscan_get_option( 'contact_phone', '+91 651 234 5678' );
+        $dock_phone    = franciscan_get_option( 'contact_phone', '+91 95726 35314' );
         $dock_tel      = 'tel:+' . preg_replace( '/[^0-9]/', '', $dock_phone );
-        $dock_wa       = franciscan_get_option( 'whatsapp_number', '917012649326' );
+        $dock_wa       = franciscan_get_option( 'whatsapp_number', '919572635314' );
         $dock_wa_url   = 'https://wa.me/' . preg_replace( '/[^0-9]/', '', $dock_wa ) . '?text=Hello%2C%20I%27d%20like%20to%20know%20more%20about%20the%20Franciscan%20Society.';
         $dock_email_url = 'mailto:' . antispambot( $dock_email ) . '?subject=Enquiry%20%E2%80%93%20The%20Franciscan%20Society';
         ?>
