@@ -743,6 +743,13 @@ button.fs-mega-toggle:focus::after {
             color: #0c1727 !important;
             transform: rotate(90deg) !important;
         }
+        .council-card {
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+        }
+        .council-card:hover {
+            transform: translateY(-6px) !important;
+            box-shadow: 0 18px 40px rgba(74, 42, 24, 0.12) !important;
+        }
     </style><main id="main-content" style="padding-top: 0; background-color: #FFFFFF;">
     <!-- Page Hero Banner -->
     <?php
@@ -797,68 +804,179 @@ button.fs-mega-toggle:focus::after {
                 </p>
             </div>
 
-            <div class="leadership-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1.75rem; margin-bottom: 4.5rem;">
-                <!-- General Council Member 1 -->
-                <div style="text-align: center; background: #FAF7F0; padding: 2.2rem 1.5rem; border-radius: 20px; border: 1px solid rgba(74,42,24,0.06); box-shadow: 0 4px 20px rgba(74,42,24,0.04);">
-                    <div style="width: 130px; height: 130px; border-radius: 50%; overflow: hidden; margin: 0 auto 1.2rem auto; box-shadow: 0 8px 20px rgba(74,42,24,0.14); border: 3px solid #e6c888; background: #ffffff;">
-                        <img loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/IMG_1013.JPG' ); ?>" alt="Most Rev. Fr. Armando Trujillo, TOR" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+            <div class="leadership-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; margin-bottom: 5rem;">
+                <!-- General Council Member 1: Minister General -->
+                <div class="council-card" style="text-align: center; background: #FAF7F0; padding: 2.5rem 1.8rem 2rem 1.8rem; border-radius: 24px; border: 1px solid rgba(74,42,24,0.08); box-shadow: 0 10px 30px rgba(74,42,24,0.05); display: flex; flex-direction: column; justify-content: space-between; transition: transform 0.3s ease, box-shadow 0.3s ease;">
+                    <div>
+                        <div style="width: 140px; height: 140px; border-radius: 50%; overflow: hidden; margin: 0 auto 1.3rem auto; box-shadow: 0 10px 25px rgba(74,42,24,0.16); border: 3px solid #e6c888; background: #ffffff;">
+                            <img loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/general-council/most-rev-fr-amando-trujillo-cano.jpg' ); ?>" alt="Most Rev. Fr. Amando Trujillo Cano" style="width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block;">
+                        </div>
+                        <div style="margin-bottom: 0.6rem;">
+                            <span style="display: inline-block; background: #4A2A18; color: #e6c888; font-family: 'Instrument Sans', sans-serif; font-size: 0.76rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; padding: 0.35rem 0.9rem; border-radius: 50px;">Minister General</span>
+                        </div>
+                        <h4 style="font-family: 'Phudu', sans-serif; font-size: 1.18rem; font-weight: 700; color: #1c1917; margin: 0 0 0.45rem 0; line-height: 1.3;">Most Rev. Fr. Amando Trujillo Cano</h4>
+                        <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.88rem; color: #8c5b36; font-weight: 600; margin: 0 0 1.2rem 0; line-height: 1.4;">Vice Province of Holy Mary of Guadalupe, Mexico</p>
                     </div>
-                    <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.78rem; color: #78716c; margin: 0 0 0.35rem 0; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 800;">Minister General</p>
-                    <h4 style="font-family: 'Phudu', sans-serif; font-size: 1.05rem; font-weight: 700; color: #1c1917; margin: 0;">Most Rev. Fr. Armando Trujillo, TOR</h4>
+
+                    <div style="border-top: 1px solid rgba(74,42,24,0.08); padding-top: 1.2rem; margin-top: 0.5rem; text-align: left; background: #ffffff; border-radius: 16px; padding: 1.2rem 1.4rem; border: 1px solid rgba(74,42,24,0.05);">
+                        <div style="display: flex; align-items: flex-start; gap: 0.6rem; margin-bottom: 0.65rem;">
+                            <svg style="width: 16px; height: 16px; color: #4A2A18; flex-shrink: 0; margin-top: 2px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                            <span style="font-family: 'Instrument Sans', sans-serif; font-size: 0.82rem; color: #57534e; line-height: 1.45;">Basilica dei Santi Cosma e Damiano, Via dei Fori Imperiali, 1, 00186 Roma, Italia</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.65rem;">
+                            <svg style="width: 16px; height: 16px; color: #4A2A18; flex-shrink: 0;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                            <a href="tel:+39066790278" style="font-family: 'Instrument Sans', sans-serif; font-size: 0.84rem; color: #1c1917; font-weight: 600; text-decoration: none;">+39 06 679 0278</a>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 0.6rem;">
+                            <svg style="width: 16px; height: 16px; color: #4A2A18; flex-shrink: 0;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                            <a href="mailto:curia@francescanitor.org" style="font-family: 'Instrument Sans', sans-serif; font-size: 0.84rem; color: #4A2A18; font-weight: 600; text-decoration: underline; text-underline-offset: 2px;">curia@francescanitor.org</a>
+                        </div>
+                    </div>
                 </div>
 
-                <!-- General Council Member 2 -->
-                <div style="text-align: center; background: #FAF7F0; padding: 2.2rem 1.5rem; border-radius: 20px; border: 1px solid rgba(74,42,24,0.06); box-shadow: 0 4px 20px rgba(74,42,24,0.04);">
-                    <div style="width: 130px; height: 130px; border-radius: 50%; overflow: hidden; margin: 0 auto 1.2rem auto; box-shadow: 0 8px 20px rgba(74,42,24,0.14); border: 3px solid #e6c888; background: #ffffff;">
-                        <img loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/IMG_1016.JPG' ); ?>" alt="Very Rev. Fr. Sean Sheridan, TOR" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+                <!-- General Council Member 2: Vicar General -->
+                <div class="council-card" style="text-align: center; background: #FAF7F0; padding: 2.5rem 1.8rem 2rem 1.8rem; border-radius: 24px; border: 1px solid rgba(74,42,24,0.08); box-shadow: 0 10px 30px rgba(74,42,24,0.05); display: flex; flex-direction: column; justify-content: space-between; transition: transform 0.3s ease, box-shadow 0.3s ease;">
+                    <div>
+                        <div style="width: 140px; height: 140px; border-radius: 50%; overflow: hidden; margin: 0 auto 1.3rem auto; box-shadow: 0 10px 25px rgba(74,42,24,0.16); border: 3px solid #e6c888; background: #ffffff;">
+                            <img loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/general-council/very-rev-fr-sean-sheridan.jpg' ); ?>" alt="Very Rev. Fr. Sean Sheridan" style="width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block;">
+                        </div>
+                        <div style="margin-bottom: 0.6rem;">
+                            <span style="display: inline-block; background: #4A2A18; color: #e6c888; font-family: 'Instrument Sans', sans-serif; font-size: 0.76rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; padding: 0.35rem 0.9rem; border-radius: 50px;">Vicar General</span>
+                        </div>
+                        <h4 style="font-family: 'Phudu', sans-serif; font-size: 1.18rem; font-weight: 700; color: #1c1917; margin: 0 0 0.45rem 0; line-height: 1.3;">Very Rev. Fr. Sean Sheridan</h4>
+                        <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.88rem; color: #8c5b36; font-weight: 600; margin: 0 0 1.2rem 0; line-height: 1.4;">Province of the Most Sacred Heart of Jesus, USA</p>
                     </div>
-                    <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.78rem; color: #78716c; margin: 0 0 0.35rem 0; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 800;">Vicar General</p>
-                    <h4 style="font-family: 'Phudu', sans-serif; font-size: 1.05rem; font-weight: 700; color: #1c1917; margin: 0;">Very Rev. Fr. Sean Sheridan, TOR</h4>
+
+                    <div style="border-top: 1px solid rgba(74,42,24,0.08); padding-top: 1.2rem; margin-top: 0.5rem; text-align: left; background: #ffffff; border-radius: 16px; padding: 1.2rem 1.4rem; border: 1px solid rgba(74,42,24,0.05);">
+                        <div style="display: flex; align-items: flex-start; gap: 0.6rem; margin-bottom: 0.65rem;">
+                            <svg style="width: 16px; height: 16px; color: #4A2A18; flex-shrink: 0; margin-top: 2px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                            <span style="font-family: 'Instrument Sans', sans-serif; font-size: 0.82rem; color: #57534e; line-height: 1.45;">Basilica dei Santi Cosma e Damiano, Via dei Fori Imperiali, 1, 00186 Roma, Italia</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.65rem;">
+                            <svg style="width: 16px; height: 16px; color: #4A2A18; flex-shrink: 0;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                            <a href="tel:+39066790278" style="font-family: 'Instrument Sans', sans-serif; font-size: 0.84rem; color: #1c1917; font-weight: 600; text-decoration: none;">+39 06 679 0278</a>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 0.6rem;">
+                            <svg style="width: 16px; height: 16px; color: #4A2A18; flex-shrink: 0;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                            <a href="mailto:curia@francescanitor.org" style="font-family: 'Instrument Sans', sans-serif; font-size: 0.84rem; color: #4A2A18; font-weight: 600; text-decoration: underline; text-underline-offset: 2px;">curia@francescanitor.org</a>
+                        </div>
+                    </div>
                 </div>
 
-                <!-- General Council Member 3 -->
-                <div style="text-align: center; background: #FAF7F0; padding: 2.2rem 1.5rem; border-radius: 20px; border: 1px solid rgba(74,42,24,0.06); box-shadow: 0 4px 20px rgba(74,42,24,0.04);">
-                    <div style="width: 130px; height: 130px; border-radius: 50%; overflow: hidden; margin: 0 auto 1.2rem auto; box-shadow: 0 8px 20px rgba(74,42,24,0.14); border: 3px solid #e6c888; background: #ffffff;">
-                        <img loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/IMG_1017.JPG' ); ?>" alt="Very Rev. Fr. Zvonimir Brusac, TOR" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+                <!-- General Council Member 3: 1st Councilor -->
+                <div class="council-card" style="text-align: center; background: #FAF7F0; padding: 2.5rem 1.8rem 2rem 1.8rem; border-radius: 24px; border: 1px solid rgba(74,42,24,0.08); box-shadow: 0 10px 30px rgba(74,42,24,0.05); display: flex; flex-direction: column; justify-content: space-between; transition: transform 0.3s ease, box-shadow 0.3s ease;">
+                    <div>
+                        <div style="width: 140px; height: 140px; border-radius: 50%; overflow: hidden; margin: 0 auto 1.3rem auto; box-shadow: 0 10px 25px rgba(74,42,24,0.16); border: 3px solid #e6c888; background: #ffffff;">
+                            <img loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/general-council/very-rev-fr-zvonimir-brusac.jpg' ); ?>" alt="Very Rev. Fr. Zvonimir Brusač" style="width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block;">
+                        </div>
+                        <div style="margin-bottom: 0.6rem;">
+                            <span style="display: inline-block; background: #4A2A18; color: #e6c888; font-family: 'Instrument Sans', sans-serif; font-size: 0.76rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; padding: 0.35rem 0.9rem; border-radius: 50px;">1st Councilor</span>
+                        </div>
+                        <h4 style="font-family: 'Phudu', sans-serif; font-size: 1.18rem; font-weight: 700; color: #1c1917; margin: 0 0 0.45rem 0; line-height: 1.3;">Very Rev. Fr. Zvonimir Brusač</h4>
+                        <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.88rem; color: #8c5b36; font-weight: 600; margin: 0 0 1.2rem 0; line-height: 1.4;">Province of Saint Jerome, Croatia</p>
                     </div>
-                    <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.78rem; color: #78716c; margin: 0 0 0.35rem 0; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 800;">First Councilor</p>
-                    <h4 style="font-family: 'Phudu', sans-serif; font-size: 1.05rem; font-weight: 700; color: #1c1917; margin: 0;">Very Rev. Fr. Zvonimir Brusac, TOR</h4>
+
+                    <div style="border-top: 1px solid rgba(74,42,24,0.08); padding-top: 1.2rem; margin-top: 0.5rem; text-align: left; background: #ffffff; border-radius: 16px; padding: 1.2rem 1.4rem; border: 1px solid rgba(74,42,24,0.05);">
+                        <div style="display: flex; align-items: flex-start; gap: 0.6rem; margin-bottom: 0.65rem;">
+                            <svg style="width: 16px; height: 16px; color: #4A2A18; flex-shrink: 0; margin-top: 2px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                            <span style="font-family: 'Instrument Sans', sans-serif; font-size: 0.82rem; color: #57534e; line-height: 1.45;">Basilica dei Santi Cosma e Damiano, Via dei Fori Imperiali, 1, 00186 Roma, Italia</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.65rem;">
+                            <svg style="width: 16px; height: 16px; color: #4A2A18; flex-shrink: 0;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                            <a href="tel:+39066990808" style="font-family: 'Instrument Sans', sans-serif; font-size: 0.84rem; color: #1c1917; font-weight: 600; text-decoration: none;">+39 06 699 0808</a>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 0.6rem;">
+                            <svg style="width: 16px; height: 16px; color: #4A2A18; flex-shrink: 0;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                            <a href="mailto:curia@francescanitor.org" style="font-family: 'Instrument Sans', sans-serif; font-size: 0.84rem; color: #4A2A18; font-weight: 600; text-decoration: underline; text-underline-offset: 2px;">curia@francescanitor.org</a>
+                        </div>
+                    </div>
                 </div>
 
-                <!-- General Council Member 4 -->
-                <div style="text-align: center; background: #FAF7F0; padding: 2.2rem 1.5rem; border-radius: 20px; border: 1px solid rgba(74,42,24,0.06); box-shadow: 0 4px 20px rgba(74,42,24,0.04);">
-                    <div style="width: 130px; height: 130px; border-radius: 50%; overflow: hidden; margin: 0 auto 1.2rem auto; box-shadow: 0 8px 20px rgba(74,42,24,0.14); border: 3px solid #e6c888; background: #ffffff;">
-                        <img loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/IMG_1018.JPG' ); ?>" alt="Very Rev. Fr. Shibin Kurian, TOR" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+                <!-- General Council Member 4: 2nd Councilor and Secretary General -->
+                <div class="council-card" style="text-align: center; background: #FAF7F0; padding: 2.5rem 1.8rem 2rem 1.8rem; border-radius: 24px; border: 1px solid rgba(74,42,24,0.08); box-shadow: 0 10px 30px rgba(74,42,24,0.05); display: flex; flex-direction: column; justify-content: space-between; transition: transform 0.3s ease, box-shadow 0.3s ease;">
+                    <div>
+                        <div style="width: 140px; height: 140px; border-radius: 50%; overflow: hidden; margin: 0 auto 1.3rem auto; box-shadow: 0 10px 25px rgba(74,42,24,0.16); border: 3px solid #e6c888; background: #ffffff;">
+                            <img loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/general-council/very-rev-fr-shibin-kurian.jpg' ); ?>" alt="Very Rev. Fr. Shibin Kurian Vallattuthundathil" style="width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block;">
+                        </div>
+                        <div style="margin-bottom: 0.6rem;">
+                            <span style="display: inline-block; background: #4A2A18; color: #e6c888; font-family: 'Instrument Sans', sans-serif; font-size: 0.76rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; padding: 0.35rem 0.9rem; border-radius: 50px;">2nd Councilor &amp; Secretary General</span>
+                        </div>
+                        <h4 style="font-family: 'Phudu', sans-serif; font-size: 1.18rem; font-weight: 700; color: #1c1917; margin: 0 0 0.45rem 0; line-height: 1.3;">Very Rev. Fr. Shibin Kurian Vallattuthundathil</h4>
+                        <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.88rem; color: #8c5b36; font-weight: 600; margin: 0 0 1.2rem 0; line-height: 1.4;">Province of Saint Louis, India</p>
                     </div>
-                    <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.78rem; color: #78716c; margin: 0 0 0.35rem 0; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 800;">Second Councilor</p>
-                    <h4 style="font-family: 'Phudu', sans-serif; font-size: 1.05rem; font-weight: 700; color: #1c1917; margin: 0;">Very Rev. Fr. Shibin Kurian, TOR</h4>
+
+                    <div style="border-top: 1px solid rgba(74,42,24,0.08); padding-top: 1.2rem; margin-top: 0.5rem; text-align: left; background: #ffffff; border-radius: 16px; padding: 1.2rem 1.4rem; border: 1px solid rgba(74,42,24,0.05);">
+                        <div style="display: flex; align-items: flex-start; gap: 0.6rem; margin-bottom: 0.65rem;">
+                            <svg style="width: 16px; height: 16px; color: #4A2A18; flex-shrink: 0; margin-top: 2px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                            <span style="font-family: 'Instrument Sans', sans-serif; font-size: 0.82rem; color: #57534e; line-height: 1.45;">Basilica dei Santi Cosma e Damiano, Via dei Fori Imperiali, 1, 00186 Roma, Italia</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.65rem;">
+                            <svg style="width: 16px; height: 16px; color: #4A2A18; flex-shrink: 0;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                            <a href="tel:+39066990808" style="font-family: 'Instrument Sans', sans-serif; font-size: 0.84rem; color: #1c1917; font-weight: 600; text-decoration: none;">+39 06 699 0808</a>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 0.6rem;">
+                            <svg style="width: 16px; height: 16px; color: #4A2A18; flex-shrink: 0;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                            <a href="mailto:curia@francescanitor.org" style="font-family: 'Instrument Sans', sans-serif; font-size: 0.84rem; color: #4A2A18; font-weight: 600; text-decoration: underline; text-underline-offset: 2px;">curia@francescanitor.org</a>
+                        </div>
+                    </div>
                 </div>
 
-                <!-- General Council Member 5 -->
-                <div style="text-align: center; background: #FAF7F0; padding: 2.2rem 1.5rem; border-radius: 20px; border: 1px solid rgba(74,42,24,0.06); box-shadow: 0 4px 20px rgba(74,42,24,0.04);">
-                    <div style="width: 130px; height: 130px; border-radius: 50%; overflow: hidden; margin: 0 auto 1.2rem auto; box-shadow: 0 8px 20px rgba(74,42,24,0.14); border: 3px solid #e6c888; background: #ffffff;">
-                        <img loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/IMG_1019.JPG' ); ?>" alt="Very Rev. Fr. Massimo Cucinotta, TOR" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+                <!-- General Council Member 5: 3rd Councilor -->
+                <div class="council-card" style="text-align: center; background: #FAF7F0; padding: 2.5rem 1.8rem 2rem 1.8rem; border-radius: 24px; border: 1px solid rgba(74,42,24,0.08); box-shadow: 0 10px 30px rgba(74,42,24,0.05); display: flex; flex-direction: column; justify-content: space-between; transition: transform 0.3s ease, box-shadow 0.3s ease;">
+                    <div>
+                        <div style="width: 140px; height: 140px; border-radius: 50%; overflow: hidden; margin: 0 auto 1.3rem auto; box-shadow: 0 10px 25px rgba(74,42,24,0.16); border: 3px solid #e6c888; background: #ffffff;">
+                            <img loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/general-council/very-rev-fr-massimo-cucinotta.jpg' ); ?>" alt="Very Rev. Fr. Massimo Cucinotta" style="width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block;">
+                        </div>
+                        <div style="margin-bottom: 0.6rem;">
+                            <span style="display: inline-block; background: #4A2A18; color: #e6c888; font-family: 'Instrument Sans', sans-serif; font-size: 0.76rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; padding: 0.35rem 0.9rem; border-radius: 50px;">3rd Councilor</span>
+                        </div>
+                        <h4 style="font-family: 'Phudu', sans-serif; font-size: 1.18rem; font-weight: 700; color: #1c1917; margin: 0 0 0.45rem 0; line-height: 1.3;">Very Rev. Fr. Massimo Cucinotta</h4>
+                        <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.88rem; color: #8c5b36; font-weight: 600; margin: 0 0 1.2rem 0; line-height: 1.4;">Province of Saints Joachim and Anne, Sicily</p>
                     </div>
-                    <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.78rem; color: #78716c; margin: 0 0 0.35rem 0; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 800;">Third Councilor</p>
-                    <h4 style="font-family: 'Phudu', sans-serif; font-size: 1.05rem; font-weight: 700; color: #1c1917; margin: 0;">Very Rev. Fr. Massimo Cucinotta, TOR</h4>
+
+                    <div style="border-top: 1px solid rgba(74,42,24,0.08); padding-top: 1.2rem; margin-top: 0.5rem; text-align: left; background: #ffffff; border-radius: 16px; padding: 1.2rem 1.4rem; border: 1px solid rgba(74,42,24,0.05);">
+                        <div style="display: flex; align-items: flex-start; gap: 0.6rem; margin-bottom: 0.65rem;">
+                            <svg style="width: 16px; height: 16px; color: #4A2A18; flex-shrink: 0; margin-top: 2px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                            <span style="font-family: 'Instrument Sans', sans-serif; font-size: 0.82rem; color: #57534e; line-height: 1.45;">Basilica dei Santi Cosma e Damiano, Via dei Fori Imperiali, 1, 00186 Roma, Italia</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.65rem;">
+                            <svg style="width: 16px; height: 16px; color: #4A2A18; flex-shrink: 0;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                            <a href="tel:+39066990808" style="font-family: 'Instrument Sans', sans-serif; font-size: 0.84rem; color: #1c1917; font-weight: 600; text-decoration: none;">+39 06 699 0808</a>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 0.6rem;">
+                            <svg style="width: 16px; height: 16px; color: #4A2A18; flex-shrink: 0;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                            <a href="mailto:curia@francescanitor.org" style="font-family: 'Instrument Sans', sans-serif; font-size: 0.84rem; color: #4A2A18; font-weight: 600; text-decoration: underline; text-underline-offset: 2px;">curia@francescanitor.org</a>
+                        </div>
+                    </div>
                 </div>
 
-                <!-- General Council Member 6 -->
-                <div style="text-align: center; background: #FAF7F0; padding: 2.2rem 1.5rem; border-radius: 20px; border: 1px solid rgba(74,42,24,0.06); box-shadow: 0 4px 20px rgba(74,42,24,0.04);">
-                    <div style="width: 130px; height: 130px; border-radius: 50%; overflow: hidden; margin: 0 auto 1.2rem auto; box-shadow: 0 8px 20px rgba(74,42,24,0.14); border: 3px solid #e6c888; background: #ffffff;">
-                        <img loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/IMG_1020.JPG' ); ?>" alt="Very Rev. Fr. Bijay Prakash Tirkey, TOR" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+                <!-- General Council Member 6: 4th Councilor -->
+                <div class="council-card" style="text-align: center; background: #FAF7F0; padding: 2.5rem 1.8rem 2rem 1.8rem; border-radius: 24px; border: 1px solid rgba(74,42,24,0.08); box-shadow: 0 10px 30px rgba(74,42,24,0.05); display: flex; flex-direction: column; justify-content: space-between; transition: transform 0.3s ease, box-shadow 0.3s ease;">
+                    <div>
+                        <div style="width: 140px; height: 140px; border-radius: 50%; overflow: hidden; margin: 0 auto 1.3rem auto; box-shadow: 0 10px 25px rgba(74,42,24,0.16); border: 3px solid #e6c888; background: #ffffff;">
+                            <img loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/general-council/very-rev-fr-sumedha-dissanayaka.jpg' ); ?>" alt="Very Rev. Fr. Sumedha Dissanayaka" style="width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block;">
+                        </div>
+                        <div style="margin-bottom: 0.6rem;">
+                            <span style="display: inline-block; background: #4A2A18; color: #e6c888; font-family: 'Instrument Sans', sans-serif; font-size: 0.76rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; padding: 0.35rem 0.9rem; border-radius: 50px;">4th Councilor</span>
+                        </div>
+                        <h4 style="font-family: 'Phudu', sans-serif; font-size: 1.18rem; font-weight: 700; color: #1c1917; margin: 0 0 0.45rem 0; line-height: 1.3;">Very Rev. Fr. Sumedha Dissanayaka</h4>
+                        <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.88rem; color: #8c5b36; font-weight: 600; margin: 0 0 1.2rem 0; line-height: 1.4;">Province of Our Lady of Lanka, Sri Lanka</p>
                     </div>
-                    <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.78rem; color: #78716c; margin: 0 0 0.35rem 0; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 800;">Fourth Councilor</p>
-                    <h4 style="font-family: 'Phudu', sans-serif; font-size: 1.05rem; font-weight: 700; color: #1c1917; margin: 0;">Very Rev. Fr. Bijay Prakash Tirkey, TOR</h4>
-                </div>
 
-                <!-- General Council Member 7 -->
-                <div style="text-align: center; background: #FAF7F0; padding: 2.2rem 1.5rem; border-radius: 20px; border: 1px solid rgba(74,42,24,0.06); box-shadow: 0 4px 20px rgba(74,42,24,0.04);">
-                    <div style="width: 130px; height: 130px; border-radius: 50%; overflow: hidden; margin: 0 auto 1.2rem auto; box-shadow: 0 8px 20px rgba(74,42,24,0.14); border: 3px solid #e6c888; background: #ffffff;">
-                        <img loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/IMG_1157.JPG' ); ?>" alt="Very Rev. Fr. Shibin Vallattuthundathil, TOR" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+                    <div style="border-top: 1px solid rgba(74,42,24,0.08); padding-top: 1.2rem; margin-top: 0.5rem; text-align: left; background: #ffffff; border-radius: 16px; padding: 1.2rem 1.4rem; border: 1px solid rgba(74,42,24,0.05);">
+                        <div style="display: flex; align-items: flex-start; gap: 0.6rem; margin-bottom: 0.65rem;">
+                            <svg style="width: 16px; height: 16px; color: #4A2A18; flex-shrink: 0; margin-top: 2px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                            <span style="font-family: 'Instrument Sans', sans-serif; font-size: 0.82rem; color: #57534e; line-height: 1.45;">Basilica dei Santi Cosma e Damiano, Via dei Fori Imperiali, 1, 00186 Roma, Italia</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.65rem;">
+                            <svg style="width: 16px; height: 16px; color: #4A2A18; flex-shrink: 0;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                            <a href="tel:+39066990808" style="font-family: 'Instrument Sans', sans-serif; font-size: 0.84rem; color: #1c1917; font-weight: 600; text-decoration: none;">+39 06 699 0808</a>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 0.6rem;">
+                            <svg style="width: 16px; height: 16px; color: #4A2A18; flex-shrink: 0;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                            <a href="mailto:secretarius@francescanitor.org" style="font-family: 'Instrument Sans', sans-serif; font-size: 0.84rem; color: #4A2A18; font-weight: 600; text-decoration: underline; text-underline-offset: 2px;">secretarius@francescanitor.org</a>
+                        </div>
                     </div>
-                    <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.78rem; color: #78716c; margin: 0 0 0.35rem 0; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 800;">Secretary General</p>
-                    <h4 style="font-family: 'Phudu', sans-serif; font-size: 1.05rem; font-weight: 700; color: #1c1917; margin: 0;">Very Rev. Fr. Shibin Vallattuthundathil, TOR</h4>
                 </div>
             </div>
 
