@@ -406,6 +406,64 @@ $hero_subtitle = franciscan_get_page_field( 'contact', 'hero_subtitle', 'Reach o
         gap: 3rem;
     }
 }
+
+/* Two-Image Values Composition (As in Homepage Our Values) */
+.contact-images-composition {
+    position: relative;
+    height: 450px;
+    margin-top: 1.8rem;
+    margin-bottom: 2rem;
+    border-radius: 20px;
+}
+.contact-img-back {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 66%;
+    height: 92%;
+    border-radius: 22px;
+    overflow: hidden;
+    box-shadow: 0 16px 36px rgba(74, 42, 24, 0.12);
+    border: 2px solid rgba(230, 200, 136, 0.35);
+}
+.contact-img-back img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.contact-images-composition:hover .contact-img-back img {
+    transform: scale(1.04);
+}
+.contact-img-front {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 52%;
+    height: 85%;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.18);
+    border: 4px solid #FFFFFF;
+    background: #FAF7F0;
+}
+.contact-img-front img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.contact-images-composition:hover .contact-img-front img {
+    transform: scale(1.04);
+}
+@media (max-width: 640px) {
+    .contact-images-composition {
+        height: 320px;
+    }
+}
 </style>
 
 <!-- Copy Notification Toast -->
@@ -460,7 +518,10 @@ $hero_subtitle = franciscan_get_page_field( 'contact', 'hero_subtitle', 'Reach o
                 <!-- Card 2: Communication Channels -->
                 <?php
                 $contact_email = franciscan_get_option( 'contact_email', 'info@franciscansociety.org' );
-                $contact_phone = franciscan_get_option( 'contact_phone', '+91 95726 35314' );
+                $contact_phone = franciscan_get_option( 'contact_phone', '+91 94311 00000' );
+                if ( empty( $contact_phone ) || $contact_phone === '+91 95726 35314' ) {
+                    $contact_phone = '+91 94311 00000';
+                }
                 $tel_href      = 'tel:+' . preg_replace( '/[^0-9]/', '', $contact_phone );
                 ?>
                 <div class="info-card-ivory">
@@ -476,6 +537,23 @@ $hero_subtitle = franciscan_get_page_field( 'contact', 'hero_subtitle', 'Reach o
                             Email: <a href="mailto:<?php echo esc_attr( $contact_email ); ?>" style="color: var(--fs-brown); font-weight: 700; text-decoration: none;"><?php echo esc_html( $contact_email ); ?></a><br>
                             Phone / WhatsApp: <a href="<?php echo esc_url( $tel_href ); ?>" style="color: var(--fs-brown); font-weight: 700; text-decoration: none;"><?php echo esc_html( $contact_phone ); ?></a>
                         </p>
+                    </div>
+                </div>
+
+                <!-- Two-Image Values Composition (As in Homepage Our Values Section) -->
+                <?php
+                $contact_img_back  = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/contact-value-2.jpeg';
+                $contact_img_front = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/contact-value-1.jpeg';
+                ?>
+                <div class="hover-trigger contact-images-composition">
+                    <!-- Back Main Image -->
+                    <div class="about-img-container contact-img-back">
+                        <img loading="lazy" decoding="async" src="<?php echo esc_url( $contact_img_back ); ?>" alt="Franciscan Ministry and Community">
+                    </div>
+                    
+                    <!-- Overlapping Front Portrait Image -->
+                    <div class="contact-img-front">
+                        <img loading="lazy" decoding="async" src="<?php echo esc_url( $contact_img_front ); ?>" alt="Franciscan Friar in Prayer">
                     </div>
                 </div>
 

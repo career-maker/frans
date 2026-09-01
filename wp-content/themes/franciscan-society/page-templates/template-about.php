@@ -717,8 +717,8 @@ button.fs-mega-toggle:focus::after {
     <!-- Page Hero -->
     <?php
     $about_hero_bg = franciscan_get_page_field( 'about', 'hero_image', '' );
-    if ( empty( $about_hero_bg ) ) {
-        $about_hero_bg = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_51_30_PM.png';
+    if ( empty( $about_hero_bg ) || strpos( $about_hero_bg, 'ChatGPT_Image' ) !== false ) {
+        $about_hero_bg = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/about-banner-sept01.jpeg';
     }
     ?>
     <section style="padding: 12rem 2rem 8rem 2rem; background-image: url('<?php echo esc_url( $about_hero_bg ); ?>'); background-size: cover; background-position: center; position: relative; overflow: hidden;">

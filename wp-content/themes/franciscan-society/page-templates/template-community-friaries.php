@@ -726,22 +726,7 @@ button.fs-mega-toggle:focus::after {
 
 
 
-    <section class="page-hero" style="position: relative; padding: 3rem 2rem 0; background: #FFF;">
-        <div style="position: relative; width: 100%; display: flex; flex-direction: column; justify-content: center; background: linear-gradient(135deg, #4A2A18, #6b3d28); min-height: 380px; border-radius: 24px; padding: 4rem 2rem; max-width: 1400px; margin: 0 auto;">
-            <div style="position: relative; z-index: 2;">
-                <div style="display: inline-flex; align-items: center; gap: 0.5rem; margin-bottom: 1.4rem;">
-                    <span style="width: 6px; height: 6px; background-color: #e6c888; border-radius: 50%;"></span>
-                    <span style="color: #fff; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; font-family: 'Instrument Sans';"><?php echo esc_html( franciscan_get_page_field( 'community-friaries', 'card_badge', 'OUR FRIARIES' ) ); ?></span>
-                </div>
-                <h2 style="font-family: 'Phudu'; font-size: clamp(2.6rem, 4.2vw, 62px); font-weight: 600; color: #fff; text-transform: uppercase; line-height: 1.05; margin-bottom: 1.5rem;">
-                    <?php echo esc_html( franciscan_get_page_field( 'community-friaries', 'card_title', 'HOUSES OF PRAYER AND SERVICE' ) ); ?>
-                </h2>
-                <p style="font-family: 'Instrument Sans'; font-size: 1.1rem; color: rgba(255,255,255,0.9); max-width: 600px;">
-                    <?php echo esc_html( franciscan_get_page_field( 'community-friaries', 'card_subtitle', 'Communities across India and beyond, rooted in the Franciscan charism of poverty, prayer, and service.' ) ); ?>
-                </p>
-            </div>
-        </div>
-    </section>
+
 
     
 

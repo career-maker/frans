@@ -15,7 +15,7 @@ function franciscan_get_default_options() {
         'site_title'            => 'Franciscan Friars of the Third Order Regular',
         'site_tagline'          => 'Province of St. Francis of Assisi, Ranchi',
         'contact_email'         => 'info@franciscansociety.org',
-        'contact_phone'         => '+91 95726 35314',
+        'contact_phone'         => '+91 94311 00000',
         'whatsapp_number'       => '919572635314',
         'address_text'          => "Franciscan Ashram (Provincial Residence)\nP.O. Harmu Housing Colony, Ranchi – 834002, JHARKHAND",
         'maps_url'              => 'https://maps.google.com/?q=Franciscan+Ashram+Harmu+Housing+Colony+Ranchi+Jharkhand',
