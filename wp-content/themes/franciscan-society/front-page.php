@@ -516,92 +516,24 @@ get_header();
                 </div>
 
                 <div id="news-scroll-track" style="display: flex; gap: 2.2rem; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 1.5rem; scrollbar-width: none; -ms-overflow-style: none;">
-                    
-                    <!-- Item 1 -->
-                    <div class="blog-card" style="flex: 0 0 380px; scroll-snap-align: start; display: flex; flex-direction: column; background: transparent;">
-                        <div style="border-radius: 20px; overflow: hidden; height: 260px; margin-bottom: 1.6rem; box-shadow: 0 10px 25px rgba(0,0,0,0.06); background-color: #d6ccc2;">
-                            <img  loading="lazy"loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/news-blog/IMG20230215103348.jpg.jpeg' ); ?>" style="width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s ease;" alt="Daily Prayer Life" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform='scale(1)'">
-                        </div>
-                        <h3 style="font-family: 'Phudu', sans-serif !important; font-size: 1.2rem !important; font-weight: 600 !important; color: #1c1917 !important; text-transform: uppercase; line-height: 1.35; margin-bottom: 1.5rem; border-bottom: 1px solid rgba(0,0,0,0.1); padding-bottom: 1.5rem;">
-                            STRENGTHENING YOUR FAITH THROUGH CONSISTENT DAILY PRAYER LIFE
-                        </h3>
-                        <div>
-                            <a href="<?php echo esc_url( get_permalink( 42 ) ); ?>" class="news-text-link" style="font-family: �Instrument Sans�, sans-serif !important; font-weight: 800 !important; font-size: 0.88rem !important; color: #1c1917 !important; text-transform: uppercase !important; letter-spacing: 0.06em !important; text-decoration: none !important; display: inline-flex !important; align-items: center !important; gap: 0.4rem !important; transition: color 0.3s ease !important;">
-                                <span>READ MORE</span> <span class="btn-arrow" style="font-size: 1rem; transition: transform 0.3s ease;"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; vertical-align: text-bottom;"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></span>
-                            </a>
-                        </div>
-                    </div>
 
-                    <!-- Item 2 -->
-                    <div class="blog-card" style="flex: 0 0 380px; scroll-snap-align: start; display: flex; flex-direction: column; background: transparent;">
-                        <div style="border-radius: 20px; overflow: hidden; height: 260px; margin-bottom: 1.6rem; box-shadow: 0 10px 25px rgba(0,0,0,0.06); background-color: #d6ccc2;">
-                            <img  loading="lazy"loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/news-blog/WhatsApp Image 2025-02-15 at 9.44.56 AM (1).jpeg' ); ?>" style="width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s ease;" alt="Trusting God" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform='scale(1)'">
+                    <!-- Seminar on New Labour Code -->
+                    <div class="blog-card" style="flex: 0 0 min(540px, 90vw); scroll-snap-align: start; display: flex; flex-direction: column; background: transparent;">
+                        <div style="border-radius: 20px; overflow: hidden; height: 300px; margin-bottom: 1.6rem; box-shadow: 0 10px 25px rgba(0,0,0,0.10); background-color: #d6ccc2;">
+                            <img loading="eager" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/new_uploads/seminar-labour-code.jpeg' ); ?>" style="width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s ease;" alt="Seminar on New Labour Code at Hardag, Ranchi" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform='scale(1)'">
                         </div>
-                        <h3 style="font-family: 'Phudu', sans-serif !important; font-size: 1.2rem !important; font-weight: 600 !important; color: #1c1917 !important; text-transform: uppercase; line-height: 1.35; margin-bottom: 1.5rem; border-bottom: 1px solid rgba(0,0,0,0.1); padding-bottom: 1.5rem;">
-                            TRUSTING GOD FULLY DURING LIFE'S DIFFICULT AND UNCERTAIN TIMES
+                        <div style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 0.9rem;">
+                            <span style="font-family: 'Instrument Sans', sans-serif; font-size: 0.75rem; color: #8b6f47; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; background: rgba(139,111,71,0.08); padding: 0.25rem 0.7rem; border-radius: 50px;">Province News</span>
+                            <span style="font-family: 'Instrument Sans', sans-serif; font-size: 0.78rem; color: #a8a29e;">📅 August 29, 2026</span>
+                        </div>
+                        <h3 style="font-family: 'Phudu', sans-serif !important; font-size: 1.25rem !important; font-weight: 600 !important; color: #1c1917 !important; text-transform: uppercase; line-height: 1.35; margin-bottom: 1rem; border-bottom: 1px solid rgba(0,0,0,0.1); padding-bottom: 1rem;">
+                            Seminar on "New Labour Code" Held at Hardag, Ranchi
                         </h3>
+                        <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.7; margin-bottom: 1.5rem; flex-grow: 1;">
+                            A one-day seminar on "New Labour Code" was organized by the St. Francis Province, Ranchi, on 29 August 2026 at Moments Resorts, Hardag. Attended by around fifty participants — including TOR friars in the education ministry and principals from across Jharkhand — the event was graced by Very Rev. Fr. Manoj Vengathanam, TOR, Minister Provincial of Ranchi Province.
+                        </p>
                         <div>
-                            <a href="<?php echo esc_url( get_permalink( 43 ) ); ?>" class="news-text-link" style="font-family: 'Instrument Sans', sans-serif !important; font-weight: 800 !important; font-size: 0.88rem !important; color: #1c1917 !important; text-transform: uppercase !important; letter-spacing: 0.06em !important; text-decoration: none !important; display: inline-flex !important; align-items: center !important; gap: 0.4rem !important; transition: color 0.3s ease !important;">
-                                <span>READ MORE</span> <span class="btn-arrow" style="font-size: 1rem; transition: transform 0.3s ease;"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; vertical-align: text-bottom;"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></span>
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- Item 3 -->
-                    <div class="blog-card" style="flex: 0 0 380px; scroll-snap-align: start; display: flex; flex-direction: column; background: transparent;">
-                        <div style="border-radius: 20px; overflow: hidden; height: 260px; margin-bottom: 1.6rem; box-shadow: 0 10px 25px rgba(0,0,0,0.06); background-color: #d6ccc2;">
-                            <img  loading="lazy"loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/news-blog/WhatsApp Image 2025-02-15 at 9.44.56 AM.jpeg' ); ?>" style="width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s ease;" alt="Spiritually Strong" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform='scale(1)'">
-                        </div>
-                        <h3 style="font-family: 'Phudu', sans-serif !important; font-size: 1.2rem !important; font-weight: 600 !important; color: #1c1917 !important; text-transform: uppercase; line-height: 1.35; margin-bottom: 1.5rem; border-bottom: 1px solid rgba(0,0,0,0.1); padding-bottom: 1.5rem;">
-                            STAYING SPIRITUALLY STRONG THROUGH FAITH AND DAILY PRAYER
-                        </h3>
-                        <div>
-                            <a href="<?php echo esc_url( get_permalink( 44 ) ); ?>" class="news-text-link" style="font-family: 'Instrument Sans', sans-serif !important; font-weight: 800 !important; font-size: 0.88rem !important; color: #1c1917 !important; text-transform: uppercase !important; letter-spacing: 0.06em !important; text-decoration: none !important; display: inline-flex !important; align-items: center !important; gap: 0.4rem !important; transition: color 0.3s ease !important;">
-                                <span>READ MORE</span> <span class="btn-arrow" style="font-size: 1rem; transition: transform 0.3s ease;"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; vertical-align: text-bottom;"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></span>
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- Item 4 -->
-                    <div class="blog-card" style="flex: 0 0 380px; scroll-snap-align: start; display: flex; flex-direction: column; background: transparent;">
-                        <div style="border-radius: 20px; overflow: hidden; height: 260px; margin-bottom: 1.6rem; box-shadow: 0 10px 25px rgba(0,0,0,0.06); background-color: #d6ccc2;">
-                            <img  loading="lazy"loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/news-blog/WhatsApp Image 2025-03-29 at 5.41.00 AM.jpeg' ); ?>" style="width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s ease;" alt="Franciscan Mission" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform='scale(1)'">
-                        </div>
-                        <h3 style="font-family: 'Phudu', sans-serif !important; font-size: 1.2rem !important; font-weight: 600 !important; color: #1c1917 !important; text-transform: uppercase; line-height: 1.35; margin-bottom: 1.5rem; border-bottom: 1px solid rgba(0,0,0,0.1); padding-bottom: 1.5rem;">
-                            EXPANDING FRANCISCAN EDUCATIONAL &amp; SOCIAL MISSIONS IN RANCHI
-                        </h3>
-                        <div>
-                            <a href="<?php echo esc_url( get_permalink( 44 ) ); ?>" class="news-text-link" style="font-family: 'Instrument Sans', sans-serif !important; font-weight: 800 !important; font-size: 0.88rem !important; color: #1c1917 !important; text-transform: uppercase !important; letter-spacing: 0.06em !important; text-decoration: none !important; display: inline-flex !important; align-items: center !important; gap: 0.4rem !important; transition: color 0.3s ease !important;">
-                                <span>READ MORE</span> <span class="btn-arrow" style="font-size: 1rem; transition: transform 0.3s ease;"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; vertical-align: text-bottom;"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></span>
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- Item 5 -->
-                    <div class="blog-card" style="flex: 0 0 380px; scroll-snap-align: start; display: flex; flex-direction: column; background: transparent;">
-                        <div style="border-radius: 20px; overflow: hidden; height: 260px; margin-bottom: 1.6rem; box-shadow: 0 10px 25px rgba(0,0,0,0.06); background-color: #d6ccc2;">
-                            <img  loading="lazy"loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/news-blog/WhatsApp Image 2025-04-04 at 11.06.38 AM.jpeg' ); ?>" style="width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s ease;" alt="Youth Ministry" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform='scale(1)'">
-                        </div>
-                        <h3 style="font-family: 'Phudu', sans-serif !important; font-size: 1.2rem !important; font-weight: 600 !important; color: #1c1917 !important; text-transform: uppercase; line-height: 1.35; margin-bottom: 1.5rem; border-bottom: 1px solid rgba(0,0,0,0.1); padding-bottom: 1.5rem;">
-                            YOUTH SPIRITUAL RETREAT &amp; COMMUNITY FELLOWSHIP GATHERING
-                        </h3>
-                        <div>
-                            <a href="<?php echo esc_url( get_permalink( 44 ) ); ?>" class="news-text-link" style="font-family: 'Instrument Sans', sans-serif !important; font-weight: 800 !important; font-size: 0.88rem !important; color: #1c1917 !important; text-transform: uppercase !important; letter-spacing: 0.06em !important; text-decoration: none !important; display: inline-flex !important; align-items: center !important; gap: 0.4rem !important; transition: color 0.3s ease !important;">
-                                <span>READ MORE</span> <span class="btn-arrow" style="font-size: 1rem; transition: transform 0.3s ease;"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; vertical-align: text-bottom;"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></span>
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- Item 6 -->
-                    <div class="blog-card" style="flex: 0 0 380px; scroll-snap-align: start; display: flex; flex-direction: column; background: transparent;">
-                        <div style="border-radius: 20px; overflow: hidden; height: 260px; margin-bottom: 1.6rem; box-shadow: 0 10px 25px rgba(0,0,0,0.06); background-color: #d6ccc2;">
-                            <img  loading="lazy"loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/news-blog/WhatsApp Image 2025-08-02 at 10.29.49 AM.jpeg' ); ?>" style="width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s ease;" alt="Parish Feast" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform='scale(1)'">
-                        </div>
-                        <h3 style="font-family: 'Phudu', sans-serif !important; font-size: 1.2rem !important; font-weight: 600 !important; color: #1c1917 !important; text-transform: uppercase; line-height: 1.35; margin-bottom: 1.5rem; border-bottom: 1px solid rgba(0,0,0,0.1); padding-bottom: 1.5rem;">
-                            CELEBRATING THE ANNUAL ST. FRANCIS PROVINCIA FEAST DAY
-                        </h3>
-                        <div>
-                            <a href="<?php echo esc_url( get_permalink( 44 ) ); ?>" class="news-text-link" style="font-family: 'Instrument Sans', sans-serif !important; font-weight: 800 !important; font-size: 0.88rem !important; color: #1c1917 !important; text-transform: uppercase !important; letter-spacing: 0.06em !important; text-decoration: none !important; display: inline-flex !important; align-items: center !important; gap: 0.4rem !important; transition: color 0.3s ease !important;">
+                            <a href="<?php echo esc_url( home_url( '/news/' ) ); ?>" class="news-text-link" style="font-family: 'Instrument Sans', sans-serif !important; font-weight: 800 !important; font-size: 0.88rem !important; color: #1c1917 !important; text-transform: uppercase !important; letter-spacing: 0.06em !important; text-decoration: none !important; display: inline-flex !important; align-items: center !important; gap: 0.4rem !important; transition: color 0.3s ease !important;">
                                 <span>READ MORE</span> <span class="btn-arrow" style="font-size: 1rem; transition: transform 0.3s ease;"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; vertical-align: text-bottom;"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></span>
                             </a>
                         </div>
