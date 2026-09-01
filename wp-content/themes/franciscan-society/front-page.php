@@ -40,14 +40,8 @@ get_header();
                 <!-- Content Grid (Exact Reference Screenshot 1 Parallel Alignment & Spacing) -->
                 <div class="hero-grid hero-grid-layout" style="position: relative; z-index: 10;">
                     
-                    <!-- Left Column: Eyebrow, Title & Buttons -->
+                    <!-- Left Column: Title & Buttons -->
                     <div class="js-hero-text" style="display: flex; flex-direction: column; justify-content: flex-end;">
-                        <!-- Eyebrow Pill Tag -->
-                        <div style="display: inline-flex; align-items: center; gap: 0.5rem; margin-bottom: 1.4rem; width: fit-content;">
-                            <span style="width: 6px; height: 6px; background-color: #e6c888; border-radius: 50%; display: inline-block;"></span>
-                            <span class="eyebrow-text" style="color: #ffffff; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; font-family: 'Instrument Sans', sans-serif;"><?php echo esc_html( franciscan_get_page_field( 'home', 'hero_badge', 'THIRD ORDER REGULAR OF ST. FRANCIS' ) ); ?></span>
-                        </div>
-
                         <!-- Main Title: Phudu, 600 weight, 62px size, 62px line height -->
                         <h1 class="hero-title" style="font-family: 'Phudu', sans-serif !important; font-size: clamp(2.6rem, 5.5vw, 4.8rem) !important; font-weight: 600 !important; color: #ffffff; text-transform: uppercase; line-height: 1.05; letter-spacing: -0.01em; margin-bottom: 2.2rem; text-shadow: none !important;">
                             <?php echo nl2br( esc_html( franciscan_get_page_field( 'home', 'hero_title', "Let us begin again,\nfor we have only begun to serve the Lord." ) ) ); ?>
@@ -68,13 +62,8 @@ get_header();
                         </div>
                     </div>
 
-                    <!-- Right Column: Subtitle Paragraph & Stats Counter Strip -->
+                    <!-- Right Column: Stats Counter Strip -->
                     <div class="js-hero-text" style="display: flex; flex-direction: column; justify-content: flex-end;">
-                        <!-- Subtitle paragraph parallel horizontally across from line 2 of title -->
-                        <p style="font-family: 'Instrument Sans', sans-serif !important; font-size: 16px !important; font-weight: 600 !important; color: #ffffff; line-height: 26px !important; margin-bottom: 2.2rem; max-width: 490px; text-shadow: 0 2px 14px rgba(0,0,0,0.9);">
-                            <?php echo nl2br( esc_html( franciscan_get_page_field( 'home', 'hero_subtitle', 'In the spirit of the Seraphic Minstrel of Divine Love, we walk the way of the Gospel—our hearts rooted in prayer, our lives woven together in fraternity, and our footsteps shaped by the simplicity and humility of Christ. Drawn to the least, we seek to become gentle instruments of His peace, singing into the world the melody of mercy, hope, and love.' ) ) ); ?>
-                        </p>
-
                         <!-- Stats Counter Strip -->
                         <div class="responsive-grid-3" style="position: relative; z-index: 20; display: grid; border-top: 1px solid rgba(255, 255, 255, 0.25); padding-top: 1.25rem;">
                             <div style="border-right: 1px solid rgba(255, 255, 255, 0.18); padding-right: 1rem;">
@@ -128,8 +117,14 @@ get_header();
                     </h2>
 
                     <!-- Welcome Message Text in Instrument Sans 600 -->
+                    <?php
+                    $welcome_text = franciscan_get_page_field( 'home', 'welcome_section_text', '' );
+                    if ( empty( $welcome_text ) || strpos( $welcome_text, 'We warmly welcome you' ) !== false || strpos( $welcome_text, 'Poverello of Assisi' ) !== false ) {
+                        $welcome_text = 'In the spirit of the Seraphic Minstrel of Divine Love, we walk the way of the Gospel—our hearts rooted in prayer, our lives woven together in fraternity, and our footsteps shaped by the simplicity and humility of Christ. Drawn to the least, we seek to become gentle instruments of His peace, singing into the world the melody of mercy, hope, and love.';
+                    }
+                    ?>
                     <p class="gsap-reveal-p" style="font-family: 'Instrument Sans', sans-serif !important; font-size: 0.95rem !important; font-weight: 500 !important; color: #44403c !important; line-height: 1.52 !important; margin: 0;">
-                        <?php echo esc_html( franciscan_get_page_field( 'home', 'welcome_section_text', 'In the spirit of the Poverello of Assisi, we journey along the Gospel path—rooted in prayer, sustained by fraternity, and shaped by the simplicity and humility of Christ. With hearts open to God and attentive to our brothers and sisters, we seek to serve with compassion, draw near to the least, and carry into the world the peace, mercy, and hope of Christ.' ) ); ?>
+                        <?php echo esc_html( $welcome_text ); ?>
                     </p>
 
                 </div>

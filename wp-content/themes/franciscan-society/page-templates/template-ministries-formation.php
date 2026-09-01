@@ -744,14 +744,26 @@ button.fs-mega-toggle:focus::after {
                 </div>
 
                 <div style="border-radius: 20px; overflow: hidden; box-shadow: 0 15px 40px rgba(74,42,24,0.12); border: 2px solid rgba(230,200,136,0.3); background: #FAF7F0;">
-                    <img loading="lazy" decoding="async" src="<?php echo esc_url( franciscan_get_page_field( "ministries-formation", "section_1_image", FRANCISCAN_THEME_URI . "/assets/images/gallery/WhatsApp Image 2025-09-17 at 11.30.25 AM (1).jpeg" ) ); ?>" alt="<?php echo esc_attr( franciscan_get_page_field( "ministries-formation", "section_1_img_alt", "Franciscan Formation Ministry" ) ); ?>" style="width: 100%; height: 460px; object-fit: cover; display: block; transition: transform 0.5s ease;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
+                    <?php
+                    $form_img1 = franciscan_get_page_field( "ministries-formation", "section_1_image", "" );
+                    if ( empty( $form_img1 ) || strpos( $form_img1, 'WhatsApp Image 2025-09-17' ) !== false ) {
+                        $form_img1 = FRANCISCAN_THEME_URI . "/assets/images/new_uploads/ministry-formation-1.jpeg";
+                    }
+                    ?>
+                    <img loading="lazy" decoding="async" src="<?php echo esc_url( $form_img1 ); ?>" alt="<?php echo esc_attr( franciscan_get_page_field( "ministries-formation", "section_1_img_alt", "Franciscan Formation Ministry" ) ); ?>" style="width: 100%; height: 460px; object-fit: cover; display: block; transition: transform 0.5s ease;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
                 </div>
             </div>
 
             <!-- Section 2 -->
             <div style="display: grid; grid-template-columns: 0.9fr 1.1fr; gap: clamp(2.5rem, 5vw, 4.5rem); align-items: center;" class="responsive-ministry-grid">
                 <div style="border-radius: 20px; overflow: hidden; box-shadow: 0 15px 40px rgba(74,42,24,0.12); border: 2px solid rgba(230,200,136,0.3); background: #FAF7F0;">
-                    <img loading="lazy" decoding="async" src="<?php echo esc_url( franciscan_get_page_field( "ministries-formation", "section_2_image", FRANCISCAN_THEME_URI . "/assets/images/gallery/WhatsApp Image 2025-09-10 at 4.28.51 AM.jpeg" ) ); ?>" alt="<?php echo esc_attr( franciscan_get_page_field( "ministries-formation", "section_2_img_alt", "Formation Centres in Ranchi Province" ) ); ?>" style="width: 100%; height: 460px; object-fit: cover; display: block; transition: transform 0.5s ease;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
+                    <?php
+                    $form_img2 = franciscan_get_page_field( "ministries-formation", "section_2_image", "" );
+                    if ( empty( $form_img2 ) || strpos( $form_img2, 'WhatsApp Image 2025-09-10' ) !== false ) {
+                        $form_img2 = FRANCISCAN_THEME_URI . "/assets/images/new_uploads/ministry-formation-2.jpeg";
+                    }
+                    ?>
+                    <img loading="lazy" decoding="async" src="<?php echo esc_url( $form_img2 ); ?>" alt="<?php echo esc_attr( franciscan_get_page_field( "ministries-formation", "section_2_img_alt", "Formation Centres in Ranchi Province" ) ); ?>" style="width: 100%; height: 460px; object-fit: cover; display: block; transition: transform 0.5s ease;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
                 </div>
 
                 <div>

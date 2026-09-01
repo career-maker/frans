@@ -796,7 +796,13 @@ button.fs-mega-toggle:focus::after {
             <div style="text-align: center; margin-bottom: 2.5rem;">
                 <div style="display: inline-flex; align-items: center; gap: 0.5rem; margin-bottom: 0.8rem;">
                     <span style="width: 6px; height: 6px; background-color: #4A2A18; border-radius: 50%;"></span>
-                    <span style="color: #4A2A18; font-size: 0.78rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; font-family: 'Instrument Sans', sans-serif;"><?php echo esc_html( franciscan_get_page_field( 'community-leadership', 'general_eyebrow', 'LEADERSHIP OF THE ORDER' ) ); ?></span>
+                    <?php
+                    $general_eyebrow = franciscan_get_page_field( 'community-leadership', 'general_eyebrow', '' );
+                    if ( empty( $general_eyebrow ) || $general_eyebrow === 'LEADERSHIP OF THE ORDER' ) {
+                        $general_eyebrow = 'To lead is to serve; to be greater is to become lesser.';
+                    }
+                    ?>
+                    <span style="color: #4A2A18; font-size: 0.78rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; font-family: 'Instrument Sans', sans-serif;"><?php echo esc_html( $general_eyebrow ); ?></span>
                 </div>
                 <h2 style="font-family: 'Phudu', sans-serif; font-size: clamp(2rem, 3.5vw, 2.6rem); font-weight: 700; color: #1c1917; text-transform: uppercase; margin: 0 0 1rem 0;"><?php echo esc_html( franciscan_get_page_field( 'community-leadership', 'general_heading', 'GENERAL COUNCIL' ) ); ?></h2>
                 <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.52; max-width: 750px; margin: 0 auto;">
@@ -984,7 +990,13 @@ button.fs-mega-toggle:focus::after {
             <div style="text-align: center; margin-bottom: 2.5rem; padding-top: 3rem; border-top: 1px solid rgba(74,42,24,0.1);">
                 <div style="display: inline-flex; align-items: center; gap: 0.5rem; margin-bottom: 0.8rem;">
                     <span style="width: 6px; height: 6px; background-color: #4A2A18; border-radius: 50%;"></span>
-                    <span style="color: #4A2A18; font-size: 0.78rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; font-family: 'Instrument Sans', sans-serif;"><?php echo esc_html( franciscan_get_page_field( 'community-leadership', 'provincial_eyebrow', 'RANCHI PROVINCE LEADERSHIP' ) ); ?></span>
+                    <?php
+                    $provincial_eyebrow = franciscan_get_page_field( 'community-leadership', 'provincial_eyebrow', '' );
+                    if ( empty( $provincial_eyebrow ) || $provincial_eyebrow === 'RANCHI PROVINCE LEADERSHIP' ) {
+                        $provincial_eyebrow = 'To lead is to serve; to be greater is to become lesser.';
+                    }
+                    ?>
+                    <span style="color: #4A2A18; font-size: 0.78rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; font-family: 'Instrument Sans', sans-serif;"><?php echo esc_html( $provincial_eyebrow ); ?></span>
                 </div>
                 <h2 style="font-family: 'Phudu', sans-serif; font-size: clamp(2rem, 3.5vw, 2.6rem); font-weight: 700; color: #1c1917; text-transform: uppercase; margin: 0 0 1rem 0;"><?php echo esc_html( franciscan_get_page_field( 'community-leadership', 'provincial_heading', 'PROVINCIAL COUNCIL' ) ); ?></h2>
                 <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.52; max-width: 750px; margin: 0 auto;">
