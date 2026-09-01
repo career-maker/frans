@@ -529,7 +529,7 @@ get_header();
                         <h3 style="font-family: 'Phudu', sans-serif !important; font-size: 1.25rem !important; font-weight: 600 !important; color: #1c1917 !important; text-transform: uppercase; line-height: 1.35; margin-bottom: 1rem; border-bottom: 1px solid rgba(0,0,0,0.1); padding-bottom: 1rem;">
                             Seminar on "New Labour Code" Held at Hardag, Ranchi
                         </h3>
-                        <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.7; margin-bottom: 1.5rem; flex-grow: 1;">
+                        <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.5; margin-bottom: 1.5rem; flex-grow: 1;">
                             A one-day seminar on "New Labour Code" was organized by the St. Francis Province, Ranchi, on 29 August 2026 at Moments Resorts, Hardag. Attended by around fifty participants — including TOR friars in the education ministry and principals from across Jharkhand — the event was graced by Very Rev. Fr. Manoj Vengathanam, TOR, Minister Provincial of Ranchi Province.
                         </p>
                         <div>

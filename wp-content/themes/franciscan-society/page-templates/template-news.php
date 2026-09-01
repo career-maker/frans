@@ -173,8 +173,8 @@ $banner_bg = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/hero-banner-aug2
     }
     .article-featured-wrapper img { width: 100%; height: 100%; max-height: 520px; object-fit: cover; display: block; transition: transform 0.6s cubic-bezier(0.16,1,0.3,1); }
     .article-featured-wrapper:hover img { transform: scale(1.03); }
-    .article-prose { font-family: 'Instrument Sans', sans-serif; font-size: 1.05rem; line-height: 1.9; color: #292524; }
-    .article-prose p { margin-bottom: 1.8rem; }
+    .article-prose { font-family: 'Instrument Sans', sans-serif; font-size: 1.05rem; line-height: 1.65; color: #292524; }
+    .article-prose p { margin-bottom: 1.4rem; }
     .article-prose p:first-of-type::first-letter {
         font-family: 'Phudu', serif;
         font-size: 3.8rem;
