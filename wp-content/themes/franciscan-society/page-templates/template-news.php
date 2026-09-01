@@ -6,25 +6,6 @@
  */
 
 get_header();
-
-$paged = get_query_var( 'paged' ) ? get_query_var( 'paged' ) : ( get_query_var( 'page' ) ? get_query_var( 'page' ) : 1 );
-
-// Query posts with category 'news' or all posts if not categorized
-$news_query = new WP_Query( array(
-    'category_name'  => 'news',
-    'posts_per_page' => 6,
-    'paged'          => $paged,
-    'post_status'    => 'publish',
-) );
-
-if ( ! $news_query->have_posts() ) {
-    $news_query = new WP_Query( array(
-        'post_type'      => 'post',
-        'posts_per_page' => 6,
-        'paged'          => $paged,
-        'post_status'    => 'publish',
-    ) );
-}
 ?>
 
 <style>
@@ -143,71 +124,38 @@ if ( ! $news_query->have_posts() ) {
     </section>
 
     <!-- News Grid Section -->
-    <section style="padding: clamp(3rem, 5vw, 5rem) 2rem; background-color: #FAF8F5; max-width: 1320px; margin: 0 auto;">
-        
-        <?php if ( $news_query->have_posts() ) : ?>
-            <div class="news-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 2.5rem;">
-                <?php while ( $news_query->have_posts() ) : $news_query->the_post();
-                    $cats = get_the_category();
-                    $cat_label = ! empty( $cats ) ? $cats[0]->name : 'News';
-                    $thumb_url = has_post_thumbnail() 
-                        ? get_the_post_thumbnail_url( get_the_ID(), 'large' ) 
-                        : esc_url( FRANCISCAN_THEME_URI . '/assets/images/news-blog/IMG20230215103348.jpg.jpeg' );
-                    $excerpt = get_the_excerpt() ? get_the_excerpt() : wp_trim_words( get_the_content(), 18, '...' );
-                ?>
-                    <article class="news-card">
-                        <div class="news-thumb-wrap">
-                            <img loading="lazy" src="<?php echo esc_url( $thumb_url ); ?>" alt="<?php the_title_attribute(); ?>">
-                        </div>
-                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.6rem;">
-                            <span style="font-family: 'Instrument Sans', sans-serif; font-size: 0.78rem; color: #8b6f47; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;">
-                                <?php echo esc_html( $cat_label ); ?>
-                            </span>
-                            <span style="font-family: 'Instrument Sans', sans-serif; font-size: 0.78rem; color: #a8a29e;">
-                                📅 <?php echo get_the_date( 'M j, Y' ); ?>
-                            </span>
-                        </div>
-                        <h3 class="news-card-title">
-                            <?php the_title(); ?>
-                        </h3>
-                        <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.6; margin-bottom: 1.5rem; flex-grow: 1;">
-                            <?php echo esc_html( $excerpt ); ?>
-                        </p>
-                        <a href="<?php the_permalink(); ?>" style="font-family: 'Instrument Sans', sans-serif; font-weight: 800; font-size: 0.88rem; color: #1c1917; text-transform: uppercase; letter-spacing: 0.06em; text-decoration: none; display: inline-flex; align-items: center; gap: 0.4rem; transition: color 0.2s;">
-                            <span>READ MORE</span> <span>&rarr;</span>
-                        </a>
-                    </article>
-                <?php endwhile; wp_reset_postdata(); ?>
-            </div>
+    <section style="padding: clamp(3rem, 5vw, 5rem) 2rem; background-color: #FAF8F5; margin: 0 auto;">
 
-            <!-- Pagination -->
-            <?php
-            $big = 999999999;
-            $pagination_links = paginate_links( array(
-                'base'      => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
-                'format'    => '?paged=%#%',
-                'current'   => max( 1, $paged ),
-                'total'     => $news_query->max_num_pages,
-                'prev_text' => '&larr; Previous',
-                'next_text' => 'Next &rarr;',
-                'type'      => 'array',
-            ) );
-            if ( ! empty( $pagination_links ) ) : ?>
-                <div class="fs-pagination-wrapper">
-                    <nav class="fs-pagination-nav">
-                        <?php foreach ( $pagination_links as $link ) : ?>
-                            <?php echo $link; ?>
-                        <?php endforeach; ?>
-                    </nav>
+        <div style="max-width: 1320px; margin: 0 auto; display: flex; justify-content: center;">
+
+            <!-- Seminar on New Labour Code -->
+            <article class="news-card" style="max-width: 620px; width: 100%;">
+                <div class="news-thumb-wrap" style="height: 320px;">
+                    <img loading="eager" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/new_uploads/seminar-labour-code.jpeg' ); ?>" alt="Seminar on New Labour Code at Hardag, Ranchi">
                 </div>
-            <?php endif; ?>
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.8rem;">
+                    <span style="font-family: 'Instrument Sans', sans-serif; font-size: 0.75rem; color: #8b6f47; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; background: rgba(139,111,71,0.08); padding: 0.25rem 0.7rem; border-radius: 50px;">Province News</span>
+                    <span style="font-family: 'Instrument Sans', sans-serif; font-size: 0.78rem; color: #a8a29e;">📅 Aug 29, 2026</span>
+                </div>
+                <h3 class="news-card-title">Seminar on "New Labour Code" Held at Hardag, Ranchi</h3>
+                <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.97rem; color: #57534e; line-height: 1.75; margin-bottom: 1.2rem; flex-grow: 1;">
+                    A one-day seminar on "New Labour Code" was organized by the St. Francis Province, Ranchi, on 29 August 2026 at Moments Resorts, Hardag, Ranchi. The seminar was attended by around fifty participants. Besides the TOR friars involved in the education ministry, the programme was attended by several principals from different parts of Jharkhand.
+                </p>
+                <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.97rem; color: #57534e; line-height: 1.75; margin-bottom: 1.2rem;">
+                    The programme was graced by the presence of Very Rev. Fr. Manoj Vengathanam, TOR, Minister Provincial of Ranchi Province.
+                </p>
+                <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.97rem; color: #57534e; line-height: 1.75; margin-bottom: 1.2rem;">
+                    Mr. Shammi Joseph Tigga, Welfare Commissioner (C), served as the resource person and led the two sessions of the seminar. The sessions offered a comprehensive introduction to the four Labour Codes, namely the Code on Wages, the Industrial Relations Code, the Code on Social Security, and the Occupational Safety, Health and Working Conditions Code. The presentations highlighted important provisions relating to minimum wages, timely payment of wages, social security, industrial relations, workplace safety, and the welfare and working conditions of employees.
+                </p>
+                <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.97rem; color: #57534e; line-height: 1.75; margin-bottom: 1.2rem;">
+                    The seminar provided the participants with a valuable opportunity for learning, dialogue, and reflection on the implications of the new Labour Codes, particularly in the context of educational institutions and employment practices.
+                </p>
+                <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.97rem; color: #57534e; line-height: 1.75; margin-bottom: 1.6rem;">
+                    The programme was coordinated by Fr. Manoj Kullu, TOR, and Fr. Shaji Alappurath, TOR.
+                </p>
+            </article>
 
-        <?php else : ?>
-            <div style="text-align:center; padding:5rem 2rem;">
-                <h3 style="font-family:'Phudu', serif; font-size:1.8rem; color:#1c1917; margin-bottom:1rem;">No News Posts Found</h3>
-                <p style="font-family:'Instrument Sans', sans-serif; color:#78716c;">New articles published from Franciscan Studio will appear here.</p>
-            </div>
-        <?php endif; ?>
+        </div>
 
     </section>
 </main>
