@@ -228,8 +228,128 @@ const initScrollAnimations = () => {
     }
 };
 
+// Universal Welcome Section Image Slider Controller
+const initWelcomeSliders = () => {
+    const sliders = document.querySelectorAll('.welcome-slider-container');
+    sliders.forEach((slider) => {
+        const slides = slider.querySelectorAll('.welcome-slide');
+        const dots = slider.querySelectorAll('.welcome-dot');
+        const prevBtn = slider.querySelector('.welcome-slider-prev');
+        const nextBtn = slider.querySelector('.welcome-slider-next');
+
+        if (!slides.length) return;
+
+        let currentIndex = 0;
+        const totalSlides = slides.length;
+        let slideTimer = null;
+
+        const goToSlide = (index) => {
+            currentIndex = (index + totalSlides) % totalSlides;
+            slides.forEach((slide, i) => {
+                if (i === currentIndex) {
+                    slide.classList.add('is-active');
+                    slide.style.opacity = '1';
+                    slide.style.zIndex = '2';
+                    slide.style.transform = 'scale(1)';
+                } else {
+                    slide.classList.remove('is-active');
+                    slide.style.opacity = '0';
+                    slide.style.zIndex = '1';
+                    slide.style.transform = 'scale(1.04)';
+                }
+            });
+
+            dots.forEach((dot, i) => {
+                if (i === currentIndex) {
+                    dot.classList.add('is-active');
+                    dot.style.width = '24px';
+                    dot.style.borderRadius = '4px';
+                    dot.style.background = '#e6c888';
+                } else {
+                    dot.classList.remove('is-active');
+                    dot.style.width = '8px';
+                    dot.style.borderRadius = '50%';
+                    dot.style.background = 'rgba(255, 255, 255, 0.5)';
+                }
+            });
+        };
+
+        const nextSlide = () => goToSlide(currentIndex + 1);
+        const prevSlide = () => goToSlide(currentIndex - 1);
+
+        const startAutoPlay = () => {
+            stopAutoPlay();
+            slideTimer = setInterval(nextSlide, 4500);
+        };
+
+        const stopAutoPlay = () => {
+            if (slideTimer) {
+                clearInterval(slideTimer);
+                slideTimer = null;
+            }
+        };
+
+        if (nextBtn) {
+            nextBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                nextSlide();
+                startAutoPlay();
+            });
+        }
+
+        if (prevBtn) {
+            prevBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                prevSlide();
+                startAutoPlay();
+            });
+        }
+
+        dots.forEach((dot) => {
+            dot.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetIdx = parseInt(dot.getAttribute('data-index'), 10);
+                if (!isNaN(targetIdx)) {
+                    goToSlide(targetIdx);
+                    startAutoPlay();
+                }
+            });
+        });
+
+        // Pause on mouse hover
+        slider.addEventListener('mouseenter', stopAutoPlay);
+        slider.addEventListener('mouseleave', startAutoPlay);
+
+        // Touch Swipe Gestures for Mobile
+        let touchStartX = 0;
+        let touchEndX = 0;
+        slider.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+
+        slider.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            if (touchStartX - touchEndX > 45) {
+                nextSlide();
+                startAutoPlay();
+            } else if (touchEndX - touchStartX > 45) {
+                prevSlide();
+                startAutoPlay();
+            }
+        }, { passive: true });
+
+        // Start initial auto rotation
+        startAutoPlay();
+    });
+};
+
 if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initScrollAnimations);
+    document.addEventListener('DOMContentLoaded', () => {
+        initScrollAnimations();
+        initWelcomeSliders();
+    });
 } else {
     initScrollAnimations();
+    initWelcomeSliders();
 }
+

@@ -734,7 +734,7 @@ button.fs-mega-toggle:focus::after {
     <section id="about-section" style="position: relative; padding: 5.5rem 0 0 0; background-color: #FFFFFF; color: #1c1917; overflow: hidden;">
             <div class="responsive-grid-about" style="max-width: 1320px; margin: 0 auto; padding: 0 clamp(1rem, 5vw, 3rem); display: grid; gap: 4.5rem; align-items: center;">
                 
-                <!-- Left Column: Main Image with Working Video Card Overlay -->
+                <!-- Left Column: Image Slider with Working Video Card Overlay -->
                 <?php
                 $about_sec_img = franciscan_get_page_field( 'about', 'about_section_img', '' );
                 if ( empty( $about_sec_img ) ) {
@@ -744,10 +744,54 @@ button.fs-mega-toggle:focus::after {
                 if ( empty( $about_sec_video ) ) {
                     $about_sec_video = FRANCISCAN_THEME_URI . '/assets/videos/hero-bg.mp4';
                 }
+                $about_slides = array(
+                    array(
+                        'url' => $about_sec_img,
+                        'alt' => 'Franciscan Rosary and Contemplative Prayer',
+                    ),
+                    array(
+                        'url' => FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_24_08_PM.png',
+                        'alt' => 'Franciscan Society Cathedral Sanctuary',
+                    ),
+                    array(
+                        'url' => FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_51_30_PM.png',
+                        'alt' => 'Franciscan Church Altar Architecture',
+                    ),
+                    array(
+                        'url' => FRANCISCAN_THEME_URI . '/assets/images/new_uploads/hero-banner-aug20.jpeg',
+                        'alt' => 'Franciscan Friars Community Gathering',
+                    ),
+                    array(
+                        'url' => FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_20_2026_02_25_29_PM.png',
+                        'alt' => 'Franciscan Community Prayer Celebration',
+                    ),
+                );
                 ?>
                 <div style="position: relative; border-radius: 24px;">
-                    <div class="about-img-container" style="position: relative; border-radius: 24px; overflow: hidden; box-shadow: 0 20px 45px rgba(0, 0, 0, 0.08);">
-                        <img loading="lazy" decoding="async" src="<?php echo esc_url( $about_sec_img ); ?>" style="width: 100%; height: 460px; object-fit: cover; border-radius: 24px; display: block;" alt="Franciscan Rosary & Prayer">
+                    <div class="welcome-slider-container">
+                        <div class="welcome-slider-track">
+                            <?php foreach ( $about_slides as $index => $slide ) : $is_active = ( 0 === $index ); ?>
+                                <div class="welcome-slide <?php echo $is_active ? 'is-active' : ''; ?>">
+                                    <img loading="<?php echo $index === 0 ? 'eager' : 'lazy'; ?>" decoding="async" src="<?php echo esc_url( $slide['url'] ); ?>" alt="<?php echo esc_attr( $slide['alt'] ); ?>">
+                                    <div style="position: absolute; inset: 0; background: linear-gradient(to top, rgba(12, 23, 39, 0.4) 0%, transparent 65%); pointer-events: none;"></div>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+
+                        <!-- Navigation Arrows -->
+                        <button type="button" class="welcome-slider-btn welcome-slider-prev" aria-label="Previous Slide">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                        </button>
+                        <button type="button" class="welcome-slider-btn welcome-slider-next" aria-label="Next Slide">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                        </button>
+
+                        <!-- Indicators Dots -->
+                        <div class="welcome-slider-dots">
+                            <?php foreach ( $about_slides as $index => $slide ) : ?>
+                                <button type="button" class="welcome-dot <?php echo 0 === $index ? 'is-active' : ''; ?>" data-index="<?php echo esc_attr( $index ); ?>" aria-label="Go to slide <?php echo esc_attr( $index + 1 ); ?>"></button>
+                            <?php endforeach; ?>
+                        </div>
                     </div>
                     
                     <!-- Inset Video Overlay Card (Positioned inside bottom-right corner) -->
