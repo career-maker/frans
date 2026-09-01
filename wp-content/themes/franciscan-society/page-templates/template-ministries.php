@@ -784,10 +784,10 @@ button.fs-mega-toggle:focus::after {
                         <h2 style="font-family: 'Phudu', sans-serif; font-size: clamp(2rem, 3.2vw, 2.7rem); font-weight: 700; color: #1c1917; text-transform: uppercase; line-height: 1.2; margin: 0 0 1.5rem 0;">
                             <?php echo esc_html( franciscan_get_page_field( "ministries", "pastoral_title", "PROCLAIMING THE GOSPEL THROUGH COMPASSIONATE SERVICE" ) ); ?>
                         </h2>
-                        <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.8; margin-bottom: 1.2rem;">
+                        <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.52; margin-bottom: 1.2rem;">
                             <?php echo esc_html( franciscan_get_page_field( "ministries", "pastoral_lead", "St. Francis gathered brothers around him to become heralds of the Good News. Inspired by this vision, the TOR Franciscans of the Province actively engage in pastoral ministry in parishes. Through this vital service to the Church, the friars dedicate themselves wholeheartedly to the mission of evangelization by their pastoral presence and ministry." ) ); ?>
                         </p>
-                        <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.8; margin-bottom: 1.8rem;">
+                        <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.52; margin-bottom: 1.8rem;">
                             <?php echo esc_html( franciscan_get_page_field( "ministries", "pastoral_desc", "Their ministry extends beyond the celebration of the sacraments to a compassionate and attentive presence among the people—caring for the sick and elderly, pastoral counseling, and family visits across 15 parishes in India and the Archdiocese of Freiburg, Germany." ) ); ?>
                         </p>
 
@@ -844,10 +844,10 @@ button.fs-mega-toggle:focus::after {
                         <h2 style="font-family: 'Phudu', sans-serif; font-size: clamp(2rem, 3.2vw, 2.7rem); font-weight: 700; color: #1c1917; text-transform: uppercase; line-height: 1.2; margin: 0 0 1.5rem 0;">
                             <?php echo esc_html( franciscan_get_page_field( "ministries", "formation_title", "NURTURING THE NEXT GENERATION OF FRANCISCANS" ) ); ?>
                         </h2>
-                        <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.8; margin-bottom: 1.2rem;">
+                        <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.52; margin-bottom: 1.2rem;">
                             <?php echo esc_html( franciscan_get_page_field( "ministries", "formation_lead", "Formation is the foundational ministry through which the Franciscan TOR charism and spirituality are creatively and faithfully proposed to successive generations. As Pope John Paul II emphasized in Vita Consecrata, formation is a dynamic, lifelong process that leads to ongoing conversion." ) ); ?>
                         </p>
-                        <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.8; margin-bottom: 1.8rem;">
+                        <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.52; margin-bottom: 1.8rem;">
                             <?php echo esc_html( franciscan_get_page_field( "ministries", "formation_desc", "The Province operates two Minor Seminaries (Dorma and Ranchi), the Novitiate House in Bichna (Khunti), and the Clericate at Purulia Road (Ranchi), providing holistic spiritual, intellectual, human, and pastoral preparation for religious consecration." ) ); ?>
                         </p>
 
@@ -888,10 +888,10 @@ button.fs-mega-toggle:focus::after {
                         <h2 style="font-family: 'Phudu', sans-serif; font-size: clamp(2rem, 3.2vw, 2.7rem); font-weight: 700; color: #1c1917; text-transform: uppercase; line-height: 1.2; margin: 0 0 1.5rem 0;">
                             <?php echo esc_html( franciscan_get_page_field( "ministries", "education_title", "EMPOWERING MINDS THROUGH KNOWLEDGE & VALUES" ) ); ?>
                         </h2>
-                        <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.8; margin-bottom: 1.2rem;">
+                        <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.52; margin-bottom: 1.2rem;">
                             <?php echo esc_html( franciscan_get_page_field( "ministries", "education_lead", "Guided by the motto, “Peace and Joy to the World,” our educational apostolate serves over 20,000 students across Jharkhand, Bihar, and West Bengal. Operating five Hindi-medium high schools, eleven middle schools, and six English-medium schools affiliated with CISCE and CBSE boards." ) ); ?>
                         </p>
-                        <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.8; margin-bottom: 1.8rem;">
+                        <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.52; margin-bottom: 1.8rem;">
                             <?php echo esc_html( franciscan_get_page_field( "ministries", "education_desc", "Open to students of all faiths and backgrounds, our schools provide balanced, holistic education nurturing moral, intellectual, emotional, and spiritual development." ) ); ?>
                         </p>
 
@@ -943,7 +943,7 @@ button.fs-mega-toggle:focus::after {
                 <h2 style="font-family: 'Phudu', sans-serif; font-size: clamp(2.2rem, 4vw, 3.4rem); font-weight: 700; color: #ffffff; text-transform: uppercase; line-height: 1.2; margin: 0 0 1.5rem 0; letter-spacing: -0.01em;">
                     <?php echo esc_html( franciscan_get_page_field( "ministries", "mission_title", "“PEACE AND JOY TO THE WORLD”" ) ); ?>
                 </h2>
-                <p style="font-family: 'Instrument Sans', sans-serif; font-size: clamp(1.05rem, 1.8vw, 1.2rem); color: #d6d3d1; max-width: 780px; margin: 0 auto 2.5rem auto; line-height: 1.75;">
+                <p style="font-family: 'Instrument Sans', sans-serif; font-size: clamp(1.05rem, 1.8vw, 1.2rem); color: #d6d3d1; max-width: 780px; margin: 0 auto 2.5rem auto; line-height: 1.52;">
                     <?php echo esc_html( franciscan_get_page_field( "ministries", "mission_desc", "Whether in rural parish mission stations, classrooms of growing minds, or quiet contemplative chapels, our friars serve as instruments of Christ’s peace and fraternal love." ) ); ?>
                 </p>
                 <div style="display: flex; gap: 1.2rem; justify-content: center; flex-wrap: wrap;">

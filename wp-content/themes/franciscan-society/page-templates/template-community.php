@@ -842,7 +842,7 @@ button.fs-mega-toggle:focus::after {
             <h2 style="font-family: 'Phudu', sans-serif; font-size: clamp(2rem, 3vw, 2.8rem); font-weight: 600; color: #1c1917; text-transform: uppercase; line-height: 1.15; margin-bottom: 2rem;">
                 FRIARIES ACROSS INDIA
             </h2>
-            <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.8; margin-bottom: 2rem; max-width: 800px;">
+            <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.52; margin-bottom: 2rem; max-width: 800px;">
                 The Province maintains 18 major friaries and ashrams across multiple dioceses, serving the People of God through parishes, schools, and pastoral ministry.
             </p>
 
@@ -894,7 +894,7 @@ button.fs-mega-toggle:focus::after {
             <h2 style="font-family: 'Phudu', sans-serif; font-size: clamp(2rem, 3vw, 2.8rem); font-weight: 600; color: #1c1917; text-transform: uppercase; line-height: 1.15; margin-bottom: 1rem;">
                 SERVING IN RELIGIOUS LIFE
             </h2>
-            <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.8; margin-bottom: 2rem;">
+            <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.52; margin-bottom: 2rem;">
                 The Province comprises 104 professed friars including 84 solemnly professed and 19 temporarily professed members. Among them are 71 priests and 3 brothers. Additionally, there are 28 major seminarians, 4 novices, 9 pre-novices, and 36 candidates in formation.
             </p>
 

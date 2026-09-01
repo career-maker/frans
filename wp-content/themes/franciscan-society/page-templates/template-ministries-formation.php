@@ -738,7 +738,7 @@ button.fs-mega-toggle:focus::after {
                     <h2 style="font-family: 'Phudu', sans-serif; font-size: clamp(1.8rem, 2.8vw, 2.3rem); font-weight: 700; color: #1c1917; text-transform: uppercase; line-height: 1.25; margin: 0 0 1.5rem 0;">
                         <?php echo esc_html( franciscan_get_page_field( "ministries-formation", "section_1_heading", "Formation Ministry" ) ); ?>
                     </h2>
-                    <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.85; margin: 0;">
+                    <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.52; margin: 0;">
                         <?php echo esc_html( franciscan_get_page_field( "ministries-formation", "section_1_p1", "Formation is the foundational ministry through which the Franciscan TOR charism and spirituality are creatively and faithfully proposed to and shared with successive generations. In accordance with the mind of the Church and the Order, our primary objective is to prepare candidates for the total consecration of themselves to God in the following of Christ, at the service of the Church’s mission. As Pope John Paul II emphasizes in Vita Consecrata, formation is a dynamic, lifelong process that leads to ongoing conversion and helps individuals discover the signs of God in earthly realities. For this formation to be truly complete, it must be holistic—encompassing and integrating every aspect of Christian life. Ultimately, it is a sacred sharing in the work of the Father who, through the Spirit, fashions the inner attitudes of the Son in the hearts of young men." ) ); ?>
                     </p>
                 </div>
@@ -755,7 +755,7 @@ button.fs-mega-toggle:focus::after {
                 </div>
 
                 <div>
-                    <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.85; margin: 0;">
+                    <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.52; margin: 0;">
                         <?php echo esc_html( franciscan_get_page_field( "ministries-formation", "section_2_p1", "By placing formation at the very heart of its life and mission, the TOR St. Francis Province, Ranchi, strives to form committed, mature, and joyful Franciscan religious who are fully consecrated to God and dedicated to the service of the Church and society in the spirit of St. Francis. This vision is nurtured through a well-structured network of formation centres: two Minor Seminaries located in Dorma, Khunti, Jharkhand and in Ranchi, Jharkhand; the Novitiate House in Bichna, Khunti, Jharkhand; and the Clericate at Purulia Road, Ranchi." ) ); ?>
                     </p>
                 </div>

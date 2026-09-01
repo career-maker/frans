@@ -781,7 +781,7 @@ button.fs-mega-toggle:focus::after {
                 <h2 style="font-family: 'Phudu', sans-serif; font-size: clamp(2rem, 3.8vw, 44px); font-weight: 600; color: #ffffff; text-transform: uppercase; line-height: 1.15; letter-spacing: -0.01em; margin-bottom: 1.2rem; max-width: 800px;">
                     SERVING IN COMMUNION
                 </h2>
-                <p style="font-family: 'Instrument Sans', sans-serif; font-size: 1.05rem; font-weight: 400; color: rgba(255, 255, 255, 0.9); line-height: 1.7; max-width: 650px; margin: 0;">
+                <p style="font-family: 'Instrument Sans', sans-serif; font-size: 1.05rem; font-weight: 400; color: rgba(255, 255, 255, 0.9); line-height: 1.52; max-width: 650px; margin: 0;">
                     Led by the Minister Provincial and provincial leadership team committed to spiritual excellence.
                 </p>
             </div>
@@ -799,7 +799,7 @@ button.fs-mega-toggle:focus::after {
                     <span style="color: #4A2A18; font-size: 0.78rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; font-family: 'Instrument Sans', sans-serif;"><?php echo esc_html( franciscan_get_page_field( 'community-leadership', 'general_eyebrow', 'LEADERSHIP OF THE ORDER' ) ); ?></span>
                 </div>
                 <h2 style="font-family: 'Phudu', sans-serif; font-size: clamp(2rem, 3.5vw, 2.6rem); font-weight: 700; color: #1c1917; text-transform: uppercase; margin: 0 0 1rem 0;"><?php echo esc_html( franciscan_get_page_field( 'community-leadership', 'general_heading', 'GENERAL COUNCIL' ) ); ?></h2>
-                <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.85; max-width: 750px; margin: 0 auto;">
+                <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.52; max-width: 750px; margin: 0 auto;">
                     <?php echo esc_html( franciscan_get_page_field( 'community-leadership', 'general_subtitle', 'The General Council guides the Franciscan Third Order Regular globally, ensuring fidelity to our charism and mission across all provinces and regions.' ) ); ?>
                 </p>
             </div>
@@ -987,7 +987,7 @@ button.fs-mega-toggle:focus::after {
                     <span style="color: #4A2A18; font-size: 0.78rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; font-family: 'Instrument Sans', sans-serif;"><?php echo esc_html( franciscan_get_page_field( 'community-leadership', 'provincial_eyebrow', 'RANCHI PROVINCE LEADERSHIP' ) ); ?></span>
                 </div>
                 <h2 style="font-family: 'Phudu', sans-serif; font-size: clamp(2rem, 3.5vw, 2.6rem); font-weight: 700; color: #1c1917; text-transform: uppercase; margin: 0 0 1rem 0;"><?php echo esc_html( franciscan_get_page_field( 'community-leadership', 'provincial_heading', 'PROVINCIAL COUNCIL' ) ); ?></h2>
-                <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.85; max-width: 750px; margin: 0 auto;">
+                <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.52; max-width: 750px; margin: 0 auto;">
                     <?php echo esc_html( franciscan_get_page_field( 'community-leadership', 'provincial_subtitle', "The Provincial Council oversees the spiritual and apostolic life of our community in Ranchi Province, ensuring our friars flourish in their vocations and effectively serve the Church's mission across India." ) ); ?>
                 </p>
             </div>

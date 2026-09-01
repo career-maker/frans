@@ -1136,10 +1136,10 @@ function franciscan_render_dashboard_view() {
                                     <?php
                                     $home_slider_items = array(
                                         '1' => array( 'label' => '1. Fraternity Image', 'key' => 'welcome_slide_1_img', 'default' => FRANCISCAN_THEME_URI . '/assets/images/new_uploads/fraternity.jpeg' ),
-                                        '2' => array( 'label' => '2. Tradition Image', 'key' => 'welcome_slide_2_img', 'default' => FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_24_08_PM.png' ),
-                                        '3' => array( 'label' => '3. Service Image', 'key' => 'welcome_slide_3_img', 'default' => FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_51_30_PM.png' ),
-                                        '4' => array( 'label' => '4. Humility Image', 'key' => 'welcome_slide_4_img', 'default' => FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_48_39_PM.png' ),
-                                        '5' => array( 'label' => '5. Conversion Image', 'key' => 'welcome_slide_5_img', 'default' => FRANCISCAN_THEME_URI . '/assets/images/new_uploads/hero-banner-aug20.jpeg' ),
+                                        '2' => array( 'label' => '2. Prayer Image', 'key' => 'welcome_slide_2_img', 'default' => FRANCISCAN_THEME_URI . '/assets/images/new_uploads/slider-prayer.jpeg' ),
+                                        '3' => array( 'label' => '3. Service Image', 'key' => 'welcome_slide_3_img', 'default' => FRANCISCAN_THEME_URI . '/assets/images/new_uploads/slider-service.jpeg' ),
+                                        '4' => array( 'label' => '4. Humility Image', 'key' => 'welcome_slide_4_img', 'default' => FRANCISCAN_THEME_URI . '/assets/images/new_uploads/slider-humility.jpeg' ),
+                                        '5' => array( 'label' => '5. Conversion Image', 'key' => 'welcome_slide_5_img', 'default' => FRANCISCAN_THEME_URI . '/assets/images/new_uploads/slider-conversion.jpeg' ),
                                     );
                                     foreach ( $home_slider_items as $s_num => $s_info ) :
                                         $s_key = $s_info['key'];
@@ -1182,7 +1182,7 @@ function franciscan_render_dashboard_view() {
                                     <div class="form-group full-width">
                                         <label>About Rosary &amp; Prayer Image</label>
                                         <?php
-                                        $def_h_about_img = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_48_39_PM.png';
+                                        $def_h_about_img = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/about-section-img-sep01.png';
                                         $cur_h_about_img = ! empty( $data['about_section_img'] ) ? $data['about_section_img'] : $def_h_about_img;
                                         ?>
                                         <div class="image-uploader-box">
@@ -1457,10 +1457,10 @@ function franciscan_render_dashboard_view() {
                                     <?php
                                     $about_slider_items = array(
                                         '1' => array( 'label' => '1. Fraternity Image', 'key' => 'welcome_slide_1_img', 'default' => FRANCISCAN_THEME_URI . '/assets/images/new_uploads/fraternity.jpeg' ),
-                                        '2' => array( 'label' => '2. Tradition Image', 'key' => 'welcome_slide_2_img', 'default' => FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_24_08_PM.png' ),
-                                        '3' => array( 'label' => '3. Service Image', 'key' => 'welcome_slide_3_img', 'default' => FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_51_30_PM.png' ),
-                                        '4' => array( 'label' => '4. Humility Image', 'key' => 'welcome_slide_4_img', 'default' => FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_48_39_PM.png' ),
-                                        '5' => array( 'label' => '5. Conversion Image', 'key' => 'welcome_slide_5_img', 'default' => FRANCISCAN_THEME_URI . '/assets/images/new_uploads/hero-banner-aug20.jpeg' ),
+                                        '2' => array( 'label' => '2. Prayer Image', 'key' => 'welcome_slide_2_img', 'default' => FRANCISCAN_THEME_URI . '/assets/images/new_uploads/slider-prayer.jpeg' ),
+                                        '3' => array( 'label' => '3. Service Image', 'key' => 'welcome_slide_3_img', 'default' => FRANCISCAN_THEME_URI . '/assets/images/new_uploads/slider-service.jpeg' ),
+                                        '4' => array( 'label' => '4. Humility Image', 'key' => 'welcome_slide_4_img', 'default' => FRANCISCAN_THEME_URI . '/assets/images/new_uploads/slider-humility.jpeg' ),
+                                        '5' => array( 'label' => '5. Conversion Image', 'key' => 'welcome_slide_5_img', 'default' => FRANCISCAN_THEME_URI . '/assets/images/new_uploads/slider-conversion.jpeg' ),
                                     );
                                     foreach ( $about_slider_items as $s_num => $s_info ) :
                                         $s_key = $s_info['key'];

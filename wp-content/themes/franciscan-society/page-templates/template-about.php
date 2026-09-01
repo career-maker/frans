@@ -737,6 +737,9 @@ button.fs-mega-toggle:focus::after {
                 <!-- Left Column: Image Slider with Working Video Card Overlay -->
                 <?php
                 $about_sec_img = franciscan_get_page_field( 'about', 'about_section_img', '' );
+                if ( empty( $about_sec_img ) || strpos( $about_sec_img, 'ChatGPT_Image_Aug_18_2026_05_48_39_PM' ) !== false ) {
+                    $about_sec_img = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/about-section-img-sep01.png';
+                }
                 $slide1_img = franciscan_get_page_field( 'about', 'welcome_slide_1_img', '' );
                 if ( empty( $slide1_img ) ) {
                     $slide1_img = franciscan_get_page_field( 'home', 'welcome_slide_1_img', '' );
@@ -749,32 +752,32 @@ button.fs-mega-toggle:focus::after {
                 if ( empty( $slide2_img ) ) {
                     $slide2_img = franciscan_get_page_field( 'home', 'welcome_slide_2_img', '' );
                 }
-                if ( empty( $slide2_img ) ) {
-                    $slide2_img = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_24_08_PM.png';
+                if ( empty( $slide2_img ) || strpos( $slide2_img, 'ChatGPT_Image' ) !== false ) {
+                    $slide2_img = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/slider-prayer.jpeg';
                 }
 
                 $slide3_img = franciscan_get_page_field( 'about', 'welcome_slide_3_img', '' );
                 if ( empty( $slide3_img ) ) {
                     $slide3_img = franciscan_get_page_field( 'home', 'welcome_slide_3_img', '' );
                 }
-                if ( empty( $slide3_img ) ) {
-                    $slide3_img = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_51_30_PM.png';
+                if ( empty( $slide3_img ) || strpos( $slide3_img, 'ChatGPT_Image' ) !== false ) {
+                    $slide3_img = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/slider-service.jpeg';
                 }
 
                 $slide4_img = franciscan_get_page_field( 'about', 'welcome_slide_4_img', '' );
                 if ( empty( $slide4_img ) ) {
                     $slide4_img = franciscan_get_page_field( 'home', 'welcome_slide_4_img', '' );
                 }
-                if ( empty( $slide4_img ) ) {
-                    $slide4_img = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_48_39_PM.png';
+                if ( empty( $slide4_img ) || strpos( $slide4_img, 'ChatGPT_Image' ) !== false ) {
+                    $slide4_img = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/slider-humility.jpeg';
                 }
 
                 $slide5_img = franciscan_get_page_field( 'about', 'welcome_slide_5_img', '' );
                 if ( empty( $slide5_img ) ) {
                     $slide5_img = franciscan_get_page_field( 'home', 'welcome_slide_5_img', '' );
                 }
-                if ( empty( $slide5_img ) ) {
-                    $slide5_img = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/hero-banner-aug20.jpeg';
+                if ( empty( $slide5_img ) || strpos( $slide5_img, 'hero-banner-aug20' ) !== false ) {
+                    $slide5_img = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/slider-conversion.jpeg';
                 }
 
                 $about_sec_video = franciscan_get_page_field( 'about', 'about_video_url', '' );
@@ -789,8 +792,8 @@ button.fs-mega-toggle:focus::after {
                     ),
                     array(
                         'url'   => $slide2_img,
-                        'title' => 'Tradition',
-                        'alt'   => 'Franciscan Tradition',
+                        'title' => 'Prayer',
+                        'alt'   => 'Franciscan Prayer',
                     ),
                     array(
                         'url'   => $slide3_img,
@@ -1054,7 +1057,7 @@ button.fs-mega-toggle:focus::after {
                     <div style="width: 34px; height: 3.5px; background: #4A2A18; margin: 1.2rem 0 1.5rem 0; border-radius: 2px;"></div>
 
                     <!-- Paragraph Text (Montserrat clean sans) -->
-                    <p style="font-family: 'Montserrat', sans-serif; font-size: 0.95rem; line-height: 1.75; color: #57534e; margin: 0 0 2.5rem 0;">
+                    <p style="font-family: 'Montserrat', sans-serif; font-size: 0.95rem; line-height: 1.52; color: #57534e; margin: 0 0 2.5rem 0;">
                         <?php echo esc_html( franciscan_get_page_field( 'about', 'charism_text', "lie at the heart of Franciscan identity. The fundamental charism of the Third Order Regular is penance, understood as ongoing conversion. This involves turning to God in love, reconciliation with Him, harmony with oneself, and charity toward one's neighbour." ) ); ?>
                     </p>
 
@@ -1174,7 +1177,7 @@ button.fs-mega-toggle:focus::after {
 
     <!-- CTA to Community Page -->
     <section style="padding: clamp(2rem, 4vw, 3.5rem) 2rem; background-color: #FFFFFF; text-align: center; max-width: 900px; margin: 0 auto;">
-        <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.8; margin-bottom: 1.5rem;">
+        <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.52; margin-bottom: 1.5rem;">
             <?php echo esc_html( franciscan_get_page_field( 'about', 'community_cta_text', 'To learn more about our leadership, friaries across India, and the friars serving in our Province, visit our Community page.' ) ); ?>
         </p>
         <a href="<?php echo esc_url( home_url( franciscan_get_page_field( 'about', 'community_cta_btn_url', '/community-history/' ) ) ); ?>" style="display: inline-block; background: #4A2A18; color: white; padding: 1rem 2rem; border-radius: 8px; font-family: 'Instrument Sans', sans-serif; font-weight: 800; font-size: 0.88rem; text-transform: uppercase; letter-spacing: 0.06em; text-decoration: none; transition: all 0.3s ease;">

@@ -9,6 +9,10 @@ body, p, span, a, button, input, textarea, select {
     font-family: 'Instrument Sans', 'Noto Sans Malayalam', 'Manjari', 'Gayathri', sans-serif !important;
 }
 
+p {
+    line-height: 1.52;
+}
+
 /* Header — minimal: logo + single pill Menu trigger at every breakpoint */
 .header {
     position: fixed;

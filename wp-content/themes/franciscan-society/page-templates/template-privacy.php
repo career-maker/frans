@@ -675,7 +675,7 @@ button.fs-mega-toggle:focus::after {
             <span style="color: #4A2A18; font-size: 0.78rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; font-family: 'Instrument Sans', sans-serif;"><?php echo esc_html( $eyebrow ); ?></span>
         </div>
 
-        <div style="font-family: 'Instrument Sans', sans-serif; font-size: 1rem; color: #57534e; line-height: 1.8;">
+        <div style="font-family: 'Instrument Sans', sans-serif; font-size: 1rem; color: #57534e; line-height: 1.52;">
 
             <?php if ( ! empty( $custom_content ) ) : ?>
                 <div class="custom-legal-body">

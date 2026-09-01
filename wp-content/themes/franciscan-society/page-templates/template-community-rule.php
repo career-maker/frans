@@ -731,7 +731,7 @@ button.fs-mega-toggle:focus::after {
                 <h2 style="font-family: 'Phudu'; font-size: clamp(2.6rem, 4.2vw, 62px); font-weight: 600; color: #ffffff; text-transform: uppercase; line-height: 1.05; margin-bottom: 1.5rem; max-width: 800px;">
                     <?php echo esc_html( franciscan_get_page_field( 'community-rule', 'card_title', 'GUIDING PRINCIPLES OF OUR FAITH' ) ); ?>
                 </h2>
-                <p style="font-family: 'Instrument Sans'; font-size: 1.1rem; font-weight: 500; color: rgba(255, 255, 255, 0.9); line-height: 1.7; max-width: 600px;">
+                <p style="font-family: 'Instrument Sans'; font-size: 1.1rem; font-weight: 500; color: rgba(255, 255, 255, 0.9); line-height: 1.52; max-width: 600px;">
                     <?php echo esc_html( franciscan_get_page_field( 'community-rule', 'card_subtitle', 'Rooted in Franciscan spirituality and commitment to Christ-centered living.' ) ); ?>
                 </p>
             </div>
@@ -742,13 +742,13 @@ button.fs-mega-toggle:focus::after {
 
         <h2 style="font-family: 'Phudu'; font-size: 2.2rem; font-weight: 900; color: #1c1917; margin-bottom: 1.5rem;"><?php echo esc_html( franciscan_get_page_field( 'community-rule', 'rule_heading', 'THE FRANCISCAN RULE' ) ); ?></h2>
 
-        <p style="font-family: 'Instrument Sans'; font-size: 0.95rem; color: #57534e; line-height: 1.9; margin-bottom: 1.2rem;">
+        <p style="font-family: 'Instrument Sans'; font-size: 0.95rem; color: #57534e; line-height: 1.52; margin-bottom: 1.2rem;">
             <?php echo esc_html( franciscan_get_page_field( 'community-rule', 'rule_text', 'The Rule of the Third Order Regular provides the spiritual and practical framework for our community life. It calls us to live the Gospel values of poverty, humility, obedience, and love—rooted in the charism of St. Francis of Assisi.' ) ); ?>
         </p>
 
         <h3 style="font-family: 'Phudu'; font-size: 1.5rem; font-weight: 700; color: #4a2a18; margin-top: 2.5rem; margin-bottom: 1rem;"><?php echo esc_html( franciscan_get_page_field( 'community-rule', 'principles_heading', 'CORE PRINCIPLES' ) ); ?></h3>
 
-        <ul style="font-family: 'Instrument Sans'; font-size: 1.05rem; color: #57534e; line-height: 1.9; padding-left: 2rem;">
+        <ul style="font-family: 'Instrument Sans'; font-size: 1.05rem; color: #57534e; line-height: 1.52; padding-left: 2rem;">
             <li style="margin-bottom: 0.8rem;"><strong>Poverty:</strong> Simplicity and detachment from worldly possessions</li>
             <li style="margin-bottom: 0.8rem;"><strong>Humility:</strong> Recognition of our dependence on God</li>
             <li style="margin-bottom: 0.8rem;"><strong>Obedience:</strong> Alignment with God's will through religious authority</li>
@@ -758,13 +758,13 @@ button.fs-mega-toggle:focus::after {
 
         <h3 style="font-family: 'Phudu'; font-size: 1.5rem; font-weight: 700; color: #4a2a18; margin-top: 2.5rem; margin-bottom: 1rem;"><?php echo esc_html( franciscan_get_page_field( 'community-rule', 'living_heading', 'LIVING THE RULE TODAY' ) ); ?></h3>
 
-        <p style="font-family: 'Instrument Sans'; font-size: 0.95rem; color: #57534e; line-height: 1.9; margin-bottom: 1.2rem;">
+        <p style="font-family: 'Instrument Sans'; font-size: 0.95rem; color: #57534e; line-height: 1.52; margin-bottom: 1.2rem;">
             <?php echo esc_html( franciscan_get_page_field( 'community-rule', 'living_text', 'Our community strives to embody these principles through daily practice, community life, and active ministry. The Rule guides us toward peace, joy, and authentic Christian witness in our modern world.' ) ); ?>
         </p>
 
         <div style="background: #f5f3ec; border-radius: 12px; padding: 2rem; border-left: 4px solid #4a2a18; margin-top: 2rem;">
             <h4 style="font-family: 'Phudu'; font-size: 1.2rem; font-weight: 700; color: #1c1917; margin-bottom: 1rem;"><?php echo esc_html( franciscan_get_page_field( 'community-rule', 'inquire_title', 'LEARN MORE' ) ); ?></h4>
-            <p style="font-family: 'Instrument Sans'; font-size: 0.95rem; color: #57534e; line-height: 1.8; margin-bottom: 1rem;">
+            <p style="font-family: 'Instrument Sans'; font-size: 0.95rem; color: #57534e; line-height: 1.52; margin-bottom: 1rem;">
                 <?php echo esc_html( franciscan_get_page_field( 'community-rule', 'inquire_text', 'Explore the spiritual depth and wisdom of Franciscan living.' ) ); ?>
             </p>
             <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>#enquiry" style="display: inline-block; background: #4a2a18; color: white; padding: 0.8rem 1.5rem; border-radius: 6px; font-family: 'Instrument Sans'; font-weight: 700; font-size: 0.85rem; text-decoration: none; text-transform: uppercase;"><?php echo esc_html( franciscan_get_page_field( 'community-rule', 'inquire_btn_text', 'Inquire' ) ); ?></a>

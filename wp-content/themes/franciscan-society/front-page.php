@@ -128,7 +128,7 @@ get_header();
                     </h2>
 
                     <!-- Welcome Message Text in Instrument Sans 600 -->
-                    <p class="gsap-reveal-p" style="font-family: 'Instrument Sans', sans-serif !important; font-size: 0.95rem !important; font-weight: 500 !important; color: #44403c !important; line-height: 1.8 !important; margin: 0;">
+                    <p class="gsap-reveal-p" style="font-family: 'Instrument Sans', sans-serif !important; font-size: 0.95rem !important; font-weight: 500 !important; color: #44403c !important; line-height: 1.52 !important; margin: 0;">
                         <?php echo esc_html( franciscan_get_page_field( 'home', 'welcome_section_text', 'In the spirit of the Poverello of Assisi, we journey along the Gospel path—rooted in prayer, sustained by fraternity, and shaped by the simplicity and humility of Christ. With hearts open to God and attentive to our brothers and sisters, we seek to serve with compassion, draw near to the least, and carry into the world the peace, mercy, and hope of Christ.' ) ); ?>
                     </p>
 
@@ -142,20 +142,20 @@ get_header();
                         $slide1_img = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/fraternity.jpeg';
                     }
                     $slide2_img = franciscan_get_page_field( 'home', 'welcome_slide_2_img', '' );
-                    if ( empty( $slide2_img ) ) {
-                        $slide2_img = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_24_08_PM.png';
+                    if ( empty( $slide2_img ) || strpos( $slide2_img, 'ChatGPT_Image' ) !== false ) {
+                        $slide2_img = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/slider-prayer.jpeg';
                     }
                     $slide3_img = franciscan_get_page_field( 'home', 'welcome_slide_3_img', '' );
-                    if ( empty( $slide3_img ) ) {
-                        $slide3_img = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_51_30_PM.png';
+                    if ( empty( $slide3_img ) || strpos( $slide3_img, 'ChatGPT_Image' ) !== false ) {
+                        $slide3_img = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/slider-service.jpeg';
                     }
                     $slide4_img = franciscan_get_page_field( 'home', 'welcome_slide_4_img', '' );
-                    if ( empty( $slide4_img ) ) {
-                        $slide4_img = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_48_39_PM.png';
+                    if ( empty( $slide4_img ) || strpos( $slide4_img, 'ChatGPT_Image' ) !== false ) {
+                        $slide4_img = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/slider-humility.jpeg';
                     }
                     $slide5_img = franciscan_get_page_field( 'home', 'welcome_slide_5_img', '' );
-                    if ( empty( $slide5_img ) ) {
-                        $slide5_img = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/hero-banner-aug20.jpeg';
+                    if ( empty( $slide5_img ) || strpos( $slide5_img, 'hero-banner-aug20' ) !== false ) {
+                        $slide5_img = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/slider-conversion.jpeg';
                     }
 
                     $welcome_slides = array(
@@ -166,8 +166,8 @@ get_header();
                         ),
                         array(
                             'url'   => $slide2_img,
-                            'title' => 'Tradition',
-                            'alt'   => 'Franciscan Tradition',
+                            'title' => 'Prayer',
+                            'alt'   => 'Franciscan Prayer',
                         ),
                         array(
                             'url'   => $slide3_img,
@@ -230,8 +230,8 @@ get_header();
                 <!-- Left Column: Main Image with Working Video Card Overlay -->
                 <?php
                 $about_img = franciscan_get_page_field( 'home', 'about_section_img', '' );
-                if ( empty( $about_img ) ) {
-                    $about_img = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_48_39_PM.png';
+                if ( empty( $about_img ) || strpos( $about_img, 'ChatGPT_Image_Aug_18_2026_05_48_39_PM' ) !== false ) {
+                    $about_img = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/about-section-img-sep01.png';
                 }
                 $about_video = franciscan_get_page_field( 'home', 'about_video_url', '' );
                 if ( empty( $about_video ) ) {
@@ -1577,7 +1577,7 @@ document.addEventListener("DOMContentLoaded", function() {
                             FOR MASS INTENSION IN USA
                         </h2>
                         
-                        <p class="gsap-reveal-p" style="font-family: 'Instrument Sans', sans-serif !important; font-size: 1.1rem !important; font-weight: 500 !important; color: rgba(255,255,255,0.9) !important; line-height: 1.8 !important; max-width: 500px; margin-bottom: 2.5rem;">
+                        <p class="gsap-reveal-p" style="font-family: 'Instrument Sans', sans-serif !important; font-size: 1.1rem !important; font-weight: 500 !important; color: rgba(255,255,255,0.9) !important; line-height: 1.52 !important; max-width: 500px; margin-bottom: 2.5rem;">
                             TOR FRANCISCANS OF ST.LOUIS PROVINCE
                         </p>
 

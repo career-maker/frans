@@ -786,7 +786,7 @@ button.fs-mega-toggle:focus::after {
                 <h2 style="font-family: 'Phudu', sans-serif; font-size: clamp(2rem, 3.8vw, 44px); font-weight: 600; color: #ffffff; text-transform: uppercase; line-height: 1.15; letter-spacing: -0.01em; margin-bottom: 1.2rem; max-width: 800px;">
                     <?php echo esc_html( franciscan_get_page_field( 'community-history', 'heritage_title', 'A LEGACY OF FAITH AND SERVICE' ) ); ?>
                 </h2>
-                <p style="font-family: 'Instrument Sans', sans-serif; font-size: 1.05rem; font-weight: 400; color: rgba(255, 255, 255, 0.9); line-height: 1.7; max-width: 650px; margin: 0;">
+                <p style="font-family: 'Instrument Sans', sans-serif; font-size: 1.05rem; font-weight: 400; color: rgba(255, 255, 255, 0.9); line-height: 1.52; max-width: 650px; margin: 0;">
                     <?php echo esc_html( franciscan_get_page_field( 'community-history', 'heritage_text', 'Tracing our origins from the ancient 4th-century Order of Penance, to St. Francis of Assisi, to thirty years of dedicated growth in Ranchi Province.' ) ); ?>
                 </p>
             </div>
@@ -806,13 +806,13 @@ button.fs-mega-toggle:focus::after {
                 <h3 style="font-family: 'Phudu', sans-serif; font-size: clamp(1.6rem, 2.6vw, 2.1rem); font-weight: 700; color: #1c1917; text-transform: uppercase; margin: 0 0 1.5rem 0;">
                     <?php echo esc_html( franciscan_get_page_field( 'community-history', 'era1_title', 'The Order of Penance & St. Francis of Assisi' ) ); ?>
                 </h3>
-                <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.85; margin-bottom: 1.25rem;">
+                <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.52; margin-bottom: 1.25rem;">
                     <?php echo esc_html( franciscan_get_page_field( 'community-history', 'era1_p1', 'The Third Order Regular (TOR) of St. Francis traces its origins to the ancient Order of Penance, which dates back to the fourth century AD. Men and women voluntarily embraced lives of penance for the sake of the Kingdom of God and their own spiritual growth.' ) ); ?>
                 </p>
-                <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.85; margin-bottom: 1.25rem;">
+                <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.52; margin-bottom: 1.25rem;">
                     <?php echo esc_html( franciscan_get_page_field( 'community-history', 'era1_p2', 'During his early conversion experience, St. Francis of Assisi (1181–1226) became associated with the Order of Penance, an itinerant movement known as the Penitents of Assisi. He addressed them through an Exhortation, encouraging them to lead holy lives of penance.' ) ); ?>
                 </p>
-                <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.85; margin: 0;">
+                <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.52; margin: 0;">
                     <?php echo esc_html( franciscan_get_page_field( 'community-history', 'era1_p3', 'Among the early Franciscan penitents were both Seculars and Regulars who lived according to a regula (rule of life). The Regulars embraced religious life characterized by the profession of vows, observance of the Third Order Rule, and communal living in hermitages.' ) ); ?>
                 </p>
             </div>
@@ -827,10 +827,10 @@ button.fs-mega-toggle:focus::after {
                     <h3 style="font-family: 'Phudu', sans-serif; font-size: clamp(1.6rem, 2.6vw, 2.1rem); font-weight: 700; color: #1c1917; text-transform: uppercase; margin: 0 0 1.5rem 0;">
                         Unification &amp; The Generalate in Rome
                     </h3>
-                    <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.85; margin-bottom: 1.25rem;">
+                    <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.52; margin-bottom: 1.25rem;">
                         In 1447, Pope Nicholas V, through the bull <em>Pastoralis Officii</em>, united approximately sixty communities of male Franciscan tertiaries in Italy under a single Minister General. This marked the formal beginning of the Third Order Regular of St. Francis. In 1512, the Order established its headquarters at the Basilica of Saints Cosmas and Damian in Rome, where its Generalate remains to this day.
                     </p>
-                    <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.85; margin: 0;">
+                    <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.52; margin: 0;">
                         The Third Order Regular received a revised Rule from Pope Pius XI in 1927 through the document <em>Rerum Conditio</em>. This Rule was renewed on 8 December 1982 by Pope John Paul II through the apostolic letter <em>Franciscanum Vitae Propositum</em>, becoming the Rule and Life of nearly four hundred Franciscan Third Order congregations of men and women throughout the world.
                     </p>
                 </div>
@@ -844,10 +844,10 @@ button.fs-mega-toggle:focus::after {
                 <h4 style="font-family: 'Phudu', sans-serif; font-size: 1.3rem; font-weight: 700; color: #4A2A18; text-transform: uppercase; margin: 0 0 0.8rem 0;">
                     Franciscan Identity &amp; Global Presence
                 </h4>
-                <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.85; margin-bottom: 1rem;">
+                <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.52; margin-bottom: 1rem;">
                     Conversion, contemplation, poverty, and humility lie at the heart of Franciscan identity. The fundamental charism of the Third Order Regular, however, is penance, understood as ongoing conversion. This involves turning to God in love, reconciliation with Him, harmony with oneself, and charity toward one’s neighbour.
                 </p>
-                <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.85; margin: 0;">
+                <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.52; margin: 0;">
                     Today, the Order comprises three provinces in India; two provinces each in Italy and the United States; one province each in Sri Lanka, Spain and Croatia; vice provinces in South Africa, Brazil, Paraguay, and Mexico; delegations in the Philippines, France, Sweden, and Bangladesh; and a commissariat of the Spanish Province in Peru.
                 </p>
             </div>
@@ -861,19 +861,19 @@ button.fs-mega-toggle:focus::after {
                 <h3 style="font-family: 'Phudu', sans-serif; font-size: clamp(1.6rem, 2.6vw, 2.1rem); font-weight: 700; color: #1c1917; text-transform: uppercase; margin: 0 0 1.5rem 0;">
                     The History of the TOR in India &amp; Ranchi Province
                 </h3>
-                <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.85; margin-bottom: 1.25rem;">
+                <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.52; margin-bottom: 1.25rem;">
                     The history of the TOR in India began in 1938 when missionaries from the Province of the Sacred Heart of Jesus, USA, arrived in Bhagalpur, Bihar. The mission steadily grew and was established as a Commissariat in 1945. In 1971, it was elevated to the status of a Province under the title Province of St. Thomas the Apostle.
                 </p>
-                <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.85; margin-bottom: 1.25rem;">
+                <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.52; margin-bottom: 1.25rem;">
                     In 1996, the Commissariat of St. Francis was established at Ranchi. On 4 October 1999, the Most Rev. Bonaventure Midili, TOR, Minister General, elevated it to the status of a Vice Province. The Vice Province of St. Francis was formally inaugurated by him in Ranchi on 8 December 1999.
                 </p>
-                <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.85; margin-bottom: 1.25rem;">
+                <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.52; margin-bottom: 1.25rem;">
                     Recognizing the remarkable growth and expansion of the Vice Province between 1999 and 2005, as well as the strategic importance of India for the future of the Order, the Most Rev. Ilija Živković, TOR, Minister General, elevated it to a full-fledged Province on 20 March 2006. The ceremony took place in Ranchi during a Eucharistic celebration presided over by the Most Rev. Dr. Vincent Barwa, Auxiliary Bishop of Ranchi.
                 </p>
-                <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.85; margin-bottom: 1.25rem;">
+                <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.52; margin-bottom: 1.25rem;">
                     The Province presently has 104 professed friars, including 84 solemnly professed and 19 temporarily professed members. Among them are 71 priests and 3 brothers. The Province has 28 major seminarians, 4 novices, 9 pre-novices, and 36 candidates.
                 </p>
-                <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.85; margin: 0;">
+                <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.52; margin: 0;">
                     The Province maintains four houses in the Archdiocese of Ranchi, four in Khunti, three in Simdega, two in Rourkela, two in Jalpaiguri, and one each in the dioceses of Bagdogra, Gumla, Purnea, and Bongaigaon. The friars serve the People of God through ministry in 14 parishes and 22 schools. Two friars are currently engaged in ministry abroad. The Province has three formation houses: one in Ranchi, one in Dorma, and one in Bichna.
                 </p>
             </div>

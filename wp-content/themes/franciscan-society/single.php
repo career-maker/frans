@@ -209,7 +209,7 @@ if ( ! empty( $custom_banner ) ) {
     .article-prose {
         font-family: 'Instrument Sans', sans-serif;
         font-size: 1.15rem;
-        line-height: 1.9;
+        line-height: 1.52;
         color: #292524;
     }
     .article-prose p {
@@ -258,7 +258,7 @@ if ( ! empty( $custom_banner ) ) {
         margin: 2.5rem 0;
         font-style: italic;
         font-size: 1.2rem;
-        line-height: 1.7;
+        line-height: 1.52;
         color: #1c1917;
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
         position: relative;
@@ -360,7 +360,7 @@ if ( ! empty( $custom_banner ) ) {
         font-family: 'Instrument Sans', sans-serif;
         font-size: 0.98rem;
         color: rgba(255, 255, 255, 0.85);
-        line-height: 1.7;
+        line-height: 1.52;
         margin: 0;
     }
 
