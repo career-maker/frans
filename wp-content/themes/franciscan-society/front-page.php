@@ -129,7 +129,7 @@ get_header();
 
                     <!-- Welcome Message Text in Instrument Sans 600 -->
                     <p class="gsap-reveal-p" style="font-family: 'Instrument Sans', sans-serif !important; font-size: 0.95rem !important; font-weight: 500 !important; color: #44403c !important; line-height: 1.8 !important; margin: 0;">
-                        <?php echo esc_html( franciscan_get_page_field( 'home', 'welcome_section_text', 'We warmly welcome you to the official digital portal of the Franciscan Society, Third Order Regular (TOR), Province of St. Francis, Ranchi.' ) ); ?>
+                        <?php echo esc_html( franciscan_get_page_field( 'home', 'welcome_section_text', 'In the spirit of the Poverello of Assisi, we journey along the Gospel path—rooted in prayer, sustained by fraternity, and shaped by the simplicity and humility of Christ. With hearts open to God and attentive to our brothers and sisters, we seek to serve with compassion, draw near to the least, and carry into the world the peace, mercy, and hope of Christ.' ) ); ?>
                     </p>
 
                 </div>

@@ -824,17 +824,17 @@ button.fs-mega-toggle:focus::after {
                     <!-- Eyebrow Tag -->
                     <div style="display: inline-flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;">
                         <span style="width: 6px; height: 6px; background-color: #4A2A18; border-radius: 50%; display: inline-block;"></span>
-                        <span style="color: #4A2A18; font-size: 0.78rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; font-family: 'Instrument Sans', sans-serif;"><?php echo esc_html( franciscan_get_page_field( 'about', 'about_eyebrow', 'ABOUT US' ) ); ?></span>
+                        <span style="color: #4A2A18; font-size: 0.78rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; font-family: 'Instrument Sans', sans-serif;"><?php echo esc_html( franciscan_get_page_field( 'about', 'about_eyebrow', 'WELCOME TO THE FRANCISCAN SOCIETY' ) ); ?></span>
                     </div>
 
                     <!-- Main Section Title in Phudu 600 -->
                     <h2 style="font-family: 'Phudu', sans-serif !important; font-size: clamp(2.2rem, 3.2vw, 2.9rem) !important; font-weight: 600 !important; color: #1c1917 !important; text-transform: uppercase; line-height: 1.1; letter-spacing: -0.01em; margin-bottom: 1.4rem;">
-                        <?php echo esc_html( franciscan_get_page_field( 'about', 'about_section_heading', 'OUR STORY FAITH MISSION AND VISION TOGETHER' ) ); ?>
+                        <?php echo esc_html( franciscan_get_page_field( 'about', 'about_section_heading', 'WALKING TOGETHER IN FAITH, PENANCE, AND SERVICE' ) ); ?>
                     </h2>
 
                     <!-- Body Description in Instrument Sans -->
                     <p style="font-family: 'Instrument Sans', sans-serif !important; font-size: 0.95rem; color: #57534e; line-height: 1.65; margin-bottom: 2rem;">
-                        <?php echo esc_html( franciscan_get_page_field( 'about', 'about_section_text', 'The Third Order Regular (TOR) of St. Francis traces its origins to the ancient Order of Penance from the 4th century. Established in Ranchi in 1996 and elevated to a full Province on 20 March 2006.' ) ); ?>
+                        <?php echo esc_html( franciscan_get_page_field( 'about', 'about_section_text', 'In the spirit of the Poverello of Assisi, we journey along the Gospel path—rooted in prayer, sustained by fraternity, and shaped by the simplicity and humility of Christ. With hearts open to God and attentive to our brothers and sisters, we seek to serve with compassion, draw near to the least, and carry into the world the peace, mercy, and hope of Christ.' ) ); ?>
                     </p>
 
                     <!-- Mission & Vision 2-Column Grid -->

@@ -155,7 +155,7 @@ function franciscan_get_default_page_content( $slug = '' ) {
             // Section 2: Welcome
             'welcome_eyebrow'        => 'WELCOME TO THE FRANCISCAN SOCIETY',
             'welcome_section_heading'=> 'WALKING TOGETHER IN FAITH, PENANCE, AND SERVICE',
-            'welcome_section_text'   => 'We warmly welcome you to the official digital portal of the Franciscan Society, Third Order Regular (TOR), Province of St. Francis, Ranchi. Rooted in the spirit of St. Francis of Assisi, our brotherhood is devoted to living the Gospel through prayer, contemplation, fraternity, and dedicated service across Jharkhand, India, and global missions.',
+            'welcome_section_text'   => 'In the spirit of the Poverello of Assisi, we journey along the Gospel path—rooted in prayer, sustained by fraternity, and shaped by the simplicity and humility of Christ. With hearts open to God and attentive to our brothers and sisters, we seek to serve with compassion, draw near to the least, and carry into the world the peace, mercy, and hope of Christ.',
             'welcome_mosaic_img'     => '',
 
             // Section 3: About
@@ -221,9 +221,9 @@ function franciscan_get_default_page_content( $slug = '' ) {
             'hero_image'             => '',
 
             // Story & Mission
-            'about_eyebrow'          => 'ABOUT US',
-            'about_section_heading'  => 'OUR STORY FAITH MISSION AND VISION TOGETHER',
-            'about_section_text'     => 'The Third Order Regular (TOR) of St. Francis traces its origins to the ancient Order of Penance from the 4th century. Established in Ranchi in 1996 and elevated to a full Province on 20 March 2006.',
+            'about_eyebrow'          => 'WELCOME TO THE FRANCISCAN SOCIETY',
+            'about_section_heading'  => 'WALKING TOGETHER IN FAITH, PENANCE, AND SERVICE',
+            'about_section_text'     => 'In the spirit of the Poverello of Assisi, we journey along the Gospel path—rooted in prayer, sustained by fraternity, and shaped by the simplicity and humility of Christ. With hearts open to God and attentive to our brothers and sisters, we seek to serve with compassion, draw near to the least, and carry into the world the peace, mercy, and hope of Christ.',
             'about_mission_title'    => 'OUR MISSION',
             'about_mission_text'     => 'Serving 15 parishes & 22 schools across Ranchi and global mission fields.',
             'about_vision_title'     => 'OUR VISION',
