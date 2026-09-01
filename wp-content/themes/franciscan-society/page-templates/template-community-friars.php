@@ -753,12 +753,6 @@ button.fs-mega-toggle:focus::after {
             </div>
             <div style="text-align: center;">
                 <div style="width: 140px; height: 140px; border-radius: 50%; overflow: hidden; margin: 0 auto 1rem auto; box-shadow: 0 10px 20px rgba(0,0,0,0.1);">
-                    <img loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/friars/fr-george-mailadil.png' ); ?>" alt="Fr. George Palamattam" style="width: 100%; height: 100%; object-fit: cover;">
-                </div>
-                <h4 style="font-family: 'Phudu', sans-serif; font-size: 1rem; font-weight: 700; color: #4a2a18; margin: 0;">Fr. George Palamattam</h4>
-            </div>
-            <div style="text-align: center;">
-                <div style="width: 140px; height: 140px; border-radius: 50%; overflow: hidden; margin: 0 auto 1rem auto; box-shadow: 0 10px 20px rgba(0,0,0,0.1);">
                     <img loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/friars/fr-jerome-alookaran.png' ); ?>" alt="Fr. Jerome Alookaran" style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
                 <h4 style="font-family: 'Phudu', sans-serif; font-size: 1rem; font-weight: 700; color: #4a2a18; margin: 0;">Fr. Jerome Alookaran</h4>
@@ -1263,39 +1257,9 @@ button.fs-mega-toggle:focus::after {
             </div>
             <div style="text-align: center;">
                 <div style="width: 140px; height: 140px; border-radius: 50%; overflow: hidden; margin: 0 auto 1rem auto; box-shadow: 0 10px 20px rgba(0,0,0,0.1); border: 2px solid #e6c888;">
-                    <img loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/friars/br-juewel-tirkey.png' ); ?>" alt="Br. Juewel Tirkey" style="width: 100%; height: 100%; object-fit: cover;">
-                </div>
-                <h4 style="font-family: 'Phudu', sans-serif; font-size: 1rem; font-weight: 700; color: #4a2a18; margin: 0;">Br. Juewel Tirkey</h4>
-            </div>
-            <div style="text-align: center;">
-                <div style="width: 140px; height: 140px; border-radius: 50%; overflow: hidden; margin: 0 auto 1rem auto; box-shadow: 0 10px 20px rgba(0,0,0,0.1); border: 2px solid #e6c888;">
-                    <img loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/friars/br-remesh-dhodray.png' ); ?>" alt="Br. Remesh Dhodray" style="width: 100%; height: 100%; object-fit: cover;">
-                </div>
-                <h4 style="font-family: 'Phudu', sans-serif; font-size: 1rem; font-weight: 700; color: #4a2a18; margin: 0;">Br. Remesh Dhodray</h4>
-            </div>
-            <div style="text-align: center;">
-                <div style="width: 140px; height: 140px; border-radius: 50%; overflow: hidden; margin: 0 auto 1rem auto; box-shadow: 0 10px 20px rgba(0,0,0,0.1); border: 2px solid #e6c888;">
                     <img loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/friars/br-abrahm-soren.png' ); ?>" alt="Br. Abrahm Soren" style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
                 <h4 style="font-family: 'Phudu', sans-serif; font-size: 1rem; font-weight: 700; color: #4a2a18; margin: 0;">Br. Abrahm Soren</h4>
-            </div>
-            <div style="text-align: center;">
-                <div style="width: 140px; height: 140px; border-radius: 50%; overflow: hidden; margin: 0 auto 1rem auto; box-shadow: 0 10px 20px rgba(0,0,0,0.1); border: 2px solid #e6c888;">
-                    <img loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/friars/br-odil-kerketta.png' ); ?>" alt="Br. Odil Kerketta" style="width: 100%; height: 100%; object-fit: cover;">
-                </div>
-                <h4 style="font-family: 'Phudu', sans-serif; font-size: 1rem; font-weight: 700; color: #4a2a18; margin: 0;">Br. Odil Kerketta</h4>
-            </div>
-            <div style="text-align: center;">
-                <div style="width: 140px; height: 140px; border-radius: 50%; overflow: hidden; margin: 0 auto 1rem auto; box-shadow: 0 10px 20px rgba(0,0,0,0.1); border: 2px solid #e6c888;">
-                    <img loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/friars/br-rujesh-panna.png' ); ?>" alt="Br. Rujesh Panna" style="width: 100%; height: 100%; object-fit: cover;">
-                </div>
-                <h4 style="font-family: 'Phudu', sans-serif; font-size: 1rem; font-weight: 700; color: #4a2a18; margin: 0;">Br. Rujesh Panna</h4>
-            </div>
-            <div style="text-align: center;">
-                <div style="width: 140px; height: 140px; border-radius: 50%; overflow: hidden; margin: 0 auto 1rem auto; box-shadow: 0 10px 20px rgba(0,0,0,0.1); border: 2px solid #e6c888;">
-                    <img loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/friars/br-sukesh-kullu.png' ); ?>" alt="Br. Sukesh Kullu" style="width: 100%; height: 100%; object-fit: cover;">
-                </div>
-                <h4 style="font-family: 'Phudu', sans-serif; font-size: 1rem; font-weight: 700; color: #4a2a18; margin: 0;">Br. Sukesh Kullu</h4>
             </div>
             <div style="text-align: center;">
                 <div style="width: 140px; height: 140px; border-radius: 50%; overflow: hidden; margin: 0 auto 1rem auto; box-shadow: 0 10px 20px rgba(0,0,0,0.1); border: 2px solid #e6c888;">

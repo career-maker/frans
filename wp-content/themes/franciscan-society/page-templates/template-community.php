@@ -919,7 +919,6 @@ button.fs-mega-toggle:focus::after {
                 <h3 style="font-family: 'Phudu', sans-serif; font-size: 1rem; font-weight: 600; color: #1c1917; margin-bottom: 1rem; text-transform: uppercase;">FRIARS IN COMMUNITY</h3>
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.8rem;">
                     <span style="font-family: 'Instrument Sans', sans-serif; font-size: 0.9rem; color: #57534e;">Fr. Anselm Kullu</span>
-                    <span style="font-family: 'Instrument Sans', sans-serif; font-size: 0.9rem; color: #57534e;">Fr. George Palamattam</span>
                     <span style="font-family: 'Instrument Sans', sans-serif; font-size: 0.9rem; color: #57534e;">Fr. Jerome Alookaran</span>
                     <span style="font-family: 'Instrument Sans', sans-serif; font-size: 0.9rem; color: #57534e;">Br. Simon Gahatraj</span>
                     <span style="font-family: 'Instrument Sans', sans-serif; font-size: 0.9rem; color: #57534e;">Fr. Cyril Kochuvilayil</span>
