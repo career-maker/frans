@@ -1691,44 +1691,44 @@ button.fs-mega-toggle:focus::after {
 
 <?php
 // Dynamic Navigation Links & Labels
-$opt = franciscan_get_options();
+$opt = function_exists( 'franciscan_get_options' ) ? franciscan_get_options() : ( function_exists( 'franciscan_get_default_options' ) ? franciscan_get_default_options() : array() );
 
 $nav_lbl_home        = ! empty( $opt['nav_label_home'] ) ? $opt['nav_label_home'] : 'Home';
-$nav_url_home        = franciscan_resolve_nav_url( $opt['nav_link_home'] ?? '/', '/' );
+$nav_url_home        = function_exists( 'franciscan_resolve_nav_url' ) ? franciscan_resolve_nav_url( $opt['nav_link_home'] ?? '/', '/' ) : home_url( '/' );
 
 $nav_lbl_about       = ! empty( $opt['nav_label_about'] ) ? $opt['nav_label_about'] : 'About Us';
-$nav_url_about       = franciscan_resolve_nav_url( $opt['nav_link_about'] ?? '/about/', '/about/' );
+$nav_url_about       = function_exists( 'franciscan_resolve_nav_url' ) ? franciscan_resolve_nav_url( $opt['nav_link_about'] ?? '/about/', '/about/' ) : home_url( '/about/' );
 
 $nav_lbl_gallery     = ! empty( $opt['nav_label_gallery'] ) ? $opt['nav_label_gallery'] : 'Gallery';
-$nav_url_gallery      = franciscan_resolve_nav_url( $opt['nav_link_gallery'] ?? '/gallery/', '/gallery/' );
+$nav_url_gallery     = function_exists( 'franciscan_resolve_nav_url' ) ? franciscan_resolve_nav_url( $opt['nav_link_gallery'] ?? '/gallery/', '/gallery/' ) : home_url( '/gallery/' );
 
 $nav_lbl_ministries  = ! empty( $opt['nav_label_ministries'] ) ? $opt['nav_label_ministries'] : 'Ministries';
 $nav_lbl_m_pastoral  = ! empty( $opt['nav_label_ministries_pastoral'] ) ? $opt['nav_label_ministries_pastoral'] : 'Pastoral Ministry';
-$nav_url_m_pastoral  = franciscan_resolve_nav_url( $opt['nav_link_ministries_pastoral'] ?? '/ministries-pastoral/', '/ministries-pastoral/' );
+$nav_url_m_pastoral  = function_exists( 'franciscan_resolve_nav_url' ) ? franciscan_resolve_nav_url( $opt['nav_link_ministries_pastoral'] ?? '/ministries-pastoral/', '/ministries-pastoral/' ) : home_url( '/ministries-pastoral/' );
 $nav_lbl_m_formation = ! empty( $opt['nav_label_ministries_formation'] ) ? $opt['nav_label_ministries_formation'] : 'Formation Ministry';
-$nav_url_m_formation = franciscan_resolve_nav_url( $opt['nav_link_ministries_formation'] ?? '/ministries-formation/', '/ministries-formation/' );
+$nav_url_m_formation = function_exists( 'franciscan_resolve_nav_url' ) ? franciscan_resolve_nav_url( $opt['nav_link_ministries_formation'] ?? '/ministries-formation/', '/ministries-formation/' ) : home_url( '/ministries-formation/' );
 $nav_lbl_m_education = ! empty( $opt['nav_label_ministries_education'] ) ? $opt['nav_label_ministries_education'] : 'Education Ministry';
-$nav_url_m_education = franciscan_resolve_nav_url( $opt['nav_link_ministries_education'] ?? '/ministries-education/', '/ministries-education/' );
+$nav_url_m_education = function_exists( 'franciscan_resolve_nav_url' ) ? franciscan_resolve_nav_url( $opt['nav_link_ministries_education'] ?? '/ministries-education/', '/ministries-education/' ) : home_url( '/ministries-education/' );
 $nav_lbl_publication = ! empty( $opt['nav_label_publications'] ) ? $opt['nav_label_publications'] : 'Publications';
-$nav_url_publication = franciscan_resolve_nav_url( $opt['nav_link_publications'] ?? '/publications/', '/publications/' );
+$nav_url_publication = function_exists( 'franciscan_resolve_nav_url' ) ? franciscan_resolve_nav_url( $opt['nav_link_publications'] ?? '/publications/', '/publications/' ) : home_url( '/publications/' );
 
 $nav_lbl_community   = ! empty( $opt['nav_label_community'] ) ? $opt['nav_label_community'] : 'Community';
 $nav_lbl_c_history   = ! empty( $opt['nav_label_community_history'] ) ? $opt['nav_label_community_history'] : 'Our History';
-$nav_url_c_history   = franciscan_resolve_nav_url( $opt['nav_link_community_history'] ?? '/community-history/', '/community-history/' );
+$nav_url_c_history   = function_exists( 'franciscan_resolve_nav_url' ) ? franciscan_resolve_nav_url( $opt['nav_link_community_history'] ?? '/community-history/', '/community-history/' ) : home_url( '/community-history/' );
 $nav_lbl_c_rule      = ! empty( $opt['nav_label_community_rule'] ) ? $opt['nav_label_community_rule'] : 'Third Order Rule';
-$nav_url_c_rule      = franciscan_resolve_nav_url( $opt['nav_link_community_rule'] ?? '/community-rule/', '/community-rule/' );
+$nav_url_c_rule      = function_exists( 'franciscan_resolve_nav_url' ) ? franciscan_resolve_nav_url( $opt['nav_link_community_rule'] ?? '/community-rule/', '/community-rule/' ) : home_url( '/community-rule/' );
 $nav_lbl_c_leader    = ! empty( $opt['nav_label_community_leadership'] ) ? $opt['nav_label_community_leadership'] : 'Leadership';
-$nav_url_c_leader    = franciscan_resolve_nav_url( $opt['nav_link_community_leadership'] ?? '/community-leadership/', '/community-leadership/' );
+$nav_url_c_leader    = function_exists( 'franciscan_resolve_nav_url' ) ? franciscan_resolve_nav_url( $opt['nav_link_community_leadership'] ?? '/community-leadership/', '/community-leadership/' ) : home_url( '/community-leadership/' );
 $nav_lbl_c_friars    = ! empty( $opt['nav_label_community_friars'] ) ? $opt['nav_label_community_friars'] : 'Our Friars';
-$nav_url_c_friars    = franciscan_resolve_nav_url( $opt['nav_link_community_friars'] ?? '/community-friars/', '/community-friars/' );
+$nav_url_c_friars    = function_exists( 'franciscan_resolve_nav_url' ) ? franciscan_resolve_nav_url( $opt['nav_link_community_friars'] ?? '/community-friars/', '/community-friars/' ) : home_url( '/community-friars/' );
 $nav_lbl_c_friaries  = ! empty( $opt['nav_label_community_friaries'] ) ? $opt['nav_label_community_friaries'] : 'Our Friaries';
-$nav_url_c_friaries  = franciscan_resolve_nav_url( $opt['nav_link_community_friaries'] ?? '/community-friaries/', '/community-friaries/' );
+$nav_url_c_friaries  = function_exists( 'franciscan_resolve_nav_url' ) ? franciscan_resolve_nav_url( $opt['nav_link_community_friaries'] ?? '/community-friaries/', '/community-friaries/' ) : home_url( '/community-friaries/' );
 
 $nav_lbl_news        = ! empty( $opt['nav_label_news'] ) ? $opt['nav_label_news'] : 'News';
-$nav_url_news        = franciscan_resolve_nav_url( $opt['nav_link_news'] ?? '/news/', '/news/' );
+$nav_url_news        = function_exists( 'franciscan_resolve_nav_url' ) ? franciscan_resolve_nav_url( $opt['nav_link_news'] ?? '/news/', '/news/' ) : home_url( '/news/' );
 
 $nav_lbl_contact     = ! empty( $opt['nav_label_contact'] ) ? $opt['nav_label_contact'] : 'Contact Us';
-$nav_url_contact     = franciscan_resolve_nav_url( $opt['nav_link_contact'] ?? '/contact/', '/contact/' );
+$nav_url_contact     = function_exists( 'franciscan_resolve_nav_url' ) ? franciscan_resolve_nav_url( $opt['nav_link_contact'] ?? '/contact/', '/contact/' ) : home_url( '/contact/' );
 ?>
 <!-- Header -->
 <header class="fs-header fs-menu">

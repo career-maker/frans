@@ -101,6 +101,15 @@ function franciscan_resolve_nav_url( $path_or_url, $default = '/' ) {
     return home_url( '/' . ltrim( $path_or_url, '/' ) );
 }
 
+function franciscan_get_options() {
+    $options = get_option( 'franciscan_theme_options', array() );
+    $defaults = franciscan_get_default_options();
+    if ( ! is_array( $options ) ) {
+        $options = array();
+    }
+    return wp_parse_args( $options, $defaults );
+}
+
 function franciscan_get_option( $key, $default = '' ) {
     $options = get_option( 'franciscan_theme_options', array() );
     $defaults = franciscan_get_default_options();
