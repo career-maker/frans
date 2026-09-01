@@ -72,7 +72,7 @@ get_header();
                     <div class="js-hero-text" style="display: flex; flex-direction: column; justify-content: flex-end;">
                         <!-- Subtitle paragraph parallel horizontally across from line 2 of title -->
                         <p style="font-family: 'Instrument Sans', sans-serif !important; font-size: 16px !important; font-weight: 600 !important; color: #ffffff; line-height: 26px !important; margin-bottom: 2.2rem; max-width: 490px; text-shadow: 0 2px 14px rgba(0,0,0,0.9);">
-                            <?php echo esc_html( franciscan_get_page_field( 'home', 'hero_subtitle', 'Conversion, contemplation, poverty, and humility lie at the heart of Franciscan identity. Walking together in penance, peace, and service across Ranchi, Jharkhand, and global missions.' ) ); ?>
+                            <?php echo nl2br( esc_html( franciscan_get_page_field( 'home', 'hero_subtitle', "WELCOME TO THE FRANCISCAN SOCIETY\nWALKING TOGETHER IN FAITH, PENANCE, AND SERVICE\nWe warmly welcome you to India, and global missions." ) ) ); ?>
                         </p>
 
                         <!-- Stats Counter Strip -->

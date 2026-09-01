@@ -138,7 +138,7 @@ function franciscan_get_default_page_content( $slug = '' ) {
             // Hero
             'hero_badge'        => 'THIRD ORDER REGULAR OF ST. FRANCIS',
             'hero_title'        => "WALKING IN PEACE\nSERVED IN GOD'S LOVE",
-            'hero_subtitle'     => 'Conversion, contemplation, poverty, and humility lie at the heart of Franciscan identity. Walking together in penance, peace, and service across Ranchi, Jharkhand, and global missions.',
+            'hero_subtitle'     => "WELCOME TO THE FRANCISCAN SOCIETY\nWALKING TOGETHER IN FAITH, PENANCE, AND SERVICE\nWe warmly welcome you to India, and global missions.",
             'hero_image'        => '',
             'hero_video'        => '',
             'hero_stat_1_num'   => '104+',
