@@ -62,7 +62,6 @@ get_header();
             color: #e6c888 !important;
         }
 
-        footer { position: relative; z-index: 10 !important; }
     
 /* ============================================================
    SLIDER ARROWS HOVER ANIMATION (Blogs & News Sections)
@@ -933,8 +932,9 @@ button.fs-mega-toggle:focus::after {
 
         </div>
     </div>
+</main>
 
-    <!-- 9 Chapter Popup Reader Modals -->
+    <!-- 9 Chapter Popup Reader Modals (outside main to prevent stacking context clipping) -->
     <?php foreach ( $chapters as $modal_id => $chap_data ) : ?>
         <div class="tor-reader-modal" id="chapterModal<?php echo esc_attr( $modal_id ); ?>" role="dialog" aria-modal="true" aria-labelledby="chapterModalTitle<?php echo esc_attr( $modal_id ); ?>" style="display: none; position: fixed; inset: 0; z-index: 999999; overflow-y: auto; background: rgba(12, 11, 10, 0.78); backdrop-filter: blur(8px); padding: 1.5rem 1rem; align-items: center; justify-content: center;">
             <div class="tor-reader-card" style="background: #ffffff; width: 100%; max-width: 820px; border-radius: 22px; box-shadow: 0 25px 60px rgba(0,0,0,0.35); border: 2px solid #e6c888; overflow: hidden; margin: auto; animation: torModalIn 0.3s cubic-bezier(0.16, 1, 0.3, 1); display: flex; flex-direction: column; max-height: 90vh;">
@@ -1006,9 +1006,21 @@ button.fs-mega-toggle:focus::after {
         </div>
     <?php endforeach; ?>
 
-</main>
-
 <style>
+/* Guaranteed Topmost Layer for Rule Chapter Modals */
+.tor-reader-modal {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    z-index: 999999999 !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+}
+
 /* Hover animation for chapter rows */
 .tor-chapter-row {
     transition: all 0.22s ease;
@@ -1066,6 +1078,11 @@ button.fs-mega-toggle:focus::after {
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+    // Relocate all modal dialogs directly to <body> to eliminate parent stacking contexts & footer overlap
+    document.querySelectorAll('.tor-reader-modal').forEach(function(modal) {
+        document.body.appendChild(modal);
+    });
+
     function openChapterModal(chapterId) {
         // Close any currently open modals
         document.querySelectorAll('.tor-reader-modal').forEach(function(m) {
