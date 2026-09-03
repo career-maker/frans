@@ -262,7 +262,7 @@ get_header();
 
                     <!-- Main Section Title in Phudu 600 -->
                     <h2 style="font-family: 'Phudu', sans-serif !important; font-size: clamp(2.2rem, 3.2vw, 2.9rem) !important; font-weight: 600 !important; color: #1c1917 !important; text-transform: uppercase; line-height: 1.1; letter-spacing: -0.01em; margin-bottom: 1.4rem;">
-                        <?php echo esc_html( franciscan_get_page_field( 'home', 'about_section_heading', 'OUR STORY FAITH MISSION AND VISION TOGETHER' ) ); ?>
+                        <?php echo esc_html( franciscan_get_page_field( 'home', 'about_section_heading', 'Our Franciscan Journey' ) ); ?>
                     </h2>
 
                     <!-- Body Description in Instrument Sans -->

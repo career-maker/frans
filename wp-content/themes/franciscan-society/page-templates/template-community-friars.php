@@ -708,8 +708,8 @@ button.fs-mega-toggle:focus::after {
     <!-- Page Hero -->
     <?php
     $friars_hero_bg = franciscan_get_page_field( 'community-friars', 'hero_image', '' );
-    if ( empty( $friars_hero_bg ) ) {
-        $friars_hero_bg = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_51_30_PM.png';
+    if ( empty( $friars_hero_bg ) || false !== strpos( $friars_hero_bg, 'ChatGPT_Image' ) ) {
+        $friars_hero_bg = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/friars-banner.jpg';
     }
     ?>
     <section style="padding: 12rem 2rem 8rem 2rem; background-image: url('<?php echo esc_url( $friars_hero_bg ); ?>'); background-size: cover; background-position: center; position: relative; overflow: hidden;">
@@ -1329,81 +1329,59 @@ button.fs-mega-toggle:focus::after {
             </div>
         </div>
         
-                <h2 style="font-family: 'Phudu', sans-serif; font-size: 2.2rem; font-weight: 900; color: #1c1917; margin-bottom: 2.5rem; text-align: center; border-top: 1px solid #e5e5e5; padding-top: 4rem;">NECROLOGY</h2>
+                <h2 style="font-family: 'Phudu', sans-serif; font-size: 2.2rem; font-weight: 900; color: #1c1917; margin-bottom: 2.5rem; text-align: center; border-top: 1px solid #e5e5e5; padding-top: 4rem;">DECEASED FRIARS</h2>
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 2rem; margin-bottom: 5rem;">
             <div style="text-align: center;">
                 <div style="width: 140px; height: 140px; border-radius: 50%; overflow: hidden; margin: 0 auto 1rem auto; box-shadow: 0 10px 20px rgba(0,0,0,0.15); border: 2px solid #e6c888; background: #2a160b; position: relative;">
-                    <img loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/IMG_1013.JPG' ); ?>" alt="Br. Carlus Bara" style="width: 100%; height: 100%; object-fit: cover; filter: grayscale(40%);">
+                    <img loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/friars/deceased/br-carlus-bara.jpeg' ); ?>" alt="Br. Carlus Bara" style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
                 <h4 style="font-family: 'Phudu', sans-serif; font-size: 1rem; font-weight: 700; color: #4a2a18; margin: 0 0 0.35rem 0;">Br. Carlus Bara</h4>
                 <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.85rem; font-weight: 600; color: #78716c; margin: 0;">&#10013; 28.07.2002</p>
             </div>
             <div style="text-align: center;">
                 <div style="width: 140px; height: 140px; border-radius: 50%; overflow: hidden; margin: 0 auto 1rem auto; box-shadow: 0 10px 20px rgba(0,0,0,0.15); border: 2px solid #e6c888; background: #2a160b; position: relative;">
-                    <img loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/IMG_1016.JPG' ); ?>" alt="Br. Michael Bhengra" style="width: 100%; height: 100%; object-fit: cover; filter: grayscale(40%);">
+                    <img loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/friars/deceased/br-michael-bhengra.jpeg' ); ?>" alt="Br. Michael Bhengra" style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
                 <h4 style="font-family: 'Phudu', sans-serif; font-size: 1rem; font-weight: 700; color: #4a2a18; margin: 0 0 0.35rem 0;">Br. Michael Bhengra</h4>
                 <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.85rem; font-weight: 600; color: #78716c; margin: 0;">&#10013; 23.07.2003</p>
             </div>
             <div style="text-align: center;">
                 <div style="width: 140px; height: 140px; border-radius: 50%; overflow: hidden; margin: 0 auto 1rem auto; box-shadow: 0 10px 20px rgba(0,0,0,0.15); border: 2px solid #e6c888; background: #2a160b; position: relative;">
-                    <img loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/IMG_1017.JPG' ); ?>" alt="Deacon Sabu Vettikottil" style="width: 100%; height: 100%; object-fit: cover; filter: grayscale(40%);">
+                    <img loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/friars/deceased/fr-george-palamattam.jpeg' ); ?>" alt="Fr. George Palamattam" style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
-                <h4 style="font-family: 'Phudu', sans-serif; font-size: 1rem; font-weight: 700; color: #4a2a18; margin: 0 0 0.35rem 0;">Deacon Sabu Vettikottil</h4>
-                <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.85rem; font-weight: 600; color: #78716c; margin: 0;">&#10013; 13.12.2003</p>
+                <h4 style="font-family: 'Phudu', sans-serif; font-size: 1rem; font-weight: 700; color: #4a2a18; margin: 0 0 0.35rem 0;">Fr. George Palamattam</h4>
             </div>
             <div style="text-align: center;">
                 <div style="width: 140px; height: 140px; border-radius: 50%; overflow: hidden; margin: 0 auto 1rem auto; box-shadow: 0 10px 20px rgba(0,0,0,0.15); border: 2px solid #e6c888; background: #2a160b; position: relative;">
-                    <img loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/IMG_1018.JPG' ); ?>" alt="Fr. Dionis Kiro" style="width: 100%; height: 100%; object-fit: cover; filter: grayscale(40%);">
-                </div>
-                <h4 style="font-family: 'Phudu', sans-serif; font-size: 1rem; font-weight: 700; color: #4a2a18; margin: 0 0 0.35rem 0;">Fr. Dionis Kiro</h4>
-                <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.85rem; font-weight: 600; color: #78716c; margin: 0;">&#10013; 29.02.2008</p>
-            </div>
-            <div style="text-align: center;">
-                <div style="width: 140px; height: 140px; border-radius: 50%; overflow: hidden; margin: 0 auto 1rem auto; box-shadow: 0 10px 20px rgba(0,0,0,0.15); border: 2px solid #e6c888; background: #2a160b; position: relative;">
-                    <img loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/IMG_1019.JPG' ); ?>" alt="Fr. James Lakra" style="width: 100%; height: 100%; object-fit: cover; filter: grayscale(40%);">
-                </div>
-                <h4 style="font-family: 'Phudu', sans-serif; font-size: 1rem; font-weight: 700; color: #4a2a18; margin: 0 0 0.35rem 0;">Fr. James Lakra</h4>
-                <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.85rem; font-weight: 600; color: #78716c; margin: 0;">&#10013; 03.06.2013</p>
-            </div>
-            <div style="text-align: center;">
-                <div style="width: 140px; height: 140px; border-radius: 50%; overflow: hidden; margin: 0 auto 1rem auto; box-shadow: 0 10px 20px rgba(0,0,0,0.15); border: 2px solid #e6c888; background: #2a160b; position: relative;">
-                    <img loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/IMG_1020.JPG' ); ?>" alt="Fr. Augustine Peedikamala" style="width: 100%; height: 100%; object-fit: cover; filter: grayscale(40%);">
-                </div>
-                <h4 style="font-family: 'Phudu', sans-serif; font-size: 1rem; font-weight: 700; color: #4a2a18; margin: 0 0 0.35rem 0;">Fr. Augustine Peedikamala</h4>
-                <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.85rem; font-weight: 600; color: #78716c; margin: 0;">&#10013; 14.10.2014</p>
-            </div>
-            <div style="text-align: center;">
-                <div style="width: 140px; height: 140px; border-radius: 50%; overflow: hidden; margin: 0 auto 1rem auto; box-shadow: 0 10px 20px rgba(0,0,0,0.15); border: 2px solid #e6c888; background: #2a160b; position: relative;">
-                    <img loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/IMG_1157.JPG' ); ?>" alt="Br. Benedict Kullu" style="width: 100%; height: 100%; object-fit: cover; filter: grayscale(40%);">
+                    <img loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/friars/deceased/br-benedict-kullu.jpg' ); ?>" alt="Br. Benedict Kullu" style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
                 <h4 style="font-family: 'Phudu', sans-serif; font-size: 1rem; font-weight: 700; color: #4a2a18; margin: 0 0 0.35rem 0;">Br. Benedict Kullu</h4>
                 <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.85rem; font-weight: 600; color: #78716c; margin: 0;">&#10013; 28.01.2021</p>
             </div>
             <div style="text-align: center;">
                 <div style="width: 140px; height: 140px; border-radius: 50%; overflow: hidden; margin: 0 auto 1rem auto; box-shadow: 0 10px 20px rgba(0,0,0,0.15); border: 2px solid #e6c888; background: #2a160b; position: relative;">
-                    <img loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/IMG_1163.JPG' ); ?>" alt="Fr. Gregory Kerketta" style="width: 100%; height: 100%; object-fit: cover; filter: grayscale(40%);">
+                    <img loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/friars/deceased/fr-gregory-kerketta.jpg' ); ?>" alt="Fr. Gregory Kerketta" style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
                 <h4 style="font-family: 'Phudu', sans-serif; font-size: 1rem; font-weight: 700; color: #4a2a18; margin: 0 0 0.35rem 0;">Fr. Gregory Kerketta</h4>
                 <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.85rem; font-weight: 600; color: #78716c; margin: 0;">&#10013; 20.04.2021</p>
             </div>
             <div style="text-align: center;">
                 <div style="width: 140px; height: 140px; border-radius: 50%; overflow: hidden; margin: 0 auto 1rem auto; box-shadow: 0 10px 20px rgba(0,0,0,0.15); border: 2px solid #e6c888; background: #2a160b; position: relative;">
-                    <img loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/IMG_1166.JPG' ); ?>" alt="Fr. Donatus Soreng" style="width: 100%; height: 100%; object-fit: cover; filter: grayscale(40%);">
+                    <img loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/friars/deceased/fr-donatus-soreng.jpg' ); ?>" alt="Fr. Donatus Soreng" style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
                 <h4 style="font-family: 'Phudu', sans-serif; font-size: 1rem; font-weight: 700; color: #4a2a18; margin: 0 0 0.35rem 0;">Fr. Donatus Soreng</h4>
                 <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.85rem; font-weight: 600; color: #78716c; margin: 0;">&#10013; 11.05.2021</p>
             </div>
             <div style="text-align: center;">
                 <div style="width: 140px; height: 140px; border-radius: 50%; overflow: hidden; margin: 0 auto 1rem auto; box-shadow: 0 10px 20px rgba(0,0,0,0.15); border: 2px solid #e6c888; background: #2a160b; position: relative;">
-                    <img loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/IMG_1169.JPG' ); ?>" alt="Fr. Fabian Kunnappillil" style="width: 100%; height: 100%; object-fit: cover; filter: grayscale(40%);">
+                    <img loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/friars/deceased/fr-fabian.jpg' ); ?>" alt="Fr. Fabian" style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
-                <h4 style="font-family: 'Phudu', sans-serif; font-size: 1rem; font-weight: 700; color: #4a2a18; margin: 0 0 0.35rem 0;">Fr. Fabian Kunnappillil</h4>
+                <h4 style="font-family: 'Phudu', sans-serif; font-size: 1rem; font-weight: 700; color: #4a2a18; margin: 0 0 0.35rem 0;">Fr. Fabian</h4>
                 <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.85rem; font-weight: 600; color: #78716c; margin: 0;">&#10013; 20.01.2025</p>
             </div>
             <div style="text-align: center;">
                 <div style="width: 140px; height: 140px; border-radius: 50%; overflow: hidden; margin: 0 auto 1rem auto; box-shadow: 0 10px 20px rgba(0,0,0,0.15); border: 2px solid #e6c888; background: #2a160b; position: relative;">
-                    <img loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery/IMG_1236.JPG' ); ?>" alt="Fr. Sushil Prawin Tiru" style="width: 100%; height: 100%; object-fit: cover; filter: grayscale(40%);">
+                    <img loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/friars/deceased/fr-sushil-prawin-tiru.png' ); ?>" alt="Fr. Sushil Prawin Tiru" style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
                 <h4 style="font-family: 'Phudu', sans-serif; font-size: 1rem; font-weight: 700; color: #4a2a18; margin: 0 0 0.35rem 0;">Fr. Sushil Prawin Tiru</h4>
                 <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.85rem; font-weight: 600; color: #78716c; margin: 0;">&#10013; 07.01.2026</p>

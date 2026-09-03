@@ -754,8 +754,8 @@ button.fs-mega-toggle:focus::after {
     <!-- Page Hero Banner -->
     <?php
     $ldr_hero_bg = franciscan_get_page_field( 'community-leadership', 'hero_image', '' );
-    if ( empty( $ldr_hero_bg ) ) {
-        $ldr_hero_bg = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_51_30_PM.png';
+    if ( empty( $ldr_hero_bg ) || false !== strpos( $ldr_hero_bg, 'ChatGPT_Image' ) ) {
+        $ldr_hero_bg = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/leadership-banner.jpg';
     }
     ?>
     <section class="page-hero-banner" style="background-image: url('<?php echo esc_url( $ldr_hero_bg ); ?>');">

@@ -714,7 +714,10 @@ button.fs-mega-toggle:focus::after {
 
     <!-- Gallery Hero Section -->
     <?php
-    $gal_hero_bg    = franciscan_get_page_field( 'gallery', 'hero_image', FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_51_30_PM.png' );
+    $gal_hero_bg = franciscan_get_page_field( 'gallery', 'hero_image', '' );
+    if ( empty( $gal_hero_bg ) || false !== strpos( $gal_hero_bg, 'ChatGPT_Image' ) ) {
+        $gal_hero_bg = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/gallery-banner.jpg';
+    }
     $gal_hero_badge = franciscan_get_page_field( 'gallery', 'hero_badge', 'MOMENTS OF GRACE' );
     $gal_hero_title = franciscan_get_page_field( 'gallery', 'hero_title', 'PHOTO & VIDEO GALLERY' );
     $gal_hero_sub   = franciscan_get_page_field( 'gallery', 'hero_subtitle', 'Visual chronicles of feast days, ordinations, jubilees, missions, and community living across Ranchi Province.' );

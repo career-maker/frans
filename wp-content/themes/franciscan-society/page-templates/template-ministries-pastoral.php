@@ -715,8 +715,13 @@ button.fs-mega-toggle:focus::after {
     </style>
 
 <main id="main-content" style="padding-top: 0; background-color: #FFFFFF;">
-    <!-- Page Hero -->
-    <section style="padding: 11rem 2rem 7rem 2rem; background-image: url('<?php echo esc_url( franciscan_get_page_field( "ministries-pastoral", "hero_image", FRANCISCAN_THEME_URI . "/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_51_30_PM.png" ) ); ?>'); background-size: cover; background-position: center; position: relative; overflow: hidden;">
+    <?php
+    $pastoral_hero_bg = franciscan_get_page_field( 'ministries-pastoral', 'hero_image', '' );
+    if ( empty( $pastoral_hero_bg ) || false !== strpos( $pastoral_hero_bg, 'ChatGPT_Image' ) ) {
+        $pastoral_hero_bg = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/pastoral-ministry-banner.jpg';
+    }
+    ?>
+    <section style="padding: 11rem 2rem 7rem 2rem; background-image: url('<?php echo esc_url( $pastoral_hero_bg ); ?>'); background-size: cover; background-position: center; position: relative; overflow: hidden;">
         <div style="position: absolute; inset: 0; background-color: rgba(12, 11, 10, 0.74);"></div>
         <div style="max-width: 900px; margin: 0 auto; position: relative; z-index: 2; text-align: center;">
             <div style="display: inline-flex; align-items: center; gap: 0.6rem; background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); padding: 0.5rem 1.2rem; border-radius: 50px; margin-bottom: 1.5rem; border: 1px solid rgba(255,255,255,0.2);">

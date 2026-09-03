@@ -21,3 +21,14 @@ require_once FRANCISCAN_THEME_DIR . '/inc/post-types.php';
 require_once FRANCISCAN_THEME_DIR . '/inc/seo-engine.php';
 require_once FRANCISCAN_THEME_DIR . '/inc/form-handlers.php';
 require_once FRANCISCAN_THEME_DIR . '/inc/custom-dashboard.php';
+
+// Redirect /third-order-rule to /community-rule/
+add_action( 'template_redirect', function() {
+    if ( is_404() ) {
+        $req_path = trim( parse_url( $_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH ), '/' );
+        if ( $req_path === 'third-order-rule' ) {
+            wp_safe_redirect( home_url( '/community-rule/' ), 301 );
+            exit;
+        }
+    }
+} );

@@ -713,8 +713,8 @@ button.fs-mega-toggle:focus::after {
     <!-- Page Hero -->
     <?php
     $friaries_hero_bg = franciscan_get_page_field( 'community-friaries', 'hero_image', '' );
-    if ( empty( $friaries_hero_bg ) ) {
-        $friaries_hero_bg = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_51_30_PM.png';
+    if ( empty( $friaries_hero_bg ) || false !== strpos( $friaries_hero_bg, 'ChatGPT_Image' ) ) {
+        $friaries_hero_bg = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/friaries-banner.jpg';
     }
     ?>
     <section style="padding: 12rem 2rem 8rem 2rem; background-image: url('<?php echo esc_url( $friaries_hero_bg ); ?>'); background-size: cover; background-position: center; position: relative; overflow: hidden;">

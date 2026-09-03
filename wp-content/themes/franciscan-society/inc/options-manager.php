@@ -165,7 +165,7 @@ function franciscan_get_default_page_content( $slug = '' ) {
 
             // Section 3: About
             'about_eyebrow'          => 'ABOUT US',
-            'about_section_heading'  => 'OUR STORY FAITH MISSION AND VISION TOGETHER',
+            'about_section_heading'  => 'Our Franciscan Journey',
             'about_section_text'     => 'The Third Order Regular (TOR) of St. Francis traces its origins to the ancient Order of Penance from the 4th century. Established in Ranchi in 1996 and elevated to a full Province on 20 March 2006.',
             'about_mission_title'    => 'OUR MISSION',
             'about_mission_text'     => 'Serving 15 parishes & 22 schools across Ranchi and global mission fields.',
@@ -227,7 +227,7 @@ function franciscan_get_default_page_content( $slug = '' ) {
 
             // Story & Mission
             'about_eyebrow'          => 'WELCOME TO THE FRANCISCAN SOCIETY',
-            'about_section_heading'  => 'WALKING TOGETHER IN FAITH, PENANCE, AND SERVICE',
+            'about_section_heading'  => 'Our Franciscan Journey',
             'about_section_text'     => 'In the spirit of the Poverello of Assisi, we journey along the Gospel path—rooted in prayer, sustained by fraternity, and shaped by the simplicity and humility of Christ. With hearts open to God and attentive to our brothers and sisters, we seek to serve with compassion, draw near to the least, and carry into the world the peace, mercy, and hope of Christ.',
             'about_mission_title'    => 'OUR MISSION',
             'about_mission_text'     => 'Serving 15 parishes & 22 schools across Ranchi and global mission fields.',
@@ -277,7 +277,7 @@ function franciscan_get_default_page_content( $slug = '' ) {
             'hero_badge'             => 'GET IN TOUCH',
             'hero_title'             => 'CONTACT US',
             'hero_subtitle'          => 'Reach out to the Provincial Office for prayer requests, mass intentions, vocations inquiries, or general information.',
-            'hero_image'             => '',
+            'hero_image'             => FRANCISCAN_THEME_URI . '/assets/images/new_uploads/contact-banner.jpg',
             'contact_eyebrow'        => 'CONTACT INFORMATION',
             'contact_heading'        => 'REACH OUT TO US',
             'address_card_title'     => 'PRINCIPAL ADDRESS',
@@ -299,14 +299,14 @@ function franciscan_get_default_page_content( $slug = '' ) {
             'hero_badge'             => 'HERITAGE',
             'hero_title'             => 'HISTORY OF THE PROVINCE',
             'hero_subtitle'          => 'Tracing our origins from the ancient 4th-century Order of Penance, to St. Francis of Assisi, to thirty years of dedicated growth in Ranchi Province.',
-            'hero_image'             => '',
+            'hero_image'             => FRANCISCAN_THEME_URI . '/assets/images/new_uploads/history-banner.jpeg',
             'heritage_badge'         => 'OUR HERITAGE',
             'heritage_title'         => 'A LEGACY OF FAITH AND SERVICE',
             'heritage_text'          => 'Tracing our origins from the ancient 4th-century Order of Penance, to St. Francis of Assisi, to thirty years of dedicated growth in Ranchi Province.',
             'era1_badge'             => 'ORIGINS & ROOTS',
             'era1_title'             => 'The Order of Penance & St. Francis of Assisi',
             'era1_p1'                => 'The Third Order Regular (TOR) of St. Francis traces its origins to the ancient Order of Penance, which dates back to the fourth century AD. Men and women voluntarily embraced lives of penance for the sake of the Kingdom of God and their own spiritual growth.',
-            'era1_p2'                => 'During his early conversion experience, St. Francis of Assisi (1181–1226) became associated with the Order of Penance, an itinerant movement known as the Penitents of Assisi. He addressed them through an Exhortation, encouraging them to lead holy lives of penance.',
+            'era1_p2'                => 'During his early conversion experience, St. Francis of Assisi (1181–226) became associated with the Order of Penance, an itinerant movement known as the Penitents of Assisi. He addressed them through an Exhortation, encouraging them to lead holy lives of penance.',
             'era1_p3'                => 'Among the early Franciscan penitents were both Seculars and Regulars who lived according to a regula (rule of life). The Regulars embraced religious life characterized by the profession of vows, observance of the Third Order Rule, and communal living in hermitages.',
             'era2_badge'             => 'PAPAL CONFIRMATION',
             'era2_title'             => 'Unification & The Generalate in Rome',
@@ -326,7 +326,7 @@ function franciscan_get_default_page_content( $slug = '' ) {
             'hero_badge'             => 'SPIRITUAL FOUNDATION',
             'hero_title'             => 'RULE & CONSTITUTIONS',
             'hero_subtitle'          => 'Rooted in Franciscan spirituality and commitment to Christ-centered living.',
-            'hero_image'             => '',
+            'hero_image'             => FRANCISCAN_THEME_URI . '/assets/images/new_uploads/third-rule-banner.jpg',
             'rule_card_badge'        => 'THIRD ORDER RULE',
             'rule_card_title'        => 'GUIDING PRINCIPLES OF OUR FAITH',
             'rule_card_text'         => 'Rooted in Franciscan spirituality and commitment to Christ-centered living.',
@@ -344,7 +344,7 @@ function franciscan_get_default_page_content( $slug = '' ) {
             'hero_badge'             => 'To lead is to serve; to be greater is to become lesser.',
             'hero_title'             => 'LEADERSHIP',
             'hero_subtitle'          => 'Guiding the Province in fraternity, governance, and mission.',
-            'hero_image'             => '',
+            'hero_image'             => FRANCISCAN_THEME_URI . '/assets/images/new_uploads/leadership-banner.jpg',
             'general_council_badge'  => 'GENERAL COUNCIL',
             'general_council_title'  => 'LEADERSHIP OF THE ORDER',
             'provincial_council_badge'=> 'PROVINCIAL COUNCIL',
@@ -354,7 +354,7 @@ function franciscan_get_default_page_content( $slug = '' ) {
             'hero_badge'             => 'OUR BROTHERHOOD',
             'hero_title'             => 'OUR FRIARS',
             'hero_subtitle'          => 'Brothers serving in prayer, fraternity, and active apostolates across Ranchi Province and beyond.',
-            'hero_image'             => '',
+            'hero_image'             => FRANCISCAN_THEME_URI . '/assets/images/new_uploads/friars-banner.jpg',
             'section_eyebrow'        => 'OUR FRIARS',
             'section_title'          => 'SERVING IN RELIGIOUS LIFE',
             'intro_text'             => 'The Province comprises 104 professed friars including 84 solemnly professed and 19 temporarily professed members. Among them are 71 priests and 3 brothers. Additionally, there are 28 major seminarians, 4 novices, 9 pre-novices, and 36 candidates in formation.',
@@ -371,7 +371,7 @@ function franciscan_get_default_page_content( $slug = '' ) {
             'hero_badge'             => 'OUR HOMES',
             'hero_title'             => 'OUR FRIARIES & ASHRAMS',
             'hero_subtitle'          => 'Centres of prayer, hospitality, and apostolate across India and Germany.',
-            'hero_image'             => '',
+            'hero_image'             => FRANCISCAN_THEME_URI . '/assets/images/new_uploads/friaries-banner.jpg',
             'section_eyebrow'        => 'OUR HOMES',
             'section_title'          => 'FRIARIES ACROSS INDIA',
             'intro_text'             => 'The Province maintains 18 major friaries and ashrams across multiple dioceses, serving the People of God through parishes, schools, and pastoral ministry.',
@@ -437,7 +437,7 @@ function franciscan_get_default_page_content( $slug = '' ) {
         'ministries-pastoral' => array(
             'hero_badge'        => 'SACRED CARE',
             'hero_title'        => 'PASTORAL MINISTRY',
-            'hero_image'        => '',
+            'hero_image'        => FRANCISCAN_THEME_URI . '/assets/images/new_uploads/pastoral-ministry-banner.jpg',
             'section_1_heading' => 'Pastoral Ministry',
             'section_1_p1'      => 'St. Francis gathered brothers around him to become heralds of the Good News. Inspired by this vision, the TOR Franciscans of the Province actively engage in pastoral ministry in parishes. Through this vital service to the Church, the friars dedicate themselves wholeheartedly to the mission of evangelization by their pastoral presence and ministry.',
             'section_1_p2'      => 'Through their participation in the life and mission of the Church, the friars seek to continue the zeal of St. Francis by inviting the faithful to an ongoing conversion to Gospel values. Their ministry extends beyond the celebration of the sacraments to a compassionate and attentive presence among the people. Through family visits, care for the sick and the elderly, pastoral counseling, and sacramental ministry, they strive to plant the seeds of the Gospel in the hearts of those they serve.',
@@ -455,7 +455,7 @@ function franciscan_get_default_page_content( $slug = '' ) {
         'ministries-education' => array(
             'hero_badge'        => 'ILLUMINATING MINDS',
             'hero_title'        => 'EDUCATION MINISTRY',
-            'hero_image'        => '',
+            'hero_image'        => FRANCISCAN_THEME_URI . '/assets/images/new_uploads/education-ministry-banner.jpg',
             'section_1_heading' => 'Education Ministry',
             'section_1_p1'      => 'Education is one of the principal ministries of St. Francis Province, Ranchi. Inspired by the vision of St. Francis of Assisi and the educational mission of the Catholic Church, the Province is committed to forming young people who are intellectually competent, morally upright, spiritually grounded, and socially responsible.',
             'section_1_p2'      => 'Guided by the motto, “Peace and Joy to the World,” the Province’s educational ministry seeks to promote God’s love among all people and foster the values of equality, justice, peace, and human dignity, irrespective of caste, creed, religion, language, or social status. Through its educational institutions, the Province strives to contribute to the creation of a more just, compassionate, and harmonious society.',
@@ -593,7 +593,7 @@ function franciscan_get_default_page_content( $slug = '' ) {
             'hero_badge'    => 'MOMENTS OF GRACE',
             'hero_title'    => 'PHOTO & VIDEO GALLERY',
             'hero_subtitle' => 'Visual chronicles of feast days, ordinations, jubilees, missions, and community living across Ranchi Province.',
-            'hero_image'    => '',
+            'hero_image'    => FRANCISCAN_THEME_URI . '/assets/images/new_uploads/gallery-banner.jpg',
         ),
         'news' => array(
             'hero_badge'    => 'PROVINCE CHRONICLES',
@@ -611,12 +611,6 @@ function franciscan_get_default_page_content( $slug = '' ) {
             'hero_badge'    => 'ARTICLE CHRONICLES',
             'hero_title'    => 'NEWS & BLOG DETAILS',
             'hero_subtitle' => 'Read our latest chronicles, Franciscan reflections, and province updates.',
-            'hero_image'    => '',
-        ),
-        'contact' => array(
-            'hero_badge'    => 'GET IN TOUCH',
-            'hero_title'    => 'CONTACT US',
-            'hero_subtitle' => 'We welcome your inquiries, prayer intentions, and pastoral visits.',
             'hero_image'    => '',
         ),
         'privacy' => array(
@@ -716,6 +710,29 @@ function franciscan_resync_legacy_content_options() {
                     }
                     if ( ! isset( $clean['hero_badge'] ) || in_array( $clean['hero_badge'], array( 'SERVANT LEADERSHIP', 'PROVINCIAL ADMINISTRATION' ), true ) ) {
                         $clean['hero_badge'] = 'To lead is to serve; to be greater is to become lesser.';
+                    }
+                }
+                // Resync legacy about section heading
+                if ( in_array( $slug, array( 'home', 'about' ), true ) ) {
+                    if ( isset( $clean['about_section_heading'] ) && in_array( $clean['about_section_heading'], array( 'OUR STORY FAITH MISSION AND VISION TOGETHER', 'WALKING TOGETHER IN FAITH, PENANCE, AND SERVICE' ), true ) ) {
+                        $clean['about_section_heading'] = 'Our Franciscan Journey';
+                    }
+                }
+                // Resync banner images if empty or containing placeholder
+                $banner_migrations = array(
+                    'community-history'    => FRANCISCAN_THEME_URI . '/assets/images/new_uploads/history-banner.jpeg',
+                    'gallery'              => FRANCISCAN_THEME_URI . '/assets/images/new_uploads/gallery-banner.jpg',
+                    'ministries-pastoral'  => FRANCISCAN_THEME_URI . '/assets/images/new_uploads/pastoral-ministry-banner.jpg',
+                    'ministries-education' => FRANCISCAN_THEME_URI . '/assets/images/new_uploads/education-ministry-banner.jpg',
+                    'community-rule'       => FRANCISCAN_THEME_URI . '/assets/images/new_uploads/third-rule-banner.jpg',
+                    'contact'              => FRANCISCAN_THEME_URI . '/assets/images/new_uploads/contact-banner.jpg',
+                    'community-friars'     => FRANCISCAN_THEME_URI . '/assets/images/new_uploads/friars-banner.jpg',
+                    'community-friaries'   => FRANCISCAN_THEME_URI . '/assets/images/new_uploads/friaries-banner.jpg',
+                    'community-leadership' => FRANCISCAN_THEME_URI . '/assets/images/new_uploads/leadership-banner.jpg',
+                );
+                if ( isset( $banner_migrations[ $slug ] ) ) {
+                    if ( empty( $clean['hero_image'] ) || false !== strpos( $clean['hero_image'], 'ChatGPT_Image' ) || false !== strpos( $clean['hero_image'], 'church-bg.jpg' ) ) {
+                        $clean['hero_image'] = $banner_migrations[ $slug ];
                     }
                 }
                 $merged = wp_parse_args( $clean, $def_values );

@@ -991,12 +991,33 @@ function franciscan_render_dashboard_view() {
                                 <div class="form-group full-width">
                                     <label>Hero Banner Image (Replaces default background)</label>
                                     <?php
-                                    $default_banner = ( $slug === "home" ) 
-                                        ? ( FRANCISCAN_THEME_URI . "/assets/images/new_uploads/hero-banner-aug20.jpeg" )
-                                        : ( $slug === "publications"
-                                            ? ( FRANCISCAN_THEME_URI . "/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_51_30_PM.png" )
-                                            : ( FRANCISCAN_THEME_URI . "/assets/images/church-bg.jpg" ) );
-                                    $current_banner = ! empty( $data["hero_image"] ) ? $data["hero_image"] : $default_banner;
+                                    switch ( $slug ) {
+                                        case 'home':
+                                            $default_banner = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/hero-banner-aug20.jpeg';
+                                            break;
+                                        case 'gallery':
+                                            $default_banner = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/gallery-banner.jpg';
+                                            break;
+                                        case 'contact':
+                                            $default_banner = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/contact-banner.jpg';
+                                            break;
+                                        case 'community-history':
+                                            $default_banner = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/history-banner.jpeg';
+                                            break;
+                                        case 'ministries-pastoral':
+                                            $default_banner = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/pastoral-ministry-banner.jpg';
+                                            break;
+                                        case 'ministries-education':
+                                            $default_banner = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/education-ministry-banner.jpg';
+                                            break;
+                                        case 'publications':
+                                            $default_banner = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_51_30_PM.png';
+                                            break;
+                                        default:
+                                            $default_banner = FRANCISCAN_THEME_URI . '/assets/images/church-bg.jpg';
+                                            break;
+                                    }
+                                    $current_banner = ! empty( $data['hero_image'] ) ? $data['hero_image'] : $default_banner;
                                     ?>
                                     <div class="image-uploader-box">
                                         <div style="width: 100px; height: 64px; border-radius: 8px; overflow: hidden; background: #0c1727; border: 1px solid var(--c-gold); flex-shrink: 0; display: flex; align-items: center; justify-content: center;">
@@ -1173,7 +1194,7 @@ function franciscan_render_dashboard_view() {
                                     </div>
                                     <div class="form-group">
                                         <label>Section Heading</label>
-                                        <input type="text" name="about_section_heading" class="form-control" value="<?php echo esc_attr( $data['about_section_heading'] ?? 'OUR STORY FAITH MISSION AND VISION TOGETHER' ); ?>">
+                                        <input type="text" name="about_section_heading" class="form-control" value="<?php echo esc_attr( $data['about_section_heading'] ?? 'Our Franciscan Journey' ); ?>">
                                     </div>
                                     <div class="form-group full-width">
                                         <label>Section Description</label>
@@ -1445,7 +1466,7 @@ function franciscan_render_dashboard_view() {
                                     </div>
                                     <div class="form-group">
                                         <label>Story Heading</label>
-                                        <input type="text" name="about_section_heading" class="form-control" value="<?php echo esc_attr( $data['about_section_heading'] ?? 'OUR STORY FAITH MISSION AND VISION TOGETHER' ); ?>">
+                                        <input type="text" name="about_section_heading" class="form-control" value="<?php echo esc_attr( $data['about_section_heading'] ?? 'Our Franciscan Journey' ); ?>">
                                     </div>
                                     <div class="form-group full-width">
                                         <label>Story Main Text</label>
@@ -1883,7 +1904,7 @@ function franciscan_render_dashboard_view() {
                                     <div class="form-group full-width">
                                         <label>Hero Background Image</label>
                                         <?php
-                                        $def_cr_hero = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_51_30_PM.png';
+                                        $def_cr_hero = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/third-rule-banner.jpg';
                                         $cur_cr_hero = ! empty( $data['hero_image'] ) ? $data['hero_image'] : $def_cr_hero;
                                         ?>
                                         <div class="image-uploader-box">
@@ -1967,7 +1988,7 @@ function franciscan_render_dashboard_view() {
                                     <div class="form-group full-width">
                                         <label>Hero Background Image</label>
                                         <?php
-                                        $def_cl_hero = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_51_30_PM.png';
+                                        $def_cl_hero = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/leadership-banner.jpg';
                                         $cur_cl_hero = ! empty( $data['hero_image'] ) ? $data['hero_image'] : $def_cl_hero;
                                         ?>
                                         <div class="image-uploader-box">
@@ -2039,7 +2060,7 @@ function franciscan_render_dashboard_view() {
                                     <div class="form-group full-width">
                                         <label>Hero Background Image</label>
                                         <?php
-                                        $def_cfr_hero = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_51_30_PM.png';
+                                        $def_cfr_hero = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/friars-banner.jpg';
                                         $cur_cfr_hero = ! empty( $data['hero_image'] ) ? $data['hero_image'] : $def_cfr_hero;
                                         ?>
                                         <div class="image-uploader-box">
@@ -2105,7 +2126,7 @@ function franciscan_render_dashboard_view() {
                                     <div class="form-group full-width">
                                         <label>Hero Background Image</label>
                                         <?php
-                                        $def_cfy_hero = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_51_30_PM.png';
+                                        $def_cfy_hero = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/friaries-banner.jpg';
                                         $cur_cfy_hero = ! empty( $data['hero_image'] ) ? $data['hero_image'] : $def_cfy_hero;
                                         ?>
                                         <div class="image-uploader-box">
