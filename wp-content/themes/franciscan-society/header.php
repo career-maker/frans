@@ -95,7 +95,9 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Anek+Malayalam:wght@400;500;600;700;800&family=Cinzel:wght@400..700&family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=DM+Sans:wght@400..900&family=Gayathri:wght@400;700&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Manjari:wght@400;700&family=Noto+Sans+Malayalam:wght@300;400;500;600;700;800&family=Phudu:wght@400..900&display=swap" rel="stylesheet">
+    <?php if ( ! empty( $meta_image ) ) : ?>
+    <link rel="preload" as="image" href="<?php echo esc_url( $meta_image ); ?>" fetchpriority="high">
+    <?php endif; ?>
     
     <style>
         /* Global body padding for fixed header */
@@ -986,8 +988,6 @@ button.fs-mega-toggle:focus::after {
         }
     </style>
 
-    <?php wp_head(); ?>
-
 
 
 
@@ -1177,9 +1177,6 @@ button.fs-mega-toggle:focus::after {
     }
 </style>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anek+Malayalam:wght@400;500;600;700;800&family=Cinzel:wght@400..700&family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=DM+Sans:wght@400..900&family=Gayathri:wght@400;700&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Manjari:wght@400;700&family=Montserrat:wght@400;500;600;700;800&family=Noto+Sans+Malayalam:wght@300;400;500;600;700;800&family=Phudu:wght@400..900&display=swap" rel="stylesheet">
 <?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?> style="background:#FFFFFF; color:#1c2430; font-family:var(--font-body); line-height:1.7; margin:0;">

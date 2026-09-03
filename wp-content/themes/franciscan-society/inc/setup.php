@@ -45,10 +45,10 @@ function franciscan_theme_setup() {
 add_action( 'after_setup_theme', 'franciscan_theme_setup' );
 
 function franciscan_enqueue_assets() {
-    // 1. Google Fonts (including Malayalam)
+    // 1. Optimized Google Fonts (Essential weights only with font-display: swap)
     wp_enqueue_style(
         'franciscan-google-fonts',
-        'https://fonts.googleapis.com/css2?family=Anek+Malayalam:wght@400;500;600;700;800&family=Cinzel:wght@400..700&family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=DM+Sans:wght@400..900&family=Gayathri:wght@400;700&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Manjari:wght@400;700&family=Noto+Sans+Malayalam:wght@300;400;500;600;700;800&family=Phudu:wght@400..900&display=swap',
+        'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Phudu:wght@500;600;700;800&display=swap',
         array(),
         null
     );
@@ -152,14 +152,78 @@ function franciscan_enqueue_assets() {
 }
 add_action( 'wp_enqueue_scripts', 'franciscan_enqueue_assets' );
 
-// Filter to support ES module for dotlottie script tag
-function franciscan_add_type_attribute( $tag, $handle, $src ) {
+// High-performance Script Loader Filter (defer non-critical JS)
+function franciscan_defer_scripts( $tag, $handle, $src ) {
+    if ( is_admin() ) {
+        return $tag;
+    }
     if ( 'dotlottie-wc' === $handle ) {
-        $tag = '<script type="module" src="' . esc_url( $src ) . '"></script>';
+        return '<script type="module" src="' . esc_url( $src ) . '"></script>';
+    }
+    $defer_handles = array(
+        'gsap',
+        'gsap-scroll-trigger',
+        'franciscan-animations',
+        'franciscan-bible-widget',
+        'franciscan-main-js',
+        'franciscan-form-validator',
+    );
+    if ( in_array( $handle, $defer_handles, true ) ) {
+        if ( false === strpos( $tag, 'defer' ) ) {
+            $tag = str_replace( ' src=', ' defer src=', $tag );
+        }
     }
     return $tag;
 }
-add_filter( 'script_loader_tag', 'franciscan_add_type_attribute', 10, 3 );
+add_filter( 'script_loader_tag', 'franciscan_defer_scripts', 10, 3 );
+
+// Dequeue unused Gutenberg & Block styles to eliminate render-blocking CSS
+add_action( 'wp_enqueue_scripts', function() {
+    wp_dequeue_style( 'wp-block-library' );
+    wp_dequeue_style( 'wp-block-library-theme' );
+    wp_dequeue_style( 'wc-blocks-style' );
+    wp_dequeue_style( 'classic-theme-styles' );
+}, 100 );
+
+// Disable core emoji scripts and styles for instant FCP
+add_action( 'init', function() {
+    remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
+    remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
+    remove_action( 'wp_print_styles', 'print_emoji_styles' );
+    remove_action( 'admin_print_styles', 'print_emoji_styles' );
+    remove_filter( 'the_content_feed', 'wp_staticize_emoji' );
+    remove_filter( 'comment_text_rss', 'wp_staticize_emoji' );
+    remove_filter( 'wp_mail', 'wp_staticize_emoji_for_email' );
+} );
+
+// High-speed Resource Hints for early DNS resolution & TLS handshakes
+add_filter( 'wp_resource_hints', function( $hints, $relation_type ) {
+    if ( 'preconnect' === $relation_type ) {
+        $hints[] = array(
+            'href'        => 'https://fonts.googleapis.com',
+            'crossorigin' => 'use-credentials',
+        );
+        $hints[] = array(
+            'href'        => 'https://fonts.gstatic.com',
+            'crossorigin' => '',
+        );
+        $hints[] = array(
+            'href'        => 'https://cdnjs.cloudflare.com',
+            'crossorigin' => '',
+        );
+    }
+    return $hints;
+}, 10, 2 );
+
+// Remove static asset query strings for better CDN / proxy caching
+function franciscan_remove_ver_query_args( $src ) {
+    if ( ! is_admin() && strpos( $src, '?ver=' ) ) {
+        $src = remove_query_arg( 'ver', $src );
+    }
+    return $src;
+}
+add_filter( 'style_loader_src', 'franciscan_remove_ver_query_args', 15, 1 );
+add_filter( 'script_loader_src', 'franciscan_remove_ver_query_args', 15, 1 );
 
 
 /**
