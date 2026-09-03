@@ -841,83 +841,68 @@ button.fs-mega-toggle:focus::after {
     </nav>
 
     <!-- Main Editorial Section -->
-    <div style="background-color: #ffffff; padding: clamp(3rem, 6vw, 5.5rem) 1.5rem 5rem 1.5rem;">
-        <div style="max-width: 1140px; margin: 0 auto;">
+    <div style="background-color: #ffffff; padding: 2.5rem 1.5rem 4rem 1.5rem;">
+        <div style="max-width: 960px; margin: 0 auto;">
 
-            <!-- Prologue Header -->
-            <div style="text-align: center; max-width: 860px; margin: 0 auto 3.5rem auto;">
-                <span style="display: inline-block; font-family: 'Instrument Sans', sans-serif; font-size: 0.78rem; font-weight: 800; color: #854d0e; text-transform: uppercase; letter-spacing: 0.15em; background: #faf4e8; padding: 0.35rem 1.1rem; border-radius: 20px; margin-bottom: 1.2rem; border: 1px solid #ebdcc5;">
-                    PROLOGUE TO THE RULE
-                </span>
-                <h2 style="font-family: 'Phudu', sans-serif; font-size: clamp(1.8rem, 3.2vw, 2.6rem); font-weight: 700; color: #1c1917; line-height: 1.25; margin: 0 0 1rem 0;">
-                    Words of St. Francis to His Followers
-                </h2>
-                <p style="font-family: 'Instrument Sans', sans-serif; font-size: clamp(1rem, 1.8vw, 1.18rem); font-weight: 600; color: #6b3d28; line-height: 1.5; margin: 0 0 1.5rem 0;">
-                    The Beginning of the Rule and the Life of the Brothers and Sisters of the Third Order Regular of St. Francis
-                </p>
-                <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.92rem; color: #854d0e; font-style: italic; margin: 0;">
-                    Letter to the Faithful (I, 1–19)
-                </p>
-                <div style="display: flex; align-items: center; justify-content: center; gap: 0.75rem; margin-top: 1.5rem;">
-                    <span style="width: 40px; height: 1px; background: #e6c888;"></span>
-                    <span style="color: #854d0e; font-size: 0.9rem;">✝</span>
-                    <span style="width: 40px; height: 1px; background: #e6c888;"></span>
+            <!-- Header + Content Flex Row (compact, perfectly aligned, no awkward empty gaps) -->
+            <div style="display: flex; flex-wrap: wrap; gap: 2rem; align-items: flex-start; justify-content: space-between; margin-bottom: 1.5rem;">
+                
+                <!-- Left: Title, Subtitle, and First Paragraph -->
+                <div style="flex: 1 1 580px; min-width: 290px;">
+                    <span style="display: inline-block; font-family: 'Instrument Sans', sans-serif; font-size: 0.78rem; font-weight: 800; color: #854d0e; text-transform: uppercase; letter-spacing: 0.12em; background: #faf4e8; padding: 0.3rem 0.9rem; border-radius: 20px; margin-bottom: 0.8rem; border: 1px solid #ebdcc5;">
+                        PROLOGUE TO THE RULE
+                    </span>
+                    <h2 style="font-family: 'Phudu', sans-serif; font-size: clamp(1.8rem, 3vw, 2.3rem); font-weight: 700; color: #1c1917; line-height: 1.2; margin: 0 0 0.6rem 0;">
+                        Third Order Regular Rule
+                    </h2>
+                    <h3 style="font-family: 'Instrument Sans', sans-serif; font-size: 1.05rem; font-weight: 600; color: #6b3d28; line-height: 1.45; margin: 0 0 1.2rem 0;">
+                        The Beginning of the Rule and the Life of the Brothers and Sisters of the Third Order Regular of St. Francis <span style="font-weight: 400; color: #854d0e; font-style: italic;">(Words of St. Francis to His Followers — Letter to the Faithful I, 1–19)</span>
+                    </h3>
+
+                    <p style="font-family: 'Instrument Sans', sans-serif; font-size: 1.02rem; line-height: 1.75; color: #374151; text-align: justify; margin: 0;">
+                        All who love the Lord with their whole heart, with their whole soul and mind, and with all their strength, <em>(cf Mk 12:30)</em> and love their neighbors as themselves, <em>(cf Mt 22:39)</em> and who despise the tendency in their humanity to sin, receive the Body and Blood of our Lord Jesus Christ and bring forth from within themselves fruits worthy of true penance; How happy and blessed are these men and women when they do these things, and persevere in doing them because the Spirit of the Lord will rest upon them <em>(cf Is 11:12)</em> and the Lord will make His home and dwelling place with them <em>(cf Jn 14:23)</em>. They are the children of the Heavenly Father <em>(cf Mt 5:45)</em> whose works they do. They are the spouses, brothers and mothers of Our Lord Jesus Christ <em>(cf Mt 12:50)</em>. We are his spouses when the faithful soul is united by the Holy Spirit with Our Lord Jesus Christ. We are brothers when we do the will of the Father who is in Heaven <em>(cf Mt 12:50)</em>. We are mothers when we bear Him in our hearts and bodies <em>(cf 1 Co 6:20)</em> with divine love and with pure and sincere consciences; and we give birth to him through a holy life which should enlighten others because of our example <em>(Mt 5:16)</em>.
+                    </p>
                 </div>
-            </div>
 
-            <!-- Two-Column Editorial: Sacred Text + Emblem Card -->
-            <div style="display: grid; grid-template-columns: 1fr; gap: 2.5rem; margin-bottom: 3rem;">
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 3.5rem; align-items: center;">
-                    <div>
-                        <p style="font-family: 'Instrument Sans', sans-serif; font-size: 1.05rem; line-height: 1.85; color: #374151; text-align: justify; margin: 0;">
-                            All who love the Lord with their whole heart, with their whole soul and mind, and with all their strength, <em>(cf Mk 12:30)</em> and love their neighbors as themselves, <em>(cf Mt 22:39)</em> and who despise the tendency in their humanity to sin, receive the Body and Blood of our Lord Jesus Christ and bring forth from within themselves fruits worthy of true penance; How happy and blessed are these men and women when they do these things, and persevere in doing them because the Spirit of the Lord will rest upon them <em>(cf Is 11:12)</em> and the Lord will make His home and dwelling place with them <em>(cf Jn 14:23)</em>.
-                        </p>
-                        <p style="font-family: 'Instrument Sans', sans-serif; font-size: 1.05rem; line-height: 1.85; color: #374151; text-align: justify; margin: 1.4rem 0 0 0;">
-                            They are the children of the Heavenly Father <em>(cf Mt 5:45)</em> whose works they do. They are the spouses, brothers and mothers of Our Lord Jesus Christ <em>(cf Mt 12:50)</em>. We are his spouses when the faithful soul is united by the Holy Spirit with Our Lord Jesus Christ. We are brothers when we do the will of the Father who is in Heaven <em>(cf Mt 12:50)</em>. We are mothers when we bear Him in our hearts and bodies <em>(cf 1 Co 6:20)</em> with divine love and with pure and sincere consciences; and we give birth to him through a holy life which should enlighten others because of our example <em>(Mt 5:16)</em>.
-                        </p>
-                    </div>
-
-                    <!-- Coat of Arms Emblem Card -->
-                    <div style="text-align: center;">
-                        <div style="max-width: 320px; margin: 0 auto; background: #faf7f0; border-radius: 20px; padding: 2rem 1.5rem; border: 1.5px solid #ebdcc5; box-shadow: 0 10px 30px rgba(74, 42, 24, 0.06);">
-                            <div style="max-width: 220px; margin: 0 auto 1.2rem auto;">
-                                <img loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/rule/st-francis-rule.jpg' ); ?>" alt="Franciscan Coat of Arms" style="width: 100%; height: auto; display: block; filter: contrast(1.05);">
-                            </div>
-                            <div style="font-family: 'Phudu', sans-serif; font-size: 0.95rem; font-weight: 700; color: #4a2a18; letter-spacing: 0.04em; text-transform: uppercase;">
-                                Third Order Regular
-                            </div>
-                            <div style="font-family: 'Instrument Sans', sans-serif; font-size: 0.8rem; color: #78716c; margin-top: 0.25rem;">
-                                Order of St. Francis
-                            </div>
+                <!-- Right: Coat of Arms Emblem (Snug, proportionate) -->
+                <div style="flex: 0 0 240px; margin: 0 auto; text-align: center;">
+                    <div style="background: #faf7f0; border-radius: 16px; padding: 1.4rem 1.2rem; border: 1.5px solid #ebdcc5; box-shadow: 0 6px 20px rgba(74, 42, 24, 0.05);">
+                        <img loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/rule/st-francis-rule.jpg' ); ?>" alt="Franciscan Coat of Arms" style="width: 100%; max-width: 180px; height: auto; display: block; margin: 0 auto 0.75rem auto;">
+                        <div style="font-family: 'Phudu', sans-serif; font-size: 0.9rem; font-weight: 700; color: #4a2a18; text-transform: uppercase;">
+                            Third Order Regular
+                        </div>
+                        <div style="font-family: 'Instrument Sans', sans-serif; font-size: 0.78rem; color: #78716c; margin-top: 0.2rem;">
+                            Province of St. Francis of Assisi
                         </div>
                     </div>
                 </div>
 
-                <!-- Paragraph 2 -->
-                <p style="font-family: 'Instrument Sans', sans-serif; font-size: 1.05rem; line-height: 1.85; color: #374151; text-align: justify; margin: 0;">
-                    How glorious it is to have so holy and great a Father in Heaven; and to have such a beautiful and admirable Spouse, the Holy Paraclete; and to have a Brother and Son, so holy, beloved, blessed, humble, peaceful, sweet, lovable, and desirable over all things: Our Lord Jesus Christ who gave up his life for his sheep <em>(cf Jn 10:15)</em> and prayed to the Father, saying: Holy Father, keep in your name <em>(Jn 17:11)</em> those whom You gave Me in the world; they are Yours and You gave them to Me <em>(Jn 17:6)</em>. And the word which You gave Me I gave to them, and they accepted it and truly believed that it came forth from You. And they have accepted that You sent Me <em>(Jn 17:8)</em>. I pray for them and not for the world <em>(Jn 17:9)</em>. Bless them and sanctify them <em>(Jn 17:17)</em>. I sanctify Myself for their sakes <em>(Jn 17:19)</em>. I do not pray only for these but also for those who, through their word, will believe in Me <em>(Jn 17:20)</em>, may they be holy in oneness as We are <em>(Jn 17:11)</em>. Father, I wish that where I am they too may be and that they may see My glory <em>(Jn 17:24)</em> in Your kingdom <em>(Mt 20:21)</em>.
-                </p>
             </div>
 
-            <!-- Sacred Proclamation Ribbon -->
-            <div style="margin: 3.5rem 0 4.5rem 0; background: linear-gradient(135deg, #371e11 0%, #4a2a18 50%, #2a160b 100%); border-radius: 18px; padding: 2.2rem 2rem; text-align: center; border: 1.5px solid #e6c888; box-shadow: 0 12px 32px rgba(74, 42, 24, 0.18); position: relative;">
-                <div style="display: inline-block; width: 48px; height: 2px; background: #e6c888; margin-bottom: 0.9rem;"></div>
-                <h3 style="font-family: 'Phudu', sans-serif; font-size: clamp(1.05rem, 2vw, 1.35rem); font-weight: 700; color: #ffffff; letter-spacing: 0.06em; line-height: 1.45; margin: 0; text-transform: uppercase;">
+            <!-- Paragraph 2 (Flows seamlessly immediately after) -->
+            <p style="font-family: 'Instrument Sans', sans-serif; font-size: 1.02rem; line-height: 1.75; color: #374151; text-align: justify; margin: 0 0 2.2rem 0;">
+                How glorious it is to have so holy and great a Father in Heaven; and to have such a beautiful and admirable Spouse, the Holy Paraclete; and to have a Brother and Son, so holy, beloved, blessed, humble, peaceful, sweet, lovable, and desirable over all things: Our Lord Jesus Christ who gave up his life for his sheep <em>(cf Jn 10:15)</em> and prayed to the Father, saying: Holy Father, keep in your name <em>(Jn 17:11)</em> those whom You gave Me in the world; they are Yours and You gave them to Me <em>(Jn 17:6)</em>. And the word which You gave Me I gave to them, and they accepted it and truly believed that it came forth from You. And they have accepted that You sent Me <em>(Jn 17:8)</em>. I pray for them and not for the world <em>(Jn 17:9)</em>. Bless them and sanctify them <em>(Jn 17:17)</em>. I sanctify Myself for their sakes <em>(Jn 17:19)</em>. I do not pray only for these but also for those who, through their word, will believe in Me <em>(Jn 17:20)</em>, may they be holy in oneness as We are <em>(Jn 17:11)</em>. Father, I wish that where I am they too may be and that they may see My glory <em>(Jn 17:24)</em> in Your kingdom <em>(Mt 20:21)</em>.
+            </p>
+
+            <!-- Sacred Proclamation Ribbon (Compact margins) -->
+            <div style="margin: 0 0 2.5rem 0; background: linear-gradient(135deg, #371e11 0%, #4a2a18 50%, #2a160b 100%); border-radius: 14px; padding: 1.6rem 1.8rem; text-align: center; border: 1.5px solid #e6c888; box-shadow: 0 8px 24px rgba(74, 42, 24, 0.15);">
+                <div style="display: inline-block; width: 40px; height: 2px; background: #e6c888; margin-bottom: 0.6rem;"></div>
+                <h3 style="font-family: 'Phudu', sans-serif; font-size: clamp(1rem, 1.8vw, 1.25rem); font-weight: 700; color: #ffffff; letter-spacing: 0.05em; line-height: 1.45; margin: 0; text-transform: uppercase;">
                     IN THE NAME OF THE LORD! HERE BEGINS THE RULE AND LIFE OF THE BROTHERS AND SISTERS OF THE THIRD ORDER REGULAR OF ST. FRANCIS
                 </h3>
-                <div style="display: inline-block; width: 48px; height: 2px; background: #e6c888; margin-top: 0.9rem;"></div>
+                <div style="display: inline-block; width: 40px; height: 2px; background: #e6c888; margin-top: 0.6rem;"></div>
             </div>
 
             <!-- Chapter Directory Layout (Matches Reference Site Clean Structure) -->
-            <div style="background: #ffffff; border: 1.5px solid #ede4d3; border-radius: 20px; padding: clamp(2rem, 4vw, 3.5rem); box-shadow: 0 8px 30px rgba(0,0,0,0.03);">
-                <div style="border-bottom: 1.5px solid #ede4d3; padding-bottom: 1.5rem; margin-bottom: 2rem;">
+            <div style="background: #ffffff; border: 1.5px solid #ede4d3; border-radius: 18px; padding: clamp(1.8rem, 3.5vw, 2.5rem); box-shadow: 0 6px 24px rgba(0,0,0,0.03);">
+                <div style="border-bottom: 1.5px solid #ede4d3; padding-bottom: 1.2rem; margin-bottom: 1.5rem;">
                     <span style="font-family: 'Instrument Sans', sans-serif; font-size: 0.78rem; font-weight: 800; color: #854d0e; text-transform: uppercase; letter-spacing: 0.12em; display: block; margin-bottom: 0.35rem;">
                         THE NINE CHAPTERS
                     </span>
-                    <h3 style="font-family: 'Phudu', sans-serif; font-size: clamp(1.6rem, 2.8vw, 2.2rem); font-weight: 700; color: #1c1917; margin: 0 0 0.5rem 0;">
+                    <h3 style="font-family: 'Phudu', sans-serif; font-size: clamp(1.5rem, 2.5vw, 2rem); font-weight: 700; color: #1c1917; margin: 0 0 0.4rem 0;">
                         Rule of the Third Order Regular
                     </h3>
-                    <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #78716c; margin: 0;">
+                    <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.92rem; color: #78716c; margin: 0;">
                         Click on any chapter to open the interactive reading window
                     </p>
                 </div>
