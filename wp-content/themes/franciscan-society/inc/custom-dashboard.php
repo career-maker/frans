@@ -1893,18 +1893,26 @@ function franciscan_render_dashboard_view() {
                         <?php endif; ?>
 
                         <?php if ( $slug === 'community-rule' ) : ?>
-                            <!-- Community Rule Page Specific Sections -->
+                            <!-- Community Rule: Hero Banner & Page Header -->
                             <div class="form-section">
-                                <h3 class="form-section-title">📖 Hero Banner &amp; Principles Card</h3>
+                                <h3 class="form-section-title">🌄 Hero Banner &amp; Page Header</h3>
                                 <div class="form-grid">
                                     <div class="form-group">
-                                        <label>Hero Title</label>
-                                        <input type="text" name="hero_title" class="form-control" value="<?php echo esc_attr( $data['hero_title'] ?? 'RULE & CONSTITUTIONS' ); ?>">
+                                        <label>Hero Badge / Tagline</label>
+                                        <input type="text" name="hero_badge" class="form-control" value="<?php echo esc_attr( $data['hero_badge'] ?? 'OUR RULE… OUR LIFE' ); ?>" placeholder="OUR RULE… OUR LIFE">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Hero Main Title</label>
+                                        <input type="text" name="hero_title" class="form-control" value="<?php echo esc_attr( $data['hero_title'] ?? 'THIRD ORDER REGULAR RULE' ); ?>" placeholder="THIRD ORDER REGULAR RULE">
+                                    </div>
+                                    <div class="form-group full-width">
+                                        <label>Hero Subtitle / Description</label>
+                                        <input type="text" name="hero_subtitle" class="form-control" value="<?php echo esc_attr( $data['hero_subtitle'] ?? 'Discovering the authentic meaning of Franciscan life' ); ?>" placeholder="Discovering the authentic meaning of Franciscan life">
                                     </div>
                                     <div class="form-group full-width">
                                         <label>Hero Background Image</label>
                                         <?php
-                                        $def_cr_hero = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/third-rule-banner.jpg';
+                                        $def_cr_hero = defined( 'FRANCISCAN_THEME_URI' ) ? FRANCISCAN_THEME_URI . '/assets/images/new_uploads/third-rule-banner.jpg' : '';
                                         $cur_cr_hero = ! empty( $data['hero_image'] ) ? $data['hero_image'] : $def_cr_hero;
                                         ?>
                                         <div class="image-uploader-box">
@@ -1918,56 +1926,168 @@ function franciscan_render_dashboard_view() {
                                             </div>
                                         </div>
                                     </div>
+                                </div>
+                            </div>
+
+                            <!-- Community Rule: Prologue & Sacred Proclamation -->
+                            <div class="form-section">
+                                <h3 class="form-section-title">📜 Prologue to the Rule &amp; Emblem</h3>
+                                <div class="form-grid">
                                     <div class="form-group">
-                                        <label>Card Badge</label>
-                                        <input type="text" name="card_badge" class="form-control" value="<?php echo esc_attr( $data['card_badge'] ?? 'THIRD ORDER RULE' ); ?>">
+                                        <label>Prologue Eyebrow Badge</label>
+                                        <input type="text" name="prologue_badge" class="form-control" value="<?php echo esc_attr( $data['prologue_badge'] ?? 'PROLOGUE TO THE RULE' ); ?>" placeholder="PROLOGUE TO THE RULE">
                                     </div>
                                     <div class="form-group">
-                                        <label>Card Title</label>
-                                        <input type="text" name="card_title" class="form-control" value="<?php echo esc_attr( $data['card_title'] ?? 'GUIDING PRINCIPLES OF OUR FAITH' ); ?>">
+                                        <label>Prologue Heading</label>
+                                        <input type="text" name="prologue_title" class="form-control" value="<?php echo esc_attr( $data['prologue_title'] ?? 'Third Order Regular Rule' ); ?>" placeholder="Third Order Regular Rule">
                                     </div>
                                     <div class="form-group full-width">
-                                        <label>Card Subtitle</label>
-                                        <input type="text" name="card_subtitle" class="form-control" value="<?php echo esc_attr( $data['card_subtitle'] ?? 'Rooted in Franciscan spirituality and commitment to Christ-centered living.' ); ?>">
+                                        <label>Prologue Subtitle / Epistle Heading</label>
+                                        <input type="text" name="prologue_subtitle" class="form-control" value="<?php echo esc_attr( $data['prologue_subtitle'] ?? 'The Beginning of the Rule and the Life of the Brothers and Sisters of the Third Order Regular of St. Francis (Words of St. Francis to His Followers — Letter to the Faithful I, 1–19)' ); ?>">
+                                    </div>
+                                    <div class="form-group full-width">
+                                        <label>Prologue Paragraph 1</label>
+                                        <textarea name="prologue_p1" class="form-control" rows="5"><?php echo esc_textarea( $data['prologue_p1'] ?? '' ); ?></textarea>
+                                    </div>
+                                    <div class="form-group full-width">
+                                        <label>Prologue Paragraph 2</label>
+                                        <textarea name="prologue_p2" class="form-control" rows="5"><?php echo esc_textarea( $data['prologue_p2'] ?? '' ); ?></textarea>
+                                    </div>
+                                    
+                                    <!-- Coat of Arms Emblem Card -->
+                                    <div class="form-group">
+                                        <label>Emblem Image</label>
+                                        <?php
+                                        $def_emblem = defined( 'FRANCISCAN_THEME_URI' ) ? FRANCISCAN_THEME_URI . '/assets/images/rule/st-francis-rule.jpg' : '';
+                                        $cur_emblem = ! empty( $data['emblem_image'] ) ? $data['emblem_image'] : $def_emblem;
+                                        ?>
+                                        <div class="image-uploader-box">
+                                            <div style="width: 70px; height: 70px; border-radius: 8px; overflow: hidden; background: #faf7f0; border: 1px solid var(--c-gold); flex-shrink: 0; display: flex; align-items: center; justify-content: center; padding: 4px;">
+                                                <img src="<?php echo esc_url( $cur_emblem ); ?>" class="image-preview-thumb" id="preview-emblem_image-community-rule" style="width: 100%; height: 100%; object-fit: contain; display: block;" onerror="this.src='<?php echo esc_url( $def_emblem ); ?>';">
+                                            </div>
+                                            <input type="hidden" name="emblem_image" id="input-emblem_image-community-rule" value="<?php echo esc_attr( $data['emblem_image'] ?? '' ); ?>">
+                                            <div style="display: flex; gap: 0.6rem; align-items: center; flex-wrap: wrap;">
+                                                <button type="button" class="btn btn-secondary btn-upload-media" data-target="emblem_image-community-rule" style="font-size: 0.82rem; padding: 0.4rem 0.8rem;">Choose Image</button>
+                                                <button type="button" class="btn btn-secondary btn-reset-media" data-target="emblem_image-community-rule" data-default="<?php echo esc_url( $def_emblem ); ?>" style="font-size: 0.82rem; padding: 0.4rem 0.8rem; <?php echo empty( $data['emblem_image'] ) ? 'display:none;' : ''; ?>">Reset</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Emblem Title Label</label>
+                                        <input type="text" name="emblem_title" class="form-control" value="<?php echo esc_attr( $data['emblem_title'] ?? 'Third Order Regular' ); ?>">
+                                        <label style="margin-top: 0.6rem;">Emblem Subtitle Label</label>
+                                        <input type="text" name="emblem_subtitle" class="form-control" value="<?php echo esc_attr( $data['emblem_subtitle'] ?? 'Province of St. Francis of Assisi' ); ?>">
+                                    </div>
+                                    <div class="form-group full-width">
+                                        <label>Sacred Proclamation Ribbon Text</label>
+                                        <textarea name="proclamation_text" class="form-control" rows="2"><?php echo esc_textarea( $data['proclamation_text'] ?? 'IN THE NAME OF THE LORD! HERE BEGINS THE RULE AND LIFE OF THE BROTHERS AND SISTERS OF THE THIRD ORDER REGULAR OF ST. FRANCIS' ); ?></textarea>
                                     </div>
                                 </div>
                             </div>
 
+                            <!-- Community Rule: Chapters Directory Intro -->
                             <div class="form-section">
-                                <h3 class="form-section-title">📜 The Franciscan Rule &amp; Principles</h3>
+                                <h3 class="form-section-title">📑 Chapters Directory Section Intro</h3>
                                 <div class="form-grid">
                                     <div class="form-group">
-                                        <label>Rule Heading</label>
-                                        <input type="text" name="rule_heading" class="form-control" value="<?php echo esc_attr( $data['rule_heading'] ?? 'THE FRANCISCAN RULE' ); ?>">
+                                        <label>Directory Eyebrow Badge</label>
+                                        <input type="text" name="directory_badge" class="form-control" value="<?php echo esc_attr( $data['directory_badge'] ?? 'THE CHAPTERS' ); ?>" placeholder="THE CHAPTERS">
                                     </div>
                                     <div class="form-group">
-                                        <label>Core Principles Heading</label>
-                                        <input type="text" name="principles_heading" class="form-control" value="<?php echo esc_attr( $data['principles_heading'] ?? 'CORE PRINCIPLES' ); ?>">
+                                        <label>Directory Heading</label>
+                                        <input type="text" name="directory_title" class="form-control" value="<?php echo esc_attr( $data['directory_title'] ?? 'Rule of the Third Order Regular' ); ?>" placeholder="Rule of the Third Order Regular">
                                     </div>
                                     <div class="form-group full-width">
-                                        <label>Rule Description Text</label>
-                                        <textarea name="rule_text" class="form-control"><?php echo esc_textarea( $data['rule_text'] ?? '' ); ?></textarea>
+                                        <label>Directory Subtitle / Reader Prompt</label>
+                                        <input type="text" name="directory_subtitle" class="form-control" value="<?php echo esc_attr( $data['directory_subtitle'] ?? 'Click on any chapter to open the interactive reading window' ); ?>">
                                     </div>
-                                    <div class="form-group">
-                                        <label>Living the Rule Heading</label>
-                                        <input type="text" name="living_heading" class="form-control" value="<?php echo esc_attr( $data['living_heading'] ?? 'LIVING THE RULE TODAY' ); ?>">
+                                </div>
+                            </div>
+
+                            <!-- Community Rule: Chapters & Readers Manager (Repeater) -->
+                            <div class="form-section">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.2rem; flex-wrap: wrap; gap: 1rem;">
+                                    <div>
+                                        <h3 class="form-section-title" style="margin-bottom: 0.3rem;">
+                                            📖 Chapters &amp; Interactive Reader Content
+                                        </h3>
+                                        <p style="color: var(--c-text-muted); font-size: 0.88rem; margin: 0;">
+                                            Add, edit, reorder, or remove chapters. Content will flow smoothly as narrative reading paragraphs without numbers or points.
+                                        </p>
                                     </div>
-                                    <div class="form-group full-width">
-                                        <label>Living the Rule Text</label>
-                                        <textarea name="living_text" class="form-control"><?php echo esc_textarea( $data['living_text'] ?? '' ); ?></textarea>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Inquiry Box Title</label>
-                                        <input type="text" name="inquire_title" class="form-control" value="<?php echo esc_attr( $data['inquire_title'] ?? 'LEARN MORE' ); ?>">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Inquiry Button Text</label>
-                                        <input type="text" name="inquire_btn_text" class="form-control" value="<?php echo esc_attr( $data['inquire_btn_text'] ?? 'Inquire' ); ?>">
-                                    </div>
-                                    <div class="form-group full-width">
-                                        <label>Inquiry Box Text</label>
-                                        <textarea name="inquire_text" class="form-control"><?php echo esc_textarea( $data['inquire_text'] ?? '' ); ?></textarea>
-                                    </div>
+                                    <button type="button" class="btn btn-primary" id="btn-add-rule-chapter" style="display: inline-flex; align-items: center; gap: 0.5rem;">
+                                        <span>➕</span> Add New Chapter
+                                    </button>
+                                </div>
+
+                                <div style="background: rgba(197, 169, 99, 0.08); border: 1px solid rgba(197, 169, 99, 0.25); border-radius: 8px; padding: 0.75rem 1.1rem; margin-bottom: 1.4rem; display: flex; align-items: center; gap: 0.6rem;">
+                                    <span style="font-size: 1.2rem;">🕊️</span>
+                                    <span style="font-size: 0.86rem; color: #f4f1ea;">
+                                        <strong>Popup Reader Notice</strong>: Paragraphs separated by a blank line are presented as beautiful sacred reading text without numerical badges or point markers.
+                                    </span>
+                                </div>
+
+                                <?php 
+                                $rule_chapters = franciscan_get_rule_chapters();
+                                ?>
+
+                                <div id="rule-chapters-list-container" style="display: flex; flex-direction: column; gap: 1.2rem;">
+                                    <?php foreach ( $rule_chapters as $c_idx => $c_chap ) : 
+                                        $c_id       = $c_chap['id'] ?? ( 'chap_' . ($c_idx + 1) );
+                                        $c_roman    = $c_chap['roman'] ?? ( 'Chapter ' . ($c_idx + 1) );
+                                        $c_title    = $c_chap['title'] ?? '';
+                                        $c_subtitle = $c_chap['subtitle'] ?? '';
+                                        $c_content  = $c_chap['content'] ?? '';
+                                        $c_blessing = $c_chap['blessing'] ?? '';
+                                    ?>
+                                        <div class="rule-chapter-card" data-index="<?php echo esc_attr( $c_idx ); ?>" style="background: rgba(255,255,255,0.02); border: 1px solid var(--c-card-border); border-radius: 12px; padding: 1.4rem; position: relative; transition: border-color 0.2s ease;">
+                                            <input type="hidden" name="chapters_list[<?php echo esc_attr( $c_idx ); ?>][id]" value="<?php echo esc_attr( $c_id ); ?>" class="chapter-input-id">
+
+                                            <!-- Card Header -->
+                                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(255,255,255,0.06); flex-wrap: wrap; gap: 0.8rem;">
+                                                <div style="display: flex; align-items: center; gap: 0.8rem;">
+                                                    <span class="chapter-card-num-badge" style="background: var(--c-gold); color: #12100e; font-weight: 800; font-size: 0.8rem; padding: 0.25rem 0.65rem; border-radius: 6px;">
+                                                        #<?php echo esc_html( $c_idx + 1 ); ?>
+                                                    </span>
+                                                    <strong class="chapter-card-title-preview" style="color: var(--c-text); font-size: 0.98rem; max-width: 450px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: inline-block;">
+                                                        <?php echo esc_html( $c_roman . ( ! empty( $c_title ) ? ' — ' . $c_title : '' ) ); ?>
+                                                    </strong>
+                                                </div>
+                                                <div style="display: flex; gap: 0.5rem; align-items: center;">
+                                                    <button type="button" class="btn btn-secondary btn-move-rule-chapter-up" title="Move Up" style="padding: 0.35rem 0.65rem; font-size: 0.8rem;">▲</button>
+                                                    <button type="button" class="btn btn-secondary btn-move-rule-chapter-down" title="Move Down" style="padding: 0.35rem 0.65rem; font-size: 0.8rem;">▼</button>
+                                                    <button type="button" class="btn btn-secondary btn-delete-rule-chapter" style="padding: 0.35rem 0.75rem; font-size: 0.8rem; background: rgba(239, 68, 68, 0.15); color: #fca5a5; border-color: rgba(239, 68, 68, 0.4);" title="Delete Chapter">
+                                                        🗑️ Remove
+                                                    </button>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-grid">
+                                                <div class="form-group">
+                                                    <label>Chapter Roman Numeral / Label <span style="color: var(--c-gold);">*</span></label>
+                                                    <input type="text" name="chapters_list[<?php echo esc_attr( $c_idx ); ?>][roman]" class="form-control chapter-input-roman" value="<?php echo esc_attr( $c_roman ); ?>" placeholder="e.g. Chapter I, Chapter X">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Chapter Title <span style="color: var(--c-gold);">*</span></label>
+                                                    <input type="text" name="chapters_list[<?php echo esc_attr( $c_idx ); ?>][title]" class="form-control chapter-input-title" value="<?php echo esc_attr( $c_title ); ?>" placeholder="e.g. Our Identity">
+                                                </div>
+                                                <div class="form-group full-width">
+                                                    <label>Chapter Subtitle / Theological Theme</label>
+                                                    <input type="text" name="chapters_list[<?php echo esc_attr( $c_idx ); ?>][subtitle]" class="form-control chapter-input-subtitle" value="<?php echo esc_attr( $c_subtitle ); ?>" placeholder="e.g. The Form of Life and Evangelical Conversion">
+                                                </div>
+                                                <div class="form-group full-width">
+                                                    <label>Chapter Content / Paragraphs <span style="color: var(--c-gold);">*</span></label>
+                                                    <p style="font-size: 0.78rem; color: var(--c-text-muted); margin: 0 0 6px 0;">Separate paragraphs with a blank line. Paragraphs will be rendered as clean, elegant reading text without numbers or points.</p>
+                                                    <textarea name="chapters_list[<?php echo esc_attr( $c_idx ); ?>][content]" class="form-control chapter-input-content" rows="8"><?php echo esc_textarea( $c_content ); ?></textarea>
+                                                </div>
+                                                <div class="form-group full-width">
+                                                    <label>Concluding Blessing / Special Prayer (Optional)</label>
+                                                    <p style="font-size: 0.78rem; color: var(--c-text-muted); margin: 0 0 6px 0;">If filled, this text appears in an illuminated golden blessing callout box at the end of the chapter.</p>
+                                                    <textarea name="chapters_list[<?php echo esc_attr( $c_idx ); ?>][blessing]" class="form-control chapter-input-blessing" rows="3" placeholder="e.g. Franciscan Blessing or Concluding Reflection..."><?php echo esc_textarea( $c_blessing ); ?></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <?php endforeach; ?>
                                 </div>
                             </div>
                         <?php endif; ?>
@@ -3776,6 +3896,139 @@ function franciscan_render_dashboard_view() {
             $('#input-' + targetKey).val('');
             $('#preview-' + targetKey).attr('src', defaultUrl);
             $(this).hide();
+        });
+
+        // ==========================================
+        // THIRD ORDER RULE CHAPTERS MANAGER
+        // ==========================================
+        function getNewRuleChapterCardHtml(index) {
+            const chapNum = index + 1;
+            return `
+                <div class="rule-chapter-card" data-index="${index}" style="background: rgba(255,255,255,0.02); border: 1px solid var(--c-gold); border-radius: 12px; padding: 1.4rem; position: relative; transition: border-color 0.2s ease;">
+                    <input type="hidden" name="chapters_list[${index}][id]" value="chap_${Date.now()}" class="chapter-input-id">
+
+                    <!-- Card Header -->
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(255,255,255,0.06); flex-wrap: wrap; gap: 0.8rem;">
+                        <div style="display: flex; align-items: center; gap: 0.8rem;">
+                            <span class="chapter-card-num-badge" style="background: var(--c-gold); color: #12100e; font-weight: 800; font-size: 0.8rem; padding: 0.25rem 0.65rem; border-radius: 6px;">
+                                #${chapNum}
+                            </span>
+                            <strong class="chapter-card-title-preview" style="color: var(--c-text); font-size: 0.98rem; max-width: 450px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: inline-block;">
+                                Chapter ${chapNum} — New Chapter
+                            </strong>
+                        </div>
+                        <div style="display: flex; gap: 0.5rem; align-items: center;">
+                            <button type="button" class="btn btn-secondary btn-move-rule-chapter-up" title="Move Up" style="padding: 0.35rem 0.65rem; font-size: 0.8rem;">▲</button>
+                            <button type="button" class="btn btn-secondary btn-move-rule-chapter-down" title="Move Down" style="padding: 0.35rem 0.65rem; font-size: 0.8rem;">▼</button>
+                            <button type="button" class="btn btn-secondary btn-delete-rule-chapter" style="padding: 0.35rem 0.75rem; font-size: 0.8rem; background: rgba(239, 68, 68, 0.15); color: #fca5a5; border-color: rgba(239, 68, 68, 0.4);" title="Delete Chapter">
+                                🗑️ Remove
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Chapter Roman Numeral / Label <span style="color: var(--c-gold);">*</span></label>
+                            <input type="text" name="chapters_list[${index}][roman]" class="form-control chapter-input-roman" value="Chapter ${chapNum}" placeholder="e.g. Chapter I, Chapter X">
+                        </div>
+                        <div class="form-group">
+                            <label>Chapter Title <span style="color: var(--c-gold);">*</span></label>
+                            <input type="text" name="chapters_list[${index}][title]" class="form-control chapter-input-title" value="New Chapter" placeholder="e.g. Our Identity">
+                        </div>
+                        <div class="form-group full-width">
+                            <label>Chapter Subtitle / Theological Theme</label>
+                            <input type="text" name="chapters_list[${index}][subtitle]" class="form-control chapter-input-subtitle" value="" placeholder="e.g. The Form of Life and Evangelical Conversion">
+                        </div>
+                        <div class="form-group full-width">
+                            <label>Chapter Content / Paragraphs <span style="color: var(--c-gold);">*</span></label>
+                            <p style="font-size: 0.78rem; color: var(--c-text-muted); margin: 0 0 6px 0;">Separate paragraphs with a blank line. Paragraphs will be rendered as clean, elegant reading text without numbers or points.</p>
+                            <textarea name="chapters_list[${index}][content]" class="form-control chapter-input-content" rows="8" placeholder="Enter chapter narrative text here..."></textarea>
+                        </div>
+                        <div class="form-group full-width">
+                            <label>Concluding Blessing / Special Prayer (Optional)</label>
+                            <p style="font-size: 0.78rem; color: var(--c-text-muted); margin: 0 0 6px 0;">If filled, this text appears in an illuminated golden blessing callout box at the end of the chapter.</p>
+                            <textarea name="chapters_list[${index}][blessing]" class="form-control chapter-input-blessing" rows="3" placeholder="e.g. Franciscan Blessing or Concluding Reflection..."></textarea>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function reindexRuleChaptersList() {
+            $('#rule-chapters-list-container .rule-chapter-card').each(function(newIdx) {
+                const card = $(this);
+                card.attr('data-index', newIdx);
+                card.find('.chapter-card-num-badge').text('#' + (newIdx + 1));
+                
+                card.find('input, textarea, select').each(function() {
+                    const name = $(this).attr('name');
+                    if (name && name.startsWith('chapters_list[')) {
+                        const updatedName = name.replace(/chapters_list\[\d+\]/, 'chapters_list[' + newIdx + ']');
+                        $(this).attr('name', updatedName);
+                    }
+                });
+
+                const roman = card.find('.chapter-input-roman').val() || ('Chapter ' + (newIdx + 1));
+                const title = card.find('.chapter-input-title').val() || '';
+                card.find('.chapter-card-title-preview').text(roman + (title ? ' — ' + title : ''));
+            });
+        }
+
+        // Add Rule Chapter Card
+        $(document).on('click', '#btn-add-rule-chapter', function(e) {
+            e.preventDefault();
+            const count = $('#rule-chapters-list-container .rule-chapter-card').length;
+            const newHtml = $(getNewRuleChapterCardHtml(count));
+            $('#rule-chapters-list-container').append(newHtml);
+            newHtml.hide().fadeIn(300);
+            $('html, body').animate({
+                scrollTop: newHtml.offset().top - 120
+            }, 400);
+            newHtml.find('.chapter-input-title').focus();
+        });
+
+        // Delete Rule Chapter Card
+        $(document).on('click', '.btn-delete-rule-chapter', function(e) {
+            e.preventDefault();
+            if (confirm('Are you sure you want to remove this chapter?')) {
+                const card = $(this).closest('.rule-chapter-card');
+                card.fadeOut(250, function() {
+                    card.remove();
+                    reindexRuleChaptersList();
+                });
+            }
+        });
+
+        // Move Rule Chapter Up
+        $(document).on('click', '.btn-move-rule-chapter-up', function(e) {
+            e.preventDefault();
+            const card = $(this).closest('.rule-chapter-card');
+            const prev = card.prev('.rule-chapter-card');
+            if (prev.length) {
+                card.insertBefore(prev);
+                reindexRuleChaptersList();
+                $('html, body').animate({ scrollTop: card.offset().top - 120 }, 200);
+            }
+        });
+
+        // Move Rule Chapter Down
+        $(document).on('click', '.btn-move-rule-chapter-down', function(e) {
+            e.preventDefault();
+            const card = $(this).closest('.rule-chapter-card');
+            const next = card.next('.rule-chapter-card');
+            if (next.length) {
+                card.insertAfter(next);
+                reindexRuleChaptersList();
+                $('html, body').animate({ scrollTop: card.offset().top - 120 }, 200);
+            }
+        });
+
+        // Live preview title update
+        $(document).on('input', '.chapter-input-roman, .chapter-input-title', function() {
+            const card = $(this).closest('.rule-chapter-card');
+            const roman = card.find('.chapter-input-roman').val() || 'Chapter';
+            const title = card.find('.chapter-input-title').val() || '';
+            card.find('.chapter-card-title-preview').text(roman + (title ? ' — ' + title : ''));
         });
 
         // ==========================================

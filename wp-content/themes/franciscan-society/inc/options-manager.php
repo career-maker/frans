@@ -323,22 +323,96 @@ function franciscan_get_default_page_content( $slug = '' ) {
             'era3_image'             => '',
         ),
         'community-rule' => array(
-            'hero_badge'             => 'SPIRITUAL FOUNDATION',
-            'hero_title'             => 'RULE & CONSTITUTIONS',
-            'hero_subtitle'          => 'Rooted in Franciscan spirituality and commitment to Christ-centered living.',
-            'hero_image'             => FRANCISCAN_THEME_URI . '/assets/images/new_uploads/third-rule-banner.jpg',
-            'rule_card_badge'        => 'THIRD ORDER RULE',
-            'rule_card_title'        => 'GUIDING PRINCIPLES OF OUR FAITH',
-            'rule_card_text'         => 'Rooted in Franciscan spirituality and commitment to Christ-centered living.',
-            'rule_section_title'     => 'THE FRANCISCAN RULE',
-            'rule_section_text'      => 'The Rule of the Third Order Regular provides the spiritual and practical framework for our community life. It calls us to live the Gospel values of poverty, humility, obedience, and love—rooted in the charism of St. Francis of Assisi.',
-            'core_principles_title'  => 'CORE PRINCIPLES',
-            'living_rule_title'      => 'LIVING THE RULE TODAY',
-            'living_rule_text'       => 'Our community strives to embody these principles through daily practice, community life, and active ministry. The Rule guides us toward peace, joy, and authentic Christian witness in our modern world.',
-            'inquiry_title'          => 'LEARN MORE',
-            'inquiry_text'           => 'Explore the spiritual depth and wisdom of Franciscan living.',
-            'inquiry_btn_text'       => 'INQUIRE',
-            'inquiry_btn_url'        => '/contact/#enquiry',
+            'hero_badge'             => 'OUR RULE… OUR LIFE',
+            'hero_title'             => 'THIRD ORDER REGULAR RULE',
+            'hero_subtitle'          => 'Discovering the authentic meaning of Franciscan life',
+            'hero_image'             => defined( 'FRANCISCAN_THEME_URI' ) ? FRANCISCAN_THEME_URI . '/assets/images/new_uploads/third-rule-banner.jpg' : '',
+            'prologue_badge'         => 'PROLOGUE TO THE RULE',
+            'prologue_title'         => 'Third Order Regular Rule',
+            'prologue_subtitle'      => 'The Beginning of the Rule and the Life of the Brothers and Sisters of the Third Order Regular of St. Francis (Words of St. Francis to His Followers — Letter to the Faithful I, 1–19)',
+            'prologue_p1'            => 'All who love the Lord with their whole heart, with their whole soul and mind, and with all their strength, (cf Mk 12:30) and love their neighbors as themselves, (cf Mt 22:39) and who despise the tendency in their humanity to sin, receive the Body and Blood of our Lord Jesus Christ and bring forth from within themselves fruits worthy of true penance; How happy and blessed are these men and women when they do these things, and persevere in doing them because the Spirit of the Lord will rest upon them (cf Is 11:12) and the Lord will make His home and dwelling place with them (cf Jn 14:23). They are the children of the Heavenly Father (cf Mt 5:45) whose works they do. They are the spouses, brothers and mothers of Our Lord Jesus Christ (cf Mt 12:50). We are his spouses when the faithful soul is united by the Holy Spirit with Our Lord Jesus Christ. We are brothers when we do the will of the Father who is in Heaven (cf Mt 12:50). We are mothers when we bear Him in our hearts and bodies (cf 1 Co 6:20) with divine love and with pure and sincere consciences; and we give birth to him through a holy life which should enlighten others because of our example (Mt 5:16).',
+            'prologue_p2'            => 'How glorious it is to have so holy and great a Father in Heaven; and to have such a beautiful and admirable Spouse, the Holy Paraclete; and to have a Brother and Son, so holy, beloved, blessed, humble, peaceful, sweet, lovable, and desirable over all things: Our Lord Jesus Christ who gave up his life for his sheep (cf Jn 10:15) and prayed to the Father, saying: Holy Father, keep in your name (Jn 17:11) those whom You gave Me in the world; they are Yours and You gave them to Me (Jn 17:6). And the word which You gave Me I gave to them, and they accepted it and truly believed that it came forth from You. And they have accepted that You sent Me (Jn 17:8). I pray for them and not for the world (Jn 17:9). Bless them and sanctify them (Jn 17:17). I sanctify Myself for their sakes (Jn 17:19). I do not pray only for these but also for those who, through their word, will believe in Me (Jn 17:20), may they be holy in oneness as We are (Jn 17:11). Father, I wish that where I am they too may be and that they may see My glory (Jn 17:24) in Your kingdom (Mt 20:21).',
+            'emblem_image'           => defined( 'FRANCISCAN_THEME_URI' ) ? FRANCISCAN_THEME_URI . '/assets/images/rule/st-francis-rule.jpg' : '',
+            'emblem_title'           => 'Third Order Regular',
+            'emblem_subtitle'        => 'Province of St. Francis of Assisi',
+            'proclamation_text'      => 'IN THE NAME OF THE LORD! HERE BEGINS THE RULE AND LIFE OF THE BROTHERS AND SISTERS OF THE THIRD ORDER REGULAR OF ST. FRANCIS',
+            'directory_badge'        => 'THE CHAPTERS',
+            'directory_title'        => 'Rule of the Third Order Regular',
+            'directory_subtitle'     => 'Click on any chapter to open the interactive reading window',
+            'chapters_list'          => array(
+                array(
+                    'id'       => 'chap_1',
+                    'roman'    => 'Chapter I',
+                    'title'    => 'Our Identity',
+                    'subtitle' => 'The Form of Life and Evangelical Conversion',
+                    'content'  => "The form of life of the Brothers and Sisters of the Third Order Regular of Saint Francis is this: to observe the Holy Gospel of Our Lord Jesus Christ by living in obedience, in poverty and in chastity. Following Jesus Christ after the example of St. Francis, let them recognize that they are called to make greater efforts in their observance of the precepts and counsels of Our Lord Jesus Christ. Let them deny themselves (cf Mt 16:24) as each has promised the Lord.\n\nWith all in the holy Catholic and apostolic Church who wish to serve the Lord, the brothers and sisters of this order are to persevere in true faith and penance. They wish to live this evangelical conversion of life in a spirit of prayer, of poverty, and of humility. Therefore, let them abstain from all evil and persevere to the end in doing good because God the Son Himself will come again in glory and will say to all who acknowledge, adore and serve Him in sincere repentance: \"Come blessed of my Father, take possession of the kingdom prepared for you from the beginning of the world\" (Mt 25:34).\n\nThe sisters and brothers promise obedience and reverence to the Pope and the Holy Catholic Church. In this same spirit they are to obey those called to be ministers and servants of their own fraternity. And wherever they are, or in whatever situation they are in, they should diligently and fervently show reverence and honor to one another. They should also foster unity and communion with all the members of the Franciscan family.",
+                    'blessing' => '',
+                ),
+                array(
+                    'id'       => 'chap_2',
+                    'roman'    => 'Chapter II',
+                    'title'    => 'Acceptance into this Life',
+                    'subtitle' => 'Vocation, Initiation, and Consecration',
+                    'content'  => "Those who through the Lord's inspiration come to us desiring to accept this way of life are to be received kindly. At the appropriate time, they are to be presented to the ministers of the fraternity who hold responsibility to admit them.\n\nThe ministers shall ascertain that the aspirants truly adhere to the Catholic faith and the Church's sacramental life. If they are found to have a vocation, they are to be initiated into the life of the fraternity. Let everything pertaining to this gospel way of life be explained to them, especially these words of the Lord: \"If you wish to be perfect (Mt 19:21), go and sell all your possessions (cf Lk 18:22) and give to the poor. You will have treasure in heaven. Then come, follow Me.\" And \"if anyone wishes to follow Me, let him deny himself, take up his cross, and follow Me\" (Mt 16:24).\n\nLed by the Lord, let them begin a life of penance, conscious that all of us must be continuously and totally converted to the Lord. As a sign of their conversion and consecration to gospel life, they are to clothe themselves plainly and to live in simplicity.\n\nWhen their initial formation is completed, they are to be received into obedience promising to observe this life and rule always. Let them put aside all attachment as well as every care and worry. Let them only be concerned to serve, love, adore, and honor the Lord God, as best they can, with single-heartedness and purity of intention.\n\nWithin themselves, let them always make a dwelling place and home for the Lord God Almighty, Father, Son and Holy Spirit, so that, with undivided hearts, they may increase in universal love by continually turning to God and to neighbor (Jn 14:23).",
+                    'blessing' => '',
+                ),
+                array(
+                    'id'       => 'chap_3',
+                    'roman'    => 'Chapter III',
+                    'title'    => 'The Spirit of Prayer',
+                    'subtitle' => 'Contemplation, Liturgy, and Penance',
+                    'content'  => "Everywhere and in each place, and in every season and each day, the brothers and sisters are to have a true and humble faith. From the depths of their inner life let them love, honor, adore, serve, praise, bless and glorify our most high and eternal God who is Father, Son and Holy Spirit. With all that they are, let them adore Him \"because we should pray always and not lose heart\" (Lk 18:1); this is what the Father desires. In this same spirit let them also celebrate the Liturgy of the Hours in union with the whole Church. The sisters and brothers whom the Lord has called to the life of contemplation (Mk 6:31), with a daily renewed joy, should manifest their special dedication to God and celebrate the Father's love for the world. It was He who created and redeemed us, and by His mercy alone shall save us.\n\nThe brothers and sisters are to praise the Lord, the King of heaven and earth, (cf Mt 11:25) with all His creatures and to give Him thanks because, by His own holy will and through His only Son with the Holy Spirit, He has created all things spiritual and material and made us in His own image and likeness.\n\nSince the sisters and brothers are to be totally conformed to the Gospel, they should reflect and keep in their hearts the words of Our Lord Jesus Christ who is the word of the Father, as well as the words of the Holy Spirit which \"are spirit and life\" (Jn 6:63).\n\nLet them participate in the sacrifice of Our Lord Jesus Christ and receive His Body and Blood with great humility and reverence remembering the words of the Lord: \"He who eats My Flesh and drinks My Blood has eternal life\" (Jn 6:54). Moreover, they are to show the greatest possible reverence and honor for the most sacred name, written words and most holy Body and Blood of Our Lord Jesus Christ through whom all things in heaven and on earth have been brought to peace and reconciliation with Almighty God (Jn 6:63).\n\nWhenever they commit sin the brothers and sisters, without delay, are to do penance interiorly by sincere sorrow and exteriorly by confessing their sins to a priest. They should also do worthy deeds that manifest their repentance. They should fast and always strive to be simple and humble, especially before God. They should desire nothing else but our Savior, who offered Himself in His own Blood as a sacrifice on the altar of the Cross for our sins, giving us example so that we might follow in His footsteps.",
+                    'blessing' => '',
+                ),
+                array(
+                    'id'       => 'chap_4',
+                    'roman'    => 'Chapter IV',
+                    'title'    => 'The Life of Chastity for the Sake of the Kingdom',
+                    'subtitle' => 'Total Consecration and Marian Devotion',
+                    'content'  => "Let the brothers and sisters keep in mind how great a dignity the Lord God has given them \"because He created them and formed them in the image of His beloved Son according to the flesh and in His own likeness according to the Spirit\" (Col 1:16). Since they are created through Christ and in Christ, they have chosen this form of life which is founded on the words and deeds of our Redeemer.\n\nProfessing chastity \"for the sake of the kingdom of heaven\" (Mt 19:12), they are to care for the things of the Lord and \"they have nothing else to do except to follow the will of the Lord and to please Him\" (1 Col 7:32). In all of their works the love of God and all people should shine forth.\n\nThey are to remember that they have been called by a special gift of grace to manifest in their lives that wonderful mystery by which the Church is joined to Christ her spouse (cf Eph. 5:23-26).\n\nLet the brothers and sisters keep the example of the Blessed Virgin Mary, the Mother of God and of our Lord Jesus Christ, ever before their eyes. Let them do this according to the exhortation of St. Francis who held Holy Mary, Lady and Queen, in highest veneration, since she is \"the virgin made church.\" Let them also remember that the Immaculate Virgin Mary, whose example they are to follow, called herself \"the handmaid of the Lord\" (Lk 1:38).",
+                    'blessing' => '',
+                ),
+                array(
+                    'id'       => 'chap_5',
+                    'roman'    => 'Chapter V',
+                    'title'    => 'The Way to Serve and Work',
+                    'subtitle' => 'Labor, Humility, and Peaceful Witness',
+                    'content'  => "As poor people, the brothers and sisters to whom the Lord has given the grace of serving or working with their hands, should do so faithfully and conscientiously. Let them avoid that idleness which is the enemy of the soul. But they should not be so busy that the spirit of holy prayer and devotion, which all earthly goods should foster, is extinguished.\n\nIn exchange for their service or work, they may accept anything necessary for their own temporal needs and for that of their sisters or brothers. Let them accept it humbly as is expected of those who are servants of God and seekers of most holy poverty. Whatever they may have over and above their needs, they are to give to the poor. And let them never want to be over others. Instead they should be servants and subjects to every human creature for the Lord's sake (1 P 2:13).\n\nLet the sisters and brothers be gentle, peaceful and unassuming, mild and humble, speaking respectfully to all in accord with their vocation. Wherever they are, or wherever they go throughout the world they should not be quarrelsome, contentious, or judgmental towards others. Rather, it should be obvious that they are \"joyful, good-humored,\" and happy \"in the Lord\" as they ought to be (cf Ph 4:4). And in greeting others, let them say, \"The Lord give you peace.\"",
+                    'blessing' => '',
+                ),
+                array(
+                    'id'       => 'chap_6',
+                    'roman'    => 'Chapter VI',
+                    'title'    => 'The Life of Poverty',
+                    'subtitle' => 'Pilgrims, Strangers, and Heavenly Riches',
+                    'content'  => "All the sisters and brothers zealously follow the poverty and humility of Our Lord Jesus Christ. \"Though rich\" beyond measure (2 Co 8:9). He emptied Himself for our sake (Ph 2:7) and with the holy virgin, His mother, Mary, He chose poverty in this world. Let them be mindful that they should have only those goods of this world which, as the apostle says, \"having something to eat and something to wear, with these we are content\" (1 Tim 6:8). Let them particularly beware of money. And let them be happy to live among the outcast and despised, among the poor, the weak, the sick, the unwanted, the oppressed, and the destitute.\n\nThe truly poor in spirit, following the example of the Lord, live in this world as pilgrims and strangers (cf 1 P 2:1). They neither appropriate nor defend anything as their own. So excellent is this most high poverty that it makes us heirs and rulers of the kingdom of heaven. It makes us materially poor, but rich in virtue (cf James 2:5). Let this poverty alone be our portion because it leads to the land of the living (Ps 141:6). Clinging completely to it let us, for the sake of Our Lord Jesus Christ, never want anything else under heaven.",
+                    'blessing' => '',
+                ),
+                array(
+                    'id'       => 'chap_7',
+                    'roman'    => 'Chapter VII',
+                    'title'    => 'Fraternal Love',
+                    'subtitle' => 'Brotherhood, Mutual Care, and Reconciliation',
+                    'content'  => "Because God loves us, the brothers and sisters should love each other, for the Lord says, \"This is My commandment, that you love one another as I have loved you\" (Jn 15:12). Let them manifest their love in deeds (cf 1 Jn 3:18). Also whenever they meet each other, they should show that they are members of the same family. Let them make known their needs to one another. Blessed are they who love another who is sick and seemingly useless, as much as when that brother or sister is well and of service to them. Whether in sickness or in health, they should only want what God wishes for them. For all that happens to them let them give thanks to our Creator.\n\nIf discord caused by word or deed should occur among them, they should immediately (Mt 18:35) and humbly ask forgiveness of one another even before offering their gift of prayer before the Lord (cf Mt 5:24). And if anyone seriously neglects the form of life all profess, the minister, or others who may know of it, are to admonish that person. Those giving the admonition should neither embarrass nor speak evil of the other, but show great kindness. Let all be careful of self-righteousness, which causes anger and annoyance because of another's sin. These in oneself or in another hinder living lovingly.",
+                    'blessing' => '',
+                ),
+                array(
+                    'id'       => 'chap_8',
+                    'roman'    => 'Chapter VIII',
+                    'title'    => 'The Obedience of Love',
+                    'subtitle' => 'Mutual Submission, Servant Leadership, and Humility',
+                    'content'  => "Following the example of Our Lord Jesus Christ Who made His own will one with the Father's, the sisters and brothers are to remember that, for God, they should give up their own wills. Therefore, in every kind of chapter they have let them \"seek first the kingdom of God and His justice,\" (Mt 6:33) and exhort one another to observe with greater dedication the rule they have professed and to follow faithfully in the footprints of Our Lord Jesus Christ. Let them neither dominate nor seek power over one another, but let them willingly serve and obey \"one another with that genuine love which comes from each one's heart\" (cf Gal 5:13). This is the true and holy obedience of Our Lord Jesus Christ.\n\nThey are always to have one of their number as minister and servant of the fraternity whom they are strictly obliged to obey in all that they have promised the Lord to observe, and which is not contrary to conscience or this rule.\n\nThose who are ministers and servants of the others should visit, admonish, and encourage them with humility and love. Should there be brothers or sisters anywhere who know and acknowledge that they cannot observe the rule according to its spirit, it is their right and duty to have recourse to their ministers. The ministers are to receive them with such love, kindness, and sympathy that the sisters or brothers can speak and act toward them just as an employer would with a worker. This is how it should be. The ministers are to be servants of all.\n\nNo one is to appropriate any office or ministry whatsoever as if it were a personal right; rather each should willingly relinquish it when the time comes.",
+                    'blessing' => '',
+                ),
+                array(
+                    'id'       => 'chap_9',
+                    'roman'    => 'Chapter IX',
+                    'title'    => 'Apostolic Life',
+                    'subtitle' => 'Witness of Peace, Joyful Perseverance, and Francis\' Blessing',
+                    'content'  => "The brothers and sisters are to love the Lord \"with their whole heart, with their whole soul and mind, and with all their strength,\" and to love their neighbor as themselves. Let them glorify the Lord in all they do. For He has sent them into the world so that they might give witness by word and work to His voice and to make known to all that the Lord alone is God (cf Mk 12:30, Mt 22:30).\n\nAs they announce peace with their lips, let them be careful to have it even more within their own hearts. No one should be roused to wrath or insult on their account, rather all should be moved to peace, goodwill and mercy because of their gentleness. The sisters and brothers are called to heal the wounded, to bind up those who are bruised, and to reclaim the erring. Wherever they are, they should recall that they have given themselves up completely and handed themselves over totally to Our Lord Jesus Christ. Therefore, they should be prepared to expose themselves to every enemy, visible and invisible, for the love of Him because the Lord says: \"Blessed are they who suffer persecution for the sake of justice, theirs is the kingdom of heaven\" (Mt 5:10).\n\nIn that love which is God (1 Jn 4:16) all the brothers and sisters, whether they are engaged in prayer, or in announcing the word of God, or in serving, or in doing manual labor, should strive to be humble in everything. They should not seek glory, or be self-satisfied, or interiorly proud because of a good work or word God does or speaks in or through them. Rather in every place and circumstance, let them acknowledge that all good belongs to the most high Lord and Ruler of all things. Let them always give thanks to Him from Whom we receive all good.\n\nLet the sisters and brothers always be mindful that they should desire one thing alone, namely, the Spirit of God at work within them. Always obedient to the Church and firmly established in the Catholic faith, let them live according to the poverty, the humility and the holy Gospel of Our Lord Jesus Christ which they have solemnly promised to observe.",
+                    'blessing' => "\"Whoever will observe these things shall be filled with the blessings of the Most High Father in Heaven, and on earth with the blessing of His beloved Son, with the Holy Spirit, and with all virtues and with all the saints. And I, Brother Francis, your little one and servant, in so far as I am able, confirm to you within and without this most Holy Blessing.\"",
+                ),
+            ),
         ),
         'community-leadership' => array(
             'hero_badge'             => 'To lead is to serve; to be greater is to become lesser.',
@@ -757,6 +831,35 @@ function franciscan_resync_legacy_content_options() {
                         $clean['hero_subtitle'] = "“The Most High Himself revealed to me that I should live according to the pattern of the Holy Gospel.”\n— St. Francis of Assisi, Testament";
                     }
                 }
+                // Resync Third Order Rule page
+                if ( 'community-rule' === $slug ) {
+                    if ( empty( $clean['hero_badge'] ) || 'SPIRITUAL FOUNDATION' === $clean['hero_badge'] ) {
+                        $clean['hero_badge'] = 'OUR RULE… OUR LIFE';
+                    }
+                    if ( empty( $clean['hero_title'] ) || 'RULE & CONSTITUTIONS' === $clean['hero_title'] ) {
+                        $clean['hero_title'] = 'THIRD ORDER REGULAR RULE';
+                    }
+                    if ( empty( $clean['hero_subtitle'] ) || 'Rooted in Franciscan spirituality and commitment to Christ-centered living.' === $clean['hero_subtitle'] ) {
+                        $clean['hero_subtitle'] = 'Discovering the authentic meaning of Franciscan life';
+                    }
+                    if ( empty( $clean['prologue_title'] ) ) {
+                        $clean['prologue_badge']     = $def_values['prologue_badge'] ?? 'PROLOGUE TO THE RULE';
+                        $clean['prologue_title']     = $def_values['prologue_title'] ?? 'Third Order Regular Rule';
+                        $clean['prologue_subtitle']  = $def_values['prologue_subtitle'] ?? 'The Beginning of the Rule and the Life of the Brothers and Sisters of the Third Order Regular of St. Francis';
+                        $clean['prologue_p1']        = $def_values['prologue_p1'] ?? '';
+                        $clean['prologue_p2']        = $def_values['prologue_p2'] ?? '';
+                        $clean['emblem_image']       = $def_values['emblem_image'] ?? '';
+                        $clean['emblem_title']       = $def_values['emblem_title'] ?? 'Third Order Regular';
+                        $clean['emblem_subtitle']    = $def_values['emblem_subtitle'] ?? 'Province of St. Francis of Assisi';
+                        $clean['proclamation_text']  = $def_values['proclamation_text'] ?? 'IN THE NAME OF THE LORD! HERE BEGINS THE RULE AND LIFE OF THE BROTHERS AND SISTERS OF THE THIRD ORDER REGULAR OF ST. FRANCIS';
+                        $clean['directory_badge']    = $def_values['directory_badge'] ?? 'THE CHAPTERS';
+                        $clean['directory_title']    = $def_values['directory_title'] ?? 'Rule of the Third Order Regular';
+                        $clean['directory_subtitle'] = $def_values['directory_subtitle'] ?? 'Click on any chapter to open the interactive reading window';
+                    }
+                    if ( empty( $clean['chapters_list'] ) || ! is_array( $clean['chapters_list'] ) ) {
+                        $clean['chapters_list'] = $def_values['chapters_list'] ?? array();
+                    }
+                }
                 // Resync publications page
                 if ( 'publications' === $slug ) {
                     $clean['hero_title']    = 'PUBLICATIONS';
@@ -911,5 +1014,30 @@ function franciscan_save_publications_list( $items ) {
     $current['publications_list'] = is_array( $items ) ? array_values( $items ) : array();
     return update_option( 'franciscan_page_publications', $current );
 }
+
+/**
+ * Retrieve curated/custom Third Order Rule chapters list.
+ */
+function franciscan_get_rule_chapters() {
+    $data = franciscan_get_page_content( 'community-rule' );
+    if ( isset( $data['chapters_list'] ) && is_array( $data['chapters_list'] ) && ! empty( $data['chapters_list'] ) ) {
+        return array_values( $data['chapters_list'] );
+    }
+    $defaults = franciscan_get_default_page_content( 'community-rule' );
+    if ( isset( $defaults['chapters_list'] ) && is_array( $defaults['chapters_list'] ) && ! empty( $defaults['chapters_list'] ) ) {
+        return array_values( $defaults['chapters_list'] );
+    }
+    return array();
+}
+
+function franciscan_save_rule_chapters( $chapters ) {
+    $current = get_option( 'franciscan_page_community-rule', array() );
+    if ( ! is_array( $current ) ) {
+        $current = array();
+    }
+    $current['chapters_list'] = is_array( $chapters ) ? array_values( $chapters ) : array();
+    return update_option( 'franciscan_page_community-rule', $current );
+}
+
 
 
