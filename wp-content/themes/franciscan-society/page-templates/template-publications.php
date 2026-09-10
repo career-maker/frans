@@ -736,10 +736,10 @@ button.fs-mega-toggle:focus::after {
                 <span style="width: 8px; height: 8px; background-color: #e6c888; border-radius: 50%; display: inline-block;"></span>
                 <span style="color: #ffffff; font-size: 0.85rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; font-family: 'Instrument Sans', sans-serif;"><?php echo esc_html( franciscan_get_page_field( "publications", "hero_badge", "PROVINCIAL CHRONICLES" ) ); ?></span>
             </div>
-            <h1 style="font-family: 'Phudu', sans-serif; font-size: clamp(2.8rem, 5.2vw, 4.5rem); font-weight: 700; color: #ffffff; text-transform: uppercase; margin: 0 0 1rem 0; line-height: 1.1;"><?php echo esc_html( franciscan_get_page_field( "publications", "hero_title", "PUBLICATIONS & MEDIA" ) ); ?></h1>
+            <h1 style="font-family: 'Phudu', sans-serif; font-size: clamp(2.8rem, 5.2vw, 4.5rem); font-weight: 700; color: #ffffff; text-transform: uppercase; margin: 0 0 1rem 0; line-height: 1.1;"><?php echo esc_html( franciscan_get_page_field( "publications", "hero_title", "PUBLICATIONS" ) ); ?></h1>
             <?php 
             $pub_hero_sub = franciscan_get_page_field( "publications", "hero_subtitle", "" );
-            if ( ! empty( $pub_hero_sub ) ) :
+            if ( ! empty( $pub_hero_sub ) && false === stripos( $pub_hero_sub, 'Books, newsletters' ) ) :
             ?>
                 <p style="font-family: 'Instrument Sans', sans-serif; font-size: clamp(1rem, 1.8vw, 1.2rem); color: #e6c888; max-width: 680px; margin: 0 auto; line-height: 1.5; font-weight: 500;">
                     <?php echo esc_html( $pub_hero_sub ); ?>
@@ -767,6 +767,14 @@ button.fs-mega-toggle:focus::after {
                     <?php
                     $publications = franciscan_get_publications_list();
                     if ( ! empty( $publications ) ) :
+                        // Ensure "Farmer-suicide in India" article is displayed as the first item
+                        usort( $publications, function( $a, $b ) {
+                            $a_farmer = ( false !== stripos( $a['title'] ?? '', 'Farmer-suicide' ) );
+                            $b_farmer = ( false !== stripos( $b['title'] ?? '', 'Farmer-suicide' ) );
+                            if ( $a_farmer && ! $b_farmer ) return -1;
+                            if ( ! $a_farmer && $b_farmer ) return 1;
+                            return 0;
+                        });
                         $total_pubs = count( $publications );
                         foreach ( $publications as $pub_idx => $pub ) :
                             $day         = isset( $pub['day'] ) ? trim( $pub['day'] ) : '';
@@ -776,6 +784,12 @@ button.fs-mega-toggle:focus::after {
                             $title       = isset( $pub['title'] ) ? trim( $pub['title'] ) : '';
                             $subtitle    = isset( $pub['subtitle'] ) ? trim( $pub['subtitle'] ) : '';
                             $meta_info   = isset( $pub['meta_info'] ) ? trim( $pub['meta_info'] ) : '';
+                            // Normalize author name to Gijesh Thomas Meckal
+                            $meta_info   = str_ireplace(
+                                array( 'Jijesh Thomas Mekal', 'Jijesh Thomas Meckal', 'Gigesh Thomas Meckel', 'Gigesh Meckel', 'Gigesh Meckal', 'Gijesh Meckel' ),
+                                'Fr. Gijesh Thomas Meckal, TOR',
+                                $meta_info
+                            );
                             $link_type   = isset( $pub['link_type'] ) && $pub['link_type'] === 'link' ? 'link' : 'pdf';
                             $file_url    = ! empty( $pub['file_url'] ) ? $pub['file_url'] : '#';
                             $btn_label   = ! empty( $pub['button_label'] ) ? $pub['button_label'] : ( $link_type === 'link' ? 'VIEW ARTICLE' : 'VIEW PDF' );

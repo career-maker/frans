@@ -495,12 +495,25 @@ function franciscan_get_default_page_content( $slug = '' ) {
         ),
         'publications' => array(
             'hero_badge'        => 'PROVINCIAL CHRONICLES',
-            'hero_title'        => 'PUBLICATIONS & MEDIA',
-            'hero_subtitle'     => 'Books, newsletters, pastoral letters, and audio-visual releases.',
+            'hero_title'        => 'PUBLICATIONS',
+            'hero_subtitle'     => '',
             'hero_image'        => '',
             'section_title'     => 'ARTICLES & RESEARCH',
             'section_subtitle'  => 'Scholarly papers, theological treatises, and peer-reviewed publications authored by our Franciscan Friars.',
             'publications_list' => array(
+                array(
+                    'id'           => 'pub_6',
+                    'day'          => '11',
+                    'month_year'   => 'MAY 2017',
+                    'image'        => defined( 'FRANCISCAN_THEME_URI' ) ? FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_24_08_PM.png' : '',
+                    'image_alt'    => 'Farmer suicide in India biotechnology research',
+                    'title'        => 'Farmer-suicide in India: debating the role of biotechnology',
+                    'subtitle'     => 'Indian Biotech opponents have attributed the increase of suicides to the monopolization of GM seeds, centering on patent control, application of terminator technology, marketing strategy, and increased production costs.',
+                    'meta_info'    => 'National Library of Medicine (PubMed: 28497354) • Peer-Reviewed Paper',
+                    'link_type'    => 'link',
+                    'file_url'     => 'https://pubmed.ncbi.nlm.nih.gov/28497354/',
+                    'button_label' => 'VIEW ARTICLE',
+                ),
                 array(
                     'id'           => 'pub_1',
                     'day'          => '20',
@@ -535,7 +548,7 @@ function franciscan_get_default_page_content( $slug = '' ) {
                     'image_alt'    => 'Pastoral Conversion in Shaping Pastoral Ministry',
                     'title'        => 'Jnanadeepa: Pune Journal of Religious Studies',
                     'subtitle'     => 'The Central Role of Pastoral Conversion in Shaping Pastoral Ministry',
-                    'meta_info'    => 'Fr. Gigesh Meckel, TOR • Vol. 29/2',
+                    'meta_info'    => 'Fr. Gijesh Thomas Meckal, TOR • Vol. 29/2',
                     'link_type'    => 'pdf',
                     'file_url'     => defined( 'FRANCISCAN_THEME_URI' ) ? FRANCISCAN_THEME_URI . '/assets/pdf/jnanadeepa-may-aug-2025-pastoral-conversion.pdf' : '',
                     'button_label' => 'VIEW PDF',
@@ -548,7 +561,7 @@ function franciscan_get_default_page_content( $slug = '' ) {
                     'image_alt'    => 'Harmonizing Human Welfare and Intrinsic Value',
                     'title'        => 'Jnanadeepa: Pune Journal of Religious Studies',
                     'subtitle'     => 'Harmonizing Human Welfare and Intrinsic Value: Hierarchical Theology in Catholic Eco-Theology',
-                    'meta_info'    => 'Fr. Gigesh Thomas Meckel, TOR • Vol. 29/3',
+                    'meta_info'    => 'Fr. Gijesh Thomas Meckal, TOR • Vol. 29/3',
                     'link_type'    => 'pdf',
                     'file_url'     => defined( 'FRANCISCAN_THEME_URI' ) ? FRANCISCAN_THEME_URI . '/assets/pdf/jnanadeepa-oct-dec-2025-eco-theology.pdf' : '',
                     'button_label' => 'VIEW PDF',
@@ -561,23 +574,10 @@ function franciscan_get_default_page_content( $slug = '' ) {
                     'image_alt'    => 'Word and Worship Theological Perspectives',
                     'title'        => 'Word & Worship: Journal of Pastoral Liturgy & Catechetics',
                     'subtitle'     => 'The Poor as Sacrament of Divine Encounter: Liberationist and Thomistic Perspectives',
-                    'meta_info'    => 'Fr. Gigesh Meckel, TOR • Vol. 59, No. 1',
+                    'meta_info'    => 'Fr. Gijesh Thomas Meckal, TOR • Vol. 59, No. 1',
                     'link_type'    => 'pdf',
                     'file_url'     => defined( 'FRANCISCAN_THEME_URI' ) ? FRANCISCAN_THEME_URI . '/assets/pdf/word-and-worship-2026.pdf' : '',
                     'button_label' => 'VIEW PDF',
-                ),
-                array(
-                    'id'           => 'pub_6',
-                    'day'          => '11',
-                    'month_year'   => 'MAY 2017',
-                    'image'        => defined( 'FRANCISCAN_THEME_URI' ) ? FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_24_08_PM.png' : '',
-                    'image_alt'    => 'Farmer suicide in India biotechnology research',
-                    'title'        => 'Farmer-suicide in India: debating the role of biotechnology',
-                    'subtitle'     => 'Indian Biotech opponents have attributed the increase of suicides to the monopolization of GM seeds, centering on patent control, application of terminator technology, marketing strategy, and increased production costs.',
-                    'meta_info'    => 'National Library of Medicine (PubMed: 28497354) • Peer-Reviewed Paper',
-                    'link_type'    => 'link',
-                    'file_url'     => 'https://pubmed.ncbi.nlm.nih.gov/28497354/',
-                    'button_label' => 'VIEW ARTICLE',
                 ),
                 array(
                     'id'           => 'pub_7',
@@ -755,6 +755,30 @@ function franciscan_resync_legacy_content_options() {
                 if ( 'ministries-formation' === $slug ) {
                     if ( empty( $clean['hero_subtitle'] ) ) {
                         $clean['hero_subtitle'] = "“The Most High Himself revealed to me that I should live according to the pattern of the Holy Gospel.”\n— St. Francis of Assisi, Testament";
+                    }
+                }
+                // Resync publications page
+                if ( 'publications' === $slug ) {
+                    $clean['hero_title']    = 'PUBLICATIONS';
+                    $clean['hero_subtitle'] = '';
+                    if ( ! empty( $clean['publications_list'] ) && is_array( $clean['publications_list'] ) ) {
+                        $farmer_items = array();
+                        $other_items  = array();
+                        foreach ( $clean['publications_list'] as $p_item ) {
+                            if ( isset( $p_item['meta_info'] ) ) {
+                                $p_item['meta_info'] = str_ireplace(
+                                    array( 'Fr. Gigesh Thomas Meckel, TOR', 'Fr. Gigesh Meckel, TOR', 'Gigesh Meckel', 'Jijesh Thomas Mekal', 'Gigesh Thomas Meckel', 'Jijesh Thomas Meckel' ),
+                                    'Fr. Gijesh Thomas Meckal, TOR',
+                                    $p_item['meta_info']
+                                );
+                            }
+                            if ( false !== stripos( $p_item['title'] ?? '', 'Farmer-suicide' ) ) {
+                                $farmer_items[] = $p_item;
+                            } else {
+                                $other_items[] = $p_item;
+                            }
+                        }
+                        $clean['publications_list'] = array_merge( $farmer_items, $other_items );
                     }
                 }
                 // Resync banner images if empty or containing placeholder

@@ -1017,9 +1017,9 @@ button.fs-mega-toggle:focus::after {
             </div>
             <div style="text-align: center;">
                 <div style="width: 140px; height: 140px; border-radius: 50%; overflow: hidden; margin: 0 auto 1rem auto; box-shadow: 0 10px 20px rgba(0,0,0,0.1);">
-                    <img loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/friars/fr-gigesh-meckal.png' ); ?>" alt="Fr. Gigesh Meckel" style="width: 100%; height: 100%; object-fit: cover;">
+                    <img loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/friars/fr-gigesh-meckal.png' ); ?>" alt="Fr. Gijesh Thomas Meckal" style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
-                <h4 style="font-family: 'Phudu', sans-serif; font-size: 1rem; font-weight: 700; color: #4a2a18; margin: 0;">Fr. Gigesh Meckel</h4>
+                <h4 style="font-family: 'Phudu', sans-serif; font-size: 1rem; font-weight: 700; color: #4a2a18; margin: 0;">Fr. Gijesh Thomas Meckal</h4>
             </div>
             <div style="text-align: center;">
                 <div style="width: 140px; height: 140px; border-radius: 50%; overflow: hidden; margin: 0 auto 1rem auto; box-shadow: 0 10px 20px rgba(0,0,0,0.1);">
