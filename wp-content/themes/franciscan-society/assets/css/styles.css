@@ -6618,32 +6618,51 @@ button:not(.btn-fill-animation):not(.footer-accordion-toggle):not(.fs-mega-toggl
         right: 0 !important;
     }
     
-    /* 2. Video at the top, showing full aspect ratio without scrolling */
-    #hero-bg-video {
-        border-radius: 0 !important;
+    /* 2. Video at the top, contained in 16:9 media wrapper without gaps */
+    .hero-media-wrapper {
         position: relative !important;
         width: 100% !important;
         max-width: 100% !important;
-        height: auto !important;
         aspect-ratio: 16/9 !important;
-        min-height: 0 !important;
-        object-fit: cover !important;
-        left: 0 !important;
-        right: 0 !important;
+        overflow: hidden !important;
+        border-radius: 0 !important;
+        display: block !important;
         margin: 0 !important;
         padding: 0 !important;
-        display: block !important;
+        z-index: 1 !important;
     }
     
-    /* Overlay only covers the video */
-    .hero-section .video-overlay {
+    .hero-media-wrapper #hero-bg-video,
+    #hero-bg-video {
+        border-radius: 0 !important;
         position: absolute !important;
+        inset: 0 !important;
         top: 0 !important;
         left: 0 !important;
         width: 100% !important;
-        height: auto !important;
-        aspect-ratio: 16/9 !important;
-        bottom: auto !important;
+        max-width: 100% !important;
+        height: 100% !important;
+        min-height: 0 !important;
+        object-fit: cover !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        display: block !important;
+        z-index: 1 !important;
+    }
+    
+    /* Overlay only covers the video */
+    .hero-media-wrapper .video-overlay,
+    .hero-section .video-overlay {
+        position: absolute !important;
+        inset: 0 !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+        aspect-ratio: unset !important;
+        border-radius: 0 !important;
+        z-index: 2 !important;
+        pointer-events: none !important;
     }
     
     /* 3. The grid layout becomes the white section below the video */

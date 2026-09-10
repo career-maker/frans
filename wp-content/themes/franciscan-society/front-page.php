@@ -25,17 +25,20 @@ get_header();
             $is_img_video = preg_match( '/\.(mp4|webm|ogg|mov)(\?.*)?$/i', $hero_img );
             $active_video = ! empty( $hero_vid ) ? $hero_vid : ( $is_img_video ? $hero_img : '' );
             $poster_img   = ! $is_img_video ? $hero_img : ( FRANCISCAN_THEME_URI . '/assets/images/new_uploads/hero-banner-aug20.jpeg' );
+            ?>
 
-            if ( ! empty( $active_video ) ) : ?>
-                <video id="hero-bg-video" autoplay muted loop playsinline poster="<?php echo esc_url( $poster_img ); ?>" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; border-radius: 24px;">
-                    <source src="<?php echo esc_url( $active_video ); ?>" type="video/mp4">
-                    <img src="<?php echo esc_url( $poster_img ); ?>" alt="Franciscan Friars Hero" style="width: 100%; height: 100%; object-fit: cover;">
-                </video>
-            <?php else : ?>
-                <img id="hero-bg-video" src="<?php echo esc_url( $hero_img ); ?>" alt="Franciscan Friars Hero" style="z-index: 1;">
-            <?php endif; ?>
-            <!-- Black Overlay (Soft Opacity) -->
-            <div class="video-overlay" style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(12, 11, 10, 0.35) 0%, rgba(12, 11, 10, 0.58) 100%); z-index: 2; pointer-events: none; border-radius: 24px;"></div>
+            <div class="hero-media-wrapper" style="position: absolute; inset: 0; width: 100%; height: 100%; overflow: hidden; z-index: 1; border-radius: 24px;">
+                <?php if ( ! empty( $active_video ) ) : ?>
+                    <video id="hero-bg-video" autoplay muted loop playsinline poster="<?php echo esc_url( $poster_img ); ?>" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1;">
+                        <source src="<?php echo esc_url( $active_video ); ?>" type="video/mp4">
+                        <img src="<?php echo esc_url( $poster_img ); ?>" alt="Franciscan Friars Hero" style="width: 100%; height: 100%; object-fit: cover;">
+                    </video>
+                <?php else : ?>
+                    <img id="hero-bg-video" src="<?php echo esc_url( $hero_img ); ?>" alt="Franciscan Friars Hero" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1;">
+                <?php endif; ?>
+                <!-- Black Overlay (Soft Opacity) -->
+                <div class="video-overlay" style="position: absolute; inset: 0; width: 100%; height: 100%; background: linear-gradient(180deg, rgba(12, 11, 10, 0.35) 0%, rgba(12, 11, 10, 0.58) 100%); z-index: 2; pointer-events: none;"></div>
+            </div>
 
                 <!-- Content Grid (Exact Reference Screenshot 1 Parallel Alignment & Spacing) -->
                 <div class="hero-grid hero-grid-layout" style="position: relative; z-index: 10;">
@@ -1074,17 +1077,20 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 
-    // Parallax Background Video
-    gsap.to("#hero-bg-video", {
-        scrollTrigger: {
-            trigger: ".hero-section",
-            start: "top top",
-            end: "bottom top",
-            scrub: true
-        },
-        yPercent: 20,
-        ease: "none"
-    });
+    // Parallax Background Video (Desktop only, subtle scale to prevent any uncovered seams or clipping)
+    if (window.innerWidth >= 992) {
+        gsap.to("#hero-bg-video", {
+            scrollTrigger: {
+                trigger: ".hero-section",
+                start: "top top",
+                end: "bottom top",
+                scrub: true
+            },
+            scale: 1.08,
+            transformOrigin: "center center",
+            ease: "none"
+        });
+    }
 
     // 5. Images Fade + Scale Reveal
     gsap.utils.toArray(".about-img-container, .about-video-card").forEach(img => {

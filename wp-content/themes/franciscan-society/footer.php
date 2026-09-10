@@ -17,9 +17,12 @@
                         <!-- Column 1: Logo & Contact Information -->
                         <div>
                             <div style="margin-bottom: 2rem;">
-                                <a href="<?php echo esc_url( home_url( '/' ) ); ?>" style="text-decoration: none; display: inline-flex; align-items: center; gap: 0.75rem;">
-                                    <img  loading="lazy" decoding="async"src="<?php echo esc_url( FRANCISCAN_THEME_URI . "/assets/images/logo.svg" ); ?>" alt="Franciscan Society Emblem" style="height: 48px; width: auto;" onerror="this.style.display='none'">
-                                    <span style="font-family: 'DM Sans', sans-serif; font-weight: 900; font-size: 1.4rem; color: #ffffff; letter-spacing: 0.05em; text-transform: uppercase;">FRANCISCAN<span style="color: #4A2A18;">.</span></span>
+                                <a href="<?php echo esc_url( home_url( '/' ) ); ?>" style="text-decoration: none; display: inline-flex; align-items: center; gap: 0.85rem;">
+                                    <img loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . "/assets/images/logo.svg" ); ?>" alt="Franciscan Society" style="height: 48px; width: auto;" onerror="this.style.display='none'">
+                                    <div style="display: flex; flex-direction: column; text-align: left;">
+                                        <span style="font-family: 'Instrument Sans', sans-serif; font-weight: 600; font-size: 0.88rem; color: #ffffff; line-height: 1.25; letter-spacing: 0.01em;">Franciscan Friars of the Third Order Regular</span>
+                                        <span style="font-family: 'Instrument Sans', sans-serif; font-size: 0.72rem; color: rgba(255, 255, 255, 0.75); line-height: 1.25; margin-top: 2px;">Province of St Francis of Assisi Ranchi</span>
+                                    </div>
                                 </a>
                             </div>
 

@@ -136,19 +136,45 @@
                 box-shadow: none !important;
                 overflow: visible !important;
             }
+            .hero-media-wrapper {
+                position: relative !important;
+                width: 100% !important;
+                max-width: 100% !important;
+                aspect-ratio: 16/9 !important;
+                overflow: hidden !important;
+                border-radius: 0 !important;
+                display: block !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+            .hero-media-wrapper #hero-bg-video,
             #hero-bg-video {
                 display: block !important;
                 border-radius: 0 !important;
-                width: 100% !important;
-                max-width: 100% !important;
-                height: auto !important;
-                aspect-ratio: 16/9 !important;
-                position: relative !important;
+                position: absolute !important;
+                inset: 0 !important;
+                top: 0 !important;
                 left: 0 !important;
-                right: 0 !important;
+                width: 100% !important;
+                height: 100% !important;
+                max-width: 100% !important;
                 margin: 0 !important;
                 padding: 0 !important;
                 object-fit: cover !important;
+                z-index: 1 !important;
+            }
+            .hero-media-wrapper .video-overlay,
+            .video-overlay {
+                position: absolute !important;
+                inset: 0 !important;
+                top: 0 !important;
+                left: 0 !important;
+                width: 100% !important;
+                height: 100% !important;
+                aspect-ratio: unset !important;
+                border-radius: 0 !important;
+                z-index: 2 !important;
+                pointer-events: none !important;
             }
         }
         
@@ -174,8 +200,10 @@
         /* Desktop layout */
         @media (min-width: 992px) {
             .hero-section { padding: 0 1.5rem 0 1.5rem !important; margin-top: 0 !important; }
-            .hero-section > div.hero-container { min-height: 100vh; border-radius: 0 0 24px 24px; box-shadow: 0 20px 50px rgba(0,0,0,0.18); max-width: 1400px; margin: 0 auto; }
-            #hero-bg-video { border-radius: 0 0 24px 24px; position: absolute; inset: 0; width: 100%; height: 120%; object-fit: cover; z-index: 1; }
+            .hero-section > div.hero-container { min-height: 100vh; border-radius: 0 0 24px 24px; box-shadow: 0 20px 50px rgba(0,0,0,0.18); max-width: 1400px; margin: 0 auto; position: relative; overflow: hidden !important; }
+            .hero-media-wrapper { border-radius: 0 0 24px 24px !important; position: absolute !important; inset: 0 !important; width: 100% !important; height: 100% !important; overflow: hidden !important; z-index: 1 !important; }
+            #hero-bg-video { border-radius: 0 0 24px 24px; position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; }
+            .video-overlay { position: absolute !important; inset: 0 !important; width: 100% !important; height: 100% !important; border-radius: 0 0 24px 24px !important; z-index: 2 !important; }
         }
         
         /* Mobile counters center alignment */
