@@ -1006,75 +1006,83 @@ button.fs-mega-toggle:focus::after {
 
             <div class="leadership-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1.75rem;">
                 <!-- Provincial Council Member 1: Minister Provincial -->
-                <div style="text-align: center; background: #FAF7F0; padding: 2.2rem 1.5rem; border-radius: 20px; border: 1px solid rgba(74,42,24,0.06); box-shadow: 0 4px 20px rgba(74,42,24,0.04);">
-                    <div style="width: 130px; height: 130px; border-radius: 50%; overflow: hidden; margin: 0 auto 1.2rem auto; box-shadow: 0 8px 20px rgba(74,42,24,0.14); border: 3px solid #e6c888; background: #ffffff;">
-                        <img loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/friars/fr-manoj-vengathanam.png' ); ?>" alt="Very Rev. Fr. Manoj Vengathanam, TOR" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+                <div style="text-align: center; background: #FAF7F0; padding: 2.2rem 1.5rem; border-radius: 20px; border: 1px solid rgba(74,42,24,0.06); box-shadow: 0 4px 20px rgba(74,42,24,0.04); display: flex; flex-direction: column; justify-content: space-between;">
+                    <div>
+                        <div style="width: 130px; height: 130px; border-radius: 50%; overflow: hidden; margin: 0 auto 1.2rem auto; box-shadow: 0 8px 20px rgba(74,42,24,0.14); border: 3px solid #e6c888; background: #ffffff;">
+                            <img loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/friars/fr-manoj-vengathanam.png' ); ?>" alt="Very Rev. Fr. Manoj Vengathanam, TOR" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+                        </div>
+                        <div style="min-height: 48px; display: flex; align-items: center; justify-content: center; margin-bottom: 0.35rem;">
+                            <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.78rem; color: #78716c; margin: 0; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 800;">Minister Provincial</p>
+                        </div>
                     </div>
-                    <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.78rem; color: #78716c; margin: 0 0 0.35rem 0; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 800;">Minister Provincial</p>
                     <h4 style="font-family: 'Phudu', sans-serif; font-size: 1.05rem; font-weight: 700; color: #1c1917; margin: 0;">Very Rev. Fr. Manoj Vengathanam, TOR</h4>
                 </div>
 
                 <!-- Provincial Council Member 2: Vicar Provincial -->
-                <div style="text-align: center; background: #FAF7F0; padding: 2.2rem 1.5rem; border-radius: 20px; border: 1px solid rgba(74,42,24,0.06); box-shadow: 0 4px 20px rgba(74,42,24,0.04);">
-                    <div style="width: 130px; height: 130px; border-radius: 50%; overflow: hidden; margin: 0 auto 1.2rem auto; box-shadow: 0 8px 20px rgba(74,42,24,0.14); border: 3px solid #e6c888; background: #ffffff;">
-                        <img loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/friars/fr-manoj-kullu.png' ); ?>" alt="Very Rev. Fr. Manoj Kullu, TOR" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+                <div style="text-align: center; background: #FAF7F0; padding: 2.2rem 1.5rem; border-radius: 20px; border: 1px solid rgba(74,42,24,0.06); box-shadow: 0 4px 20px rgba(74,42,24,0.04); display: flex; flex-direction: column; justify-content: space-between;">
+                    <div>
+                        <div style="width: 130px; height: 130px; border-radius: 50%; overflow: hidden; margin: 0 auto 1.2rem auto; box-shadow: 0 8px 20px rgba(74,42,24,0.14); border: 3px solid #e6c888; background: #ffffff;">
+                            <img loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/friars/fr-manoj-kullu.png' ); ?>" alt="Very Rev. Fr. Manoj Kullu, TOR" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+                        </div>
+                        <div style="min-height: 48px; display: flex; align-items: center; justify-content: center; margin-bottom: 0.35rem;">
+                            <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.78rem; color: #78716c; margin: 0; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 800;">Vicar Provincial</p>
+                        </div>
                     </div>
-                    <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.78rem; color: #78716c; margin: 0 0 0.35rem 0; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 800;">Vicar Provincial</p>
                     <h4 style="font-family: 'Phudu', sans-serif; font-size: 1.05rem; font-weight: 700; color: #1c1917; margin: 0;">Very Rev. Fr. Manoj Kullu, TOR</h4>
                 </div>
 
-                <!-- Provincial Council Member 3: First Councilor -->
-                <div style="text-align: center; background: #FAF7F0; padding: 2.2rem 1.5rem; border-radius: 20px; border: 1px solid rgba(74,42,24,0.06); box-shadow: 0 4px 20px rgba(74,42,24,0.04);">
-                    <div style="width: 130px; height: 130px; border-radius: 50%; overflow: hidden; margin: 0 auto 1.2rem auto; box-shadow: 0 8px 20px rgba(74,42,24,0.14); border: 3px solid #e6c888; background: #ffffff;">
-                        <img loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/friars/fr-paulinus-kiro.png' ); ?>" alt="Rev. Fr. Paulinus Kiro, TOR" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+                <!-- Provincial Council Member 3: First Councilor, Provincial Secretary & Province Econome -->
+                <div style="text-align: center; background: #FAF7F0; padding: 2.2rem 1.5rem; border-radius: 20px; border: 1px solid rgba(74,42,24,0.06); box-shadow: 0 4px 20px rgba(74,42,24,0.04); display: flex; flex-direction: column; justify-content: space-between;">
+                    <div>
+                        <div style="width: 130px; height: 130px; border-radius: 50%; overflow: hidden; margin: 0 auto 1.2rem auto; box-shadow: 0 8px 20px rgba(74,42,24,0.14); border: 3px solid #e6c888; background: #ffffff;">
+                            <img loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/friars/fr-paulinus-kiro.png' ); ?>" alt="Rev. Fr. Paulinus Kiro, TOR" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+                        </div>
+                        <div style="min-height: 48px; display: flex; align-items: center; justify-content: center; margin-bottom: 0.35rem;">
+                            <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.72rem; color: #78716c; margin: 0; text-transform: uppercase; letter-spacing: 0.07em; font-weight: 800; line-height: 1.35;">
+                                First Councilor<br>Provincial Secretary<br>Province Econome
+                            </p>
+                        </div>
                     </div>
-                    <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.78rem; color: #78716c; margin: 0 0 0.35rem 0; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 800;">First Councilor</p>
                     <h4 style="font-family: 'Phudu', sans-serif; font-size: 1.05rem; font-weight: 700; color: #1c1917; margin: 0;">Rev. Fr. Paulinus Kiro, TOR</h4>
                 </div>
 
                 <!-- Provincial Council Member 4: Second Councilor -->
-                <div style="text-align: center; background: #FAF7F0; padding: 2.2rem 1.5rem; border-radius: 20px; border: 1px solid rgba(74,42,24,0.06); box-shadow: 0 4px 20px rgba(74,42,24,0.04);">
-                    <div style="width: 130px; height: 130px; border-radius: 50%; overflow: hidden; margin: 0 auto 1.2rem auto; box-shadow: 0 8px 20px rgba(74,42,24,0.14); border: 3px solid #e6c888; background: #ffffff;">
-                        <img loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/friars/fr-benidict-tirkey.png' ); ?>" alt="Rev. Fr. Benedict Tirkey, TOR" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+                <div style="text-align: center; background: #FAF7F0; padding: 2.2rem 1.5rem; border-radius: 20px; border: 1px solid rgba(74,42,24,0.06); box-shadow: 0 4px 20px rgba(74,42,24,0.04); display: flex; flex-direction: column; justify-content: space-between;">
+                    <div>
+                        <div style="width: 130px; height: 130px; border-radius: 50%; overflow: hidden; margin: 0 auto 1.2rem auto; box-shadow: 0 8px 20px rgba(74,42,24,0.14); border: 3px solid #e6c888; background: #ffffff;">
+                            <img loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/friars/fr-benidict-tirkey.png' ); ?>" alt="Rev. Fr. Benedict Tirkey, TOR" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+                        </div>
+                        <div style="min-height: 48px; display: flex; align-items: center; justify-content: center; margin-bottom: 0.35rem;">
+                            <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.78rem; color: #78716c; margin: 0; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 800;">Second Councilor</p>
+                        </div>
                     </div>
-                    <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.78rem; color: #78716c; margin: 0 0 0.35rem 0; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 800;">Second Councilor</p>
                     <h4 style="font-family: 'Phudu', sans-serif; font-size: 1.05rem; font-weight: 700; color: #1c1917; margin: 0;">Rev. Fr. Benedict Tirkey, TOR</h4>
                 </div>
 
                 <!-- Provincial Council Member 5: Third Councilor -->
-                <div style="text-align: center; background: #FAF7F0; padding: 2.2rem 1.5rem; border-radius: 20px; border: 1px solid rgba(74,42,24,0.06); box-shadow: 0 4px 20px rgba(74,42,24,0.04);">
-                    <div style="width: 130px; height: 130px; border-radius: 50%; overflow: hidden; margin: 0 auto 1.2rem auto; box-shadow: 0 8px 20px rgba(74,42,24,0.14); border: 3px solid #e6c888; background: #ffffff;">
-                        <img loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/friars/fr-benjamin-tiru.png' ); ?>" alt="Rev. Fr. Benjamin Tiru, TOR" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+                <div style="text-align: center; background: #FAF7F0; padding: 2.2rem 1.5rem; border-radius: 20px; border: 1px solid rgba(74,42,24,0.06); box-shadow: 0 4px 20px rgba(74,42,24,0.04); display: flex; flex-direction: column; justify-content: space-between;">
+                    <div>
+                        <div style="width: 130px; height: 130px; border-radius: 50%; overflow: hidden; margin: 0 auto 1.2rem auto; box-shadow: 0 8px 20px rgba(74,42,24,0.14); border: 3px solid #e6c888; background: #ffffff;">
+                            <img loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/friars/fr-benjamin-tiru.png' ); ?>" alt="Rev. Fr. Benjamin Tiru, TOR" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+                        </div>
+                        <div style="min-height: 48px; display: flex; align-items: center; justify-content: center; margin-bottom: 0.35rem;">
+                            <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.78rem; color: #78716c; margin: 0; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 800;">Third Councilor</p>
+                        </div>
                     </div>
-                    <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.78rem; color: #78716c; margin: 0 0 0.35rem 0; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 800;">Third Councilor</p>
                     <h4 style="font-family: 'Phudu', sans-serif; font-size: 1.05rem; font-weight: 700; color: #1c1917; margin: 0;">Rev. Fr. Benjamin Tiru, TOR</h4>
                 </div>
 
                 <!-- Provincial Council Member 6: Fourth Councilor -->
-                <div style="text-align: center; background: #FAF7F0; padding: 2.2rem 1.5rem; border-radius: 20px; border: 1px solid rgba(74,42,24,0.06); box-shadow: 0 4px 20px rgba(74,42,24,0.04);">
-                    <div style="width: 130px; height: 130px; border-radius: 50%; overflow: hidden; margin: 0 auto 1.2rem auto; box-shadow: 0 8px 20px rgba(74,42,24,0.14); border: 3px solid #e6c888; background: #ffffff;">
-                        <img loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/friars/fr-xavier-kindo.png' ); ?>" alt="Rev. Fr. Xavier Kindo, TOR" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+                <div style="text-align: center; background: #FAF7F0; padding: 2.2rem 1.5rem; border-radius: 20px; border: 1px solid rgba(74,42,24,0.06); box-shadow: 0 4px 20px rgba(74,42,24,0.04); display: flex; flex-direction: column; justify-content: space-between;">
+                    <div>
+                        <div style="width: 130px; height: 130px; border-radius: 50%; overflow: hidden; margin: 0 auto 1.2rem auto; box-shadow: 0 8px 20px rgba(74,42,24,0.14); border: 3px solid #e6c888; background: #ffffff;">
+                            <img loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/friars/fr-xavier-kindo.png' ); ?>" alt="Rev. Fr. Xavier Kindo, TOR" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+                        </div>
+                        <div style="min-height: 48px; display: flex; align-items: center; justify-content: center; margin-bottom: 0.35rem;">
+                            <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.78rem; color: #78716c; margin: 0; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 800;">Fourth Councilor</p>
+                        </div>
                     </div>
-                    <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.78rem; color: #78716c; margin: 0 0 0.35rem 0; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 800;">Fourth Councilor</p>
                     <h4 style="font-family: 'Phudu', sans-serif; font-size: 1.05rem; font-weight: 700; color: #1c1917; margin: 0;">Rev. Fr. Xavier Kindo, TOR</h4>
-                </div>
-
-                <!-- Provincial Council Member 7: Provincial Secretary -->
-                <div style="text-align: center; background: #FAF7F0; padding: 2.2rem 1.5rem; border-radius: 20px; border: 1px solid rgba(74,42,24,0.06); box-shadow: 0 4px 20px rgba(74,42,24,0.04);">
-                    <div style="width: 130px; height: 130px; border-radius: 50%; overflow: hidden; margin: 0 auto 1.2rem auto; box-shadow: 0 8px 20px rgba(74,42,24,0.14); border: 3px solid #e6c888; background: #ffffff;">
-                        <img loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/friars/fr-paulinus-kiro.png' ); ?>" alt="Rev. Fr. Paulinus Kiro, TOR" style="width: 100%; height: 100%; object-fit: cover; display: block;">
-                    </div>
-                    <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.78rem; color: #78716c; margin: 0 0 0.35rem 0; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 800;">Provincial Secretary</p>
-                    <h4 style="font-family: 'Phudu', sans-serif; font-size: 1.05rem; font-weight: 700; color: #1c1917; margin: 0;">Rev. Fr. Paulinus Kiro, TOR</h4>
-                </div>
-
-                <!-- Provincial Council Member 8: Province Econome -->
-                <div style="text-align: center; background: #FAF7F0; padding: 2.2rem 1.5rem; border-radius: 20px; border: 1px solid rgba(74,42,24,0.06); box-shadow: 0 4px 20px rgba(74,42,24,0.04);">
-                    <div style="width: 130px; height: 130px; border-radius: 50%; overflow: hidden; margin: 0 auto 1.2rem auto; box-shadow: 0 8px 20px rgba(74,42,24,0.14); border: 3px solid #e6c888; background: #ffffff;">
-                        <img loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/friars/fr-paulinus-kiro.png' ); ?>" alt="Rev. Fr. Paulinus Kiro, TOR" style="width: 100%; height: 100%; object-fit: cover; display: block;">
-                    </div>
-                    <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.78rem; color: #78716c; margin: 0 0 0.35rem 0; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 800;">Province Econome</p>
-                    <h4 style="font-family: 'Phudu', sans-serif; font-size: 1.05rem; font-weight: 700; color: #1c1917; margin: 0;">Rev. Fr. Paulinus Kiro, TOR</h4>
                 </div>
             </div>
 
