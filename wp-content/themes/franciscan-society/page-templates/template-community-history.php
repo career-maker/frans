@@ -784,7 +784,7 @@ button.fs-mega-toggle:focus::after {
                     <span style="color: #ffffff; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; font-family: 'Instrument Sans', sans-serif;"><?php echo esc_html( franciscan_get_page_field( 'community-history', 'heritage_badge', 'OUR HERITAGE' ) ); ?></span>
                 </div>
                 <h2 style="font-family: 'Phudu', sans-serif; font-size: clamp(2rem, 3.8vw, 44px); font-weight: 600; color: #ffffff; text-transform: uppercase; line-height: 1.15; letter-spacing: -0.01em; margin-bottom: 1.2rem; max-width: 800px;">
-                    <?php echo esc_html( franciscan_get_page_field( 'community-history', 'heritage_title', 'A LEGACY OF FAITH AND SERVICE' ) ); ?>
+                    <?php echo esc_html( franciscan_get_page_field( 'community-history', 'heritage_title', 'The Lord Himself led me among them' ) ); ?>
                 </h2>
                 <p style="font-family: 'Instrument Sans', sans-serif; font-size: 1.05rem; font-weight: 400; color: rgba(255, 255, 255, 0.9); line-height: 1.52; max-width: 650px; margin: 0;">
                     <?php echo esc_html( franciscan_get_page_field( 'community-history', 'heritage_text', 'Tracing our origins from the ancient 4th-century Order of Penance, to St. Francis of Assisi, to thirty years of dedicated growth in Ranchi Province.' ) ); ?>

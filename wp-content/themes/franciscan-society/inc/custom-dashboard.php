@@ -1783,7 +1783,7 @@ function franciscan_render_dashboard_view() {
                                     </div>
                                     <div class="form-group">
                                         <label>Heritage Card Title</label>
-                                        <input type="text" name="heritage_title" class="form-control" value="<?php echo esc_attr( $data['heritage_title'] ?? 'A LEGACY OF FAITH AND SERVICE' ); ?>">
+                                        <input type="text" name="heritage_title" class="form-control" value="<?php echo esc_attr( $data['heritage_title'] ?? 'The Lord Himself led me among them' ); ?>">
                                     </div>
                                     <div class="form-group full-width">
                                         <label>Heritage Card Text</label>
@@ -2110,6 +2110,10 @@ function franciscan_render_dashboard_view() {
                                         <label>Stat 3 Label</label>
                                         <input type="text" name="stat_formation_lbl" class="form-control" value="<?php echo esc_attr( $data['stat_formation_lbl'] ?? 'Brothers in Formation' ); ?>">
                                     </div>
+                                    <div class="form-group full-width">
+                                        <label>Friars Directory Title / Franciscan Motto</label>
+                                        <input type="text" name="directory_title" class="form-control" value="<?php echo esc_attr( $data['directory_title'] ?? 'Brothers always be mindful that they should desire one thing alone, namely, the Spirit of God at work within them' ); ?>">
+                                    </div>
                                 </div>
                             </div>
                         <?php endif; ?>
@@ -2153,8 +2157,8 @@ function franciscan_render_dashboard_view() {
                                         <input type="text" name="card_subtitle" class="form-control" value="<?php echo esc_attr( $data['card_subtitle'] ?? 'Communities across India and beyond, rooted in the Franciscan charism of poverty, prayer, and service.' ); ?>">
                                     </div>
                                     <div class="form-group">
-                                        <label>Overview Section Title</label>
-                                        <input type="text" name="friaries_overview_title" class="form-control" value="<?php echo esc_attr( $data['friaries_overview_title'] ?? 'OUR FRIARIES' ); ?>">
+                                        <label>Overview Section Title / Quote</label>
+                                        <input type="text" name="friaries_overview_title" class="form-control" value="<?php echo esc_attr( $data['friaries_overview_title'] ?? 'The Lord gave me brothers.' ); ?>">
                                     </div>
                                     <div class="form-group full-width">
                                         <label>Overview Subtitle Text</label>
@@ -2413,6 +2417,21 @@ function franciscan_render_dashboard_view() {
                         <?php endif; ?>
 
                         <?php if ( $slug === 'ministries-pastoral' ) : ?>
+                            <!-- Pastoral Ministry Hero Banner -->
+                            <div class="form-section">
+                                <h3 class="form-section-title">🌟 Hero Banner</h3>
+                                <div class="form-grid">
+                                    <div class="form-group full-width">
+                                        <label>Hero Title</label>
+                                        <input type="text" name="hero_title" class="form-control" value="<?php echo esc_attr( $data['hero_title'] ?? 'PASTORAL MINISTRY' ); ?>">
+                                    </div>
+                                    <div class="form-group full-width">
+                                        <label>Hero Subtitle / Franciscan Quote</label>
+                                        <textarea name="hero_subtitle" class="form-control" rows="3"><?php echo esc_textarea( $data['hero_subtitle'] ?? "“The brothers should rejoice when they live among people who are considered of little worth and who are despised.”\n— St. Francis of Assisi, Earlier Rule, Ch. IX" ); ?></textarea>
+                                    </div>
+                                </div>
+                            </div>
+
                             <!-- Pastoral Ministry Details -->
                             <div class="form-section">
                                 <h3 class="form-section-title">📖 Section 1: Pastoral Mission & Presence</h3>
@@ -2498,6 +2517,21 @@ function franciscan_render_dashboard_view() {
                         <?php endif; ?>
 
                         <?php if ( $slug === 'ministries-education' ) : ?>
+                            <!-- Education Ministry Hero Banner -->
+                            <div class="form-section">
+                                <h3 class="form-section-title">🌟 Hero Banner</h3>
+                                <div class="form-grid">
+                                    <div class="form-group full-width">
+                                        <label>Hero Title</label>
+                                        <input type="text" name="hero_title" class="form-control" value="<?php echo esc_attr( $data['hero_title'] ?? 'EDUCATION MINISTRY' ); ?>">
+                                    </div>
+                                    <div class="form-group full-width">
+                                        <label>Hero Subtitle / Franciscan Quote</label>
+                                        <textarea name="hero_subtitle" class="form-control" rows="3"><?php echo esc_textarea( $data['hero_subtitle'] ?? "“Where there is charity and wisdom, there is neither fear nor ignorance.”" ); ?></textarea>
+                                    </div>
+                                </div>
+                            </div>
+
                             <!-- Education Ministry Details -->
                             <div class="form-section">
                                 <h3 class="form-section-title">🏫 Section 1: Educational Vision & Formation</h3>
@@ -2591,6 +2625,21 @@ function franciscan_render_dashboard_view() {
                         <?php endif; ?>
 
                         <?php if ( $slug === 'ministries-formation' ) : ?>
+                            <!-- Formation Ministry Hero Banner -->
+                            <div class="form-section">
+                                <h3 class="form-section-title">🌟 Hero Banner</h3>
+                                <div class="form-grid">
+                                    <div class="form-group full-width">
+                                        <label>Hero Title</label>
+                                        <input type="text" name="hero_title" class="form-control" value="<?php echo esc_attr( $data['hero_title'] ?? 'FORMATION MINISTRY' ); ?>">
+                                    </div>
+                                    <div class="form-group full-width">
+                                        <label>Hero Subtitle / Franciscan Quote</label>
+                                        <textarea name="hero_subtitle" class="form-control" rows="3"><?php echo esc_textarea( $data['hero_subtitle'] ?? "“The Most High Himself revealed to me that I should live according to the pattern of the Holy Gospel.”\n— St. Francis of Assisi, Testament" ); ?></textarea>
+                                    </div>
+                                </div>
+                            </div>
+
                             <!-- Formation Ministry Details -->
                             <div class="form-section">
                                 <h3 class="form-section-title">🕊️ Section 1: Religious Charism & Consecration</h3>

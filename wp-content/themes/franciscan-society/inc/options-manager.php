@@ -301,7 +301,7 @@ function franciscan_get_default_page_content( $slug = '' ) {
             'hero_subtitle'          => 'Tracing our origins from the ancient 4th-century Order of Penance, to St. Francis of Assisi, to thirty years of dedicated growth in Ranchi Province.',
             'hero_image'             => FRANCISCAN_THEME_URI . '/assets/images/new_uploads/history-banner.jpeg',
             'heritage_badge'         => 'OUR HERITAGE',
-            'heritage_title'         => 'A LEGACY OF FAITH AND SERVICE',
+            'heritage_title'         => 'The Lord Himself led me among them',
             'heritage_text'          => 'Tracing our origins from the ancient 4th-century Order of Penance, to St. Francis of Assisi, to thirty years of dedicated growth in Ranchi Province.',
             'era1_badge'             => 'ORIGINS & ROOTS',
             'era1_title'             => 'The Order of Penance & St. Francis of Assisi',
@@ -365,6 +365,7 @@ function franciscan_get_default_page_content( $slug = '' ) {
             'stat_3_num'             => '77+',
             'stat_3_lbl'             => 'In Formation',
             'roster_title'           => 'FRIARS IN COMMUNITY',
+            'directory_title'        => 'Brothers always be mindful that they should desire one thing alone, namely, the Spirit of God at work within them',
             'roster_note'            => 'Complete list includes 100+ professed friars serving across India and abroad.',
         ),
         'community-friaries' => array(
@@ -374,6 +375,7 @@ function franciscan_get_default_page_content( $slug = '' ) {
             'hero_image'             => FRANCISCAN_THEME_URI . '/assets/images/new_uploads/friaries-banner.jpg',
             'section_eyebrow'        => 'OUR HOMES',
             'section_title'          => 'FRIARIES ACROSS INDIA',
+            'friaries_overview_title'=> 'The Lord gave me brothers.',
             'intro_text'             => 'The Province maintains 18 major friaries and ashrams across multiple dioceses, serving the People of God through parishes, schools, and pastoral ministry.',
         ),
         'community' => array(
@@ -437,6 +439,7 @@ function franciscan_get_default_page_content( $slug = '' ) {
         'ministries-pastoral' => array(
             'hero_badge'        => 'SACRED CARE',
             'hero_title'        => 'PASTORAL MINISTRY',
+            'hero_subtitle'     => "“The brothers should rejoice when they live among people who are considered of little worth and who are despised.”\n— St. Francis of Assisi, Earlier Rule, Ch. IX",
             'hero_image'        => FRANCISCAN_THEME_URI . '/assets/images/new_uploads/pastoral-ministry-banner.jpg',
             'section_1_heading' => 'Pastoral Ministry',
             'section_1_p1'      => 'St. Francis gathered brothers around him to become heralds of the Good News. Inspired by this vision, the TOR Franciscans of the Province actively engage in pastoral ministry in parishes. Through this vital service to the Church, the friars dedicate themselves wholeheartedly to the mission of evangelization by their pastoral presence and ministry.',
@@ -455,6 +458,7 @@ function franciscan_get_default_page_content( $slug = '' ) {
         'ministries-education' => array(
             'hero_badge'        => 'ILLUMINATING MINDS',
             'hero_title'        => 'EDUCATION MINISTRY',
+            'hero_subtitle'     => "“Where there is charity and wisdom, there is neither fear nor ignorance.”",
             'hero_image'        => FRANCISCAN_THEME_URI . '/assets/images/new_uploads/education-ministry-banner.jpg',
             'section_1_heading' => 'Education Ministry',
             'section_1_p1'      => 'Education is one of the principal ministries of St. Francis Province, Ranchi. Inspired by the vision of St. Francis of Assisi and the educational mission of the Catholic Church, the Province is committed to forming young people who are intellectually competent, morally upright, spiritually grounded, and socially responsible.',
@@ -475,6 +479,7 @@ function franciscan_get_default_page_content( $slug = '' ) {
         'ministries-formation' => array(
             'hero_badge'        => 'NURTURING VOCATIONS',
             'hero_title'        => 'FORMATION MINISTRY',
+            'hero_subtitle'     => "“The Most High Himself revealed to me that I should live according to the pattern of the Holy Gospel.”\n— St. Francis of Assisi, Testament",
             'hero_image'        => '',
             'section_1_heading' => 'Formation Ministry',
             'section_1_p1'      => 'Formation is the foundational ministry through which the Franciscan TOR charism and spirituality are creatively and faithfully proposed to and shared with successive generations. In accordance with the mind of the Church and the Order, our primary objective is to prepare candidates for the total consecration of themselves to God in the following of Christ, at the service of the Church’s mission. As Pope John Paul II emphasizes in Vita Consecrata, formation is a dynamic, lifelong process that leads to ongoing conversion and helps individuals discover the signs of God in earthly realities. For this formation to be truly complete, it must be holistic—encompassing and integrating every aspect of Christian life. Ultimately, it is a sacred sharing in the work of the Father who, through the Spirit, fashions the inner attitudes of the Son in the hearts of young men.',
@@ -716,6 +721,40 @@ function franciscan_resync_legacy_content_options() {
                 if ( in_array( $slug, array( 'home', 'about' ), true ) ) {
                     if ( isset( $clean['about_section_heading'] ) && in_array( $clean['about_section_heading'], array( 'OUR STORY FAITH MISSION AND VISION TOGETHER', 'WALKING TOGETHER IN FAITH, PENANCE, AND SERVICE' ), true ) ) {
                         $clean['about_section_heading'] = 'Our Franciscan Journey';
+                    }
+                }
+                // Resync friars directory title
+                if ( 'community-friars' === $slug ) {
+                    if ( ! isset( $clean['directory_title'] ) || in_array( $clean['directory_title'], array( 'OUR FRIARS', 'FRIARS IN COMMUNITY' ), true ) ) {
+                        $clean['directory_title'] = 'Brothers always be mindful that they should desire one thing alone, namely, the Spirit of God at work within them';
+                    }
+                }
+                // Resync history heritage title
+                if ( 'community-history' === $slug ) {
+                    if ( ! isset( $clean['heritage_title'] ) || in_array( $clean['heritage_title'], array( 'A LEGACY OF FAITH AND SERVICE' ), true ) ) {
+                        $clean['heritage_title'] = 'The Lord Himself led me among them';
+                    }
+                }
+                // Resync friaries overview title
+                if ( 'community-friaries' === $slug ) {
+                    if ( ! isset( $clean['friaries_overview_title'] ) || in_array( $clean['friaries_overview_title'], array( 'OUR FRIARIES' ), true ) ) {
+                        $clean['friaries_overview_title'] = 'The Lord gave me brothers.';
+                    }
+                }
+                // Resync ministry banner subtitles
+                if ( 'ministries-pastoral' === $slug ) {
+                    if ( empty( $clean['hero_subtitle'] ) ) {
+                        $clean['hero_subtitle'] = "“The brothers should rejoice when they live among people who are considered of little worth and who are despised.”\n— St. Francis of Assisi, Earlier Rule, Ch. IX";
+                    }
+                }
+                if ( 'ministries-education' === $slug ) {
+                    if ( empty( $clean['hero_subtitle'] ) ) {
+                        $clean['hero_subtitle'] = "“Where there is charity and wisdom, there is neither fear nor ignorance.”";
+                    }
+                }
+                if ( 'ministries-formation' === $slug ) {
+                    if ( empty( $clean['hero_subtitle'] ) ) {
+                        $clean['hero_subtitle'] = "“The Most High Himself revealed to me that I should live according to the pattern of the Holy Gospel.”\n— St. Francis of Assisi, Testament";
                     }
                 }
                 // Resync banner images if empty or containing placeholder

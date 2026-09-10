@@ -742,7 +742,7 @@ button.fs-mega-toggle:focus::after {
     
 
         <div style="max-width: 1200px; margin: 0 auto; padding: clamp(3rem, 8vw, 5rem) 2rem;">
-        <h2 style="font-family: 'Phudu', sans-serif; font-size: 2.2rem; font-weight: 900; color: #1c1917; margin-bottom: 2.5rem; text-align: center;">OUR FRIARS</h2>
+        <h2 style="font-family: 'Phudu', sans-serif; font-size: clamp(1.4rem, 2.4vw, 2.2rem); font-weight: 700; color: #1c1917; margin-bottom: 2.5rem; text-align: center; line-height: 1.35; max-width: 950px; margin-left: auto; margin-right: auto;"><?php echo esc_html( franciscan_get_page_field( 'community-friars', 'directory_title', 'Brothers always be mindful that they should desire one thing alone, namely, the Spirit of God at work within them' ) ); ?></h2>
         
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 2rem; margin-bottom: 5rem;">
             <div style="text-align: center;">

@@ -731,7 +731,7 @@ button.fs-mega-toggle:focus::after {
     
 
     <div style="max-width: 1200px; margin: 0 auto; padding: clamp(3rem, 8vw, 5rem) 2rem;">
-        <h2 style="font-family: 'Phudu', sans-serif; font-size: 2.2rem; font-weight: 900; color: #1c1917; margin-bottom: 2.5rem; text-align: center;">OUR FRIARIES</h2>
+        <h2 style="font-family: 'Phudu', sans-serif; font-size: clamp(1.5rem, 2.5vw, 2.2rem); font-weight: 700; color: #1c1917; margin-bottom: 2.5rem; text-align: center; line-height: 1.35; max-width: 950px; margin-left: auto; margin-right: auto;"><?php echo esc_html( franciscan_get_page_field( 'community-friaries', 'friaries_overview_title', 'The Lord gave me brothers.' ) ); ?></h2>
 
         <?php
         // Refined light pastel color palettes (background, border, stroke, text)
