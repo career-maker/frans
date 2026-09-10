@@ -515,14 +515,17 @@ $hero_subtitle = franciscan_get_page_field( 'contact', 'hero_subtitle', 'Reach o
                     </div>
                 </div>
 
-                <!-- Card 2: Communication Channels -->
                 <?php
-                $contact_email = franciscan_get_option( 'contact_email', 'info@franciscansociety.org' );
-                $contact_phone = franciscan_get_option( 'contact_phone', '+91 94311 00000' );
-                if ( empty( $contact_phone ) || $contact_phone === '+91 95726 35314' ) {
-                    $contact_phone = '+91 94311 00000';
+                $contact_email = franciscan_get_option( 'contact_email', 'sectorranchi09@gmail.com' );
+                if ( empty( $contact_email ) || false !== strpos( $contact_email, 'info@franciscansociety.org' ) ) {
+                    $contact_email = 'sectorranchi09@gmail.com';
                 }
-                $tel_href      = 'tel:+' . preg_replace( '/[^0-9]/', '', $contact_phone );
+                $contact_phone = franciscan_get_option( 'contact_phone', '+91 95726 35314' );
+                if ( empty( $contact_phone ) || false !== strpos( $contact_phone, '94311' ) ) {
+                    $contact_phone = '+91 95726 35314';
+                }
+                $tel_digits = preg_replace( '/[^0-9]/', '', $contact_phone );
+                $tel_href   = ( strlen( $tel_digits ) === 10 ? 'tel:+91' : 'tel:+' ) . $tel_digits;
                 ?>
                 <div class="info-card-ivory">
                     <div class="info-icon-badge">

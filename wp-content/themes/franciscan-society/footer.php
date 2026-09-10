@@ -25,9 +25,16 @@
 
                             <?php
                             $footer_phone   = franciscan_get_option( 'contact_phone', '+91 95726 35314' );
-                            $footer_tel_url = 'tel:+' . preg_replace( '/[^0-9]/', '', $footer_phone );
-                            $footer_email   = franciscan_get_option( 'contact_email', 'info@franciscansociety.org' );
-                            $footer_address = franciscan_get_option( 'address_text', "Franciscan Ashram (Provincial Residence), P.O. Harmu Housing Colony, Ranchi – 834002, JHARKHAND" );
+                            if ( empty( $footer_phone ) || false !== strpos( $footer_phone, '94311' ) ) {
+                                $footer_phone = '+91 95726 35314';
+                            }
+                            $tel_digits     = preg_replace( '/[^0-9]/', '', $footer_phone );
+                            $footer_tel_url = ( strlen( $tel_digits ) === 10 ? 'tel:+91' : 'tel:+' ) . $tel_digits;
+                            $footer_email   = franciscan_get_option( 'contact_email', 'sectorranchi09@gmail.com' );
+                            if ( empty( $footer_email ) || false !== strpos( $footer_email, 'info@franciscansociety.org' ) ) {
+                                $footer_email = 'sectorranchi09@gmail.com';
+                            }
+                            $footer_address = franciscan_get_option( 'address_text', "Franciscan Ashram (Provincial Residence)\nP.O. Harmu Housing Colony, Ranchi – 834002, JHARKHAND" );
                             ?>
                             <div style="display: flex; flex-direction: column; gap: 1.1rem; font-family: 'Instrument Sans', sans-serif; font-size: 0.92rem; color: #d6d3d1;">
                                 <div style="display: flex; align-items: center; gap: 0.8rem;">
@@ -48,7 +55,7 @@
                                     <span style="width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.18); display: flex; align-items: center; justify-content: center; color: #ffffff; flex-shrink: 0;">
                                         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
                                     </span>
-                                    <span style="line-height: 1.5; font-size: 0.88rem;"><?php echo esc_html( $footer_address ); ?></span>
+                                    <span style="line-height: 1.5; font-size: 0.88rem;"><?php echo nl2br( esc_html( $footer_address ) ); ?></span>
                                 </div>
                             </div>
                         </div>
@@ -556,7 +563,7 @@
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12.031 21.46c-1.6 0-3.15-.43-4.5-1.25L3 21l.8-4.3c-.9-1.4-1.37-3.05-1.37-4.73C2.43 6.47 6.74 2.16 12.21 2.16c2.66 0 5.16 1.04 7.03 2.92a9.92 9.92 0 0 1 2.93 7.04c0 5.48-4.31 9.34-10.14 9.34zm-4.76-2.58l.28.17c1.3.77 2.82 1.18 4.38 1.18 4.88 0 8.85-3.23 8.85-8.1 0-2.17-.85-4.2-2.38-5.74a7.86 7.86 0 0 0-5.63-2.33c-4.94 0-8.96 4-8.96 8.94 0 1.63.43 3.2 1.25 4.54l.2.32-.47 2.53 2.58-.5z"/><path d="M17.43 14.36c-.3-.15-1.78-.88-2.05-.98-.28-.1-.47-.15-.68.15-.2.3-.77.98-.95 1.18-.17.2-.35.23-.65.08-.3-.15-1.27-.47-2.42-1.5-.9-.8-1.5-1.79-1.68-2.1-.18-.3-.02-.45.13-.6.13-.13.3-.35.45-.53.15-.17.2-.3.3-.5.1-.2.05-.38-.03-.53-.08-.15-.68-1.63-.93-2.23-.24-.59-.48-.5-.68-.52h-.58c-.2 0-.53.08-.8.38-.28.3-1.05 1.03-1.05 2.5 0 1.5 1.08 2.93 1.23 3.13.15.2 2.13 3.25 5.15 4.55 2.05.88 2.58.93 3.4.78.85-.15 1.78-.73 2.03-1.43.25-.7.25-1.3.18-1.43-.08-.13-.28-.2-.58-.35z"/></svg>
             </a>
             
-            <a href="mailto:<?php echo esc_attr( franciscan_get_option( 'contact_email', 'info@franciscansociety.org' ) ); ?>" title="Send Email" class="chat-icon email-icon">
+            <a href="mailto:<?php echo esc_attr( franciscan_get_option( 'contact_email', 'sectorranchi09@gmail.com' ) ); ?>" title="Send Email" class="chat-icon email-icon">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
             </a>
         </div>

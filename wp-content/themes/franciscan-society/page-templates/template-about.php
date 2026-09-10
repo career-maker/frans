@@ -979,7 +979,11 @@ button.fs-mega-toggle:focus::after {
                     <!-- Call to Action Row -->
                     <?php
                     $contact_phone = franciscan_get_option( 'contact_phone', '+91 95726 35314' );
-                    $tel_href      = 'tel:+' . preg_replace( '/[^0-9]/', '', $contact_phone );
+                    if ( empty( $contact_phone ) || false !== strpos( $contact_phone, '94311' ) ) {
+                        $contact_phone = '+91 95726 35314';
+                    }
+                    $tel_digits    = preg_replace( '/[^0-9]/', '', $contact_phone );
+                    $tel_href      = ( strlen( $tel_digits ) === 10 ? 'tel:+91' : 'tel:+' ) . $tel_digits;
                     ?>
                     <div style="display: flex; align-items: center; gap: 2.5rem;">
                         <a href="<?php echo esc_url( $tel_href ); ?>" style="display: flex; align-items: center; gap: 1rem; text-decoration: none;">

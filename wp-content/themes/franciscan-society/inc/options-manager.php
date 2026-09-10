@@ -14,8 +14,8 @@ function franciscan_get_default_options() {
     return array(
         'site_title'            => 'Franciscan Friars of the Third Order Regular',
         'site_tagline'          => 'Province of St. Francis of Assisi, Ranchi',
-        'contact_email'         => 'info@franciscansociety.org',
-        'contact_phone'         => '+91 94311 00000',
+        'contact_email'         => 'sectorranchi09@gmail.com',
+        'contact_phone'         => '+91 95726 35314',
         'whatsapp_number'       => '919572635314',
         'address_text'          => "Franciscan Ashram (Provincial Residence)\nP.O. Harmu Housing Colony, Ranchi – 834002, JHARKHAND",
         'maps_url'              => 'https://maps.google.com/?q=Franciscan+Ashram+Harmu+Housing+Colony+Ranchi+Jharkhand',
@@ -833,6 +833,16 @@ function franciscan_resync_legacy_content_options() {
     }
     // Always enable SMTP delivery
     $merged_opts['smtp_enabled'] = '1';
+
+    // Migrate contact phone, email, and address
+    if ( ! isset( $merged_opts['contact_phone'] ) || in_array( $merged_opts['contact_phone'], array( '+91 94311 00000', '9431100000', '' ), true ) ) {
+        $merged_opts['contact_phone'] = '+91 95726 35314';
+    }
+    if ( ! isset( $merged_opts['contact_email'] ) || in_array( $merged_opts['contact_email'], array( 'info@franciscansociety.org', '' ), true ) ) {
+        $merged_opts['contact_email'] = 'sectorranchi09@gmail.com';
+    }
+    $merged_opts['whatsapp_number'] = '919572635314';
+    $merged_opts['address_text']    = "Franciscan Ashram (Provincial Residence)\nP.O. Harmu Housing Colony, Ranchi – 834002, JHARKHAND";
 
     update_option( 'franciscan_theme_options', $merged_opts );
 }

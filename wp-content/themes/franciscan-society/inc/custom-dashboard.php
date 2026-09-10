@@ -3116,11 +3116,11 @@ function franciscan_render_dashboard_view() {
                             </div>
                             <div class="form-group">
                                 <label>Public Contact Email</label>
-                                <input type="email" name="contact_email" class="form-control" value="<?php echo esc_attr( $options['contact_email'] ?? 'info@franciscansociety.org' ); ?>">
+                                <input type="email" name="contact_email" class="form-control" value="<?php echo esc_attr( $options['contact_email'] ?? 'sectorranchi09@gmail.com' ); ?>">
                             </div>
                             <div class="form-group full-width">
                                 <label>Official Monastery Address</label>
-                                <textarea name="contact_address" class="form-control"><?php echo esc_textarea( $options['contact_address'] ?? '' ); ?></textarea>
+                                <textarea name="address_text" class="form-control"><?php echo esc_textarea( $options['address_text'] ?? "Franciscan Ashram (Provincial Residence)\nP.O. Harmu Housing Colony, Ranchi – 834002, JHARKHAND" ); ?></textarea>
                             </div>
                         </div>
                     </div>

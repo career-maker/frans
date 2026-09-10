@@ -852,7 +852,7 @@ button.fs-mega-toggle:focus::after {
                 <div style="background: white; border-radius: 16px; padding: 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
                     <h3 style="font-family: 'Phudu', sans-serif; font-size: 1.2rem; font-weight: 600; color: #1c1917; margin-bottom: 1rem; text-transform: uppercase;">ARCHDIOCESE OF RANCHI</h3>
                     <ul style="list-style: none; margin: 0; padding: 0; display: grid; gap: 1rem;">
-                        <li style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e;"><strong>Franciscan Ashram (Provincial Residence)</strong><br>Harmu Housing Colony, Ranchi – 834002 (Est. 1978)</li>
+                        <li style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e;"><strong>Franciscan Ashram (Provincial Residence)</strong><br>P.O. Harmu Housing Colony, Ranchi – 834002, JHARKHAND (Est. 1978)</li>
                         <li style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e;"><strong>Franciscan Training Institute</strong><br>Purulia Road, Ranchi – 834001 (Est. 1954)</li>
                         <li style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e;"><strong>Franciscan Ashram Banhora</strong><br>Hehel, Ranchi – 834005 (Est. 1988)</li>
                         <li style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e;"><strong>Franciscan Ashram, Getalsud</strong><br>Tatisilwai, Ranchi – 835101 (Est. 2002)</li>
