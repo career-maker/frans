@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly.
 }
 
-define( 'FRANCISCAN_THEME_VERSION', '1.0.6' );
+define( 'FRANCISCAN_THEME_VERSION', '1.0.7' );
 define( 'FRANCISCAN_THEME_DIR', get_template_directory() );
 define( 'FRANCISCAN_THEME_URI', get_template_directory_uri() );
 

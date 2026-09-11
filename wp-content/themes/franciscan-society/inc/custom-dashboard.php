@@ -2281,7 +2281,9 @@ function franciscan_render_dashboard_view() {
                                         $pc_name    = $pc_member['name'] ?? '';
                                         $pc_role    = $pc_member['role'] ?? '';
                                         $pc_raw_img = ! empty( $pc_member['image'] ) ? $pc_member['image'] : ( $pc_member['photo'] ?? '' );
-                                        $pc_img_url = ! empty( $pc_raw_img ) ? franciscan_resolve_friar_image_url( $pc_raw_img ) : ( FRANCISCAN_THEME_URI . '/assets/images/general-council/placeholder.jpg' );
+                                        $pc_img_url = function_exists( 'franciscan_resolve_provincial_council_image' )
+                                            ? franciscan_resolve_provincial_council_image( $pc_raw_img, $pc_name )
+                                            : ( ! empty( $pc_raw_img ) ? franciscan_resolve_friar_image_url( $pc_raw_img ) : ( FRANCISCAN_THEME_URI . '/assets/images/general-council/placeholder.jpg' ) );
                                     ?>
                                         <div class="provincial-council-item-card" data-index="<?php echo esc_attr( $pc_idx ); ?>" style="background: rgba(255,255,255,0.02); border: 1px solid var(--c-card-border); border-radius: 10px; padding: 0.85rem; position: relative;">
                                             <div style="display: flex; gap: 0.8rem; align-items: center;">

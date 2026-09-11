@@ -954,14 +954,16 @@ button.fs-mega-toggle:focus::after {
                 $provincial_council = franciscan_get_provincial_council();
                 foreach ( $provincial_council as $member ) :
                     $raw_prov_img = ! empty( $member['image'] ) ? $member['image'] : ( ! empty( $member['photo'] ) ? $member['photo'] : '' );
-                    $photo = ! empty( $raw_prov_img ) ? franciscan_resolve_friar_image_url( $raw_prov_img ) : FRANCISCAN_THEME_URI . '/assets/images/general-council/placeholder.jpg';
-                    $role  = $member['role'] ?? '';
                     $name  = $member['name'] ?? '';
+                    $role  = $member['role'] ?? '';
+                    $photo = function_exists( 'franciscan_resolve_provincial_council_image' )
+                        ? franciscan_resolve_provincial_council_image( $raw_prov_img, $name )
+                        : ( ! empty( $raw_prov_img ) ? franciscan_resolve_friar_image_url( $raw_prov_img ) : FRANCISCAN_THEME_URI . '/assets/images/general-council/placeholder.jpg' );
                 ?>
                 <div style="text-align: center; background: #FAF7F0; padding: 2.2rem 1.5rem; border-radius: 20px; border: 1px solid rgba(74,42,24,0.06); box-shadow: 0 4px 20px rgba(74,42,24,0.04); display: flex; flex-direction: column; justify-content: space-between;">
                     <div>
                         <div style="width: 130px; height: 130px; border-radius: 50%; overflow: hidden; margin: 0 auto 1.2rem auto; box-shadow: 0 8px 20px rgba(74,42,24,0.14); border: 3px solid #e6c888; background: #ffffff;">
-                            <img loading="lazy" decoding="async" src="<?php echo esc_url( $photo ); ?>" alt="<?php echo esc_attr( $name ); ?>" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+                            <img loading="lazy" decoding="async" src="<?php echo esc_url( $photo ); ?>" alt="<?php echo esc_attr( $name ); ?>" style="width: 100%; height: 100%; object-fit: cover; display: block;" onerror="this.src='<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/logo.svg' ); ?>';">
                         </div>
                         <?php if ( ! empty( $role ) ) : ?>
                         <div style="min-height: 48px; display: flex; align-items: center; justify-content: center; margin-bottom: 0.35rem;">

@@ -1502,32 +1502,95 @@ function franciscan_get_default_provincial_council() {
             'image' => '/assets/images/friars/fr-manoj-kullu.png',
         ),
         array(
-            'name'  => 'Fr. Wilson James, TOR',
-            'role'  => 'First Councilor, Provincial Secretary & Province Econome',
-            'image' => '/assets/images/friars/fr-wilson-james.png',
+            'name'  => 'Rev. Fr. Paulinus Kiro, TOR',
+            'role'  => "First Councilor\nProvincial Secretary\nProvince Econome",
+            'image' => '/assets/images/friars/fr-paulinus-kiro.png',
         ),
         array(
-            'name'  => 'Fr. George Thannickal, TOR',
+            'name'  => 'Rev. Fr. Benedict Tirkey, TOR',
             'role'  => 'Second Councilor',
-            'image' => '/assets/images/friars/fr-george-thannickal.png',
+            'image' => '/assets/images/friars/fr-benidict-tirkey.png',
         ),
         array(
-            'name'  => 'Fr. Varghese Thekkekara, TOR',
+            'name'  => 'Rev. Fr. Benjamin Tiru, TOR',
             'role'  => 'Third Councilor',
-            'image' => '/assets/images/friars/fr-varghese-thekkekara.png',
+            'image' => '/assets/images/friars/fr-benjamin-tiru.png',
         ),
         array(
-            'name'  => 'Fr. Augustine, TOR',
+            'name'  => 'Rev. Fr. Xavier Kindo, TOR',
             'role'  => 'Fourth Councilor',
-            'image' => '/assets/images/friars/fr-augustine.png',
+            'image' => '/assets/images/friars/fr-xavier-kindo.png',
         ),
     );
+}
+
+/**
+ * Robust image resolver for Provincial Council members to prevent broken photos
+ */
+function franciscan_resolve_provincial_council_image( $img = '', $name = '' ) {
+    $canonical_map = array(
+        'manoj vengathanam' => '/assets/images/friars/fr-manoj-vengathanam.png',
+        'manoj kullu'       => '/assets/images/friars/fr-manoj-kullu.png',
+        'paulinus kiro'     => '/assets/images/friars/fr-paulinus-kiro.png',
+        'benedict tirkey'   => '/assets/images/friars/fr-benidict-tirkey.png',
+        'benidict tirkey'   => '/assets/images/friars/fr-benidict-tirkey.png',
+        'benjamin tiru'     => '/assets/images/friars/fr-benjamin-tiru.png',
+        'xavier kindo'      => '/assets/images/friars/fr-xavier-kindo.png',
+    );
+
+    $lower_name = strtolower( $name );
+
+    // Check if image exists or is broken/placeholder/old wrong path
+    $is_broken_or_wrong = empty( $img ) 
+        || strpos( $img, 'placeholder' ) !== false 
+        || strpos( $img, 'wilson-james' ) !== false 
+        || strpos( $img, 'george-thannickal' ) !== false 
+        || strpos( $img, 'varghese-thekkekara' ) !== false 
+        || strpos( $img, 'fr-augustine' ) !== false;
+
+    if ( $is_broken_or_wrong ) {
+        foreach ( $canonical_map as $needle => $canonical_path ) {
+            if ( strpos( $lower_name, $needle ) !== false ) {
+                return FRANCISCAN_THEME_URI . $canonical_path;
+            }
+        }
+    }
+
+    if ( ! empty( $img ) && strpos( $img, 'placeholder' ) === false ) {
+        return franciscan_resolve_friar_image_url( $img );
+    }
+
+    // Secondary name match fallback
+    foreach ( $canonical_map as $needle => $canonical_path ) {
+        if ( strpos( $lower_name, $needle ) !== false ) {
+            return FRANCISCAN_THEME_URI . $canonical_path;
+        }
+    }
+
+    return FRANCISCAN_THEME_URI . '/assets/images/general-council/placeholder.jpg';
 }
 
 function franciscan_get_provincial_council() {
     $data = franciscan_get_page_content( 'community-leadership' );
     if ( isset( $data['provincial_council_list'] ) && is_array( $data['provincial_council_list'] ) && ! empty( $data['provincial_council_list'] ) ) {
-        return array_values( $data['provincial_council_list'] );
+        $list = array_values( $data['provincial_council_list'] );
+        // Check for outdated/corrupted dummy councilor names
+        $has_corrupted = false;
+        foreach ( $list as $item ) {
+            $name = $item['name'] ?? '';
+            if ( stripos( $name, 'Wilson James' ) !== false || stripos( $name, 'George Thannickal' ) !== false || stripos( $name, 'Varghese Thekkekara' ) !== false || stripos( $name, 'Augustine' ) !== false ) {
+                $has_corrupted = true;
+                break;
+            }
+        }
+        if ( ! $has_corrupted ) {
+            // Ensure photos are properly resolved for each member
+            foreach ( $list as &$member ) {
+                $raw_img = ! empty( $member['image'] ) ? $member['image'] : ( $member['photo'] ?? '' );
+                $member['image'] = franciscan_resolve_provincial_council_image( $raw_img, $member['name'] ?? '' );
+            }
+            return $list;
+        }
     }
     return franciscan_get_default_provincial_council();
 }

@@ -471,3 +471,29 @@ function franciscan_cleanup_dummy_news_posts() {
 }
 add_action( 'init', 'franciscan_cleanup_dummy_news_posts' );
 
+/**
+ * Ensure Provincial Council members and photos are clean and accurate
+ */
+function franciscan_ensure_provincial_council_photos() {
+    if ( get_option( 'franciscan_provincial_council_synced_v2' ) ) {
+        return;
+    }
+
+    $opt_key = 'franciscan_page_community-leadership';
+    $data = get_option( $opt_key );
+    if ( ! is_array( $data ) ) {
+        $data = array();
+    }
+
+    $correct_council = function_exists( 'franciscan_get_default_provincial_council' )
+        ? franciscan_get_default_provincial_council()
+        : array();
+
+    if ( ! empty( $correct_council ) ) {
+        $data['provincial_council_list'] = $correct_council;
+        update_option( $opt_key, $data );
+    }
+    update_option( 'franciscan_provincial_council_synced_v2', 1 );
+}
+add_action( 'init', 'franciscan_ensure_provincial_council_photos', 4 );
+
