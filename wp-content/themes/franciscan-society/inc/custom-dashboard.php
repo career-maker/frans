@@ -2766,7 +2766,6 @@ function franciscan_render_dashboard_view() {
                         <?php endif; ?>
 
                         <?php if ( $slug === 'ministries-pastoral' ) : ?>
-                            </div>
 
                             <!-- Pastoral Ministry Details -->
                             <div class="form-section">
@@ -2853,7 +2852,6 @@ function franciscan_render_dashboard_view() {
                         <?php endif; ?>
 
                         <?php if ( $slug === 'ministries-education' ) : ?>
-                            </div>
 
                             <!-- Education Ministry Details -->
                             <div class="form-section">
@@ -2948,7 +2946,6 @@ function franciscan_render_dashboard_view() {
                         <?php endif; ?>
 
                         <?php if ( $slug === 'ministries-formation' ) : ?>
-                            </div>
 
                             <!-- Formation Ministry Details -->
                             <div class="form-section">
