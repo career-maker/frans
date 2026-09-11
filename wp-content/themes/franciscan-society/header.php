@@ -266,13 +266,14 @@
         @media (max-width: 991px) {
             .hero-buttons-row {
                 flex-direction: column !important;
-                gap: 1rem !important;
+                gap: 0.75rem !important;
+                margin-top: 0.75rem !important;
                 width: 100% !important;
             }
             .hero-buttons-row a {
                 width: 100% !important;
                 text-align: center !important;
-                padding: 1.2rem 1.5rem !important;
+                padding: 0.9rem 1.4rem !important;
                 display: flex !important;
                 opacity: 1 !important;
                 visibility: visible !important;
@@ -285,15 +286,28 @@
             }
             .btn-fill-outline {
                 background-color: transparent !important;
-                border: 1.5px solid rgba(255, 255, 255, 0.9) !important;
-                color: #ffffff !important;
+                border: 1.5px solid #4A2A18 !important;
+                color: #4A2A18 !important;
                 display: flex !important;
                 opacity: 1 !important;
                 visibility: visible !important;
                 width: 100% !important;
             }
-            .btn-fill-outline:hover {
+            .btn-fill-outline span,
+            .btn-fill-outline svg {
                 color: #4A2A18 !important;
+                stroke: #4A2A18 !important;
+            }
+            .btn-fill-outline:hover,
+            .btn-fill-outline:focus,
+            .btn-fill-outline:active {
+                background-color: #4A2A18 !important;
+                color: #ffffff !important;
+            }
+            .btn-fill-outline:hover span,
+            .btn-fill-outline:hover svg {
+                color: #ffffff !important;
+                stroke: #ffffff !important;
             }
         }
         
@@ -636,6 +650,7 @@ button.slider-btn:active {
 
 /* ============================================================
    NAV MENU & DROPDOWN HOVER IDENTICAL GOLD STYLING
+   NO-JUMP: All dimensions locked — only color changes on hover
    ============================================================ */
 .fs-desktop-nav a,
 .fs-desktop-nav button,
@@ -647,21 +662,36 @@ button.fs-mega-toggle,
     background: transparent !important;
     background-color: transparent !important;
     border: none !important;
+    border-width: 0 !important;
     outline: none !important;
     box-shadow: none !important;
     font-family: 'DM Sans', sans-serif !important;
     font-size: 0.88rem !important;
     font-weight: 600 !important;
+    line-height: 1.4 !important;
     text-decoration: none !important;
     cursor: pointer !important;
+    /* ONLY color transitions — no transform, no padding, no border */
     transition: color 0.2s ease !important;
     opacity: 1 !important;
     display: inline-flex !important;
     align-items: center !important;
+    /* Zero padding/margin so browsers don't add defaults that shift layout */
+    padding: 0 !important;
+    margin: 0 !important;
+    /* Stable height — prevents any vertical dimension change on hover */
+    height: auto !important;
+    min-height: 0 !important;
+    vertical-align: middle !important;
+    transform: none !important;
+    -webkit-appearance: none !important;
+    appearance: none !important;
 }
 
 .fs-desktop-nav a:hover,
+.fs-desktop-nav a:focus,
 .fs-desktop-nav button:hover,
+.fs-desktop-nav button:focus,
 .fs-desktop-nav .fs-mega-toggle:hover,
 .fs-desktop-nav .fs-mega-toggle:focus,
 .fs-desktop-nav .fs-mega-toggle.hover-active,
@@ -676,10 +706,43 @@ button.fs-mega-toggle.active,
 .fs-header .fs-desktop-nav a:hover,
 .fs-header .fs-desktop-nav a:focus,
 .fs-header .fs-desktop-nav a.active {
+    /* ONLY color changes — every layout property stays identical to base state */
     color: #e6c888 !important;
     background: transparent !important;
     background-color: transparent !important;
+    border: none !important;
+    border-width: 0 !important;
+    outline: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    transform: none !important;
     opacity: 1 !important;
+    font-size: 0.88rem !important;
+    font-weight: 600 !important;
+    line-height: 1.4 !important;
+    text-decoration: none !important;
+}
+
+/* Lock ::before and ::after on nav items so they never add height */
+.fs-desktop-nav a::before,
+.fs-desktop-nav a::after,
+.fs-desktop-nav button::before,
+.fs-header .fs-desktop-nav a::before,
+.fs-header .fs-desktop-nav a::after,
+.fs-header .fs-desktop-nav button::before {
+    display: none !important;
+    content: none !important;
+    height: 0 !important;
+    width: 0 !important;
+    opacity: 0 !important;
+}
+
+/* Exception: keep the dropdown arrow ::after on mega-toggle buttons */
+.fs-desktop-nav .fs-mega-toggle::before,
+button.fs-mega-toggle::before {
+    display: none !important;
+    content: none !important;
 }
 
 .fs-desktop-nav .fs-mega-toggle::after,
@@ -721,6 +784,7 @@ button.fs-mega-toggle.hover-active::after,
 
 /* ============================================================
    NAV MENU & DROPDOWN HOVER BRIGHTNESS & VISIBILITY FIX
+   NO-JUMP: dimensions locked, only color changes
    ============================================================ */
 .fs-desktop-nav a,
 .fs-desktop-nav button,
@@ -730,19 +794,28 @@ button.fs-mega-toggle {
     background: transparent !important;
     background-color: transparent !important;
     border: none !important;
+    border-width: 0 !important;
     outline: none !important;
     box-shadow: none !important;
     font-family: 'DM Sans', sans-serif !important;
     font-size: 0.88rem !important;
     font-weight: 600 !important;
+    line-height: 1.4 !important;
     text-decoration: none !important;
     cursor: pointer !important;
     transition: color 0.2s ease !important;
     opacity: 1 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    transform: none !important;
+    -webkit-appearance: none !important;
+    appearance: none !important;
 }
 
 .fs-desktop-nav a:hover,
+.fs-desktop-nav a:focus,
 .fs-desktop-nav button:hover,
+.fs-desktop-nav button:focus,
 .fs-desktop-nav .fs-mega-toggle:hover,
 .fs-desktop-nav .fs-mega-toggle:focus,
 .fs-desktop-nav .fs-mega-toggle.active,
@@ -751,7 +824,17 @@ button.fs-mega-toggle:focus {
     color: #e6c888 !important;
     background: transparent !important;
     background-color: transparent !important;
+    border: none !important;
+    border-width: 0 !important;
+    outline: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    transform: none !important;
     opacity: 1 !important;
+    font-size: 0.88rem !important;
+    font-weight: 600 !important;
+    line-height: 1.4 !important;
 }
 
 .fs-desktop-nav .fs-mega-toggle::after,
@@ -1446,7 +1529,8 @@ button.fs-mega-toggle:focus::after {
   .fs-mega-col a:hover {
     color: #e6c888;
     background: rgba(230, 200, 136, 0.1);
-    padding-left: 1.8rem;
+    /* Do NOT change padding-left on hover — it causes layout jump */
+    padding-left: 1.5rem;
   }
 
   /* Header Actions */

@@ -395,3 +395,79 @@ function franciscan_save_post_banner_metabox( $post_id ) {
     }
 }
 add_action( 'save_post', 'franciscan_save_post_banner_metabox' );
+
+/**
+ * Automatically clean up unwanted dummy news posts and preserve legitimate news post
+ */
+function franciscan_cleanup_dummy_news_posts() {
+    if ( get_option( 'franciscan_cleaned_dummy_news_v3' ) ) {
+        return;
+    }
+
+    $unwanted_slugs = array(
+        'strengthening-your-faith-through-consistent-daily-prayer-life',
+        'trusting-god-fully-during-life-struggles-and-trials',
+        'staying-spiritually-strong-through-community-faith-and-fraternity',
+        'expanding-franciscan-educational-missions-in-rural-jharkhand',
+        'youth-spiritual-retreat-franciscan-fellowship-in-ranchi',
+        'solemn-celebration-of-provincial-feast-day-and-jubilees',
+    );
+
+    foreach ( $unwanted_slugs as $slug ) {
+        $post = get_page_by_path( $slug, OBJECT, 'post' );
+        if ( $post ) {
+            wp_delete_post( $post->ID, true );
+        }
+    }
+
+    // Ensure 'News' category exists
+    $news_cat = get_term_by( 'slug', 'news', 'category' );
+    if ( ! $news_cat ) {
+        $cat_id = wp_create_category( 'News' );
+    } else {
+        $cat_id = $news_cat->term_id;
+    }
+
+    // Ensure the legitimate news article exists with rich content
+    $legit_slug = 'seminar-on-new-labour-code-held-at-hardag-ranchi';
+    $existing = get_page_by_path( $legit_slug, OBJECT, 'post' );
+    
+    $article_content = '<p>A one-day seminar on <strong>"New Labour Code"</strong> was organized by the St. Francis Province, Ranchi, on 29 August 2026 at Moments Resorts, Hardag, Ranchi. The seminar was attended by around fifty participants. Besides the TOR friars involved in the education ministry, the programme was attended by several principals from different parts of Jharkhand.</p>' . "\n\n" .
+        '<p>The programme was graced by the presence of Very Rev. Fr. <strong>Manoj Vengathanam, TOR</strong>, Minister Provincial of Ranchi Province.</p>' . "\n\n" .
+        '<p>Mr. <strong>Shammi Joseph Tigga</strong>, Welfare Commissioner (C), served as the resource person and led the two sessions of the seminar. The sessions offered a comprehensive introduction to the four Labour Codes, namely the <em>Code on Wages</em>, the <em>Industrial Relations Code</em>, the <em>Code on Social Security</em>, and the <em>Occupational Safety, Health and Working Conditions Code</em>. The presentations highlighted important provisions relating to minimum wages, timely payment of wages, social security, industrial relations, workplace safety, and the welfare and working conditions of employees.</p>' . "\n\n" .
+        '<p>The seminar provided the participants with a valuable opportunity for learning, dialogue, and reflection on the implications of the new Labour Codes, particularly in the context of educational institutions and employment practices.</p>' . "\n\n" .
+        '<p>The programme was coordinated by <strong>Fr. Manoj Kullu, TOR</strong>, and <strong>Fr. Shaji Alappurath, TOR</strong>.</p>';
+
+    if ( ! $existing ) {
+        $post_93 = get_post( 93 );
+        if ( $post_93 && 'post' === $post_93->post_type ) {
+            wp_update_post( array(
+                'ID'           => 93,
+                'post_title'   => 'Seminar on "New Labour Code" Held at Hardag, Ranchi',
+                'post_name'    => $legit_slug,
+                'post_content' => $article_content,
+                'post_excerpt' => 'A one-day seminar on "New Labour Code" was organized by the St. Francis Province, Ranchi, on 29 August 2026 at Moments Resorts, Hardag, Ranchi. Attended by around fifty participants including TOR friars and principals from across Jharkhand.',
+                'post_status'  => 'publish',
+                'post_date'    => '2026-08-29 10:00:00',
+            ) );
+            wp_set_post_categories( 93, array( $cat_id ) );
+        } else {
+            $inserted = wp_insert_post( array(
+                'post_title'   => 'Seminar on "New Labour Code" Held at Hardag, Ranchi',
+                'post_name'    => $legit_slug,
+                'post_content' => $article_content,
+                'post_excerpt' => 'A one-day seminar on "New Labour Code" was organized by the St. Francis Province, Ranchi, on 29 August 2026 at Moments Resorts, Hardag, Ranchi. Attended by around fifty participants including TOR friars and principals from across Jharkhand.',
+                'post_status'  => 'publish',
+                'post_type'    => 'post',
+                'post_date'    => '2026-08-29 10:00:00',
+            ) );
+            if ( $inserted && ! is_wp_error( $inserted ) ) {
+                wp_set_post_categories( $inserted, array( $cat_id ) );
+            }
+        }
+    }
+
+    update_option( 'franciscan_cleaned_dummy_news_v3', 1 );
+}
+add_action( 'init', 'franciscan_cleanup_dummy_news_posts' );
+

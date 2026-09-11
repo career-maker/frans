@@ -15,3 +15,8 @@ desktop.ini
 
 # Log files
 *.log
+
+# Local credentials & agent configs
+.agents/
+*.env
+git-credentials.json

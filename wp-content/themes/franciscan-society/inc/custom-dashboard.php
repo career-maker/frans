@@ -327,7 +327,9 @@ function franciscan_render_dashboard_view() {
         'posts_per_page' => 50,
         'post_status'    => 'publish',
     ) );
+    $is_wp_admin = is_admin();
     ?>
+    <?php if ( ! $is_wp_admin ) : ?>
     <!DOCTYPE html>
     <html lang="en">
     <head>
@@ -338,6 +340,11 @@ function franciscan_render_dashboard_view() {
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Anek+Malayalam:wght@400;500;600;700;800&family=Gayathri:wght@400;700&family=Instrument+Sans:wght@400;500;600;700&family=Manjari:wght@400;700&family=Noto+Sans+Malayalam:wght@300;400;500;600;700;800&family=Phudu:wght@600;700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
         <?php wp_print_scripts( array( 'jquery' ) ); ?>
+    <?php else : ?>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Anek+Malayalam:wght@400;500;600;700;800&family=Gayathri:wght@400;700&family=Instrument+Sans:wght@400;500;600;700&family=Manjari:wght@400;700&family=Noto+Sans+Malayalam:wght@300;400;500;600;700;800&family=Phudu:wght@600;700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <?php endif; ?>
         <style>
             :root {
                 --c-gold: #C5A963;
@@ -355,37 +362,60 @@ function franciscan_render_dashboard_view() {
             * { box-sizing: border-box; margin: 0; padding: 0; }
             body {
                 font-family: 'DM Sans', -apple-system, sans-serif;
-                background-color: var(--c-bg);
-                color: var(--c-text);
+                background-color: var(--c-bg) !important;
+                color: var(--c-text) !important;
                 min-height: 100vh;
-                display: flex;
             }
 
-            /* WP-Admin Integration */
-            .toplevel_page_franciscan-dashboard #adminmenuback,
-            .toplevel_page_franciscan-dashboard #adminmenuwrap {
+            /* WP-Admin Integration Overrides */
+            html.wp-toolbar {
+                padding-top: 32px !important;
+                background-color: #0F0E0D !important;
+            }
+            @media screen and (max-width: 782px) {
+                html.wp-toolbar {
+                    padding-top: 46px !important;
+                }
+            }
+            body.toplevel_page_franciscan-dashboard,
+            body.wp-admin {
+                background: #0F0E0D !important;
+            }
+            #adminmenuback,
+            #adminmenuwrap {
                 display: none !important;
             }
-            .toplevel_page_franciscan-dashboard #wpcontent {
+            #wpcontent {
                 margin-left: 0 !important;
                 padding: 0 !important;
+                background-color: #0F0E0D !important;
             }
-            .toplevel_page_franciscan-dashboard #wpbody-content {
+            #wpbody-content {
                 padding-bottom: 0 !important;
+                float: none !important;
             }
-            .toplevel_page_franciscan-dashboard #wpfooter {
+            #wpfooter {
                 display: none !important;
             }
-            .toplevel_page_franciscan-dashboard #wpadminbar {
+            #wpadminbar {
                 background: #141311 !important;
                 border-bottom: 1px solid #2B2824 !important;
+            }
+            .notice, .updated, .error, .update-nag {
+                display: none !important;
             }
 
             /* Main Layout */
             #studio-app {
                 display: flex;
                 width: 100%;
-                min-height: 100vh;
+                min-height: calc(100vh - 32px);
+                background-color: var(--c-bg);
+            }
+            @media screen and (max-width: 782px) {
+                #studio-app {
+                    min-height: calc(100vh - 46px);
+                }
             }
 
             /* Sidebar */
@@ -1446,7 +1476,6 @@ function franciscan_render_dashboard_view() {
                                     </div>
                                 </div>
                             </div>
-                            </div>
 
                         <?php endif; ?>
 
@@ -1922,10 +1951,6 @@ function franciscan_render_dashboard_view() {
                         <?php endif; ?>
 
                         <?php if ( $slug === 'community-rule' ) : ?>
-                                    </div>
-                                </div>
-                            </div>
-
                             <!-- Community Rule: Prologue & Sacred Proclamation -->
                             <div class="form-section">
                                 <h3 class="form-section-title">📜 Prologue to the Rule &amp; Emblem</h3>
@@ -6166,8 +6191,10 @@ function franciscan_render_dashboard_view() {
         </div>
     </div>
 
+    <?php if ( ! $is_wp_admin ) : ?>
     </body>
     </html>
+    <?php endif; ?>
     <?php
 }
 

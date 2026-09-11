@@ -1,0 +1,16 @@
+# Local credentials - NEVER push
+.agents/
+.env
+*.env
+git-credentials.json
+
+# WordPress & OS
+.DS_Store
+Thumbs.db
+desktop.ini
+*.log
+
+# Node / build artifacts
+node_modules/
+dist/
+*.min.map

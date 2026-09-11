@@ -3775,12 +3775,12 @@ body, p, span, a, button, input, textarea, .font-body {
     font-family: 'Instrument Sans', sans-serif !important;
 }
 
-/* Master Hero Heading Specs */
+/* Master Hero Heading Specs — Desktop: Phudu 600, 43px, 50px line-height */
 h1.hero-title, .hero-grid h1 {
     font-family: 'Phudu', sans-serif !important;
     font-weight: 600 !important;
-    font-size: clamp(2.8rem, 4.5vw, 65px) !important;
-    line-height: 65px !important;
+    font-size: 43px !important;
+    line-height: 50px !important;
     color: #ffffff !important;
 }
 
@@ -6865,7 +6865,7 @@ button:not(.btn-fill-animation):not(.footer-accordion-toggle):not(.fs-mega-toggl
         z-index: 2 !important;
     }
     
-    /* First block: title and buttons */
+    /* First block: title and buttons — reduce vertical padding to eliminate empty space on mobile */
     .hero-section .hero-grid-layout > div:first-child {
         min-height: auto !important; /* no 100svh anymore */
         width: 100% !important;
@@ -6873,7 +6873,7 @@ button:not(.btn-fill-animation):not(.footer-accordion-toggle):not(.fs-mega-toggl
         flex-direction: column !important;
         justify-content: flex-start !important;
         align-items: flex-start !important;
-        padding: 2.5rem 1.5rem 1.5rem 1.5rem !important;
+        padding: 0.75rem 1.25rem 0.5rem 1.25rem !important;
         box-sizing: border-box !important;
         text-align: left !important;
     }
@@ -6888,25 +6888,31 @@ button:not(.btn-fill-animation):not(.footer-accordion-toggle):not(.fs-mega-toggl
         align-items: flex-start !important;
         text-align: left !important;
         justify-content: flex-start !important;
-        
         text-shadow: none !important;
     }
-    
     
     .hero-section .hero-grid-layout .js-hero-text > div:first-child span.eyebrow-text {
         color: #555555 !important;
         text-shadow: none !important;
     }
-.hero-section .hero-grid-layout .js-hero-text h1.hero-title {
+    .hero-section .hero-grid-layout .js-hero-text h1.hero-title {
         text-align: left !important;
-        font-size: 28px !important;
-        line-height: 1.15 !important;
-        margin-bottom: 1.5rem !important;
+        font-size: 26px !important;
+        line-height: 1.2 !important;
+        margin-top: 0 !important;
+        margin-bottom: 0.5rem !important;
         align-self: flex-start !important;
         color: #1c1917 !important; /* Dark title */
         text-shadow: none !important;
     }
     
+    .hero-section .hero-grid-layout .js-hero-text p {
+        margin: 0 0 0.75rem 0 !important;
+        font-size: 0.95rem !important;
+        line-height: 1.5 !important;
+        color: #44403c !important;
+    }
+
     /* Buttons */
     .hero-section .hero-grid-layout .hero-buttons-row {
         display: flex !important;
@@ -6914,14 +6920,14 @@ button:not(.btn-fill-animation):not(.footer-accordion-toggle):not(.fs-mega-toggl
         flex-wrap: wrap !important;
         width: 100% !important;
         justify-content: center !important;
-        margin-top: 1.5rem !important;
-        gap: 1rem !important;
+        margin-top: 0.75rem !important;
+        gap: 0.75rem !important;
     }
 
     .hero-section .hero-grid-layout .hero-buttons-row > a {
         width: 100% !important;
         flex: 0 0 100% !important;
-        padding: 1.2rem 1.5rem !important;
+        padding: 0.9rem 1.4rem !important;
         justify-content: center !important;
         text-align: center !important;
         margin: 0 !important;
@@ -6940,9 +6946,31 @@ button:not(.btn-fill-animation):not(.footer-accordion-toggle):not(.fs-mega-toggl
         height: 12px !important;
     }
 
-    /* Ensure GET STARTED button is visible on mobile */
-    .hero-section .hero-grid-layout .hero-buttons-row > a:nth-child(2) {
+    /* Ensure GET STARTED button (btn-fill-outline) is ALWAYS visible on mobile */
+    .hero-section .hero-grid-layout .hero-buttons-row > a:nth-child(2),
+    .hero-section .hero-grid-layout .hero-buttons-row > a.btn-fill-outline {
         display: inline-flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        color: #4A2A18 !important;
+        border: 1.5px solid #4A2A18 !important;
+        background-color: transparent !important;
+    }
+    .hero-section .hero-grid-layout .hero-buttons-row > a.btn-fill-outline span {
+        color: #4A2A18 !important;
+    }
+    .hero-section .hero-grid-layout .hero-buttons-row > a.btn-fill-outline svg {
+        stroke: #4A2A18 !important;
+    }
+    .hero-section .hero-grid-layout .hero-buttons-row > a.btn-fill-outline:hover,
+    .hero-section .hero-grid-layout .hero-buttons-row > a.btn-fill-outline:active {
+        background-color: #4A2A18 !important;
+        color: #FFFFFF !important;
+    }
+    .hero-section .hero-grid-layout .hero-buttons-row > a.btn-fill-outline:hover span,
+    .hero-section .hero-grid-layout .hero-buttons-row > a.btn-fill-outline:hover svg {
+        color: #FFFFFF !important;
+        stroke: #FFFFFF !important;
     }
     
     /* Second block: description and counters */
@@ -7674,6 +7702,7 @@ button.slider-btn:active {
 
 /* ============================================================
    NAV MENU & DROPDOWN HOVER BRIGHTNESS & VISIBILITY FIX
+   NO-JUMP: All dimensions locked — only color changes on hover
    ============================================================ */
 .fs-desktop-nav a,
 .fs-desktop-nav button,
@@ -7683,19 +7712,28 @@ button.fs-mega-toggle {
     background: transparent !important;
     background-color: transparent !important;
     border: none !important;
+    border-width: 0 !important;
     outline: none !important;
     box-shadow: none !important;
     font-family: 'DM Sans', sans-serif !important;
     font-size: 0.88rem !important;
     font-weight: 600 !important;
+    line-height: 1.4 !important;
     text-decoration: none !important;
     cursor: pointer !important;
     transition: color 0.2s ease !important;
     opacity: 1 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    transform: none !important;
+    -webkit-appearance: none !important;
+    appearance: none !important;
 }
 
 .fs-desktop-nav a:hover,
+.fs-desktop-nav a:focus,
 .fs-desktop-nav button:hover,
+.fs-desktop-nav button:focus,
 .fs-desktop-nav .fs-mega-toggle:hover,
 .fs-desktop-nav .fs-mega-toggle:focus,
 .fs-desktop-nav .fs-mega-toggle.active,
@@ -7704,7 +7742,17 @@ button.fs-mega-toggle:focus {
     color: #e6c888 !important;
     background: transparent !important;
     background-color: transparent !important;
+    border: none !important;
+    border-width: 0 !important;
+    outline: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    transform: none !important;
     opacity: 1 !important;
+    font-size: 0.88rem !important;
+    font-weight: 600 !important;
+    line-height: 1.4 !important;
 }
 
 .fs-desktop-nav .fs-mega-toggle::after,
@@ -7787,6 +7835,7 @@ button.fs-mega-toggle:focus::after {
 
 /* ============================================================
    NAV MENU & DROPDOWN HOVER IDENTICAL GOLD STYLING
+   NO-JUMP: All layout dims locked — only color changes on hover
    ============================================================ */
 .fs-desktop-nav a,
 .fs-desktop-nav button,
@@ -7798,21 +7847,30 @@ button.fs-mega-toggle,
     background: transparent !important;
     background-color: transparent !important;
     border: none !important;
+    border-width: 0 !important;
     outline: none !important;
     box-shadow: none !important;
     font-family: 'DM Sans', sans-serif !important;
     font-size: 0.88rem !important;
     font-weight: 600 !important;
+    line-height: 1.4 !important;
     text-decoration: none !important;
     cursor: pointer !important;
     transition: color 0.2s ease !important;
     opacity: 1 !important;
     display: inline-flex !important;
     align-items: center !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    transform: none !important;
+    -webkit-appearance: none !important;
+    appearance: none !important;
 }
 
 .fs-desktop-nav a:hover,
+.fs-desktop-nav a:focus,
 .fs-desktop-nav button:hover,
+.fs-desktop-nav button:focus,
 .fs-desktop-nav .fs-mega-toggle:hover,
 .fs-desktop-nav .fs-mega-toggle:focus,
 .fs-desktop-nav .fs-mega-toggle.hover-active,
@@ -7830,7 +7888,17 @@ button.fs-mega-toggle.active,
     color: #e6c888 !important;
     background: transparent !important;
     background-color: transparent !important;
+    border: none !important;
+    border-width: 0 !important;
+    outline: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    transform: none !important;
     opacity: 1 !important;
+    font-size: 0.88rem !important;
+    font-weight: 600 !important;
+    line-height: 1.4 !important;
 }
 
 .fs-desktop-nav .fs-mega-toggle::after,
@@ -8626,3 +8694,208 @@ button.fs-mega-toggle.is-current-parent::after,
 
 
 
+
+
+/* ============================================================
+   DEFINITIVE NO-JUMP NAV FIX (last in cascade — highest priority)
+   Ensures no layout shift on hover for any nav item.
+   ============================================================ */
+
+/* Kill ALL pseudo-element layout contributions on nav links */
+.fs-desktop-nav a::before,
+.fs-desktop-nav a::after,
+.fs-header .fs-desktop-nav a::before,
+.fs-header .fs-desktop-nav a::after {
+    display: none !important;
+    content: none !important;
+    height: 0 !important;
+    width: 0 !important;
+    opacity: 0 !important;
+    position: static !important;
+}
+
+/* Kill ::before on nav buttons (keep ::after for the dropdown arrow) */
+.fs-desktop-nav button::before,
+.fs-header .fs-desktop-nav button::before {
+    display: none !important;
+    content: none !important;
+    height: 0 !important;
+    width: 0 !important;
+    opacity: 0 !important;
+}
+
+/* Ensure the dropdown arrow never shifts layout */
+.fs-desktop-nav .fs-mega-toggle::after,
+button.fs-mega-toggle::after,
+.fs-header .fs-desktop-nav button::after {
+    vertical-align: middle !important;
+    line-height: 1 !important;
+    position: static !important;
+    display: inline-block !important;
+}
+
+/* Lock the nav flex container */
+.fs-desktop-nav {
+    align-items: center !important;
+    flex-wrap: nowrap !important;
+}
+
+
+/* ============================================================
+   MOBILE ABOUT-VIDEO-CARD FIX — no overlap on mobile (max-width: 991px)
+   ============================================================ */
+@media (max-width: 991px) {
+    .about-media-column {
+        display: flex !important;
+        flex-direction: column !important;
+        position: relative !important;
+        width: 100% !important;
+        gap: 1rem !important;
+    }
+
+    .about-img-container {
+        position: relative !important;
+        width: 100% !important;
+        border-radius: 20px !important;
+        overflow: hidden !important;
+    }
+
+    .about-img-container img,
+    .about-main-img {
+        height: clamp(250px, 58vw, 360px) !important;
+        width: 100% !important;
+        object-fit: cover !important;
+        border-radius: 20px !important;
+        display: block !important;
+    }
+
+    /* On mobile/tablet: move the video card OUT of the absolute overlay, show below image */
+    .about-video-card {
+        position: relative !important;
+        inset: auto !important;
+        bottom: auto !important;
+        right: auto !important;
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        gap: 1.1rem !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+        border-radius: 16px !important;
+        margin: 0 !important;
+        padding: 0.85rem 1.1rem !important;
+        background: #FFFFFF !important;
+        box-shadow: 0 10px 28px rgba(0, 0, 0, 0.07) !important;
+        border: 1px solid rgba(197, 169, 99, 0.25) !important;
+        text-align: left !important;
+    }
+
+    .about-video-card .about-video-thumb-wrap,
+    .about-video-card > div:first-child {
+        width: 95px !important;
+        height: 65px !important;
+        min-width: 95px !important;
+        flex-shrink: 0 !important;
+        border-radius: 10px !important;
+        overflow: hidden !important;
+        position: relative !important;
+    }
+
+    .about-video-card .video-info-wrap {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        justify-content: center !important;
+        margin: 0 !important;
+        flex-grow: 1 !important;
+    }
+
+    .about-video-card span.about-video-badge {
+        font-family: 'Instrument Sans', sans-serif !important;
+        font-size: 0.82rem !important;
+        font-weight: 800 !important;
+        text-align: left !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.08em !important;
+        color: #1c1917 !important;
+        margin: 0 0 0.2rem 0 !important;
+        display: block !important;
+    }
+
+    .about-video-card span.about-video-sub {
+        font-family: 'Instrument Sans', sans-serif !important;
+        font-size: 0.76rem !important;
+        color: #78716c !important;
+        text-align: left !important;
+        margin: 0 !important;
+        display: block !important;
+    }
+}
+
+/* ============================================================
+   MOBILE HERO — reduce vertical whitespace
+   ============================================================ */
+@media (max-width: 768px) {
+    .hero-section {
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+    }
+
+    .hero-media-wrapper {
+        aspect-ratio: 16/9 !important;
+        max-height: 56vw !important;
+    }
+}
+
+/* ============================================================
+   NEWS SECTION MOBILE — allow vertical scroll through cards
+   ============================================================ */
+#news-scroll-track {
+    overscroll-behavior-x: contain !important;
+    touch-action: pan-x pinch-zoom !important;
+}
+
+@media (max-width: 768px) {
+    #news-scroll-track {
+        touch-action: pan-x pinch-zoom !important;
+        overscroll-behavior-x: contain !important;
+        /* Ensure parent section can receive vertical scroll */
+        overflow-y: visible !important;
+    }
+
+    #news-section {
+        /* Allow vertical scroll to pass through */
+        overscroll-behavior: contain !important;
+    }
+}
+
+/* ============================================================
+   BTN-FILL-OUTLINE MOBILE VISIBILITY FIX
+   On mobile hero white bg, the white-border btn was invisible
+   ============================================================ */
+@media (max-width: 768px) {
+    .hero-section .hero-grid-layout .hero-buttons-row a.btn-fill-outline,
+    .hero-section .hero-grid-layout .hero-buttons-row a:nth-child(2) {
+        color: #1c1917 !important;
+        border-color: #1c1917 !important;
+        background-color: transparent !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        display: inline-flex !important;
+    }
+    .hero-section .hero-grid-layout .hero-buttons-row a.btn-fill-outline span,
+    .hero-section .hero-grid-layout .hero-buttons-row a:nth-child(2) span {
+        color: #1c1917 !important;
+    }
+    .hero-section .hero-grid-layout .hero-buttons-row a.btn-fill-outline::before {
+        background: #1c1917 !important;
+    }
+    .hero-section .hero-grid-layout .hero-buttons-row a.btn-fill-outline:hover {
+        color: #ffffff !important;
+    }
+    .hero-section .hero-grid-layout .hero-buttons-row a.btn-fill-outline:hover span {
+        color: #ffffff !important;
+    }
+}

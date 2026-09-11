@@ -24,9 +24,13 @@ $parent_label = ( strtolower( $cat_slug ) === 'blogs' || strtolower( $cat_name )
     ? 'Blogs & Reflections' 
     : 'News & Updates';
 
+$default_img = ( strtolower( $cat_slug ) === 'news' || strtolower( $cat_name ) === 'news' || strpos( strtolower( get_the_title() ), 'labour' ) !== false || strpos( strtolower( get_the_title() ), 'assembly' ) !== false )
+    ? FRANCISCAN_THEME_URI . '/assets/images/new_uploads/seminar-labour-code.jpeg'
+    : FRANCISCAN_THEME_URI . '/assets/images/news-blog/IMG20230215103348.jpg.jpeg';
+
 $post_img_url = has_post_thumbnail() 
     ? get_the_post_thumbnail_url( get_the_ID(), 'full' ) 
-    : esc_url( FRANCISCAN_THEME_URI . '/assets/images/news-blog/IMG20230215103348.jpg.jpeg' );
+    : esc_url( $default_img );
 
 // Retrieve Dynamic Banner Background Image (Per-Post > Franciscan Studio News Details > News > Default)
 $custom_banner = get_post_meta( get_the_ID(), '_franciscan_banner_image', true );
@@ -38,7 +42,7 @@ if ( ! empty( $custom_banner ) ) {
         $banner_bg = function_exists( 'franciscan_get_page_field' ) ? franciscan_get_page_field( 'news', 'hero_image', '' ) : '';
     }
     if ( empty( $banner_bg ) ) {
-        $banner_bg = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_51_30_PM.png';
+        $banner_bg = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/hero-banner-aug20.jpeg';
     }
 }
 ?>

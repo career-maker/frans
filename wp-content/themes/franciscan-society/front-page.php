@@ -85,15 +85,10 @@ get_header();
                         $home_hero_badge = franciscan_get_page_field( 'home', 'hero_badge', '' );
                         $home_hero_sub   = franciscan_get_page_field( 'home', 'hero_subtitle', '' );
                         ?>
-                        <?php if ( ! empty( $home_hero_badge ) ) : ?>
-                            <div style="display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(230, 200, 136, 0.16); backdrop-filter: blur(8px); padding: 0.35rem 1rem; border-radius: 50px; margin-bottom: 1.2rem; border: 1px solid rgba(230, 200, 136, 0.35); width: fit-content;">
-                                <span style="width: 6px; height: 6px; background-color: #e6c888; border-radius: 50%; display: inline-block;"></span>
-                                <span style="color: #ffffff; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; font-family: 'Instrument Sans', sans-serif;"><?php echo esc_html( $home_hero_badge ); ?></span>
-                            </div>
-                        <?php endif; ?>
+                        <!-- Hero badge pill removed per design spec -->
 
-                        <!-- Main Title: Phudu, 600 weight, 62px size, 62px line height -->
-                        <h1 class="hero-title" style="font-family: 'Phudu', sans-serif !important; font-size: clamp(2.6rem, 5.5vw, 4.8rem) !important; font-weight: 600 !important; color: #ffffff; text-transform: uppercase; line-height: 1.05; letter-spacing: -0.01em; margin-bottom: 1.5rem; text-shadow: none !important;">
+                        <!-- Main Title: Phudu, 600 weight, 43px size, 50px line-height on desktop -->
+                        <h1 class="hero-title" style="font-family: 'Phudu', sans-serif !important; font-size: 43px !important; font-weight: 600 !important; color: #ffffff; text-transform: uppercase; line-height: 50px !important; letter-spacing: -0.01em; margin-bottom: 1.5rem; text-shadow: none !important;">
                             <?php echo nl2br( esc_html( franciscan_get_page_field( 'home', 'hero_title', "Let us begin again,\nfor we have only begun to serve the Lord." ) ) ); ?>
                         </h1>
 
@@ -289,12 +284,12 @@ get_header();
                     $about_video = FRANCISCAN_THEME_URI . '/assets/videos/hero-bg.mp4';
                 }
                 ?>
-                <div style="position: relative; border-radius: 24px;">
+                <div class="about-media-column" style="position: relative; border-radius: 24px;">
                     <div class="about-img-container" style="position: relative; border-radius: 24px; overflow: hidden; box-shadow: 0 20px 45px rgba(0, 0, 0, 0.08);">
-                        <img loading="lazy" decoding="async" src="<?php echo esc_url( $about_img ); ?>" style="width: 100%; height: 460px; object-fit: cover; border-radius: 24px; display: block;" alt="Franciscan Rosary & Prayer">
+                        <img loading="lazy" decoding="async" class="about-main-img" src="<?php echo esc_url( $about_img ); ?>" style="width: 100%; height: 460px; object-fit: cover; border-radius: 24px; display: block;" alt="Franciscan Rosary & Prayer">
                     </div>
                     
-                    <!-- Inset Video Overlay Card (Positioned inside bottom-right corner) -->
+                    <!-- Inset Video Overlay Card (Positioned inside bottom-right on desktop, sleek bar on mobile) -->
                     <?php
                     $about_video_btn_url = franciscan_get_page_field( 'home', 'about_video_btn_url', '' );
                     if ( empty( $about_video_btn_url ) ) {
@@ -302,15 +297,18 @@ get_header();
                     }
                     ?>
                     <div class="about-video-card" style="position: absolute; bottom: 20px; right: 20px; background: #ffffff; padding: 10px; border-radius: 16px; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.18); width: 185px; text-align: center; z-index: 10;">
-                        <div style="position: relative; border-radius: 12px; overflow: hidden; height: 95px; background-color: #1c1917;">
+                        <div class="about-video-thumb-wrap" style="position: relative; border-radius: 12px; overflow: hidden; height: 95px; background-color: #1c1917;">
                             <video src="<?php echo esc_url( $about_video ); ?>" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" autoplay loop muted playsinline></video>
-                            <a rel="noopener noreferrer" href="<?php echo esc_url( $about_video_btn_url ); ?>" target="_blank" class="video-play-btn" aria-label="Watch our video on YouTube">
-                                <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16" aria-hidden="true">
+                            <a rel="noopener noreferrer" href="<?php echo esc_url( $about_video_btn_url ); ?>" target="_blank" class="video-play-btn" aria-label="Watch our video on YouTube" style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.35); color: #ffffff; border-radius: 12px;">
+                                <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20" aria-hidden="true">
                                     <path d="M8 5v14l11-7z"/>
                                 </svg>
                             </a>
                         </div>
-                        <span style="display: block; margin-top: 8px; font-weight: 800; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: #1c1917; font-family: 'Instrument Sans', sans-serif;"><?php echo esc_html( franciscan_get_page_field( 'home', 'about_video_btn_text', 'WATCH OUR VIDEO' ) ); ?></span>
+                        <div class="video-info-wrap" style="margin-top: 8px;">
+                            <span class="about-video-badge" style="display: block; font-weight: 800; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: #1c1917; font-family: 'Instrument Sans', sans-serif;"><?php echo esc_html( franciscan_get_page_field( 'home', 'about_video_btn_text', 'WATCH OUR VIDEO' ) ); ?></span>
+                            <span class="about-video-sub" style="display: none; font-size: 0.76rem; color: #78716c; font-family: 'Instrument Sans', sans-serif;">Explore our mission &amp; ministry on YouTube</span>
+                        </div>
                     </div>
                 </div>
 
@@ -576,24 +574,27 @@ get_header();
 
                 </div>
 
-                <div id="news-scroll-track" style="display: flex; gap: 2.2rem; overflow-x: auto; -webkit-overflow-scrolling: touch; touch-action: pan-x; scroll-behavior: smooth; scroll-snap-type: x mandatory; padding: 0.5rem 0 1.5rem 0; scrollbar-width: none; -ms-overflow-style: none;">
+                <div id="news-scroll-track" style="display: flex; gap: 2.2rem; overflow-x: auto; -webkit-overflow-scrolling: touch; touch-action: pan-y pinch-zoom; scroll-behavior: smooth; scroll-snap-type: x proximity; padding: 0.5rem 0 1.5rem 0; scrollbar-width: none; -ms-overflow-style: none;">
                     <?php
+                    // STRICT: Only show posts from the 'news' category.
+                    // If the 'news' category doesn't exist OR has no published posts,
+                    // show the hardcoded fallback card instead.
+                    $news_cat = get_term_by( 'slug', 'news', 'category' );
                     $news_slider_args = array(
                         'post_type'      => 'post',
                         'post_status'    => 'publish',
                         'posts_per_page' => 8,
+                        'has_password'   => false,
+                        'orderby'        => 'date',
+                        'order'          => 'DESC',
                     );
-                    $news_cat = get_term_by( 'slug', 'news', 'category' );
                     if ( $news_cat ) {
+                        // Only fetch posts that are STRICTLY in the news category
                         $news_slider_args['cat'] = $news_cat->term_id;
+                        $news_slider_args['category__in'] = array( $news_cat->term_id );
                     } else {
-                        $blog_cat = get_term_by( 'slug', 'blogs', 'category' );
-                        if ( ! $blog_cat ) {
-                            $blog_cat = get_term_by( 'slug', 'blog', 'category' );
-                        }
-                        if ( $blog_cat ) {
-                            $news_slider_args['category__not_in'] = array( $blog_cat->term_id );
-                        }
+                        // No 'news' category exists at all — skip the query
+                        $news_slider_args['post__in'] = array( 0 ); // returns nothing
                     }
                     $news_slider_query = new WP_Query( $news_slider_args );
                     if ( $news_slider_query->have_posts() ) :
@@ -711,7 +712,7 @@ get_header();
                 </div>
 
                           <!-- Blog Cards Scroll Track -->
-                <div id="blogs-scroll-track" style="display: flex; gap: 2.2rem; overflow-x: auto; -webkit-overflow-scrolling: touch; touch-action: pan-x; scroll-behavior: smooth; scroll-snap-type: x mandatory; padding: 0.5rem 0 1.5rem 0; margin-bottom: 2rem; scrollbar-width: none; -ms-overflow-style: none;">
+                <div id="blogs-scroll-track" style="display: flex; gap: 2.2rem; overflow-x: auto; -webkit-overflow-scrolling: touch; touch-action: pan-y pinch-zoom; scroll-behavior: smooth; scroll-snap-type: x proximity; padding: 0.5rem 0 1.5rem 0; margin-bottom: 2rem; scrollbar-width: none; -ms-overflow-style: none;">
                     <?php
                     $blog_slider_args = array(
                         'post_type'      => 'post',

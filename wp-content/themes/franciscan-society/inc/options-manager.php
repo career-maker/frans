@@ -151,8 +151,8 @@ function franciscan_update_option( $key, $value ) {
 function franciscan_get_default_page_content( $slug = '' ) {
     $defaults = array(
         'home' => array(
-            // Hero
-            'hero_badge'        => 'THIRD ORDER REGULAR OF ST. FRANCIS',
+            // Hero (Pill removed per design spec)
+            'hero_badge'        => '',
             'hero_title'        => "Let us begin again,\nfor we have only begun to serve the Lord.",
             'hero_subtitle'     => 'In the spirit of the Seraphic Minstrel of Divine Love, we walk the way of the Gospel—our hearts rooted in prayer, our lives woven together in fraternity, and our footsteps shaped by the simplicity and humility of Christ. Drawn to the least, we seek to become gentle instruments of His peace, singing into the world the melody of mercy, hope, and love.',
             'hero_image'        => '',
