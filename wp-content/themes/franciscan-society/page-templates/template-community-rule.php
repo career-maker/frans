@@ -873,11 +873,11 @@ button.fs-mega-toggle:focus::after {
     <?php foreach ( $chapters as $c_idx => $chap_data ) : 
         $modal_id = $c_idx + 1;
     ?>
-        <div class="tor-reader-modal" id="chapterModal<?php echo esc_attr( $modal_id ); ?>" role="dialog" aria-modal="true" aria-labelledby="chapterModalTitle<?php echo esc_attr( $modal_id ); ?>" style="display: none; position: fixed; inset: 0; z-index: 999999; overflow-y: auto; background: rgba(12, 11, 10, 0.78); backdrop-filter: blur(8px); padding: 1.5rem 1rem; align-items: center; justify-content: center;">
-            <div class="tor-reader-card" style="background: #ffffff; width: 100%; max-width: 820px; border-radius: 22px; box-shadow: 0 25px 60px rgba(0,0,0,0.35); border: 2px solid #e6c888; overflow: hidden; margin: auto; animation: torModalIn 0.3s cubic-bezier(0.16, 1, 0.3, 1); display: flex; flex-direction: column; max-height: 90vh;">
+        <div class="tor-reader-modal" id="chapterModal<?php echo esc_attr( $modal_id ); ?>" role="dialog" aria-modal="true" aria-labelledby="chapterModalTitle<?php echo esc_attr( $modal_id ); ?>" style="display: none;">
+            <div class="tor-reader-card">
                 
                 <!-- Modal Header -->
-                <div style="background: linear-gradient(135deg, #4a2a18 0%, #2a160b 100%); padding: 1.8rem 2.2rem; display: flex; justify-content: space-between; align-items: flex-start; gap: 1.5rem; border-bottom: 2px solid #e6c888; position: relative;">
+                <div class="tor-modal-header" style="background: linear-gradient(135deg, #4a2a18 0%, #2a160b 100%); padding: 1.8rem 2.2rem; display: flex; justify-content: space-between; align-items: flex-start; gap: 1.5rem; border-bottom: 2px solid #e6c888; position: relative;">
                     <div>
                         <div style="display: inline-flex; align-items: center; gap: 0.45rem; background: rgba(230, 200, 136, 0.2); padding: 0.3rem 0.85rem; border-radius: 20px; margin-bottom: 0.6rem; border: 1px solid rgba(230, 200, 136, 0.4);">
                             <span style="width: 6px; height: 6px; background-color: #e6c888; border-radius: 50%; display: inline-block;"></span>
@@ -899,7 +899,7 @@ button.fs-mega-toggle:focus::after {
                 </div>
 
                 <!-- Modal Body: Flowing Sacred Reading Paragraphs (NO numbers or points) -->
-                <div style="padding: 2.2rem 2.5rem; overflow-y: auto; flex: 1 1 auto; background: #ffffff;">
+                <div class="tor-modal-body" style="padding: 2.2rem 2.5rem; overflow-y: auto; flex: 1 1 0%; min-height: 0; background: #ffffff;">
                     <div class="tor-chapter-paragraphs" style="font-family: 'Instrument Sans', sans-serif; font-size: 1.05rem; line-height: 1.85; color: #374151;">
                         <?php 
                         $raw_content = $chap_data['content'] ?? ( $chap_data['paragraphs'] ?? '' );
@@ -935,7 +935,7 @@ button.fs-mega-toggle:focus::after {
                 </div>
 
                 <!-- Modal Footer with Dynamic Next / Previous Chapter Navigation -->
-                <div style="background: #f9f6f0; border-top: 1px solid #ebdcc5; padding: 1.1rem 2.2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+                <div class="tor-modal-footer" style="background: #f9f6f0; border-top: 1px solid #ebdcc5; padding: 1.1rem 2.2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
                     <div>
                         <?php if ( $modal_id > 1 ) : ?>
                             <button type="button" class="tor-nav-chapter-btn" data-chapter-target="<?php echo esc_attr( $modal_id - 1 ); ?>" style="background: transparent; color: #4a2a18; border: 1.5px solid #4a2a18; padding: 0.55rem 1.2rem; border-radius: 25px; font-family: 'Instrument Sans', sans-serif; font-size: 0.88rem; font-weight: 700; cursor: pointer; transition: all 0.2s ease; display: inline-flex; align-items: center; gap: 0.4rem;">
@@ -962,18 +962,111 @@ button.fs-mega-toggle:focus::after {
     <?php endforeach; ?>
 
 <style>
+/* Lock background scrolling when modal is open */
+html.tor-modal-open,
+body.tor-modal-open {
+    overflow: hidden !important;
+    height: 100% !important;
+    touch-action: none !important;
+    -webkit-overflow-scrolling: auto !important;
+}
+
 /* Guaranteed Topmost Layer for Rule Chapter Modals */
 .tor-reader-modal {
     position: fixed !important;
+    inset: 0 !important;
     top: 0 !important;
     left: 0 !important;
     right: 0 !important;
     bottom: 0 !important;
-    width: 100vw !important;
-    height: 100vh !important;
+    width: 100% !important;
+    height: 100% !important;
+    height: 100dvh !important;
     z-index: 999999999 !important;
+    background: rgba(12, 11, 10, 0.82) !important;
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+    padding: 1.5rem 1rem !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+    display: none;
+    align-items: center !important;
+    justify-content: center !important;
+    overscroll-behavior: contain !important;
+}
+
+.tor-reader-card {
+    background: #ffffff !important;
+    width: 100% !important;
+    max-width: 820px !important;
+    height: 88vh !important;
+    height: 88dvh !important;
+    max-height: 88vh !important;
+    max-height: 88dvh !important;
+    border-radius: 22px !important;
+    box-shadow: 0 25px 60px rgba(0,0,0,0.4) !important;
+    border: 2px solid #e6c888 !important;
+    overflow: hidden !important;
+    margin: auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    animation: torModalIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    overscroll-behavior: contain !important;
+}
+
+.tor-modal-header {
+    flex: 0 0 auto !important;
+    flex-shrink: 0 !important;
+}
+
+.tor-modal-body {
+    flex: 1 1 0% !important;
+    min-height: 0 !important;
     overflow-y: auto !important;
     -webkit-overflow-scrolling: touch !important;
+    overscroll-behavior: contain !important;
+    touch-action: pan-y !important;
+    background: #ffffff !important;
+}
+
+.tor-modal-footer {
+    flex: 0 0 auto !important;
+    flex-shrink: 0 !important;
+}
+
+@media (max-width: 768px) {
+    .tor-reader-modal {
+        padding: 0.5rem 0.35rem !important;
+    }
+    .tor-reader-card {
+        height: 94vh !important;
+        height: 94dvh !important;
+        max-height: 94vh !important;
+        max-height: 94dvh !important;
+        border-radius: 16px !important;
+    }
+    .tor-modal-header {
+        padding: 1.1rem 1.25rem !important;
+        gap: 1rem !important;
+    }
+    .tor-modal-header h3 {
+        font-size: 1.22rem !important;
+    }
+    .tor-modal-body {
+        padding: 1.2rem 1.15rem !important;
+    }
+    .tor-chapter-paragraphs {
+        font-size: 0.95rem !important;
+        line-height: 1.75 !important;
+    }
+    .tor-modal-footer {
+        padding: 0.8rem 1.15rem !important;
+        gap: 0.6rem !important;
+    }
+    .tor-modal-footer button {
+        padding: 0.45rem 0.95rem !important;
+        font-size: 0.8rem !important;
+    }
 }
 
 /* Hover animation for chapter rows */
@@ -1047,7 +1140,15 @@ document.addEventListener('DOMContentLoaded', function() {
         const targetModal = document.getElementById('chapterModal' + chapterId);
         if (targetModal) {
             targetModal.style.display = 'flex';
-            document.body.style.overflow = 'hidden';
+            document.documentElement.classList.add('tor-modal-open');
+            document.body.classList.add('tor-modal-open');
+
+            // Scroll modal body content to top
+            const modalBody = targetModal.querySelector('.tor-modal-body');
+            if (modalBody) {
+                modalBody.scrollTop = 0;
+            }
+
             // Focus on close button for accessibility
             const closeBtn = targetModal.querySelector('.tor-close-modal-btn');
             if (closeBtn) closeBtn.focus();
@@ -1062,8 +1163,18 @@ document.addEventListener('DOMContentLoaded', function() {
                 m.style.display = 'none';
             });
         }
-        document.body.style.overflow = '';
+        document.documentElement.classList.remove('tor-modal-open');
+        document.body.classList.remove('tor-modal-open');
     }
+
+    // Touch event guard for mobile: stop background window dragging
+    document.addEventListener('touchmove', function(e) {
+        if (document.body.classList.contains('tor-modal-open')) {
+            if (!e.target.closest('.tor-modal-body')) {
+                e.preventDefault();
+            }
+        }
+    }, { passive: false });
 
     // Event delegation for opening/navigating chapters
     document.addEventListener('click', function(e) {

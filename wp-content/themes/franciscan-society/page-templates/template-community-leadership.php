@@ -11,6 +11,48 @@ get_header();
 <style>
         @media (max-width: 991px) { html, body { margin: 0; padding: 0; } body.menu-open #welcome-scroll-bible-container { display: none !important; } }
 
+        /* Leadership Section Eyebrows & Bullets */
+        .leadership-eyebrow-container {
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            gap: 0.6rem !important;
+            max-width: 100% !important;
+            margin: 0 auto 0.8rem auto !important;
+            text-align: center !important;
+        }
+        .leadership-eyebrow-bullet {
+            width: 6px !important;
+            height: 6px !important;
+            min-width: 6px !important;
+            min-height: 6px !important;
+            background-color: #4A2A18 !important;
+            border-radius: 50% !important;
+            display: inline-block !important;
+            flex-shrink: 0 !important;
+        }
+        @media (max-width: 768px) {
+            .leadership-eyebrow-container {
+                align-items: flex-start !important;
+                text-align: left !important;
+                max-width: 92% !important;
+            }
+            .leadership-eyebrow-bullet {
+                margin-top: 0.35rem !important;
+            }
+            .leadership-eyebrow-text {
+                text-align: left !important;
+            }
+            .leadership-hero-badge {
+                align-items: flex-start !important;
+                border-radius: 20px !important;
+                padding: 0.55rem 1rem !important;
+            }
+            .leadership-hero-badge .leadership-hero-bullet {
+                margin-top: 0.32rem !important;
+            }
+        }
+
         /* Menu item consistency */
         .mobile-nav-drawer .drawer-nav > a,
         .mobile-nav-drawer .drawer-nav .submenu-toggle {
@@ -765,9 +807,9 @@ button.fs-mega-toggle:focus::after {
     <section class="page-hero-banner" style="background-image: url('<?php echo esc_url( $ldr_hero_bg ); ?>');">
         <div style="position: absolute; inset: 0; background-color: rgba(12, 11, 10, 0.74);"></div>
         <div style="max-width: 900px; margin: 0 auto; position: relative; z-index: 2; text-align: center;">
-            <div style="display: inline-flex; align-items: center; gap: 0.6rem; background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); padding: 0.5rem 1.2rem; border-radius: 50px; margin-bottom: 1.5rem; border: 1px solid rgba(255,255,255,0.2);">
-                <span style="width: 8px; height: 8px; background-color: #e6c888; border-radius: 50%; display: inline-block;"></span>
-                <span style="color: #ffffff; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.04em; font-family: 'Instrument Sans', sans-serif;"><?php echo esc_html( franciscan_get_page_field( 'community-leadership', 'hero_badge', 'To lead is to serve; to be greater is to become lesser.' ) ); ?></span>
+            <div class="leadership-hero-badge" style="display: inline-flex; align-items: center; justify-content: center; gap: 0.6rem; background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); padding: 0.5rem 1.2rem; border-radius: 50px; margin-bottom: 1.5rem; border: 1px solid rgba(255,255,255,0.2); max-width: 95%;">
+                <span class="leadership-hero-bullet" style="width: 8px; height: 8px; min-width: 8px; min-height: 8px; background-color: #e6c888; border-radius: 50%; display: inline-block; flex-shrink: 0;"></span>
+                <span style="color: #ffffff; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.04em; font-family: 'Instrument Sans', sans-serif; line-height: 1.4; text-align: left;"><?php echo esc_html( franciscan_get_page_field( 'community-leadership', 'hero_badge', 'To lead is to serve; to be greater is to become lesser.' ) ); ?></span>
             </div>
             <h1 style="font-family: 'Phudu', sans-serif; font-size: clamp(2.8rem, 5.2vw, 4.5rem); font-weight: 700; color: #ffffff; text-transform: uppercase; margin: 0 0 1rem 0; line-height: 1.1;"><?php echo esc_html( franciscan_get_page_field( 'community-leadership', 'hero_title', 'LEADERSHIP' ) ); ?></h1>
             <?php if ( ! empty( $ldr_hero_desc ) ) : ?>
@@ -815,15 +857,15 @@ button.fs-mega-toggle:focus::after {
 
             <!-- GENERAL COUNCIL -->
             <div style="text-align: center; margin-bottom: 2.5rem;">
-                <div style="display: inline-flex; align-items: center; gap: 0.5rem; margin-bottom: 0.8rem;">
-                    <span style="width: 6px; height: 6px; background-color: #4A2A18; border-radius: 50%;"></span>
+                <div class="leadership-eyebrow-container">
+                    <span class="leadership-eyebrow-bullet"></span>
                     <?php
                     $general_eyebrow = franciscan_get_page_field( 'community-leadership', 'general_eyebrow', '' );
                     if ( empty( $general_eyebrow ) || $general_eyebrow === 'LEADERSHIP OF THE ORDER' ) {
                         $general_eyebrow = 'To lead is to serve; to be greater is to become lesser.';
                     }
                     ?>
-                    <span style="color: #4A2A18; font-size: 0.78rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; font-family: 'Instrument Sans', sans-serif;"><?php echo esc_html( $general_eyebrow ); ?></span>
+                    <span class="leadership-eyebrow-text" style="color: #4A2A18; font-size: 0.78rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; font-family: 'Instrument Sans', sans-serif; line-height: 1.45;"><?php echo esc_html( $general_eyebrow ); ?></span>
                 </div>
                 <h2 style="font-family: 'Phudu', sans-serif; font-size: clamp(2rem, 3.5vw, 2.6rem); font-weight: 700; color: #1c1917; text-transform: uppercase; margin: 0 0 1rem 0;"><?php echo esc_html( franciscan_get_page_field( 'community-leadership', 'general_heading', 'GENERAL COUNCIL' ) ); ?></h2>
                 <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.52; max-width: 750px; margin: 0 auto;">
@@ -1009,15 +1051,15 @@ button.fs-mega-toggle:focus::after {
 
             <!-- PROVINCIAL COUNCIL -->
             <div style="text-align: center; margin-bottom: 2.5rem; padding-top: 3rem; border-top: 1px solid rgba(74,42,24,0.1);">
-                <div style="display: inline-flex; align-items: center; gap: 0.5rem; margin-bottom: 0.8rem;">
-                    <span style="width: 6px; height: 6px; background-color: #4A2A18; border-radius: 50%;"></span>
+                <div class="leadership-eyebrow-container">
+                    <span class="leadership-eyebrow-bullet"></span>
                     <?php
                     $provincial_eyebrow = franciscan_get_page_field( 'community-leadership', 'provincial_eyebrow', '' );
                     if ( empty( $provincial_eyebrow ) || $provincial_eyebrow === 'RANCHI PROVINCE LEADERSHIP' ) {
                         $provincial_eyebrow = 'To lead is to serve; to be greater is to become lesser.';
                     }
                     ?>
-                    <span style="color: #4A2A18; font-size: 0.78rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; font-family: 'Instrument Sans', sans-serif;"><?php echo esc_html( $provincial_eyebrow ); ?></span>
+                    <span class="leadership-eyebrow-text" style="color: #4A2A18; font-size: 0.78rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; font-family: 'Instrument Sans', sans-serif; line-height: 1.45;"><?php echo esc_html( $provincial_eyebrow ); ?></span>
                 </div>
                 <h2 style="font-family: 'Phudu', sans-serif; font-size: clamp(2rem, 3.5vw, 2.6rem); font-weight: 700; color: #1c1917; text-transform: uppercase; margin: 0 0 1rem 0;"><?php echo esc_html( franciscan_get_page_field( 'community-leadership', 'provincial_heading', 'PROVINCIAL COUNCIL' ) ); ?></h2>
                 <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.52; max-width: 750px; margin: 0 auto;">
