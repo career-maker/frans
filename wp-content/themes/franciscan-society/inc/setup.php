@@ -54,25 +54,31 @@ function franciscan_enqueue_assets() {
     );
 
     // 2. Design System & Theme Styles
+    $theme_ver   = FRANCISCAN_THEME_VERSION;
+    $styles_file = FRANCISCAN_THEME_DIR . '/assets/css/styles.css';
+    if ( file_exists( $styles_file ) ) {
+        $theme_ver .= '.' . filemtime( $styles_file );
+    }
+
     wp_enqueue_style(
         'franciscan-design-system',
         FRANCISCAN_THEME_URI . '/assets/css/design-system.css',
         array(),
-        FRANCISCAN_THEME_VERSION
+        $theme_ver
     );
 
     wp_enqueue_style(
         'franciscan-main-styles',
         FRANCISCAN_THEME_URI . '/assets/css/styles.css',
         array( 'franciscan-design-system' ),
-        FRANCISCAN_THEME_VERSION
+        $theme_ver
     );
 
     wp_enqueue_style(
         'franciscan-bible-widget-style',
         FRANCISCAN_THEME_URI . '/assets/css/bible-widget.css',
         array(),
-        FRANCISCAN_THEME_VERSION
+        $theme_ver
     );
 
     // 3. GSAP & ScrollTrigger
@@ -215,9 +221,12 @@ add_filter( 'wp_resource_hints', function( $hints, $relation_type ) {
     return $hints;
 }, 10, 2 );
 
-// Remove static asset query strings for better CDN / proxy caching
+// Remove static asset query strings for better CDN / proxy caching (preserve theme assets for cache busting)
 function franciscan_remove_ver_query_args( $src ) {
     if ( ! is_admin() && strpos( $src, '?ver=' ) ) {
+        if ( false !== strpos( $src, 'themes/franciscan-society' ) ) {
+            return $src;
+        }
         $src = remove_query_arg( 'ver', $src );
     }
     return $src;

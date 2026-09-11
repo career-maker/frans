@@ -6,16 +6,156 @@
  */
 ?>
 <footer style="padding: 0 0 2rem 0; background-color: #FAFAFA; color: #ffffff; box-sizing: border-box;">
+    <!-- Critical inline styles for mobile footer layout, logo containment, and strict left alignment -->
+    <style id="footer-alignment-critical">
+        @media (max-width: 768px) {
+            footer > div > div,
+            footer .footer-main-card {
+                padding: 2.25rem 1.25rem 1.75rem 1.25rem !important;
+                border-radius: 24px !important;
+            }
+        }
+        footer .footer-col-brand,
+        footer .footer-brand-wrap,
+        footer .footer-brand-link,
+        footer .footer-brand-text-wrap,
+        footer .footer-contact-list,
+        footer .footer-contact-item,
+        footer .footer-address-text {
+            text-align: left !important;
+            text-align: start !important;
+        }
+        footer .footer-brand-link {
+            text-decoration: none !important;
+            display: flex !important;
+            flex-direction: row !important;
+            align-items: center !important;
+            justify-content: flex-start !important;
+            gap: 0.85rem !important;
+            width: 100% !important;
+            max-width: 100% !important;
+            min-width: 0 !important;
+            box-sizing: border-box !important;
+            overflow: hidden !important;
+        }
+        footer .footer-brand-link img,
+        footer img.footer-logo-img {
+            height: 46px !important;
+            max-height: 48px !important;
+            width: auto !important;
+            max-width: 48px !important;
+            min-width: 38px !important;
+            flex-shrink: 0 !important;
+            object-fit: contain !important;
+            display: block !important;
+        }
+        footer .footer-brand-text-wrap {
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: flex-start !important;
+            text-align: left !important;
+            text-align: start !important;
+            flex: 1 1 auto !important;
+            min-width: 0 !important;
+            max-width: calc(100% - 56px) !important;
+            box-sizing: border-box !important;
+            overflow: hidden !important;
+        }
+        footer .footer-logo-title {
+            font-family: 'Instrument Sans', sans-serif !important;
+            font-weight: 600 !important;
+            font-size: 0.88rem !important;
+            color: #ffffff !important;
+            line-height: 1.25 !important;
+            letter-spacing: 0.01em !important;
+            display: block !important;
+            width: 100% !important;
+            white-space: normal !important;
+            overflow-wrap: break-word !important;
+            word-break: normal !important;
+            text-align: left !important;
+            text-align: start !important;
+            margin: 0 !important;
+        }
+        footer .footer-logo-subtitle {
+            font-family: 'Instrument Sans', sans-serif !important;
+            font-size: 0.72rem !important;
+            color: rgba(255, 255, 255, 0.75) !important;
+            line-height: 1.25 !important;
+            margin-top: 3px !important;
+            display: block !important;
+            width: 100% !important;
+            white-space: normal !important;
+            overflow-wrap: break-word !important;
+            word-break: normal !important;
+            text-align: left !important;
+            text-align: start !important;
+            margin-bottom: 0 !important;
+        }
+        footer .footer-contact-list {
+            display: flex !important;
+            flex-direction: column !important;
+            gap: 1.1rem !important;
+            font-family: 'Instrument Sans', sans-serif !important;
+            font-size: 0.92rem !important;
+            color: #d6d3d1 !important;
+            text-align: left !important;
+            text-align: start !important;
+            align-items: flex-start !important;
+            width: 100% !important;
+        }
+        footer .footer-contact-item {
+            display: flex !important;
+            flex-direction: row !important;
+            align-items: center !important;
+            justify-content: flex-start !important;
+            gap: 0.8rem !important;
+            text-align: left !important;
+            text-align: start !important;
+            width: 100% !important;
+        }
+        footer .footer-contact-item.is-address {
+            align-items: flex-start !important;
+            margin-top: 0.3rem !important;
+        }
+        footer .footer-contact-icon {
+            width: 36px !important;
+            height: 36px !important;
+            border-radius: 50% !important;
+            background: rgba(255,255,255,0.08) !important;
+            border: 1px solid rgba(255,255,255,0.18) !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            color: #ffffff !important;
+            flex-shrink: 0 !important;
+        }
+        footer .footer-contact-item.is-address .footer-contact-icon {
+            margin-top: 2px !important;
+        }
+        footer .footer-address-text {
+            line-height: 1.5 !important;
+            font-size: 0.88rem !important;
+            color: #d6d3d1 !important;
+            text-align: left !important;
+            text-align: start !important;
+            display: block !important;
+            flex: 1 1 auto !important;
+            min-width: 0 !important;
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+    </style>
             <div style="max-width: 1320px; margin: 0 auto; padding: 0 clamp(1rem, 5vw, 3rem);">
                 
                 <!-- Main Inset Card Container with 32px Rounded Corners & Dark Texture -->
-                <div style="position: relative; border-radius: 32px; overflow: hidden; background-color: #0c0b0a; background-image: radial-gradient(rgba(255,255,255,0.06) 1px, transparent 1px); background-size: 18px 18px; padding: 4.5rem 4rem 2.5rem 4rem; box-shadow: 0 25px 60px rgba(0,0,0,0.35);">
+                <div class="footer-main-card" style="position: relative; border-radius: 32px; overflow: hidden; background-color: #0c0b0a; background-image: radial-gradient(rgba(255,255,255,0.06) 1px, transparent 1px); background-size: 18px 18px; padding: 4.5rem 4rem 2.5rem 4rem; box-shadow: 0 25px 60px rgba(0,0,0,0.35);">
                     
                     <!-- 4-Column Main Grid -->
                     <div class="responsive-grid-footer" style="display: grid; gap: 3.5rem; margin-bottom: 3.8rem; align-items: start;">
                         
                         <!-- Column 1: Logo & Contact Information -->
-                        <div class="footer-col-brand" style="text-align: left;">
+                        <div class="footer-col-brand" style="text-align: start;">
                             <?php
                             $footer_logo             = franciscan_get_option( 'footer_logo', FRANCISCAN_THEME_URI . '/assets/images/logo.svg' );
                             $footer_org_title        = franciscan_get_option( 'footer_org_title', 'Franciscan Friars of the Third Order Regular' );
@@ -44,36 +184,36 @@
                             }
                             $footer_address = franciscan_get_option( 'address_text', "Franciscan Ashram (Provincial Residence)\nP.O. Harmu Housing Colony, Ranchi – 834002, JHARKHAND" );
                             ?>
-                            <div style="margin-bottom: 2rem; text-align: left;">
-                                <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="footer-brand-link" style="text-decoration: none; display: flex; align-items: center; gap: 0.85rem; width: 100%; max-width: 100%; text-align: left;">
-                                    <img loading="lazy" decoding="async" src="<?php echo esc_url( $footer_logo ); ?>" alt="<?php echo esc_attr( $footer_org_title ); ?>" style="height: 48px; width: auto; flex-shrink: 0; min-width: 40px;" onerror="this.style.display='none'">
-                                    <div style="display: flex; flex-direction: column; text-align: left; flex: 1 1 auto; min-width: 0;">
-                                        <span class="footer-logo-title" style="font-family: 'Instrument Sans', sans-serif; font-weight: 600; font-size: 0.88rem; color: #ffffff; line-height: 1.25; letter-spacing: 0.01em; display: block; width: 100%; white-space: normal; overflow-wrap: break-word; word-break: normal; text-align: left;"><?php echo esc_html( $footer_org_title ); ?></span>
-                                        <span class="footer-logo-subtitle" style="font-family: 'Instrument Sans', sans-serif; font-size: 0.72rem; color: rgba(255, 255, 255, 0.75); line-height: 1.25; margin-top: 2px; display: block; width: 100%; white-space: normal; overflow-wrap: break-word; word-break: normal; text-align: left;"><?php echo esc_html( $footer_org_subtitle ); ?></span>
+                            <div class="footer-brand-wrap" style="margin-bottom: 2rem; text-align: start; width: 100%; max-width: 100%;">
+                                <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="footer-brand-link" style="text-decoration: none; display: flex; align-items: center; gap: 0.85rem; width: 100%; max-width: 100%; text-align: start; min-width: 0; overflow: hidden; box-sizing: border-box;">
+                                    <img loading="lazy" decoding="async" class="footer-logo-img" src="<?php echo esc_url( $footer_logo ); ?>" alt="<?php echo esc_attr( $footer_org_title ); ?>" style="height: 48px; max-height: 48px; width: auto; max-width: 48px; flex-shrink: 0; min-width: 40px; object-fit: contain; display: block;" onerror="this.style.display='none'">
+                                    <div class="footer-brand-text-wrap" style="display: flex; flex-direction: column; text-align: start; flex: 1 1 auto; min-width: 0; max-width: calc(100% - 56px); box-sizing: border-box; overflow: hidden;">
+                                        <span class="footer-logo-title" style="font-family: 'Instrument Sans', sans-serif; font-weight: 600; font-size: 0.88rem; color: #ffffff; line-height: 1.25; letter-spacing: 0.01em; display: block; width: 100%; white-space: normal; overflow-wrap: break-word; word-break: normal; text-align: start; margin: 0;"><?php echo esc_html( $footer_org_title ); ?></span>
+                                        <span class="footer-logo-subtitle" style="font-family: 'Instrument Sans', sans-serif; font-size: 0.72rem; color: rgba(255, 255, 255, 0.75); line-height: 1.25; margin-top: 2px; display: block; width: 100%; white-space: normal; overflow-wrap: break-word; word-break: normal; text-align: start; margin: 0;"><?php echo esc_html( $footer_org_subtitle ); ?></span>
                                     </div>
                                 </a>
                             </div>
 
-                            <div class="footer-contact-list" style="display: flex; flex-direction: column; gap: 1.1rem; font-family: 'Instrument Sans', sans-serif; font-size: 0.92rem; color: #d6d3d1; text-align: left;">
-                                <div style="display: flex; align-items: center; gap: 0.8rem; text-align: left;">
-                                    <span style="width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.18); display: flex; align-items: center; justify-content: center; color: #ffffff; flex-shrink: 0;">
+                            <div class="footer-contact-list" style="display: flex; flex-direction: column; gap: 1.1rem; font-family: 'Instrument Sans', sans-serif; font-size: 0.92rem; color: #d6d3d1; text-align: start; width: 100%;">
+                                <div class="footer-contact-item" style="display: flex; align-items: center; gap: 0.8rem; text-align: start; width: 100%;">
+                                    <span class="footer-contact-icon" style="width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.18); display: flex; align-items: center; justify-content: center; color: #ffffff; flex-shrink: 0;">
                                         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.18 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6.29 6.29l.97-.97a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
                                     </span>
                                     <a href="<?php echo esc_url( $footer_tel_url ); ?>" style="color: #d6d3d1; text-decoration: none;" onmouseover="this.style.color='#e6c888'" onmouseout="this.style.color='#d6d3d1'"><?php echo esc_html( $footer_phone ); ?></a>
                                 </div>
 
-                                <div style="display: flex; align-items: center; gap: 0.8rem; text-align: left;">
-                                    <span style="width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.18); display: flex; align-items: center; justify-content: center; color: #ffffff; flex-shrink: 0;">
+                                <div class="footer-contact-item" style="display: flex; align-items: center; gap: 0.8rem; text-align: start; width: 100%;">
+                                    <span class="footer-contact-icon" style="width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.18); display: flex; align-items: center; justify-content: center; color: #ffffff; flex-shrink: 0;">
                                         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
                                     </span>
                                     <a href="mailto:<?php echo esc_attr( $footer_email ); ?>" style="color: #d6d3d1; text-decoration: none;" onmouseover="this.style.color='#e6c888'" onmouseout="this.style.color='#d6d3d1'"><?php echo esc_html( $footer_email ); ?></a>
                                 </div>
 
-                                <div style="display: flex; align-items: flex-start; gap: 0.8rem; margin-top: 0.3rem; text-align: left;">
-                                    <span style="width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.18); display: flex; align-items: center; justify-content: center; color: #ffffff; flex-shrink: 0;">
+                                <div class="footer-contact-item is-address" style="display: flex; align-items: flex-start; gap: 0.8rem; margin-top: 0.3rem; text-align: start; width: 100%;">
+                                    <span class="footer-contact-icon" style="width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.18); display: flex; align-items: center; justify-content: center; color: #ffffff; flex-shrink: 0;">
                                         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
                                     </span>
-                                    <span class="footer-address-text" style="line-height: 1.5; font-size: 0.88rem; text-align: left; display: block; flex: 1 1 auto; min-width: 0;"><?php echo nl2br( esc_html( $footer_address ) ); ?></span>
+                                    <span class="footer-address-text" style="line-height: 1.5; font-size: 0.88rem; text-align: start; display: block; flex: 1 1 auto; min-width: 0; margin: 0; padding: 0;"><?php echo nl2br( esc_html( $footer_address ) ); ?></span>
                                 </div>
                             </div>
                         </div>
