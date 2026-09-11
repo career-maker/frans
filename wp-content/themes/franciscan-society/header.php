@@ -514,18 +514,30 @@ button.slider-btn:active {
     }
 }
 
-/* Invisible hover bridge between navbar toggle and dropdown menu */
-.fs-mega-menu::before {
-    content: "" !important;
-    position: absolute !important;
-    top: -20px !important;
-    left: -15px !important;
-    right: -15px !important;
-    height: 25px !important;
-    background: transparent !important;
-    display: block !important;
+/* Disable invisible pseudo-element overlay to guarantee adjacent nav buttons are never blocked */
+.fs-mega-menu::before,
+.fs-mega-menu::after {
+    display: none !important;
+    pointer-events: none !important;
+    content: none !important;
+}
+
+.fs-header {
+    z-index: 1000005 !important;
+}
+.fs-desktop-nav {
+    position: relative !important;
+    z-index: 1000006 !important;
+}
+.fs-desktop-nav a,
+.fs-desktop-nav button,
+.fs-desktop-nav .fs-mega-toggle {
+    position: relative !important;
+    z-index: 1000007 !important;
     pointer-events: auto !important;
-    z-index: 1000000 !important;
+}
+.fs-mega-menu {
+    z-index: 99999 !important;
 }
 
 @media (max-width: 1200px) {
@@ -1907,8 +1919,10 @@ $nav_url_contact     = function_exists( 'franciscan_resolve_nav_url' ) ? francis
         return;
       }
 
-      // Horizontal alignment matching toggle
-      megaMenu.style.left = Math.max(10, Math.round(toggleRect.left - 6)) + "px";
+      // Horizontal alignment matching toggle with right viewport clamping
+      const maxLeft = Math.max(10, window.innerWidth - (megaMenu.offsetWidth || 230) - 15);
+      const calcLeft = Math.min(maxLeft, Math.max(10, Math.round(toggleRect.left - 6)));
+      megaMenu.style.left = calcLeft + "px";
 
       // Vertical alignment: ALWAYS attach to the bottom edge of the header bar!
       // This guarantees the dropdown is strictly underneath the navigation bar and NEVER overlaps menu items
@@ -2036,6 +2050,18 @@ $nav_url_contact     = function_exists( 'franciscan_resolve_nav_url' ) ? francis
         const menuKey = menu.id.replace('-mega', '');
         const toggle = document.querySelector(`[data-menu="${menuKey}"]`);
         if (toggle) positionDropdown(toggle, menu);
+      });
+    });
+
+    // Immediately dismiss open dropdowns when hovering over regular navigation links
+    document.querySelectorAll('.fs-desktop-nav > a').forEach(link => {
+      link.addEventListener('mouseenter', function() {
+        document.querySelectorAll('.fs-mega-menu.show').forEach(m => m.classList.remove('show'));
+        document.querySelectorAll('.fs-mega-toggle.active').forEach(t => t.classList.remove('active'));
+        if (activeHoverTimeout) {
+          clearTimeout(activeHoverTimeout);
+          activeHoverTimeout = null;
+        }
       });
     });
 

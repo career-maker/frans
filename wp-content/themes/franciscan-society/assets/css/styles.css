@@ -8384,3 +8384,30 @@ footer .footer-bottom-row .footer-sep {
     opacity: 0 !important;
     pointer-events: none !important;
 }
+
+/* Disable invisible pseudo-element overlay to guarantee adjacent nav buttons are never blocked */
+.fs-mega-menu::before,
+.fs-mega-menu::after {
+    display: none !important;
+    pointer-events: none !important;
+    content: none !important;
+}
+
+.fs-header {
+    z-index: 1000005 !important;
+}
+.fs-desktop-nav {
+    position: relative !important;
+    z-index: 1000006 !important;
+}
+.fs-desktop-nav a,
+.fs-desktop-nav button,
+.fs-desktop-nav .fs-mega-toggle {
+    position: relative !important;
+    z-index: 1000007 !important;
+    pointer-events: auto !important;
+}
+.fs-mega-menu {
+    z-index: 99999 !important;
+}
+
