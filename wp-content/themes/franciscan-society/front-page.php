@@ -29,10 +29,46 @@ get_header();
 
             <div class="hero-media-wrapper" style="position: absolute; inset: 0; width: 100%; height: 100%; overflow: hidden; z-index: 1; border-radius: 24px;">
                 <?php if ( ! empty( $active_video ) ) : ?>
-                    <video id="hero-bg-video" autoplay muted loop playsinline poster="<?php echo esc_url( $poster_img ); ?>" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1;">
+                    <video id="hero-bg-video" autoplay muted="muted" loop playsinline="playsinline" webkit-playsinline="webkit-playsinline" preload="auto" src="<?php echo esc_url( $active_video ); ?>" poster="<?php echo esc_url( $poster_img ); ?>" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1;">
                         <source src="<?php echo esc_url( $active_video ); ?>" type="video/mp4">
-                        <img src="<?php echo esc_url( $poster_img ); ?>" alt="Franciscan Friars Hero" style="width: 100%; height: 100%; object-fit: cover;">
                     </video>
+                    <script>
+                    function fsPlayHeroVideo() {
+                        var v = document.getElementById('hero-bg-video');
+                        if (!v || v.tagName.toLowerCase() !== 'video') return;
+                        v.muted = true;
+                        v.defaultMuted = true;
+                        v.playsInline = true;
+                        v.setAttribute('playsinline', '');
+                        v.setAttribute('webkit-playsinline', '');
+                        if (v.paused) {
+                            var p = v.play();
+                            if (p !== undefined) {
+                                p.catch(function() {});
+                            }
+                        }
+                    }
+                    fsPlayHeroVideo();
+                    document.addEventListener('DOMContentLoaded', fsPlayHeroVideo);
+                    window.addEventListener('load', fsPlayHeroVideo);
+                    document.addEventListener('visibilitychange', function() {
+                        if (!document.hidden) fsPlayHeroVideo();
+                    });
+                    (function() {
+                        var touchEvents = ['touchstart', 'touchend', 'scroll', 'click', 'pointerdown'];
+                        function unlockHeroVideo() {
+                            fsPlayHeroVideo();
+                            touchEvents.forEach(function(evt) {
+                                window.removeEventListener(evt, unlockHeroVideo, { passive: true });
+                                document.removeEventListener(evt, unlockHeroVideo);
+                            });
+                        }
+                        touchEvents.forEach(function(evt) {
+                            window.addEventListener(evt, unlockHeroVideo, { passive: true });
+                            document.addEventListener(evt, unlockHeroVideo);
+                        });
+                    })();
+                    </script>
                 <?php else : ?>
                     <img id="hero-bg-video" src="<?php echo esc_url( $hero_img ); ?>" alt="Franciscan Friars Hero" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1;">
                 <?php endif; ?>

@@ -1883,9 +1883,15 @@ $nav_url_contact     = function_exists( 'franciscan_resolve_nav_url' ) ? francis
       const calcLeft = Math.min(maxLeft, Math.max(10, Math.round(toggleRect.left - 6)));
       megaMenu.style.left = calcLeft + "px";
 
-      // Vertical alignment: ALWAYS attach to the bottom edge of the header bar!
-      // This guarantees the dropdown is strictly underneath the navigation bar and NEVER overlaps menu items
-      const topPos = Math.round(Math.max(headerRect.bottom, toggleRect.bottom));
+      // Vertical alignment:
+      // When sticky/scrolled: attach right below the compact sticky header bar
+      // When NOT sticky/at top: attach directly below the toggle item (eliminates the large ~50px empty gap)
+      let topPos;
+      if (header.classList.contains('scrolled')) {
+        topPos = Math.round(headerRect.bottom + 4);
+      } else {
+        topPos = Math.round(toggleRect.bottom + 8);
+      }
       megaMenu.style.top = topPos + "px";
     }
 
@@ -2138,6 +2144,17 @@ $nav_url_contact     = function_exists( 'franciscan_resolve_nav_url' ) ? francis
                     preloader.style.display = 'none';
                     preloader.style.pointerEvents = 'none';
                     document.body.classList.remove('is-loading');
+                    if (typeof fsPlayHeroVideo === 'function') {
+                        fsPlayHeroVideo();
+                    } else {
+                        var hv = document.getElementById('hero-bg-video');
+                        if (hv && hv.tagName.toLowerCase() === 'video') {
+                            hv.muted = true;
+                            hv.defaultMuted = true;
+                            var hp = hv.play();
+                            if (hp !== undefined) hp.catch(function() {});
+                        }
+                    }
                 }
             });
             if (circle) {
@@ -2155,6 +2172,17 @@ $nav_url_contact     = function_exists( 'franciscan_resolve_nav_url' ) ? francis
                 preloader.style.display = 'none';
                 preloader.style.pointerEvents = 'none';
                 document.body.classList.remove('is-loading');
+                if (typeof fsPlayHeroVideo === 'function') {
+                    fsPlayHeroVideo();
+                } else {
+                    var hv = document.getElementById('hero-bg-video');
+                    if (hv && hv.tagName.toLowerCase() === 'video') {
+                        hv.muted = true;
+                        hv.defaultMuted = true;
+                        var hp = hv.play();
+                        if (hp !== undefined) hp.catch(function() {});
+                    }
+                }
             }, 550);
         }
     }
