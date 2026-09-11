@@ -697,25 +697,455 @@ button.fs-mega-toggle:focus::after {
             outline: none !important;
         }
         .fs-mobile-close:hover,
+    box-shadow: none !important;
+    opacity: 1 !important;
+    cursor: pointer !important;
+}
+
+.fs-logo *,
+.fs-logo:hover *,
+.fs-logo:focus *,
+.fs-logo:active *,
+.fs-logo span,
+.fs-logo:hover span,
+.fs-logo-name,
+.fs-logo-sub,
+.fs-logo:hover .fs-logo-name,
+.fs-logo:hover .fs-logo-sub {
+    color: #ffffff !important;
+    transform: none !important;
+    text-decoration: none !important;
+    transition: none !important;
+}
+
+.fs-logo img,
+.fs-logo:hover img,
+.fs-logo:focus img {
+    transform: none !important;
+    transition: none !important;
+    filter: none !important;
+    animation: none !important;
+}
+
+
+        /* Keep toggle highlighted when mega menu is open and highlight active page */
+        .fs-desktop-nav a.active,
+        .fs-desktop-nav button.active,
+        .fs-desktop-nav button.hover-active {
+            color: #e6c888 !important;
+            font-weight: 800 !important;
+        }
+        .fs-desktop-nav button.active::after,
+        .fs-desktop-nav button.hover-active::after {
+            color: #e6c888 !important;
+        }
+
+        /* BUTTON TEXT RECOVERY */
+        .btn-fill-animation,
+        .btn-fill-outline,
+        a.btn-chocolate,
+        .header-cta-btn {
+            position: relative !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            gap: 0.5rem !important;
+            text-decoration: none !important;
+            overflow: hidden !important;
+        }
+        .btn-fill-animation span,
+        .btn-fill-outline span,
+        .btn-fill-animation svg,
+        .btn-fill-outline svg {
+            position: relative !important;
+            z-index: 4 !important;
+            color: inherit !important;
+            opacity: 1 !important;
+            visibility: visible !important;
+            transform: none !important;
+        }
+        .btn-fill-animation .btn-arrow,
+        .btn-fill-outline .btn-arrow {
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+        }
+
+        /* Mobile hamburger toggle */
+        .fs-mobile-toggle,
+        .fs-mobile-toggle:hover,
+        .fs-mobile-toggle:focus,
+        .fs-mobile-toggle:active {
+            background: transparent !important;
+            background-color: transparent !important;
+            border: none !important;
+            outline: none !important;
+            box-shadow: none !important;
+            transform: none !important;
+            -webkit-tap-highlight-color: transparent !important;
+        }
+        .fs-mobile-toggle::before,
+        .fs-mobile-toggle::after,
+        .fs-mobile-toggle:hover::before,
+        .fs-mobile-toggle:hover::after,
+        .fs-mobile-toggle:active::before,
+        .fs-mobile-toggle:active::after,
+        .fs-mobile-toggle:focus::before,
+        .fs-mobile-toggle:focus::after {
+            display: none !important;
+            content: none !important;
+            opacity: 0 !important;
+        }
+        .fs-mobile-toggle span span {
+            background: #ffffff !important;
+        }
+
+        /* Mobile Header: Centered Logo Emblem + Right-Aligned Logo Title */
+        @media (max-width: 991px) {
+            .fs-header {
+                padding: 0.5rem 1rem !important;
+            }
+            .fs-header-inner {
+                position: relative !important;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: space-between !important;
+                width: 100% !important;
+                min-height: 48px !important;
+            }
+                    .fs-header-inner {
+      position: relative !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: space-between !important;
+      width: 100% !important;
+      min-height: 48px !important;
+      padding: 0 !important;
+    }
+    .fs-header-actions {
+      order: 1 !important;
+      display: flex !important;
+      align-items: center !important;
+      z-index: 110 !important;
+      position: static !important;
+      transform: none !important;
+    }
+    .fs-logo {
+      order: 2 !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: flex-end !important;
+      text-decoration: none !important;
+      position: static !important;
+      transform: none !important;
+    }
+    .fs-logo img {
+      display: block !important;
+      height: 38px !important;
+      width: auto !important;
+      max-width: 48px !important;
+      object-fit: contain !important;
+      position: static !important;
+      transform: none !important;
+      filter: drop-shadow(0 2px 6px rgba(0,0,0,0.4)) !important;
+    }
+    .fs-logo-text {
+      display: none !important;
+    }
+        }
+        @media (max-width: 380px) {
+            .fs-logo img {
+                height: 28px !important;
+            }
+            .fs-logo-name {
+                font-size: 0.46rem !important;
+            }
+            .fs-logo-sub {
+                font-size: 0.36rem !important;
+            }
+        }
+
+        /* Mobile Close Button in Drawer Menu */
+        .fs-mobile-close {
+            align-self: flex-end !important;
+            background: rgba(255, 255, 255, 0.15) !important;
+            border: 1px solid rgba(255, 255, 255, 0.35) !important;
+            color: #ffffff !important;
+            width: 44px !important;
+            height: 44px !important;
+            min-width: 44px !important;
+            min-height: 44px !important;
+            border-radius: 50% !important;
+            font-size: 28px !important;
+            line-height: 1 !important;
+            font-family: Arial, sans-serif !important;
+            font-weight: 300 !important;
+            cursor: pointer !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            margin-bottom: 1.5rem !important;
+            flex-shrink: 0 !important;
+            padding: 0 !important;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3) !important;
+            transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease !important;
+            outline: none !important;
+        }
+        .fs-mobile-close:hover,
         .fs-mobile-close:focus {
             background: #e6c888 !important;
             color: #0c1727 !important;
             transform: rotate(90deg) !important;
         }
+        /* Friars Directory & Hero Responsive Styles */
+        .page-hero-banner {
+            position: relative;
+            padding: 10rem 2rem 4rem 2rem;
+            background-size: cover;
+            background-position: center;
+            overflow: hidden;
+            text-align: center;
+        }
+        .page-hero-banner .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background-color: rgba(12, 11, 10, 0.7);
+        }
+        .page-hero-banner .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+        .page-hero-banner h1 {
+            font-family: 'Phudu', sans-serif;
+            font-size: clamp(2.8rem, 5.2vw, 4.5rem);
+            font-weight: 700;
+            color: #ffffff;
+            text-transform: uppercase;
+            margin: 0 0 1rem 0;
+            line-height: 1.1;
+        }
+
+        .page-hero-friars {
+            position: relative;
+            padding: 3rem 2rem 0;
+            background: #FFF;
+        }
+        .friars-directory-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: clamp(3rem, 6vw, 5rem) 2rem;
+        }
+        .friars-directory-title {
+            font-family: 'Phudu', sans-serif;
+            font-size: clamp(1.4rem, 2.4vw, 2.2rem);
+            font-weight: 700;
+            color: #1c1917;
+            margin-bottom: 2.5rem;
+            text-align: center;
+            line-height: 1.35;
+            max-width: 950px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .deceased-section-title {
+            font-family: 'Phudu', sans-serif;
+            font-size: clamp(1.8rem, 3vw, 2.2rem);
+            font-weight: 900;
+            color: #1c1917;
+            margin-bottom: 2.5rem;
+            text-align: center;
+            border-top: 1px solid #e5e5e5;
+            padding-top: 4rem;
+        }
+
+        /* Desktop: Standard Multi-Column Grid */
+        .friars-slider-controls {
+            display: none;
+        }
+        .friars-track-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 2rem;
+            margin-bottom: 5rem;
+        }
+        .friar-card-item {
+            text-align: center;
+        }
+        .friar-avatar-wrap {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 0 auto 1rem auto;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            border: 2px solid #e6c888;
+            background: #fdfbf7;
+        }
+        .friar-avatar-wrap--deceased {
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+            background: #2a160b;
+        }
+        .friar-avatar-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .friar-name {
+            font-family: 'Phudu', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            color: #4a2a18;
+            margin: 0;
+            line-height: 1.3;
+        }
+        .friar-date {
+            font-family: 'Instrument Sans', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #78716c;
+            margin: 0.35rem 0 0 0;
+        }
+
+        /* Mobile & Tablet Responsiveness */
+        @media (max-width: 991px) {
+            .page-hero-banner {
+                padding: 6.5rem 1.25rem 2rem 1.25rem !important;
+            }
+            .page-hero-banner h1 {
+                font-size: clamp(2rem, 6.5vw, 2.8rem) !important;
+            }
+            .page-hero-friars {
+                padding: 1.25rem 1rem 0 1rem !important;
+            }
+            .page-hero-friars .has-vine-watermark {
+                min-height: auto !important;
+                padding: 2.2rem 1.5rem !important;
+                border-radius: 18px !important;
+            }
+            .page-hero-friars h2 {
+                font-size: clamp(1.6rem, 5vw, 2.2rem) !important;
+            }
+            .friars-directory-section {
+                padding: 2rem 1rem 3rem 1rem !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            /* Friars Mobile Horizontal Touch Slider */
+            .friars-slider-controls {
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                gap: 0.75rem !important;
+                margin-bottom: 1.5rem !important;
+            }
+            .friars-slider-badge {
+                display: inline-flex !important;
+                align-items: center !important;
+                gap: 0.35rem !important;
+                font-family: 'Instrument Sans', sans-serif !important;
+                font-size: 0.75rem !important;
+                font-weight: 700 !important;
+                color: #4A2A18 !important;
+                letter-spacing: 0.05em !important;
+                text-transform: uppercase !important;
+                background: rgba(230, 200, 136, 0.25) !important;
+                border: 1px solid rgba(74, 42, 24, 0.15) !important;
+                padding: 0.4rem 0.9rem !important;
+                border-radius: 30px !important;
+            }
+            .friars-track-grid {
+                display: flex !important;
+                flex-wrap: nowrap !important;
+                overflow-x: auto !important;
+                overflow-y: hidden !important;
+                scroll-snap-type: x mandatory !important;
+                -webkit-overflow-scrolling: touch !important;
+                gap: 1rem !important;
+                padding: 0.5rem 0.75rem 1.5rem 0.75rem !important;
+                margin-bottom: 2.5rem !important;
+                scrollbar-width: none !important;
+                -ms-overflow-style: none !important;
+            }
+            .friars-track-grid::-webkit-scrollbar {
+                display: none !important;
+                width: 0 !important;
+                height: 0 !important;
+            }
+            .friar-card-item {
+                flex: 0 0 160px !important;
+                min-width: 160px !important;
+                max-width: 160px !important;
+                scroll-snap-align: center !important;
+                text-align: center !important;
+                background: #ffffff !important;
+                border-radius: 16px !important;
+                padding: 1.25rem 0.75rem !important;
+                box-shadow: 0 4px 16px rgba(74, 42, 24, 0.08) !important;
+                border: 1px solid rgba(230, 200, 136, 0.3) !important;
+                transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+                box-sizing: border-box !important;
+            }
+            .friar-card-item:active {
+                transform: scale(0.97) !important;
+            }
+            .friar-avatar-wrap {
+                width: 110px !important;
+                height: 110px !important;
+                margin: 0 auto 0.75rem auto !important;
+                border-width: 2.5px !important;
+            }
+            .friar-name {
+                font-size: 0.92rem !important;
+            }
+            .deceased-section-title {
+                padding-top: 2rem !important;
+                margin-bottom: 1.25rem !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page-hero-banner {
+                padding: 5.5rem 1rem 1.5rem 1rem !important;
+            }
+            .page-hero-friars {
+                padding: 1rem 0.75rem 0 0.75rem !important;
+            }
+            .page-hero-friars .has-vine-watermark {
+                padding: 1.75rem 1.25rem !important;
+            }
+            .friars-directory-section {
+                padding: 1.5rem 0.75rem 2.5rem 0.75rem !important;
+            }
+            .friar-card-item {
+                flex: 0 0 150px !important;
+                min-width: 150px !important;
+                max-width: 150px !important;
+                padding: 1rem 0.6rem !important;
+            }
+            .friar-avatar-wrap {
+                width: 100px !important;
+                height: 100px !important;
+            }
+        }
     </style>
 
 <main id="main-content" style="padding-top: 0; background-color: #FFF;">
-    <!-- Page Hero -->
+    <!-- Page Hero Banner -->
     <?php
     $friars_hero_bg = franciscan_get_page_field( 'community-friars', 'hero_image', '' );
     if ( empty( $friars_hero_bg ) || false !== strpos( $friars_hero_bg, 'ChatGPT_Image' ) ) {
         $friars_hero_bg = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/friars-banner.jpg';
     }
     ?>
-    <section style="padding: 12rem 2rem 8rem 2rem; background-image: url('<?php echo esc_url( $friars_hero_bg ); ?>'); background-size: cover; background-position: center; position: relative; overflow: hidden;">
-        <div style="position: absolute; inset: 0; background-color: rgba(12, 11, 10, 0.7);"></div>
-        <div style="max-width: 800px; margin: 0 auto; position: relative; z-index: 2; text-align: center;">
-            <h1 style="font-family: 'Phudu', sans-serif; font-size: clamp(2.8rem, 5.2vw, 4.5rem); font-weight: 700; color: #ffffff; text-transform: uppercase; margin: 0 0 1rem 0; line-height: 1.1;"><?php echo esc_html( franciscan_get_page_field( 'community-friars', 'hero_title', 'OUR FRIARS' ) ); ?></h1>
+    <section class="page-hero-banner" style="background-image: url('<?php echo esc_url( $friars_hero_bg ); ?>');">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1><?php echo esc_html( franciscan_get_page_field( 'community-friars', 'hero_title', 'OUR FRIARS' ) ); ?></h1>
             <?php
             $friars_hero_desc = franciscan_get_page_field( 'community-friars', 'hero_subtitle', '' );
             if ( ! empty( $friars_hero_desc ) ) :
@@ -727,9 +1157,8 @@ button.fs-mega-toggle:focus::after {
         </div>
     </section>
 
-
-
-    <section class="page-hero" style="position: relative; padding: 3rem 2rem 0; background: #FFF;">
+    <!-- Page Hero Featured Card -->
+    <section class="page-hero page-hero-friars">
         <div class="has-vine-watermark" style="position: relative; width: 100%; display: flex; flex-direction: column; justify-content: center; background: linear-gradient(135deg, #4A2A18, #6b3d28); min-height: 380px; border-radius: 24px; padding: 4rem clamp(2rem, 5vw, 4rem); max-width: 1400px; margin: 0 auto; overflow: hidden; box-shadow: 0 15px 35px rgba(74,42,24,0.18);">
             <img src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/shapes/vine-corner-watermark.png' ); ?>" class="vine-corner-watermark" alt="" aria-hidden="true" style="position: absolute; top: 0; right: 0; width: clamp(280px, 36vw, 540px); height: 100%; object-fit: contain; object-position: top right; pointer-events: none; opacity: 0.38; filter: brightness(1.6) contrast(1.1); z-index: 1;">
             <div style="position: relative; z-index: 2;">
@@ -747,9 +1176,8 @@ button.fs-mega-toggle:focus::after {
         </div>
     </section>
 
-    
-
-        <div style="max-width: 1200px; margin: 0 auto; padding: clamp(3rem, 8vw, 5rem) 2rem;">
+    <!-- Friars Directory Section -->
+    <div class="friars-directory-section">
         <?php
         $directory_title  = franciscan_get_page_field( 'community-friars', 'directory_title', 'Brothers always be mindful that they should desire one thing alone, namely, the Spirit of God at work within them' );
         $deceased_heading = franciscan_get_page_field( 'community-friars', 'deceased_heading', 'DECEASED FRIARS' );
@@ -758,58 +1186,85 @@ button.fs-mega-toggle:focus::after {
         ?>
 
         <?php if ( ! empty( $directory_title ) ) : ?>
-            <h2 style="font-family: 'Phudu', sans-serif; font-size: clamp(1.4rem, 2.4vw, 2.2rem); font-weight: 700; color: #1c1917; margin-bottom: 2.5rem; text-align: center; line-height: 1.35; max-width: 950px; margin-left: auto; margin-right: auto;">
+            <h2 class="friars-directory-title">
                 <?php echo esc_html( $directory_title ); ?>
             </h2>
         <?php endif; ?>
 
         <?php if ( ! empty( $living_friars ) ) : ?>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 2rem; margin-bottom: 5rem;">
-                <?php foreach ( $living_friars as $friar ) : 
-                    $f_name = $friar['name'] ?? '';
-                    $f_img  = $friar['image'] ?? '';
-                    if ( empty( $f_name ) ) continue;
-                    $f_img_url = franciscan_resolve_friar_image_url( $f_img );
-                ?>
-                    <div style="text-align: center;">
-                        <div style="width: 140px; height: 140px; border-radius: 50%; overflow: hidden; margin: 0 auto 1rem auto; box-shadow: 0 10px 20px rgba(0,0,0,0.1); border: 2px solid #e6c888;">
-                            <img loading="lazy" decoding="async" src="<?php echo esc_url( $f_img_url ); ?>" alt="<?php echo esc_attr( $f_name ); ?>" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.src='<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/logo.svg' ); ?>'">
+            <div class="friars-slider-container">
+                <!-- Mobile Slider Navigation Controls -->
+                <div class="friars-slider-controls">
+                    <button type="button" class="slider-btn slider-btn--prev" onclick="document.getElementById('living-friars-track').scrollBy({left: -240, behavior: 'smooth'})" aria-label="Previous Friars">
+                        &#8592;
+                    </button>
+                    <span class="friars-slider-badge">
+                        <span>Swipe to explore</span> &#8594;
+                    </span>
+                    <button type="button" class="slider-btn slider-btn--next" onclick="document.getElementById('living-friars-track').scrollBy({left: 240, behavior: 'smooth'})" aria-label="Next Friars">
+                        &#8594;
+                    </button>
+                </div>
+
+                <!-- Living Friars Grid / Slider Track -->
+                <div id="living-friars-track" class="friars-track-grid">
+                    <?php foreach ( $living_friars as $friar ) : 
+                        $f_name = $friar['name'] ?? '';
+                        $f_img  = $friar['image'] ?? '';
+                        if ( empty( $f_name ) ) continue;
+                        $f_img_url = franciscan_resolve_friar_image_url( $f_img );
+                    ?>
+                        <div class="friar-card-item">
+                            <div class="friar-avatar-wrap">
+                                <img loading="lazy" decoding="async" src="<?php echo esc_url( $f_img_url ); ?>" alt="<?php echo esc_attr( $f_name ); ?>" onerror="this.src='<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/logo.svg' ); ?>'">
+                            </div>
+                            <h4 class="friar-name"><?php echo esc_html( $f_name ); ?></h4>
                         </div>
-                        <h4 style="font-family: 'Phudu', sans-serif; font-size: 1rem; font-weight: 700; color: #4a2a18; margin: 0;"><?php echo esc_html( $f_name ); ?></h4>
-                    </div>
-                <?php endforeach; ?>
+                    <?php endforeach; ?>
+                </div>
             </div>
         <?php endif; ?>
 
         <?php if ( ! empty( $deceased_friars ) ) : ?>
-            <h2 style="font-family: 'Phudu', sans-serif; font-size: 2.2rem; font-weight: 900; color: #1c1917; margin-bottom: 2.5rem; text-align: center; border-top: 1px solid #e5e5e5; padding-top: 4rem;">
-                <?php echo esc_html( $deceased_heading ); ?>
-            </h2>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 2rem; margin-bottom: 5rem;">
-                <?php foreach ( $deceased_friars as $dfriar ) : 
-                    $df_name = $dfriar['name'] ?? '';
-                    $df_img  = $dfriar['image'] ?? '';
-                    $df_date = $dfriar['date'] ?? '';
-                    if ( empty( $df_name ) ) continue;
-                    $df_img_url = franciscan_resolve_friar_image_url( $df_img );
-                ?>
-                    <div style="text-align: center;">
-                        <div style="width: 140px; height: 140px; border-radius: 50%; overflow: hidden; margin: 0 auto 1rem auto; box-shadow: 0 10px 20px rgba(0,0,0,0.15); border: 2px solid #e6c888; background: #2a160b; position: relative;">
-                            <img loading="lazy" decoding="async" src="<?php echo esc_url( $df_img_url ); ?>" alt="<?php echo esc_attr( $df_name ); ?>" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.src='<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/logo.svg' ); ?>'">
+            <div class="deceased-friars-section">
+                <h2 class="deceased-section-title">
+                    <?php echo esc_html( $deceased_heading ); ?>
+                </h2>
+
+                <!-- Mobile Slider Navigation Controls -->
+                <div class="friars-slider-controls">
+                    <button type="button" class="slider-btn slider-btn--prev" onclick="document.getElementById('deceased-friars-track').scrollBy({left: -240, behavior: 'smooth'})" aria-label="Previous Deceased Friars">
+                        &#8592;
+                    </button>
+                    <span class="friars-slider-badge">
+                        <span>Swipe to explore</span> &#8594;
+                    </span>
+                    <button type="button" class="slider-btn slider-btn--next" onclick="document.getElementById('deceased-friars-track').scrollBy({left: 240, behavior: 'smooth'})" aria-label="Next Deceased Friars">
+                        &#8594;
+                    </button>
+                </div>
+
+                <!-- Deceased Friars Grid / Slider Track -->
+                <div id="deceased-friars-track" class="friars-track-grid">
+                    <?php foreach ( $deceased_friars as $dfriar ) : 
+                        $df_name = $dfriar['name'] ?? '';
+                        $df_img  = $dfriar['image'] ?? '';
+                        $df_date = $dfriar['date'] ?? '';
+                        if ( empty( $df_name ) ) continue;
+                        $df_img_url = franciscan_resolve_friar_image_url( $df_img );
+                    ?>
+                        <div class="friar-card-item">
+                            <div class="friar-avatar-wrap friar-avatar-wrap--deceased">
+                                <img loading="lazy" decoding="async" src="<?php echo esc_url( $df_img_url ); ?>" alt="<?php echo esc_attr( $df_name ); ?>" onerror="this.src='<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/logo.svg' ); ?>'">
+                            </div>
+                            <h4 class="friar-name"><?php echo esc_html( $df_name ); ?></h4>
+                            <?php if ( ! empty( $df_date ) ) : ?>
+                                <p class="friar-date"><?php echo esc_html( $df_date ); ?></p>
+                            <?php endif; ?>
                         </div>
-                        <h4 style="font-family: 'Phudu', sans-serif; font-size: 1rem; font-weight: 700; color: #4a2a18; margin: 0 0 0.35rem 0;"><?php echo esc_html( $df_name ); ?></h4>
-                        <?php if ( ! empty( $df_date ) ) : ?>
-                            <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.85rem; font-weight: 600; color: #78716c; margin: 0;"><?php echo esc_html( $df_date ); ?></p>
-                        <?php endif; ?>
-                    </div>
-                <?php endforeach; ?>
+                    <?php endforeach; ?>
+                </div>
             </div>
         <?php endif; ?>
     </div>
-    <!-- FOOTER + BOTTOM WIDGETS + BIBLE MODAL UNIFIED SECTION -->
-<!-- Use exact copy from home page for all inner pages -->
-
-
-
-<?php
 get_footer();
