@@ -395,28 +395,116 @@ $banner_bg = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/hero-banner-aug2
     </section>
 
     <section style="padding: clamp(3rem, 5vw, 5rem) 2rem; background-color: #FAF8F5; max-width: 1320px; margin: 0 auto;">
-        <div style="display: flex; justify-content: center;">
-            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 2.5rem; width: 100%; max-width: 800px;">
+        <?php
+        $paged = get_query_var( 'paged' ) ? get_query_var( 'paged' ) : ( get_query_var( 'page' ) ? get_query_var( 'page' ) : 1 );
 
-                <!-- Seminar on New Labour Code -->
-                <article class="news-card">
-                    <div class="news-thumb-wrap">
-                        <img loading="eager" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/new_uploads/seminar-labour-code.jpeg' ); ?>" alt="Seminar on New Labour Code at Hardag, Ranchi">
-                    </div>
-                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.6rem;">
-                        <span style="font-family: 'Instrument Sans', sans-serif; font-size: 0.78rem; color: #8b6f47; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;">Province News</span>
-                        <span style="font-family: 'Instrument Sans', sans-serif; font-size: 0.78rem; color: #a8a29e;">📅 Aug 29, 2026</span>
-                    </div>
-                    <h3 class="news-card-title">Seminar on "New Labour Code" Held at Hardag, Ranchi</h3>
-                    <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.6; margin-bottom: 1.5rem; flex-grow: 1;">
-                        A one-day seminar on "New Labour Code" was organized by the St. Francis Province, Ranchi, on 29 August 2026 at Moments Resorts, Hardag, Ranchi. Attended by around fifty participants including TOR friars and principals from across Jharkhand.
-                    </p>
-                    <a href="<?php echo esc_url( home_url( '/news/?view=detail' ) ); ?>" style="font-family: 'Instrument Sans', sans-serif; font-weight: 800; font-size: 0.88rem; color: #1c1917; text-transform: uppercase; letter-spacing: 0.06em; text-decoration: none; display: inline-flex; align-items: center; gap: 0.4rem; transition: color 0.2s;">
-                        <span>READ MORE</span> <span>&rarr;</span>
-                    </a>
-                </article>
+        // 1. Try querying category 'news'
+        $news_query = new WP_Query( array(
+            'category_name'  => 'news',
+            'posts_per_page' => 9,
+            'paged'          => $paged,
+            'post_status'    => 'publish',
+        ) );
 
-            </div>
+        // 2. If no posts with 'news' category, query any posts not categorized as 'blogs'
+        if ( ! $news_query->have_posts() ) {
+            $blog_cat = get_category_by_slug( 'blogs' );
+            $tax_query = array();
+            if ( $blog_cat ) {
+                $tax_query[] = array(
+                    'taxonomy' => 'category',
+                    'field'    => 'term_id',
+                    'terms'    => array( $blog_cat->term_id ),
+                    'operator' => 'NOT IN',
+                );
+            }
+            $news_query = new WP_Query( array(
+                'post_type'      => 'post',
+                'posts_per_page' => 9,
+                'paged'          => $paged,
+                'post_status'    => 'publish',
+                'tax_query'      => $tax_query,
+            ) );
+        }
+
+        // 3. Fallback to all published posts
+        if ( ! $news_query->have_posts() ) {
+            $news_query = new WP_Query( array(
+                'post_type'      => 'post',
+                'posts_per_page' => 9,
+                'paged'          => $paged,
+                'post_status'    => 'publish',
+            ) );
+        }
+        ?>
+
+        <div style="display: flex; flex-direction: column; align-items: center;">
+            <?php if ( $news_query->have_posts() ) : ?>
+                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 2.5rem; width: 100%; max-width: 1200px;">
+                    <?php while ( $news_query->have_posts() ) : $news_query->the_post(); 
+                        $thumb_url = has_post_thumbnail() 
+                            ? get_the_post_thumbnail_url( get_the_ID(), 'large' ) 
+                            : FRANCISCAN_THEME_URI . '/assets/images/new_uploads/seminar-labour-code.jpeg';
+                        $categories = get_the_category();
+                        $cat_name = ! empty( $categories ) ? $categories[0]->name : 'Province News';
+                        $post_date = get_the_date( 'M j, Y' );
+                        $excerpt = has_excerpt() ? get_the_excerpt() : wp_trim_words( get_the_content(), 28 );
+                    ?>
+                        <article class="news-card">
+                            <div class="news-thumb-wrap">
+                                <img loading="lazy" decoding="async" src="<?php echo esc_url( $thumb_url ); ?>" alt="<?php echo esc_attr( get_the_title() ); ?>">
+                            </div>
+                            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.6rem;">
+                                <span style="font-family: 'Instrument Sans', sans-serif; font-size: 0.78rem; color: #8b6f47; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;"><?php echo esc_html( $cat_name ); ?></span>
+                                <span style="font-family: 'Instrument Sans', sans-serif; font-size: 0.78rem; color: #a8a29e;">📅 <?php echo esc_html( $post_date ); ?></span>
+                            </div>
+                            <h3 class="news-card-title"><?php the_title(); ?></h3>
+                            <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.6; margin-bottom: 1.5rem; flex-grow: 1;">
+                                <?php echo esc_html( $excerpt ); ?>
+                            </p>
+                            <a href="<?php the_permalink(); ?>" style="font-family: 'Instrument Sans', sans-serif; font-weight: 800; font-size: 0.88rem; color: #1c1917; text-transform: uppercase; letter-spacing: 0.06em; text-decoration: none; display: inline-flex; align-items: center; gap: 0.4rem; transition: color 0.2s;">
+                                <span>READ MORE</span> <span>&rarr;</span>
+                            </a>
+                        </article>
+                    <?php endwhile; wp_reset_postdata(); ?>
+                </div>
+
+                <!-- Pagination -->
+                <?php if ( $news_query->max_num_pages > 1 ) : ?>
+                    <div style="margin-top: 3.5rem; display: flex; justify-content: center; gap: 0.5rem;">
+                        <?php
+                        echo paginate_links( array(
+                            'total'     => $news_query->max_num_pages,
+                            'current'   => max( 1, $paged ),
+                            'prev_text' => '&larr; Previous',
+                            'next_text' => 'Next &rarr;',
+                            'type'      => 'plain',
+                        ) );
+                        ?>
+                    </div>
+                <?php endif; ?>
+
+            <?php else : ?>
+                <!-- Fallback reference card if no database posts exist -->
+                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 2.5rem; width: 100%; max-width: 800px;">
+                    <article class="news-card">
+                        <div class="news-thumb-wrap">
+                            <img loading="eager" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/new_uploads/seminar-labour-code.jpeg' ); ?>" alt="Seminar on New Labour Code at Hardag, Ranchi">
+                        </div>
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.6rem;">
+                            <span style="font-family: 'Instrument Sans', sans-serif; font-size: 0.78rem; color: #8b6f47; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;">Province News</span>
+                            <span style="font-family: 'Instrument Sans', sans-serif; font-size: 0.78rem; color: #a8a29e;">📅 Aug 29, 2026</span>
+                        </div>
+                        <h3 class="news-card-title">Seminar on "New Labour Code" Held at Hardag, Ranchi</h3>
+                        <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.6; margin-bottom: 1.5rem; flex-grow: 1;">
+                            A one-day seminar on "New Labour Code" was organized by the St. Francis Province, Ranchi, on 29 August 2026 at Moments Resorts, Hardag, Ranchi. Attended by around fifty participants including TOR friars and principals from across Jharkhand.
+                        </p>
+                        <a href="<?php echo esc_url( home_url( '/news/?view=detail' ) ); ?>" style="font-family: 'Instrument Sans', sans-serif; font-weight: 800; font-size: 0.88rem; color: #1c1917; text-transform: uppercase; letter-spacing: 0.06em; text-decoration: none; display: inline-flex; align-items: center; gap: 0.4rem; transition: color 0.2s;">
+                            <span>READ MORE</span> <span>&rarr;</span>
+                        </a>
+                    </article>
+                </div>
+            <?php endif; ?>
         </div>
     </section>
 

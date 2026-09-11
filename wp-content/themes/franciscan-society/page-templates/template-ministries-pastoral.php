@@ -742,17 +742,17 @@ button.fs-mega-toggle:focus::after {
                         <?php echo esc_html( franciscan_get_page_field( "ministries-pastoral", "section_1_heading", "Pastoral Ministry" ) ); ?>
                     </h2>
                     <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.52; margin-bottom: 1.25rem;">
-                        <?php echo esc_html( franciscan_get_page_field( "ministries-pastoral", "section_1_p1", "St. Francis gathered brothers around him to become heralds of the Good News. Inspired by this vision, the TOR Franciscans of the Province actively engage in pastoral ministry in parishes. Through this vital service to the Church, the friars dedicate themselves wholeheartedly to the mission of evangelization by their pastoral presence and ministry." ) ); ?>
+                        <?php echo nl2br( esc_html( franciscan_get_page_field( "ministries-pastoral", "section_1_p1", "St. Francis gathered brothers around him to become heralds of the Good News. Inspired by this vision, the TOR Franciscans of the Province actively engage in pastoral ministry in parishes. Through this vital service to the Church, the friars dedicate themselves wholeheartedly to the mission of evangelization by their pastoral presence and ministry." ) ) ); ?>
                     </p>
                     <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.52; margin: 0;">
-                        <?php echo esc_html( franciscan_get_page_field( "ministries-pastoral", "section_1_p2", "Through their participation in the life and mission of the Church, the friars seek to continue the zeal of St. Francis by inviting the faithful to an ongoing conversion to Gospel values. Their ministry extends beyond the celebration of the sacraments to a compassionate and attentive presence among the people. Through family visits, care for the sick and the elderly, pastoral counseling, and sacramental ministry, they strive to plant the seeds of the Gospel in the hearts of those they serve." ) ); ?>
+                        <?php echo nl2br( esc_html( franciscan_get_page_field( "ministries-pastoral", "section_1_p2", "Through their participation in the life and mission of the Church, the friars seek to continue the zeal of St. Francis by inviting the faithful to an ongoing conversion to Gospel values. Their ministry extends beyond the celebration of the sacraments to a compassionate and attentive presence among the people. Through family visits, care for the sick and the elderly, pastoral counseling, and sacramental ministry, they strive to plant the seeds of the Gospel in the hearts of those they serve." ) ) ); ?>
                     </p>
                 </div>
 
                 <div style="border-radius: 20px; overflow: hidden; box-shadow: 0 15px 40px rgba(74,42,24,0.12); border: 2px solid rgba(230,200,136,0.3); background: #FAF7F0;">
                     <?php
                     $pastoral_img1 = franciscan_get_page_field( "ministries-pastoral", "section_1_image", "" );
-                    if ( empty( $pastoral_img1 ) || strpos( $pastoral_img1, 'WhatsApp Image 2026-08-07' ) !== false ) {
+                    if ( empty( $pastoral_img1 ) ) {
                         $pastoral_img1 = FRANCISCAN_THEME_URI . "/assets/images/new_uploads/ministry-pastoral-1.jpeg";
                     }
                     ?>
@@ -765,7 +765,7 @@ button.fs-mega-toggle:focus::after {
                 <div style="border-radius: 20px; overflow: hidden; box-shadow: 0 15px 40px rgba(74,42,24,0.12); border: 2px solid rgba(230,200,136,0.3); background: #FAF7F0;">
                     <?php
                     $pastoral_img2 = franciscan_get_page_field( "ministries-pastoral", "section_2_image", "" );
-                    if ( empty( $pastoral_img2 ) || strpos( $pastoral_img2, 'WhatsApp Image 2026-08-10' ) !== false ) {
+                    if ( empty( $pastoral_img2 ) ) {
                         $pastoral_img2 = FRANCISCAN_THEME_URI . "/assets/images/new_uploads/ministry-pastoral-2.jpeg";
                     }
                     ?>
@@ -774,10 +774,10 @@ button.fs-mega-toggle:focus::after {
 
                 <div>
                     <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.52; margin-bottom: 1.25rem;">
-                        <?php echo esc_html( franciscan_get_page_field( "ministries-pastoral", "section_2_p1", "Faithful to the Franciscan spirit of fraternity and service, the friars make themselves available to all, listening to people’s joys and struggles and responding with compassion and care. In this way, they seek not only to proclaim the Gospel but also to witness it through lives of humble service, bringing Christ’s love and hope to the communities entrusted to their care." ) ); ?>
+                        <?php echo nl2br( esc_html( franciscan_get_page_field( "ministries-pastoral", "section_2_p1", "Faithful to the Franciscan spirit of fraternity and service, the friars make themselves available to all, listening to people’s joys and struggles and responding with compassion and care. In this way, they seek not only to proclaim the Gospel but also to witness it through lives of humble service, bringing Christ’s love and hope to the communities entrusted to their care." ) ) ); ?>
                     </p>
                     <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.52; margin: 0;">
-                        <?php echo esc_html( franciscan_get_page_field( "ministries-pastoral", "section_2_p2", "The TOR Franciscans of St. Francis Province, Ranchi, currently serve in various dioceses and parishes both in India and abroad. In India, they minister in fifteen parishes across the dioceses of Ranchi, Khunti, Simdega, Gumla, Rourkela, Purnea, Bagdogra, Jalpaiguri, and Bongaigaon, particularly in areas where a Franciscan presence is most needed. Beyond India, the friars are actively engaged in pastoral ministry in the Archdiocese of Freiburg, Germany." ) ); ?>
+                        <?php echo nl2br( esc_html( franciscan_get_page_field( "ministries-pastoral", "section_2_p2", "The TOR Franciscans of St. Francis Province, Ranchi, currently serve in various dioceses and parishes both in India and abroad. In India, they minister in fifteen parishes across the dioceses of Ranchi, Khunti, Simdega, Gumla, Rourkela, Purnea, Bagdogra, Jalpaiguri, and Bongaigaon, particularly in areas where a Franciscan presence is most needed. Beyond India, the friars are actively engaged in pastoral ministry in the Archdiocese of Freiburg, Germany." ) ) ); ?>
                     </p>
                 </div>
             </div>

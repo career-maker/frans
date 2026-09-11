@@ -442,6 +442,8 @@ function franciscan_get_default_page_content( $slug = '' ) {
             'general_council_title'  => 'LEADERSHIP OF THE ORDER',
             'provincial_council_badge'=> 'PROVINCIAL COUNCIL',
             'provincial_council_title'=> 'RANCHI PROVINCE LEADERSHIP',
+            'general_council_list'   => function_exists( 'franciscan_get_default_general_council' ) ? franciscan_get_default_general_council() : array(),
+            'provincial_council_list'=> function_exists( 'franciscan_get_default_provincial_council' ) ? franciscan_get_default_provincial_council() : array(),
         ),
         'community-friars' => array(
             'hero_badge'             => 'OUR BROTHERHOOD',
@@ -461,10 +463,15 @@ function franciscan_get_default_page_content( $slug = '' ) {
             'hero_title'             => 'OUR FRIARIES & ASHRAMS',
             'hero_subtitle'          => 'Centres of prayer, hospitality, and apostolate across India and Germany.',
             'hero_image'             => FRANCISCAN_THEME_URI . '/assets/images/new_uploads/friaries-banner.jpg',
+            'card_badge'             => 'OUR FRIARIES',
+            'card_title'             => 'HOUSES OF PRAYER AND SERVICE',
+            'card_subtitle'          => 'Communities across India and beyond, rooted in the Franciscan charism of poverty, prayer, and service.',
             'section_eyebrow'        => 'OUR HOMES',
             'section_title'          => 'FRIARIES ACROSS INDIA',
-            'friaries_overview_title'=> 'The Lord gave me brothers.',
+            'friaries_overview_title'=> 'OUR FRIARIES',
+            'friaries_overview_text' => 'The Province maintains houses in Archdiocese of Ranchi, Khunti, Simdega, Rourkela, Jalpaiguri, Bagdogra, Gumla, Purnea, and Bongaigaon.',
             'intro_text'             => 'The Province maintains 18 major friaries and ashrams across multiple dioceses, serving the People of God through parishes, schools, and pastoral ministry.',
+            'friaries_list'          => function_exists( 'franciscan_get_default_friaries_data' ) ? franciscan_get_default_friaries_data() : array(),
         ),
         'community' => array(
             'hero_badge'             => 'OUR BROTHERHOOD',
@@ -846,10 +853,22 @@ function franciscan_resync_legacy_content_options() {
                         $clean['heritage_text'] = $clean['hero_subtitle'];
                     }
                 }
-                // Resync friaries overview title
+                // Resync friaries defaults if missing
                 if ( 'community-friaries' === $slug ) {
-                    if ( ! isset( $clean['friaries_overview_title'] ) || in_array( $clean['friaries_overview_title'], array( 'OUR FRIARIES' ), true ) ) {
-                        $clean['friaries_overview_title'] = 'The Lord gave me brothers.';
+                    if ( empty( $clean['card_badge'] ) ) {
+                        $clean['card_badge'] = 'OUR FRIARIES';
+                    }
+                    if ( empty( $clean['card_title'] ) ) {
+                        $clean['card_title'] = 'HOUSES OF PRAYER AND SERVICE';
+                    }
+                    if ( empty( $clean['card_subtitle'] ) ) {
+                        $clean['card_subtitle'] = 'Communities across India and beyond, rooted in the Franciscan charism of poverty, prayer, and service.';
+                    }
+                    if ( empty( $clean['friaries_overview_title'] ) ) {
+                        $clean['friaries_overview_title'] = 'OUR FRIARIES';
+                    }
+                    if ( empty( $clean['friaries_overview_text'] ) ) {
+                        $clean['friaries_overview_text'] = 'The Province maintains houses in Archdiocese of Ranchi, Khunti, Simdega, Rourkela, Jalpaiguri, Bagdogra, Gumla, Purnea, and Bongaigaon.';
                     }
                 }
                 // Resync ministry banner subtitles
@@ -1231,5 +1250,283 @@ function franciscan_resolve_friar_image_url( $img ) {
         return FRANCISCAN_THEME_URI . '/' . $img;
     }
     return home_url( $img );
+}
+
+/**
+ * =============================================================================
+ * OUR FRIARIES & ASHRAMS DATA STORE & GETTERS
+ * =============================================================================
+ */
+
+function franciscan_get_default_friaries_data() {
+    return array(
+        array(
+            'diocese' => 'ARCHDIOCESE OF RANCHI',
+            'title'   => 'Provincial House (Assisi Ashram)',
+            'desc'    => 'St. Francis of Assisi Province, Harmu P.O., Ranchi-834 002, JHARKHAND, Estd. 1989',
+            'image'   => '',
+        ),
+        array(
+            'diocese' => 'ARCHDIOCESE OF RANCHI',
+            'title'   => "St. Joseph's Parish & Franciscan Ashram",
+            'desc'    => 'P.O. Kasmar - 835225, Ranchi, JHARKHAND, Estd. 2008',
+            'image'   => '',
+        ),
+        array(
+            'diocese' => 'ARCHDIOCESE OF RANCHI',
+            'title'   => 'St. Francis Clericate',
+            'desc'    => 'Purulia Road, Ranchi - 834001, JHARKHAND',
+            'image'   => '',
+        ),
+        array(
+            'diocese' => 'ARCHDIOCESE OF RANCHI',
+            'title'   => 'Franciscan Ashram Morabadi',
+            'desc'    => 'Ranchi - 834008, JHARKHAND',
+            'image'   => '',
+        ),
+        array(
+            'diocese' => 'ARCHDIOCESE OF RANCHI',
+            'title'   => 'TOR Novitiate',
+            'desc'    => 'Bichna, P.O. Khunti - 835210, JHARKHAND',
+            'image'   => '',
+        ),
+        array(
+            'diocese' => 'ARCHDIOCESE OF RANCHI',
+            'title'   => 'Franciscan Ashram Hulhundu',
+            'desc'    => 'P.O. Hulhundu, Ranchi - 835221, JHARKHAND',
+            'image'   => '',
+        ),
+        array(
+            'diocese' => 'DIOCESE OF KHUNTI',
+            'title'   => 'St. Antony Parish & Franciscan Ashram',
+            'desc'    => 'Dorma, P.O. Torpa, Khunti - 835227, JHARKHAND, Estd. 1993',
+            'image'   => '',
+        ),
+        array(
+            'diocese' => 'DIOCESE OF SIMDEGA',
+            'title'   => 'St. Jude Parish & Franciscan Ashram',
+            'desc'    => 'Kersai, P.O. Kersai, Simdega - 835212, JHARKHAND, Estd. 2004',
+            'image'   => '',
+        ),
+        array(
+            'diocese' => 'DIOCESE OF SIMDEGA',
+            'title'   => 'St. Clare Parish & Franciscan Ashram',
+            'desc'    => 'Gholeng, P.O. Gholeng, Jashpur - 496338, CHHATTISGARH, Estd. 2011',
+            'image'   => '',
+        ),
+        array(
+            'diocese' => 'DIOCESE OF GUMLA',
+            'title'   => 'St. Francis of Assisi Parish & Ashram',
+            'desc'    => 'Dumri, P.O. Dumri, Gumla - 835230, JHARKHAND, Estd. 2014',
+            'image'   => '',
+        ),
+        array(
+            'diocese' => 'DIOCESE OF PURNEA',
+            'title'   => 'Sacred Heart Parish & Franciscan Ashram',
+            'desc'    => 'Banmankhi, P.O. Banmankhi, Purnea - 854202, BIHAR, Estd. 2015',
+            'image'   => '',
+        ),
+        array(
+            'diocese' => 'DIOCESE OF PURNEA',
+            'title'   => 'St. Francis School & Ashram',
+            'desc'    => 'Gwalpara, P.O. Gwalpara, Madhepura - 852115, BIHAR, Estd. 2017',
+            'image'   => '',
+        ),
+        array(
+            'diocese' => 'DIOCESE OF BAGDOGRA',
+            'title'   => "St. Mary's Parish & Franciscan Ashram",
+            'desc'    => 'Muraliganj, P.O. Phansidewa, Darjeeling - 734434, WEST BENGAL, Estd. 2016',
+            'image'   => '',
+        ),
+        array(
+            'diocese' => 'DIOCESE OF BAGDOGRA',
+            'title'   => 'Franciscan Ashram Panighatta',
+            'desc'    => 'P.O. Panighatta, Darjeeling - 734423, WEST BENGAL, Estd. 2019',
+            'image'   => '',
+        ),
+        array(
+            'diocese' => 'DIOCESE OF JALPAIGURI',
+            'title'   => 'Franciscan Ashram Chel-Line',
+            'desc'    => 'Sylee, P.O. Mal, Jalpaiguri - 735221, WEST BENGAL, Estd. 2018',
+            'image'   => '',
+        ),
+        array(
+            'diocese' => 'DIOCESE OF ROURKELA',
+            'title'   => 'Franciscan Ashram Deorapara (St. Francis Xavier Church)',
+            'desc'    => 'P.O. Lohondabud, Sundergarh – 700022, ODISHA, Estd. 2003',
+            'image'   => '',
+        ),
+        array(
+            'diocese' => 'DIOCESE OF ROURKELA',
+            'title'   => 'Sneh Bhavan Jamunadipa',
+            'desc'    => 'P.O. Kuarmunda, Rourkela, ODISHA-770039, Estd. 2014',
+            'image'   => '',
+        ),
+        array(
+            'diocese' => 'DIOCESE OF BONGAIGAON',
+            'title'   => 'Franciscan Ashram Kashiabari',
+            'desc'    => 'Village Sindrijhora, P.O. Kashiabari Kokrajhar, ASSAM - 783360',
+            'image'   => '',
+        ),
+        array(
+            'diocese' => 'OUTSIDE INDIA',
+            'title'   => 'Pater Nicholas Tudu',
+            'desc'    => 'TOR, Pfarrei Mariä Himmelfahrt, Schulstr.1, 84051 Essenbach, Germany',
+            'image'   => '',
+        ),
+        array(
+            'diocese' => 'OUTSIDE INDIA',
+            'title'   => 'Pater Daison Thaikkattil',
+            'desc'    => 'TOR, Kirch Strasse 3a, 79793 Wutoeschingen, Germany',
+            'image'   => '',
+        ),
+    );
+}
+
+/**
+ * Retrieve curated/custom Friaries list (flat array).
+ */
+function franciscan_get_friaries_data() {
+    $data = franciscan_get_page_content( 'community-friaries' );
+    if ( isset( $data['friaries_list'] ) && is_array( $data['friaries_list'] ) && ! empty( $data['friaries_list'] ) ) {
+        return array_values( $data['friaries_list'] );
+    }
+    $global_opt = get_option( 'franciscan_friaries_data', null );
+    if ( is_array( $global_opt ) && ! empty( $global_opt ) ) {
+        return array_values( $global_opt );
+    }
+    return franciscan_get_default_friaries_data();
+}
+
+/**
+ * Group flat friaries array by Diocese for frontend rendering.
+ */
+function franciscan_get_friaries_grouped() {
+    $list = franciscan_get_friaries_data();
+    $grouped = array();
+    foreach ( $list as $item ) {
+        $diocese = ! empty( $item['diocese'] ) ? trim( $item['diocese'] ) : 'OTHER FRIARIES';
+        if ( ! isset( $grouped[ $diocese ] ) ) {
+            $grouped[ $diocese ] = array();
+        }
+        $grouped[ $diocese ][] = $item;
+    }
+    return $grouped;
+}
+
+/**
+ * =============================================================================
+ * GENERAL & PROVINCIAL COUNCILS DATA STORE & GETTERS
+ * =============================================================================
+ */
+
+function franciscan_get_default_general_council() {
+    return array(
+        array(
+            'name'    => 'Most Rev. Fr. Amando Trujillo Cano',
+            'role'    => 'Minister General',
+            'region'  => 'Vice Province of Holy Mary of Guadalupe, Mexico',
+            'image'   => '/assets/images/general-council/most-rev-fr-amando-trujillo-cano.jpg',
+            'address' => 'Basilica dei Santi Cosma e Damiano, Via dei Fori Imperiali, 1, 00186 Roma, Italia',
+            'phone'   => '+39 06 679 0278',
+            'email'   => 'curia@francescanitor.org',
+        ),
+        array(
+            'name'    => 'Very Rev. Fr. Sean Sheridan',
+            'role'    => 'Vicar General',
+            'region'  => 'Province of the Most Sacred Heart of Jesus, USA',
+            'image'   => '/assets/images/general-council/very-rev-fr-sean-sheridan.jpg',
+            'address' => 'Basilica dei Santi Cosma e Damiano, Via dei Fori Imperiali, 1, 00186 Roma, Italia',
+            'phone'   => '+39 06 679 0278',
+            'email'   => 'curia@francescanitor.org',
+        ),
+        array(
+            'name'    => 'Very Rev. Fr. Zvonimir Brusač',
+            'role'    => '1st Councilor',
+            'region'  => 'Province of Saint Jerome, Croatia',
+            'image'   => '/assets/images/general-council/very-rev-fr-zvonimir-brusac.jpg',
+            'address' => 'Basilica dei Santi Cosma e Damiano, Via dei Fori Imperiali, 1, 00186 Roma, Italia',
+            'phone'   => '+39 06 699 0808',
+            'email'   => 'curia@francescanitor.org',
+        ),
+        array(
+            'name'    => 'Very Rev. Fr. Shibin Kurian Vallattuthundathil',
+            'role'    => '2nd Councilor & Secretary General',
+            'region'  => 'Province of Saint Louis, India',
+            'image'   => '/assets/images/general-council/very-rev-fr-shibin-kurian.jpg',
+            'address' => 'Basilica dei Santi Cosma e Damiano, Via dei Fori Imperiali, 1, 00186 Roma, Italia',
+            'phone'   => '+39 06 699 0808',
+            'email'   => 'curia@francescanitor.org',
+        ),
+        array(
+            'name'    => 'Very Rev. Fr. Massimo Cucinotta',
+            'role'    => '3rd Councilor',
+            'region'  => 'Province of Saints Joachim and Anne, Sicily',
+            'image'   => '/assets/images/general-council/very-rev-fr-massimo-cucinotta.jpg',
+            'address' => 'Basilica dei Santi Cosma e Damiano, Via dei Fori Imperiali, 1, 00186 Roma, Italia',
+            'phone'   => '+39 06 699 0808',
+            'email'   => 'curia@francescanitor.org',
+        ),
+        array(
+            'name'    => 'Rev. Fr. Bijay Prakash Tirkey TOR',
+            'role'    => '4th Councilor',
+            'region'  => 'Province of St. Francis of Assisi, India',
+            'image'   => '/assets/images/general-council/rev-fr-bijay-prakash-tirkey.jpeg',
+            'address' => 'Basilica dei Santi Cosma e Damiano, Via dei Fori Imperiali, 1, 00186 Roma, Italia',
+            'phone'   => '+39 06 699 0808',
+            'email'   => 'secretarius@francescanitor.org',
+        ),
+    );
+}
+
+function franciscan_get_general_council() {
+    $data = franciscan_get_page_content( 'community-leadership' );
+    if ( isset( $data['general_council_list'] ) && is_array( $data['general_council_list'] ) && ! empty( $data['general_council_list'] ) ) {
+        return array_values( $data['general_council_list'] );
+    }
+    return franciscan_get_default_general_council();
+}
+
+function franciscan_get_default_provincial_council() {
+    return array(
+        array(
+            'name'  => 'Very Rev. Fr. Manoj Vengathanam, TOR',
+            'role'  => 'Minister Provincial',
+            'image' => '/assets/images/friars/fr-manoj-vengathanam.png',
+        ),
+        array(
+            'name'  => 'Very Rev. Fr. Manoj Kullu, TOR',
+            'role'  => 'Vicar Provincial',
+            'image' => '/assets/images/friars/fr-manoj-kullu.png',
+        ),
+        array(
+            'name'  => 'Fr. Wilson James, TOR',
+            'role'  => 'First Councilor, Provincial Secretary & Province Econome',
+            'image' => '/assets/images/friars/fr-wilson-james.png',
+        ),
+        array(
+            'name'  => 'Fr. George Thannickal, TOR',
+            'role'  => 'Second Councilor',
+            'image' => '/assets/images/friars/fr-george-thannickal.png',
+        ),
+        array(
+            'name'  => 'Fr. Varghese Thekkekara, TOR',
+            'role'  => 'Third Councilor',
+            'image' => '/assets/images/friars/fr-varghese-thekkekara.png',
+        ),
+        array(
+            'name'  => 'Fr. Augustine, TOR',
+            'role'  => 'Fourth Councilor',
+            'image' => '/assets/images/friars/fr-augustine.png',
+        ),
+    );
+}
+
+function franciscan_get_provincial_council() {
+    $data = franciscan_get_page_content( 'community-leadership' );
+    if ( isset( $data['provincial_council_list'] ) && is_array( $data['provincial_council_list'] ) && ! empty( $data['provincial_council_list'] ) ) {
+        return array_values( $data['provincial_council_list'] );
+    }
+    return franciscan_get_default_provincial_council();
 }
 

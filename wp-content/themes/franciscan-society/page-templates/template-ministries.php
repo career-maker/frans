@@ -785,10 +785,10 @@ button.fs-mega-toggle:focus::after {
                             <?php echo esc_html( franciscan_get_page_field( "ministries", "pastoral_title", "PROCLAIMING THE GOSPEL THROUGH COMPASSIONATE SERVICE" ) ); ?>
                         </h2>
                         <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.52; margin-bottom: 1.2rem;">
-                            <?php echo esc_html( franciscan_get_page_field( "ministries", "pastoral_lead", "St. Francis gathered brothers around him to become heralds of the Good News. Inspired by this vision, the TOR Franciscans of the Province actively engage in pastoral ministry in parishes. Through this vital service to the Church, the friars dedicate themselves wholeheartedly to the mission of evangelization by their pastoral presence and ministry." ) ); ?>
+                            <?php echo nl2br( esc_html( franciscan_get_page_field( "ministries", "pastoral_lead", "St. Francis gathered brothers around him to become heralds of the Good News. Inspired by this vision, the TOR Franciscans of the Province actively engage in pastoral ministry in parishes. Through this vital service to the Church, the friars dedicate themselves wholeheartedly to the mission of evangelization by their pastoral presence and ministry." ) ) ); ?>
                         </p>
                         <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.52; margin-bottom: 1.8rem;">
-                            <?php echo esc_html( franciscan_get_page_field( "ministries", "pastoral_desc", "Their ministry extends beyond the celebration of the sacraments to a compassionate and attentive presence among the people—caring for the sick and elderly, pastoral counseling, and family visits across 15 parishes in India and the Archdiocese of Freiburg, Germany." ) ); ?>
+                            <?php echo nl2br( esc_html( franciscan_get_page_field( "ministries", "pastoral_desc", "Their ministry extends beyond the celebration of the sacraments to a compassionate and attentive presence among the people—caring for the sick and elderly, pastoral counseling, and family visits across 15 parishes in India and the Archdiocese of Freiburg, Germany." ) ) ); ?>
                         </p>
 
                         <!-- Key Pillars Grid -->
@@ -845,10 +845,10 @@ button.fs-mega-toggle:focus::after {
                             <?php echo esc_html( franciscan_get_page_field( "ministries", "formation_title", "NURTURING THE NEXT GENERATION OF FRANCISCANS" ) ); ?>
                         </h2>
                         <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.52; margin-bottom: 1.2rem;">
-                            <?php echo esc_html( franciscan_get_page_field( "ministries", "formation_lead", "Formation is the foundational ministry through which the Franciscan TOR charism and spirituality are creatively and faithfully proposed to successive generations. As Pope John Paul II emphasized in Vita Consecrata, formation is a dynamic, lifelong process that leads to ongoing conversion." ) ); ?>
+                            <?php echo nl2br( esc_html( franciscan_get_page_field( "ministries", "formation_lead", "Formation is the foundational ministry through which the Franciscan TOR charism and spirituality are creatively and faithfully proposed to successive generations. As Pope John Paul II emphasized in Vita Consecrata, formation is a dynamic, lifelong process that leads to ongoing conversion." ) ) ); ?>
                         </p>
                         <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.52; margin-bottom: 1.8rem;">
-                            <?php echo esc_html( franciscan_get_page_field( "ministries", "formation_desc", "The Province operates two Minor Seminaries (Dorma and Ranchi), the Novitiate House in Bichna (Khunti), and the Clericate at Purulia Road (Ranchi), providing holistic spiritual, intellectual, human, and pastoral preparation for religious consecration." ) ); ?>
+                            <?php echo nl2br( esc_html( franciscan_get_page_field( "ministries", "formation_desc", "The Province operates two Minor Seminaries (Dorma and Ranchi), the Novitiate House in Bichna (Khunti), and the Clericate at Purulia Road (Ranchi), providing holistic spiritual, intellectual, human, and pastoral preparation for religious consecration." ) ) ); ?>
                         </p>
 
                         <!-- Key Pillars Grid -->
@@ -889,10 +889,10 @@ button.fs-mega-toggle:focus::after {
                             <?php echo esc_html( franciscan_get_page_field( "ministries", "education_title", "EMPOWERING MINDS THROUGH KNOWLEDGE & VALUES" ) ); ?>
                         </h2>
                         <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.52; margin-bottom: 1.2rem;">
-                            <?php echo esc_html( franciscan_get_page_field( "ministries", "education_lead", "Guided by the motto, “Peace and Joy to the World,” our educational apostolate serves over 20,000 students across Jharkhand, Bihar, and West Bengal. Operating five Hindi-medium high schools, eleven middle schools, and six English-medium schools affiliated with CISCE and CBSE boards." ) ); ?>
+                            <?php echo nl2br( esc_html( franciscan_get_page_field( "ministries", "education_lead", "Guided by the motto, “Peace and Joy to the World,” our educational apostolate serves over 20,000 students across Jharkhand, Bihar, and West Bengal. Operating five Hindi-medium high schools, eleven middle schools, and six English-medium schools affiliated with CISCE and CBSE boards." ) ) ); ?>
                         </p>
                         <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.52; margin-bottom: 1.8rem;">
-                            <?php echo esc_html( franciscan_get_page_field( "ministries", "education_desc", "Open to students of all faiths and backgrounds, our schools provide balanced, holistic education nurturing moral, intellectual, emotional, and spiritual development." ) ); ?>
+                            <?php echo nl2br( esc_html( franciscan_get_page_field( "ministries", "education_desc", "Open to students of all faiths and backgrounds, our schools provide balanced, holistic education nurturing moral, intellectual, emotional, and spiritual development." ) ) ); ?>
                         </p>
 
                         <!-- Key Pillars Grid -->

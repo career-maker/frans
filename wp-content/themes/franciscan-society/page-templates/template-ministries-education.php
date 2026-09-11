@@ -743,20 +743,20 @@ button.fs-mega-toggle:focus::after {
                         <?php echo esc_html( franciscan_get_page_field( "ministries-education", "section_1_heading", "Education Ministry" ) ); ?>
                     </h2>
                     <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.52; margin-bottom: 1.25rem;">
-                        <?php echo esc_html( franciscan_get_page_field( "ministries-education", "section_1_p1", "Education is one of the principal ministries of St. Francis Province, Ranchi. Inspired by the vision of St. Francis of Assisi and the educational mission of the Catholic Church, the Province is committed to forming young people who are intellectually competent, morally upright, spiritually grounded, and socially responsible." ) ); ?>
+                        <?php echo nl2br( esc_html( franciscan_get_page_field( "ministries-education", "section_1_p1", "Education is one of the principal ministries of St. Francis Province, Ranchi. Inspired by the vision of St. Francis of Assisi and the educational mission of the Catholic Church, the Province is committed to forming young people who are intellectually competent, morally upright, spiritually grounded, and socially responsible." ) ) ); ?>
                     </p>
                     <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.52; margin-bottom: 1.25rem;">
-                        <?php echo esc_html( franciscan_get_page_field( "ministries-education", "section_1_p2", "Guided by the motto, “Peace and Joy to the World,” the Province’s educational ministry seeks to promote God’s love among all people and foster the values of equality, justice, peace, and human dignity, irrespective of caste, creed, religion, language, or social status. Through its educational institutions, the Province strives to contribute to the creation of a more just, compassionate, and harmonious society." ) ); ?>
+                        <?php echo nl2br( esc_html( franciscan_get_page_field( "ministries-education", "section_1_p2", "Guided by the motto, “Peace and Joy to the World,” the Province’s educational ministry seeks to promote God’s love among all people and foster the values of equality, justice, peace, and human dignity, irrespective of caste, creed, religion, language, or social status. Through its educational institutions, the Province strives to contribute to the creation of a more just, compassionate, and harmonious society." ) ) ); ?>
                     </p>
                     <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.52; margin: 0;">
-                        <?php echo esc_html( franciscan_get_page_field( "ministries-education", "section_1_p3", "The primary objective of the Province’s educational ministry is the holistic formation of the human person. To achieve this goal, its schools provide a balanced education that nurtures the moral, intellectual, physical, emotional, and spiritual dimensions of students’ lives. By helping young people discover and develop their God-given talents, the institutions prepare them to face the challenges of life with confidence, integrity, and a sense of responsibility toward society." ) ); ?>
+                        <?php echo nl2br( esc_html( franciscan_get_page_field( "ministries-education", "section_1_p3", "The primary objective of the Province’s educational ministry is the holistic formation of the human person. To achieve this goal, its schools provide a balanced education that nurtures the moral, intellectual, physical, emotional, and spiritual dimensions of students’ lives. By helping young people discover and develop their God-given talents, the institutions prepare them to face the challenges of life with confidence, integrity, and a sense of responsibility toward society." ) ) ); ?>
                     </p>
                 </div>
 
                 <div style="border-radius: 20px; overflow: hidden; box-shadow: 0 15px 40px rgba(74,42,24,0.12); border: 2px solid rgba(230,200,136,0.3); background: #FAF7F0;">
                     <?php
                     $edu_img1 = franciscan_get_page_field( "ministries-education", "section_1_image", "" );
-                    if ( empty( $edu_img1 ) || strpos( $edu_img1, 'WhatsApp Image 2026-08-07 at 8.39.44' ) !== false ) {
+                    if ( empty( $edu_img1 ) ) {
                         $edu_img1 = FRANCISCAN_THEME_URI . "/assets/images/new_uploads/ministry-edu-1.jpg";
                     }
                     ?>
@@ -769,7 +769,7 @@ button.fs-mega-toggle:focus::after {
                 <div style="border-radius: 20px; overflow: hidden; box-shadow: 0 15px 40px rgba(74,42,24,0.12); border: 2px solid rgba(230,200,136,0.3); background: #FAF7F0;">
                     <?php
                     $edu_img2 = franciscan_get_page_field( "ministries-education", "section_2_image", "" );
-                    if ( empty( $edu_img2 ) || strpos( $edu_img2, 'WhatsApp Image 2026-08-07 at 8.42.19' ) !== false ) {
+                    if ( empty( $edu_img2 ) ) {
                         $edu_img2 = FRANCISCAN_THEME_URI . "/assets/images/new_uploads/ministry-edu-2.jpg";
                     }
                     ?>
@@ -778,13 +778,13 @@ button.fs-mega-toggle:focus::after {
 
                 <div>
                     <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.52; margin-bottom: 1.25rem;">
-                        <?php echo esc_html( franciscan_get_page_field( "ministries-education", "section_2_p1", "To carry out this mission, the Province operates a network of educational institutions across Jharkhand, Bihar, and West Bengal, serving approximately 20,000 students. Our academic framework is diverse, operating five Hindi-medium high schools and eleven middle schools affiliated with their respective state education boards, alongside six English-medium schools—four of which are affiliated with the CISCE, one with the CBSE, and one currently awaiting affiliation." ) ); ?>
+                        <?php echo nl2br( esc_html( franciscan_get_page_field( "ministries-education", "section_2_p1", "To carry out this mission, the Province operates a network of educational institutions across Jharkhand, Bihar, and West Bengal, serving approximately 20,000 students. Our academic framework is diverse, operating five Hindi-medium high schools and eleven middle schools affiliated with their respective state education boards, alongside six English-medium schools—four of which are affiliated with the CISCE, one with the CBSE, and one currently awaiting affiliation." ) ) ); ?>
                     </p>
                     <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.52; margin-bottom: 1.25rem;">
-                        <?php echo esc_html( franciscan_get_page_field( "ministries-education", "section_2_p2", "These institutions are staffed by dedicated and qualified priests, religious sisters, and lay teachers who work together to provide quality education in both English and regional languages. Open to students of all faiths, communities, and social backgrounds, the schools reflect the inclusive spirit of the Gospel and the Franciscan tradition of service." ) ); ?>
+                        <?php echo nl2br( esc_html( franciscan_get_page_field( "ministries-education", "section_2_p2", "These institutions are staffed by dedicated and qualified priests, religious sisters, and lay teachers who work together to provide quality education in both English and regional languages. Open to students of all faiths, communities, and social backgrounds, the schools reflect the inclusive spirit of the Gospel and the Franciscan tradition of service." ) ) ); ?>
                     </p>
                     <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.52; margin: 0;">
-                        <?php echo esc_html( franciscan_get_page_field( "ministries-education", "section_2_p3", "While they have a special responsibility toward the Christian community, the Province’s schools remain firmly committed to serving the wider society. Through academic excellence, value-based education, and the promotion of human dignity, they continue to make a meaningful contribution to the educational and social development of the nation." ) ); ?>
+                        <?php echo nl2br( esc_html( franciscan_get_page_field( "ministries-education", "section_2_p3", "While they have a special responsibility toward the Christian community, the Province’s schools remain firmly committed to serving the wider society. Through academic excellence, value-based education, and the promotion of human dignity, they continue to make a meaningful contribution to the educational and social development of the nation." ) ) ); ?>
                     </p>
                 </div>
             </div>

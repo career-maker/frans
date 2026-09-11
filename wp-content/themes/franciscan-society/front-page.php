@@ -554,11 +554,62 @@ get_header();
                 </div>
 
                 <div id="news-scroll-track" style="display: flex; gap: 2.2rem; overflow-x: auto; -webkit-overflow-scrolling: touch; touch-action: pan-x; scroll-behavior: smooth; scroll-snap-type: x mandatory; padding: 0.5rem 0 1.5rem 0; scrollbar-width: none; -ms-overflow-style: none;">
-
-                    <!-- Seminar on New Labour Code -->
+                    <?php
+                    $news_slider_args = array(
+                        'post_type'      => 'post',
+                        'post_status'    => 'publish',
+                        'posts_per_page' => 8,
+                    );
+                    $news_cat = get_term_by( 'slug', 'news', 'category' );
+                    if ( $news_cat ) {
+                        $news_slider_args['cat'] = $news_cat->term_id;
+                    } else {
+                        $blog_cat = get_term_by( 'slug', 'blogs', 'category' );
+                        if ( ! $blog_cat ) {
+                            $blog_cat = get_term_by( 'slug', 'blog', 'category' );
+                        }
+                        if ( $blog_cat ) {
+                            $news_slider_args['category__not_in'] = array( $blog_cat->term_id );
+                        }
+                    }
+                    $news_slider_query = new WP_Query( $news_slider_args );
+                    if ( $news_slider_query->have_posts() ) :
+                        while ( $news_slider_query->have_posts() ) : $news_slider_query->the_post();
+                            $thumb_url = has_post_thumbnail() ? get_the_post_thumbnail_url( get_the_ID(), 'large' ) : FRANCISCAN_THEME_URI . '/assets/images/new_uploads/seminar-labour-code.jpeg';
+                            $categories = get_the_category();
+                            $cat_name = ! empty( $categories ) ? $categories[0]->name : 'Province News';
+                    ?>
                     <div class="blog-card" style="flex: 0 0 min(540px, 90vw); margin: 0 auto; scroll-snap-align: center; display: flex; flex-direction: column; background: transparent;">
                         <div style="border-radius: 20px; overflow: hidden; height: 300px; margin-bottom: 1.6rem; box-shadow: 0 10px 25px rgba(0,0,0,0.10); background-color: #d6ccc2;">
-                            <img loading="eager" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/new_uploads/seminar-labour-code.jpeg' ); ?>" style="width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s ease;" alt="Seminar on New Labour Code at Hardag, Ranchi" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform='scale(1)'">
+                            <a href="<?php the_permalink(); ?>" style="display: block; width: 100%; height: 100%;" aria-label="<?php the_title_attribute(); ?>">
+                                <img loading="lazy" decoding="async" src="<?php echo esc_url( $thumb_url ); ?>" style="width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s ease;" alt="<?php the_title_attribute(); ?>" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform='scale(1)'">
+                            </a>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 0.9rem;">
+                            <span style="font-family: 'Instrument Sans', sans-serif; font-size: 0.75rem; color: #8b6f47; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; background: rgba(139,111,71,0.08); padding: 0.25rem 0.7rem; border-radius: 50px;"><?php echo esc_html( $cat_name ); ?></span>
+                            <span style="font-family: 'Instrument Sans', sans-serif; font-size: 0.78rem; color: #a8a29e;">📅 <?php echo esc_html( get_the_date( 'F j, Y' ) ); ?></span>
+                        </div>
+                        <h3 style="font-family: 'Phudu', sans-serif !important; font-size: 1.25rem !important; font-weight: 600 !important; color: #1c1917 !important; text-transform: uppercase; line-height: 1.35; margin-bottom: 1rem; border-bottom: 1px solid rgba(0,0,0,0.1); padding-bottom: 1rem;">
+                            <a href="<?php the_permalink(); ?>" style="color: inherit; text-decoration: none;"><?php the_title(); ?></a>
+                        </h3>
+                        <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.5; margin-bottom: 1.5rem; flex-grow: 1;">
+                            <?php echo esc_html( wp_trim_words( get_the_excerpt(), 28, '...' ) ); ?>
+                        </p>
+                        <div>
+                            <a href="<?php the_permalink(); ?>" class="news-text-link" style="font-family: 'Instrument Sans', sans-serif !important; font-weight: 800 !important; font-size: 0.88rem !important; color: #1c1917 !important; text-transform: uppercase !important; letter-spacing: 0.06em !important; text-decoration: none !important; display: inline-flex !important; align-items: center !important; gap: 0.4rem !important; transition: color 0.3s ease !important;">
+                                <span>READ MORE</span> <span class="btn-arrow" style="font-size: 1rem; transition: transform 0.3s ease;"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; vertical-align: text-bottom;"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></span>
+                            </a>
+                        </div>
+                    </div>
+                    <?php
+                        endwhile;
+                        wp_reset_postdata();
+                    else :
+                    ?>
+                    <!-- Fallback -->
+                    <div class="blog-card" style="flex: 0 0 min(540px, 90vw); margin: 0 auto; scroll-snap-align: center; display: flex; flex-direction: column; background: transparent;">
+                        <div style="border-radius: 20px; overflow: hidden; height: 300px; margin-bottom: 1.6rem; box-shadow: 0 10px 25px rgba(0,0,0,0.10); background-color: #d6ccc2;">
+                            <img loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/new_uploads/seminar-labour-code.jpeg' ); ?>" style="width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s ease;" alt="Seminar on New Labour Code at Hardag, Ranchi">
                         </div>
                         <div style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 0.9rem;">
                             <span style="font-family: 'Instrument Sans', sans-serif; font-size: 0.75rem; color: #8b6f47; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; background: rgba(139,111,71,0.08); padding: 0.25rem 0.7rem; border-radius: 50px;">Province News</span>
@@ -571,12 +622,12 @@ get_header();
                             A one-day seminar on "New Labour Code" was organized by the St. Francis Province, Ranchi, on 29 August 2026 at Moments Resorts, Hardag. Attended by around fifty participants — including TOR friars in the education ministry and principals from across Jharkhand — the event was graced by Very Rev. Fr. Manoj Vengathanam, TOR, Minister Provincial of Ranchi Province.
                         </p>
                         <div>
-                            <a href="<?php echo esc_url( home_url( '/news/?view=detail' ) ); ?>" class="news-text-link" style="font-family: 'Instrument Sans', sans-serif !important; font-weight: 800 !important; font-size: 0.88rem !important; color: #1c1917 !important; text-transform: uppercase !important; letter-spacing: 0.06em !important; text-decoration: none !important; display: inline-flex !important; align-items: center !important; gap: 0.4rem !important; transition: color 0.3s ease !important;">
+                            <a href="<?php echo esc_url( home_url( '/news' ) ); ?>" class="news-text-link" style="font-family: 'Instrument Sans', sans-serif !important; font-weight: 800 !important; font-size: 0.88rem !important; color: #1c1917 !important; text-transform: uppercase !important; letter-spacing: 0.06em !important; text-decoration: none !important; display: inline-flex !important; align-items: center !important; gap: 0.4rem !important; transition: color 0.3s ease !important;">
                                 <span>READ MORE</span> <span class="btn-arrow" style="font-size: 1rem; transition: transform 0.3s ease;"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; vertical-align: text-bottom;"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></span>
                             </a>
                         </div>
                     </div>
-
+                    <?php endif; ?>
                 </div>
 
                 <!-- View All News & Events Button -->
@@ -636,13 +687,59 @@ get_header();
                     </div>
                 </div>
 
-                <!-- Blog Cards Scroll Track -->
+                          <!-- Blog Cards Scroll Track -->
                 <div id="blogs-scroll-track" style="display: flex; gap: 2.2rem; overflow-x: auto; -webkit-overflow-scrolling: touch; touch-action: pan-x; scroll-behavior: smooth; scroll-snap-type: x mandatory; padding: 0.5rem 0 1.5rem 0; margin-bottom: 2rem; scrollbar-width: none; -ms-overflow-style: none;">
-                    
-                    <!-- Card 1: Children's Ministry -->
+                    <?php
+                    $blog_slider_args = array(
+                        'post_type'      => 'post',
+                        'post_status'    => 'publish',
+                        'posts_per_page' => 8,
+                    );
+                    $blog_cat = get_term_by( 'slug', 'blogs', 'category' );
+                    if ( ! $blog_cat ) {
+                        $blog_cat = get_term_by( 'slug', 'blog', 'category' );
+                    }
+                    if ( $blog_cat ) {
+                        $blog_slider_args['cat'] = $blog_cat->term_id;
+                    } else {
+                        // Exclude news if news category exists
+                        $news_cat = get_term_by( 'slug', 'news', 'category' );
+                        if ( $news_cat ) {
+                            $blog_slider_args['category__not_in'] = array( $news_cat->term_id );
+                        }
+                    }
+                    $blogs_query = new WP_Query( $blog_slider_args );
+                    if ( $blogs_query->have_posts() ) :
+                        while ( $blogs_query->have_posts() ) : $blogs_query->the_post();
+                            $thumb_url = has_post_thumbnail() ? get_the_post_thumbnail_url( get_the_ID(), 'medium_large' ) : FRANCISCAN_THEME_URI . '/assets/images/news-blog/WhatsApp Image 2025-09-10 at 4.28.51 AM.jpeg';
+                    ?>
                     <div class="blog-padded-card" style="flex: 0 0 380px; scroll-snap-align: start; background: #ffffff; border-radius: 24px; padding: 1.8rem; box-shadow: 0 15px 35px rgba(0,0,0,0.06); display: flex; flex-direction: column; transition: transform 0.4s ease, box-shadow 0.4s ease;">
                         <div style="border-radius: 16px; overflow: hidden; height: 260px; margin-bottom: 1.6rem; background-color: #d6ccc2;">
-                            <img  loading="lazy"loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/news-blog/WhatsApp Image 2025-09-10 at 4.28.51 AM.jpeg' ); ?>" style="width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s ease;" alt="Children's Ministry" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform='scale(1)'">
+                            <a href="<?php the_permalink(); ?>" style="display: block; width: 100%; height: 100%;" aria-label="<?php the_title_attribute(); ?>">
+                                <img loading="lazy" decoding="async" src="<?php echo esc_url( $thumb_url ); ?>" style="width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s ease;" alt="<?php the_title_attribute(); ?>" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform='scale(1)'">
+                            </a>
+                        </div>
+                        <h3 style="font-family: 'Phudu', sans-serif !important; font-size: 1.25rem !important; font-weight: 600 !important; color: #1c1917 !important; text-transform: uppercase; margin-bottom: 0.8rem; letter-spacing: 0.01em; line-height: 1.3;">
+                            <a href="<?php the_permalink(); ?>" style="color: inherit; text-decoration: none;"><?php the_title(); ?></a>
+                        </h3>
+                        <p style="font-family: 'Instrument Sans', sans-serif !important; font-size: 0.88rem; color: #57534e; line-height: 1.6; margin-bottom: 1.6rem; flex-grow: 1;">
+                            <?php echo esc_html( wp_trim_words( get_the_excerpt(), 18, '...' ) ); ?>
+                        </p>
+                        <div style="margin-top: auto;">
+                            <a href="<?php the_permalink(); ?>" class="news-text-link" style="font-family: 'Instrument Sans', sans-serif !important; font-weight: 800 !important; font-size: 0.88rem !important; color: #1c1917 !important; text-transform: uppercase !important; letter-spacing: 0.06em !important; text-decoration: none !important; display: inline-flex !important; align-items: center !important; gap: 0.4rem !important; transition: color 0.3s ease !important;">
+                                <span>READ MORE</span> <span class="btn-arrow" style="font-size: 1rem; transition: transform 0.3s ease;"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; vertical-align: text-bottom;"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></span>
+                            </a>
+                        </div>
+                    </div>
+                    <?php
+                        endwhile;
+                        wp_reset_postdata();
+                    else :
+                    ?>
+                    <!-- Fallback Cards -->
+                    <div class="blog-padded-card" style="flex: 0 0 380px; scroll-snap-align: start; background: #ffffff; border-radius: 24px; padding: 1.8rem; box-shadow: 0 15px 35px rgba(0,0,0,0.06); display: flex; flex-direction: column; transition: transform 0.4s ease, box-shadow 0.4s ease;">
+                        <div style="border-radius: 16px; overflow: hidden; height: 260px; margin-bottom: 1.6rem; background-color: #d6ccc2;">
+                            <img loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/news-blog/WhatsApp Image 2025-09-10 at 4.28.51 AM.jpeg' ); ?>" style="width: 100%; height: 100%; object-fit: cover; display: block;" alt="Exploring the Franciscan Way">
                         </div>
                         <h3 style="font-family: 'Phudu', sans-serif !important; font-size: 1.25rem !important; font-weight: 600 !important; color: #1c1917 !important; text-transform: uppercase; margin-bottom: 0.8rem; letter-spacing: 0.01em; line-height: 1.3;">
                             EXPLORING THE FRANCISCAN WAY
@@ -651,102 +748,12 @@ get_header();
                             An inspiring reflection on exploring the franciscan way.
                         </p>
                         <div style="margin-top: auto;">
-                            <a href="<?php echo esc_url( get_permalink( 48 ) ); ?>" class="news-text-link" style="font-family: 'Instrument Sans', sans-serif !important; font-weight: 800 !important; font-size: 0.88rem !important; color: #1c1917 !important; text-transform: uppercase !important; letter-spacing: 0.06em !important; text-decoration: none !important; display: inline-flex !important; align-items: center !important; gap: 0.4rem !important; transition: color 0.3s ease !important;">
-                                <span>READ MORE</span> <span class="btn-arrow" style="font-size: 1rem; transition: transform 0.3s ease;"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; vertical-align: text-bottom;"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></span>
+                            <a href="<?php echo esc_url( home_url( '/blogs' ) ); ?>" class="news-text-link" style="font-family: 'Instrument Sans', sans-serif !important; font-weight: 800 !important; font-size: 0.88rem !important; color: #1c1917 !important; text-transform: uppercase !important; letter-spacing: 0.06em !important; text-decoration: none !important; display: inline-flex !important; align-items: center !important; gap: 0.4rem !important;">
+                                <span>READ MORE</span> <span class="btn-arrow" style="font-size: 1rem;"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; vertical-align: text-bottom;"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></span>
                             </a>
                         </div>
                     </div>
-
-                    <!-- Card 2: Youth Ministry -->
-                    <div class="blog-padded-card" style="flex: 0 0 380px; scroll-snap-align: start; background: #ffffff; border-radius: 24px; padding: 1.8rem; box-shadow: 0 15px 35px rgba(0,0,0,0.06); display: flex; flex-direction: column; transition: transform 0.4s ease, box-shadow 0.4s ease;">
-                        <div style="border-radius: 16px; overflow: hidden; height: 260px; margin-bottom: 1.6rem; background-color: #d6ccc2;">
-                            <img  loading="lazy"loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/news-blog/WhatsApp Image 2025-09-10 at 4.28.52 AM.jpeg' ); ?>" style="width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s ease;" alt="Youth Ministry" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform='scale(1)'">
-                        </div>
-                        <h3 style="font-family: 'Phudu', sans-serif !important; font-size: 1.25rem !important; font-weight: 600 !important; color: #1c1917 !important; text-transform: uppercase; margin-bottom: 0.8rem; letter-spacing: 0.01em; line-height: 1.3;">
-                            FINDING PEACE IN DAILY LIFE
-                        </h3>
-                        <p style="font-family: 'Instrument Sans', sans-serif !important; font-size: 0.88rem; color: #57534e; line-height: 1.6; margin-bottom: 1.6rem;">
-                            An inspiring reflection on finding peace in daily life.
-                        </p>
-                        <div style="margin-top: auto;">
-                            <a href="<?php echo esc_url( get_permalink( 49 ) ); ?>" class="news-text-link" style="font-family: 'Instrument Sans', sans-serif !important; font-weight: 800 !important; font-size: 0.88rem !important; color: #1c1917 !important; text-transform: uppercase !important; letter-spacing: 0.06em !important; text-decoration: none !important; display: inline-flex !important; align-items: center !important; gap: 0.4rem !important; transition: color 0.3s ease !important;">
-                                <span>READ MORE</span> <span class="btn-arrow" style="font-size: 1rem; transition: transform 0.3s ease;"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; vertical-align: text-bottom;"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></span>
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- Card 3: Women's Ministry -->
-                    <div class="blog-padded-card" style="flex: 0 0 380px; scroll-snap-align: start; background: #ffffff; border-radius: 24px; padding: 1.8rem; box-shadow: 0 15px 35px rgba(0,0,0,0.06); display: flex; flex-direction: column; transition: transform 0.4s ease, box-shadow 0.4s ease;">
-                        <div style="border-radius: 16px; overflow: hidden; height: 260px; margin-bottom: 1.6rem; background-color: #d6ccc2;">
-                            <img  loading="lazy"loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/news-blog/WhatsApp Image 2025-09-17 at 11.30.24 AM.jpeg' ); ?>" style="width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s ease;" alt="Women's Ministry" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform='scale(1)'">
-                        </div>
-                        <h3 style="font-family: 'Phudu', sans-serif !important; font-size: 1.25rem !important; font-weight: 600 !important; color: #1c1917 !important; text-transform: uppercase; margin-bottom: 0.8rem; letter-spacing: 0.01em; line-height: 1.3;">
-                            THE SPIRIT OF COMMUNITY SERVICE
-                        </h3>
-                        <p style="font-family: 'Instrument Sans', sans-serif !important; font-size: 0.88rem; color: #57534e; line-height: 1.6; margin-bottom: 1.6rem;">
-                            An inspiring reflection on the spirit of community service.
-                        </p>
-                        <div style="margin-top: auto;">
-                            <a href="<?php echo esc_url( get_permalink( 50 ) ); ?>" class="news-text-link" style="font-family: 'Instrument Sans', sans-serif !important; font-weight: 800 !important; font-size: 0.88rem !important; color: #1c1917 !important; text-transform: uppercase !important; letter-spacing: 0.06em !important; text-decoration: none !important; display: inline-flex !important; align-items: center !important; gap: 0.4rem !important; transition: color 0.3s ease !important;">
-                                <span>READ MORE</span> <span class="btn-arrow" style="font-size: 1rem; transition: transform 0.3s ease;"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; vertical-align: text-bottom;"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></span>
-                            </a>
-                        </div>
-                    </div>
-
-
-                    <!-- Card 4: Prayer & Intercession -->
-                    <div class="blog-padded-card" style="flex: 0 0 380px; scroll-snap-align: start; background: #ffffff; border-radius: 24px; padding: 1.8rem; box-shadow: 0 15px 35px rgba(0,0,0,0.06); display: flex; flex-direction: column; transition: transform 0.4s ease, box-shadow 0.4s ease;">
-                        <div style="border-radius: 16px; overflow: hidden; height: 260px; margin-bottom: 1.6rem; background-color: #d6ccc2;">
-                            <img  loading="lazy"loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery_2_1785739478020.png' ); ?>" style="width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s ease;" alt="Prayer and Intercession" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform='scale(1)'">
-                        </div>
-                        <h3 style="font-family: 'Phudu', sans-serif !important; font-size: 1.25rem !important; font-weight: 600 !important; color: #1c1917 !important; text-transform: uppercase; margin-bottom: 0.8rem; letter-spacing: 0.01em; line-height: 1.3;">
-                            REFLECTIONS ON MORNING PRAYER
-                        </h3>
-                        <p style="font-family: 'Instrument Sans', sans-serif !important; font-size: 0.88rem; color: #57534e; line-height: 1.6; margin-bottom: 1.6rem;">
-                            PRAYER &amp; INTERCESSION HOME MEETING<br>TIMES Thursdays, 6:00pm [...]
-                        </p>
-                        <div style="margin-top: auto;">
-                            <a href="<?php echo esc_url( get_permalink( 51 ) ); ?>" class="news-text-link" style="font-family: 'Instrument Sans', sans-serif !important; font-weight: 800 !important; font-size: 0.88rem !important; color: #1c1917 !important; text-transform: uppercase !important; letter-spacing: 0.06em !important; text-decoration: none !important; display: inline-flex !important; align-items: center !important; gap: 0.4rem !important; transition: color 0.3s ease !important;">
-                                <span>READ MORE</span> <span class="btn-arrow" style="font-size: 1rem; transition: transform 0.3s ease;"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; vertical-align: text-bottom;"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></span>
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- Card 5: Liturgy & Worship -->
-                    <div class="blog-padded-card" style="flex: 0 0 380px; scroll-snap-align: start; background: #ffffff; border-radius: 24px; padding: 1.8rem; box-shadow: 0 15px 35px rgba(0,0,0,0.06); display: flex; flex-direction: column; transition: transform 0.4s ease, box-shadow 0.4s ease;">
-                        <div style="border-radius: 16px; overflow: hidden; height: 260px; margin-bottom: 1.6rem; background-color: #d6ccc2;">
-                            <img  loading="lazy"loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_24_08_PM.png' ); ?>" style="width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s ease;" alt="Liturgy and Worship" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform='scale(1)'">
-                        </div>
-                        <h3 style="font-family: 'Phudu', sans-serif !important; font-size: 1.25rem !important; font-weight: 600 !important; color: #1c1917 !important; text-transform: uppercase; margin-bottom: 0.8rem; letter-spacing: 0.01em; line-height: 1.3;">
-                            BRINGING HOPE TO THE MARGINS
-                        </h3>
-                        <p style="font-family: 'Instrument Sans', sans-serif !important; font-size: 0.88rem; color: #57534e; line-height: 1.6; margin-bottom: 1.6rem;">
-                            LITURGY &amp; WORSHIP HOME MEETING<br>TIMES Sundays, 7:00am [...]
-                        </p>
-                        <div style="margin-top: auto;">
-                            <a href="<?php echo esc_url( get_permalink( 52 ) ); ?>" class="news-text-link" style="font-family: 'Instrument Sans', sans-serif !important; font-weight: 800 !important; font-size: 0.88rem !important; color: #1c1917 !important; text-transform: uppercase !important; letter-spacing: 0.06em !important; text-decoration: none !important; display: inline-flex !important; align-items: center !important; gap: 0.4rem !important; transition: color 0.3s ease !important;">
-                                <span>READ MORE</span> <span class="btn-arrow" style="font-size: 1rem; transition: transform 0.3s ease;"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; vertical-align: text-bottom;"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></span>
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- Card 6: Outreach & Charity -->
-                    <div class="blog-padded-card" style="flex: 0 0 380px; scroll-snap-align: start; background: #ffffff; border-radius: 24px; padding: 1.8rem; box-shadow: 0 15px 35px rgba(0,0,0,0.06); display: flex; flex-direction: column; transition: transform 0.4s ease, box-shadow 0.4s ease;">
-                        <div style="border-radius: 16px; overflow: hidden; height: 260px; margin-bottom: 1.6rem; background-color: #d6ccc2;">
-                            <img  loading="lazy"loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/gallery_4_1785739507745.png' ); ?>" style="width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s ease;" alt="Outreach and Charity" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform='scale(1)'">
-                        </div>
-                        <h3 style="font-family: 'Phudu', sans-serif !important; font-size: 1.25rem !important; font-weight: 600 !important; color: #1c1917 !important; text-transform: uppercase; margin-bottom: 0.8rem; letter-spacing: 0.01em; line-height: 1.3;">
-                            A JOURNEY OF FAITH AND FELLOWSHIP
-                        </h3>
-                        <p style="font-family: 'Instrument Sans', sans-serif !important; font-size: 0.88rem; color: #57534e; line-height: 1.6; margin-bottom: 1.6rem;">
-                            OUTREACH &amp; CHARITY HOME MEETING<br>TIMES Saturdays, 9:00am [...]
-                        </p>
-                        <div style="margin-top: auto;">
-                            <a href="<?php echo esc_url( get_permalink( 53 ) ); ?>" class="news-text-link" style="font-family: 'Instrument Sans', sans-serif !important; font-weight: 800 !important; font-size: 0.88rem !important; color: #1c1917 !important; text-transform: uppercase !important; letter-spacing: 0.06em !important; text-decoration: none !important; display: inline-flex !important; align-items: center !important; gap: 0.4rem !important; transition: color 0.3s ease !important;">
-                                <span>READ MORE</span> <span class="btn-arrow" style="font-size: 1rem; transition: transform 0.3s ease;"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; vertical-align: text-bottom;"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></span>
-                            </a>
-                        </div>
-                    </div>
+                    <?php endif; ?>
                 </div>
 
                 <!-- View All Blogs Button -->

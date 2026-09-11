@@ -732,14 +732,38 @@ button.fs-mega-toggle:focus::after {
         </div>
     </section>
 
-
-
-
-
-    
+    <!-- Page Hero Featured Card -->
+    <section class="page-hero page-hero-friaries" style="position: relative; background-color: #FFFFFF; padding: 2rem 2rem 0 2rem; box-sizing: border-box;">
+        <div class="has-vine-watermark" style="position: relative; width: 100%; display: flex; flex-direction: column; justify-content: center; box-sizing: border-box; background: linear-gradient(135deg, #4A2A18 0%, #6b3d28 100%); min-height: 300px; border-radius: 24px; padding: clamp(2.5rem, 5vw, 3.8rem) clamp(1.8rem, 5vw, 3.5rem); max-width: 1400px; margin: 0 auto; overflow: hidden; box-shadow: 0 15px 35px rgba(74,42,24,0.18);">
+            <img src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/shapes/vine-corner-watermark.png' ); ?>" class="vine-corner-watermark" alt="" aria-hidden="true" style="position: absolute; top: 0; right: 0; width: clamp(280px, 36vw, 540px); height: 100%; object-fit: contain; object-position: top right; pointer-events: none; opacity: 0.38; filter: brightness(1.6) contrast(1.1); z-index: 1;">
+            <div style="position: relative; z-index: 2;">
+                <div style="display: inline-flex; align-items: center; gap: 0.5rem; margin-bottom: 1.2rem;">
+                    <span style="width: 6px; height: 6px; background-color: #e6c888; border-radius: 50%; display: inline-block;"></span>
+                    <span style="color: #ffffff; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; font-family: 'Instrument Sans', sans-serif;"><?php echo esc_html( franciscan_get_page_field( 'community-friaries', 'card_badge', 'OUR FRIARIES' ) ); ?></span>
+                </div>
+                <h2 style="font-family: 'Phudu', sans-serif; font-size: clamp(2rem, 3.8vw, 44px); font-weight: 600; color: #ffffff; text-transform: uppercase; line-height: 1.15; letter-spacing: -0.01em; margin-bottom: 1.2rem; max-width: 800px;">
+                    <?php echo esc_html( franciscan_get_page_field( 'community-friaries', 'card_title', 'HOUSES OF PRAYER AND SERVICE' ) ); ?>
+                </h2>
+                <p style="font-family: 'Instrument Sans', sans-serif; font-size: 1.05rem; font-weight: 400; color: rgba(255, 255, 255, 0.9); line-height: 1.52; max-width: 650px; margin: 0;">
+                    <?php echo nl2br( esc_html( franciscan_get_page_field( 'community-friaries', 'card_subtitle', 'Communities across India and beyond, rooted in the Franciscan charism of poverty, prayer, and service.' ) ) ); ?>
+                </p>
+            </div>
+        </div>
+    </section>
 
     <div style="max-width: 1200px; margin: 0 auto; padding: clamp(3rem, 8vw, 5rem) 2rem;">
-        <h2 style="font-family: 'Phudu', sans-serif; font-size: clamp(1.5rem, 2.5vw, 2.2rem); font-weight: 700; color: #1c1917; margin-bottom: 2.5rem; text-align: center; line-height: 1.35; max-width: 950px; margin-left: auto; margin-right: auto;"><?php echo esc_html( franciscan_get_page_field( 'community-friaries', 'friaries_overview_title', 'The Lord gave me brothers.' ) ); ?></h2>
+        <div style="text-align: center; margin-bottom: 3.5rem;">
+            <?php
+            $friaries_overview_title = franciscan_get_page_field( 'community-friaries', 'friaries_overview_title', 'OUR FRIARIES' );
+            $friaries_overview_text  = franciscan_get_page_field( 'community-friaries', 'friaries_overview_text', 'The Province maintains houses in Archdiocese of Ranchi, Khunti, Simdega, Rourkela, Jalpaiguri, Bagdogra, Gumla, Purnea, and Bongaigaon.' );
+            ?>
+            <?php if ( ! empty( $friaries_overview_title ) ) : ?>
+                <h2 style="font-family: 'Phudu', sans-serif; font-size: clamp(1.8rem, 3vw, 2.5rem); font-weight: 700; color: #1c1917; text-transform: uppercase; margin-bottom: 1rem; line-height: 1.25;"><?php echo esc_html( $friaries_overview_title ); ?></h2>
+            <?php endif; ?>
+            <?php if ( ! empty( $friaries_overview_text ) ) : ?>
+                <p style="font-family: 'Instrument Sans', sans-serif; font-size: 1.05rem; color: #57534e; line-height: 1.6; max-width: 820px; margin: 0 auto;"><?php echo nl2br( esc_html( $friaries_overview_text ) ); ?></p>
+            <?php endif; ?>
+        </div>
 
         <?php
         // Refined light pastel color palettes (background, border, stroke, text)
@@ -756,133 +780,7 @@ button.fs-mega-toggle:focus::after {
             array( 'bg' => '#EEF3F7', 'border' => '#D2DFEB', 'stroke' => '#47637C', 'text' => '#284157' ), // Slate Pearl
         );
 
-        $dioceses = array(
-            'ARCHDIOCESE OF RANCHI' => array(
-                array(
-                    'title' => 'Franciscan Ashram (Provincial Residence)',
-                    'desc'  => 'P.O. Harmu Housing Colony, Ranchi – 834002, JHARKHAND, Estd. 1978',
-                    'image' => '',
-                ),
-                array(
-                    'title' => 'Franciscan Training Institute',
-                    'desc'  => 'Purulia Road (Dr. Camil Bulcke Path), P. Box No. 123, Ranchi – 834001, JHARKHAND, Estd. 1954',
-                    'image' => '',
-                ),
-                array(
-                    'title' => 'Franciscan Ashram Banhora',
-                    'desc'  => 'P.O. Hehel, Ranchi – 834005, JHARKHAND, Estd. 1988',
-                    'image' => '',
-                ),
-                array(
-                    'title' => 'Franciscan Ashram Getalsud',
-                    'desc'  => 'P.O. Getalsud (Via – Tatisilwai), Ranchi – 835101, JHARKHAND, Estd. 2002',
-                    'image' => '',
-                ),
-            ),
-            'DIOCESE OF KHUNTI' => array(
-                array(
-                    'title' => "St. Anthony’s Monastery",
-                    'desc'  => 'P.O. Dorma (Via – Torpa), Khunti – 835227, JHARKHAND, Estd. 1970',
-                    'image' => '',
-                ),
-                array(
-                    'title' => 'Franciscan Ashram Gaurbera',
-                    'desc'  => 'P.O. Bhamini (Via - Muruhu), Khunti – 835216, JHARKHAND, Estd. 1986',
-                    'image' => '',
-                ),
-                array(
-                    'title' => 'Assisi Bhavan',
-                    'desc'  => 'P.O. Dorma (Via – Torpa), Khunti – 835227, JHARKHAND, Estd. 2006',
-                    'image' => '',
-                ),
-                array(
-                    'title' => 'Vinay Bhavan',
-                    'desc'  => 'P.O. Bichna, Khunti - 835210, Jharkhand, Estd. 2009',
-                    'image' => '',
-                ),
-            ),
-            'DIOCESE OF SIMDEGA' => array(
-                array(
-                    'title' => 'Franciscan Ashram Bhukumunda',
-                    'desc'  => 'P.O. Targa, Simdega – 835226, JHARKHAND, Estd. 1987',
-                    'image' => '',
-                ),
-                array(
-                    'title' => "St. Joseph’s Church Kuruskela",
-                    'desc'  => 'Simdega - 835228, JHARKHAND, Estd. 2012',
-                    'image' => '',
-                ),
-                array(
-                    'title' => 'Catholic Church Behrinbasa',
-                    'desc'  => 'P.O. Behrinbasa, Simdega – 835226, JHARKHAND, Estd. 2013',
-                    'image' => '',
-                ),
-            ),
-            'DIOCESE OF GUMLA' => array(
-                array(
-                    'title' => 'Franciscan Ashram Murumkela',
-                    'desc'  => 'P.O. Kansir (Via – Chainpur), Gumla – 835206, JHARKHAND, Estd. 1998',
-                    'image' => '',
-                ),
-            ),
-            'DIOCESE OF PURNEA' => array(
-                array(
-                    'title' => 'Franciscan Ashram Thakurganj',
-                    'desc'  => 'P.O. Thakurganj, Kishanganj – 855116, BIHAR, Estd. 1996',
-                    'image' => '',
-                ),
-            ),
-            'DIOCESE OF BAGDOGRA' => array(
-                array(
-                    'title' => 'Franciscan Ashram Adhikari',
-                    'desc'  => 'P.O. Adhikari (Via – Khoribari), Darjeeling – 734427, WEST BENGAL, Estd. 1982.',
-                    'image' => '',
-                ),
-            ),
-            'DIOCESE OF JALPAIGURI' => array(
-                array(
-                    'title' => 'Franciscan Ashram Hasimara',
-                    'desc'  => 'P.O. Hasimara, Jalpaiguri – 735215, WEST BENGAL, Estd. 1984',
-                    'image' => '',
-                ),
-                array(
-                    'title' => 'Franciscan Ashram Chel-Line',
-                    'desc'  => 'Sylee, P.O. Mal, Jalpaiguri - 735221, WEST BENGAL, Estd. 2018',
-                    'image' => '',
-                ),
-            ),
-            'DIOCESE OF ROURKELA' => array(
-                array(
-                    'title' => 'Franciscan Ashram Deorapara (St. Francis Xavier Church)',
-                    'desc'  => 'P.O. Lohondabud, Sundergarh – 700022, ODISHA, Estd. 2003',
-                    'image' => '',
-                ),
-                array(
-                    'title' => 'Sneh Bhavan Jamunadipa',
-                    'desc'  => 'P.O. Kuarmunda, Rourkela, ODISHA-770039, Estd. 2014',
-                    'image' => '',
-                ),
-            ),
-            'DIOCESE OF BONGAIGAON' => array(
-                array(
-                    'title' => 'Franciscan Ashram Kashiabari',
-                    'desc'  => 'Village Sindrijhora, P.O. Kashiabari Kokrajhar, ASSAM - 783360',
-                    'image' => '',
-                ),
-            ),
-            'OUTSIDE INDIA' => array(
-                array(
-                    'title' => 'Pater Nicholas Tudu',
-                    'desc'  => 'TOR, Pfarrei Mariä Himmelfahrt, Schulstr.1, 84051 Essenbach, Germany',
-                    'image' => '',
-                ),
-                array(
-                    'title' => 'Pater Daison Thaikkattil',
-                    'desc'  => 'TOR, Kirch Strasse 3a, 79793 Wutoeschingen, Germany',
-                    'image' => '',
-                ),
-            ),
-        );
+        $dioceses = franciscan_get_friaries_grouped();
 
         $color_index = 0;
         foreach ( $dioceses as $diocese_title => $friary_list ) :

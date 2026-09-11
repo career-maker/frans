@@ -2176,6 +2176,146 @@ function franciscan_render_dashboard_view() {
                                     </div>
                                 </div>
                             </div>
+
+                            <?php
+                            $gen_council = franciscan_get_general_council();
+                            $prov_council = franciscan_get_provincial_council();
+                            ?>
+                            <!-- Section: General Council Directory -->
+                            <div class="form-section">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.2rem; flex-wrap: wrap; gap: 1rem;">
+                                    <div>
+                                        <h3 class="form-section-title" style="margin-bottom: 0.3rem;">
+                                            👑 General Council Members (<span id="general-council-count"><?php echo count( $gen_council ); ?></span> Members)
+                                        </h3>
+                                        <p style="color: var(--c-text-muted); font-size: 0.88rem; margin: 0;">
+                                            Manage Minister General, Vicar General, and General Councilors displayed on the leadership page.
+                                        </p>
+                                    </div>
+                                    <div style="display: flex; gap: 0.8rem; align-items: center; flex-wrap: wrap;">
+                                        <button type="button" class="btn btn-primary" id="btn-add-general-council" style="display: inline-flex; align-items: center; gap: 0.5rem;">
+                                            <span>➕</span> Add Council Member
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div id="general-council-list-container" style="display: flex; flex-direction: column; gap: 1.2rem;">
+                                    <?php foreach ( $gen_council as $gc_idx => $gc_member ) :
+                                        $gc_name    = $gc_member['name'] ?? '';
+                                        $gc_role    = $gc_member['role'] ?? '';
+                                        $gc_region  = $gc_member['region'] ?? '';
+                                        $gc_raw_img = ! empty( $gc_member['image'] ) ? $gc_member['image'] : ( $gc_member['photo'] ?? '' );
+                                        $gc_img_url = ! empty( $gc_raw_img ) ? franciscan_resolve_friar_image_url( $gc_raw_img ) : ( FRANCISCAN_THEME_URI . '/assets/images/general-council/placeholder.jpg' );
+                                        $gc_address = $gc_member['address'] ?? '';
+                                        $gc_phone   = $gc_member['phone'] ?? '';
+                                        $gc_email   = $gc_member['email'] ?? '';
+                                    ?>
+                                        <div class="general-council-item-card" data-index="<?php echo esc_attr( $gc_idx ); ?>" style="background: rgba(255,255,255,0.02); border: 1px solid var(--c-card-border); border-radius: 12px; padding: 1.2rem; position: relative;">
+                                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 0.6rem; flex-wrap: wrap; gap: 0.5rem;">
+                                                <div style="display: flex; align-items: center; gap: 0.6rem;">
+                                                    <span style="background: var(--c-gold); color: #12100e; font-weight: 800; font-size: 0.75rem; padding: 0.2rem 0.55rem; border-radius: 5px;">#<?php echo $gc_idx + 1; ?></span>
+                                                    <strong class="gc-card-title-preview" style="color: var(--c-text); font-size: 0.92rem;"><?php echo esc_html( ! empty( $gc_name ) ? $gc_name : 'New Member' ); ?></strong>
+                                                    <?php if ( ! empty( $gc_role ) ) : ?>
+                                                        <span class="gc-card-role-preview" style="background: rgba(230, 200, 136, 0.15); color: #e6c888; font-size: 0.72rem; padding: 0.15rem 0.5rem; border-radius: 4px; font-weight: 600;"><?php echo esc_html( $gc_role ); ?></span>
+                                                    <?php endif; ?>
+                                                </div>
+                                                <div style="display: flex; gap: 0.35rem; align-items: center;">
+                                                    <button type="button" class="btn btn-secondary btn-move-gc-up" title="Move Up" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;">▲</button>
+                                                    <button type="button" class="btn btn-secondary btn-move-gc-down" title="Move Down" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;">▼</button>
+                                                    <button type="button" class="btn btn-secondary btn-delete-gc-item" title="Remove Member" style="padding: 0.25rem 0.6rem; font-size: 0.75rem; background: rgba(239, 68, 68, 0.15); color: #fca5a5; border-color: rgba(239, 68, 68, 0.4);">🗑️ Remove</button>
+                                                </div>
+                                            </div>
+
+                                            <div style="display: flex; gap: 1.2rem; align-items: flex-start; flex-wrap: wrap;">
+                                                <div style="width: 80px; text-align: center; flex-shrink: 0;">
+                                                    <div style="width: 76px; height: 76px; border-radius: 50%; overflow: hidden; border: 2px solid var(--c-gold); margin: 0 auto 0.5rem; background: #2a160b;">
+                                                        <img src="<?php echo esc_url( $gc_img_url ); ?>" class="gc-img-preview" style="width: 100%; height: 100%; object-fit: cover; display: block;" onerror="this.src='<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/general-council/placeholder.jpg' ); ?>';">
+                                                    </div>
+                                                    <input type="hidden" name="general_council_list[<?php echo esc_attr( $gc_idx ); ?>][image]" class="gc-input-image" value="<?php echo esc_attr( $gc_raw_img ); ?>">
+                                                    <button type="button" class="btn btn-secondary btn-upload-gc-img" style="padding: 0.2rem 0.4rem; font-size: 0.7rem; width: 100%; margin-bottom: 0.25rem;">📷 Photo</button>
+                                                    <button type="button" class="btn btn-secondary btn-reset-gc-img" style="padding: 0.15rem 0.3rem; font-size: 0.68rem; width: 100%; <?php echo empty( $gc_raw_img ) ? 'display:none;' : ''; ?>">Reset</button>
+                                                </div>
+                                                <div style="flex: 1; min-width: 260px;" class="form-grid">
+                                                    <div class="form-group">
+                                                        <label>Full Name</label>
+                                                        <input type="text" name="general_council_list[<?php echo esc_attr( $gc_idx ); ?>][name]" class="form-control gc-input-name" value="<?php echo esc_attr( $gc_name ); ?>" placeholder="e.g. Most Rev. Fr. Amando Trujillo Cano" required>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Office / Role</label>
+                                                        <input type="text" name="general_council_list[<?php echo esc_attr( $gc_idx ); ?>][role]" class="form-control gc-input-role" value="<?php echo esc_attr( $gc_role ); ?>" placeholder="e.g. Minister General">
+                                                    </div>
+                                                    <div class="form-group full-width">
+                                                        <label>Province / Region / Country</label>
+                                                        <input type="text" name="general_council_list[<?php echo esc_attr( $gc_idx ); ?>][region]" class="form-control gc-input-region" value="<?php echo esc_attr( $gc_region ); ?>" placeholder="e.g. Vice Province of Holy Mary of Guadalupe, Mexico">
+                                                    </div>
+                                                    <div class="form-group full-width">
+                                                        <label>Official Curia Address</label>
+                                                        <input type="text" name="general_council_list[<?php echo esc_attr( $gc_idx ); ?>][address]" class="form-control" value="<?php echo esc_attr( $gc_address ); ?>" placeholder="e.g. Basilica dei Santi Cosma e Damiano, Via dei Fori Imperiali, 1, 00186 Roma, Italia">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Phone Number</label>
+                                                        <input type="text" name="general_council_list[<?php echo esc_attr( $gc_idx ); ?>][phone]" class="form-control" value="<?php echo esc_attr( $gc_phone ); ?>" placeholder="e.g. +39 06 679 0278">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Email Address</label>
+                                                        <input type="email" name="general_council_list[<?php echo esc_attr( $gc_idx ); ?>][email]" class="form-control" value="<?php echo esc_attr( $gc_email ); ?>" placeholder="e.g. curia@francescanitor.org">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <?php endforeach; ?>
+                                </div>
+                            </div>
+
+                            <!-- Section: Provincial Council Directory -->
+                            <div class="form-section">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.2rem; flex-wrap: wrap; gap: 1rem;">
+                                    <div>
+                                        <h3 class="form-section-title" style="margin-bottom: 0.3rem;">
+                                            👥 Provincial Council Members (<span id="provincial-council-count"><?php echo count( $prov_council ); ?></span> Members)
+                                        </h3>
+                                        <p style="color: var(--c-text-muted); font-size: 0.88rem; margin: 0;">
+                                            Manage Minister Provincial, Vicar Provincial, and Councilors for Ranchi Province.
+                                        </p>
+                                    </div>
+                                    <div style="display: flex; gap: 0.8rem; align-items: center; flex-wrap: wrap;">
+                                        <button type="button" class="btn btn-primary" id="btn-add-provincial-council" style="display: inline-flex; align-items: center; gap: 0.5rem;">
+                                            <span>➕</span> Add Provincial Member
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div id="provincial-council-list-container" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 1rem;">
+                                    <?php foreach ( $prov_council as $pc_idx => $pc_member ) :
+                                        $pc_name    = $pc_member['name'] ?? '';
+                                        $pc_role    = $pc_member['role'] ?? '';
+                                        $pc_raw_img = ! empty( $pc_member['image'] ) ? $pc_member['image'] : ( $pc_member['photo'] ?? '' );
+                                        $pc_img_url = ! empty( $pc_raw_img ) ? franciscan_resolve_friar_image_url( $pc_raw_img ) : ( FRANCISCAN_THEME_URI . '/assets/images/general-council/placeholder.jpg' );
+                                    ?>
+                                        <div class="provincial-council-item-card" data-index="<?php echo esc_attr( $pc_idx ); ?>" style="background: rgba(255,255,255,0.02); border: 1px solid var(--c-card-border); border-radius: 10px; padding: 0.85rem; position: relative;">
+                                            <div style="display: flex; gap: 0.8rem; align-items: center;">
+                                                <div style="width: 56px; height: 56px; border-radius: 50%; overflow: hidden; border: 2px solid var(--c-gold); flex-shrink: 0; background: #2a160b;">
+                                                    <img src="<?php echo esc_url( $pc_img_url ); ?>" class="pc-img-preview" style="width: 100%; height: 100%; object-fit: cover; display: block;" onerror="this.src='<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/general-council/placeholder.jpg' ); ?>';">
+                                                </div>
+                                                <div style="flex: 1; min-width: 0;">
+                                                    <input type="text" name="provincial_council_list[<?php echo esc_attr( $pc_idx ); ?>][name]" class="form-control pc-input-name" value="<?php echo esc_attr( $pc_name ); ?>" placeholder="e.g. Fr. Manoj Vengathanam" style="font-weight: 600; font-size: 0.88rem; margin-bottom: 0.25rem; padding: 0.35rem 0.6rem;" required>
+                                                    <input type="text" name="provincial_council_list[<?php echo esc_attr( $pc_idx ); ?>][role]" class="form-control pc-input-role" value="<?php echo esc_attr( $pc_role ); ?>" placeholder="e.g. Minister Provincial" style="font-size: 0.8rem; margin-bottom: 0.3rem; padding: 0.3rem 0.6rem;">
+                                                    <input type="hidden" name="provincial_council_list[<?php echo esc_attr( $pc_idx ); ?>][image]" class="pc-input-image" value="<?php echo esc_attr( $pc_raw_img ); ?>">
+                                                    <div style="display: flex; gap: 0.4rem; align-items: center;">
+                                                        <button type="button" class="btn btn-secondary btn-upload-pc-img" style="padding: 0.2rem 0.5rem; font-size: 0.75rem;">📷 Change Photo</button>
+                                                        <button type="button" class="btn btn-secondary btn-reset-pc-img" style="padding: 0.2rem 0.5rem; font-size: 0.75rem; <?php echo empty( $pc_raw_img ) ? 'display:none;' : ''; ?>">Reset</button>
+                                                    </div>
+                                                </div>
+                                                <div style="display: flex; flex-direction: column; gap: 0.25rem;">
+                                                    <button type="button" class="btn btn-secondary btn-move-pc-up" title="Move Up" style="padding: 0.15rem 0.4rem; font-size: 0.7rem;">▲</button>
+                                                    <button type="button" class="btn btn-secondary btn-move-pc-down" title="Move Down" style="padding: 0.15rem 0.4rem; font-size: 0.7rem;">▼</button>
+                                                    <button type="button" class="btn btn-secondary btn-delete-pc-item" title="Remove" style="padding: 0.15rem 0.4rem; font-size: 0.7rem; background: rgba(239, 68, 68, 0.15); color: #fca5a5; border-color: rgba(239, 68, 68, 0.4);">🗑️</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <?php endforeach; ?>
+                                </div>
+                            </div>
                         <?php endif; ?>
 
                         <?php if ( $slug === 'community-friars' ) : ?>
@@ -2349,12 +2489,85 @@ function franciscan_render_dashboard_view() {
                                     </div>
                                     <div class="form-group">
                                         <label>Overview Section Title / Quote</label>
-                                        <input type="text" name="friaries_overview_title" class="form-control" value="<?php echo esc_attr( $data['friaries_overview_title'] ?? 'The Lord gave me brothers.' ); ?>">
+                                        <input type="text" name="friaries_overview_title" class="form-control" value="<?php echo esc_attr( $data['friaries_overview_title'] ?? 'OUR FRIARIES' ); ?>">
                                     </div>
                                     <div class="form-group full-width">
                                         <label>Overview Subtitle Text</label>
                                         <textarea name="friaries_overview_text" class="form-control"><?php echo esc_textarea( $data['friaries_overview_text'] ?? 'The Province maintains houses in Archdiocese of Ranchi, Khunti, Simdega, Rourkela, Jalpaiguri, Bagdogra, Gumla, Purnea, and Bongaigaon.' ); ?></textarea>
                                     </div>
+                                </div>
+                            </div>
+
+                            <?php
+                            $all_friaries = franciscan_get_friaries_data();
+                            ?>
+                            <!-- Section: Friaries & Ashrams Directory -->
+                            <div class="form-section">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.2rem; flex-wrap: wrap; gap: 1rem;">
+                                    <div>
+                                        <h3 class="form-section-title" style="margin-bottom: 0.3rem;">
+                                            🏘️ Friaries &amp; Ashrams Cards (<span id="friaries-count"><?php echo count( $all_friaries ); ?></span> Friaries)
+                                        </h3>
+                                        <p style="color: var(--c-text-muted); font-size: 0.88rem; margin: 0;">
+                                            Edit dioceses, friary names, address details, upload custom photos, or add and delete friaries.
+                                        </p>
+                                    </div>
+                                    <div style="display: flex; gap: 0.8rem; align-items: center; flex-wrap: wrap;">
+                                        <input type="text" id="filter-friaries" class="form-control" placeholder="🔍 Search friaries or diocese..." style="width: 240px; font-size: 0.85rem; padding: 0.4rem 0.8rem;">
+                                        <button type="button" class="btn btn-primary" id="btn-add-friary" style="display: inline-flex; align-items: center; gap: 0.5rem;">
+                                            <span>➕</span> Add New Friary
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div id="friaries-list-container" style="display: flex; flex-direction: column; gap: 1.2rem; max-height: 800px; overflow-y: auto; padding-right: 0.5rem;">
+                                    <?php foreach ( $all_friaries as $fr_idx => $friary ) :
+                                        $fr_diocese = $friary['diocese'] ?? '';
+                                        $fr_title   = $friary['title'] ?? '';
+                                        $fr_desc    = $friary['desc'] ?? '';
+                                        $fr_img     = $friary['image'] ?? '';
+                                        $fr_img_url = ! empty( $fr_img ) ? franciscan_resolve_friar_image_url( $fr_img ) : ( FRANCISCAN_THEME_URI . '/assets/images/logo.svg' );
+                                    ?>
+                                        <div class="friary-item-card" data-index="<?php echo esc_attr( $fr_idx ); ?>" style="background: rgba(255,255,255,0.02); border: 1px solid var(--c-card-border); border-radius: 12px; padding: 1.2rem; position: relative;">
+                                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 0.6rem; flex-wrap: wrap; gap: 0.5rem;">
+                                                <div style="display: flex; align-items: center; gap: 0.6rem;">
+                                                    <span style="background: var(--c-gold); color: #12100e; font-weight: 800; font-size: 0.75rem; padding: 0.2rem 0.55rem; border-radius: 5px;">#<?php echo $fr_idx + 1; ?></span>
+                                                    <strong class="friary-card-title-preview" style="color: var(--c-text); font-size: 0.92rem;"><?php echo esc_html( ! empty( $fr_title ) ? $fr_title : 'New Friary' ); ?></strong>
+                                                    <span class="friary-card-diocese-preview" style="background: rgba(230, 200, 136, 0.15); color: #e6c888; font-size: 0.72rem; padding: 0.15rem 0.5rem; border-radius: 4px; font-weight: 600;"><?php echo esc_html( ! empty( $fr_diocese ) ? $fr_diocese : 'DIOCESE' ); ?></span>
+                                                </div>
+                                                <div style="display: flex; gap: 0.35rem; align-items: center;">
+                                                    <button type="button" class="btn btn-secondary btn-move-friary-up" title="Move Up" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;">▲</button>
+                                                    <button type="button" class="btn btn-secondary btn-move-friary-down" title="Move Down" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;">▼</button>
+                                                    <button type="button" class="btn btn-secondary btn-delete-friary-item" title="Remove Friary" style="padding: 0.25rem 0.6rem; font-size: 0.75rem; background: rgba(239, 68, 68, 0.15); color: #fca5a5; border-color: rgba(239, 68, 68, 0.4);">🗑️ Remove</button>
+                                                </div>
+                                            </div>
+
+                                            <div style="display: flex; gap: 1.2rem; align-items: flex-start; flex-wrap: wrap;">
+                                                <div style="width: 100px; text-align: center; flex-shrink: 0;">
+                                                    <div style="width: 100px; height: 75px; border-radius: 8px; overflow: hidden; border: 1px solid var(--c-gold); margin: 0 auto 0.5rem; background: #0c1727; display: flex; align-items: center; justify-content: center;">
+                                                        <img src="<?php echo esc_url( $fr_img_url ); ?>" class="friary-img-preview" style="width: 100%; height: 100%; object-fit: cover; display: block;" onerror="this.src='<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/logo.svg' ); ?>';">
+                                                    </div>
+                                                    <input type="hidden" name="friaries_list[<?php echo esc_attr( $fr_idx ); ?>][image]" class="friary-input-image" value="<?php echo esc_attr( $fr_img ); ?>">
+                                                    <button type="button" class="btn btn-secondary btn-upload-friary-img" style="padding: 0.2rem 0.4rem; font-size: 0.7rem; width: 100%; margin-bottom: 0.25rem;">📷 Photo</button>
+                                                    <button type="button" class="btn btn-secondary btn-reset-friary-img" style="padding: 0.15rem 0.3rem; font-size: 0.68rem; width: 100%; <?php echo empty( $fr_img ) ? 'display:none;' : ''; ?>">Reset</button>
+                                                </div>
+                                                <div style="flex: 1; min-width: 260px;" class="form-grid">
+                                                    <div class="form-group">
+                                                        <label>Diocese (Grouping Heading)</label>
+                                                        <input type="text" name="friaries_list[<?php echo esc_attr( $fr_idx ); ?>][diocese]" class="form-control friary-input-diocese" value="<?php echo esc_attr( $fr_diocese ); ?>" placeholder="e.g. ARCHDIOCESE OF RANCHI" required>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Friary / Ashram / Parish Title</label>
+                                                        <input type="text" name="friaries_list[<?php echo esc_attr( $fr_idx ); ?>][title]" class="form-control friary-input-title" value="<?php echo esc_attr( $fr_title ); ?>" placeholder="e.g. Provincial House (Assisi Ashram)" required>
+                                                    </div>
+                                                    <div class="form-group full-width">
+                                                        <label>Description &amp; Postal Address</label>
+                                                        <textarea name="friaries_list[<?php echo esc_attr( $fr_idx ); ?>][desc]" class="form-control friary-input-desc" rows="2" placeholder="e.g. Harmu P.O., Ranchi-834 002, JHARKHAND, Estd. 1989"><?php echo esc_textarea( $fr_desc ); ?></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <?php endforeach; ?>
                                 </div>
                             </div>
                         <?php endif; ?>
@@ -4941,6 +5154,463 @@ function franciscan_render_dashboard_view() {
             $(this).hide();
         });
 
+
+                // ==========================================
+        // GENERAL COUNCIL REPEATER MANAGER
+        // ==========================================
+        function getNewGeneralCouncilCardHtml(index) {
+            const defaultImg = defaultThemeUri ? defaultThemeUri + '/assets/images/general-council/placeholder.jpg' : '';
+            return `
+                <div class="general-council-item-card" data-index="${index}" style="background: rgba(255,255,255,0.02); border: 1px solid var(--c-gold); border-radius: 12px; padding: 1.2rem; position: relative;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 0.6rem; flex-wrap: wrap; gap: 0.5rem;">
+                        <div style="display: flex; align-items: center; gap: 0.6rem;">
+                            <span style="background: var(--c-gold); color: #12100e; font-weight: 800; font-size: 0.75rem; padding: 0.2rem 0.55rem; border-radius: 5px;">#${index + 1}</span>
+                            <strong class="gc-card-title-preview" style="color: var(--c-text); font-size: 0.92rem;">New Member</strong>
+                            <span class="gc-card-role-preview" style="background: rgba(230, 200, 136, 0.15); color: #e6c888; font-size: 0.72rem; padding: 0.15rem 0.5rem; border-radius: 4px; font-weight: 600;">Council Member</span>
+                        </div>
+                        <div style="display: flex; gap: 0.35rem; align-items: center;">
+                            <button type="button" class="btn btn-secondary btn-move-gc-up" title="Move Up" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;">▲</button>
+                            <button type="button" class="btn btn-secondary btn-move-gc-down" title="Move Down" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;">▼</button>
+                            <button type="button" class="btn btn-secondary btn-delete-gc-item" title="Remove Member" style="padding: 0.25rem 0.6rem; font-size: 0.75rem; background: rgba(239, 68, 68, 0.15); color: #fca5a5; border-color: rgba(239, 68, 68, 0.4);">🗑️ Remove</button>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; gap: 1.2rem; align-items: flex-start; flex-wrap: wrap;">
+                        <div style="width: 80px; text-align: center; flex-shrink: 0;">
+                            <div style="width: 76px; height: 76px; border-radius: 50%; overflow: hidden; border: 2px solid var(--c-gold); margin: 0 auto 0.5rem; background: #2a160b;">
+                                <img src="${defaultImg}" class="gc-img-preview" style="width: 100%; height: 100%; object-fit: cover; display: block;" onerror="this.src='${defaultImg}';">
+                            </div>
+                            <input type="hidden" name="general_council_list[${index}][image]" class="gc-input-image" value="">
+                            <button type="button" class="btn btn-secondary btn-upload-gc-img" style="padding: 0.2rem 0.4rem; font-size: 0.7rem; width: 100%; margin-bottom: 0.25rem;">📷 Photo</button>
+                            <button type="button" class="btn btn-secondary btn-reset-gc-img" style="padding: 0.15rem 0.3rem; font-size: 0.68rem; width: 100%; display: none;">Reset</button>
+                        </div>
+                        <div style="flex: 1; min-width: 260px;" class="form-grid">
+                            <div class="form-group">
+                                <label>Full Name</label>
+                                <input type="text" name="general_council_list[${index}][name]" class="form-control gc-input-name" value="" placeholder="e.g. Most Rev. Fr. Amando Trujillo Cano" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Office / Role</label>
+                                <input type="text" name="general_council_list[${index}][role]" class="form-control gc-input-role" value="" placeholder="e.g. Minister General">
+                            </div>
+                            <div class="form-group full-width">
+                                <label>Province / Region / Country</label>
+                                <input type="text" name="general_council_list[${index}][region]" class="form-control gc-input-region" value="" placeholder="e.g. Vice Province of Holy Mary of Guadalupe, Mexico">
+                            </div>
+                            <div class="form-group full-width">
+                                <label>Official Curia Address</label>
+                                <input type="text" name="general_council_list[${index}][address]" class="form-control" value="" placeholder="e.g. Basilica dei Santi Cosma e Damiano, Via dei Fori Imperiali, 1, 00186 Roma, Italia">
+                            </div>
+                            <div class="form-group">
+                                <label>Phone Number</label>
+                                <input type="text" name="general_council_list[${index}][phone]" class="form-control" value="" placeholder="e.g. +39 06 679 0278">
+                            </div>
+                            <div class="form-group">
+                                <label>Email Address</label>
+                                <input type="email" name="general_council_list[${index}][email]" class="form-control" value="" placeholder="e.g. curia@francescanitor.org">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function reindexGeneralCouncilList() {
+            $('#general-council-list-container .general-council-item-card').each(function(newIdx) {
+                const card = $(this);
+                card.attr('data-index', newIdx);
+                card.find('span:first').text('#' + (newIdx + 1));
+                card.find('input').each(function() {
+                    const name = $(this).attr('name');
+                    if (name && name.startsWith('general_council_list[')) {
+                        const updated = name.replace(/general_council_list\[\d+\]/, 'general_council_list[' + newIdx + ']');
+                        $(this).attr('name', updated);
+                    }
+                });
+            });
+            $('#general-council-count').text($('#general-council-list-container .general-council-item-card').length);
+        }
+
+        $(document).on('click', '#btn-add-general-council', function(e) {
+            e.preventDefault();
+            const count = $('#general-council-list-container .general-council-item-card').length;
+            const newHtml = $(getNewGeneralCouncilCardHtml(count));
+            $('#general-council-list-container').append(newHtml);
+            newHtml.hide().fadeIn(300);
+            newHtml.find('.gc-input-name').focus();
+            reindexGeneralCouncilList();
+        });
+
+        $(document).on('click', '.btn-delete-gc-item', function(e) {
+            e.preventDefault();
+            const card = $(this).closest('.general-council-item-card');
+            const name = card.find('.gc-input-name').val() || 'this member';
+            if (confirm('Are you sure you want to remove "' + name + '"?')) {
+                card.fadeOut(200, function() {
+                    $(this).remove();
+                    reindexGeneralCouncilList();
+                });
+            }
+        });
+
+        $(document).on('click', '.btn-move-gc-up', function(e) {
+            e.preventDefault();
+            const card = $(this).closest('.general-council-item-card');
+            const prev = card.prev('.general-council-item-card');
+            if (prev.length) {
+                card.insertBefore(prev);
+                reindexGeneralCouncilList();
+                card.css('border-color', 'var(--c-gold)');
+                setTimeout(() => card.css('border-color', 'var(--c-card-border)'), 600);
+            }
+        });
+
+        $(document).on('click', '.btn-move-gc-down', function(e) {
+            e.preventDefault();
+            const card = $(this).closest('.general-council-item-card');
+            const next = card.next('.general-council-item-card');
+            if (next.length) {
+                card.insertAfter(next);
+                reindexGeneralCouncilList();
+                card.css('border-color', 'var(--c-gold)');
+                setTimeout(() => card.css('border-color', 'var(--c-card-border)'), 600);
+            }
+        });
+
+        $(document).on('input', '.gc-input-name', function() {
+            const val = $(this).val().trim();
+            $(this).closest('.general-council-item-card').find('.gc-card-title-preview').text(val || 'New Member');
+        });
+
+        $(document).on('input', '.gc-input-role', function() {
+            const val = $(this).val().trim();
+            $(this).closest('.general-council-item-card').find('.gc-card-role-preview').text(val || 'Council Member');
+        });
+
+        $(document).on('click', '.btn-upload-gc-img', function(e) {
+            e.preventDefault();
+            const card = $(this).closest('.general-council-item-card');
+            const inputImg = card.find('.gc-input-image');
+            const previewImg = card.find('.gc-img-preview');
+            const resetBtn = card.find('.btn-reset-gc-img');
+
+            const frame = wp.media({
+                title: 'Select or Upload Member Photo',
+                library: { type: 'image' },
+                button: { text: 'Use this Photo' },
+                multiple: false
+            });
+
+            frame.on('select', function() {
+                const attachment = frame.state().get('selection').first().toJSON();
+                inputImg.val(attachment.url);
+                previewImg.attr('src', attachment.url);
+                resetBtn.show();
+            });
+
+            frame.open();
+        });
+
+        $(document).on('click', '.btn-reset-gc-img', function(e) {
+            e.preventDefault();
+            const card = $(this).closest('.general-council-item-card');
+            const defaultImg = defaultThemeUri ? defaultThemeUri + '/assets/images/general-council/placeholder.jpg' : '';
+            card.find('.gc-input-image').val('');
+            card.find('.gc-img-preview').attr('src', defaultImg);
+            $(this).hide();
+        });
+
+        // ==========================================
+        // PROVINCIAL COUNCIL REPEATER MANAGER
+        // ==========================================
+        function getNewProvincialCouncilCardHtml(index) {
+            const defaultImg = defaultThemeUri ? defaultThemeUri + '/assets/images/general-council/placeholder.jpg' : '';
+            return `
+                <div class="provincial-council-item-card" data-index="${index}" style="background: rgba(255,255,255,0.02); border: 1px solid var(--c-gold); border-radius: 10px; padding: 0.85rem; position: relative;">
+                    <div style="display: flex; gap: 0.8rem; align-items: center;">
+                        <div style="width: 56px; height: 56px; border-radius: 50%; overflow: hidden; border: 2px solid var(--c-gold); flex-shrink: 0; background: #2a160b;">
+                            <img src="${defaultImg}" class="pc-img-preview" style="width: 100%; height: 100%; object-fit: cover; display: block;" onerror="this.src='${defaultImg}';">
+                        </div>
+                        <div style="flex: 1; min-width: 0;">
+                            <input type="text" name="provincial_council_list[${index}][name]" class="form-control pc-input-name" value="" placeholder="e.g. Fr. Manoj Vengathanam" style="font-weight: 600; font-size: 0.88rem; margin-bottom: 0.25rem; padding: 0.35rem 0.6rem;" required>
+                            <input type="text" name="provincial_council_list[${index}][role]" class="form-control pc-input-role" value="" placeholder="e.g. Minister Provincial" style="font-size: 0.8rem; margin-bottom: 0.3rem; padding: 0.3rem 0.6rem;">
+                            <input type="hidden" name="provincial_council_list[${index}][image]" class="pc-input-image" value="">
+                            <div style="display: flex; gap: 0.4rem; align-items: center;">
+                                <button type="button" class="btn btn-secondary btn-upload-pc-img" style="padding: 0.2rem 0.5rem; font-size: 0.75rem;">📷 Change Photo</button>
+                                <button type="button" class="btn btn-secondary btn-reset-pc-img" style="padding: 0.2rem 0.5rem; font-size: 0.75rem; display: none;">Reset</button>
+                            </div>
+                        </div>
+                        <div style="display: flex; flex-direction: column; gap: 0.25rem;">
+                            <button type="button" class="btn btn-secondary btn-move-pc-up" title="Move Up" style="padding: 0.15rem 0.4rem; font-size: 0.7rem;">▲</button>
+                            <button type="button" class="btn btn-secondary btn-move-pc-down" title="Move Down" style="padding: 0.15rem 0.4rem; font-size: 0.7rem;">▼</button>
+                            <button type="button" class="btn btn-secondary btn-delete-pc-item" title="Remove" style="padding: 0.15rem 0.4rem; font-size: 0.7rem; background: rgba(239, 68, 68, 0.15); color: #fca5a5; border-color: rgba(239, 68, 68, 0.4);">🗑️</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function reindexProvincialCouncilList() {
+            $('#provincial-council-list-container .provincial-council-item-card').each(function(newIdx) {
+                const card = $(this);
+                card.attr('data-index', newIdx);
+                card.find('input').each(function() {
+                    const name = $(this).attr('name');
+                    if (name && name.startsWith('provincial_council_list[')) {
+                        const updated = name.replace(/provincial_council_list\[\d+\]/, 'provincial_council_list[' + newIdx + ']');
+                        $(this).attr('name', updated);
+                    }
+                });
+            });
+            $('#provincial-council-count').text($('#provincial-council-list-container .provincial-council-item-card').length);
+        }
+
+        $(document).on('click', '#btn-add-provincial-council', function(e) {
+            e.preventDefault();
+            const count = $('#provincial-council-list-container .provincial-council-item-card').length;
+            const newHtml = $(getNewProvincialCouncilCardHtml(count));
+            $('#provincial-council-list-container').append(newHtml);
+            newHtml.hide().fadeIn(300);
+            newHtml.find('.pc-input-name').focus();
+            reindexProvincialCouncilList();
+        });
+
+        $(document).on('click', '.btn-delete-pc-item', function(e) {
+            e.preventDefault();
+            const card = $(this).closest('.provincial-council-item-card');
+            const name = card.find('.pc-input-name').val() || 'this member';
+            if (confirm('Are you sure you want to remove "' + name + '"?')) {
+                card.fadeOut(200, function() {
+                    $(this).remove();
+                    reindexProvincialCouncilList();
+                });
+            }
+        });
+
+        $(document).on('click', '.btn-move-pc-up', function(e) {
+            e.preventDefault();
+            const card = $(this).closest('.provincial-council-item-card');
+            const prev = card.prev('.provincial-council-item-card');
+            if (prev.length) {
+                card.insertBefore(prev);
+                reindexProvincialCouncilList();
+                card.css('border-color', 'var(--c-gold)');
+                setTimeout(() => card.css('border-color', 'var(--c-card-border)'), 600);
+            }
+        });
+
+        $(document).on('click', '.btn-move-pc-down', function(e) {
+            e.preventDefault();
+            const card = $(this).closest('.provincial-council-item-card');
+            const next = card.next('.provincial-council-item-card');
+            if (next.length) {
+                card.insertAfter(next);
+                reindexProvincialCouncilList();
+                card.css('border-color', 'var(--c-gold)');
+                setTimeout(() => card.css('border-color', 'var(--c-card-border)'), 600);
+            }
+        });
+
+        $(document).on('click', '.btn-upload-pc-img', function(e) {
+            e.preventDefault();
+            const card = $(this).closest('.provincial-council-item-card');
+            const inputImg = card.find('.pc-input-image');
+            const previewImg = card.find('.pc-img-preview');
+            const resetBtn = card.find('.btn-reset-pc-img');
+
+            const frame = wp.media({
+                title: 'Select or Upload Council Member Photo',
+                library: { type: 'image' },
+                button: { text: 'Use this Photo' },
+                multiple: false
+            });
+
+            frame.on('select', function() {
+                const attachment = frame.state().get('selection').first().toJSON();
+                inputImg.val(attachment.url);
+                previewImg.attr('src', attachment.url);
+                resetBtn.show();
+            });
+
+            frame.open();
+        });
+
+        $(document).on('click', '.btn-reset-pc-img', function(e) {
+            e.preventDefault();
+            const card = $(this).closest('.provincial-council-item-card');
+            const defaultImg = defaultThemeUri ? defaultThemeUri + '/assets/images/general-council/placeholder.jpg' : '';
+            card.find('.pc-input-image').val('');
+            card.find('.pc-img-preview').attr('src', defaultImg);
+            $(this).hide();
+        });
+
+        // ==========================================
+        // FRIARIES & ASHRAMS REPEATER MANAGER
+        // ==========================================
+        function getNewFriaryCardHtml(index) {
+            const defaultImg = defaultThemeUri ? defaultThemeUri + '/assets/images/logo.svg' : '';
+            return `
+                <div class="friary-item-card" data-index="${index}" style="background: rgba(255,255,255,0.02); border: 1px solid var(--c-gold); border-radius: 12px; padding: 1.2rem; position: relative;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 0.6rem; flex-wrap: wrap; gap: 0.5rem;">
+                        <div style="display: flex; align-items: center; gap: 0.6rem;">
+                            <span style="background: var(--c-gold); color: #12100e; font-weight: 800; font-size: 0.75rem; padding: 0.2rem 0.55rem; border-radius: 5px;">#${index + 1}</span>
+                            <strong class="friary-card-title-preview" style="color: var(--c-text); font-size: 0.92rem;">New Friary</strong>
+                            <span class="friary-card-diocese-preview" style="background: rgba(230, 200, 136, 0.15); color: #e6c888; font-size: 0.72rem; padding: 0.15rem 0.5rem; border-radius: 4px; font-weight: 600;">DIOCESE</span>
+                        </div>
+                        <div style="display: flex; gap: 0.35rem; align-items: center;">
+                            <button type="button" class="btn btn-secondary btn-move-friary-up" title="Move Up" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;">▲</button>
+                            <button type="button" class="btn btn-secondary btn-move-friary-down" title="Move Down" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;">▼</button>
+                            <button type="button" class="btn btn-secondary btn-delete-friary-item" title="Remove Friary" style="padding: 0.25rem 0.6rem; font-size: 0.75rem; background: rgba(239, 68, 68, 0.15); color: #fca5a5; border-color: rgba(239, 68, 68, 0.4);">🗑️ Remove</button>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; gap: 1.2rem; align-items: flex-start; flex-wrap: wrap;">
+                        <div style="width: 100px; text-align: center; flex-shrink: 0;">
+                            <div style="width: 100px; height: 75px; border-radius: 8px; overflow: hidden; border: 1px solid var(--c-gold); margin: 0 auto 0.5rem; background: #0c1727; display: flex; align-items: center; justify-content: center;">
+                                <img src="${defaultImg}" class="friary-img-preview" style="width: 100%; height: 100%; object-fit: cover; display: block;" onerror="this.src='${defaultImg}';">
+                            </div>
+                            <input type="hidden" name="friaries_list[${index}][image]" class="friary-input-image" value="">
+                            <button type="button" class="btn btn-secondary btn-upload-friary-img" style="padding: 0.2rem 0.4rem; font-size: 0.7rem; width: 100%; margin-bottom: 0.25rem;">📷 Photo</button>
+                            <button type="button" class="btn btn-secondary btn-reset-friary-img" style="padding: 0.15rem 0.3rem; font-size: 0.68rem; width: 100%; display: none;">Reset</button>
+                        </div>
+                        <div style="flex: 1; min-width: 260px;" class="form-grid">
+                            <div class="form-group">
+                                <label>Diocese (Grouping Heading)</label>
+                                <input type="text" name="friaries_list[${index}][diocese]" class="form-control friary-input-diocese" value="" placeholder="e.g. ARCHDIOCESE OF RANCHI" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Friary / Ashram / Parish Title</label>
+                                <input type="text" name="friaries_list[${index}][title]" class="form-control friary-input-title" value="" placeholder="e.g. Provincial House (Assisi Ashram)" required>
+                            </div>
+                            <div class="form-group full-width">
+                                <label>Description &amp; Postal Address</label>
+                                <textarea name="friaries_list[${index}][desc]" class="form-control friary-input-desc" rows="2" placeholder="e.g. Harmu P.O., Ranchi-834 002, JHARKHAND, Estd. 1989"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function reindexFriariesList() {
+            $('#friaries-list-container .friary-item-card').each(function(newIdx) {
+                const card = $(this);
+                card.attr('data-index', newIdx);
+                card.find('span:first').text('#' + (newIdx + 1));
+                card.find('input, textarea').each(function() {
+                    const name = $(this).attr('name');
+                    if (name && name.startsWith('friaries_list[')) {
+                        const updated = name.replace(/friaries_list\[\d+\]/, 'friaries_list[' + newIdx + ']');
+                        $(this).attr('name', updated);
+                    }
+                });
+            });
+            $('#friaries-count').text($('#friaries-list-container .friary-item-card').length);
+        }
+
+        $(document).on('click', '#btn-add-friary', function(e) {
+            e.preventDefault();
+            const count = $('#friaries-list-container .friary-item-card').length;
+            const newHtml = $(getNewFriaryCardHtml(count));
+            $('#friaries-list-container').prepend(newHtml);
+            newHtml.hide().fadeIn(300);
+            $('#friaries-list-container').animate({ scrollTop: 0 }, 300);
+            newHtml.find('.friary-input-title').focus();
+            reindexFriariesList();
+        });
+
+        $(document).on('click', '.btn-delete-friary-item', function(e) {
+            e.preventDefault();
+            const card = $(this).closest('.friary-item-card');
+            const name = card.find('.friary-input-title').val() || 'this friary';
+            if (confirm('Are you sure you want to remove "' + name + '"?')) {
+                card.fadeOut(200, function() {
+                    $(this).remove();
+                    reindexFriariesList();
+                });
+            }
+        });
+
+        $(document).on('click', '.btn-move-friary-up', function(e) {
+            e.preventDefault();
+            const card = $(this).closest('.friary-item-card');
+            const prev = card.prev('.friary-item-card');
+            if (prev.length) {
+                card.insertBefore(prev);
+                reindexFriariesList();
+                card.css('border-color', 'var(--c-gold)');
+                setTimeout(() => card.css('border-color', 'var(--c-card-border)'), 600);
+            }
+        });
+
+        $(document).on('click', '.btn-move-friary-down', function(e) {
+            e.preventDefault();
+            const card = $(this).closest('.friary-item-card');
+            const next = card.next('.friary-item-card');
+            if (next.length) {
+                card.insertAfter(next);
+                reindexFriariesList();
+                card.css('border-color', 'var(--c-gold)');
+                setTimeout(() => card.css('border-color', 'var(--c-card-border)'), 600);
+            }
+        });
+
+        $(document).on('input', '.friary-input-title', function() {
+            const val = $(this).val().trim();
+            $(this).closest('.friary-item-card').find('.friary-card-title-preview').text(val || 'New Friary');
+        });
+
+        $(document).on('input', '.friary-input-diocese', function() {
+            const val = $(this).val().trim();
+            $(this).closest('.friary-item-card').find('.friary-card-diocese-preview').text(val || 'DIOCESE');
+        });
+
+        $(document).on('click', '.btn-upload-friary-img', function(e) {
+            e.preventDefault();
+            const card = $(this).closest('.friary-item-card');
+            const inputImg = card.find('.friary-input-image');
+            const previewImg = card.find('.friary-img-preview');
+            const resetBtn = card.find('.btn-reset-friary-img');
+
+            const frame = wp.media({
+                title: 'Select or Upload Friary Photo',
+                library: { type: 'image' },
+                button: { text: 'Use this Photo' },
+                multiple: false
+            });
+
+            frame.on('select', function() {
+                const attachment = frame.state().get('selection').first().toJSON();
+                inputImg.val(attachment.url);
+                previewImg.attr('src', attachment.url);
+                resetBtn.show();
+            });
+
+            frame.open();
+        });
+
+        $(document).on('click', '.btn-reset-friary-img', function(e) {
+            e.preventDefault();
+            const card = $(this).closest('.friary-item-card');
+            const defaultImg = defaultThemeUri ? defaultThemeUri + '/assets/images/logo.svg' : '';
+            card.find('.friary-input-image').val('');
+            card.find('.friary-img-preview').attr('src', defaultImg);
+            $(this).hide();
+        });
+
+        // Filter friaries by title or diocese
+        $(document).on('input', '#filter-friaries', function() {
+            const q = $(this).val().toLowerCase().trim();
+            $('#friaries-list-container .friary-item-card').each(function() {
+                const title = $(this).find('.friary-input-title').val().toLowerCase();
+                const diocese = $(this).find('.friary-input-diocese').val().toLowerCase();
+                if (!q || title.indexOf(q) !== -1 || diocese.indexOf(q) !== -1) {
+                    $(this).show();
+                } else {
+                    $(this).hide();
+                }
+            });
+        });
 
         // Save Page Content Form
         $('.page-editor-form').on('submit', function(e) {
