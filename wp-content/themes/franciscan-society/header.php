@@ -843,7 +843,7 @@ button.fs-mega-toggle:focus::after {
         button.fs-mega-toggle.is-current-parent,
         .fs-header .fs-desktop-nav button.is-current-parent {
             color: #e6c888 !important;
-            font-weight: 700 !important;
+            font-weight: 600 !important;
         }
         .fs-desktop-nav button.active::after,
         .fs-desktop-nav button.hover-active::after,
@@ -1378,7 +1378,7 @@ button.fs-mega-toggle:focus::after {
 
   .fs-desktop-nav a.active {
     color: #e6c888;
-    font-weight: 800;
+    font-weight: 600;
   }
 
   /* Hide button animation on mega-toggle (dropdown buttons) */

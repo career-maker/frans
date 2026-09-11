@@ -208,11 +208,7 @@ button.slider-btn:active {
       body { padding-top: 100px; }
     </style>
 <style>
-        /* Internal page solid header override */
-        .fs-header,
-        .fs-header.scrolled,
-        
-    </style>
+        </style>
 <style id="custom-menu-active-styles">
 
 /* ============================================================
@@ -548,7 +544,7 @@ button.fs-mega-toggle:focus::after {
         .fs-desktop-nav button.active,
         .fs-desktop-nav button.hover-active {
             color: #e6c888 !important;
-            font-weight: 800 !important;
+            font-weight: 600 !important;
         }
         .fs-desktop-nav button.active::after,
         .fs-desktop-nav button.hover-active::after {

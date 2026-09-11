@@ -240,11 +240,6 @@ button.slider-btn:active {
       body { padding-top: 100px; }
     </style>
 <style>
-        /* Internal page solid header override & responsive mobile styles */
-        .fs-header,
-        .fs-header.scrolled,
-        
-
         .page-hero-banner {
             position: relative;
             padding: 10rem 2rem 4rem 2rem;
@@ -621,7 +616,7 @@ button.fs-mega-toggle:focus::after {
         .fs-desktop-nav button.active,
         .fs-desktop-nav button.hover-active {
             color: #e6c888 !important;
-            font-weight: 800 !important;
+            font-weight: 600 !important;
         }
         .fs-desktop-nav button.active::after,
         .fs-desktop-nav button.hover-active::after {

@@ -9,12 +9,7 @@ get_header();
 ?>
 
 <style>
-        /* Internal page solid header override */
-        .fs-header,
-        .fs-header.scrolled,
-        
-    
-/* ============================================================
+        /* ============================================================
    SLIDER ARROWS HOVER ANIMATION (Blogs & News Sections)
    ============================================================ */
 .slider-btn,
@@ -479,7 +474,7 @@ button.fs-mega-toggle:focus::after {
         .fs-desktop-nav button.active,
         .fs-desktop-nav button.hover-active {
             color: #e6c888 !important;
-            font-weight: 800 !important;
+            font-weight: 600 !important;
         }
         .fs-desktop-nav button.active::after,
         .fs-desktop-nav button.hover-active::after {
