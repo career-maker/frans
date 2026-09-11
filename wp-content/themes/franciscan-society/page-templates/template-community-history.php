@@ -762,6 +762,7 @@ button.fs-mega-toggle:focus::after {
     if ( empty( $hist_hero_bg ) || false !== strpos( $hist_hero_bg, 'ChatGPT_Image' ) ) {
         $hist_hero_bg = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/history-banner.jpeg';
     }
+    $hist_hero_desc = franciscan_get_page_field( 'community-history', 'hero_subtitle', 'Tracing our origins from the ancient 4th-century Order of Penance, to St. Francis of Assisi, to thirty years of dedicated growth in Ranchi Province.' );
     ?>
     <section class="page-hero-banner" style="background-image: url('<?php echo esc_url( $hist_hero_bg ); ?>');">
         <div style="position: absolute; inset: 0; background-color: rgba(12, 11, 10, 0.74);"></div>
@@ -771,6 +772,11 @@ button.fs-mega-toggle:focus::after {
                 <span style="color: #ffffff; font-size: 0.85rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; font-family: 'Instrument Sans', sans-serif;"><?php echo esc_html( franciscan_get_page_field( 'community-history', 'hero_badge', 'HERITAGE' ) ); ?></span>
             </div>
             <h1 style="font-family: 'Phudu', sans-serif; font-size: clamp(2.8rem, 5.2vw, 4.5rem); font-weight: 700; color: #ffffff; text-transform: uppercase; margin: 0 0 1rem 0; line-height: 1.1;"><?php echo esc_html( franciscan_get_page_field( 'community-history', 'hero_title', 'HISTORY OF THE PROVINCE' ) ); ?></h1>
+            <?php if ( ! empty( $hist_hero_desc ) ) : ?>
+                <p style="font-family: 'Instrument Sans', sans-serif; font-size: clamp(1rem, 1.8vw, 1.18rem); color: rgba(255, 255, 255, 0.92); max-width: 760px; margin: 0.8rem auto 0; line-height: 1.6; font-weight: 400;">
+                    <?php echo nl2br( esc_html( $hist_hero_desc ) ); ?>
+                </p>
+            <?php endif; ?>
         </div>
     </section>
 

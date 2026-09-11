@@ -716,6 +716,14 @@ button.fs-mega-toggle:focus::after {
         <div style="position: absolute; inset: 0; background-color: rgba(12, 11, 10, 0.7);"></div>
         <div style="max-width: 800px; margin: 0 auto; position: relative; z-index: 2; text-align: center;">
             <h1 style="font-family: 'Phudu', sans-serif; font-size: clamp(2.8rem, 5.2vw, 4.5rem); font-weight: 700; color: #ffffff; text-transform: uppercase; margin: 0 0 1rem 0; line-height: 1.1;"><?php echo esc_html( franciscan_get_page_field( 'community-friars', 'hero_title', 'OUR FRIARS' ) ); ?></h1>
+            <?php
+            $friars_hero_desc = franciscan_get_page_field( 'community-friars', 'hero_subtitle', '' );
+            if ( ! empty( $friars_hero_desc ) ) :
+            ?>
+                <p style="font-family: 'Instrument Sans', sans-serif; font-size: clamp(1rem, 1.8vw, 1.18rem); color: rgba(255, 255, 255, 0.92); max-width: 760px; margin: 0.8rem auto 0; line-height: 1.6; font-weight: 400;">
+                    <?php echo nl2br( esc_html( $friars_hero_desc ) ); ?>
+                </p>
+            <?php endif; ?>
         </div>
     </section>
 
@@ -733,7 +741,7 @@ button.fs-mega-toggle:focus::after {
                     <?php echo esc_html( franciscan_get_page_field( 'community-friars', 'card_title', 'BROTHERS IN CHRIST' ) ); ?>
                 </h2>
                 <p style="font-family: 'Instrument Sans'; font-size: 1.1rem; color: rgba(255,255,255,0.9); max-width: 600px;">
-                    <?php echo esc_html( franciscan_get_page_field( 'community-friars', 'card_subtitle', 'Over 104 professed friars dedicated to prayer, community, and active ministry.' ) ); ?>
+                    <?php echo nl2br( esc_html( franciscan_get_page_field( 'community-friars', 'card_subtitle', 'Over 104 professed friars dedicated to prayer, community, and active ministry.' ) ) ); ?>
                 </p>
             </div>
         </div>

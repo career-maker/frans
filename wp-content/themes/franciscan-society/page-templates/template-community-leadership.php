@@ -757,6 +757,7 @@ button.fs-mega-toggle:focus::after {
     if ( empty( $ldr_hero_bg ) || false !== strpos( $ldr_hero_bg, 'ChatGPT_Image' ) ) {
         $ldr_hero_bg = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/leadership-banner.jpg';
     }
+    $ldr_hero_desc = franciscan_get_page_field( 'community-leadership', 'hero_subtitle', 'Guiding the Province in fraternity, governance, and mission.' );
     ?>
     <section class="page-hero-banner" style="background-image: url('<?php echo esc_url( $ldr_hero_bg ); ?>');">
         <div style="position: absolute; inset: 0; background-color: rgba(12, 11, 10, 0.74);"></div>
@@ -766,6 +767,11 @@ button.fs-mega-toggle:focus::after {
                 <span style="color: #ffffff; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.04em; font-family: 'Instrument Sans', sans-serif;"><?php echo esc_html( franciscan_get_page_field( 'community-leadership', 'hero_badge', 'To lead is to serve; to be greater is to become lesser.' ) ); ?></span>
             </div>
             <h1 style="font-family: 'Phudu', sans-serif; font-size: clamp(2.8rem, 5.2vw, 4.5rem); font-weight: 700; color: #ffffff; text-transform: uppercase; margin: 0 0 1rem 0; line-height: 1.1;"><?php echo esc_html( franciscan_get_page_field( 'community-leadership', 'hero_title', 'LEADERSHIP' ) ); ?></h1>
+            <?php if ( ! empty( $ldr_hero_desc ) ) : ?>
+                <p style="font-family: 'Instrument Sans', sans-serif; font-size: clamp(1rem, 1.8vw, 1.18rem); color: rgba(255, 255, 255, 0.92); max-width: 760px; margin: 0.8rem auto 0; line-height: 1.6; font-weight: 400;">
+                    <?php echo nl2br( esc_html( $ldr_hero_desc ) ); ?>
+                </p>
+            <?php endif; ?>
         </div>
     </section>
 
@@ -776,13 +782,13 @@ button.fs-mega-toggle:focus::after {
             <div style="position: relative; z-index: 2;">
                 <div style="display: inline-flex; align-items: center; gap: 0.5rem; margin-bottom: 1.2rem;">
                     <span style="width: 6px; height: 6px; background-color: #e6c888; border-radius: 50%; display: inline-block;"></span>
-                    <span style="color: #ffffff; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; font-family: 'Instrument Sans', sans-serif;">GOVERNANCE</span>
+                    <span style="color: #ffffff; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; font-family: 'Instrument Sans', sans-serif;"><?php echo esc_html( franciscan_get_page_field( 'community-leadership', 'card_badge', 'GOVERNANCE' ) ); ?></span>
                 </div>
                 <h2 style="font-family: 'Phudu', sans-serif; font-size: clamp(2rem, 3.8vw, 44px); font-weight: 600; color: #ffffff; text-transform: uppercase; line-height: 1.15; letter-spacing: -0.01em; margin-bottom: 1.2rem; max-width: 800px;">
-                    SERVING IN COMMUNION
+                    <?php echo esc_html( franciscan_get_page_field( 'community-leadership', 'card_title', 'SERVING IN COMMUNION' ) ); ?>
                 </h2>
                 <p style="font-family: 'Instrument Sans', sans-serif; font-size: 1.05rem; font-weight: 400; color: rgba(255, 255, 255, 0.9); line-height: 1.52; max-width: 650px; margin: 0;">
-                    Led by the Minister Provincial and provincial leadership team committed to spiritual excellence.
+                    <?php echo nl2br( esc_html( franciscan_get_page_field( 'community-leadership', 'card_subtitle', 'Led by the Minister Provincial and provincial leadership team committed to spiritual excellence.' ) ) ); ?>
                 </p>
             </div>
         </div>

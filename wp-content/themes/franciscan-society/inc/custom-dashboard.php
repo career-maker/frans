@@ -60,8 +60,8 @@ function franciscan_ajax_save_dashboard() {
 
     $tab = isset( $_POST['tab'] ) ? sanitize_key( $_POST['tab'] ) : 'settings';
 
-    if ( ( 'settings' === $tab || 'navigation' === $tab ) && ( isset( $_POST['settings'] ) || isset( $_POST['navigation'] ) ) ) {
-        $settings_raw = isset( $_POST['navigation'] ) ? $_POST['navigation'] : $_POST['settings'];
+    if ( ( 'settings' === $tab || 'navigation' === $tab || 'footer' === $tab ) && ( isset( $_POST['settings'] ) || isset( $_POST['navigation'] ) || isset( $_POST['footer'] ) ) ) {
+        $settings_raw = isset( $_POST['footer'] ) ? $_POST['footer'] : ( isset( $_POST['navigation'] ) ? $_POST['navigation'] : $_POST['settings'] );
         $settings = franciscan_sanitize_array( $settings_raw );
         $current_options = get_option( 'franciscan_theme_options', array() );
         $updated_options = array_merge( $current_options, $settings );
@@ -69,6 +69,9 @@ function franciscan_ajax_save_dashboard() {
 
         if ( 'navigation' === $tab ) {
             wp_send_json_success( array( 'message' => 'Navigation & Menu custom links updated successfully!' ) );
+        }
+        if ( 'footer' === $tab ) {
+            wp_send_json_success( array( 'message' => 'Footer settings and links updated successfully!' ) );
         }
 
         if ( isset( $settings['site_title'] ) ) {
@@ -862,6 +865,9 @@ function franciscan_render_dashboard_view() {
                 <a class="nav-item" data-tab="navigation" title="Header Menu & Navigation Links">
                     <span>🧭</span> <span>Menu &amp; Navigation</span>
                 </a>
+                <a class="nav-item" data-tab="footer" title="Footer Settings &amp; Configuration">
+                    <span>🦶</span> <span>Footer Settings</span>
+                </a>
                 <a class="nav-item" data-tab="inquiries" title="Inquiries & Prayers">
                     <span>📨</span> <span>Inquiries &amp; Prayers</span>
                     <span class="nav-badge"><?php echo $inquiries_count; ?></span>
@@ -1003,6 +1009,12 @@ function franciscan_render_dashboard_view() {
                                             break;
                                         case 'community-history':
                                             $default_banner = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/history-banner.jpeg';
+                                            break;
+                                        case 'community-leadership':
+                                            $default_banner = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/leadership-banner.jpg';
+                                            break;
+                                        case 'community-friars':
+                                            $default_banner = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/friars-banner.jpg';
                                             break;
                                         case 'ministries-pastoral':
                                             $default_banner = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/pastoral-ministry-banner.jpg';
@@ -2095,44 +2107,19 @@ function franciscan_render_dashboard_view() {
                         <?php if ( $slug === 'community-leadership' ) : ?>
                             <!-- Community Leadership Page Specific Sections -->
                             <div class="form-section">
-                                <h3 class="form-section-title">🏛️ Hero Banner &amp; Governance Card</h3>
+                                <h3 class="form-section-title">🏛️ Governance Card Section</h3>
                                 <div class="form-grid">
                                     <div class="form-group">
-                                        <label>Hero Badge</label>
-                                        <input type="text" name="hero_badge" class="form-control" value="<?php echo esc_attr( $data['hero_badge'] ?? 'PROVINCIAL ADMINISTRATION' ); ?>">
+                                        <label>Card Badge / Eyebrow</label>
+                                        <input type="text" name="card_badge" class="form-control" value="<?php echo esc_attr( $data['card_badge'] ?? 'GOVERNANCE' ); ?>" placeholder="GOVERNANCE">
                                     </div>
                                     <div class="form-group">
-                                        <label>Hero Title</label>
-                                        <input type="text" name="hero_title" class="form-control" value="<?php echo esc_attr( $data['hero_title'] ?? 'PROVINCIAL LEADERSHIP' ); ?>">
+                                        <label>Card Heading (Title)</label>
+                                        <input type="text" name="card_title" class="form-control" value="<?php echo esc_attr( $data['card_title'] ?? 'SERVING IN COMMUNION' ); ?>" placeholder="SERVING IN COMMUNION">
                                     </div>
                                     <div class="form-group full-width">
-                                        <label>Hero Background Image</label>
-                                        <?php
-                                        $def_cl_hero = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/leadership-banner.jpg';
-                                        $cur_cl_hero = ! empty( $data['hero_image'] ) ? $data['hero_image'] : $def_cl_hero;
-                                        ?>
-                                        <div class="image-uploader-box">
-                                            <div style="width: 100px; height: 64px; border-radius: 8px; overflow: hidden; background: #0c1727; border: 1px solid var(--c-gold); flex-shrink: 0; display: flex; align-items: center; justify-content: center;">
-                                                <img src="<?php echo esc_url( $cur_cl_hero ); ?>" class="image-preview-thumb" id="preview-hero_image-community-leadership" style="width: 100%; height: 100%; object-fit: cover; display: block;" onerror="this.src='<?php echo esc_url( $def_cl_hero ); ?>';">
-                                            </div>
-                                            <input type="hidden" name="hero_image" id="input-hero_image-community-leadership" value="<?php echo esc_attr( $data['hero_image'] ?? '' ); ?>">
-                                            <div style="display: flex; gap: 0.8rem; align-items: center; flex-wrap: wrap;">
-                                                <button type="button" class="btn btn-secondary btn-upload-media" data-target="hero_image-community-leadership">Choose Image</button>
-                                                <button type="button" class="btn btn-secondary btn-reset-media" data-target="hero_image-community-leadership" data-default="<?php echo esc_url( $def_cl_hero ); ?>" style="<?php echo empty( $data['hero_image'] ) ? 'display:none;' : ''; ?>">Reset to Default</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Card Badge</label>
-                                        <input type="text" name="card_badge" class="form-control" value="<?php echo esc_attr( $data['card_badge'] ?? 'GOVERNANCE' ); ?>">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Card Title</label>
-                                        <input type="text" name="card_title" class="form-control" value="<?php echo esc_attr( $data['card_title'] ?? 'SERVING IN COMMUNION' ); ?>">
-                                    </div>
-                                    <div class="form-group full-width">
-                                        <label>Card Subtitle</label>
-                                        <input type="text" name="card_subtitle" class="form-control" value="<?php echo esc_attr( $data['card_subtitle'] ?? 'Led by the Minister Provincial and provincial leadership team committed to spiritual excellence.' ); ?>">
+                                        <label>Card Subtitle / Description Text</label>
+                                        <textarea name="card_subtitle" class="form-control" rows="3" placeholder="Led by the Minister Provincial and provincial leadership team committed to spiritual excellence."><?php echo esc_textarea( $data['card_subtitle'] ?? 'Led by the Minister Provincial and provincial leadership team committed to spiritual excellence.' ); ?></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -2171,68 +2158,23 @@ function franciscan_render_dashboard_view() {
                         <?php if ( $slug === 'community-friars' ) : ?>
                             <!-- Community Friars Page Specific Sections -->
                             <div class="form-section">
-                                <h3 class="form-section-title">👥 Hero Banner &amp; Stats Strip</h3>
+                                <h3 class="form-section-title">🟤 Welcome Card Section &amp; Directory Motto</h3>
                                 <div class="form-grid">
                                     <div class="form-group">
-                                        <label>Hero Title</label>
-                                        <input type="text" name="hero_title" class="form-control" value="<?php echo esc_attr( $data['hero_title'] ?? 'OUR FRIARS' ); ?>">
+                                        <label>Card Badge / Eyebrow</label>
+                                        <input type="text" name="card_badge" class="form-control" value="<?php echo esc_attr( $data['card_badge'] ?? 'OUR FRIARS' ); ?>" placeholder="OUR FRIARS">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Card Heading (Title)</label>
+                                        <input type="text" name="card_title" class="form-control" value="<?php echo esc_attr( $data['card_title'] ?? 'BROTHERS IN CHRIST' ); ?>" placeholder="BROTHERS IN CHRIST">
                                     </div>
                                     <div class="form-group full-width">
-                                        <label>Hero Background Image</label>
-                                        <?php
-                                        $def_cfr_hero = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/friars-banner.jpg';
-                                        $cur_cfr_hero = ! empty( $data['hero_image'] ) ? $data['hero_image'] : $def_cfr_hero;
-                                        ?>
-                                        <div class="image-uploader-box">
-                                            <div style="width: 100px; height: 64px; border-radius: 8px; overflow: hidden; background: #0c1727; border: 1px solid var(--c-gold); flex-shrink: 0; display: flex; align-items: center; justify-content: center;">
-                                                <img src="<?php echo esc_url( $cur_cfr_hero ); ?>" class="image-preview-thumb" id="preview-hero_image-community-friars" style="width: 100%; height: 100%; object-fit: cover; display: block;" onerror="this.src='<?php echo esc_url( $def_cfr_hero ); ?>';">
-                                            </div>
-                                            <input type="hidden" name="hero_image" id="input-hero_image-community-friars" value="<?php echo esc_attr( $data['hero_image'] ?? '' ); ?>">
-                                            <div style="display: flex; gap: 0.8rem; align-items: center; flex-wrap: wrap;">
-                                                <button type="button" class="btn btn-secondary btn-upload-media" data-target="hero_image-community-friars">Choose Image</button>
-                                                <button type="button" class="btn btn-secondary btn-reset-media" data-target="hero_image-community-friars" data-default="<?php echo esc_url( $def_cfr_hero ); ?>" style="<?php echo empty( $data['hero_image'] ) ? 'display:none;' : ''; ?>">Reset to Default</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Card Badge</label>
-                                        <input type="text" name="card_badge" class="form-control" value="<?php echo esc_attr( $data['card_badge'] ?? 'OUR FRIARS' ); ?>">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Card Title</label>
-                                        <input type="text" name="card_title" class="form-control" value="<?php echo esc_attr( $data['card_title'] ?? 'BROTHERS IN CHRIST' ); ?>">
-                                    </div>
-                                    <div class="form-group full-width">
-                                        <label>Card Subtitle</label>
-                                        <input type="text" name="card_subtitle" class="form-control" value="<?php echo esc_attr( $data['card_subtitle'] ?? 'Over 104 professed friars dedicated to prayer, community, and active ministry.' ); ?>">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Stat 1 Number</label>
-                                        <input type="text" name="stat_friars_num" class="form-control" value="<?php echo esc_attr( $data['stat_friars_num'] ?? '104+' ); ?>">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Stat 1 Label</label>
-                                        <input type="text" name="stat_friars_lbl" class="form-control" value="<?php echo esc_attr( $data['stat_friars_lbl'] ?? 'Professed Friars' ); ?>">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Stat 2 Number</label>
-                                        <input type="text" name="stat_priests_num" class="form-control" value="<?php echo esc_attr( $data['stat_priests_num'] ?? '71' ); ?>">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Stat 2 Label</label>
-                                        <input type="text" name="stat_priests_lbl" class="form-control" value="<?php echo esc_attr( $data['stat_priests_lbl'] ?? 'Ordained Priests' ); ?>">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Stat 3 Number</label>
-                                        <input type="text" name="stat_formation_num" class="form-control" value="<?php echo esc_attr( $data['stat_formation_num'] ?? '77+' ); ?>">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Stat 3 Label</label>
-                                        <input type="text" name="stat_formation_lbl" class="form-control" value="<?php echo esc_attr( $data['stat_formation_lbl'] ?? 'Brothers in Formation' ); ?>">
+                                        <label>Card Subtitle / Description Text</label>
+                                        <textarea name="card_subtitle" class="form-control" rows="3" placeholder="Over 104 professed friars dedicated to prayer, community, and active ministry."><?php echo esc_textarea( $data['card_subtitle'] ?? 'Over 104 professed friars dedicated to prayer, community, and active ministry.' ); ?></textarea>
                                     </div>
                                     <div class="form-group full-width">
                                         <label>Friars Directory Title / Franciscan Motto</label>
-                                        <input type="text" name="directory_title" class="form-control" value="<?php echo esc_attr( $data['directory_title'] ?? 'Brothers always be mindful that they should desire one thing alone, namely, the Spirit of God at work within them' ); ?>">
+                                        <input type="text" name="directory_title" class="form-control" value="<?php echo esc_attr( $data['directory_title'] ?? 'Brothers always be mindful that they should desire one thing alone, namely, the Spirit of God at work within them' ); ?>" placeholder="Brothers always be mindful that they should desire one thing alone, namely, the Spirit of God at work within them">
                                     </div>
                                 </div>
                             </div>
@@ -3569,6 +3511,162 @@ function franciscan_render_dashboard_view() {
             </section>
 
             <!-- ========================================================== -->
+            <!-- TAB: FOOTER CONFIGURATION & EDIT OPTIONS -->
+            <!-- ========================================================== -->
+            <section id="tab-footer" class="tab-content" style="display:none;">
+                <form id="form-footer-settings">
+                    <div class="form-section">
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem; flex-wrap:wrap; gap:1rem;">
+                            <div>
+                                <h3 class="form-section-title" style="margin-bottom:0.25rem;">🦶 Footer Branding &amp; Contact Details</h3>
+                                <p style="color:var(--c-text-muted); font-size:0.85rem; margin:0;">Configure the primary branding logo, organizational text, phone, email, and monastery address displayed in Column 1 of the website footer.</p>
+                            </div>
+                            <button type="submit" class="btn btn-primary">
+                                💾 Save Footer Settings
+                            </button>
+                        </div>
+
+                        <div class="form-grid">
+                            <!-- Footer Logo -->
+                            <div class="form-group full-width">
+                                <label>Footer Logo Image</label>
+                                <?php
+                                $def_footer_logo = FRANCISCAN_THEME_URI . '/assets/images/logo.svg';
+                                $cur_footer_logo = ! empty( $options['footer_logo'] ) ? $options['footer_logo'] : $def_footer_logo;
+                                ?>
+                                <div class="image-uploader-box">
+                                    <div style="width: 120px; height: 64px; border-radius: 8px; overflow: hidden; background: #0c1727; border: 1px solid var(--c-gold); flex-shrink: 0; display: flex; align-items: center; justify-content: center; padding: 6px;">
+                                        <img src="<?php echo esc_url( $cur_footer_logo ); ?>" class="image-preview-thumb" id="preview-footer_logo" style="width: 100%; height: 100%; object-fit: contain; display: block;" onerror="this.src='<?php echo esc_url( $def_footer_logo ); ?>';">
+                                    </div>
+                                    <input type="hidden" name="footer_logo" id="input-footer_logo" value="<?php echo esc_attr( $options['footer_logo'] ?? '' ); ?>">
+                                    <div style="display: flex; gap: 0.8rem; align-items: center; flex-wrap: wrap;">
+                                        <button type="button" class="btn btn-secondary btn-upload-media" data-target="footer_logo">
+                                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle; margin-right:4px;"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                                            Choose Logo
+                                        </button>
+                                        <button type="button" class="btn btn-secondary btn-reset-media" data-target="footer_logo" data-default="<?php echo esc_url( $def_footer_logo ); ?>" style="<?php echo empty( $options['footer_logo'] ) ? 'display:none;' : ''; ?>">
+                                            ↺ Reset to Default Logo
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Org Title & Subtitle -->
+                            <div class="form-group">
+                                <label>Organization Title (Line 1)</label>
+                                <input type="text" name="footer_org_title" class="form-control" value="<?php echo esc_attr( $options['footer_org_title'] ?? 'Franciscan Friars of the Third Order Regular' ); ?>" placeholder="Franciscan Friars of the Third Order Regular">
+                            </div>
+                            <div class="form-group">
+                                <label>Organization Subtitle (Line 2)</label>
+                                <input type="text" name="footer_org_subtitle" class="form-control" value="<?php echo esc_attr( $options['footer_org_subtitle'] ?? 'Province of St Francis of Assisi Ranchi' ); ?>" placeholder="Province of St Francis of Assisi Ranchi">
+                            </div>
+
+                            <!-- Contact Phone & Email -->
+                            <div class="form-group">
+                                <label>Contact Phone Number</label>
+                                <input type="text" name="contact_phone" class="form-control" value="<?php echo esc_attr( $options['contact_phone'] ?? '+91 95726 35314' ); ?>" placeholder="+91 95726 35314">
+                            </div>
+                            <div class="form-group">
+                                <label>Contact Email Address</label>
+                                <input type="email" name="contact_email" class="form-control" value="<?php echo esc_attr( $options['contact_email'] ?? 'sectorranchi09@gmail.com' ); ?>" placeholder="sectorranchi09@gmail.com">
+                            </div>
+
+                            <!-- Physical Address -->
+                            <div class="form-group full-width">
+                                <label>Physical Ashram / Office Address</label>
+                                <textarea name="address_text" class="form-control" rows="3" placeholder="Franciscan Ashram (Provincial Residence)&#10;P.O. Harmu Housing Colony, Ranchi – 834002, JHARKHAND"><?php echo esc_textarea( $options['address_text'] ?? "Franciscan Ashram (Provincial Residence)\nP.O. Harmu Housing Colony, Ranchi – 834002, JHARKHAND" ); ?></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Column 2 & 3: Section Headers -->
+                    <div class="form-section">
+                        <h3 class="form-section-title">📑 Column 2 &amp; Column 3 Section Headings</h3>
+                        <p style="color:var(--c-text-muted); font-size:0.85rem; margin-top:-0.5rem; margin-bottom:1.5rem;">Configure the titles for the footer link columns (links sync automatically with the Navigation tab).</p>
+
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label>Column 2 Heading</label>
+                                <input type="text" name="footer_quick_links_title" class="form-control" value="<?php echo esc_attr( $options['footer_quick_links_title'] ?? 'QUICK LINKS' ); ?>" placeholder="QUICK LINKS">
+                            </div>
+                            <div class="form-group">
+                                <label>Column 3 Heading</label>
+                                <input type="text" name="footer_services_title" class="form-control" value="<?php echo esc_attr( $options['footer_services_title'] ?? 'OUR SERVICES' ); ?>" placeholder="OUR SERVICES">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Column 4: Location Map & Social Channels -->
+                    <div class="form-section">
+                        <h3 class="form-section-title">📍 Column 4: Location Map &amp; Social Channels</h3>
+                        <p style="color:var(--c-text-muted); font-size:0.85rem; margin-top:-0.5rem; margin-bottom:1.5rem;">Configure the Google Map embed and external social media channel URLs.</p>
+
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label>Column 4 Heading</label>
+                                <input type="text" name="footer_location_title" class="form-control" value="<?php echo esc_attr( $options['footer_location_title'] ?? 'OUR LOCATION' ); ?>" placeholder="OUR LOCATION">
+                            </div>
+                            <div class="form-group">
+                                <label>WhatsApp Contact Number (with country code)</label>
+                                <input type="text" name="whatsapp_number" class="form-control" value="<?php echo esc_attr( $options['whatsapp_number'] ?? '919572635314' ); ?>" placeholder="919572635314">
+                            </div>
+                            <div class="form-group full-width">
+                                <label>Google Maps Embed iframe URL (src attribute)</label>
+                                <input type="text" name="footer_maps_embed_url" class="form-control" value="<?php echo esc_attr( $options['footer_maps_embed_url'] ?? 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d117223.76678229864!2d85.25055530739943!3d23.3432029707174!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f4e104aa5db7dd%3A0xd409a380e2270921!2sRanchi%2C%20Jharkhand!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin' ); ?>">
+                            </div>
+                            <div class="form-group">
+                                <label>Facebook Profile / Page URL</label>
+                                <input type="text" name="facebook_url" class="form-control" value="<?php echo esc_attr( $options['facebook_url'] ?? 'https://www.facebook.com/profile.php?id=61593681501900' ); ?>" placeholder="https://www.facebook.com/...">
+                            </div>
+                            <div class="form-group">
+                                <label>Instagram Profile URL</label>
+                                <input type="text" name="instagram_url" class="form-control" value="<?php echo esc_attr( $options['instagram_url'] ?? 'https://www.instagram.com/torranchiprovince/' ); ?>" placeholder="https://www.instagram.com/...">
+                            </div>
+                            <div class="form-group full-width">
+                                <label>YouTube Channel URL</label>
+                                <input type="text" name="youtube_url" class="form-control" value="<?php echo esc_attr( $options['youtube_url'] ?? 'https://youtube.com/@tormediaranchi3804?si=UPTCSJUSj9tbcjeB' ); ?>" placeholder="https://youtube.com/@...">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Footer Bottom Bar & Copyright -->
+                    <div class="form-section">
+                        <h3 class="form-section-title">⚖️ Footer Bottom Bar &amp; Copyright</h3>
+                        <p style="color:var(--c-text-muted); font-size:0.85rem; margin-top:-0.5rem; margin-bottom:1.5rem;">Configure the bottom copyright statement, designer credit, and legal links.</p>
+
+                        <div class="form-grid">
+                            <div class="form-group full-width">
+                                <label>Copyright Notice Text</label>
+                                <input type="text" name="footer_copyright_text" class="form-control" value="<?php echo esc_attr( $options['footer_copyright_text'] ?? 'Copyright &copy; 2026 Franciscan Society, TOR Province of St. Francis, Ranchi. All rights reserved.' ); ?>">
+                            </div>
+                            <div class="form-group">
+                                <label>Designer Credit Label</label>
+                                <input type="text" name="footer_designer_text" class="form-control" value="<?php echo esc_attr( $options['footer_designer_text'] ?? 'Designed By InterSmart' ); ?>" placeholder="Designed By InterSmart">
+                            </div>
+                            <div class="form-group">
+                                <label>Designer Website URL</label>
+                                <input type="text" name="footer_designer_url" class="form-control" value="<?php echo esc_attr( $options['footer_designer_url'] ?? 'https://www.intersmart.in/' ); ?>" placeholder="https://www.intersmart.in/">
+                            </div>
+                            <div class="form-group">
+                                <label>Privacy Policy Link URL</label>
+                                <input type="text" name="footer_privacy_url" class="form-control" value="<?php echo esc_attr( $options['footer_privacy_url'] ?? '/privacy/' ); ?>" placeholder="/privacy/">
+                            </div>
+                            <div class="form-group">
+                                <label>Terms &amp; Conditions Link URL</label>
+                                <input type="text" name="footer_terms_url" class="form-control" value="<?php echo esc_attr( $options['footer_terms_url'] ?? '/terms/' ); ?>" placeholder="/terms/">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="display:flex; justify-content:flex-end; gap:1rem; margin-top:2rem;">
+                        <button type="submit" class="btn btn-primary" style="padding:0.9rem 2.2rem; font-size:1rem; font-weight:700;">
+                            💾 Save Footer Settings
+                        </button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- ========================================================== -->
             <!-- TAB 5: INQUIRIES & PRAYERS -->
             <!-- ========================================================== -->
             <section id="tab-inquiries" class="tab-content" style="display:none;">
@@ -3831,6 +3929,7 @@ function franciscan_render_dashboard_view() {
                 posts: 'News & Blog Management',
                 settings: 'Website Global Settings',
                 navigation: 'Header Menu & Navigation Links',
+                footer: 'Footer Settings & Configuration',
                 inquiries: 'Inquiries & Prayer Requests',
                 seo: 'SEO & Metadata Configuration',
                 security: 'Security & System Diagnostics'
@@ -4540,6 +4639,33 @@ function franciscan_render_dashboard_view() {
             }).fail(function() {
                 btn.prop('disabled', false).html(origHtml);
                 showToast('Server error while saving menu links.', true);
+            });
+        });
+
+        // Save Footer Settings Form
+        $('#form-footer-settings').on('submit', function(e) {
+            e.preventDefault();
+            const btn = $(this).find('button[type="submit"]');
+            const origHtml = btn.html();
+            btn.prop('disabled', true).html('💾 Saving Footer Settings...');
+            const footerData = {};
+            $(this).find('input, textarea, select').each(function() {
+                const name = $(this).attr('name');
+                if (name) footerData[name] = $(this).val();
+            });
+
+            $.post(ajaxUrl, {
+                action: 'franciscan_save_dashboard',
+                security: nonce,
+                tab: 'footer',
+                footer: footerData
+            }, function(res) {
+                btn.prop('disabled', false).html(origHtml);
+                if (res.success) showToast(res.data.message);
+                else showToast(res.data.message || 'Error saving footer settings.', true);
+            }).fail(function() {
+                btn.prop('disabled', false).html(origHtml);
+                showToast('Server error while saving footer settings.', true);
             });
         });
 

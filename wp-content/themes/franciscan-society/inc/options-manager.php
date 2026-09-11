@@ -19,10 +19,26 @@ function franciscan_get_default_options() {
         'whatsapp_number'       => '919572635314',
         'address_text'          => "Franciscan Ashram (Provincial Residence)\nP.O. Harmu Housing Colony, Ranchi – 834002, JHARKHAND",
         'maps_url'              => 'https://maps.google.com/?q=Franciscan+Ashram+Harmu+Housing+Colony+Ranchi+Jharkhand',
-        'facebook_url'          => 'https://www.facebook.com/profile.php?id=6159368',
-        'youtube_url'           => 'https://www.youtube.com/@franciscansocietytor',
-        'instagram_url'         => '',
+        'facebook_url'          => 'https://www.facebook.com/profile.php?id=61593681501900',
+        'youtube_url'           => 'https://youtube.com/@tormediaranchi3804?si=UPTCSJUSj9tbcjeB',
+        'instagram_url'         => 'https://www.instagram.com/torranchiprovince/',
         'twitter_url'           => '',
+        
+        // Footer Configuration
+        'footer_logo'                   => FRANCISCAN_THEME_URI . '/assets/images/logo.svg',
+        'footer_org_title'              => 'Franciscan Friars of the Third Order Regular',
+        'footer_org_subtitle'           => 'Province of St Francis of Assisi Ranchi',
+        'footer_quick_links_title'      => 'QUICK LINKS',
+        'footer_services_title'         => 'OUR SERVICES',
+        'footer_location_title'         => 'OUR LOCATION',
+        'footer_maps_embed_url'         => 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d117223.76678229864!2d85.25055530739943!3d23.3432029707174!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f4e104aa5db7dd%3A0xd409a380e2270921!2sRanchi%2C%20Jharkhand!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin',
+        'footer_copyright_text'         => 'Copyright &copy; 2026 Franciscan Society, TOR Province of St. Francis, Ranchi. All rights reserved.',
+        'footer_designer_text'          => 'Designed By InterSmart',
+        'footer_designer_url'           => 'https://www.intersmart.in/',
+        'footer_privacy_label'          => 'Privacy Policy',
+        'footer_privacy_url'            => '/privacy/',
+        'footer_terms_label'            => 'Terms & Conditions',
+        'footer_terms_url'              => '/terms/',
         'seo_title_suffix'      => '| Franciscan Society Ranchi',
         'seo_meta_desc'         => 'Franciscan Friars of the Third Order Regular, Province of St. Francis of Assisi, Ranchi.',
         'seo_keywords'          => 'Franciscan, TOR, Ranchi, Catholic, Friars, Faith, Ministry',
@@ -419,6 +435,9 @@ function franciscan_get_default_page_content( $slug = '' ) {
             'hero_title'             => 'LEADERSHIP',
             'hero_subtitle'          => 'Guiding the Province in fraternity, governance, and mission.',
             'hero_image'             => FRANCISCAN_THEME_URI . '/assets/images/new_uploads/leadership-banner.jpg',
+            'card_badge'             => 'GOVERNANCE',
+            'card_title'             => 'SERVING IN COMMUNION',
+            'card_subtitle'          => 'Led by the Minister Provincial and provincial leadership team committed to spiritual excellence.',
             'general_council_badge'  => 'GENERAL COUNCIL',
             'general_council_title'  => 'LEADERSHIP OF THE ORDER',
             'provincial_council_badge'=> 'PROVINCIAL COUNCIL',
@@ -429,18 +448,10 @@ function franciscan_get_default_page_content( $slug = '' ) {
             'hero_title'             => 'OUR FRIARS',
             'hero_subtitle'          => 'Brothers serving in prayer, fraternity, and active apostolates across Ranchi Province and beyond.',
             'hero_image'             => FRANCISCAN_THEME_URI . '/assets/images/new_uploads/friars-banner.jpg',
-            'section_eyebrow'        => 'OUR FRIARS',
-            'section_title'          => 'SERVING IN RELIGIOUS LIFE',
-            'intro_text'             => 'The Province comprises 104 professed friars including 84 solemnly professed and 19 temporarily professed members. Among them are 71 priests and 3 brothers. Additionally, there are 28 major seminarians, 4 novices, 9 pre-novices, and 36 candidates in formation.',
-            'stat_1_num'             => '104+',
-            'stat_1_lbl'             => 'Professed Friars',
-            'stat_2_num'             => '71',
-            'stat_2_lbl'             => 'Ordained Priests',
-            'stat_3_num'             => '77+',
-            'stat_3_lbl'             => 'In Formation',
-            'roster_title'           => 'FRIARS IN COMMUNITY',
+            'card_badge'             => 'OUR FRIARS',
+            'card_title'             => 'BROTHERS IN CHRIST',
+            'card_subtitle'          => 'Over 104 professed friars dedicated to prayer, community, and active ministry.',
             'directory_title'        => 'Brothers always be mindful that they should desire one thing alone, namely, the Spirit of God at work within them',
-            'roster_note'            => 'Complete list includes 100+ professed friars serving across India and abroad.',
         ),
         'community-friaries' => array(
             'hero_badge'             => 'OUR HOMES',
@@ -782,13 +793,22 @@ function franciscan_resync_legacy_content_options() {
                     $clean['fellowship_title'] = 'LOVE & COMPASSION';
                     $clean['fellowship_desc']  = 'We serve others with genuine love, kindness, compassion, and a heart for those in need.';
                 }
-                // Resync leadership legacy badge and title
+                // Resync leadership legacy badge, title, and card
                 if ( 'community-leadership' === $slug ) {
                     if ( ! isset( $clean['hero_title'] ) || in_array( $clean['hero_title'], array( 'LEADERSHIP & COUNCILS', 'PROVINCIAL LEADERSHIP' ), true ) ) {
                         $clean['hero_title'] = 'LEADERSHIP';
                     }
                     if ( ! isset( $clean['hero_badge'] ) || in_array( $clean['hero_badge'], array( 'SERVANT LEADERSHIP', 'PROVINCIAL ADMINISTRATION' ), true ) ) {
                         $clean['hero_badge'] = 'To lead is to serve; to be greater is to become lesser.';
+                    }
+                    if ( empty( $clean['card_badge'] ) ) {
+                        $clean['card_badge'] = 'GOVERNANCE';
+                    }
+                    if ( empty( $clean['card_title'] ) ) {
+                        $clean['card_title'] = 'SERVING IN COMMUNION';
+                    }
+                    if ( empty( $clean['card_subtitle'] ) ) {
+                        $clean['card_subtitle'] = 'Led by the Minister Provincial and provincial leadership team committed to spiritual excellence.';
                     }
                 }
                 // Resync legacy about section heading
@@ -797,11 +817,22 @@ function franciscan_resync_legacy_content_options() {
                         $clean['about_section_heading'] = 'Our Franciscan Journey';
                     }
                 }
-                // Resync friars directory title
+                // Resync friars directory title and card section
                 if ( 'community-friars' === $slug ) {
+                    if ( empty( $clean['card_badge'] ) ) {
+                        $clean['card_badge'] = ! empty( $clean['section_eyebrow'] ) ? $clean['section_eyebrow'] : 'OUR FRIARS';
+                    }
+                    if ( empty( $clean['card_title'] ) ) {
+                        $clean['card_title'] = ! empty( $clean['section_title'] ) ? $clean['section_title'] : 'BROTHERS IN CHRIST';
+                    }
+                    if ( empty( $clean['card_subtitle'] ) ) {
+                        $clean['card_subtitle'] = ! empty( $clean['intro_text'] ) ? $clean['intro_text'] : 'Over 104 professed friars dedicated to prayer, community, and active ministry.';
+                    }
                     if ( ! isset( $clean['directory_title'] ) || in_array( $clean['directory_title'], array( 'OUR FRIARS', 'FRIARS IN COMMUNITY' ), true ) ) {
                         $clean['directory_title'] = 'Brothers always be mindful that they should desire one thing alone, namely, the Spirit of God at work within them';
                     }
+                    // Clean up obsolete counter keys
+                    unset( $clean['stat_1_num'], $clean['stat_1_lbl'], $clean['stat_2_num'], $clean['stat_2_lbl'], $clean['stat_3_num'], $clean['stat_3_lbl'], $clean['stat_friars_num'], $clean['stat_friars_lbl'], $clean['stat_priests_num'], $clean['stat_priests_lbl'], $clean['stat_formation_num'], $clean['stat_formation_lbl'] );
                 }
                 // Resync history heritage title
                 if ( 'community-history' === $slug ) {

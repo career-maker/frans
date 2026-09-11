@@ -16,17 +16,22 @@
                         
                         <!-- Column 1: Logo & Contact Information -->
                         <div>
-                            <div style="margin-bottom: 2rem;">
-                                <a href="<?php echo esc_url( home_url( '/' ) ); ?>" style="text-decoration: none; display: inline-flex; align-items: center; gap: 0.85rem;">
-                                    <img loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . "/assets/images/logo.svg" ); ?>" alt="Franciscan Society" style="height: 48px; width: auto;" onerror="this.style.display='none'">
-                                    <div style="display: flex; flex-direction: column; text-align: left;">
-                                        <span style="font-family: 'Instrument Sans', sans-serif; font-weight: 600; font-size: 0.88rem; color: #ffffff; line-height: 1.25; letter-spacing: 0.01em;">Franciscan Friars of the Third Order Regular</span>
-                                        <span style="font-family: 'Instrument Sans', sans-serif; font-size: 0.72rem; color: rgba(255, 255, 255, 0.75); line-height: 1.25; margin-top: 2px;">Province of St Francis of Assisi Ranchi</span>
-                                    </div>
-                                </a>
-                            </div>
-
                             <?php
+                            $footer_logo             = franciscan_get_option( 'footer_logo', FRANCISCAN_THEME_URI . '/assets/images/logo.svg' );
+                            $footer_org_title        = franciscan_get_option( 'footer_org_title', 'Franciscan Friars of the Third Order Regular' );
+                            $footer_org_subtitle     = franciscan_get_option( 'footer_org_subtitle', 'Province of St Francis of Assisi Ranchi' );
+                            $footer_quick_links_title= franciscan_get_option( 'footer_quick_links_title', 'QUICK LINKS' );
+                            $footer_services_title   = franciscan_get_option( 'footer_services_title', 'OUR SERVICES' );
+                            $footer_location_title   = franciscan_get_option( 'footer_location_title', 'OUR LOCATION' );
+                            $footer_maps_embed_url   = franciscan_get_option( 'footer_maps_embed_url', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d117223.76678229864!2d85.25055530739943!3d23.3432029707174!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f4e104aa5db7dd%3A0xd409a380e2270921!2sRanchi%2C%20Jharkhand!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin' );
+                            $footer_copyright_text   = franciscan_get_option( 'footer_copyright_text', 'Copyright &copy; 2026 Franciscan Society, TOR Province of St. Francis, Ranchi. All rights reserved.' );
+                            $footer_designer_text    = franciscan_get_option( 'footer_designer_text', 'Designed By InterSmart' );
+                            $footer_designer_url     = franciscan_get_option( 'footer_designer_url', 'https://www.intersmart.in/' );
+                            $footer_privacy_label    = franciscan_get_option( 'footer_privacy_label', 'Privacy Policy' );
+                            $footer_privacy_url      = franciscan_resolve_nav_url( franciscan_get_option( 'footer_privacy_url', '/privacy/' ), '/privacy/' );
+                            $footer_terms_label      = franciscan_get_option( 'footer_terms_label', 'Terms & Conditions' );
+                            $footer_terms_url        = franciscan_resolve_nav_url( franciscan_get_option( 'footer_terms_url', '/terms/' ), '/terms/' );
+
                             $footer_phone   = franciscan_get_option( 'contact_phone', '+91 95726 35314' );
                             if ( empty( $footer_phone ) || false !== strpos( $footer_phone, '94311' ) ) {
                                 $footer_phone = '+91 95726 35314';
@@ -39,6 +44,16 @@
                             }
                             $footer_address = franciscan_get_option( 'address_text', "Franciscan Ashram (Provincial Residence)\nP.O. Harmu Housing Colony, Ranchi – 834002, JHARKHAND" );
                             ?>
+                            <div style="margin-bottom: 2rem;">
+                                <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="footer-brand-link" style="text-decoration: none; display: inline-flex; align-items: center; gap: 0.85rem;">
+                                    <img loading="lazy" decoding="async" src="<?php echo esc_url( $footer_logo ); ?>" alt="<?php echo esc_attr( $footer_org_title ); ?>" style="height: 48px; width: auto;" onerror="this.style.display='none'">
+                                    <div style="display: flex; flex-direction: column; text-align: left;">
+                                        <span class="footer-logo-title" style="font-family: 'Instrument Sans', sans-serif; font-weight: 600; font-size: 0.88rem; color: #ffffff; line-height: 1.25; letter-spacing: 0.01em;"><?php echo esc_html( $footer_org_title ); ?></span>
+                                        <span class="footer-logo-subtitle" style="font-family: 'Instrument Sans', sans-serif; font-size: 0.72rem; color: rgba(255, 255, 255, 0.75); line-height: 1.25; margin-top: 2px;"><?php echo esc_html( $footer_org_subtitle ); ?></span>
+                                    </div>
+                                </a>
+                            </div>
+
                             <div style="display: flex; flex-direction: column; gap: 1.1rem; font-family: 'Instrument Sans', sans-serif; font-size: 0.92rem; color: #d6d3d1;">
                                 <div style="display: flex; align-items: center; gap: 0.8rem;">
                                     <span style="width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.18); display: flex; align-items: center; justify-content: center; color: #ffffff; flex-shrink: 0;">
@@ -66,9 +81,9 @@
                         <!-- Column 2: Quick Links -->
                         <div>
                             <h4 class="footer-desktop-heading" style="font-family: 'Phudu', sans-serif !important; font-size: 1.15rem !important; font-weight: 600 !important; color: #ffffff !important; text-transform: uppercase; margin-bottom: 1.6rem; letter-spacing: 0.04em;">
-                                QUICK LINKS
+                                <?php echo esc_html( $footer_quick_links_title ); ?>
                             </h4>
-                            <button class="footer-accordion-toggle" type="button" aria-expanded="false" aria-controls="footer-quick-links">QUICK LINKS</button>
+                            <button class="footer-accordion-toggle" type="button" aria-expanded="false" aria-controls="footer-quick-links"><?php echo esc_html( $footer_quick_links_title ); ?></button>
                             <div class="footer-accordion-body" id="footer-quick-links">
                             <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.95rem; font-family: 'Instrument Sans', sans-serif; font-size: 0.92rem;">
                                 <li><a href="<?php echo esc_url( franciscan_resolve_nav_url( franciscan_get_option( 'nav_link_home', '/' ), '/' ) ); ?>" style="color: #a8a29e; text-decoration: none; transition: color 0.3s ease;" onmouseover="this.style.color='#e6c888'" onmouseout="this.style.color='#a8a29e'"><?php echo esc_html( franciscan_get_option( 'nav_label_home', 'Home' ) ); ?></a></li>
@@ -76,8 +91,8 @@
                                 <li><a href="<?php echo esc_url( franciscan_resolve_nav_url( franciscan_get_option( 'nav_link_gallery', '/gallery/' ), '/gallery/' ) ); ?>" style="color: #a8a29e; text-decoration: none; transition: color 0.3s ease;" onmouseover="this.style.color='#e6c888'" onmouseout="this.style.color='#a8a29e'"><?php echo esc_html( franciscan_get_option( 'nav_label_gallery', 'Gallery' ) ); ?></a></li>
                                 <li><a href="<?php echo esc_url( franciscan_resolve_nav_url( franciscan_get_option( 'nav_link_publications', '/publications/' ), '/publications/' ) ); ?>" style="color: #a8a29e; text-decoration: none; transition: color 0.3s ease;" onmouseover="this.style.color='#e6c888'" onmouseout="this.style.color='#a8a29e'"><?php echo esc_html( franciscan_get_option( 'nav_label_publications', 'Publications' ) ); ?></a></li>
                                 <li><a href="<?php echo esc_url( franciscan_resolve_nav_url( franciscan_get_option( 'nav_link_news', '/news/' ), '/news/' ) ); ?>" style="color: #a8a29e; text-decoration: none; transition: color 0.3s ease;" onmouseover="this.style.color='#e6c888'" onmouseout="this.style.color='#a8a29e'"><?php echo esc_html( franciscan_get_option( 'nav_label_news', 'News & Events' ) ); ?></a></li>
-                                <li><a href="<?php echo esc_url( home_url( '/privacy/' ) ); ?>" style="color: #a8a29e; text-decoration: none; transition: color 0.3s ease;" onmouseover="this.style.color='#e6c888'" onmouseout="this.style.color='#a8a29e'">Privacy Policy</a></li>
-                                <li><a href="<?php echo esc_url( home_url( '/terms/' ) ); ?>" style="color: #a8a29e; text-decoration: none; transition: color 0.3s ease;" onmouseover="this.style.color='#e6c888'" onmouseout="this.style.color='#a8a29e'">Terms &amp; Conditions</a></li>
+                                <li><a href="<?php echo esc_url( $footer_privacy_url ); ?>" style="color: #a8a29e; text-decoration: none; transition: color 0.3s ease;" onmouseover="this.style.color='#e6c888'" onmouseout="this.style.color='#a8a29e'"><?php echo esc_html( $footer_privacy_label ); ?></a></li>
+                                <li><a href="<?php echo esc_url( $footer_terms_url ); ?>" style="color: #a8a29e; text-decoration: none; transition: color 0.3s ease;" onmouseover="this.style.color='#e6c888'" onmouseout="this.style.color='#a8a29e'"><?php echo esc_html( $footer_terms_label ); ?></a></li>
                             </ul>
                             </div>
                         </div>
@@ -85,9 +100,9 @@
                         <!-- Column 3: Our Services -->
                         <div>
                             <h4 class="footer-desktop-heading" style="font-family: 'Phudu', sans-serif !important; font-size: 1.15rem !important; font-weight: 600 !important; color: #ffffff !important; text-transform: uppercase; margin-bottom: 1.6rem; letter-spacing: 0.04em;">
-                                OUR SERVICES
+                                <?php echo esc_html( $footer_services_title ); ?>
                             </h4>
-                            <button class="footer-accordion-toggle" type="button" aria-expanded="false" aria-controls="footer-services">OUR SERVICES</button>
+                            <button class="footer-accordion-toggle" type="button" aria-expanded="false" aria-controls="footer-services"><?php echo esc_html( $footer_services_title ); ?></button>
                             <div class="footer-accordion-body" id="footer-services">
                             <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.95rem; font-family: 'Instrument Sans', sans-serif; font-size: 0.92rem;">
                                 <li><a href="<?php echo esc_url( franciscan_resolve_nav_url( franciscan_get_option( 'nav_link_ministries_pastoral', '/ministries-pastoral/' ), '/ministries-pastoral/' ) ); ?>" style="color: #a8a29e; text-decoration: none; transition: color 0.3s ease;" onmouseover="this.style.color='#e6c888'" onmouseout="this.style.color='#a8a29e'"><?php echo esc_html( franciscan_get_option( 'nav_label_ministries_pastoral', 'Pastoral Ministry' ) ); ?></a></li>
@@ -100,49 +115,71 @@
 
                         <!-- Column 4: Location Map & Social Media -->
                         <div>
-                            <h4 style="font-family: 'Phudu', sans-serif !important; font-size: 1.15rem !important; font-weight: 600 !important; color: #ffffff !important; text-transform: uppercase; margin-bottom: 1.6rem; letter-spacing: 0.04em;">
-                                OUR LOCATION
+                            <h4 class="footer-location-heading" style="font-family: 'Phudu', sans-serif !important; font-size: 1.15rem !important; font-weight: 600 !important; color: #ffffff !important; text-transform: uppercase; margin-bottom: 1.6rem; letter-spacing: 0.04em;">
+                                <?php echo esc_html( $footer_location_title ); ?>
                             </h4>
 
                             <!-- Embedded Interactive Map -->
-                            <div style="border-radius: 14px; overflow: hidden; height: 150px; border: 1px solid rgba(255,255,255,0.12); box-shadow: 0 6px 16px rgba(0,0,0,0.3); margin-bottom: 1.3rem;">
-                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d117223.76678229864!2d85.25055530739943!3d23.3432029707174!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f4e104aa5db7dd%3A0xd409a380e2270921!2sRanchi%2C%20Jharkhand!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Franciscan Society Ranchi Location Map"></iframe>
+                            <?php if ( ! empty( $footer_maps_embed_url ) ) : ?>
+                            <div class="footer-map-container" style="border-radius: 14px; overflow: hidden; height: 150px; border: 1px solid rgba(255,255,255,0.12); box-shadow: 0 6px 16px rgba(0,0,0,0.3); margin-bottom: 1.3rem;">
+                                <iframe src="<?php echo esc_url( $footer_maps_embed_url ); ?>" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Franciscan Society Location Map"></iframe>
                             </div>
+                            <?php endif; ?>
 
                             <!-- Social Media Icons — SVG, white on dark -->
-                            <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
-                                <!-- Facebook -->
-                                <a rel="noopener noreferrer" href="https://www.facebook.com/profile.php?id=61593681501900" target="_blank" rel="noopener" aria-label="Facebook" class="footer-social-btn">
+                            <?php
+                            $footer_fb_url = franciscan_get_option( 'facebook_url', 'https://www.facebook.com/profile.php?id=61593681501900' );
+                            $footer_ig_url = franciscan_get_option( 'instagram_url', 'https://www.instagram.com/torranchiprovince/' );
+                            $footer_yt_url = franciscan_get_option( 'youtube_url', 'https://youtube.com/@tormediaranchi3804?si=UPTCSJUSj9tbcjeB' );
+                            $footer_wa_num = franciscan_get_option( 'whatsapp_number', '919572635314' );
+                            ?>
+                            <div class="footer-social-row" style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+                                <?php if ( ! empty( $footer_fb_url ) ) : ?>
+                                <a rel="noopener noreferrer" href="<?php echo esc_url( $footer_fb_url ); ?>" target="_blank" aria-label="Facebook" class="footer-social-btn">
                                     <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
                                 </a>
-                                <!-- Instagram -->
-                                <a rel="noopener noreferrer" href="https://www.instagram.com/torranchiprovince/" target="_blank" rel="noopener" aria-label="Instagram" class="footer-social-btn">
+                                <?php endif; ?>
+                                <?php if ( ! empty( $footer_ig_url ) ) : ?>
+                                <a rel="noopener noreferrer" href="<?php echo esc_url( $footer_ig_url ); ?>" target="_blank" aria-label="Instagram" class="footer-social-btn">
                                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
                                 </a>
-                                <!-- YouTube -->
-                                <a rel="noopener noreferrer" href="https://youtube.com/@tormediaranchi3804?si=UPTCSJUSj9tbcjeB" target="_blank" rel="noopener" aria-label="YouTube" class="footer-social-btn">
+                                <?php endif; ?>
+                                <?php if ( ! empty( $footer_yt_url ) ) : ?>
+                                <a rel="noopener noreferrer" href="<?php echo esc_url( $footer_yt_url ); ?>" target="_blank" aria-label="YouTube" class="footer-social-btn">
                                     <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58zM9.75 15.02V8.98L15.5 12l-5.75 3.02z"/></svg>
                                 </a>
-                                <!-- WhatsApp -->
-                                <a rel="noopener noreferrer" href="https://wa.me/<?php echo esc_attr( franciscan_get_option( 'whatsapp_number', '919572635314' ) ); ?>" target="_blank" rel="noopener" aria-label="WhatsApp" class="footer-social-btn">
+                                <?php endif; ?>
+                                <?php if ( ! empty( $footer_wa_num ) ) : 
+                                    $wa_clean = preg_replace( '/[^0-9]/', '', $footer_wa_num );
+                                ?>
+                                <a rel="noopener noreferrer" href="https://wa.me/<?php echo esc_attr( $wa_clean ); ?>" target="_blank" aria-label="WhatsApp" class="footer-social-btn">
                                     <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.570-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
                                 </a>
+                                <?php endif; ?>
                             </div>
                         </div>
 
                     </div>
 
                     <!-- Bottom Divider & Copyright Row -->
-                    <div style="border-top: 1px solid rgba(255, 255, 255, 0.08); padding-top: 2rem; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; font-family: 'Instrument Sans', sans-serif; font-size: 0.88rem; color: #78716c;">
-                        <p style="margin: 0; display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
-                            <span>Copyright &copy; 2026 Franciscan Society, TOR Province of St. Francis, Ranchi. All rights reserved.</span>
-                            <span style="color: rgba(255, 255, 255, 0.2);">|</span>
-                            <span style="color: #a8a29e;">Designed By <strong style="color: #e6c888; font-weight: 700;">InterSmart</strong></span>
+                    <div class="footer-bottom-row" style="border-top: 1px solid rgba(255, 255, 255, 0.08); padding-top: 2rem; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; font-family: 'Instrument Sans', sans-serif; font-size: 0.88rem; color: #78716c;">
+                        <p class="footer-copyright-p" style="margin: 0; display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
+                            <span class="footer-copyright-text"><?php echo wp_kses_post( $footer_copyright_text ); ?></span>
+                            <?php if ( ! empty( $footer_designer_text ) ) : ?>
+                                <span class="footer-sep" style="color: rgba(255, 255, 255, 0.2);">|</span>
+                                <span class="footer-designer-text">
+                                    <?php if ( ! empty( $footer_designer_url ) ) : ?>
+                                        <a href="<?php echo esc_url( $footer_designer_url ); ?>" target="_blank" rel="noopener" style="color: #a8a29e; text-decoration: none;" onmouseover="this.style.color='#e6c888'" onmouseout="this.style.color='#a8a29e'"><?php echo esc_html( $footer_designer_text ); ?></a>
+                                    <?php else : ?>
+                                        <span style="color: #a8a29e;"><?php echo esc_html( $footer_designer_text ); ?></span>
+                                    <?php endif; ?>
+                                </span>
+                            <?php endif; ?>
                         </p>
-                        <div style="display: flex; gap: 1.25rem; align-items: center; justify-content: center; flex-wrap: wrap;">
-                            <a href="<?php echo esc_url( home_url( '/privacy/' ) ); ?>" style="color: #a8a29e; text-decoration: none; transition: color 0.3s ease;" onmouseover="this.style.color='#e6c888'" onmouseout="this.style.color='#a8a29e'">Privacy Policy</a>
-                            <span style="color: rgba(255, 255, 255, 0.2);">|</span>
-                            <a href="<?php echo esc_url( home_url( '/terms/' ) ); ?>" style="color: #a8a29e; text-decoration: none; transition: color 0.3s ease;" onmouseover="this.style.color='#e6c888'" onmouseout="this.style.color='#a8a29e'">Terms &amp; Conditions</a>
+                        <div class="footer-legal-links" style="display: flex; gap: 1.25rem; align-items: center; justify-content: center; flex-wrap: wrap;">
+                            <a href="<?php echo esc_url( $footer_privacy_url ); ?>" style="color: #a8a29e; text-decoration: none; transition: color 0.3s ease;" onmouseover="this.style.color='#e6c888'" onmouseout="this.style.color='#a8a29e'"><?php echo esc_html( $footer_privacy_label ); ?></a>
+                            <span class="footer-sep" style="color: rgba(255, 255, 255, 0.2);">|</span>
+                            <a href="<?php echo esc_url( $footer_terms_url ); ?>" style="color: #a8a29e; text-decoration: none; transition: color 0.3s ease;" onmouseover="this.style.color='#e6c888'" onmouseout="this.style.color='#a8a29e'"><?php echo esc_html( $footer_terms_label ); ?></a>
                         </div>
                     </div>
 
