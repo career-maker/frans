@@ -92,6 +92,7 @@
     <!-- Apple Mobile Tags -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no, date=no, address=no, email=no">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -738,8 +739,18 @@ button.fs-mega-toggle.hover-active::after,
 button.fs-mega-toggle.active::after,
 .fs-header .fs-desktop-nav button:hover::after,
 .fs-header .fs-desktop-nav button:focus::after,
-.fs-header .fs-desktop-nav button.hover-active::after {
+.fs-header .fs-desktop-nav button.hover-active::after,
+.fs-header .fs-desktop-nav button.active::after {
     color: #e6c888 !important;
+}
+
+.fs-desktop-nav .fs-mega-toggle.active::after,
+.fs-desktop-nav .fs-mega-toggle.hover-active::after,
+button.fs-mega-toggle.active::after,
+button.fs-mega-toggle.hover-active::after,
+.fs-header .fs-desktop-nav button.active::after,
+.fs-header .fs-desktop-nav button.hover-active::after {
+    transform: rotate(180deg) !important;
 }
 
 

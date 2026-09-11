@@ -70,15 +70,15 @@ get_header();
                         <!-- Stats Counter Strip -->
                         <div class="responsive-grid-3" style="position: relative; z-index: 20; display: grid; border-top: 1px solid rgba(255, 255, 255, 0.25); padding-top: 1.25rem;">
                             <div style="border-right: 1px solid rgba(255, 255, 255, 0.18); padding-right: 1rem;">
-                                <div style="font-size: 2.2rem; font-weight: 900; color: #ffffff; line-height: 1; font-family: 'Phudu', sans-serif; text-shadow: 0 2px 10px rgba(0,0,0,0.8);"><?php echo esc_html( franciscan_get_page_field( 'home', 'hero_stat_1_num', '104+' ) ); ?></div>
+                                <div style="font-size: 2.2rem; font-weight: 900; color: #ffffff !important; -webkit-text-fill-color: #ffffff !important; line-height: 1; font-family: 'Phudu', sans-serif; text-shadow: 0 2px 10px rgba(0,0,0,0.8);"><?php echo esc_html( franciscan_get_page_field( 'home', 'hero_stat_1_num', '104+' ) ); ?></div>
                                 <div style="font-size: 0.7rem; color: rgba(255, 255, 255, 0.85); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 0.4rem; font-weight: 700; font-family: 'Instrument Sans', sans-serif;"><?php echo esc_html( franciscan_get_page_field( 'home', 'hero_stat_1_lbl', 'Professed Friars' ) ); ?></div>
                             </div>
                             <div style="border-right: 1px solid rgba(255, 255, 255, 0.18); padding-left: 1.25rem; padding-right: 1rem;">
-                                <div style="font-size: 2.2rem; font-weight: 900; color: #ffffff; line-height: 1; font-family: 'Phudu', sans-serif; text-shadow: 0 2px 10px rgba(0,0,0,0.8);"><?php echo esc_html( franciscan_get_page_field( 'home', 'hero_stat_2_num', '14+' ) ); ?></div>
+                                <div style="font-size: 2.2rem; font-weight: 900; color: #ffffff !important; -webkit-text-fill-color: #ffffff !important; line-height: 1; font-family: 'Phudu', sans-serif; text-shadow: 0 2px 10px rgba(0,0,0,0.8);"><?php echo esc_html( franciscan_get_page_field( 'home', 'hero_stat_2_num', '14+' ) ); ?></div>
                                 <div style="font-size: 0.7rem; color: rgba(255, 255, 255, 0.85); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 0.4rem; font-weight: 700; font-family: 'Instrument Sans', sans-serif;"><?php echo esc_html( franciscan_get_page_field( 'home', 'hero_stat_2_lbl', 'Parishes Served' ) ); ?></div>
                             </div>
                             <div style="padding-left: 1.25rem;">
-                                <div style="font-size: 2.2rem; font-weight: 900; color: #ffffff; line-height: 1; font-family: 'Phudu', sans-serif; text-shadow: 0 2px 10px rgba(0,0,0,0.8);"><?php echo esc_html( franciscan_get_page_field( 'home', 'hero_stat_3_num', '800+' ) ); ?></div>
+                                <div style="font-size: 2.2rem; font-weight: 900; color: #ffffff !important; -webkit-text-fill-color: #ffffff !important; line-height: 1; font-family: 'Phudu', sans-serif; text-shadow: 0 2px 10px rgba(0,0,0,0.8);"><?php echo esc_html( franciscan_get_page_field( 'home', 'hero_stat_3_num', '800+' ) ); ?></div>
                                 <div style="font-size: 0.7rem; color: rgba(255, 255, 255, 0.85); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 0.4rem; font-weight: 700; font-family: 'Instrument Sans', sans-serif;"><?php echo esc_html( franciscan_get_page_field( 'home', 'hero_stat_3_lbl', 'Years of Grace' ) ); ?></div>
                             </div>
                         </div>
@@ -276,14 +276,14 @@ get_header();
                     <!-- Mission & Vision 2-Column Grid -->
                     <div class="responsive-grid-2" style="display: grid; gap: 1.8rem; border-bottom: 1px solid rgba(0, 0, 0, 0.1); padding-bottom: 2rem; margin-bottom: 2rem;">
                         <div style="display: flex; gap: 1rem; align-items: flex-start;">
-                            <div style="width: 38px; height: 38px; background: #4A2A18; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 700; font-size: 0.9rem; flex-shrink: 0; box-shadow: 0 4px 10px rgba(74,42,24,0.3);">&#10013;</div>
+                            <div style="width: 38px; height: 38px; background: #4A2A18; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 700; flex-shrink: 0; box-shadow: 0 4px 10px rgba(74,42,24,0.3);"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" style="display:block;"><path d="M10 2h4v6h6v4h-6v10h-4v-10h-6v-4h6z"/></svg></div>
                             <div>
                                 <h4 style="font-family: 'Phudu', sans-serif !important; font-size: 0.92rem; font-weight: 600; text-transform: uppercase; margin-bottom: 0.3rem; color: #1c1917;"><?php echo esc_html( franciscan_get_page_field( 'home', 'about_mission_title', 'OUR MISSION' ) ); ?></h4>
                                 <p style="font-family: 'Instrument Sans', sans-serif !important; font-size: 0.8rem; color: #78716c; line-height: 1.45; margin: 0;"><?php echo esc_html( franciscan_get_page_field( 'home', 'about_mission_text', 'Serving 15 parishes & 22 schools across Ranchi and global mission fields.' ) ); ?></p>
                             </div>
                         </div>
                         <div style="display: flex; gap: 1rem; align-items: flex-start;">
-                            <div style="width: 38px; height: 38px; background: #4A2A18; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 700; font-size: 0.9rem; flex-shrink: 0; box-shadow: 0 4px 10px rgba(74,42,24,0.3);">&#10013;</div>
+                            <div style="width: 38px; height: 38px; background: #4A2A18; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 700; flex-shrink: 0; box-shadow: 0 4px 10px rgba(74,42,24,0.3);"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" style="display:block;"><path d="M10 2h4v6h6v4h-6v10h-4v-10h-6v-4h6z"/></svg></div>
                             <div>
                                 <h4 style="font-family: 'Phudu', sans-serif !important; font-size: 0.92rem; font-weight: 600; text-transform: uppercase; margin-bottom: 0.3rem; color: #1c1917;"><?php echo esc_html( franciscan_get_page_field( 'home', 'about_vision_title', 'OUR VISION' ) ); ?></h4>
                                 <p style="font-family: 'Instrument Sans', sans-serif !important; font-size: 0.8rem; color: #78716c; line-height: 1.45; margin: 0;"><?php echo esc_html( franciscan_get_page_field( 'home', 'about_vision_text', 'Promoting peace, joy, and dignity under "Peace and Joy to the World".' ) ); ?></p>
@@ -506,21 +506,21 @@ get_header();
                     </h2>
 
                     <!-- Centered Scroll Navigation Arrow Buttons -->
-                    <div style="display: flex; gap: 0.85rem; align-items: center; justify-content: center;">
-                        <button class="slider-btn slider-btn--prev" onclick="document.getElementById('news-scroll-track').scrollBy({left: -380, behavior: 'smooth'})" aria-label="Scroll Left">
+                    <div id="news-slider-nav" style="display: flex; gap: 0.85rem; align-items: center; justify-content: center;">
+                        <button class="slider-btn slider-btn--prev" onclick="fsSlideTrack('news-scroll-track', -1)" aria-label="Scroll Left">
                             &#8592;
                         </button>
-                        <button class="slider-btn slider-btn--next" onclick="document.getElementById('news-scroll-track').scrollBy({left: 380, behavior: 'smooth'})" aria-label="Scroll Right">
+                        <button class="slider-btn slider-btn--next" onclick="fsSlideTrack('news-scroll-track', 1)" aria-label="Scroll Right">
                             &#8594;
                         </button>
                     </div>
 
                 </div>
 
-                <div id="news-scroll-track" style="display: flex; justify-content: center; gap: 2.2rem; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 1.5rem; scrollbar-width: none; -ms-overflow-style: none;">
+                <div id="news-scroll-track" style="display: flex; gap: 2.2rem; overflow-x: auto; -webkit-overflow-scrolling: touch; touch-action: pan-x; scroll-behavior: smooth; scroll-snap-type: x mandatory; padding: 0.5rem 0 1.5rem 0; scrollbar-width: none; -ms-overflow-style: none;">
 
                     <!-- Seminar on New Labour Code -->
-                    <div class="blog-card" style="flex: 0 0 min(540px, 90vw); scroll-snap-align: start; display: flex; flex-direction: column; background: transparent;">
+                    <div class="blog-card" style="flex: 0 0 min(540px, 90vw); margin: 0 auto; scroll-snap-align: center; display: flex; flex-direction: column; background: transparent;">
                         <div style="border-radius: 20px; overflow: hidden; height: 300px; margin-bottom: 1.6rem; box-shadow: 0 10px 25px rgba(0,0,0,0.10); background-color: #d6ccc2;">
                             <img loading="eager" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/new_uploads/seminar-labour-code.jpeg' ); ?>" style="width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s ease;" alt="Seminar on New Labour Code at Hardag, Ranchi" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform='scale(1)'">
                         </div>
@@ -590,18 +590,18 @@ get_header();
                     </h2>
 
                     <!-- Centered Scroll Navigation Arrow Buttons (matches News &amp; Events) -->
-                    <div style="display: flex; gap: 0.85rem; align-items: center; justify-content: center;">
-                        <button class="slider-btn slider-btn--prev" onclick="document.getElementById('blogs-scroll-track').scrollBy({left: -380, behavior: 'smooth'})" aria-label="Scroll Left">
+                    <div id="blogs-slider-nav" style="display: flex; gap: 0.85rem; align-items: center; justify-content: center;">
+                        <button class="slider-btn slider-btn--prev" onclick="fsSlideTrack('blogs-scroll-track', -1)" aria-label="Scroll Left">
                             &#8592;
                         </button>
-                        <button class="slider-btn slider-btn--next" onclick="document.getElementById('blogs-scroll-track').scrollBy({left: 380, behavior: 'smooth'})" aria-label="Scroll Right">
+                        <button class="slider-btn slider-btn--next" onclick="fsSlideTrack('blogs-scroll-track', 1)" aria-label="Scroll Right">
                             &#8594;
                         </button>
                     </div>
                 </div>
 
                 <!-- Blog Cards Scroll Track -->
-                <div id="blogs-scroll-track" style="display: flex; gap: 2.2rem; overflow-x: auto; scroll-snap-type: x mandatory; padding: 0.5rem 0 1.5rem 0; margin-bottom: 2rem; scrollbar-width: none; -ms-overflow-style: none;">
+                <div id="blogs-scroll-track" style="display: flex; gap: 2.2rem; overflow-x: auto; -webkit-overflow-scrolling: touch; touch-action: pan-x; scroll-behavior: smooth; scroll-snap-type: x mandatory; padding: 0.5rem 0 1.5rem 0; margin-bottom: 2rem; scrollbar-width: none; -ms-overflow-style: none;">
                     
                     <!-- Card 1: Children's Ministry -->
                     <div class="blog-padded-card" style="flex: 0 0 380px; scroll-snap-align: start; background: #ffffff; border-radius: 24px; padding: 1.8rem; box-shadow: 0 15px 35px rgba(0,0,0,0.06); display: flex; flex-direction: column; transition: transform 0.4s ease, box-shadow 0.4s ease;">
@@ -1691,6 +1691,31 @@ document.addEventListener("DOMContentLoaded", function() {
          <!-- 6. Footer (Exact Reference Screenshot Inset Rounded Card with Dark Texture, Links, Socials & Map) -->
         
 
+
+<script>
+function fsSlideTrack(trackId, direction) {
+    var track = document.getElementById(trackId);
+    if (!track) return;
+    var firstCard = track.querySelector('.blog-card, .blog-padded-card');
+    var step = firstCard ? (firstCard.offsetWidth + 24) : 360;
+    track.scrollBy({ left: direction * step, behavior: 'smooth' });
+}
+
+function fsUpdateSliderArrows() {
+    ['news', 'blogs'].forEach(function(type) {
+        var track = document.getElementById(type + '-scroll-track');
+        var nav = document.getElementById(type + '-slider-nav');
+        if (track && nav) {
+            var canScroll = track.scrollWidth > (track.clientWidth + 15);
+            nav.style.display = canScroll ? 'flex' : 'none';
+        }
+    });
+}
+
+document.addEventListener('DOMContentLoaded', fsUpdateSliderArrows);
+window.addEventListener('resize', fsUpdateSliderArrows);
+window.addEventListener('load', fsUpdateSliderArrows);
+</script>
 
 <?php
 get_footer();

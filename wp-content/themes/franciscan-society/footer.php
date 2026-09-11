@@ -5,7 +5,7 @@
  * @package Franciscan_Society
  */
 ?>
-<footer style="padding: 0 0 2rem 0; background-color: #FAFAFA; color: #ffffff; box-sizing: border-box;">
+<footer style="padding: 0 0 2rem 0; background-color: transparent; color: #ffffff; box-sizing: border-box;">
     <!-- Critical inline styles for mobile footer layout, logo containment, and strict left alignment -->
     <style id="footer-alignment-critical">
         /* Ensure 4 columns on desktop */

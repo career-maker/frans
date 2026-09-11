@@ -815,7 +815,7 @@ button.fs-mega-toggle:focus::after {
     </section>
 
     <!-- Structured Historical Narrative -->
-    <section style="padding: clamp(3.5rem, 6vw, 6rem) 0; background: #FFFFFF; color: #1c1917;">
+    <section style="padding: clamp(2.5rem, 4vw, 4rem) 0 clamp(1rem, 2.5vw, 2rem) 0; background: #FFFFFF; color: #1c1917;">
         <div style="max-width: 1140px; margin: 0 auto; padding: 0 clamp(1rem, 4vw, 2.5rem);">
 
             <!-- Era 1: Ancient Roots & St. Francis -->
@@ -874,7 +874,7 @@ button.fs-mega-toggle:focus::after {
             </div>
 
             <!-- Era 3: History in India and Ranchi Province -->
-            <div style="background: #FAF7F0; border-radius: 24px; padding: clamp(2rem, 5vw, 3.5rem); border: 1px solid rgba(74,42,24,0.08); margin-bottom: 4rem;">
+            <div style="background: #FAF7F0; border-radius: 24px; padding: clamp(2rem, 5vw, 3.5rem); border: 1px solid rgba(74,42,24,0.08); margin-bottom: 0;">
                 <div style="display: inline-flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;">
                     <span style="width: 6px; height: 6px; background-color: #4A2A18; border-radius: 50%;"></span>
                     <span style="color: #4A2A18; font-size: 0.8rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; font-family: 'Instrument Sans', sans-serif;">THE INDIAN MISSION</span>

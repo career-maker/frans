@@ -8411,3 +8411,14 @@ footer .footer-bottom-row .footer-sep {
     z-index: 99999 !important;
 }
 
+/* Dropdown arrow rotation when active/open */
+.fs-desktop-nav .fs-mega-toggle.active::after,
+.fs-desktop-nav .fs-mega-toggle.hover-active::after,
+button.fs-mega-toggle.active::after,
+button.fs-mega-toggle.hover-active::after,
+.fs-header .fs-desktop-nav button.active::after,
+.fs-header .fs-desktop-nav button.hover-active::after {
+    transform: rotate(180deg) !important;
+}
+
+

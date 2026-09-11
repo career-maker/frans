@@ -1067,6 +1067,40 @@ body.tor-modal-open {
         padding: 0.45rem 0.95rem !important;
         font-size: 0.8rem !important;
     }
+
+    /* Mobile Breadcrumb & Chapter Row Alignment */
+    nav[aria-label="breadcrumb"] {
+        padding: 0.75rem 1rem !important;
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+    }
+    nav[aria-label="breadcrumb"] > div {
+        flex-wrap: nowrap !important;
+        white-space: nowrap !important;
+        font-size: 0.8rem !important;
+    }
+    .tor-chapter-row {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 0.85rem !important;
+        padding: 1.1rem 0.9rem !important;
+    }
+    .tor-chapter-row > div:first-child {
+        flex-direction: column !important;
+        gap: 0.35rem !important;
+        width: 100% !important;
+    }
+    .tor-chapter-row > div:first-child > div:first-child {
+        min-width: 0 !important;
+        font-size: 1.05rem !important;
+    }
+    .tor-chapter-row > div:first-child > div:last-child {
+        font-size: 1rem !important;
+    }
+    .tor-chapter-row .tor-read-pill {
+        align-self: flex-start !important;
+        margin-top: 0.2rem !important;
+    }
 }
 
 /* Hover animation for chapter rows */

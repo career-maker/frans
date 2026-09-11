@@ -117,8 +117,17 @@ if ( ! $blogs_query->have_posts() ) {
         background: transparent;
         border: none;
         cursor: default;
-        transform: none;
-        box-shadow: none;
+    @media (max-width: 768px) {
+        .page-hero-banner {
+            padding: 6.5rem 1.25rem 2.8rem 1.25rem !important;
+            min-height: auto !important;
+        }
+        .page-hero-banner h1 {
+            font-size: clamp(1.8rem, 6vw, 2.5rem) !important;
+            line-height: 1.2 !important;
+            margin-bottom: 0.8rem !important;
+            word-break: break-word !important;
+        }
     }
 </style>
 

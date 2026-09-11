@@ -781,18 +781,41 @@ button.fs-mega-toggle:focus::after {
             }
             @media (max-width: 768px) {
                 #gallery-grid {
-                    padding: 2.5rem 1rem !important;
+                    padding: 2rem 1rem !important;
                 }
                 #gallery-container {
                     grid-template-columns: 1fr !important;
                     gap: 1.25rem !important;
+                }
+                .gallery-tabs-wrap {
+                    display: flex !important;
+                    flex-wrap: nowrap !important;
+                    justify-content: flex-start !important;
+                    overflow-x: auto !important;
+                    -webkit-overflow-scrolling: touch !important;
+                    scroll-snap-type: x mandatory !important;
+                    gap: 0.5rem !important;
+                    padding: 0.25rem 0.5rem 0.75rem 0.5rem !important;
+                    margin-bottom: 1.8rem !important;
+                    scrollbar-width: none !important;
+                    -ms-overflow-style: none !important;
+                }
+                .gallery-tabs-wrap::-webkit-scrollbar {
+                    display: none !important;
+                }
+                .gallery-tab {
+                    flex-shrink: 0 !important;
+                    scroll-snap-align: start !important;
+                    padding: 0.5rem 1.1rem !important;
+                    font-size: 0.82rem !important;
+                    border-radius: 24px !important;
                 }
             }
         </style>
         <div style="max-width: 1320px; margin: 0 auto;">
 
             <!-- Gallery Tabs -->
-            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 0.85rem; margin-bottom: 3rem;">
+            <div class="gallery-tabs-wrap" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 0.85rem; margin-bottom: 3rem;">
                 <button type="button" class="gallery-tab active" data-filter="all" style="padding: 0.8rem 1.8rem; border: 2px solid #e6c888; background: #e6c888; color: #1c1917; font-family: 'Instrument Sans', sans-serif; font-weight: 700; border-radius: 30px; cursor: pointer; transition: all 0.3s ease; white-space: nowrap;">All</button>
                 <button type="button" class="gallery-tab" data-filter="Formation Ministry" style="padding: 0.8rem 1.8rem; border: 2px solid #e6c888; background: rgba(230, 200, 136, 0.15); font-family: 'Instrument Sans', sans-serif; font-weight: 700; border-radius: 30px; cursor: pointer; transition: all 0.3s ease; white-space: nowrap; line-height: 1.4;">Formation Ministry</button>
                 <button type="button" class="gallery-tab" data-filter="Education Ministry" style="padding: 0.8rem 1.8rem; border: 2px solid #e6c888; background: rgba(230, 200, 136, 0.15); font-family: 'Instrument Sans', sans-serif; font-weight: 700; border-radius: 30px; cursor: pointer; transition: all 0.3s ease; white-space: nowrap; line-height: 1.4;">Education Ministry</button>
@@ -1137,6 +1160,11 @@ button.fs-mega-toggle:focus::after {
     }
     .fs-lightbox-next {
         right: 2rem !important;
+    }
+    .fs-lightbox-nav-btn svg {
+        display: block !important;
+        margin: auto !important;
+        flex-shrink: 0 !important;
     }
     .fs-lightbox-footer {
         width: 100% !important;

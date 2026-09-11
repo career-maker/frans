@@ -161,7 +161,31 @@ $banner_bg = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/hero-banner-aug2
         box-shadow: 0 20px 60px rgba(0,0,0,0.08);
         border: 1px solid rgba(230,200,136,0.25);
     }
-    @media (max-width: 768px) { .article-main-card { padding: 2rem 1.5rem; border-radius: 16px; } }
+    @media (max-width: 768px) {
+        .page-hero-banner,
+        .article-hero-masthead {
+            padding: 6.5rem 1.25rem 2.8rem 1.25rem !important;
+            min-height: auto !important;
+        }
+        .page-hero-banner h1,
+        .article-headline {
+            font-size: clamp(1.8rem, 6vw, 2.5rem) !important;
+            line-height: 1.2 !important;
+            margin-bottom: 0.8rem !important;
+            word-break: break-word !important;
+        }
+        .article-breadcrumbs {
+            flex-wrap: wrap !important;
+            justify-content: center !important;
+            font-size: 0.75rem !important;
+            margin-bottom: 1rem !important;
+        }
+        .article-meta-strip {
+            gap: 0.8rem !important;
+            font-size: 0.8rem !important;
+        }
+        .article-main-card { padding: 2rem 1.25rem; border-radius: 16px; }
+    }
     .article-featured-wrapper {
         border-radius: 18px;
         overflow: hidden;

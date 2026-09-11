@@ -352,9 +352,15 @@ $hero_subtitle = franciscan_get_page_field( 'contact', 'hero_subtitle', 'Reach o
     transition: background 0.25s ease, transform 0.2s ease;
     margin-top: 0.5rem;
 }
-.btn-send-message:hover {
-    background: var(--fs-brown-dark);
+.btn-send-message:hover,
+.btn-send-message:focus {
+    background: var(--fs-brown-dark) !important;
+    color: #FFFFFF !important;
     transform: translateY(-2px);
+}
+.btn-send-message:hover span,
+.btn-send-message:focus span {
+    color: #FFFFFF !important;
 }
 
 /* Location & Provincial Headquarters Section */
@@ -649,7 +655,7 @@ $hero_subtitle = franciscan_get_page_field( 'contact', 'hero_subtitle', 'Reach o
         </div>
 
         <!-- Location & Provincial Headquarters -->
-        <div>
+        <div style="margin-bottom: clamp(3.5rem, 6vw, 5.5rem);">
             <h2 class="location-section-heading">LOCATION &amp; PROVINCIAL HEADQUARTERS</h2>
             <div class="map-embed-frame">
                 <iframe 
