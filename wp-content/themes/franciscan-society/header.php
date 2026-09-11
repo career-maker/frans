@@ -1088,6 +1088,11 @@ button.fs-mega-toggle:focus::after {
     transform: translateY(-100%) !important;
     pointer-events: none !important;
   }
+  .fs-header.header-hidden ~ .fs-mega-menu {
+    display: none !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
 
   /* Admin bar offset when logged into WordPress */
   
@@ -1886,9 +1891,29 @@ $nav_url_contact     = function_exists( 'franciscan_resolve_nav_url' ) ? francis
     let activeHoverTimeout = null;
 
     function positionDropdown(toggle, megaMenu) {
+      const header = document.querySelector('.fs-header');
+      if (!header || header.classList.contains('header-hidden')) {
+        megaMenu.classList.remove('show');
+        toggle.classList.remove('active');
+        return;
+      }
+      const headerRect = header.getBoundingClientRect();
       const toggleRect = toggle.getBoundingClientRect();
-      megaMenu.style.left = Math.max(10, (toggleRect.left - 6)) + "px";
-      megaMenu.style.top = (toggleRect.bottom + 2) + "px";
+
+      // If header or toggle is scrolled offscreen or hidden, do not show
+      if (headerRect.bottom <= 0 || toggleRect.bottom <= 0) {
+        megaMenu.classList.remove('show');
+        toggle.classList.remove('active');
+        return;
+      }
+
+      // Horizontal alignment matching toggle
+      megaMenu.style.left = Math.max(10, Math.round(toggleRect.left - 6)) + "px";
+
+      // Vertical alignment: ALWAYS attach to the bottom edge of the header bar!
+      // This guarantees the dropdown is strictly underneath the navigation bar and NEVER overlaps menu items
+      const topPos = Math.round(Math.max(headerRect.bottom, toggleRect.bottom));
+      megaMenu.style.top = topPos + "px";
     }
 
     megaToggles.forEach(toggle => {
@@ -1897,6 +1922,11 @@ $nav_url_contact     = function_exists( 'franciscan_resolve_nav_url' ) ? francis
       if (!megaMenu) return;
 
       const openDropdown = function() {
+        const header = document.querySelector('.fs-header');
+        if (header && header.classList.contains('header-hidden')) {
+          return;
+        }
+
         if (activeHoverTimeout) {
           clearTimeout(activeHoverTimeout);
           activeHoverTimeout = null;
@@ -1972,7 +2002,35 @@ $nav_url_contact     = function_exists( 'franciscan_resolve_nav_url' ) ? francis
       megaMenu.addEventListener('mouseleave', queueCloseDropdown);
     });
 
-    // Reposition open menus on window resize or scroll
+    // Close any open desktop dropdown immediately on scroll so it never gets displaced or moves to the top of the menu
+    window.addEventListener('scroll', function() {
+      document.querySelectorAll('.fs-mega-menu.show').forEach(function(menu) {
+        menu.classList.remove('show');
+      });
+      document.querySelectorAll('.fs-mega-toggle.active').forEach(function(toggle) {
+        toggle.classList.remove('active');
+      });
+      if (activeHoverTimeout) {
+        clearTimeout(activeHoverTimeout);
+        activeHoverTimeout = null;
+      }
+    }, { passive: true });
+
+    // Update open menu position when header transition completes
+    const headerElement = document.querySelector('.fs-header');
+    if (headerElement) {
+      headerElement.addEventListener('transitionend', function(e) {
+        if (e.propertyName === 'transform' || e.propertyName === 'padding') {
+          document.querySelectorAll('.fs-mega-menu.show').forEach(menu => {
+            const menuKey = menu.id.replace('-mega', '');
+            const toggle = document.querySelector(`[data-menu="${menuKey}"]`);
+            if (toggle) positionDropdown(toggle, menu);
+          });
+        }
+      });
+    }
+
+    // Reposition open menus on window resize
     window.addEventListener('resize', function() {
       document.querySelectorAll('.fs-mega-menu.show').forEach(menu => {
         const menuKey = menu.id.replace('-mega', '');

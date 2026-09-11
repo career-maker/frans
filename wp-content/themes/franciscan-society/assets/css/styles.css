@@ -8378,3 +8378,9 @@ footer .footer-bottom-row .footer-sep {
     font-size: 0.7rem !important;
     opacity: 0.3 !important;
 }
+
+.fs-header.header-hidden ~ .fs-mega-menu {
+    display: none !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
