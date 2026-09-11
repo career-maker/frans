@@ -4422,21 +4422,6 @@ header.header::-webkit-scrollbar {
     
     .bible-quote-parallax h3 {
         font-size: 2.2rem !important;
-    }
-
-    /* Footer */
-    footer > div > div:first-child {
-        text-align: center !important;
-        align-items: center !important;
-    }
-    
-    footer .footer-social-icons {
-        justify-content: center !important;
-    }
-
-    footer [style*="text-align: left"] {
-        text-align: center !important;
-    }
 }
 @media (max-width: 576px) {
     .hero-metrics-grid {
@@ -4501,20 +4486,6 @@ header.header::-webkit-scrollbar {
     .bible-quote-parallax h3 {
         font-size: 2rem !important;
     }
-
-    /* Footer stacking */
-    footer > div > div:first-child {
-        grid-template-columns: 1fr !important;
-        text-align: center !important;
-        align-items: center !important;
-    }
-    footer .footer-social-icons {
-        justify-content: center !important;
-    }
-    footer [style*="text-align: left"] {
-        text-align: center !important;
-    }
-
 
     /* Flexbox Cards stacking */
     [style*="display: flex"][style*="gap: 2rem"] {
@@ -6119,42 +6090,84 @@ header.header::-webkit-scrollbar {
     }
 
     /* Logo column */
-    footer .responsive-grid-footer > div:first-child {
+    footer .responsive-grid-footer > div:first-child,
+    footer .footer-col-brand {
         padding-bottom: 1.5rem !important;
         border-bottom: 1px solid rgba(255,255,255,0.1) !important;
         margin-bottom: 0 !important;
+        text-align: left !important;
     }
 
     /* Footer logo: ensure full visibility without overflow */
     footer .responsive-grid-footer > div:first-child a.footer-brand-link,
-    footer .responsive-grid-footer > div:first-child a {
+    footer .responsive-grid-footer > div:first-child a,
+    footer a.footer-brand-link {
         display: flex !important;
         align-items: center !important;
         gap: 0.85rem !important;
         overflow: visible !important;
         flex-wrap: nowrap !important;
+        width: 100% !important;
         max-width: 100% !important;
+        text-align: left !important;
     }
-    footer .responsive-grid-footer > div:first-child a img {
+    footer .responsive-grid-footer > div:first-child a img,
+    footer a.footer-brand-link img {
         height: 44px !important;
         width: auto !important;
+        max-width: 48px !important;
         display: block !important;
         flex-shrink: 0 !important;
         min-width: 44px !important;
     }
+    footer .responsive-grid-footer > div:first-child a > div,
+    footer a.footer-brand-link > div {
+        flex: 1 1 auto !important;
+        min-width: 0 !important;
+        max-width: calc(100% - 56px) !important;
+        display: flex !important;
+        flex-direction: column !important;
+        text-align: left !important;
+    }
     footer .responsive-grid-footer > div:first-child a span,
     footer .responsive-grid-footer > div:first-child a .footer-logo-title,
-    footer .responsive-grid-footer > div:first-child a .footer-logo-subtitle {
+    footer .responsive-grid-footer > div:first-child a .footer-logo-subtitle,
+    footer .footer-logo-title,
+    footer .footer-logo-subtitle {
         white-space: normal !important;
-        overflow: visible !important;
+        word-break: normal !important;
+        overflow-wrap: break-word !important;
+        text-align: left !important;
+        display: block !important;
+        width: 100% !important;
     }
-    footer .responsive-grid-footer > div:first-child a .footer-logo-title {
+    footer .responsive-grid-footer > div:first-child a .footer-logo-title,
+    footer .footer-logo-title {
         font-size: 0.88rem !important;
         line-height: 1.3 !important;
     }
-    footer .responsive-grid-footer > div:first-child a .footer-logo-subtitle {
+    footer .responsive-grid-footer > div:first-child a .footer-logo-subtitle,
+    footer .footer-logo-subtitle {
         font-size: 0.72rem !important;
         line-height: 1.3 !important;
+    }
+
+    /* Contact details & address: strictly left-aligned on mobile */
+    footer .responsive-grid-footer > div:first-child,
+    footer .responsive-grid-footer > div:first-child > div,
+    footer .responsive-grid-footer > div:first-child .footer-contact-list,
+    footer .footer-col-brand,
+    footer .footer-contact-list,
+    footer .footer-contact-list > div,
+    footer .footer-address-text {
+        text-align: left !important;
+    }
+    footer .footer-address-text {
+        display: block !important;
+        flex: 1 1 auto !important;
+        min-width: 0 !important;
+        line-height: 1.5 !important;
+        text-align: left !important;
     }
 
     /* Footer link sections: expandable accordion style */

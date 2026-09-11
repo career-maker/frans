@@ -15,7 +15,7 @@
                     <div class="responsive-grid-footer" style="display: grid; gap: 3.5rem; margin-bottom: 3.8rem; align-items: start;">
                         
                         <!-- Column 1: Logo & Contact Information -->
-                        <div>
+                        <div class="footer-col-brand" style="text-align: left;">
                             <?php
                             $footer_logo             = franciscan_get_option( 'footer_logo', FRANCISCAN_THEME_URI . '/assets/images/logo.svg' );
                             $footer_org_title        = franciscan_get_option( 'footer_org_title', 'Franciscan Friars of the Third Order Regular' );
@@ -44,36 +44,36 @@
                             }
                             $footer_address = franciscan_get_option( 'address_text', "Franciscan Ashram (Provincial Residence)\nP.O. Harmu Housing Colony, Ranchi – 834002, JHARKHAND" );
                             ?>
-                            <div style="margin-bottom: 2rem;">
-                                <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="footer-brand-link" style="text-decoration: none; display: inline-flex; align-items: center; gap: 0.85rem;">
-                                    <img loading="lazy" decoding="async" src="<?php echo esc_url( $footer_logo ); ?>" alt="<?php echo esc_attr( $footer_org_title ); ?>" style="height: 48px; width: auto;" onerror="this.style.display='none'">
-                                    <div style="display: flex; flex-direction: column; text-align: left;">
-                                        <span class="footer-logo-title" style="font-family: 'Instrument Sans', sans-serif; font-weight: 600; font-size: 0.88rem; color: #ffffff; line-height: 1.25; letter-spacing: 0.01em;"><?php echo esc_html( $footer_org_title ); ?></span>
-                                        <span class="footer-logo-subtitle" style="font-family: 'Instrument Sans', sans-serif; font-size: 0.72rem; color: rgba(255, 255, 255, 0.75); line-height: 1.25; margin-top: 2px;"><?php echo esc_html( $footer_org_subtitle ); ?></span>
+                            <div style="margin-bottom: 2rem; text-align: left;">
+                                <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="footer-brand-link" style="text-decoration: none; display: flex; align-items: center; gap: 0.85rem; width: 100%; max-width: 100%; text-align: left;">
+                                    <img loading="lazy" decoding="async" src="<?php echo esc_url( $footer_logo ); ?>" alt="<?php echo esc_attr( $footer_org_title ); ?>" style="height: 48px; width: auto; flex-shrink: 0; min-width: 40px;" onerror="this.style.display='none'">
+                                    <div style="display: flex; flex-direction: column; text-align: left; flex: 1 1 auto; min-width: 0;">
+                                        <span class="footer-logo-title" style="font-family: 'Instrument Sans', sans-serif; font-weight: 600; font-size: 0.88rem; color: #ffffff; line-height: 1.25; letter-spacing: 0.01em; display: block; width: 100%; white-space: normal; overflow-wrap: break-word; word-break: normal; text-align: left;"><?php echo esc_html( $footer_org_title ); ?></span>
+                                        <span class="footer-logo-subtitle" style="font-family: 'Instrument Sans', sans-serif; font-size: 0.72rem; color: rgba(255, 255, 255, 0.75); line-height: 1.25; margin-top: 2px; display: block; width: 100%; white-space: normal; overflow-wrap: break-word; word-break: normal; text-align: left;"><?php echo esc_html( $footer_org_subtitle ); ?></span>
                                     </div>
                                 </a>
                             </div>
 
-                            <div style="display: flex; flex-direction: column; gap: 1.1rem; font-family: 'Instrument Sans', sans-serif; font-size: 0.92rem; color: #d6d3d1;">
-                                <div style="display: flex; align-items: center; gap: 0.8rem;">
+                            <div class="footer-contact-list" style="display: flex; flex-direction: column; gap: 1.1rem; font-family: 'Instrument Sans', sans-serif; font-size: 0.92rem; color: #d6d3d1; text-align: left;">
+                                <div style="display: flex; align-items: center; gap: 0.8rem; text-align: left;">
                                     <span style="width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.18); display: flex; align-items: center; justify-content: center; color: #ffffff; flex-shrink: 0;">
                                         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.18 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6.29 6.29l.97-.97a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
                                     </span>
                                     <a href="<?php echo esc_url( $footer_tel_url ); ?>" style="color: #d6d3d1; text-decoration: none;" onmouseover="this.style.color='#e6c888'" onmouseout="this.style.color='#d6d3d1'"><?php echo esc_html( $footer_phone ); ?></a>
                                 </div>
 
-                                <div style="display: flex; align-items: center; gap: 0.8rem;">
+                                <div style="display: flex; align-items: center; gap: 0.8rem; text-align: left;">
                                     <span style="width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.18); display: flex; align-items: center; justify-content: center; color: #ffffff; flex-shrink: 0;">
                                         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
                                     </span>
                                     <a href="mailto:<?php echo esc_attr( $footer_email ); ?>" style="color: #d6d3d1; text-decoration: none;" onmouseover="this.style.color='#e6c888'" onmouseout="this.style.color='#d6d3d1'"><?php echo esc_html( $footer_email ); ?></a>
                                 </div>
 
-                                <div style="display: flex; align-items: flex-start; gap: 0.8rem; margin-top: 0.3rem;">
+                                <div style="display: flex; align-items: flex-start; gap: 0.8rem; margin-top: 0.3rem; text-align: left;">
                                     <span style="width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.18); display: flex; align-items: center; justify-content: center; color: #ffffff; flex-shrink: 0;">
                                         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
                                     </span>
-                                    <span style="line-height: 1.5; font-size: 0.88rem;"><?php echo nl2br( esc_html( $footer_address ) ); ?></span>
+                                    <span class="footer-address-text" style="line-height: 1.5; font-size: 0.88rem; text-align: left; display: block; flex: 1 1 auto; min-width: 0;"><?php echo nl2br( esc_html( $footer_address ) ); ?></span>
                                 </div>
                             </div>
                         </div>
