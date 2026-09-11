@@ -839,37 +839,43 @@ button.fs-mega-toggle:focus::after {
             </div>
 
             <!-- Era 2: Papal Unification & Generalate -->
+            <?php
+            $era2_img = franciscan_get_page_field( 'community-history', 'era2_image', '' );
+            if ( empty( $era2_img ) ) {
+                $era2_img = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_24_08_PM.png';
+            }
+            ?>
             <div style="display: grid; grid-template-columns: 1.15fr 0.85fr; gap: clamp(2rem, 4vw, 3.5rem); align-items: center; margin-bottom: 3rem;" class="responsive-ministry-grid">
                 <div>
                     <div style="display: inline-flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;">
                         <span style="width: 6px; height: 6px; background-color: #4A2A18; border-radius: 50%;"></span>
-                        <span style="color: #4A2A18; font-size: 0.8rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; font-family: 'Instrument Sans', sans-serif;">PAPAL CONFIRMATION</span>
+                        <span style="color: #4A2A18; font-size: 0.8rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; font-family: 'Instrument Sans', sans-serif;"><?php echo esc_html( franciscan_get_page_field( 'community-history', 'era2_badge', 'PAPAL CONFIRMATION' ) ); ?></span>
                     </div>
                     <h3 style="font-family: 'Phudu', sans-serif; font-size: clamp(1.6rem, 2.6vw, 2.1rem); font-weight: 700; color: #1c1917; text-transform: uppercase; margin: 0 0 1.5rem 0;">
-                        Unification &amp; The Generalate in Rome
+                        <?php echo esc_html( franciscan_get_page_field( 'community-history', 'era2_title', 'Unification & The Generalate in Rome' ) ); ?>
                     </h3>
                     <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.52; margin-bottom: 1.25rem;">
-                        In 1447, Pope Nicholas V, through the bull <em>Pastoralis Officii</em>, united approximately sixty communities of male Franciscan tertiaries in Italy under a single Minister General. This marked the formal beginning of the Third Order Regular of St. Francis. In 1512, the Order established its headquarters at the Basilica of Saints Cosmas and Damian in Rome, where its Generalate remains to this day.
+                        <?php echo esc_html( franciscan_get_page_field( 'community-history', 'era2_p1', 'In 1447, Pope Nicholas V, through the bull Pastoralis Officii, united approximately sixty communities of male Franciscan tertiaries in Italy under a single Minister General. This marked the formal beginning of the Third Order Regular of St. Francis. In 1512, the Order established its headquarters at the Basilica of Saints Cosmas and Damian in Rome, where its Generalate remains to this day.' ) ); ?>
                     </p>
                     <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.52; margin: 0;">
-                        The Third Order Regular received a revised Rule from Pope Pius XI in 1927 through the document <em>Rerum Conditio</em>. This Rule was renewed on 8 December 1982 by Pope John Paul II through the apostolic letter <em>Franciscanum Vitae Propositum</em>, becoming the Rule and Life of nearly four hundred Franciscan Third Order congregations of men and women throughout the world.
+                        <?php echo esc_html( franciscan_get_page_field( 'community-history', 'era2_p2', 'The Third Order Regular received a revised Rule from Pope Pius XI in 1927 through the document Rerum Conditio. This Rule was renewed on 8 December 1982 by Pope John Paul II through the apostolic letter Franciscanum Vitae Propositum, becoming the Rule and Life of nearly four hundred Franciscan Third Order congregations of men and women throughout the world.' ) ); ?>
                     </p>
                 </div>
                 <div style="border-radius: 20px; overflow: hidden; box-shadow: 0 15px 35px rgba(74,42,24,0.12); border: 2px solid rgba(230,200,136,0.3); background: #FAF7F0;">
-                    <img loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_24_08_PM.png' ); ?>" alt="Franciscan Heritage" style="width: 100%; height: 420px; object-fit: cover; display: block;">
+                    <img loading="lazy" decoding="async" src="<?php echo esc_url( $era2_img ); ?>" alt="Franciscan Heritage" style="width: 100%; height: 420px; object-fit: cover; display: block;">
                 </div>
             </div>
 
             <!-- Franciscan Identity Highlight Box -->
             <div style="background: linear-gradient(135deg, #FAF7F0, #f2ece1); border-left: 5px solid #4A2A18; border-radius: 16px; padding: 2.2rem 2.5rem; margin-bottom: 3rem; box-shadow: 0 8px 25px rgba(74,42,24,0.05);">
                 <h4 style="font-family: 'Phudu', sans-serif; font-size: 1.3rem; font-weight: 700; color: #4A2A18; text-transform: uppercase; margin: 0 0 0.8rem 0;">
-                    Franciscan Identity &amp; Global Presence
+                    <?php echo esc_html( franciscan_get_page_field( 'community-history', 'identity_title', 'Franciscan Identity & Global Presence' ) ); ?>
                 </h4>
                 <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.52; margin-bottom: 1rem;">
-                    Conversion, contemplation, poverty, and humility lie at the heart of Franciscan identity. The fundamental charism of the Third Order Regular, however, is penance, understood as ongoing conversion. This involves turning to God in love, reconciliation with Him, harmony with oneself, and charity toward one’s neighbour.
+                    <?php echo esc_html( franciscan_get_page_field( 'community-history', 'identity_p1', 'Conversion, contemplation, poverty, and humility lie at the heart of Franciscan identity. The fundamental charism of the Third Order Regular, however, is penance, understood as ongoing conversion. This involves turning to God in love, reconciliation with Him, harmony with oneself, and charity toward one’s neighbour.' ) ); ?>
                 </p>
                 <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.52; margin: 0;">
-                    Today, the Order comprises three provinces in India; two provinces each in Italy and the United States; one province each in Sri Lanka, Spain and Croatia; vice provinces in South Africa, Brazil, Paraguay, and Mexico; delegations in the Philippines, France, Sweden, and Bangladesh; and a commissariat of the Spanish Province in Peru.
+                    <?php echo esc_html( franciscan_get_page_field( 'community-history', 'identity_p2', 'Today, the Order comprises three provinces in India; two provinces each in Italy and the United States; one province each in Sri Lanka, Spain and Croatia; vice provinces in South Africa, Brazil, Paraguay, and Mexico; delegations in the Philippines, France, Sweden, and Bangladesh; and a commissariat of the Spanish Province in Peru.' ) ); ?>
                 </p>
             </div>
 
@@ -877,25 +883,25 @@ button.fs-mega-toggle:focus::after {
             <div style="background: #FAF7F0; border-radius: 24px; padding: clamp(2rem, 5vw, 3.5rem); border: 1px solid rgba(74,42,24,0.08); margin-bottom: 0;">
                 <div style="display: inline-flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;">
                     <span style="width: 6px; height: 6px; background-color: #4A2A18; border-radius: 50%;"></span>
-                    <span style="color: #4A2A18; font-size: 0.8rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; font-family: 'Instrument Sans', sans-serif;">THE INDIAN MISSION</span>
+                    <span style="color: #4A2A18; font-size: 0.8rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; font-family: 'Instrument Sans', sans-serif;"><?php echo esc_html( franciscan_get_page_field( 'community-history', 'era3_badge', 'THE INDIAN MISSION' ) ); ?></span>
                 </div>
                 <h3 style="font-family: 'Phudu', sans-serif; font-size: clamp(1.6rem, 2.6vw, 2.1rem); font-weight: 700; color: #1c1917; text-transform: uppercase; margin: 0 0 1.5rem 0;">
-                    The History of the TOR in India &amp; Ranchi Province
+                    <?php echo esc_html( franciscan_get_page_field( 'community-history', 'era3_title', 'The History of the TOR in India & Ranchi Province' ) ); ?>
                 </h3>
                 <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.52; margin-bottom: 1.25rem;">
-                    The history of the TOR in India began in 1938 when missionaries from the Province of the Sacred Heart of Jesus, USA, arrived in Bhagalpur, Bihar. The mission steadily grew and was established as a Commissariat in 1945. In 1971, it was elevated to the status of a Province under the title Province of St. Thomas the Apostle.
+                    <?php echo esc_html( franciscan_get_page_field( 'community-history', 'era3_p1', 'The history of the TOR in India began in 1938 when missionaries from the Province of the Sacred Heart of Jesus, USA, arrived in Bhagalpur, Bihar. The mission steadily grew and was established as a Commissariat in 1945. In 1971, it was elevated to the status of a Province under the title Province of St. Thomas the Apostle.' ) ); ?>
                 </p>
                 <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.52; margin-bottom: 1.25rem;">
-                    In 1996, the Commissariat of St. Francis was established at Ranchi. On 4 October 1999, the Most Rev. Bonaventure Midili, TOR, Minister General, elevated it to the status of a Vice Province. The Vice Province of St. Francis was formally inaugurated by him in Ranchi on 8 December 1999.
+                    <?php echo esc_html( franciscan_get_page_field( 'community-history', 'era3_p2', 'In 1996, the Commissariat of St. Francis was established at Ranchi. On 4 October 1999, the Most Rev. Bonaventure Midili, TOR, Minister General, elevated it to the status of a Vice Province. The Vice Province of St. Francis was formally inaugurated by him in Ranchi on 8 December 1999.' ) ); ?>
                 </p>
                 <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.52; margin-bottom: 1.25rem;">
-                    Recognizing the remarkable growth and expansion of the Vice Province between 1999 and 2005, as well as the strategic importance of India for the future of the Order, the Most Rev. Ilija Živković, TOR, Minister General, elevated it to a full-fledged Province on 20 March 2006. The ceremony took place in Ranchi during a Eucharistic celebration presided over by the Most Rev. Dr. Vincent Barwa, Auxiliary Bishop of Ranchi.
+                    <?php echo esc_html( franciscan_get_page_field( 'community-history', 'era3_p3', 'Recognizing the remarkable growth and expansion of the Vice Province between 1999 and 2005, as well as the strategic importance of India for the future of the Order, the Most Rev. Ilija Živković, TOR, Minister General, elevated it to a full-fledged Province on 20 March 2006. The ceremony took place in Ranchi during a Eucharistic celebration presided over by the Most Rev. Dr. Vincent Barwa, Auxiliary Bishop of Ranchi.' ) ); ?>
                 </p>
                 <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.52; margin-bottom: 1.25rem;">
-                    The Province presently has 104 professed friars, including 84 solemnly professed and 19 temporarily professed members. Among them are 71 priests and 3 brothers. The Province has 28 major seminarians, 4 novices, 9 pre-novices, and 36 candidates.
+                    <?php echo esc_html( franciscan_get_page_field( 'community-history', 'era3_p4', 'The Province presently has 104 professed friars, including 84 solemnly professed and 19 temporarily professed members. Among them are 71 priests and 3 brothers. The Province has 28 major seminarians, 4 novices, 9 pre-novices, and 36 candidates.' ) ); ?>
                 </p>
                 <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.52; margin: 0;">
-                    The Province maintains four houses in the Archdiocese of Ranchi, four in Khunti, three in Simdega, two in Rourkela, two in Jalpaiguri, and one each in the dioceses of Bagdogra, Gumla, Purnea, and Bongaigaon. The friars serve the People of God through ministry in 14 parishes and 22 schools. Two friars are currently engaged in ministry abroad. The Province has three formation houses: one in Ranchi, one in Dorma, and one in Bichna.
+                    <?php echo esc_html( franciscan_get_page_field( 'community-history', 'era3_p5', 'The Province maintains four houses in the Archdiocese of Ranchi, four in Khunti, three in Simdega, two in Rourkela, two in Jalpaiguri, and one each in the dioceses of Bagdogra, Gumla, Purnea, and Bongaigaon. The friars serve the People of God through ministry in 14 parishes and 22 schools. Two friars are currently engaged in ministry abroad. The Province has three formation houses: one in Ranchi, one in Dorma, and one in Bichna.' ) ); ?>
                 </p>
             </div>
 

@@ -211,6 +211,29 @@ function franciscan_ajax_contact() {
             'message'         => $clean_message,
         ) );
 
+        // Send confirmation auto-responder email to devotee if valid email provided
+        if ( is_email( $clean_email ) ) {
+            $devotee_subject = '✞ Peace and Good: Your message has been received (' . get_bloginfo( 'name' ) . ')';
+            $devotee_headers = array(
+                'Content-Type: text/html; charset=UTF-8',
+                'From: ' . wp_strip_all_tags( $from_name ) . ' <' . sanitize_email( $smtp_from_email ) . '>',
+            );
+            $devotee_body = franciscan_render_christian_email_html( array(
+                'title'           => 'Thank You for Reaching Out',
+                'subtitle'        => 'Province of St. Francis of Assisi, Ranchi • Third Order Regular',
+                'badge'           => 'MESSAGE RECEIVED',
+                'fields'          => array(
+                    'Dear'            => esc_html( $clean_name ),
+                    'Subject'         => esc_html( $clean_subject ),
+                    'Received On'     => esc_html( current_time( 'd M Y, h:i A' ) ),
+                    'Response Time'   => 'Our friars will review your message and reply within 24–48 hours.',
+                ),
+                'message_heading' => 'Copy of Your Submitted Message',
+                'message'         => $clean_message,
+            ) );
+            wp_mail( $clean_email, $devotee_subject, $devotee_body, $devotee_headers );
+        }
+
         franciscan_send_instant_success_and_email(
             array( 'message' => 'Thank you! Your message has been received. Our friars will respond within 24–48 hours. Peace and Good.' ),
             $to,
@@ -315,6 +338,28 @@ function franciscan_ajax_prayer() {
             'message_heading' => 'Holy Prayer Intention',
             'message'         => $clean_intentions,
         ) );
+
+        // Send prayer confirmation auto-responder email to devotee if valid email provided
+        if ( ! empty( $clean_email ) && is_email( $clean_email ) ) {
+            $devotee_subject = '✞ Prayer Received: Peace and Blessings from the Franciscan Friars';
+            $devotee_headers = array(
+                'Content-Type: text/html; charset=UTF-8',
+                'From: ' . wp_strip_all_tags( $from_name ) . ' <' . sanitize_email( $smtp_from_email ) . '>',
+            );
+            $devotee_body = franciscan_render_christian_email_html( array(
+                'title'           => 'Your Prayer Has Been Received',
+                'subtitle'        => 'Province of St. Francis of Assisi, Ranchi • Third Order Regular',
+                'badge'           => 'PRAYER INTENTION',
+                'fields'          => array(
+                    'Dear'            => esc_html( $clean_name ),
+                    'Received On'     => esc_html( current_time( 'd M Y, h:i A' ) ),
+                    'Spiritual Care'  => 'Your intentions will be remembered in the daily community prayers and Holy Mass celebrations of our friars.',
+                ),
+                'message_heading' => 'Your Prayer Intention',
+                'message'         => $clean_intentions,
+            ) );
+            wp_mail( $clean_email, $devotee_subject, $devotee_body, $devotee_headers );
+        }
 
         franciscan_send_instant_success_and_email(
             array( 'message' => 'Your prayer request has been received. Our friars will remember your intention in our daily community Holy Mass and Liturgy of the Hours.' ),

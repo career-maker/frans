@@ -979,9 +979,8 @@ button.fs-mega-toggle:focus::after {
                     const modal = document.getElementById('fs-gallery-lightbox');
 
                     if (closeBtn) closeBtn.addEventListener('click', closeLightbox);
-                    if (prevBtn) prevBtn.addEventListener('click', (e) => { e.stopPropagation(); prevLightboxImage(); });
-                    if (nextBtn) nextBtn.addEventListener('click', (e) => { e.stopPropagation(); nextLightboxImage(); });
                     
+                    // Unified button listeners for desktop and mobile navigation
                     document.querySelectorAll('.fs-lightbox-prev-btn').forEach(b => b.addEventListener('click', (e) => { e.stopPropagation(); prevLightboxImage(); }));
                     document.querySelectorAll('.fs-lightbox-next-btn').forEach(b => b.addEventListener('click', (e) => { e.stopPropagation(); nextLightboxImage(); }));
 

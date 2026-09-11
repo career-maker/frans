@@ -650,6 +650,7 @@ button.fs-mega-toggle:focus::after {
     <?php
     $hero_badge     = function_exists('franciscan_get_page_field') ? franciscan_get_page_field( 'privacy', 'hero_badge', 'LEGAL & PRIVACY' ) : 'LEGAL & PRIVACY';
     $hero_title     = function_exists('franciscan_get_page_field') ? franciscan_get_page_field( 'privacy', 'hero_title', 'PRIVACY POLICY' ) : 'PRIVACY POLICY';
+    $hero_subtitle  = function_exists('franciscan_get_page_field') ? franciscan_get_page_field( 'privacy', 'hero_subtitle', 'Province of St. Francis of Assisi, Ranchi' ) : 'Province of St. Francis of Assisi, Ranchi';
     $hero_image     = function_exists('franciscan_get_page_field') ? franciscan_get_page_field( 'privacy', 'hero_image', FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_51_30_PM.png' ) : ( FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_51_30_PM.png' );
     $eyebrow        = function_exists('franciscan_get_page_field') ? franciscan_get_page_field( 'privacy', 'eyebrow', 'PRIVACY' ) : 'PRIVACY';
     $custom_content = function_exists('franciscan_get_page_field') ? franciscan_get_page_field( 'privacy', 'page_content', '' ) : '';
@@ -664,6 +665,9 @@ button.fs-mega-toggle:focus::after {
                 <span style="color: #ffffff; font-size: 0.85rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; font-family: 'Instrument Sans', sans-serif;"><?php echo esc_html( $hero_badge ); ?></span>
             </div>
             <h1 style="font-family: 'Phudu', sans-serif; font-size: clamp(2.8rem, 5vw, 4.2rem); font-weight: 700; color: #ffffff; text-transform: uppercase; margin: 0;"><?php echo esc_html( $hero_title ); ?></h1>
+            <?php if ( ! empty( $hero_subtitle ) ) : ?>
+                <p style="font-family: 'Instrument Sans', sans-serif; font-size: clamp(1rem, 2vw, 1.15rem); color: rgba(255, 255, 255, 0.88); line-height: 1.6; margin: 1rem auto 0 auto; max-width: 680px;"><?php echo esc_html( $hero_subtitle ); ?></p>
+            <?php endif; ?>
         </div>
     </section>
 

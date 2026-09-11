@@ -508,6 +508,11 @@ if ( ! empty( $custom_banner ) ) {
 
                 <!-- Prose Content -->
                 <div class="article-prose">
+                    <?php if ( has_excerpt() ) : ?>
+                        <div class="article-lead-excerpt" style="font-family:'Instrument Sans', sans-serif; font-size:1.25rem; line-height:1.6; color:#4A2A18; font-weight:600; padding:1.2rem 1.5rem; background:rgba(74,42,24,0.04); border-left:4px solid #C5A963; border-radius:0 12px 12px 0; margin-bottom:2rem;">
+                            <?php the_excerpt(); ?>
+                        </div>
+                    <?php endif; ?>
                     <?php the_content(); ?>
                 </div>
 

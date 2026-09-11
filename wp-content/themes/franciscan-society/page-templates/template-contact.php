@@ -492,12 +492,28 @@ $hero_subtitle = franciscan_get_page_field( 'contact', 'hero_subtitle', 'Reach o
 <main id="main-content">
     <div class="contact-container">
 
+        <?php
+        $contact_heading = franciscan_get_page_field( 'contact', 'main_heading', '' );
+        if ( empty( $contact_heading ) ) {
+            $contact_heading = franciscan_get_page_field( 'contact', 'contact_heading', 'REACH OUT TO US' );
+        }
+        $contact_main_text = franciscan_get_page_field( 'contact', 'main_text', '' );
+        $channels_card_title = franciscan_get_page_field( 'contact', 'contact_details_title', '' );
+        if ( empty( $channels_card_title ) ) {
+            $channels_card_title = franciscan_get_page_field( 'contact', 'channels_card_title', 'COMMUNICATION CHANNELS' );
+        }
+        ?>
         <!-- Top Section Header -->
         <div class="contact-eyebrow">
             <span class="contact-eyebrow-dot"></span>
             <span class="contact-eyebrow-text"><?php echo esc_html( franciscan_get_page_field( 'contact', 'contact_eyebrow', 'CONTACT INFORMATION' ) ); ?></span>
         </div>
-        <h2 class="contact-main-heading"><?php echo esc_html( franciscan_get_page_field( 'contact', 'contact_heading', 'REACH OUT TO US' ) ); ?></h2>
+        <h2 class="contact-main-heading"><?php echo esc_html( $contact_heading ); ?></h2>
+        <?php if ( ! empty( $contact_main_text ) ) : ?>
+            <p style="font-family: 'Instrument Sans', sans-serif; font-size: 1.05rem; color: var(--fs-text-sub); line-height: 1.6; max-width: 800px; margin: -1.5rem 0 2.5rem 0;">
+                <?php echo nl2br( esc_html( $contact_main_text ) ); ?>
+            </p>
+        <?php endif; ?>
 
         <!-- 2-Column Content Layout -->
         <div class="contact-layout-grid">
@@ -541,7 +557,7 @@ $hero_subtitle = franciscan_get_page_field( 'contact', 'hero_subtitle', 'Reach o
                         </svg>
                     </div>
                     <div class="info-card-content">
-                        <h3><?php echo esc_html( franciscan_get_page_field( 'contact', 'channels_card_title', 'COMMUNICATION CHANNELS' ) ); ?></h3>
+                        <h3><?php echo esc_html( $channels_card_title ); ?></h3>
                         <p>
                             Email: <a href="mailto:<?php echo esc_attr( $contact_email ); ?>" style="color: var(--fs-brown); font-weight: 700; text-decoration: none;"><?php echo esc_html( $contact_email ); ?></a><br>
                             Phone / WhatsApp: <a href="<?php echo esc_url( $tel_href ); ?>" style="color: var(--fs-brown); font-weight: 700; text-decoration: none;"><?php echo esc_html( $contact_phone ); ?></a>
@@ -733,19 +749,17 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     // Franciscan Universal Form Validator handles validation, anti-spam, and AJAX submission.
-    // Toast notification hook for contact page
-    window.addEventListener("DOMContentLoaded", function() {
-        if (window.FranciscanValidator && form) {
-            window.FranciscanValidator.bindForm(form, {
-                onSuccess: function(res) {
-                    showToast(res && res.message ? res.message : "Message Received! May God bless you.");
-                },
-                onError: function(err) {
-                    showToast(err && err.message ? err.message : "Submission failed. Please check the fields.");
-                }
-            });
-        }
-    });
+    const contactForm = document.getElementById("fs-contact-form");
+    if (window.FranciscanValidator && contactForm) {
+        window.FranciscanValidator.bindForm(contactForm, {
+            onSuccess: function(res) {
+                showToast(res && res.message ? res.message : "Message Received! May God bless you.");
+            },
+            onError: function(err) {
+                showToast(err && err.message ? err.message : "Submission failed. Please check the fields.");
+            }
+        });
+    }
 });
 </script>
 

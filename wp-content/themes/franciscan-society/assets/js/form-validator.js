@@ -353,6 +353,21 @@
 
         feedback.style.display = 'flex';
 
+        // Auto-dismiss success feedback automatically after 5 seconds
+        if (!isError) {
+            setTimeout(() => {
+                if (feedback && feedback.style.display !== 'none') {
+                    feedback.style.transition = 'opacity 0.4s ease';
+                    feedback.style.opacity = '0';
+                    setTimeout(() => {
+                        feedback.style.display = 'none';
+                        feedback.style.opacity = '1';
+                        feedback.style.transition = '';
+                    }, 400);
+                }
+            }, 5000);
+        }
+
         // Auto-dismiss feedback when user starts modifying form inputs
         const inputs = form.querySelectorAll('input, select, textarea');
         const clearFeedback = () => {

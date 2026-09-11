@@ -716,9 +716,16 @@ button.fs-mega-toggle:focus::after {
 
     $prologue_badge    = franciscan_get_page_field( 'community-rule', 'prologue_badge', 'PROLOGUE TO THE RULE' );
     $prologue_title    = franciscan_get_page_field( 'community-rule', 'prologue_title', 'Third Order Regular Rule' );
-    $prologue_subtitle = franciscan_get_page_field( 'community-rule', 'prologue_subtitle', 'The Beginning of the Rule and the Life of the Brothers and Sisters of the Third Order Regular of St. Francis (Words of St. Francis to His Followers — Letter to the Faithful I, 1–19)' );
-    $prologue_p1       = franciscan_get_page_field( 'community-rule', 'prologue_p1', '' );
-    $prologue_p2       = franciscan_get_page_field( 'community-rule', 'prologue_p2', '' );
+    $default_prologue_p1 = 'All who love the Lord with their whole heart, with their whole soul and mind, and with all their strength, (cf Mk 12:30) and love their neighbors as themselves, (cf Mt 22:39) and who despise the tendency in their humanity to sin, receive the Body and Blood of our Lord Jesus Christ and bring forth from within themselves fruits worthy of true penance; How happy and blessed are these men and women when they do these things, and persevere in doing them because the Spirit of the Lord will rest upon them (cf Is 11:12) and the Lord will make His home and dwelling place with them (cf Jn 14:23). They are the children of the Heavenly Father (cf Mt 5:45) whose works they do. They are the spouses, brothers and mothers of Our Lord Jesus Christ (cf Mt 12:50). We are his spouses when the faithful soul is united by the Holy Spirit with Our Lord Jesus Christ. We are brothers when we do the will of the Father who is in Heaven (cf Mt 12:50). We are mothers when we bear Him in our hearts and bodies (cf 1 Co 6:20) with divine love and with pure and sincere consciences; and we give birth to him through a holy life which should enlighten others because of our example (Mt 5:16).';
+    $default_prologue_p2 = 'How glorious it is to have so holy and great a Father in Heaven; and to have such a beautiful and admirable Spouse, the Holy Paraclete; and to have a Brother and Son, so holy, beloved, blessed, humble, peaceful, sweet, lovable, and desirable over all things: Our Lord Jesus Christ who gave up his life for his sheep (cf Jn 10:15) and prayed to the Father, saying: Holy Father, keep in your name (Jn 17:11) those whom You gave Me in the world; they are Yours and You gave them to Me (Jn 17:6). And the word which You gave Me I gave to them, and they accepted it and truly believed that it came forth from You. And they have accepted that You sent Me (Jn 17:8). I pray for them and not for the world (Jn 17:9). Bless them and sanctify them (Jn 17:17). I sanctify Myself for their sakes (Jn 17:19). I do not pray only for these but also for those who, through their word, will believe in Me (Jn 17:20), may they be holy in oneness as We are (Jn 17:11). Father, I wish that where I am they too may be and that they may see My glory (Jn 17:24) in Your kingdom (Mt 20:21).';
+    $prologue_p1       = franciscan_get_page_field( 'community-rule', 'prologue_p1', $default_prologue_p1 );
+    if ( empty( $prologue_p1 ) ) {
+        $prologue_p1 = $default_prologue_p1;
+    }
+    $prologue_p2       = franciscan_get_page_field( 'community-rule', 'prologue_p2', $default_prologue_p2 );
+    if ( empty( $prologue_p2 ) ) {
+        $prologue_p2 = $default_prologue_p2;
+    }
     
     $emblem_image      = franciscan_get_page_field( 'community-rule', 'emblem_image', '' );
     if ( empty( $emblem_image ) ) {

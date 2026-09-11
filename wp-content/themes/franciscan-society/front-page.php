@@ -81,10 +81,27 @@ get_header();
                     
                     <!-- Left Column: Title & Buttons -->
                     <div class="js-hero-text" style="display: flex; flex-direction: column; justify-content: flex-end;">
+                        <?php
+                        $home_hero_badge = franciscan_get_page_field( 'home', 'hero_badge', '' );
+                        $home_hero_sub   = franciscan_get_page_field( 'home', 'hero_subtitle', '' );
+                        ?>
+                        <?php if ( ! empty( $home_hero_badge ) ) : ?>
+                            <div style="display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(230, 200, 136, 0.16); backdrop-filter: blur(8px); padding: 0.35rem 1rem; border-radius: 50px; margin-bottom: 1.2rem; border: 1px solid rgba(230, 200, 136, 0.35); width: fit-content;">
+                                <span style="width: 6px; height: 6px; background-color: #e6c888; border-radius: 50%; display: inline-block;"></span>
+                                <span style="color: #ffffff; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; font-family: 'Instrument Sans', sans-serif;"><?php echo esc_html( $home_hero_badge ); ?></span>
+                            </div>
+                        <?php endif; ?>
+
                         <!-- Main Title: Phudu, 600 weight, 62px size, 62px line height -->
-                        <h1 class="hero-title" style="font-family: 'Phudu', sans-serif !important; font-size: clamp(2.6rem, 5.5vw, 4.8rem) !important; font-weight: 600 !important; color: #ffffff; text-transform: uppercase; line-height: 1.05; letter-spacing: -0.01em; margin-bottom: 2.2rem; text-shadow: none !important;">
+                        <h1 class="hero-title" style="font-family: 'Phudu', sans-serif !important; font-size: clamp(2.6rem, 5.5vw, 4.8rem) !important; font-weight: 600 !important; color: #ffffff; text-transform: uppercase; line-height: 1.05; letter-spacing: -0.01em; margin-bottom: 1.5rem; text-shadow: none !important;">
                             <?php echo nl2br( esc_html( franciscan_get_page_field( 'home', 'hero_title', "Let us begin again,\nfor we have only begun to serve the Lord." ) ) ); ?>
                         </h1>
+
+                        <?php if ( ! empty( $home_hero_sub ) ) : ?>
+                            <p style="font-family: 'Instrument Sans', sans-serif; font-size: clamp(1rem, 1.8vw, 1.2rem); color: rgba(255, 255, 255, 0.9); max-width: 680px; margin: 0 0 1.8rem 0; line-height: 1.55; font-weight: 400;">
+                                <?php echo nl2br( esc_html( $home_hero_sub ) ); ?>
+                            </p>
+                        <?php endif; ?>
 
                         <!-- Buttons Row -->
                         <div class="hero-buttons-row" style="display: flex; gap: 1.25rem; align-items: center; flex-wrap: wrap;">
@@ -158,7 +175,7 @@ get_header();
                     <!-- Welcome Message Text in Instrument Sans 600 -->
                     <?php
                     $welcome_text = franciscan_get_page_field( 'home', 'welcome_section_text', '' );
-                    if ( empty( $welcome_text ) || strpos( $welcome_text, 'We warmly welcome you' ) !== false || strpos( $welcome_text, 'Poverello of Assisi' ) !== false ) {
+                    if ( empty( $welcome_text ) ) {
                         $welcome_text = 'In the spirit of the Seraphic Minstrel of Divine Love, we walk the way of the Gospel—our hearts rooted in prayer, our lives woven together in fraternity, and our footsteps shaped by the simplicity and humility of Christ. Drawn to the least, we seek to become gentle instruments of His peace, singing into the world the melody of mercy, hope, and love.';
                     }
                     ?>
@@ -278,10 +295,16 @@ get_header();
                     </div>
                     
                     <!-- Inset Video Overlay Card (Positioned inside bottom-right corner) -->
+                    <?php
+                    $about_video_btn_url = franciscan_get_page_field( 'home', 'about_video_btn_url', '' );
+                    if ( empty( $about_video_btn_url ) ) {
+                        $about_video_btn_url = 'https://youtube.com/@tormediaranchi3804?si=UPTCSJUSj9tbcjeB';
+                    }
+                    ?>
                     <div class="about-video-card" style="position: absolute; bottom: 20px; right: 20px; background: #ffffff; padding: 10px; border-radius: 16px; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.18); width: 185px; text-align: center; z-index: 10;">
                         <div style="position: relative; border-radius: 12px; overflow: hidden; height: 95px; background-color: #1c1917;">
                             <video src="<?php echo esc_url( $about_video ); ?>" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" autoplay loop muted playsinline></video>
-                            <a rel="noopener noreferrer" href="https://youtube.com/@tormediaranchi3804?si=UPTCSJUSj9tbcjeB" target="_blank" class="video-play-btn" aria-label="Watch our video on YouTube">
+                            <a rel="noopener noreferrer" href="<?php echo esc_url( $about_video_btn_url ); ?>" target="_blank" class="video-play-btn" aria-label="Watch our video on YouTube">
                                 <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16" aria-hidden="true">
                                     <path d="M8 5v14l11-7z"/>
                                 </svg>

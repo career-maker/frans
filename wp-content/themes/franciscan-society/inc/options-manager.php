@@ -1530,3 +1530,48 @@ function franciscan_get_provincial_council() {
     return franciscan_get_default_provincial_council();
 }
 
+/**
+ * Universal Breadcrumbs Generator for Franciscan Society Theme
+ */
+function franciscan_render_breadcrumbs() {
+    if ( is_front_page() ) {
+        return;
+    }
+
+    $home_url   = home_url( '/' );
+    $crumbs     = array();
+    $crumbs[]   = '<a href="' . esc_url( $home_url ) . '">Home</a>';
+
+    if ( is_single() ) {
+        $cats = get_the_category();
+        if ( ! empty( $cats ) ) {
+            $cat = $cats[0];
+            $crumbs[] = '<a href="' . esc_url( get_category_link( $cat->term_id ) ) . '">' . esc_html( $cat->name ) . '</a>';
+        }
+        $crumbs[] = '<span>' . esc_html( wp_trim_words( get_the_title(), 6 ) ) . '</span>';
+    } elseif ( is_page() ) {
+        global $post;
+        if ( $post->post_parent ) {
+            $ancestors = array_reverse( get_post_ancestors( $post->ID ) );
+            foreach ( $ancestors as $ancestor_id ) {
+                $crumbs[] = '<a href="' . esc_url( get_permalink( $ancestor_id ) ) . '">' . esc_html( get_the_title( $ancestor_id ) ) . '</a>';
+            }
+        }
+        $crumbs[] = '<span>' . esc_html( get_the_title() ) . '</span>';
+    } elseif ( is_category() ) {
+        $crumbs[] = '<span>' . esc_html( single_cat_title( '', false ) ) . '</span>';
+    } elseif ( is_archive() ) {
+        $crumbs[] = '<span>' . esc_html( get_the_archive_title() ) . '</span>';
+    } elseif ( is_search() ) {
+        $crumbs[] = '<span>Search Results for: "' . esc_html( get_search_query() ) . '"</span>';
+    } elseif ( is_404() ) {
+        $crumbs[] = '<span>Page Not Found</span>';
+    }
+
+    if ( ! empty( $crumbs ) ) {
+        echo '<nav class="franciscan-breadcrumbs" aria-label="Breadcrumb" style="display:inline-flex;align-items:center;gap:0.5rem;font-size:0.85rem;font-family:\'Instrument Sans\',sans-serif;color:rgba(255,255,255,0.7);">';
+        echo implode( '<span style="color:var(--c-gold,#e6c888);margin:0 0.2rem;">&rsaquo;</span>', $crumbs );
+        echo '</nav>';
+    }
+}
+

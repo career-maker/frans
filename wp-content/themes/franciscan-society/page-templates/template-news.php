@@ -290,6 +290,10 @@ $banner_bg = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/hero-banner-aug2
                 <img src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/new_uploads/seminar-labour-code.jpeg' ); ?>" alt="Seminar on New Labour Code at Hardag, Ranchi">
             </div>
 
+            <div class="article-lead-excerpt" style="font-family:'Instrument Sans', sans-serif; font-size:1.25rem; line-height:1.6; color:#4A2A18; font-weight:600; padding:1.2rem 1.5rem; background:rgba(74,42,24,0.04); border-left:4px solid #C5A963; border-radius:0 12px 12px 0; margin-bottom:2rem;">
+                A comprehensive look into the Franciscan fraternity's ongoing engagements, educational initiatives, and pastoral milestones across the Province of St. Francis of Assisi.
+            </div>
+
             <div class="article-prose">
                 <p>A one-day seminar on <strong>"New Labour Code"</strong> was organized by the St. Francis Province, Ranchi, on 29 August 2026 at Moments Resorts, Hardag, Ranchi. The seminar was attended by around fifty participants. Besides the TOR friars involved in the education ministry, the programme was attended by several principals from different parts of Jharkhand.</p>
                 <p>The programme was graced by the presence of Very Rev. Fr. <strong>Manoj Vengathanam, TOR</strong>, Minister Provincial of Ranchi Province.</p>
@@ -342,14 +346,38 @@ $banner_bg = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/hero-banner-aug2
                     <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#e6c888" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
                     Recent Chronicles
                 </h3>
-                <!-- Only one current news item — link back to list -->
-                <a href="<?php echo esc_url( home_url( '/news/?view=detail' ) ); ?>" style="display:flex;gap:1rem;text-decoration:none;align-items:center;">
-                    <img src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/new_uploads/seminar-labour-code.jpeg' ); ?>" style="width:78px;height:78px;border-radius:12px;object-fit:cover;flex-shrink:0;border:1px solid rgba(230,200,136,0.25);" alt="Seminar">
-                    <div>
-                        <h4 style="font-family:'Instrument Sans',sans-serif;font-weight:600;font-size:0.92rem;color:#1c1917;line-height:1.35;">Seminar on "New Labour Code" Held at Hardag</h4>
-                        <span style="font-size:0.75rem;color:#78716c;font-family:'Instrument Sans',sans-serif;display:block;margin-top:0.3rem;">Aug 29, 2026</span>
-                    </div>
-                </a>
+                <?php
+                $recent_news_query = new WP_Query( array(
+                    'posts_per_page'      => 4,
+                    'post_status'         => 'publish',
+                    'ignore_sticky_posts' => 1,
+                ) );
+                if ( $recent_news_query->have_posts() ) :
+                    while ( $recent_news_query->have_posts() ) :
+                        $recent_news_query->the_post();
+                        $r_thumb = has_post_thumbnail() 
+                            ? get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' ) 
+                            : esc_url( FRANCISCAN_THEME_URI . '/assets/images/news-blog/IMG20230215103348.jpg.jpeg' );
+                        ?>
+                        <a href="<?php the_permalink(); ?>" style="display:flex;gap:1rem;text-decoration:none;align-items:center;margin-bottom:1.2rem;padding-bottom:1.2rem;border-bottom:1px solid rgba(0,0,0,0.06);">
+                            <img src="<?php echo esc_url( $r_thumb ); ?>" style="width:78px;height:78px;border-radius:12px;object-fit:cover;flex-shrink:0;border:1px solid rgba(230,200,136,0.25);" alt="<?php the_title_attribute(); ?>">
+                            <div>
+                                <h4 style="font-family:'Instrument Sans',sans-serif;font-weight:600;font-size:0.92rem;color:#1c1917;line-height:1.35;"><?php the_title(); ?></h4>
+                                <span style="font-size:0.75rem;color:#78716c;font-family:'Instrument Sans',sans-serif;display:block;margin-top:0.3rem;"><?php echo get_the_date( 'M j, Y' ); ?></span>
+                            </div>
+                        </a>
+                        <?php
+                    endwhile;
+                    wp_reset_postdata();
+                else : ?>
+                    <a href="<?php echo esc_url( home_url( '/news/?view=detail' ) ); ?>" style="display:flex;gap:1rem;text-decoration:none;align-items:center;">
+                        <img src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/new_uploads/seminar-labour-code.jpeg' ); ?>" style="width:78px;height:78px;border-radius:12px;object-fit:cover;flex-shrink:0;border:1px solid rgba(230,200,136,0.25);" alt="Seminar">
+                        <div>
+                            <h4 style="font-family:'Instrument Sans',sans-serif;font-weight:600;font-size:0.92rem;color:#1c1917;line-height:1.35;">Seminar on "New Labour Code" Held at Hardag</h4>
+                            <span style="font-size:0.75rem;color:#78716c;font-family:'Instrument Sans',sans-serif;display:block;margin-top:0.3rem;">Aug 29, 2026</span>
+                        </div>
+                    </a>
+                <?php endif; ?>
             </div>
 
             <div class="sidebar-prayer-box">

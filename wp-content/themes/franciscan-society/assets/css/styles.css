@@ -6924,9 +6924,9 @@ button:not(.btn-fill-animation):not(.footer-accordion-toggle):not(.fs-mega-toggl
         height: 12px !important;
     }
 
-    /* Hide GET STARTED button on mobile */
+    /* Ensure GET STARTED button is visible on mobile */
     .hero-section .hero-grid-layout .hero-buttons-row > a:nth-child(2) {
-        display: none !important;
+        display: inline-flex !important;
     }
     
     /* Second block: description and counters */

@@ -1132,36 +1132,6 @@ function franciscan_render_dashboard_view() {
                                 </div>
                             </div>
 
-                            <div class="form-section">
-                                <h3 class="form-section-title">🕊️ Welcome & Core Values Sections</h3>
-                                <div class="form-grid">
-                                    <div class="form-group">
-                                        <label>Welcome Eyebrow Badge</label>
-                                        <input type="text" name="welcome_badge" class="form-control" value="<?php echo esc_attr( $data['welcome_badge'] ?? 'PEACE & GOOD' ); ?>">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Welcome Heading</label>
-                                        <input type="text" name="welcome_heading" class="form-control" value="<?php echo esc_attr( $data['welcome_heading'] ?? 'PAX ET BONUM — WALKING IN THE FOOTSTEPS OF THE POVERELLO' ); ?>">
-                                    </div>
-                                    <div class="form-group full-width">
-                                        <label>Welcome Lead Story</label>
-                                        <textarea name="welcome_lead" class="form-control"><?php echo esc_textarea( $data['welcome_lead'] ?? '' ); ?></textarea>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Values Heading</label>
-                                        <input type="text" name="about_heading" class="form-control" value="<?php echo esc_attr( $data['about_heading'] ?? 'OUR CHRISTIAN VALUES' ); ?>">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Values Eyebrow Badge</label>
-                                        <input type="text" name="about_badge" class="form-control" value="<?php echo esc_attr( $data['about_badge'] ?? 'OUR VALUES' ); ?>">
-                                    </div>
-                                    <div class="form-group full-width">
-                                        <label>Values Description Text</label>
-                                        <textarea name="about_text" class="form-control"><?php echo esc_textarea( $data['about_text'] ?? '' ); ?></textarea>
-                                    </div>
-                                </div>
-                            </div>
-
                             <!-- Welcome Section (Section 2) -->
                             <div class="form-section">
                                 <h3 class="form-section-title">👋 Welcome Section (Section 2)</h3>
@@ -1243,6 +1213,18 @@ function franciscan_render_dashboard_view() {
                                                 <button type="button" class="btn btn-secondary btn-reset-media" data-target="about_section_img-home" data-default="<?php echo esc_url( $def_h_about_img ); ?>" style="<?php echo empty( $data['about_section_img'] ) ? 'display:none;' : ''; ?>">Reset to Default</button>
                                             </div>
                                         </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Play Video Button URL (Rosary Modal / YouTube)</label>
+                                        <input type="text" name="about_video_btn_url" class="form-control" placeholder="https://www.youtube.com/@franciscans" value="<?php echo esc_attr( $data['about_video_btn_url'] ?? 'https://www.youtube.com/@franciscans' ); ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>About Learn More Button Label</label>
+                                        <input type="text" name="about_cta_btn_text" class="form-control" value="<?php echo esc_attr( $data['about_cta_btn_text'] ?? 'LEARN MORE ABOUT' ); ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>About Learn More Button URL</label>
+                                        <input type="text" name="about_cta_btn_url" class="form-control" placeholder="/about" value="<?php echo esc_attr( $data['about_cta_btn_url'] ?? '/about' ); ?>">
                                     </div>
                                     <div class="form-group">
                                         <label>Video Loop URL</label>
@@ -1464,20 +1446,6 @@ function franciscan_render_dashboard_view() {
                                     </div>
                                 </div>
                             </div>
-
-                            <!-- About Section CTA Button -->
-                            <div class="form-section">
-                                <h3 class="form-section-title">&#x1F4CB; About Section Button (Homepage)</h3>
-                                <div class="form-grid">
-                                    <div class="form-group">
-                                        <label>Button Label</label>
-                                        <input type="text" name="about_cta_btn_text" class="form-control" value="<?php echo esc_attr( $data['about_cta_btn_text'] ?? 'LEARN MORE ABOUT' ); ?>">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Button Link URL</label>
-                                        <input type="text" name="about_cta_btn_url" class="form-control" placeholder="/about" value="<?php echo esc_attr( $data['about_cta_btn_url'] ?? '/about' ); ?>">
-                                    </div>
-                                </div>
                             </div>
 
                         <?php endif; ?>
@@ -1529,6 +1497,18 @@ function franciscan_render_dashboard_view() {
                                             </div>
                                         </div>
                                     <?php endforeach; ?>
+                                    <div class="form-group">
+                                        <label>Play Video Button URL (Rosary Modal / YouTube)</label>
+                                        <input type="text" name="about_video_btn_url" class="form-control" placeholder="https://www.youtube.com/@franciscans" value="<?php echo esc_attr( $data['about_video_btn_url'] ?? 'https://www.youtube.com/@franciscans' ); ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>About Learn More Button Label</label>
+                                        <input type="text" name="about_cta_btn_text" class="form-control" value="<?php echo esc_attr( $data['about_cta_btn_text'] ?? 'LEARN MORE ABOUT' ); ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>About Learn More Button URL</label>
+                                        <input type="text" name="about_cta_btn_url" class="form-control" placeholder="/about" value="<?php echo esc_attr( $data['about_cta_btn_url'] ?? '/about' ); ?>">
+                                    </div>
                                     <div class="form-group">
                                         <label>Video Loop URL</label>
                                         <input type="text" name="about_video_url" class="form-control" value="<?php echo esc_attr( $data['about_video_url'] ?? '' ); ?>">
@@ -1889,6 +1869,24 @@ function franciscan_render_dashboard_view() {
                             </div>
 
                             <div class="form-section">
+                                <h3 class="form-section-title">🌍 Franciscan Identity &amp; Global Spread</h3>
+                                <div class="form-grid">
+                                    <div class="form-group full-width">
+                                        <label>Identity Section Title</label>
+                                        <input type="text" name="identity_title" class="form-control" value="<?php echo esc_attr( $data['identity_title'] ?? 'Franciscan Identity & Spread' ); ?>">
+                                    </div>
+                                    <div class="form-group full-width">
+                                        <label>Identity Paragraph 1 (Global Growth & Autonomy)</label>
+                                        <textarea name="identity_p1" class="form-control" rows="4"><?php echo esc_textarea( $data['identity_p1'] ?? '' ); ?></textarea>
+                                    </div>
+                                    <div class="form-group full-width">
+                                        <label>Identity Paragraph 2 (Provinces & Delegations Worldwide)</label>
+                                        <textarea name="identity_p2" class="form-control" rows="4"><?php echo esc_textarea( $data['identity_p2'] ?? '' ); ?></textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-section">
                                 <h3 class="form-section-title">🇮🇳 Era 3: History in India &amp; Ranchi Province</h3>
                                 <div class="form-grid">
                                     <div class="form-group">
@@ -1924,38 +1922,6 @@ function franciscan_render_dashboard_view() {
                         <?php endif; ?>
 
                         <?php if ( $slug === 'community-rule' ) : ?>
-                            <!-- Community Rule: Hero Banner & Page Header -->
-                            <div class="form-section">
-                                <h3 class="form-section-title">🌄 Hero Banner &amp; Page Header</h3>
-                                <div class="form-grid">
-                                    <div class="form-group">
-                                        <label>Hero Badge / Tagline</label>
-                                        <input type="text" name="hero_badge" class="form-control" value="<?php echo esc_attr( $data['hero_badge'] ?? 'OUR RULE… OUR LIFE' ); ?>" placeholder="OUR RULE… OUR LIFE">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Hero Main Title</label>
-                                        <input type="text" name="hero_title" class="form-control" value="<?php echo esc_attr( $data['hero_title'] ?? 'THIRD ORDER REGULAR RULE' ); ?>" placeholder="THIRD ORDER REGULAR RULE">
-                                    </div>
-                                    <div class="form-group full-width">
-                                        <label>Hero Subtitle / Description</label>
-                                        <input type="text" name="hero_subtitle" class="form-control" value="<?php echo esc_attr( $data['hero_subtitle'] ?? 'Discovering the authentic meaning of Franciscan life' ); ?>" placeholder="Discovering the authentic meaning of Franciscan life">
-                                    </div>
-                                    <div class="form-group full-width">
-                                        <label>Hero Background Image</label>
-                                        <?php
-                                        $def_cr_hero = defined( 'FRANCISCAN_THEME_URI' ) ? FRANCISCAN_THEME_URI . '/assets/images/new_uploads/third-rule-banner.jpg' : '';
-                                        $cur_cr_hero = ! empty( $data['hero_image'] ) ? $data['hero_image'] : $def_cr_hero;
-                                        ?>
-                                        <div class="image-uploader-box">
-                                            <div style="width: 100px; height: 64px; border-radius: 8px; overflow: hidden; background: #0c1727; border: 1px solid var(--c-gold); flex-shrink: 0; display: flex; align-items: center; justify-content: center;">
-                                                <img src="<?php echo esc_url( $cur_cr_hero ); ?>" class="image-preview-thumb" id="preview-hero_image-community-rule" style="width: 100%; height: 100%; object-fit: cover; display: block;" onerror="this.src='<?php echo esc_url( $def_cr_hero ); ?>';">
-                                            </div>
-                                            <input type="hidden" name="hero_image" id="input-hero_image-community-rule" value="<?php echo esc_attr( $data['hero_image'] ?? '' ); ?>">
-                                            <div style="display: flex; gap: 0.8rem; align-items: center; flex-wrap: wrap;">
-                                                <button type="button" class="btn btn-secondary btn-upload-media" data-target="hero_image-community-rule">Choose Image</button>
-                                                <button type="button" class="btn btn-secondary btn-reset-media" data-target="hero_image-community-rule" data-default="<?php echo esc_url( $def_cr_hero ); ?>" style="<?php echo empty( $data['hero_image'] ) ? 'display:none;' : ''; ?>">Reset to Default</button>
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -2452,29 +2418,8 @@ function franciscan_render_dashboard_view() {
                         <?php if ( $slug === 'community-friaries' ) : ?>
                             <!-- Community Friaries Page Specific Sections -->
                             <div class="form-section">
-                                <h3 class="form-section-title">🏡 Hero Banner &amp; Overview Card</h3>
+                                <h3 class="form-section-title">🏡 Overview Card</h3>
                                 <div class="form-grid">
-                                    <div class="form-group">
-                                        <label>Hero Title</label>
-                                        <input type="text" name="hero_title" class="form-control" value="<?php echo esc_attr( $data['hero_title'] ?? 'OUR FRIARIES & ASHRAMS' ); ?>">
-                                    </div>
-                                    <div class="form-group full-width">
-                                        <label>Hero Background Image</label>
-                                        <?php
-                                        $def_cfy_hero = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/friaries-banner.jpg';
-                                        $cur_cfy_hero = ! empty( $data['hero_image'] ) ? $data['hero_image'] : $def_cfy_hero;
-                                        ?>
-                                        <div class="image-uploader-box">
-                                            <div style="width: 100px; height: 64px; border-radius: 8px; overflow: hidden; background: #0c1727; border: 1px solid var(--c-gold); flex-shrink: 0; display: flex; align-items: center; justify-content: center;">
-                                                <img src="<?php echo esc_url( $cur_cfy_hero ); ?>" class="image-preview-thumb" id="preview-hero_image-community-friaries" style="width: 100%; height: 100%; object-fit: cover; display: block;" onerror="this.src='<?php echo esc_url( $def_cfy_hero ); ?>';">
-                                            </div>
-                                            <input type="hidden" name="hero_image" id="input-hero_image-community-friaries" value="<?php echo esc_attr( $data['hero_image'] ?? '' ); ?>">
-                                            <div style="display: flex; gap: 0.8rem; align-items: center; flex-wrap: wrap;">
-                                                <button type="button" class="btn btn-secondary btn-upload-media" data-target="hero_image-community-friaries">Choose Image</button>
-                                                <button type="button" class="btn btn-secondary btn-reset-media" data-target="hero_image-community-friaries" data-default="<?php echo esc_url( $def_cfy_hero ); ?>" style="<?php echo empty( $data['hero_image'] ) ? 'display:none;' : ''; ?>">Reset to Default</button>
-                                            </div>
-                                        </div>
-                                    </div>
                                     <div class="form-group">
                                         <label>Card Badge</label>
                                         <input type="text" name="card_badge" class="form-control" value="<?php echo esc_attr( $data['card_badge'] ?? 'OUR FRIARIES' ); ?>">
@@ -2821,19 +2766,6 @@ function franciscan_render_dashboard_view() {
                         <?php endif; ?>
 
                         <?php if ( $slug === 'ministries-pastoral' ) : ?>
-                            <!-- Pastoral Ministry Hero Banner -->
-                            <div class="form-section">
-                                <h3 class="form-section-title">🌟 Hero Banner</h3>
-                                <div class="form-grid">
-                                    <div class="form-group full-width">
-                                        <label>Hero Title</label>
-                                        <input type="text" name="hero_title" class="form-control" value="<?php echo esc_attr( $data['hero_title'] ?? 'PASTORAL MINISTRY' ); ?>">
-                                    </div>
-                                    <div class="form-group full-width">
-                                        <label>Hero Subtitle / Franciscan Quote</label>
-                                        <textarea name="hero_subtitle" class="form-control" rows="3"><?php echo esc_textarea( $data['hero_subtitle'] ?? "“The brothers should rejoice when they live among people who are considered of little worth and who are despised.”\n— St. Francis of Assisi, Earlier Rule, Ch. IX" ); ?></textarea>
-                                    </div>
-                                </div>
                             </div>
 
                             <!-- Pastoral Ministry Details -->
@@ -2921,19 +2853,6 @@ function franciscan_render_dashboard_view() {
                         <?php endif; ?>
 
                         <?php if ( $slug === 'ministries-education' ) : ?>
-                            <!-- Education Ministry Hero Banner -->
-                            <div class="form-section">
-                                <h3 class="form-section-title">🌟 Hero Banner</h3>
-                                <div class="form-grid">
-                                    <div class="form-group full-width">
-                                        <label>Hero Title</label>
-                                        <input type="text" name="hero_title" class="form-control" value="<?php echo esc_attr( $data['hero_title'] ?? 'EDUCATION MINISTRY' ); ?>">
-                                    </div>
-                                    <div class="form-group full-width">
-                                        <label>Hero Subtitle / Franciscan Quote</label>
-                                        <textarea name="hero_subtitle" class="form-control" rows="3"><?php echo esc_textarea( $data['hero_subtitle'] ?? "“Where there is charity and wisdom, there is neither fear nor ignorance.”" ); ?></textarea>
-                                    </div>
-                                </div>
                             </div>
 
                             <!-- Education Ministry Details -->
@@ -3029,19 +2948,6 @@ function franciscan_render_dashboard_view() {
                         <?php endif; ?>
 
                         <?php if ( $slug === 'ministries-formation' ) : ?>
-                            <!-- Formation Ministry Hero Banner -->
-                            <div class="form-section">
-                                <h3 class="form-section-title">🌟 Hero Banner</h3>
-                                <div class="form-grid">
-                                    <div class="form-group full-width">
-                                        <label>Hero Title</label>
-                                        <input type="text" name="hero_title" class="form-control" value="<?php echo esc_attr( $data['hero_title'] ?? 'FORMATION MINISTRY' ); ?>">
-                                    </div>
-                                    <div class="form-group full-width">
-                                        <label>Hero Subtitle / Franciscan Quote</label>
-                                        <textarea name="hero_subtitle" class="form-control" rows="3"><?php echo esc_textarea( $data['hero_subtitle'] ?? "“The Most High Himself revealed to me that I should live according to the pattern of the Holy Gospel.”\n— St. Francis of Assisi, Testament" ); ?></textarea>
-                                    </div>
-                                </div>
                             </div>
 
                             <!-- Formation Ministry Details -->
@@ -3304,7 +3210,7 @@ function franciscan_render_dashboard_view() {
                         <!-- Page-Specific SEO & Social Sharing Metadata -->
                         <div class="form-section">
                             <h3 class="form-section-title" style="display:flex; align-items:center; gap:0.5rem;">
-                                <span>??</span> Page SEO & Social Sharing Metadata
+                                <span>🔍</span> Page SEO & Social Sharing Metadata
                             </h3>
                             <div class="form-grid">
                                 <div class="form-group full-width">
@@ -3333,7 +3239,7 @@ function franciscan_render_dashboard_view() {
 
                         <div style="margin-top:2rem;">
                             <button type="submit" class="btn btn-primary">
-                                ?? Save & Synchronize Page
+                                💾 Save & Synchronize Page
                             </button>
                         </div>
                     </form>
@@ -3362,6 +3268,7 @@ function franciscan_render_dashboard_view() {
                             <select id="new-photo-category" class="form-control" style="width: 100%; height: 42px;">
                                 <option value="Pastoral Ministry">Pastoral Ministry</option>
                                 <option value="Formation Ministry">Formation Ministry</option>
+                                <option value="Education Ministry">Education Ministry</option>
                                 <option value="Provincial Assembly">Provincial Assembly</option>
                                 <option value="Sacred Ordination">Sacred Ordination &amp; Feasts</option>
                                 <option value="Mission Apostolate">Mission Apostolate</option>
@@ -3402,9 +3309,12 @@ function franciscan_render_dashboard_view() {
                     <button type="button" class="btn btn-secondary active-cat-filter" data-cat="all" style="background: var(--c-gold); color: #12100e; font-weight: 700; border-radius: 20px; padding: 0.4rem 1.2rem; font-size: 0.85rem;">All Photos</button>
                     <button type="button" class="btn btn-secondary" data-cat="Pastoral Ministry" style="border-radius: 20px; padding: 0.4rem 1.2rem; font-size: 0.85rem;">Pastoral Ministry</button>
                     <button type="button" class="btn btn-secondary" data-cat="Formation Ministry" style="border-radius: 20px; padding: 0.4rem 1.2rem; font-size: 0.85rem;">Formation Ministry</button>
+                    <button type="button" class="btn btn-secondary" data-cat="Education Ministry" style="border-radius: 20px; padding: 0.4rem 1.2rem; font-size: 0.85rem;">Education Ministry</button>
                     <button type="button" class="btn btn-secondary" data-cat="Provincial Assembly" style="border-radius: 20px; padding: 0.4rem 1.2rem; font-size: 0.85rem;">Provincial Assembly</button>
                     <button type="button" class="btn btn-secondary" data-cat="Sacred Ordination" style="border-radius: 20px; padding: 0.4rem 1.2rem; font-size: 0.85rem;">Ordinations &amp; Feasts</button>
                     <button type="button" class="btn btn-secondary" data-cat="Youth Ministry" style="border-radius: 20px; padding: 0.4rem 1.2rem; font-size: 0.85rem;">Youth &amp; Schools</button>
+                    <button type="button" class="btn btn-secondary" data-cat="Mission Apostolate" style="border-radius: 20px; padding: 0.4rem 1.2rem; font-size: 0.85rem;">Mission Apostolate</button>
+                    <button type="button" class="btn btn-secondary" data-cat="Parish Service" style="border-radius: 20px; padding: 0.4rem 1.2rem; font-size: 0.85rem;">Parish Service</button>
                     <button type="button" class="btn btn-secondary" data-cat="Community Fellowship" style="border-radius: 20px; padding: 0.4rem 1.2rem; font-size: 0.85rem;">Community Fellowship</button>
                 </div>
 
@@ -3433,11 +3343,29 @@ function franciscan_render_dashboard_view() {
             </section>
 
 <section id="tab-posts" class="tab-content" style="display:none;">
-                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem;">
-                    <h3 style="font-family:'Phudu', serif; color:var(--c-gold); font-size:1.3rem;">All Published Articles</h3>
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem; flex-wrap:wrap; gap:1rem;">
+                    <h3 style="font-family:'Phudu', serif; color:var(--c-gold); font-size:1.3rem; margin:0;">All Published Articles</h3>
                     <button type="button" class="btn btn-primary open-create-post-btn">
                         ➕ Create New Article
                     </button>
+                </div>
+
+                <!-- Articles Filter & Sort Toolbar -->
+                <div style="display:flex; gap:0.8rem; margin-bottom:1.2rem; flex-wrap:wrap; align-items:center; background:rgba(255,255,255,0.02); padding:0.8rem 1rem; border-radius:10px; border:1px solid var(--c-card-border);">
+                    <input type="text" id="posts-search-input" class="form-control" placeholder="Search articles by title..." style="flex:1 1 200px; height:38px; font-size:0.88rem;">
+                    <select id="posts-category-filter" class="form-control" style="flex:0 0 180px; height:38px; font-size:0.88rem;">
+                        <option value="all">All Categories</option>
+                        <option value="News">News</option>
+                        <option value="Blog">Blog</option>
+                        <option value="Pastoral">Pastoral</option>
+                        <option value="Formation">Formation</option>
+                        <option value="Reflections">Reflections</option>
+                    </select>
+                    <select id="posts-sort-select" class="form-control" style="flex:0 0 160px; height:38px; font-size:0.88rem;">
+                        <option value="newest">Sort: Newest First</option>
+                        <option value="oldest">Sort: Oldest First</option>
+                        <option value="title">Sort: Title A-Z</option>
+                    </select>
                 </div>
 
                 <div class="form-section" style="padding:0; overflow:hidden;">
@@ -3458,7 +3386,7 @@ function franciscan_render_dashboard_view() {
                                     $cat_name = ! empty( $cats ) ? $cats[0] : 'News';
                                     $thumb = has_post_thumbnail( $p->ID ) ? get_the_post_thumbnail_url( $p->ID, 'thumbnail' ) : ( FRANCISCAN_THEME_URI . '/assets/images/news-blog/IMG20230215103348.jpg.jpeg' );
                                 ?>
-                                    <tr>
+                                    <tr data-title="<?php echo esc_attr( strtolower( $p->post_title ) ); ?>" data-cat="<?php echo esc_attr( strtolower( $cat_name ) ); ?>" data-timestamp="<?php echo esc_attr( get_the_time( 'U', $p->ID ) ); ?>">
                                         <td>
                                             <img src="<?php echo esc_url( $thumb ); ?>" style="width:48px; height:48px; object-fit:cover; border-radius:6px;">
                                         </td>
@@ -4254,7 +4182,7 @@ function franciscan_render_dashboard_view() {
             localStorage.setItem('fs_studio_sidebar_collapsed', state);
         });
 
-        // Tab Navigation
+        // Tab Navigation with LocalStorage & Hash Persistence
         $('.sidebar-nav .nav-item').on('click', function() {
             const target = $(this).data('tab');
             $('.sidebar-nav .nav-item').removeClass('active');
@@ -4262,6 +4190,12 @@ function franciscan_render_dashboard_view() {
 
             $('.tab-content').hide();
             $('#tab-' + target).fadeIn(200);
+
+            // Persist active tab across page refreshes
+            localStorage.setItem('fs_studio_active_tab', target);
+            if (history.replaceState) {
+                history.replaceState(null, null, '#' + target);
+            }
 
             // Update page heading
             const titles = {
@@ -4284,12 +4218,69 @@ function franciscan_render_dashboard_view() {
             $(`.sidebar-nav .nav-item[data-tab="${target}"]`).trigger('click');
         });
 
-        // Page Content Selector Switcher
+        // Page Content Selector Switcher with LocalStorage Persistence
         $('#page-selector').on('change', function() {
             const slug = $(this).val();
             $('.page-editor-form').hide();
             $('#form-page-' + slug).fadeIn(150);
+            localStorage.setItem('fs_studio_active_page', slug);
         });
+
+        // Restore active tab and active page from hash or localStorage on page load
+        const savedHash = window.location.hash ? window.location.hash.replace('#', '') : localStorage.getItem('fs_studio_active_tab');
+        if (savedHash && $(`.sidebar-nav .nav-item[data-tab="${savedHash}"]`).length) {
+            $(`.sidebar-nav .nav-item[data-tab="${savedHash}"]`).trigger('click');
+        }
+        const savedPage = localStorage.getItem('fs_studio_active_page');
+        if (savedPage && $(`#page-selector option[value="${savedPage}"]`).length) {
+            $('#page-selector').val(savedPage).trigger('change');
+        }
+
+        // News & Blog Client-side Table Filter & Sort
+        function filterPostsTable() {
+            const query = ($('#posts-search-input').val() || '').toLowerCase().trim();
+            const cat = ($('#posts-category-filter').val() || 'all').toLowerCase();
+            const sort = $('#posts-sort-select').val() || 'newest';
+
+            const rows = $('#tab-posts .data-table tbody tr').get();
+
+            rows.forEach(function(row) {
+                const $row = $(row);
+                const title = ($row.data('title') || $row.find('strong').text()).toLowerCase();
+                const rowCat = ($row.data('cat') || $row.find('td:nth-child(3)').text()).toLowerCase();
+
+                const matchesQuery = !query || title.includes(query);
+                const matchesCat = (cat === 'all') || rowCat.includes(cat);
+
+                if (matchesQuery && matchesCat) {
+                    $row.show();
+                } else {
+                    $row.hide();
+                }
+            });
+
+            rows.sort(function(a, b) {
+                const $a = $(a);
+                const $b = $(b);
+                if (sort === 'newest') {
+                    return ($b.data('timestamp') || 0) - ($a.data('timestamp') || 0);
+                } else if (sort === 'oldest') {
+                    return ($a.data('timestamp') || 0) - ($b.data('timestamp') || 0);
+                } else if (sort === 'title') {
+                    const titleA = ($a.data('title') || $a.find('strong').text()).toLowerCase();
+                    const titleB = ($b.data('title') || $b.find('strong').text()).toLowerCase();
+                    return titleA.localeCompare(titleB);
+                }
+                return 0;
+            });
+
+            $.each(rows, function(idx, item) {
+                $('#tab-posts .data-table tbody').append(item);
+            });
+        }
+
+        $(document).on('input', '#posts-search-input', filterPostsTable);
+        $(document).on('change', '#posts-category-filter, #posts-sort-select', filterPostsTable);
 
         // WordPress Media Library Uploader Hook
         let mediaFrame;
@@ -6074,6 +6065,12 @@ function franciscan_render_dashboard_view() {
                         </div>
                     `;
                     $('#dashboard-gallery-grid').prepend(newCard);
+                    const matchingFilterBtn = $('#gallery-category-filter-bar button[data-cat="' + (item.category || '') + '"]');
+                    if (matchingFilterBtn.length) {
+                        matchingFilterBtn.trigger('click');
+                    } else {
+                        $('#gallery-category-filter-bar button[data-cat="all"]').trigger('click');
+                    }
                 } else {
                     showToast(res.data && res.data.message ? res.data.message : 'Error adding photo.', true);
                 }
