@@ -839,7 +839,15 @@ button.fs-mega-toggle:focus::after {
             <div style="position: relative; z-index: 2;">
                 <div style="display: inline-flex; align-items: center; gap: 0.5rem; margin-bottom: 1.2rem;">
                     <span style="width: 6px; height: 6px; background-color: #e6c888; border-radius: 50%; display: inline-block;"></span>
-                    <span style="color: #ffffff; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; font-family: 'Instrument Sans', sans-serif;"><?php echo esc_html( franciscan_get_page_field( 'community-leadership', 'card_badge', 'GOVERNANCE' ) ); ?></span>
+                    <?php
+                    $ldr_badge = franciscan_get_page_field( 'community-leadership', 'card_badge', 'GOVERNANCE' );
+                    if ( empty( $ldr_badge ) || preg_match( '/^GOVERNANCE\s*\d*$/i', trim( $ldr_badge ) ) ) {
+                        $ldr_badge = 'GOVERNANCE';
+                    } else {
+                        $ldr_badge = preg_replace( '/(\D+)\d+$/', '$1', trim( $ldr_badge ) );
+                    }
+                    ?>
+                    <span style="color: #ffffff; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; font-family: 'Instrument Sans', sans-serif;"><?php echo esc_html( $ldr_badge ); ?></span>
                 </div>
                 <h2 style="font-family: 'Phudu', sans-serif; font-size: clamp(2rem, 3.8vw, 44px); font-weight: 600; color: #ffffff; text-transform: uppercase; line-height: 1.15; letter-spacing: -0.01em; margin-bottom: 1.2rem; max-width: 800px;">
                     <?php echo esc_html( franciscan_get_page_field( 'community-leadership', 'card_title', 'SERVING IN COMMUNION' ) ); ?>

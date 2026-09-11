@@ -5,9 +5,17 @@
  * @package Franciscan_Society
  */
 ?>
-<footer style="padding: 0 0 2rem 0; background-color: transparent; color: #ffffff; box-sizing: border-box;">
+<footer class="site-footer" style="position: relative; padding: 2.75rem 0 2.5rem 0; background: linear-gradient(180deg, #ffffff 0%, #FAF7F2 40px, #1a1715 125px, #0c0b0a 185px, #0c0b0a 100%); color: #ffffff; box-sizing: border-box;">
     <!-- Critical inline styles for mobile footer layout, logo containment, and strict left alignment -->
     <style id="footer-alignment-critical">
+        footer.site-footer,
+        footer {
+            background: linear-gradient(180deg, #ffffff 0%, #FAF7F2 40px, #1a1715 125px, #0c0b0a 185px, #0c0b0a 100%) !important;
+        }
+        .footer-main-card {
+            border: 1px solid rgba(230, 200, 136, 0.18) !important;
+            box-shadow: 0 -12px 35px rgba(12, 11, 10, 0.25), 0 25px 60px rgba(0,0,0,0.45) !important;
+        }
         /* Ensure 4 columns on desktop */
         @media (min-width: 992px) {
             .responsive-grid-footer,
@@ -207,7 +215,7 @@
             <div style="max-width: 1320px; margin: 0 auto; padding: 0 clamp(1rem, 5vw, 3rem);">
                 
                 <!-- Main Inset Card Container with 32px Rounded Corners & Dark Texture -->
-                <div class="footer-main-card" style="position: relative; border-radius: 32px; overflow: hidden; background-color: #0c0b0a; background-image: radial-gradient(rgba(255,255,255,0.06) 1px, transparent 1px); background-size: 18px 18px; padding: 4.5rem 4rem 2.5rem 4rem; box-shadow: 0 25px 60px rgba(0,0,0,0.35);">
+                <div class="footer-main-card" style="position: relative; border-radius: 32px; overflow: hidden; background-color: #0c0b0a; background-image: radial-gradient(rgba(255,255,255,0.06) 1px, transparent 1px); background-size: 18px 18px; padding: 4.5rem 4rem 2.5rem 4rem; border: 1px solid rgba(230, 200, 136, 0.18); box-shadow: 0 -12px 35px rgba(12, 11, 10, 0.25), 0 25px 60px rgba(0,0,0,0.45);">
                     
                     <!-- 4-Column Main Grid -->
                     <div class="responsive-grid-footer" style="display: grid; gap: 3.5rem; margin-bottom: 3.8rem; align-items: start;">

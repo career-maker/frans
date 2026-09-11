@@ -889,6 +889,19 @@ button.fs-mega-toggle:focus::after {
                     updateLightboxContent();
                 }
 
+                function alignLightboxArrows() {
+                    const imgEl = document.getElementById('fs-lightbox-img');
+                    const prevBtn = document.getElementById('fs-lightbox-prev');
+                    const nextBtn = document.getElementById('fs-lightbox-next');
+                    if (!imgEl || !prevBtn || !nextBtn) return;
+                    const rect = imgEl.getBoundingClientRect();
+                    if (rect.height > 20) {
+                        const centerY = Math.round(rect.top + (rect.height / 2));
+                        prevBtn.style.top = centerY + 'px';
+                        nextBtn.style.top = centerY + 'px';
+                    }
+                }
+
                 function updateLightboxContent() {
                     const item = activeFilteredList[currentLightboxIndex];
                     if (!item) return;
@@ -902,6 +915,7 @@ button.fs-mega-toggle:focus::after {
                         imgEl.style.transform = 'scale(0.96)';
                         
                         setTimeout(() => {
+                            imgEl.onload = alignLightboxArrows;
                             imgEl.src = item.src;
                             imgEl.alt = item.alt;
                             if (captionEl) captionEl.textContent = item.alt;
@@ -910,6 +924,7 @@ button.fs-mega-toggle:focus::after {
                             if (mobileCounterEl) mobileCounterEl.textContent = countText;
                             imgEl.style.opacity = '1';
                             imgEl.style.transform = 'scale(1)';
+                            setTimeout(alignLightboxArrows, 60);
                         }, 100);
                     }
                 }
@@ -1022,6 +1037,9 @@ button.fs-mega-toggle:focus::after {
                             }
                         }, { passive: true });
                     }
+
+                    window.addEventListener('resize', alignLightboxArrows);
+                    window.addEventListener('orientationchange', () => setTimeout(alignLightboxArrows, 150));
                 }
 
                 document.addEventListener('DOMContentLoaded', initGallery);
@@ -1130,8 +1148,8 @@ button.fs-mega-toggle:focus::after {
         transition: transform 0.25s ease, opacity 0.2s ease !important;
     }
     .fs-lightbox-nav-btn {
-        position: absolute !important;
-        top: 50% !important;
+        position: fixed !important;
+        top: 50%;
         transform: translateY(-50%) !important;
         width: 56px !important;
         height: 56px !important;

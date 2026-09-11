@@ -1158,18 +1158,19 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    // 5. Images Fade + Scale Reveal
-    gsap.utils.toArray(".about-img-container, .about-video-card").forEach(img => {
+    // 5. Images Fade Reveal (Zero scale on rounded/overflow-hidden containers to eliminate subpixel bottom-edge flicker on scroll)
+    gsap.utils.toArray(".about-img-container, .mission-church-img, .about-video-card").forEach(img => {
         gsap.from(img, {
             scrollTrigger: {
                 trigger: img,
                 start: "top 85%",
                 toggleActions: "play none none none"
             },
-            scale: 0.94,
             opacity: 0,
-            duration: 1.1,
-            ease: "power3.out"
+            y: 20,
+            duration: 1.0,
+            ease: "power2.out",
+            clearProps: "all"
         });
     });
 
@@ -1220,12 +1221,13 @@ document.addEventListener("DOMContentLoaded", function() {
     const welcomeHeading = document.querySelector("#welcome-section h2");
 
     // Function to split headings (H1, H2, H3) into word spans for word-by-word stagger
+    // Exclude blog & news card titles to prevent font-size mismatch / FOUT shifts on first paint
     function splitHeadingsWordByWord() {
-        const headings = document.querySelectorAll("h1, h2, h3");
+        const headings = document.querySelectorAll("h1, h2, h3:not(.blog-card h3):not(.blog-padded-card h3):not(#news-scroll-track h3):not(#blogs-scroll-track h3)");
         
         headings.forEach(heading => {
-            // Avoid double splitting
-            if (heading.dataset.wordSplit === "true") return;
+            // Avoid double splitting or splitting inside sliders
+            if (heading.dataset.wordSplit === "true" || heading.closest('#news-scroll-track, #blogs-scroll-track, .blog-card, .blog-padded-card')) return;
             heading.dataset.wordSplit = "true";
 
             // Process inner HTML to preserve <br> tags while splitting text nodes into words
@@ -1762,9 +1764,41 @@ document.addEventListener("DOMContentLoaded", function() {
 function fsSlideTrack(trackId, direction) {
     var track = document.getElementById(trackId);
     if (!track) return;
-    var firstCard = track.querySelector('.blog-card, .blog-padded-card');
-    var step = firstCard ? (firstCard.offsetWidth + 24) : 360;
-    track.scrollBy({ left: direction * step, behavior: 'smooth' });
+    var cards = Array.from(track.querySelectorAll('.blog-card, .blog-padded-card'));
+    if (!cards.length) return;
+
+    var trackScrollLeft = track.scrollLeft;
+    var cardWidth = (cards[0].offsetWidth || 340) + 24;
+    var desiredLeft = trackScrollLeft + (direction * cardWidth);
+    
+    // Find card closest to desired position
+    var targetCard = cards[0];
+    var minDiff = Infinity;
+    cards.forEach(function(card) {
+        var centerDiff = Math.abs((card.offsetLeft - track.offsetLeft) - desiredLeft);
+        if (centerDiff < minDiff) {
+            minDiff = centerDiff;
+            targetCard = card;
+        }
+    });
+
+    if (targetCard) {
+        var cardOffset = targetCard.offsetLeft - track.offsetLeft;
+        var centeredLeft = Math.max(0, cardOffset - Math.round((track.clientWidth - targetCard.offsetWidth) / 2));
+        
+        // Temporarily release mandatory scroll-snap so iOS Safari / Blink smooth scrolls without snapping lock
+        track.style.scrollSnapType = 'none';
+        track.style.webkitOverflowScrolling = 'auto';
+        try {
+            track.scrollTo({ left: centeredLeft, behavior: 'smooth' });
+        } catch(e) {
+            track.scrollLeft = centeredLeft;
+        }
+        setTimeout(function() {
+            track.style.scrollSnapType = 'x mandatory';
+            track.style.webkitOverflowScrolling = 'touch';
+        }, 450);
+    }
 }
 
 function fsUpdateSliderArrows() {

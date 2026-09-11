@@ -3502,9 +3502,17 @@ header, section, main, div, footer, nav {
 
 
 /* ===== ABOUT US PHOTO GLANCING / SHINE SWEEP HOVER ANIMATION ===== */
-.about-img-container {
+.about-img-container,
+.mission-church-img {
     overflow: hidden !important;
     border-radius: 24px !important;
+    -webkit-backface-visibility: hidden !important;
+    backface-visibility: hidden !important;
+    -webkit-transform: translate3d(0, 0, 0) !important;
+    transform: translate3d(0, 0, 0) !important;
+    -webkit-mask-image: -webkit-radial-gradient(white, black) !important;
+    isolation: isolate !important;
+    will-change: transform, opacity !important;
 }
 
 .about-img-container img {
@@ -4820,15 +4828,23 @@ header.header::-webkit-scrollbar {
     }
 }
 
-/* Responsive classes for Mission Section Images */
+/* Responsive classes for Mission Section Images with hardware acceleration & anti-flicker isolation */
 .mission-church-img {
     position: absolute;
     left: 0;
     top: 0;
     width: 58%;
     height: 90%;
-    border-radius: 24px;
+    border-radius: 24px !important;
+    overflow: hidden !important;
     box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    -webkit-backface-visibility: hidden !important;
+    backface-visibility: hidden !important;
+    transform: translate3d(0, 0, 0) !important;
+    -webkit-transform: translate3d(0, 0, 0) !important;
+    will-change: transform, opacity !important;
+    isolation: isolate !important;
+    -webkit-mask-image: -webkit-radial-gradient(white, black) !important;
 }
 
 .mission-priest-container {
@@ -8574,6 +8590,38 @@ button.fs-mega-toggle.is-current-parent::after,
     border-left: 3px solid #e6c888 !important;
     padding: 0.4rem 0.75rem !important;
     border-radius: 4px;
+}
+
+/* --- Mobile Submenu Arrow Flip (Rotation) Guarantee --- */
+.fs-mobile-submenu-arrow,
+.submenu-arrow {
+    display: inline-flex !important;
+    transform-origin: center center !important;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), color 0.3s ease !important;
+}
+
+.fs-mobile-submenu-toggle.active .fs-mobile-submenu-arrow,
+.submenu-toggle.active .submenu-arrow {
+    transform: rotate(180deg) !important;
+    -webkit-transform: rotate(180deg) !important;
+    color: #e6c888 !important;
+}
+
+/* --- Blog & News Card Title Font Lock (Zero Mismatch on First Paint) --- */
+#blogs-scroll-track h3,
+#news-scroll-track h3,
+.blog-padded-card h3,
+.blog-card h3,
+#blogs-scroll-track .blog-padded-card h3 a,
+#news-scroll-track .blog-card h3 a {
+    font-family: 'Phudu', sans-serif !important;
+    font-size: 1.25rem !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.01em !important;
+    line-height: 1.35 !important;
+    text-transform: uppercase !important;
+    font-synthesis: none !important;
+    text-rendering: optimizeLegibility !important;
 }
 
 

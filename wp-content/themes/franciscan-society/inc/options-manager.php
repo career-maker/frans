@@ -811,8 +811,10 @@ function franciscan_resync_legacy_content_options() {
                     if ( ! isset( $clean['hero_badge'] ) || in_array( $clean['hero_badge'], array( 'SERVANT LEADERSHIP', 'PROVINCIAL ADMINISTRATION' ), true ) ) {
                         $clean['hero_badge'] = 'To lead is to serve; to be greater is to become lesser.';
                     }
-                    if ( empty( $clean['card_badge'] ) ) {
+                    if ( empty( $clean['card_badge'] ) || preg_match( '/^GOVERNANCE\s*\d*$/i', trim( $clean['card_badge'] ) ) ) {
                         $clean['card_badge'] = 'GOVERNANCE';
+                    } else {
+                        $clean['card_badge'] = preg_replace( '/(\D+)\d+$/', '$1', trim( $clean['card_badge'] ) );
                     }
                     if ( empty( $clean['card_title'] ) ) {
                         $clean['card_title'] = 'SERVING IN COMMUNION';

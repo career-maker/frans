@@ -1940,15 +1940,20 @@ if ( ! $fs_is_home ) {
       });
     }
 
-    // Mobile submenu toggle
+    // Mobile submenu toggle with guaranteed arrow rotation
     const submenuToggles = document.querySelectorAll('.fs-mobile-submenu-toggle');
     submenuToggles.forEach(toggle => {
       toggle.addEventListener('click', function(e) {
         e.preventDefault();
         const targetId = this.getAttribute('data-target');
         const submenu = document.getElementById(targetId);
-        submenu.classList.toggle('open');
-        this.classList.toggle('active');
+        if (submenu) submenu.classList.toggle('open');
+        const isActive = this.classList.toggle('active');
+        const arrow = this.querySelector('.fs-mobile-submenu-arrow, .submenu-arrow');
+        if (arrow) {
+          arrow.style.transform = isActive ? 'rotate(180deg)' : 'rotate(0deg)';
+          arrow.style.webkitTransform = isActive ? 'rotate(180deg)' : 'rotate(0deg)';
+        }
       });
     });
 
