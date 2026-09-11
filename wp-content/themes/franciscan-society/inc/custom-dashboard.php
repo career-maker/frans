@@ -2158,7 +2158,7 @@ function franciscan_render_dashboard_view() {
                         <?php if ( $slug === 'community-friars' ) : ?>
                             <!-- Community Friars Page Specific Sections -->
                             <div class="form-section">
-                                <h3 class="form-section-title">🟤 Welcome Card Section &amp; Directory Motto</h3>
+                                <h3 class="form-section-title">🟤 Welcome Card Section &amp; Directory Headings</h3>
                                 <div class="form-grid">
                                     <div class="form-group">
                                         <label>Card Badge / Eyebrow</label>
@@ -2176,6 +2176,112 @@ function franciscan_render_dashboard_view() {
                                         <label>Friars Directory Title / Franciscan Motto</label>
                                         <input type="text" name="directory_title" class="form-control" value="<?php echo esc_attr( $data['directory_title'] ?? 'Brothers always be mindful that they should desire one thing alone, namely, the Spirit of God at work within them' ); ?>" placeholder="Brothers always be mindful that they should desire one thing alone, namely, the Spirit of God at work within them">
                                     </div>
+                                    <div class="form-group full-width">
+                                        <label>Deceased Friars Section Heading</label>
+                                        <input type="text" name="deceased_heading" class="form-control" value="<?php echo esc_attr( $data['deceased_heading'] ?? 'DECEASED FRIARS' ); ?>" placeholder="DECEASED FRIARS">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <?php
+                            $living_friars = franciscan_get_living_friars();
+                            $deceased_friars = franciscan_get_deceased_friars();
+                            ?>
+
+                            <!-- Section: Living Friars Directory -->
+                            <div class="form-section">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.2rem; flex-wrap: wrap; gap: 1rem;">
+                                    <div>
+                                        <h3 class="form-section-title" style="margin-bottom: 0.3rem;">
+                                            👥 Living Friars Directory (<span id="living-friars-count"><?php echo count( $living_friars ); ?></span> Friars)
+                                        </h3>
+                                        <p style="color: var(--c-text-muted); font-size: 0.88rem; margin: 0;">
+                                            Edit names, update photos, reorder or add new living friars to the directory.
+                                        </p>
+                                    </div>
+                                    <div style="display: flex; gap: 0.8rem; align-items: center; flex-wrap: wrap;">
+                                        <input type="text" id="filter-living-friars" class="form-control" placeholder="🔍 Search friar by name..." style="width: 220px; font-size: 0.85rem; padding: 0.4rem 0.8rem;">
+                                        <button type="button" class="btn btn-primary" id="btn-add-living-friar" style="display: inline-flex; align-items: center; gap: 0.5rem;">
+                                            <span>➕</span> Add New Friar
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div id="living-friars-list-container" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 1rem; max-height: 720px; overflow-y: auto; padding-right: 0.5rem;">
+                                    <?php foreach ( $living_friars as $f_idx => $friar ) : 
+                                        $f_name = $friar['name'] ?? '';
+                                        $f_img  = $friar['image'] ?? '';
+                                        $f_img_url = franciscan_resolve_friar_image_url( $f_img );
+                                    ?>
+                                        <div class="friar-item-card" data-index="<?php echo esc_attr( $f_idx ); ?>" style="background: rgba(255,255,255,0.02); border: 1px solid var(--c-card-border); border-radius: 10px; padding: 0.85rem; position: relative;">
+                                            <div style="display: flex; gap: 0.8rem; align-items: center;">
+                                                <div style="width: 52px; height: 52px; border-radius: 50%; overflow: hidden; border: 2px solid var(--c-gold); flex-shrink: 0; background: #2a160b;">
+                                                    <img src="<?php echo esc_url( $f_img_url ); ?>" class="friar-img-preview" style="width: 100%; height: 100%; object-fit: cover; display: block;" onerror="this.src='<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/logo.svg' ); ?>';">
+                                                </div>
+                                                <div style="flex: 1; min-width: 0;">
+                                                    <input type="text" name="friars_list[<?php echo esc_attr( $f_idx ); ?>][name]" class="form-control friar-input-name" value="<?php echo esc_attr( $f_name ); ?>" placeholder="e.g. Fr. Anselm Kullu" style="font-weight: 600; font-size: 0.88rem; margin-bottom: 0.35rem; padding: 0.35rem 0.6rem;" required>
+                                                    <input type="hidden" name="friars_list[<?php echo esc_attr( $f_idx ); ?>][image]" class="friar-input-image" value="<?php echo esc_attr( $f_img ); ?>">
+                                                    <div style="display: flex; gap: 0.4rem; align-items: center;">
+                                                        <button type="button" class="btn btn-secondary btn-upload-friar-img" style="padding: 0.2rem 0.5rem; font-size: 0.75rem;">📷 Change Photo</button>
+                                                        <button type="button" class="btn btn-secondary btn-reset-friar-img" style="padding: 0.2rem 0.5rem; font-size: 0.75rem; <?php echo empty( $f_img ) ? 'display:none;' : ''; ?>">Reset</button>
+                                                    </div>
+                                                </div>
+                                                <div style="display: flex; flex-direction: column; gap: 0.25rem;">
+                                                    <button type="button" class="btn btn-secondary btn-move-friar-up" title="Move Up" style="padding: 0.15rem 0.4rem; font-size: 0.7rem;">▲</button>
+                                                    <button type="button" class="btn btn-secondary btn-move-friar-down" title="Move Down" style="padding: 0.15rem 0.4rem; font-size: 0.7rem;">▼</button>
+                                                    <button type="button" class="btn btn-secondary btn-delete-friar-item" title="Remove Friar" style="padding: 0.15rem 0.4rem; font-size: 0.7rem; background: rgba(239, 68, 68, 0.15); color: #fca5a5; border-color: rgba(239, 68, 68, 0.4);">🗑️</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <?php endforeach; ?>
+                                </div>
+                            </div>
+
+                            <!-- Section: Deceased Friars Directory -->
+                            <div class="form-section">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.2rem; flex-wrap: wrap; gap: 1rem;">
+                                    <div>
+                                        <h3 class="form-section-title" style="margin-bottom: 0.3rem;">
+                                            ✝️ Deceased Friars Directory (<span id="deceased-friars-count"><?php echo count( $deceased_friars ); ?></span> Friars)
+                                        </h3>
+                                        <p style="color: var(--c-text-muted); font-size: 0.88rem; margin: 0;">
+                                            Manage deceased friars, memorial dates (e.g. ✝ 28.07.2002), photos, and reorder items.
+                                        </p>
+                                    </div>
+                                    <button type="button" class="btn btn-primary" id="btn-add-deceased-friar" style="display: inline-flex; align-items: center; gap: 0.5rem;">
+                                        <span>➕</span> Add New Deceased Friar
+                                    </button>
+                                </div>
+
+                                <div id="deceased-friars-list-container" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 1rem;">
+                                    <?php foreach ( $deceased_friars as $df_idx => $dfriar ) : 
+                                        $df_name = $dfriar['name'] ?? '';
+                                        $df_img  = $dfriar['image'] ?? '';
+                                        $df_date = $dfriar['date'] ?? '';
+                                        $df_img_url = franciscan_resolve_friar_image_url( $df_img );
+                                    ?>
+                                        <div class="deceased-friar-item-card" data-index="<?php echo esc_attr( $df_idx ); ?>" style="background: rgba(255,255,255,0.02); border: 1px solid var(--c-card-border); border-radius: 10px; padding: 0.85rem; position: relative;">
+                                            <div style="display: flex; gap: 0.8rem; align-items: center;">
+                                                <div style="width: 52px; height: 52px; border-radius: 50%; overflow: hidden; border: 2px solid var(--c-gold); flex-shrink: 0; background: #2a160b;">
+                                                    <img src="<?php echo esc_url( $df_img_url ); ?>" class="deceased-friar-img-preview" style="width: 100%; height: 100%; object-fit: cover; display: block;" onerror="this.src='<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/logo.svg' ); ?>';">
+                                                </div>
+                                                <div style="flex: 1; min-width: 0;">
+                                                    <input type="text" name="deceased_friars_list[<?php echo esc_attr( $df_idx ); ?>][name]" class="form-control deceased-friar-input-name" value="<?php echo esc_attr( $df_name ); ?>" placeholder="e.g. Br. Carlus Bara" style="font-weight: 600; font-size: 0.88rem; margin-bottom: 0.25rem; padding: 0.35rem 0.6rem;" required>
+                                                    <input type="text" name="deceased_friars_list[<?php echo esc_attr( $df_idx ); ?>][date]" class="form-control deceased-friar-input-date" value="<?php echo esc_attr( $df_date ); ?>" placeholder="e.g. ✝ 28.07.2002" style="font-size: 0.8rem; margin-bottom: 0.3rem; color: #a8a29e; padding: 0.3rem 0.6rem;">
+                                                    <input type="hidden" name="deceased_friars_list[<?php echo esc_attr( $df_idx ); ?>][image]" class="deceased-friar-input-image" value="<?php echo esc_attr( $df_img ); ?>">
+                                                    <div style="display: flex; gap: 0.4rem; align-items: center;">
+                                                        <button type="button" class="btn btn-secondary btn-upload-deceased-friar-img" style="padding: 0.2rem 0.5rem; font-size: 0.75rem;">📷 Change Photo</button>
+                                                        <button type="button" class="btn btn-secondary btn-reset-deceased-friar-img" style="padding: 0.2rem 0.5rem; font-size: 0.75rem; <?php echo empty( $df_img ) ? 'display:none;' : ''; ?>">Reset</button>
+                                                    </div>
+                                                </div>
+                                                <div style="display: flex; flex-direction: column; gap: 0.25rem;">
+                                                    <button type="button" class="btn btn-secondary btn-move-deceased-friar-up" title="Move Up" style="padding: 0.15rem 0.4rem; font-size: 0.7rem;">▲</button>
+                                                    <button type="button" class="btn btn-secondary btn-move-deceased-friar-down" title="Move Down" style="padding: 0.15rem 0.4rem; font-size: 0.7rem;">▼</button>
+                                                    <button type="button" class="btn btn-secondary btn-delete-deceased-friar-item" title="Remove" style="padding: 0.15rem 0.4rem; font-size: 0.7rem; background: rgba(239, 68, 68, 0.15); color: #fca5a5; border-color: rgba(239, 68, 68, 0.4);">🗑️</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <?php endforeach; ?>
                                 </div>
                             </div>
                         <?php endif; ?>
@@ -4542,6 +4648,276 @@ function franciscan_render_dashboard_view() {
             card.find('.pub-img-preview').attr('src', defaultUrl);
             $(this).hide();
         });
+
+                // ==========================================
+        // LIVING FRIARS MANAGER
+        // ==========================================
+        function getNewLivingFriarCardHtml(index) {
+            const defaultImg = defaultThemeUri ? defaultThemeUri + '/assets/images/logo.svg' : '';
+            return `
+                <div class="friar-item-card" data-index="${index}" style="background: rgba(255,255,255,0.02); border: 1px solid var(--c-card-border); border-radius: 10px; padding: 0.85rem; position: relative;">
+                    <div style="display: flex; gap: 0.8rem; align-items: center;">
+                        <div style="width: 52px; height: 52px; border-radius: 50%; overflow: hidden; border: 2px solid var(--c-gold); flex-shrink: 0; background: #2a160b;">
+                            <img src="${defaultImg}" class="friar-img-preview" style="width: 100%; height: 100%; object-fit: cover; display: block;" onerror="this.src='${defaultImg}';">
+                        </div>
+                        <div style="flex: 1; min-width: 0;">
+                            <input type="text" name="friars_list[${index}][name]" class="form-control friar-input-name" value="" placeholder="e.g. Fr. Name or Br. Name" style="font-weight: 600; font-size: 0.88rem; margin-bottom: 0.35rem; padding: 0.35rem 0.6rem;" required>
+                            <input type="hidden" name="friars_list[${index}][image]" class="friar-input-image" value="">
+                            <div style="display: flex; gap: 0.4rem; align-items: center;">
+                                <button type="button" class="btn btn-secondary btn-upload-friar-img" style="padding: 0.2rem 0.5rem; font-size: 0.75rem;">📷 Change Photo</button>
+                                <button type="button" class="btn btn-secondary btn-reset-friar-img" style="padding: 0.2rem 0.5rem; font-size: 0.75rem; display: none;">Reset</button>
+                            </div>
+                        </div>
+                        <div style="display: flex; flex-direction: column; gap: 0.25rem;">
+                            <button type="button" class="btn btn-secondary btn-move-friar-up" title="Move Up" style="padding: 0.15rem 0.4rem; font-size: 0.7rem;">▲</button>
+                            <button type="button" class="btn btn-secondary btn-move-friar-down" title="Move Down" style="padding: 0.15rem 0.4rem; font-size: 0.7rem;">▼</button>
+                            <button type="button" class="btn btn-secondary btn-delete-friar-item" title="Remove Friar" style="padding: 0.15rem 0.4rem; font-size: 0.7rem; background: rgba(239, 68, 68, 0.15); color: #fca5a5; border-color: rgba(239, 68, 68, 0.4);">🗑️</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function reindexLivingFriarsList() {
+            $('#living-friars-list-container .friar-item-card').each(function(newIdx) {
+                const card = $(this);
+                card.attr('data-index', newIdx);
+                card.find('input').each(function() {
+                    const name = $(this).attr('name');
+                    if (name && name.startsWith('friars_list[')) {
+                        const updatedName = name.replace(/friars_list\[\d+\]/, 'friars_list[' + newIdx + ']');
+                        $(this).attr('name', updatedName);
+                    }
+                });
+            });
+            $('#living-friars-count').text($('#living-friars-list-container .friar-item-card').length);
+        }
+
+        // Add living friar
+        $(document).on('click', '#btn-add-living-friar', function(e) {
+            e.preventDefault();
+            const count = $('#living-friars-list-container .friar-item-card').length;
+            const newHtml = $(getNewLivingFriarCardHtml(count));
+            $('#living-friars-list-container').prepend(newHtml);
+            newHtml.hide().fadeIn(300);
+            $('#living-friars-list-container').animate({ scrollTop: 0 }, 300);
+            newHtml.find('.friar-input-name').focus();
+            reindexLivingFriarsList();
+        });
+
+        // Delete living friar
+        $(document).on('click', '.btn-delete-friar-item', function(e) {
+            e.preventDefault();
+            const card = $(this).closest('.friar-item-card');
+            const name = card.find('.friar-input-name').val() || 'this friar';
+            if (confirm('Are you sure you want to remove "' + name + '"?')) {
+                card.fadeOut(200, function() {
+                    $(this).remove();
+                    reindexLivingFriarsList();
+                });
+            }
+        });
+
+        // Move living friar up / down
+        $(document).on('click', '.btn-move-friar-up', function(e) {
+            e.preventDefault();
+            const card = $(this).closest('.friar-item-card');
+            const prev = card.prev('.friar-item-card');
+            if (prev.length) {
+                card.insertBefore(prev);
+                reindexLivingFriarsList();
+                card.css('border-color', 'var(--c-gold)');
+                setTimeout(() => card.css('border-color', 'var(--c-card-border)'), 600);
+            }
+        });
+
+        $(document).on('click', '.btn-move-friar-down', function(e) {
+            e.preventDefault();
+            const card = $(this).closest('.friar-item-card');
+            const next = card.next('.friar-item-card');
+            if (next.length) {
+                card.insertAfter(next);
+                reindexLivingFriarsList();
+                card.css('border-color', 'var(--c-gold)');
+                setTimeout(() => card.css('border-color', 'var(--c-card-border)'), 600);
+            }
+        });
+
+        // Upload friar image
+        $(document).on('click', '.btn-upload-friar-img', function(e) {
+            e.preventDefault();
+            const card = $(this).closest('.friar-item-card');
+            const inputImg = card.find('.friar-input-image');
+            const previewImg = card.find('.friar-img-preview');
+            const resetBtn = card.find('.btn-reset-friar-img');
+
+            const frame = wp.media({
+                title: 'Select or Upload Friar Photo',
+                library: { type: 'image' },
+                button: { text: 'Use this Photo' },
+                multiple: false
+            });
+
+            frame.on('select', function() {
+                const attachment = frame.state().get('selection').first().toJSON();
+                inputImg.val(attachment.url);
+                previewImg.attr('src', attachment.url);
+                resetBtn.show();
+            });
+
+            frame.open();
+        });
+
+        $(document).on('click', '.btn-reset-friar-img', function(e) {
+            e.preventDefault();
+            const card = $(this).closest('.friar-item-card');
+            const defaultImg = defaultThemeUri ? defaultThemeUri + '/assets/images/logo.svg' : '';
+            card.find('.friar-input-image').val('');
+            card.find('.friar-img-preview').attr('src', defaultImg);
+            $(this).hide();
+        });
+
+        // Live filter living friars by name
+        $(document).on('input', '#filter-living-friars', function() {
+            const q = $(this).val().toLowerCase().trim();
+            $('#living-friars-list-container .friar-item-card').each(function() {
+                const name = $(this).find('.friar-input-name').val().toLowerCase();
+                if (!q || name.indexOf(q) !== -1) {
+                    $(this).show();
+                } else {
+                    $(this).hide();
+                }
+            });
+        });
+
+        // ==========================================
+        // DECEASED FRIARS MANAGER
+        // ==========================================
+        function getNewDeceasedFriarCardHtml(index) {
+            const defaultImg = defaultThemeUri ? defaultThemeUri + '/assets/images/logo.svg' : '';
+            return `
+                <div class="deceased-friar-item-card" data-index="${index}" style="background: rgba(255,255,255,0.02); border: 1px solid var(--c-card-border); border-radius: 10px; padding: 0.85rem; position: relative;">
+                    <div style="display: flex; gap: 0.8rem; align-items: center;">
+                        <div style="width: 52px; height: 52px; border-radius: 50%; overflow: hidden; border: 2px solid var(--c-gold); flex-shrink: 0; background: #2a160b;">
+                            <img src="${defaultImg}" class="deceased-friar-img-preview" style="width: 100%; height: 100%; object-fit: cover; display: block;" onerror="this.src='${defaultImg}';">
+                        </div>
+                        <div style="flex: 1; min-width: 0;">
+                            <input type="text" name="deceased_friars_list[${index}][name]" class="form-control deceased-friar-input-name" value="" placeholder="e.g. Br. Carlus Bara" style="font-weight: 600; font-size: 0.88rem; margin-bottom: 0.25rem; padding: 0.35rem 0.6rem;" required>
+                            <input type="text" name="deceased_friars_list[${index}][date]" class="form-control deceased-friar-input-date" value="" placeholder="e.g. ✝ 28.07.2002" style="font-size: 0.8rem; margin-bottom: 0.3rem; color: #a8a29e; padding: 0.3rem 0.6rem;">
+                            <input type="hidden" name="deceased_friars_list[${index}][image]" class="deceased-friar-input-image" value="">
+                            <div style="display: flex; gap: 0.4rem; align-items: center;">
+                                <button type="button" class="btn btn-secondary btn-upload-deceased-friar-img" style="padding: 0.2rem 0.5rem; font-size: 0.75rem;">📷 Change Photo</button>
+                                <button type="button" class="btn btn-secondary btn-reset-deceased-friar-img" style="padding: 0.2rem 0.5rem; font-size: 0.75rem; display: none;">Reset</button>
+                            </div>
+                        </div>
+                        <div style="display: flex; flex-direction: column; gap: 0.25rem;">
+                            <button type="button" class="btn btn-secondary btn-move-deceased-friar-up" title="Move Up" style="padding: 0.15rem 0.4rem; font-size: 0.7rem;">▲</button>
+                            <button type="button" class="btn btn-secondary btn-move-deceased-friar-down" title="Move Down" style="padding: 0.15rem 0.4rem; font-size: 0.7rem;">▼</button>
+                            <button type="button" class="btn btn-secondary btn-delete-deceased-friar-item" title="Remove" style="padding: 0.15rem 0.4rem; font-size: 0.7rem; background: rgba(239, 68, 68, 0.15); color: #fca5a5; border-color: rgba(239, 68, 68, 0.4);">🗑️</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function reindexDeceasedFriarsList() {
+            $('#deceased-friars-list-container .deceased-friar-item-card').each(function(newIdx) {
+                const card = $(this);
+                card.attr('data-index', newIdx);
+                card.find('input').each(function() {
+                    const name = $(this).attr('name');
+                    if (name && name.startsWith('deceased_friars_list[')) {
+                        const updatedName = name.replace(/deceased_friars_list\[\d+\]/, 'deceased_friars_list[' + newIdx + ']');
+                        $(this).attr('name', updatedName);
+                    }
+                });
+            });
+            $('#deceased-friars-count').text($('#deceased-friars-list-container .deceased-friar-item-card').length);
+        }
+
+        // Add deceased friar
+        $(document).on('click', '#btn-add-deceased-friar', function(e) {
+            e.preventDefault();
+            const count = $('#deceased-friars-list-container .deceased-friar-item-card').length;
+            const newHtml = $(getNewDeceasedFriarCardHtml(count));
+            $('#deceased-friars-list-container').append(newHtml);
+            newHtml.hide().fadeIn(300);
+            newHtml.find('.deceased-friar-input-name').focus();
+            reindexDeceasedFriarsList();
+        });
+
+        // Delete deceased friar
+        $(document).on('click', '.btn-delete-deceased-friar-item', function(e) {
+            e.preventDefault();
+            const card = $(this).closest('.deceased-friar-item-card');
+            const name = card.find('.deceased-friar-input-name').val() || 'this deceased friar';
+            if (confirm('Are you sure you want to remove "' + name + '"?')) {
+                card.fadeOut(200, function() {
+                    $(this).remove();
+                    reindexDeceasedFriarsList();
+                });
+            }
+        });
+
+        // Move deceased friar up / down
+        $(document).on('click', '.btn-move-deceased-friar-up', function(e) {
+            e.preventDefault();
+            const card = $(this).closest('.deceased-friar-item-card');
+            const prev = card.prev('.deceased-friar-item-card');
+            if (prev.length) {
+                card.insertBefore(prev);
+                reindexDeceasedFriarsList();
+                card.css('border-color', 'var(--c-gold)');
+                setTimeout(() => card.css('border-color', 'var(--c-card-border)'), 600);
+            }
+        });
+
+        $(document).on('click', '.btn-move-deceased-friar-down', function(e) {
+            e.preventDefault();
+            const card = $(this).closest('.deceased-friar-item-card');
+            const next = card.next('.deceased-friar-item-card');
+            if (next.length) {
+                card.insertAfter(next);
+                reindexDeceasedFriarsList();
+                card.css('border-color', 'var(--c-gold)');
+                setTimeout(() => card.css('border-color', 'var(--c-card-border)'), 600);
+            }
+        });
+
+        // Upload deceased friar image
+        $(document).on('click', '.btn-upload-deceased-friar-img', function(e) {
+            e.preventDefault();
+            const card = $(this).closest('.deceased-friar-item-card');
+            const inputImg = card.find('.deceased-friar-input-image');
+            const previewImg = card.find('.deceased-friar-img-preview');
+            const resetBtn = card.find('.btn-reset-deceased-friar-img');
+
+            const frame = wp.media({
+                title: 'Select or Upload Deceased Friar Photo',
+                library: { type: 'image' },
+                button: { text: 'Use this Photo' },
+                multiple: false
+            });
+
+            frame.on('select', function() {
+                const attachment = frame.state().get('selection').first().toJSON();
+                inputImg.val(attachment.url);
+                previewImg.attr('src', attachment.url);
+                resetBtn.show();
+            });
+
+            frame.open();
+        });
+
+        $(document).on('click', '.btn-reset-deceased-friar-img', function(e) {
+            e.preventDefault();
+            const card = $(this).closest('.deceased-friar-item-card');
+            const defaultImg = defaultThemeUri ? defaultThemeUri + '/assets/images/logo.svg' : '';
+            card.find('.deceased-friar-input-image').val('');
+            card.find('.deceased-friar-img-preview').attr('src', defaultImg);
+            $(this).hide();
+        });
+
 
         // Save Page Content Form
         $('.page-editor-form').on('submit', function(e) {

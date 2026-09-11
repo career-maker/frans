@@ -452,6 +452,9 @@ function franciscan_get_default_page_content( $slug = '' ) {
             'card_title'             => 'BROTHERS IN CHRIST',
             'card_subtitle'          => 'Over 104 professed friars dedicated to prayer, community, and active ministry.',
             'directory_title'        => 'Brothers always be mindful that they should desire one thing alone, namely, the Spirit of God at work within them',
+            'deceased_heading'       => 'DECEASED FRIARS',
+            'friars_list'            => function_exists( 'franciscan_get_default_living_friars' ) ? franciscan_get_default_living_friars() : array(),
+            'deceased_friars_list'   => function_exists( 'franciscan_get_default_deceased_friars' ) ? franciscan_get_default_deceased_friars() : array(),
         ),
         'community-friaries' => array(
             'hero_badge'             => 'OUR HOMES',
@@ -1070,5 +1073,160 @@ function franciscan_save_rule_chapters( $chapters ) {
     return update_option( 'franciscan_page_community-rule', $current );
 }
 
+function franciscan_get_default_living_friars() {
+    return array(
+        array( 'name' => 'Fr. Anselm Kullu', 'image' => '/assets/images/friars/fr-anselem-kullu.png' ),
+        array( 'name' => 'Fr. Jerome Alookaran', 'image' => '/assets/images/friars/fr-jerome-alookaran.png' ),
+        array( 'name' => 'Br. Simon Gahatraj', 'image' => '/assets/images/friars/br-simon-gahatraj.png' ),
+        array( 'name' => 'Fr. Cyril Kochuvilayil', 'image' => '/assets/images/friars/fr-cyril-kochuvilayil.png' ),
+        array( 'name' => 'Fr. Marianus Kujur', 'image' => '/assets/images/friars/fr-kujur-marianus.png' ),
+        array( 'name' => 'Fr. Hilarius Barla', 'image' => '/assets/images/friars/fr-hilarius-barla.png' ),
+        array( 'name' => 'Fr. John Thakadiyel', 'image' => '/assets/images/friars/fr-john-thakadiyel.png' ),
+        array( 'name' => 'Fr. Nicholas Tudu', 'image' => '/assets/images/friars/fr-nicolus-tudu.png' ),
+        array( 'name' => 'Fr. Donatus Xaxa', 'image' => '/assets/images/friars/fr-donatus-xaxa.png' ),
+        array( 'name' => 'Fr. Anthony Hemrom', 'image' => '/assets/images/friars/fr-antony-hemrom.png' ),
+        array( 'name' => 'Fr. Donatus Tirkey', 'image' => '/assets/images/friars/fr-donatus-tirkey.png' ),
+        array( 'name' => 'Fr. Anthony Soren', 'image' => '/assets/images/friars/fr-soren-anthony.png' ),
+        array( 'name' => 'Fr. Alphonse Ekka', 'image' => '/assets/images/friars/fr-alphonse-ekka.png' ),
+        array( 'name' => 'Fr. Philip Kaduthanam', 'image' => '/assets/images/friars/fr-philip-kaduthanam.png' ),
+        array( 'name' => 'Fr. Mathew Kanayinkal', 'image' => '/assets/images/friars/fr-mathew-kanayinkal.png' ),
+        array( 'name' => 'Br. Oscar Hemrom', 'image' => '/assets/images/friars/br-oscar-hebro.png' ),
+        array( 'name' => 'Fr. George Mailadil', 'image' => '/assets/images/friars/fr-george-mailadil.png' ),
+        array( 'name' => 'Br. Subhash P. Tete', 'image' => '/assets/images/friars/br-subash-p-tete.png' ),
+        array( 'name' => 'Fr. Herman Kujur', 'image' => '/assets/images/friars/fr-herman-kujur.png' ),
+        array( 'name' => 'Fr. John Horo', 'image' => '/assets/images/friars/fr-john-horo.png' ),
+        array( 'name' => 'Fr. Vijay Kumar Ekka', 'image' => '/assets/images/friars/fr-vijay-ekka.png' ),
+        array( 'name' => 'Fr. Bigit Bage', 'image' => '/assets/images/friars/fr-bigit-bage.png' ),
+        array( 'name' => 'Fr. Ajit Xalxo', 'image' => '/assets/images/friars/fr-ajeet-xalxo.png' ),
+        array( 'name' => 'Fr. Daison Thaikattil', 'image' => '/assets/images/friars/fr-daison-thaikattil.png' ),
+        array( 'name' => 'Fr. Anand Kumar Barla', 'image' => '/assets/images/friars/fr-anand-kumar-barla.png' ),
+        array( 'name' => 'Fr. Leander Kerketta', 'image' => '/assets/images/friars/fr-leander-kerketta.png' ),
+        array( 'name' => 'Fr. Esidor Baa', 'image' => '/assets/images/friars/fr-isidor-baa.png' ),
+        array( 'name' => 'Fr. Suman Kishore Dhan', 'image' => '/assets/images/friars/fr-suman-kishore-dhan.png' ),
+        array( 'name' => 'Fr. Isidore Kerketta', 'image' => '/assets/images/friars/fr-isidor-kerketta.png' ),
+        array( 'name' => 'Fr. Carolus Kiro', 'image' => '/assets/images/friars/fr-carlous-kiro.png' ),
+        array( 'name' => 'Fr. Ranjan Prakash Ekka', 'image' => '/assets/images/friars/fr-ranjan-prakash-ekka.png' ),
+        array( 'name' => 'Fr. Abhay Tigga', 'image' => '/assets/images/friars/fr-abhay-tigga.png' ),
+        array( 'name' => 'Fr. Manoj Vengathanam', 'image' => '/assets/images/friars/fr-manoj-vengathanam.png' ),
+        array( 'name' => 'Fr. Manoj Kullu', 'image' => '/assets/images/friars/fr-manoj-kullu.png' ),
+        array( 'name' => 'Fr. Shaji Alapurath', 'image' => '/assets/images/friars/fr-shaji-alappurath.png' ),
+        array( 'name' => 'Fr. Benjamin Tiru', 'image' => '/assets/images/friars/fr-benjamin-tiru.png' ),
+        array( 'name' => 'Fr. Vincy Illickal', 'image' => '/assets/images/friars/fr-vincy-illickal.png' ),
+        array( 'name' => 'Fr. Xavier Kindo', 'image' => '/assets/images/friars/fr-xavier-kindo.png' ),
+        array( 'name' => 'Fr. Raju Tirkey', 'image' => '/assets/images/friars/fr-raju-tirkey.png' ),
+        array( 'name' => 'Fr. Anthers Bara', 'image' => '/assets/images/friars/fr-bara-anthres.png' ),
+        array( 'name' => 'Fr. Ambose Lakra', 'image' => '/assets/images/friars/fr-ambose-lakra.png' ),
+        array( 'name' => 'Fr. Benedict Tirkey', 'image' => '/assets/images/friars/fr-benidict-tirkey.png' ),
+        array( 'name' => 'Fr. Paulinus Kiro', 'image' => '/assets/images/friars/fr-paulinus-kiro.png' ),
+        array( 'name' => 'Fr. Bijay Prakash Tirkey', 'image' => '/assets/images/friars/fr-bijay-tirkey.png' ),
+        array( 'name' => 'Fr. Joseph Toppo', 'image' => '/assets/images/friars/fr-joseph-toppo.png' ),
+        array( 'name' => 'Fr. Gijesh Thomas Meckal', 'image' => '/assets/images/friars/fr-gigesh-meckal.png' ),
+        array( 'name' => 'Fr. Ajit Tiru', 'image' => '/assets/images/friars/fr-ajit-tiru.png' ),
+        array( 'name' => 'Fr. Anup Toppo', 'image' => '/assets/images/friars/fr-anup-toppo.png' ),
+        array( 'name' => 'Fr. Deepak Ekka', 'image' => '/assets/images/friars/fr-deepak-ekka.png' ),
+        array( 'name' => 'Fr. Amit Ekka', 'image' => '/assets/images/friars/fr-amit-ekka.png' ),
+        array( 'name' => 'Fr. Chander Kujur', 'image' => '/assets/images/friars/fr-chandar-kujur.png' ),
+        array( 'name' => 'Fr. Sumit Bilsan Tigga', 'image' => '/assets/images/friars/fr-sumit-tigga.png' ),
+        array( 'name' => 'Fr. Ajeet Paul Kerketta', 'image' => '/assets/images/friars/fr-ajeet-paul-kerketta.png' ),
+        array( 'name' => 'Fr. Naveen Kujur', 'image' => '/assets/images/friars/fr-naveen-kukur.png' ),
+        array( 'name' => 'Fr. Pradeep Lakra', 'image' => '/assets/images/friars/fr-pradeep-lakra.png' ),
+        array( 'name' => 'Fr. Prashant Xalxo', 'image' => '/assets/images/friars/fr-prashant-xalxo.png' ),
+        array( 'name' => 'Fr. Wilson Lugun', 'image' => '/assets/images/friars/fr-willson-ludun.png' ),
+        array( 'name' => 'Fr. Anshu Anand Tiru', 'image' => '/assets/images/friars/fr-anshu-anand-tiru.png' ),
+        array( 'name' => 'Fr. Matias Kandulna', 'image' => '/assets/images/friars/fr-mathias-kandulna.png' ),
+        array( 'name' => 'Fr. Anand Barla', 'image' => '/assets/images/friars/fr-anand-barla.png' ),
+        array( 'name' => 'Fr. Mukesh Ekka', 'image' => '/assets/images/friars/fr-mukesh-ekka.png' ),
+        array( 'name' => 'Fr. Rohit Ekka', 'image' => '/assets/images/friars/fr-rohit-ekka.png' ),
+        array( 'name' => 'Fr. Anil Soreng', 'image' => '/assets/images/friars/fr-anil-soreng.png' ),
+        array( 'name' => 'Fr. Amit Kumar Beck', 'image' => '/assets/images/friars/fr-amit-kuamr-beck.png' ),
+        array( 'name' => 'Fr. Flourence Tirkey', 'image' => '/assets/images/friars/fr-flourence-tirkey.png' ),
+        array( 'name' => 'Fr. Jugal Barla', 'image' => '/assets/images/friars/fr-jugal-barla.png' ),
+        array( 'name' => 'Fr. Udit lakra', 'image' => '/assets/images/friars/fr-udit-lakra.png' ),
+        array( 'name' => 'Fr. Albert Kindo', 'image' => '/assets/images/friars/fr-albert-kindo.png' ),
+        array( 'name' => 'Fr. Sujit Lakra', 'image' => '/assets/images/friars/fr-sujit-lakra.png' ),
+        array( 'name' => 'Fr. Sumit Tirkey', 'image' => '/assets/images/friars/fr-sumit-tirkey.png' ),
+        array( 'name' => 'Fr. Kuldeep Ekka', 'image' => '/assets/images/friars/br-kuldeep-ekka.png' ),
+        array( 'name' => 'Br. Ajit Topno', 'image' => '/assets/images/friars/br-ajit-topno.png' ),
+        array( 'name' => 'Br. Kishor Jaria', 'image' => '/assets/images/friars/br-kishor-jariya.png' ),
+        array( 'name' => 'Fr. Santosh Toppo', 'image' => '/assets/images/friars/br-santosh-toppo.png' ),
+        array( 'name' => 'Br. Mukesh Toppo', 'image' => '/assets/images/friars/br-mukesh-toppo.png' ),
+        array( 'name' => 'Fr. Jasman Toppo', 'image' => '/assets/images/friars/fr-jasman-toppo.png' ),
+        array( 'name' => 'Br. Anselm Mundu', 'image' => '/assets/images/friars/br-anselem-mundu.png' ),
+        array( 'name' => 'Br. Oskar Soreng', 'image' => '/assets/images/friars/br-oskar-soreng.png' ),
+        array( 'name' => 'Br. Amardeep Lakra', 'image' => '/assets/images/friars/br-amardeep-lakra.png' ),
+        array( 'name' => 'Br. Harshit Kerketta', 'image' => '/assets/images/friars/br-harshit-kerketta.png' ),
+        array( 'name' => 'Br. William Minz', 'image' => '/assets/images/friars/br-william-minz.png' ),
+        array( 'name' => 'Br. Roshan Soreng', 'image' => '/assets/images/friars/br-roshan-soreng.png' ),
+        array( 'name' => 'Br. Bikash Kiro', 'image' => '/assets/images/friars/br-bikash-kiro.png' ),
+        array( 'name' => 'Br. Santosh Toppo', 'image' => '/assets/images/friars/br-santosh-toppo.png' ),
+        array( 'name' => 'Br. Kuldeep Ekka', 'image' => '/assets/images/friars/br-kuldeep-ekka.png' ),
+        array( 'name' => 'Br. Abrahm Soren', 'image' => '/assets/images/friars/br-abrahm-soren.png' ),
+        array( 'name' => 'Br. Joseph Kullu', 'image' => '/assets/images/friars/br-joseph-kullu.png' ),
+        array( 'name' => 'Br. Linus Kerketta', 'image' => '/assets/images/friars/br-linus-kerketta.png' ),
+        array( 'name' => 'Br. Mohit Dungdung', 'image' => '/assets/images/friars/br-mohit-dungdung.png' ),
+        array( 'name' => 'Br. Sudeep Barwa', 'image' => '/assets/images/friars/br-sudeep-barwa.png' ),
+        array( 'name' => 'Br. Ashish Bhengra', 'image' => '/assets/images/friars/br-ashish-bhengra.png' ),
+        array( 'name' => 'Br. Arpan Kongari', 'image' => '/assets/images/friars/br-arpan-kongari.png' ),
+        array( 'name' => 'Br. Kishor Bage', 'image' => '/assets/images/friars/br-kishor-bage.png' ),
+        array( 'name' => 'Br. Michael Topno', 'image' => '/assets/images/friars/br-michael-topno.png' ),
+        array( 'name' => 'Br. Naman Kandulna', 'image' => '/assets/images/friars/br-naman-kandulna.png' ),
+        array( 'name' => 'Br. Patrick Topno', 'image' => '/assets/images/friars/br-patrick-topno.png' ),
+        array( 'name' => 'Br. Praful Xaxa', 'image' => '/assets/images/friars/br-praful-xaxa.png' ),
+    );
+}
 
+function franciscan_get_default_deceased_friars() {
+    return array(
+        array( 'name' => 'Br. Carlus Bara', 'image' => '/assets/images/friars/deceased/br-carlus-bara.jpeg', 'date' => '✝ 28.07.2002' ),
+        array( 'name' => 'Br. Michael Bhengra', 'image' => '/assets/images/friars/deceased/br-michael-bhengra.jpeg', 'date' => '✝ 23.07.2003' ),
+        array( 'name' => 'Fr. George Palamattam', 'image' => '/assets/images/friars/deceased/fr-george-palamattam.jpeg', 'date' => '' ),
+        array( 'name' => 'Br. Benedict Kullu', 'image' => '/assets/images/friars/deceased/br-benedict-kullu.jpg', 'date' => '✝ 28.01.2021' ),
+        array( 'name' => 'Fr. Gregory Kerketta', 'image' => '/assets/images/friars/deceased/fr-gregory-kerketta.jpg', 'date' => '✝ 20.04.2021' ),
+        array( 'name' => 'Fr. Donatus Soreng', 'image' => '/assets/images/friars/deceased/fr-donatus-soreng.jpg', 'date' => '✝ 11.05.2021' ),
+        array( 'name' => 'Fr. Fabian', 'image' => '/assets/images/friars/deceased/fr-fabian.jpg', 'date' => '✝ 20.01.2025' ),
+        array( 'name' => 'Fr. Sushil Prawin Tiru', 'image' => '/assets/images/friars/deceased/fr-sushil-prawin-tiru.png', 'date' => '✝ 07.01.2026' ),
+    );
+}
+
+
+/**
+ * Retrieve curated/custom Living Friars list.
+ */
+function franciscan_get_living_friars() {
+    $data = franciscan_get_page_content( 'community-friars' );
+    if ( isset( $data['friars_list'] ) && is_array( $data['friars_list'] ) && ! empty( $data['friars_list'] ) ) {
+        return array_values( $data['friars_list'] );
+    }
+    return franciscan_get_default_living_friars();
+}
+
+/**
+ * Retrieve curated/custom Deceased Friars list.
+ */
+function franciscan_get_deceased_friars() {
+    $data = franciscan_get_page_content( 'community-friars' );
+    if ( isset( $data['deceased_friars_list'] ) && is_array( $data['deceased_friars_list'] ) && ! empty( $data['deceased_friars_list'] ) ) {
+        return array_values( $data['deceased_friars_list'] );
+    }
+    return franciscan_get_default_deceased_friars();
+}
+
+/**
+ * Helper to resolve friar avatar URL whether stored as relative asset or Media Library upload.
+ */
+function franciscan_resolve_friar_image_url( $img ) {
+    if ( empty( $img ) ) {
+        return FRANCISCAN_THEME_URI . '/assets/images/logo.svg';
+    }
+    if ( 0 === strpos( $img, 'http://' ) || 0 === strpos( $img, 'https://' ) ) {
+        return $img;
+    }
+    if ( 0 === strpos( $img, '/assets/' ) ) {
+        return FRANCISCAN_THEME_URI . $img;
+    }
+    if ( 0 === strpos( $img, 'assets/' ) ) {
+        return FRANCISCAN_THEME_URI . '/' . $img;
+    }
+    return home_url( $img );
+}
 
