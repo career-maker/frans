@@ -186,6 +186,23 @@
             margin: 0 !important;
             padding: 0 !important;
         }
+        /* Small font for Copyright & Designer Credit Row */
+        footer .footer-bottom-row,
+        footer .footer-bottom-row p,
+        footer .footer-copyright-p,
+        footer .footer-copyright-text,
+        footer .footer-designer-text,
+        footer .footer-designer-text a,
+        footer .footer-designer-text span,
+        footer .footer-legal-links,
+        footer .footer-legal-links a {
+            font-size: 0.75rem !important;
+            line-height: 1.6 !important;
+        }
+        footer .footer-bottom-row .footer-sep {
+            font-size: 0.7rem !important;
+            opacity: 0.3 !important;
+        }
     </style>
             <div style="max-width: 1320px; margin: 0 auto; padding: 0 clamp(1rem, 5vw, 3rem);">
                 
@@ -343,24 +360,24 @@
                     </div>
 
                     <!-- Bottom Divider & Copyright Row -->
-                    <div class="footer-bottom-row" style="border-top: 1px solid rgba(255, 255, 255, 0.08); padding-top: 2rem; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; font-family: 'Instrument Sans', sans-serif; font-size: 0.88rem; color: #78716c;">
-                        <p class="footer-copyright-p" style="margin: 0; display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
-                            <span class="footer-copyright-text"><?php echo wp_kses_post( $footer_copyright_text ); ?></span>
+                    <div class="footer-bottom-row" style="border-top: 1px solid rgba(255, 255, 255, 0.08); padding-top: 2rem; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; font-family: 'Instrument Sans', sans-serif; font-size: 0.75rem; color: #78716c;">
+                        <p class="footer-copyright-p" style="margin: 0; display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem; font-size: 0.75rem; line-height: 1.6; color: #78716c;">
+                            <span class="footer-copyright-text" style="font-size: 0.75rem;"><?php echo wp_kses_post( $footer_copyright_text ); ?></span>
                             <?php if ( ! empty( $footer_designer_text ) ) : ?>
-                                <span class="footer-sep" style="color: rgba(255, 255, 255, 0.2);">|</span>
-                                <span class="footer-designer-text">
+                                <span class="footer-sep" style="color: rgba(255, 255, 255, 0.2); font-size: 0.7rem;">|</span>
+                                <span class="footer-designer-text" style="font-size: 0.75rem;">
                                     <?php if ( ! empty( $footer_designer_url ) ) : ?>
-                                        <a href="<?php echo esc_url( $footer_designer_url ); ?>" target="_blank" rel="noopener" style="color: #a8a29e; text-decoration: none;" onmouseover="this.style.color='#e6c888'" onmouseout="this.style.color='#a8a29e'"><?php echo esc_html( $footer_designer_text ); ?></a>
+                                        <a href="<?php echo esc_url( $footer_designer_url ); ?>" target="_blank" rel="noopener" style="color: #a8a29e; text-decoration: none; font-size: 0.75rem;" onmouseover="this.style.color='#e6c888'" onmouseout="this.style.color='#a8a29e'"><?php echo esc_html( $footer_designer_text ); ?></a>
                                     <?php else : ?>
-                                        <span style="color: #a8a29e;"><?php echo esc_html( $footer_designer_text ); ?></span>
+                                        <span style="color: #a8a29e; font-size: 0.75rem;"><?php echo esc_html( $footer_designer_text ); ?></span>
                                     <?php endif; ?>
                                 </span>
                             <?php endif; ?>
                         </p>
-                        <div class="footer-legal-links" style="display: flex; gap: 1.25rem; align-items: center; justify-content: center; flex-wrap: wrap;">
-                            <a href="<?php echo esc_url( $footer_privacy_url ); ?>" style="color: #a8a29e; text-decoration: none; transition: color 0.3s ease;" onmouseover="this.style.color='#e6c888'" onmouseout="this.style.color='#a8a29e'"><?php echo esc_html( $footer_privacy_label ); ?></a>
-                            <span class="footer-sep" style="color: rgba(255, 255, 255, 0.2);">|</span>
-                            <a href="<?php echo esc_url( $footer_terms_url ); ?>" style="color: #a8a29e; text-decoration: none; transition: color 0.3s ease;" onmouseover="this.style.color='#e6c888'" onmouseout="this.style.color='#a8a29e'"><?php echo esc_html( $footer_terms_label ); ?></a>
+                        <div class="footer-legal-links" style="display: flex; gap: 1.25rem; align-items: center; justify-content: center; flex-wrap: wrap; font-size: 0.75rem;">
+                            <a href="<?php echo esc_url( $footer_privacy_url ); ?>" style="color: #a8a29e; text-decoration: none; font-size: 0.75rem; transition: color 0.3s ease;" onmouseover="this.style.color='#e6c888'" onmouseout="this.style.color='#a8a29e'"><?php echo esc_html( $footer_privacy_label ); ?></a>
+                            <span class="footer-sep" style="color: rgba(255, 255, 255, 0.2); font-size: 0.7rem;">|</span>
+                            <a href="<?php echo esc_url( $footer_terms_url ); ?>" style="color: #a8a29e; text-decoration: none; font-size: 0.75rem; transition: color 0.3s ease;" onmouseover="this.style.color='#e6c888'" onmouseout="this.style.color='#a8a29e'"><?php echo esc_html( $footer_terms_label ); ?></a>
                         </div>
                     </div>
 

@@ -8360,3 +8360,21 @@ main h1, main h2, main h3, main h4 {
     }
 }
 
+/* Footer Bottom Copyright & Designer Credit Small Font */
+footer .footer-bottom-row,
+footer .footer-bottom-row p,
+footer .footer-copyright-p,
+footer .footer-copyright-text,
+footer .footer-designer-text,
+footer .footer-designer-text a,
+footer .footer-designer-text span,
+footer .footer-legal-links,
+footer .footer-legal-links a {
+    font-size: 0.75rem !important;
+    line-height: 1.6 !important;
+}
+
+footer .footer-bottom-row .footer-sep {
+    font-size: 0.7rem !important;
+    opacity: 0.3 !important;
+}
