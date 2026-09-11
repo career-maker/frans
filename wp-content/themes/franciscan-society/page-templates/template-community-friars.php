@@ -1267,4 +1267,7 @@ button.fs-mega-toggle:focus::after {
             </div>
         <?php endif; ?>
     </div>
+</main>
+
+<?php
 get_footer();

@@ -4422,7 +4422,9 @@ header.header::-webkit-scrollbar {
     
     .bible-quote-parallax h3 {
         font-size: 2.2rem !important;
+    }
 }
+
 @media (max-width: 576px) {
     .hero-metrics-grid {
         grid-template-columns: 1fr !important;

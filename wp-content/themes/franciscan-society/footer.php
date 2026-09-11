@@ -8,11 +8,52 @@
 <footer style="padding: 0 0 2rem 0; background-color: #FAFAFA; color: #ffffff; box-sizing: border-box;">
     <!-- Critical inline styles for mobile footer layout, logo containment, and strict left alignment -->
     <style id="footer-alignment-critical">
+        /* Ensure 4 columns on desktop */
+        @media (min-width: 992px) {
+            .responsive-grid-footer,
+            footer .responsive-grid-footer {
+                display: grid !important;
+                grid-template-columns: 1.25fr 0.85fr 1.05fr 1.15fr !important;
+                gap: 3.5rem !important;
+                align-items: start !important;
+            }
+            .footer-accordion-toggle {
+                display: none !important;
+            }
+            .footer-accordion-body {
+                display: block !important;
+            }
+            .footer-desktop-heading {
+                display: block !important;
+            }
+            .responsive-grid-footer > div:nth-child(2),
+            .responsive-grid-footer > div:nth-child(3),
+            .responsive-grid-footer > div:nth-child(4) {
+                border-bottom: none !important;
+                padding-top: 0 !important;
+            }
+        }
+        @media (max-width: 991px) and (min-width: 769px) {
+            .responsive-grid-footer,
+            footer .responsive-grid-footer {
+                display: grid !important;
+                grid-template-columns: 1fr 1fr !important;
+                gap: 2.5rem !important;
+                align-items: start !important;
+            }
+        }
         @media (max-width: 768px) {
             footer > div > div,
             footer .footer-main-card {
                 padding: 2.25rem 1.25rem 1.75rem 1.25rem !important;
                 border-radius: 24px !important;
+            }
+            .responsive-grid-footer,
+            footer .responsive-grid-footer {
+                display: grid !important;
+                grid-template-columns: 1fr !important;
+                gap: 0 !important;
+                margin-bottom: 2rem !important;
             }
         }
         footer .footer-col-brand,
