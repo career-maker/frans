@@ -66,20 +66,20 @@ get_header();
                     </div>
 
                     <!-- Right Column: Stats Counter Strip -->
-                    <div class="js-hero-text" style="display: flex; flex-direction: column; justify-content: flex-end;">
+                    <div class="js-hero-text hero-stats-container" style="display: flex; flex-direction: column; justify-content: flex-end;">
                         <!-- Stats Counter Strip -->
-                        <div class="responsive-grid-3" style="position: relative; z-index: 20; display: grid; border-top: 1px solid rgba(255, 255, 255, 0.25); padding-top: 1.25rem;">
-                            <div style="border-right: 1px solid rgba(255, 255, 255, 0.18); padding-right: 1rem;">
-                                <div style="font-size: 2.2rem; font-weight: 900; color: #ffffff !important; -webkit-text-fill-color: #ffffff !important; line-height: 1; font-family: 'Phudu', sans-serif; text-shadow: 0 2px 10px rgba(0,0,0,0.8);"><?php echo esc_html( franciscan_get_page_field( 'home', 'hero_stat_1_num', '104+' ) ); ?></div>
-                                <div style="font-size: 0.7rem; color: rgba(255, 255, 255, 0.85); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 0.4rem; font-weight: 700; font-family: 'Instrument Sans', sans-serif;"><?php echo esc_html( franciscan_get_page_field( 'home', 'hero_stat_1_lbl', 'Professed Friars' ) ); ?></div>
+                        <div class="hero-stats-strip responsive-grid-3">
+                            <div class="hero-stat-item hero-stat-col-1">
+                                <div class="hero-stat-number"><?php echo esc_html( franciscan_get_page_field( 'home', 'hero_stat_1_num', '104+' ) ); ?></div>
+                                <div class="hero-stat-label"><?php echo esc_html( franciscan_get_page_field( 'home', 'hero_stat_1_lbl', 'Professed Friars' ) ); ?></div>
                             </div>
-                            <div style="border-right: 1px solid rgba(255, 255, 255, 0.18); padding-left: 1.25rem; padding-right: 1rem;">
-                                <div style="font-size: 2.2rem; font-weight: 900; color: #ffffff !important; -webkit-text-fill-color: #ffffff !important; line-height: 1; font-family: 'Phudu', sans-serif; text-shadow: 0 2px 10px rgba(0,0,0,0.8);"><?php echo esc_html( franciscan_get_page_field( 'home', 'hero_stat_2_num', '14+' ) ); ?></div>
-                                <div style="font-size: 0.7rem; color: rgba(255, 255, 255, 0.85); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 0.4rem; font-weight: 700; font-family: 'Instrument Sans', sans-serif;"><?php echo esc_html( franciscan_get_page_field( 'home', 'hero_stat_2_lbl', 'Parishes Served' ) ); ?></div>
+                            <div class="hero-stat-item hero-stat-col-2">
+                                <div class="hero-stat-number"><?php echo esc_html( franciscan_get_page_field( 'home', 'hero_stat_2_num', '14+' ) ); ?></div>
+                                <div class="hero-stat-label"><?php echo esc_html( franciscan_get_page_field( 'home', 'hero_stat_2_lbl', 'Parishes Served' ) ); ?></div>
                             </div>
-                            <div style="padding-left: 1.25rem;">
-                                <div style="font-size: 2.2rem; font-weight: 900; color: #ffffff !important; -webkit-text-fill-color: #ffffff !important; line-height: 1; font-family: 'Phudu', sans-serif; text-shadow: 0 2px 10px rgba(0,0,0,0.8);"><?php echo esc_html( franciscan_get_page_field( 'home', 'hero_stat_3_num', '800+' ) ); ?></div>
-                                <div style="font-size: 0.7rem; color: rgba(255, 255, 255, 0.85); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 0.4rem; font-weight: 700; font-family: 'Instrument Sans', sans-serif;"><?php echo esc_html( franciscan_get_page_field( 'home', 'hero_stat_3_lbl', 'Years of Grace' ) ); ?></div>
+                            <div class="hero-stat-item hero-stat-col-3">
+                                <div class="hero-stat-number"><?php echo esc_html( franciscan_get_page_field( 'home', 'hero_stat_3_num', '800+' ) ); ?></div>
+                                <div class="hero-stat-label"><?php echo esc_html( franciscan_get_page_field( 'home', 'hero_stat_3_lbl', 'Years of Grace' ) ); ?></div>
                             </div>
                         </div>
                     </div>

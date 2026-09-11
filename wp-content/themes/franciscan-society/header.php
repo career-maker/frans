@@ -179,25 +179,7 @@
             }
         }
         
-        /* Mobile counters center alignment */
-        @media (max-width: 991px) {
-            .responsive-grid-3 {
-                text-align: center !important;
-                grid-template-columns: 1fr !important;
-                gap: 1.5rem !important;
-            }
-            .responsive-grid-3 > div {
-                border-right: none !important;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.25) !important;
-                padding-left: 0 !important;
-                padding-right: 0 !important;
-                padding-bottom: 1.5rem !important;
-            }
-            .responsive-grid-3 > div:last-child {
-                border-bottom: none !important;
-                padding-bottom: 0 !important;
-            }
-        }
+
         /* Desktop layout */
         @media (min-width: 992px) {
             .hero-section { padding: 0 1.5rem 0 1.5rem !important; margin-top: 0 !important; }
@@ -207,25 +189,7 @@
             .video-overlay { position: absolute !important; inset: 0 !important; width: 100% !important; height: 100% !important; border-radius: 0 0 24px 24px !important; z-index: 2 !important; }
         }
         
-        /* Mobile counters center alignment */
-        @media (max-width: 991px) {
-            .responsive-grid-3 {
-                text-align: center !important;
-                grid-template-columns: 1fr !important;
-                gap: 1.5rem !important;
-            }
-            .responsive-grid-3 > div {
-                border-right: none !important;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.25) !important;
-                padding-left: 0 !important;
-                padding-right: 0 !important;
-                padding-bottom: 1.5rem !important;
-            }
-            .responsive-grid-3 > div:last-child {
-                border-bottom: none !important;
-                padding-bottom: 0 !important;
-            }
-        }
+
         /* Hide sticky widgets when mobile menu is open */
         @media (max-width: 991px) {
             body.menu-open #welcome-scroll-bible-container,
@@ -1647,23 +1611,7 @@ button.fs-mega-toggle:focus::after {
       font-size: 1.2rem;
     }
 
-    /* Mobile counters - center alignment */
-    .responsive-grid-3 {
-      text-align: center !important;
-      grid-template-columns: 1fr !important;
-      gap: 1.5rem !important;
-    }
-    .responsive-grid-3 > div {
-      border-right: none !important;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.25) !important;
-      padding-left: 0 !important;
-      padding-right: 0 !important;
-      padding-bottom: 1.5rem !important;
-    }
-    .responsive-grid-3 > div:last-child {
-      border-bottom: none !important;
-      padding-bottom: 0 !important;
-    }
+
 
     /* Mobile hero buttons - ensure GET STARTED visible */
     .hero-buttons-row {
