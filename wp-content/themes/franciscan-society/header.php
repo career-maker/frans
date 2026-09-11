@@ -834,15 +834,62 @@ button.fs-mega-toggle:focus::after {
 
         /* Keep toggle highlighted when mega menu is open and highlight active page */
         .fs-desktop-nav a.active,
+        .fs-desktop-nav a.is-current-page,
+        .fs-header .fs-desktop-nav a.active,
+        .fs-header .fs-desktop-nav a.is-current-page,
         .fs-desktop-nav button.active,
-        .fs-desktop-nav button.hover-active {
+        .fs-desktop-nav button.hover-active,
+        .fs-desktop-nav button.is-current-parent,
+        button.fs-mega-toggle.is-current-parent,
+        .fs-header .fs-desktop-nav button.is-current-parent {
             color: #e6c888 !important;
-            font-weight: 800 !important;
+            font-weight: 700 !important;
         }
         .fs-desktop-nav button.active::after,
-        .fs-desktop-nav button.hover-active::after {
+        .fs-desktop-nav button.hover-active::after,
+        .fs-desktop-nav button.is-current-parent::after,
+        button.fs-mega-toggle.is-current-parent::after,
+        .fs-header .fs-desktop-nav button.is-current-parent::after {
             color: #e6c888 !important;
         }
+
+        /* Highlight dropdown active child links */
+        .fs-mega-col a.active,
+        .fs-mega-col a.is-current-page {
+            color: #e6c888 !important;
+            background: rgba(230, 200, 136, 0.16) !important;
+            font-weight: 700 !important;
+            border-left: 3px solid #e6c888 !important;
+            padding-left: 1.25rem !important;
+            border-radius: 4px;
+        }
+
+        /* Highlight mobile nav active links & parent dropdowns */
+        .fs-mobile-nav a.active,
+        .fs-mobile-nav a.is-current-page {
+            color: #e6c888 !important;
+            font-weight: 700 !important;
+        }
+        .fs-mobile-submenu-toggle.is-current-parent {
+            color: #e6c888 !important;
+            font-weight: 700 !important;
+        }
+        .fs-mobile-submenu-toggle.is-current-parent .fs-mobile-submenu-arrow {
+            color: #e6c888 !important;
+        }
+        .fs-mobile-submenu-toggle.is-current-parent .fs-mobile-submenu-arrow svg {
+            stroke: #e6c888 !important;
+        }
+        .fs-mobile-submenu a.active,
+        .fs-mobile-submenu a.is-current-page {
+            color: #e6c888 !important;
+            background: rgba(230, 200, 136, 0.12) !important;
+            font-weight: 700 !important;
+            border-left: 3px solid #e6c888 !important;
+            padding: 0.4rem 0.75rem !important;
+            border-radius: 4px;
+        }
+
 
         /* BUTTON TEXT RECOVERY */
         .btn-fill-animation,
@@ -1730,6 +1777,53 @@ $nav_url_news        = function_exists( 'franciscan_resolve_nav_url' ) ? francis
 
 $nav_lbl_contact     = ! empty( $opt['nav_label_contact'] ) ? $opt['nav_label_contact'] : 'Contact Us';
 $nav_url_contact     = function_exists( 'franciscan_resolve_nav_url' ) ? franciscan_resolve_nav_url( $opt['nav_link_contact'] ?? '/contact/', '/contact/' ) : home_url( '/contact/' );
+
+// Active Page Detection
+$fs_req_uri = isset( $_SERVER['REQUEST_URI'] ) ? strtolower( strtok( $_SERVER['REQUEST_URI'], '?' ) ) : '';
+
+$fs_is_home = is_front_page() || ( is_home() && ! is_paged() );
+if ( ! $fs_is_home && ( $fs_req_uri === '' || $fs_req_uri === '/' || $fs_req_uri === '/fransiscan' || $fs_req_uri === '/fransiscan/' ) ) {
+    $fs_is_home = true;
+}
+
+$fs_is_about         = false;
+$fs_is_gallery       = false;
+$fs_is_m_pastoral    = false;
+$fs_is_m_formation   = false;
+$fs_is_m_education   = false;
+$fs_is_m_publication = false;
+$fs_is_ministries    = false;
+$fs_is_c_history     = false;
+$fs_is_c_rule        = false;
+$fs_is_c_leader      = false;
+$fs_is_c_friars      = false;
+$fs_is_c_friaries    = false;
+$fs_is_community     = false;
+$fs_is_news          = false;
+$fs_is_contact       = false;
+
+if ( ! $fs_is_home ) {
+    $fs_is_about   = is_page_template( 'page-templates/template-about.php' ) || is_page( array( 'about', 'about-us' ) ) || ( strpos( $fs_req_uri, '/about' ) !== false );
+    $fs_is_gallery = is_page_template( 'page-templates/template-gallery.php' ) || is_page( 'gallery' ) || ( strpos( $fs_req_uri, '/gallery' ) !== false );
+
+    // Ministries sub-pages
+    $fs_is_m_pastoral    = is_page_template( 'page-templates/template-ministries-pastoral.php' ) || is_page( array( 'ministries-pastoral', 'pastoral-ministry', 'pastoral' ) ) || ( strpos( $fs_req_uri, 'pastoral' ) !== false );
+    $fs_is_m_formation   = is_page_template( 'page-templates/template-ministries-formation.php' ) || is_page( array( 'ministries-formation', 'formation-ministry', 'formation' ) ) || ( strpos( $fs_req_uri, 'formation' ) !== false );
+    $fs_is_m_education   = is_page_template( 'page-templates/template-ministries-education.php' ) || is_page( array( 'ministries-education', 'education-ministry', 'education' ) ) || ( strpos( $fs_req_uri, 'education' ) !== false );
+    $fs_is_m_publication = is_page_template( 'page-templates/template-publications.php' ) || is_page( array( 'publications', 'publication' ) ) || ( strpos( $fs_req_uri, 'publication' ) !== false );
+    $fs_is_ministries    = $fs_is_m_pastoral || $fs_is_m_formation || $fs_is_m_education || $fs_is_m_publication || is_page_template( 'page-templates/template-ministries.php' ) || is_page( array( 'ministries', 'ministry' ) ) || ( strpos( $fs_req_uri, 'ministr' ) !== false );
+
+    // Community sub-pages
+    $fs_is_c_history   = is_page_template( 'page-templates/template-community-history.php' ) || is_page( array( 'community-history', 'our-history', 'history' ) ) || ( strpos( $fs_req_uri, 'history' ) !== false );
+    $fs_is_c_rule      = is_page_template( 'page-templates/template-community-rule.php' ) || is_page( array( 'community-rule', 'third-order-rule', 'rule' ) ) || ( strpos( $fs_req_uri, 'rule' ) !== false );
+    $fs_is_c_leader    = is_page_template( 'page-templates/template-community-leadership.php' ) || is_page( array( 'community-leadership', 'our-leadership', 'leadership' ) ) || ( strpos( $fs_req_uri, 'leader' ) !== false );
+    $fs_is_c_friaries  = is_page_template( 'page-templates/template-community-friaries.php' ) || is_page( array( 'community-friaries', 'our-friaries', 'friaries' ) ) || ( strpos( $fs_req_uri, 'friaries' ) !== false );
+    $fs_is_c_friars    = ! $fs_is_c_friaries && ( is_page_template( 'page-templates/template-community-friars.php' ) || is_page( array( 'community-friars', 'our-friars', 'friars' ) ) || ( strpos( $fs_req_uri, 'friar' ) !== false ) );
+    $fs_is_community   = $fs_is_c_history || $fs_is_c_rule || $fs_is_c_leader || $fs_is_c_friars || $fs_is_c_friaries || is_page_template( 'page-templates/template-community.php' ) || is_page( array( 'community', 'our-community' ) ) || ( strpos( $fs_req_uri, 'communit' ) !== false );
+
+    $fs_is_news    = is_page_template( 'page-templates/template-news.php' ) || is_page_template( 'page-templates/template-blogs.php' ) || is_page( array( 'news', 'blogs', 'blog' ) ) || is_singular( 'post' ) || is_category() || is_tag() || is_archive() || ( strpos( $fs_req_uri, '/news' ) !== false || strpos( $fs_req_uri, '/blog' ) !== false );
+    $fs_is_contact = is_page_template( 'page-templates/template-contact.php' ) || is_page( array( 'contact', 'contact-us' ) ) || ( strpos( $fs_req_uri, '/contact' ) !== false );
+}
 ?>
 <!-- Header -->
 <header class="fs-header fs-menu">
@@ -1745,13 +1839,13 @@ $nav_url_contact     = function_exists( 'franciscan_resolve_nav_url' ) ? francis
 
     <!-- Desktop Navigation -->
     <nav class="fs-desktop-nav">
-      <a href="<?php echo esc_url( $nav_url_home ); ?>"><?php echo esc_html( $nav_lbl_home ); ?></a>
-      <a href="<?php echo esc_url( $nav_url_about ); ?>"><?php echo esc_html( $nav_lbl_about ); ?></a>
-      <a href="<?php echo esc_url( $nav_url_gallery ); ?>"><?php echo esc_html( $nav_lbl_gallery ); ?></a>
-      <button class="fs-mega-toggle" data-menu="ministries"><?php echo esc_html( $nav_lbl_ministries ); ?></button>
-      <button class="fs-mega-toggle" data-menu="community"><?php echo esc_html( $nav_lbl_community ); ?></button>
-      <a href="<?php echo esc_url( $nav_url_news ); ?>"><?php echo esc_html( $nav_lbl_news ); ?></a>
-      <a href="<?php echo esc_url( $nav_url_contact ); ?>"><?php echo esc_html( $nav_lbl_contact ); ?></a>
+      <a href="<?php echo esc_url( $nav_url_home ); ?>" class="<?php echo $fs_is_home ? 'active is-current-page' : ''; ?>"><?php echo esc_html( $nav_lbl_home ); ?></a>
+      <a href="<?php echo esc_url( $nav_url_about ); ?>" class="<?php echo $fs_is_about ? 'active is-current-page' : ''; ?>"><?php echo esc_html( $nav_lbl_about ); ?></a>
+      <a href="<?php echo esc_url( $nav_url_gallery ); ?>" class="<?php echo $fs_is_gallery ? 'active is-current-page' : ''; ?>"><?php echo esc_html( $nav_lbl_gallery ); ?></a>
+      <button class="fs-mega-toggle <?php echo $fs_is_ministries ? 'is-current-parent' : ''; ?>" data-menu="ministries"><?php echo esc_html( $nav_lbl_ministries ); ?></button>
+      <button class="fs-mega-toggle <?php echo $fs_is_community ? 'is-current-parent' : ''; ?>" data-menu="community"><?php echo esc_html( $nav_lbl_community ); ?></button>
+      <a href="<?php echo esc_url( $nav_url_news ); ?>" class="<?php echo $fs_is_news ? 'active is-current-page' : ''; ?>"><?php echo esc_html( $nav_lbl_news ); ?></a>
+      <a href="<?php echo esc_url( $nav_url_contact ); ?>" class="<?php echo $fs_is_contact ? 'active is-current-page' : ''; ?>"><?php echo esc_html( $nav_lbl_contact ); ?></a>
     </nav>
 
     <!-- Header Actions -->
@@ -1768,10 +1862,10 @@ $nav_url_contact     = function_exists( 'franciscan_resolve_nav_url' ) ? francis
   <div class="fs-mega-grid">
     <div class="fs-mega-col">
       <h3><?php echo esc_html( $nav_lbl_ministries ); ?></h3>
-      <a href="<?php echo esc_url( $nav_url_m_pastoral ); ?>"><?php echo esc_html( $nav_lbl_m_pastoral ); ?></a>
-      <a href="<?php echo esc_url( $nav_url_m_formation ); ?>"><?php echo esc_html( $nav_lbl_m_formation ); ?></a>
-      <a href="<?php echo esc_url( $nav_url_m_education ); ?>"><?php echo esc_html( $nav_lbl_m_education ); ?></a>
-      <a href="<?php echo esc_url( $nav_url_publication ); ?>"><?php echo esc_html( $nav_lbl_publication ); ?></a>
+      <a href="<?php echo esc_url( $nav_url_m_pastoral ); ?>" class="<?php echo $fs_is_m_pastoral ? 'active is-current-page' : ''; ?>"><?php echo esc_html( $nav_lbl_m_pastoral ); ?></a>
+      <a href="<?php echo esc_url( $nav_url_m_formation ); ?>" class="<?php echo $fs_is_m_formation ? 'active is-current-page' : ''; ?>"><?php echo esc_html( $nav_lbl_m_formation ); ?></a>
+      <a href="<?php echo esc_url( $nav_url_m_education ); ?>" class="<?php echo $fs_is_m_education ? 'active is-current-page' : ''; ?>"><?php echo esc_html( $nav_lbl_m_education ); ?></a>
+      <a href="<?php echo esc_url( $nav_url_publication ); ?>" class="<?php echo $fs_is_m_publication ? 'active is-current-page' : ''; ?>"><?php echo esc_html( $nav_lbl_publication ); ?></a>
     </div>
   </div>
 </div>
@@ -1780,11 +1874,11 @@ $nav_url_contact     = function_exists( 'franciscan_resolve_nav_url' ) ? francis
   <div class="fs-mega-grid">
     <div class="fs-mega-col">
       <h3><?php echo esc_html( $nav_lbl_community ); ?></h3>
-      <a href="<?php echo esc_url( $nav_url_c_history ); ?>"><?php echo esc_html( $nav_lbl_c_history ); ?></a>
-      <a href="<?php echo esc_url( $nav_url_c_rule ); ?>"><?php echo esc_html( $nav_lbl_c_rule ); ?></a>
-      <a href="<?php echo esc_url( $nav_url_c_leader ); ?>"><?php echo esc_html( $nav_lbl_c_leader ); ?></a>
-      <a href="<?php echo esc_url( $nav_url_c_friars ); ?>"><?php echo esc_html( $nav_lbl_c_friars ); ?></a>
-      <a href="<?php echo esc_url( $nav_url_c_friaries ); ?>"><?php echo esc_html( $nav_lbl_c_friaries ); ?></a>
+      <a href="<?php echo esc_url( $nav_url_c_history ); ?>" class="<?php echo $fs_is_c_history ? 'active is-current-page' : ''; ?>"><?php echo esc_html( $nav_lbl_c_history ); ?></a>
+      <a href="<?php echo esc_url( $nav_url_c_rule ); ?>" class="<?php echo $fs_is_c_rule ? 'active is-current-page' : ''; ?>"><?php echo esc_html( $nav_lbl_c_rule ); ?></a>
+      <a href="<?php echo esc_url( $nav_url_c_leader ); ?>" class="<?php echo $fs_is_c_leader ? 'active is-current-page' : ''; ?>"><?php echo esc_html( $nav_lbl_c_leader ); ?></a>
+      <a href="<?php echo esc_url( $nav_url_c_friars ); ?>" class="<?php echo $fs_is_c_friars ? 'active is-current-page' : ''; ?>"><?php echo esc_html( $nav_lbl_c_friars ); ?></a>
+      <a href="<?php echo esc_url( $nav_url_c_friaries ); ?>" class="<?php echo $fs_is_c_friaries ? 'active is-current-page' : ''; ?>"><?php echo esc_html( $nav_lbl_c_friaries ); ?></a>
     </div>
   </div>
 </div>
@@ -1793,35 +1887,36 @@ $nav_url_contact     = function_exists( 'franciscan_resolve_nav_url' ) ? francis
 <nav class="fs-mobile-nav" id="mobile-nav">
   <button class="fs-mobile-close">&times;</button>
 
-  <a href="<?php echo esc_url( $nav_url_home ); ?>"><?php echo esc_html( $nav_lbl_home ); ?></a>
-  <a href="<?php echo esc_url( $nav_url_about ); ?>"><?php echo esc_html( $nav_lbl_about ); ?></a>
-  <a href="<?php echo esc_url( $nav_url_gallery ); ?>"><?php echo esc_html( $nav_lbl_gallery ); ?></a>
+  <a href="<?php echo esc_url( $nav_url_home ); ?>" class="<?php echo $fs_is_home ? 'active is-current-page' : ''; ?>"><?php echo esc_html( $nav_lbl_home ); ?></a>
+  <a href="<?php echo esc_url( $nav_url_about ); ?>" class="<?php echo $fs_is_about ? 'active is-current-page' : ''; ?>"><?php echo esc_html( $nav_lbl_about ); ?></a>
+  <a href="<?php echo esc_url( $nav_url_gallery ); ?>" class="<?php echo $fs_is_gallery ? 'active is-current-page' : ''; ?>"><?php echo esc_html( $nav_lbl_gallery ); ?></a>
 
-  <button class="fs-mobile-submenu-toggle" data-target="ministries-submenu">
+  <button class="fs-mobile-submenu-toggle <?php echo $fs_is_ministries ? 'is-current-parent' : ''; ?>" data-target="ministries-submenu">
     <?php echo esc_html( $nav_lbl_ministries ); ?>
     <span class="fs-mobile-submenu-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span>
   </button>
-  <div class="fs-mobile-submenu" id="ministries-submenu">
-    <a href="<?php echo esc_url( $nav_url_m_pastoral ); ?>"><?php echo esc_html( $nav_lbl_m_pastoral ); ?></a>
-    <a href="<?php echo esc_url( $nav_url_m_formation ); ?>"><?php echo esc_html( $nav_lbl_m_formation ); ?></a>
-    <a href="<?php echo esc_url( $nav_url_m_education ); ?>"><?php echo esc_html( $nav_lbl_m_education ); ?></a>
-    <a href="<?php echo esc_url( $nav_url_publication ); ?>"><?php echo esc_html( $nav_lbl_publication ); ?></a>
+  <div class="fs-mobile-submenu <?php echo $fs_is_ministries ? 'open' : ''; ?>" id="ministries-submenu">
+    <a href="<?php echo esc_url( $nav_url_m_pastoral ); ?>" class="<?php echo $fs_is_m_pastoral ? 'active is-current-page' : ''; ?>"><?php echo esc_html( $nav_lbl_m_pastoral ); ?></a>
+    <a href="<?php echo esc_url( $nav_url_m_formation ); ?>" class="<?php echo $fs_is_m_formation ? 'active is-current-page' : ''; ?>"><?php echo esc_html( $nav_lbl_m_formation ); ?></a>
+    <a href="<?php echo esc_url( $nav_url_m_education ); ?>" class="<?php echo $fs_is_m_education ? 'active is-current-page' : ''; ?>"><?php echo esc_html( $nav_lbl_m_education ); ?></a>
+    <a href="<?php echo esc_url( $nav_url_publication ); ?>" class="<?php echo $fs_is_m_publication ? 'active is-current-page' : ''; ?>"><?php echo esc_html( $nav_lbl_publication ); ?></a>
   </div>
 
-  <button class="fs-mobile-submenu-toggle" data-target="community-submenu">
+  <button class="fs-mobile-submenu-toggle <?php echo $fs_is_community ? 'is-current-parent' : ''; ?>" data-target="community-submenu">
     <?php echo esc_html( $nav_lbl_community ); ?>
     <span class="fs-mobile-submenu-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span>
   </button>
-  <div class="fs-mobile-submenu" id="community-submenu">
-    <a href="<?php echo esc_url( $nav_url_c_history ); ?>"><?php echo esc_html( $nav_lbl_c_history ); ?></a>
-    <a href="<?php echo esc_url( $nav_url_c_rule ); ?>"><?php echo esc_html( $nav_lbl_c_rule ); ?></a>
-    <a href="<?php echo esc_url( $nav_url_c_leader ); ?>"><?php echo esc_html( $nav_lbl_c_leader ); ?></a>
-    <a href="<?php echo esc_url( $nav_url_c_friars ); ?>"><?php echo esc_html( $nav_lbl_c_friars ); ?></a>
-    <a href="<?php echo esc_url( $nav_url_c_friaries ); ?>"><?php echo esc_html( $nav_lbl_c_friaries ); ?></a>
+  <div class="fs-mobile-submenu <?php echo $fs_is_community ? 'open' : ''; ?>" id="community-submenu">
+    <a href="<?php echo esc_url( $nav_url_c_history ); ?>" class="<?php echo $fs_is_c_history ? 'active is-current-page' : ''; ?>"><?php echo esc_html( $nav_lbl_c_history ); ?></a>
+    <a href="<?php echo esc_url( $nav_url_c_rule ); ?>" class="<?php echo $fs_is_c_rule ? 'active is-current-page' : ''; ?>"><?php echo esc_html( $nav_lbl_c_rule ); ?></a>
+    <a href="<?php echo esc_url( $nav_url_c_leader ); ?>" class="<?php echo $fs_is_c_leader ? 'active is-current-page' : ''; ?>"><?php echo esc_html( $nav_lbl_c_leader ); ?></a>
+    <a href="<?php echo esc_url( $nav_url_c_friars ); ?>" class="<?php echo $fs_is_c_friars ? 'active is-current-page' : ''; ?>"><?php echo esc_html( $nav_lbl_c_friars ); ?></a>
+    <a href="<?php echo esc_url( $nav_url_c_friaries ); ?>" class="<?php echo $fs_is_c_friaries ? 'active is-current-page' : ''; ?>"><?php echo esc_html( $nav_lbl_c_friaries ); ?></a>
   </div>
-  <a href="<?php echo esc_url( $nav_url_news ); ?>"><?php echo esc_html( $nav_lbl_news ); ?></a>
-  <a href="<?php echo esc_url( $nav_url_contact ); ?>"><?php echo esc_html( $nav_lbl_contact ); ?></a>
+  <a href="<?php echo esc_url( $nav_url_news ); ?>" class="<?php echo $fs_is_news ? 'active is-current-page' : ''; ?>"><?php echo esc_html( $nav_lbl_news ); ?></a>
+  <a href="<?php echo esc_url( $nav_url_contact ); ?>" class="<?php echo $fs_is_contact ? 'active is-current-page' : ''; ?>"><?php echo esc_html( $nav_lbl_contact ); ?></a>
 </nav>
+
 
 <script>
   // Menu toggle functionality
@@ -2053,6 +2148,81 @@ $nav_url_contact     = function_exists( 'franciscan_resolve_nav_url' ) ? francis
     });
 
     observer.observe(document.body, { attributes: true, attributeFilter: ['class'] });
+
+    // Client-side active navigation enhancer
+    function syncActiveNavigation() {
+      try {
+        const curPath = window.location.pathname.replace(/\/+$/, '').toLowerCase();
+        const curHref = window.location.href.split('?')[0].split('#')[0].replace(/\/+$/, '').toLowerCase();
+
+        const navLinks = document.querySelectorAll('.fs-desktop-nav a, .fs-mega-col a, .fs-mobile-nav a, .fs-mobile-submenu a');
+        let bestMatch = null;
+        let bestLen = 0;
+
+        navLinks.forEach(a => {
+          const rawHref = a.getAttribute('href');
+          if (!rawHref || rawHref === '#' || rawHref.startsWith('javascript:')) return;
+          
+          let aHref = '';
+          let aPath = '';
+          try {
+            const urlObj = new URL(rawHref, window.location.origin);
+            aHref = urlObj.href.split('?')[0].split('#')[0].replace(/\/+$/, '').toLowerCase();
+            aPath = urlObj.pathname.replace(/\/+$/, '').toLowerCase();
+          } catch(e) {
+            aHref = rawHref.toLowerCase();
+            aPath = rawHref.toLowerCase();
+          }
+
+          const isHomePath = (curPath === '' || curPath === '/fransiscan');
+          const isLinkHome = (aPath === '' || aPath === '/fransiscan');
+
+          if (isHomePath) {
+            if (isLinkHome) {
+              a.classList.add('active', 'is-current-page');
+            }
+            return;
+          }
+
+          if (!isLinkHome && (curHref === aHref || curPath === aPath || curPath.endsWith(aPath))) {
+            if (aPath.length > bestLen) {
+              bestLen = aPath.length;
+              bestMatch = a;
+            }
+          }
+        });
+
+        if (bestMatch) {
+          bestMatch.classList.add('active', 'is-current-page');
+        }
+
+        // Highlight parent toggles if child is active
+        document.querySelectorAll('.fs-mega-col a.is-current-page, .fs-mega-col a.active').forEach(activeChild => {
+          const megaMenu = activeChild.closest('.fs-mega-menu');
+          if (megaMenu) {
+            const menuKey = megaMenu.id.replace('-mega', '');
+            const parentToggle = document.querySelector(`.fs-mega-toggle[data-menu="${menuKey}"]`);
+            if (parentToggle) {
+              parentToggle.classList.add('is-current-parent');
+            }
+          }
+        });
+
+        document.querySelectorAll('.fs-mobile-submenu a.is-current-page, .fs-mobile-submenu a.active').forEach(activeChild => {
+          const submenu = activeChild.closest('.fs-mobile-submenu');
+          if (submenu) {
+            const parentToggle = document.querySelector(`.fs-mobile-submenu-toggle[data-target="${submenu.id}"]`);
+            if (parentToggle) {
+              parentToggle.classList.add('is-current-parent');
+            }
+            submenu.classList.add('open');
+          }
+        });
+      } catch (err) {
+        console.debug('[Nav Highlighting]', err);
+      }
+    }
+    syncActiveNavigation();
   });
 
   // Smart Sticky Header (Hide on scroll down, Show on scroll up)

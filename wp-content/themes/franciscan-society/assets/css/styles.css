@@ -8513,4 +8513,68 @@ button.fs-mega-toggle.hover-active::after,
     transform: rotate(180deg) !important;
 }
 
+/* ============================================================
+   ACTIVE PAGE & PARENT TOGGLE HIGHLIGHTING
+   ============================================================ */
+.fs-desktop-nav a.active,
+.fs-desktop-nav a.is-current-page,
+.fs-header .fs-desktop-nav a.active,
+.fs-header .fs-desktop-nav a.is-current-page,
+.fs-desktop-nav button.is-current-parent,
+.fs-desktop-nav .fs-mega-toggle.is-current-parent,
+button.fs-mega-toggle.is-current-parent,
+.fs-header .fs-desktop-nav button.is-current-parent {
+    color: #e6c888 !important;
+    font-weight: 700 !important;
+}
+
+.fs-desktop-nav button.is-current-parent::after,
+.fs-desktop-nav .fs-mega-toggle.is-current-parent::after,
+button.fs-mega-toggle.is-current-parent::after,
+.fs-header .fs-desktop-nav button.is-current-parent::after {
+    color: #e6c888 !important;
+}
+
+.fs-mega-col a.active,
+.fs-mega-col a.is-current-page {
+    color: #e6c888 !important;
+    background: rgba(230, 200, 136, 0.16) !important;
+    font-weight: 700 !important;
+    border-left: 3px solid #e6c888 !important;
+    padding-left: 1.25rem !important;
+    border-radius: 4px;
+}
+
+.fs-mobile-nav a.active,
+.fs-mobile-nav a.is-current-page,
+.fs-mobile-nav > a.active,
+.fs-mobile-nav > a.is-current-page {
+    color: #e6c888 !important;
+    font-weight: 700 !important;
+}
+
+.fs-mobile-submenu-toggle.is-current-parent {
+    color: #e6c888 !important;
+    font-weight: 700 !important;
+}
+
+.fs-mobile-submenu-toggle.is-current-parent .fs-mobile-submenu-arrow {
+    color: #e6c888 !important;
+}
+
+.fs-mobile-submenu-toggle.is-current-parent .fs-mobile-submenu-arrow svg {
+    stroke: #e6c888 !important;
+}
+
+.fs-mobile-submenu a.active,
+.fs-mobile-submenu a.is-current-page {
+    color: #e6c888 !important;
+    background: rgba(230, 200, 136, 0.12) !important;
+    font-weight: 700 !important;
+    border-left: 3px solid #e6c888 !important;
+    padding: 0.4rem 0.75rem !important;
+    border-radius: 4px;
+}
+
+
 
