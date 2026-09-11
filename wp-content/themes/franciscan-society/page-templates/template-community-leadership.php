@@ -757,7 +757,10 @@ button.fs-mega-toggle:focus::after {
     if ( empty( $ldr_hero_bg ) || false !== strpos( $ldr_hero_bg, 'ChatGPT_Image' ) ) {
         $ldr_hero_bg = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/leadership-banner.jpg';
     }
-    $ldr_hero_desc = franciscan_get_page_field( 'community-leadership', 'hero_subtitle', 'Guiding the Province in fraternity, governance, and mission.' );
+    $ldr_hero_desc = franciscan_get_page_field( 'community-leadership', 'hero_subtitle', '' );
+    if ( empty( $ldr_hero_desc ) ) {
+        $ldr_hero_desc = franciscan_get_page_field( 'community-leadership', 'card_subtitle', 'Guiding the Province in fraternity, governance, and mission.' );
+    }
     ?>
     <section class="page-hero-banner" style="background-image: url('<?php echo esc_url( $ldr_hero_bg ); ?>');">
         <div style="position: absolute; inset: 0; background-color: rgba(12, 11, 10, 0.74);"></div>
@@ -776,6 +779,18 @@ button.fs-mega-toggle:focus::after {
     </section>
 
     <!-- Hero Banner Card with Vine Watermark -->
+    <?php
+    $ldr_default_text = 'Led by the Minister Provincial and provincial leadership team committed to spiritual excellence.';
+    $ldr_card_desc = franciscan_get_page_field( 'community-leadership', 'card_subtitle', '' );
+    if ( empty( $ldr_card_desc ) || $ldr_card_desc === $ldr_default_text ) {
+        $ldr_custom_hero = franciscan_get_page_field( 'community-leadership', 'hero_subtitle', '' );
+        if ( ! empty( $ldr_custom_hero ) && 'Guiding the Province in fraternity, governance, and mission.' !== $ldr_custom_hero ) {
+            $ldr_card_desc = $ldr_custom_hero;
+        } else {
+            $ldr_card_desc = $ldr_default_text;
+        }
+    }
+    ?>
     <section class="page-hero" style="position: relative; background-color: #FFFFFF; padding: 2rem 2rem 0 2rem; box-sizing: border-box;">
         <div class="has-vine-watermark" style="position: relative; width: 100%; display: flex; flex-direction: column; justify-content: center; box-sizing: border-box; background: linear-gradient(135deg, #4A2A18 0%, #6b3d28 100%); min-height: 300px; border-radius: 24px; padding: clamp(2.5rem, 5vw, 3.8rem) clamp(1.8rem, 5vw, 3.5rem); max-width: 1400px; margin: 0 auto; overflow: hidden; box-shadow: 0 15px 35px rgba(74,42,24,0.18);">
             <img src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/shapes/vine-corner-watermark.png' ); ?>" class="vine-corner-watermark" alt="" aria-hidden="true" style="opacity: 0.38; filter: brightness(1.6) contrast(1.1);">
@@ -788,7 +803,7 @@ button.fs-mega-toggle:focus::after {
                     <?php echo esc_html( franciscan_get_page_field( 'community-leadership', 'card_title', 'SERVING IN COMMUNION' ) ); ?>
                 </h2>
                 <p style="font-family: 'Instrument Sans', sans-serif; font-size: 1.05rem; font-weight: 400; color: rgba(255, 255, 255, 0.9); line-height: 1.52; max-width: 650px; margin: 0;">
-                    <?php echo nl2br( esc_html( franciscan_get_page_field( 'community-leadership', 'card_subtitle', 'Led by the Minister Provincial and provincial leadership team committed to spiritual excellence.' ) ) ); ?>
+                    <?php echo nl2br( esc_html( $ldr_card_desc ) ); ?>
                 </p>
             </div>
         </div>

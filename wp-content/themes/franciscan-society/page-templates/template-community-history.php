@@ -762,7 +762,10 @@ button.fs-mega-toggle:focus::after {
     if ( empty( $hist_hero_bg ) || false !== strpos( $hist_hero_bg, 'ChatGPT_Image' ) ) {
         $hist_hero_bg = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/history-banner.jpeg';
     }
-    $hist_hero_desc = franciscan_get_page_field( 'community-history', 'hero_subtitle', 'Tracing our origins from the ancient 4th-century Order of Penance, to St. Francis of Assisi, to thirty years of dedicated growth in Ranchi Province.' );
+    $hist_hero_desc = franciscan_get_page_field( 'community-history', 'hero_subtitle', '' );
+    if ( empty( $hist_hero_desc ) ) {
+        $hist_hero_desc = franciscan_get_page_field( 'community-history', 'heritage_text', 'Tracing our origins from the ancient 4th-century Order of Penance, to St. Francis of Assisi, to thirty years of dedicated growth in Ranchi Province.' );
+    }
     ?>
     <section class="page-hero-banner" style="background-image: url('<?php echo esc_url( $hist_hero_bg ); ?>');">
         <div style="position: absolute; inset: 0; background-color: rgba(12, 11, 10, 0.74);"></div>
@@ -781,6 +784,18 @@ button.fs-mega-toggle:focus::after {
     </section>
 
     <!-- Hero Banner Card with Vine Watermark -->
+    <?php
+    $hist_default_text = 'Tracing our origins from the ancient 4th-century Order of Penance, to St. Francis of Assisi, to thirty years of dedicated growth in Ranchi Province.';
+    $hist_card_desc = franciscan_get_page_field( 'community-history', 'heritage_text', '' );
+    if ( empty( $hist_card_desc ) || $hist_card_desc === $hist_default_text ) {
+        $hist_custom_hero = franciscan_get_page_field( 'community-history', 'hero_subtitle', '' );
+        if ( ! empty( $hist_custom_hero ) && $hist_custom_hero !== $hist_default_text ) {
+            $hist_card_desc = $hist_custom_hero;
+        } else {
+            $hist_card_desc = $hist_default_text;
+        }
+    }
+    ?>
     <section class="page-hero" style="position: relative; background-color: #FFFFFF; padding: 2rem 2rem 0 2rem; box-sizing: border-box;">
         <div class="has-vine-watermark" style="position: relative; width: 100%; display: flex; flex-direction: column; justify-content: center; box-sizing: border-box; background: linear-gradient(135deg, #4A2A18 0%, #6b3d28 100%); min-height: 300px; border-radius: 24px; padding: clamp(2.5rem, 5vw, 3.8rem) clamp(1.8rem, 5vw, 3.5rem); max-width: 1400px; margin: 0 auto; overflow: hidden; box-shadow: 0 15px 35px rgba(74,42,24,0.18);">
             <img src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/shapes/vine-corner-watermark.png' ); ?>" class="vine-corner-watermark" alt="" aria-hidden="true" style="opacity: 0.38; filter: brightness(1.6) contrast(1.1);">
@@ -793,7 +808,7 @@ button.fs-mega-toggle:focus::after {
                     <?php echo esc_html( franciscan_get_page_field( 'community-history', 'heritage_title', 'The Lord Himself led me among them' ) ); ?>
                 </h2>
                 <p style="font-family: 'Instrument Sans', sans-serif; font-size: 1.05rem; font-weight: 400; color: rgba(255, 255, 255, 0.9); line-height: 1.52; max-width: 650px; margin: 0;">
-                    <?php echo esc_html( franciscan_get_page_field( 'community-history', 'heritage_text', 'Tracing our origins from the ancient 4th-century Order of Penance, to St. Francis of Assisi, to thirty years of dedicated growth in Ranchi Province.' ) ); ?>
+                    <?php echo nl2br( esc_html( $hist_card_desc ) ); ?>
                 </p>
             </div>
         </div>

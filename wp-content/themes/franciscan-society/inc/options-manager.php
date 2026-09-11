@@ -811,7 +811,7 @@ function franciscan_resync_legacy_content_options() {
                         $clean['card_title'] = 'SERVING IN COMMUNION';
                     }
                     if ( empty( $clean['card_subtitle'] ) ) {
-                        $clean['card_subtitle'] = 'Led by the Minister Provincial and provincial leadership team committed to spiritual excellence.';
+                        $clean['card_subtitle'] = ! empty( $clean['hero_subtitle'] ) ? $clean['hero_subtitle'] : 'Led by the Minister Provincial and provincial leadership team committed to spiritual excellence.';
                     }
                 }
                 // Resync legacy about section heading
@@ -841,6 +841,9 @@ function franciscan_resync_legacy_content_options() {
                 if ( 'community-history' === $slug ) {
                     if ( ! isset( $clean['heritage_title'] ) || in_array( $clean['heritage_title'], array( 'A LEGACY OF FAITH AND SERVICE' ), true ) ) {
                         $clean['heritage_title'] = 'The Lord Himself led me among them';
+                    }
+                    if ( empty( $clean['heritage_text'] ) && ! empty( $clean['hero_subtitle'] ) ) {
+                        $clean['heritage_text'] = $clean['hero_subtitle'];
                     }
                 }
                 // Resync friaries overview title

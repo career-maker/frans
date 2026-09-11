@@ -87,6 +87,18 @@ function franciscan_ajax_save_dashboard() {
     if ( 'pages' === $tab && isset( $_POST['page_slug'] ) && isset( $_POST['page_data'] ) ) {
         $page_slug = sanitize_key( $_POST['page_slug'] );
         $page_data = franciscan_sanitize_array( $_POST['page_data'] );
+
+        // Cross-sync banner description for Community History and Leadership
+        if ( 'community-history' === $page_slug ) {
+            if ( isset( $page_data['hero_subtitle'] ) && ( ! isset( $page_data['heritage_text'] ) || empty( $page_data['heritage_text'] ) ) ) {
+                $page_data['heritage_text'] = $page_data['hero_subtitle'];
+            }
+        }
+        if ( 'community-leadership' === $page_slug ) {
+            if ( isset( $page_data['hero_subtitle'] ) && ( ! isset( $page_data['card_subtitle'] ) || empty( $page_data['card_subtitle'] ) ) ) {
+                $page_data['card_subtitle'] = $page_data['hero_subtitle'];
+            }
+        }
         
         $current = get_option( 'franciscan_page_' . $page_slug, array() );
         $merged = array_merge( $current, $page_data );
@@ -991,8 +1003,11 @@ function franciscan_render_dashboard_view() {
                                     <input type="text" name="hero_title" class="form-control" value="<?php echo esc_attr( $hero_title_val ); ?>" placeholder="<?php echo esc_attr( $defaults['hero_title'] ?? '' ); ?>">
                                 </div>
                                 <div class="form-group full-width">
-                                    <label>Hero Subtitle / Description</label>
+                                    <label>Hero Subtitle / Description (Banner Description)</label>
                                     <textarea name="hero_subtitle" class="form-control" placeholder="<?php echo esc_attr( $defaults['hero_subtitle'] ?? '' ); ?>"><?php echo esc_textarea( $hero_sub_val ); ?></textarea>
+                                    <?php if ( in_array( $slug, array( 'community-history', 'community-leadership' ), true ) ) : ?>
+                                        <small style="color:var(--c-gold); font-size:0.82rem; margin-top:5px; display:block;">💡 Note: Updates here update the banner description on the live website (and seamlessly synchronize with the brown banner card below).</small>
+                                    <?php endif; ?>
                                 </div>
                                 <div class="form-group full-width">
                                     <label>Hero Banner Image (Replaces default background)</label>
@@ -1798,8 +1813,12 @@ function franciscan_render_dashboard_view() {
                                         <input type="text" name="heritage_title" class="form-control" value="<?php echo esc_attr( $data['heritage_title'] ?? 'The Lord Himself led me among them' ); ?>">
                                     </div>
                                     <div class="form-group full-width">
-                                        <label>Heritage Card Text</label>
-                                        <textarea name="heritage_text" class="form-control"><?php echo esc_textarea( $data['heritage_text'] ?? '' ); ?></textarea>
+                                        <label>Heritage Banner Card Description (Brown Vine Watermark Card)</label>
+                                        <?php
+                                        $hist_card_val = ! empty( $data['heritage_text'] ) ? $data['heritage_text'] : ( ! empty( $data['hero_subtitle'] ) ? $data['hero_subtitle'] : 'Tracing our origins from the ancient 4th-century Order of Penance, to St. Francis of Assisi, to thirty years of dedicated growth in Ranchi Province.' );
+                                        ?>
+                                        <textarea name="heritage_text" class="form-control" rows="3" placeholder="Tracing our origins from the ancient 4th-century Order of Penance..."><?php echo esc_textarea( $hist_card_val ); ?></textarea>
+                                        <small style="color:var(--c-text-muted); font-size:0.8rem; margin-top:4px; display:block;">Controls the description paragraph displayed inside the brown Heritage Banner Card with vine watermark.</small>
                                     </div>
                                 </div>
                             </div>
@@ -2118,8 +2137,12 @@ function franciscan_render_dashboard_view() {
                                         <input type="text" name="card_title" class="form-control" value="<?php echo esc_attr( $data['card_title'] ?? 'SERVING IN COMMUNION' ); ?>" placeholder="SERVING IN COMMUNION">
                                     </div>
                                     <div class="form-group full-width">
-                                        <label>Card Subtitle / Description Text</label>
-                                        <textarea name="card_subtitle" class="form-control" rows="3" placeholder="Led by the Minister Provincial and provincial leadership team committed to spiritual excellence."><?php echo esc_textarea( $data['card_subtitle'] ?? 'Led by the Minister Provincial and provincial leadership team committed to spiritual excellence.' ); ?></textarea>
+                                        <label>Governance Banner Card Description (Brown Vine Watermark Card)</label>
+                                        <?php
+                                        $ldr_card_val = ! empty( $data['card_subtitle'] ) ? $data['card_subtitle'] : ( ! empty( $data['hero_subtitle'] ) ? $data['hero_subtitle'] : 'Led by the Minister Provincial and provincial leadership team committed to spiritual excellence.' );
+                                        ?>
+                                        <textarea name="card_subtitle" class="form-control" rows="3" placeholder="Led by the Minister Provincial and provincial leadership team committed to spiritual excellence."><?php echo esc_textarea( $ldr_card_val ); ?></textarea>
+                                        <small style="color:var(--c-text-muted); font-size:0.8rem; margin-top:4px; display:block;">Controls the description paragraph displayed inside the brown Governance Banner Card with vine watermark.</small>
                                     </div>
                                 </div>
                             </div>
