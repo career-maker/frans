@@ -593,11 +593,16 @@ function franciscan_render_dashboard_view() {
             /* Main Content Container */
             #admin-main {
                 margin-left: 280px;
+                width: calc(100% - 280px);
+                max-width: calc(100% - 280px);
+                min-width: 0;
                 flex-grow: 1;
-                padding: 2.5rem 3.5rem;
+                padding: 2rem 2.5rem;
                 min-height: 100vh;
                 background: #0F0E0D;
-                transition: margin-left 0.28s cubic-bezier(0.4, 0, 0.2, 1), padding 0.28s ease;
+                box-sizing: border-box;
+                overflow-x: hidden;
+                transition: margin-left 0.28s cubic-bezier(0.4, 0, 0.2, 1), width 0.28s cubic-bezier(0.4, 0, 0.2, 1), max-width 0.28s cubic-bezier(0.4, 0, 0.2, 1), padding 0.28s ease;
             }
 
             /* ========================================================== */
@@ -608,7 +613,9 @@ function franciscan_render_dashboard_view() {
             }
             #studio-app.sidebar-collapsed #admin-main {
                 margin-left: 76px;
-                padding: 2.5rem 2.2rem;
+                width: calc(100% - 76px);
+                max-width: calc(100% - 76px);
+                padding: 2rem 2.2rem;
             }
             #studio-app.sidebar-collapsed .sidebar-brand {
                 padding: 1.2rem 0.5rem;
@@ -640,6 +647,55 @@ function franciscan_render_dashboard_view() {
             }
             #studio-app.sidebar-collapsed .sidebar-toggle-btn svg {
                 transform: rotate(180deg);
+            }
+
+            @media screen and (max-width: 1100px) {
+                #admin-main {
+                    padding: 1.8rem 1.5rem;
+                }
+            }
+
+            @media screen and (max-width: 900px) {
+                #admin-sidebar {
+                    width: 76px !important;
+                }
+                #admin-main {
+                    margin-left: 76px !important;
+                    width: calc(100% - 76px) !important;
+                    max-width: calc(100% - 76px) !important;
+                    padding: 1.5rem 1rem !important;
+                }
+                .sidebar-brand {
+                    padding: 1.2rem 0.5rem !important;
+                    text-align: center !important;
+                }
+                .sidebar-brand-top a,
+                .sidebar-brand-full,
+                .nav-item span:not(:first-child),
+                .nav-badge,
+                .user-tag span:last-child,
+                .btn-logout {
+                    display: none !important;
+                }
+                .sidebar-brand-top {
+                    justify-content: center !important;
+                    margin-bottom: 0.4rem !important;
+                }
+                .sidebar-brand-mini {
+                    display: block !important;
+                }
+                .nav-item {
+                    justify-content: center !important;
+                    padding: 0.85rem 0 !important;
+                    font-size: 1.25rem !important;
+                }
+                .sidebar-footer {
+                    padding: 1rem 0 !important;
+                    justify-content: center !important;
+                }
+                .sidebar-toggle-btn svg {
+                    transform: rotate(180deg) !important;
+                }
             }
 
             .top-bar {
@@ -3381,14 +3437,14 @@ function franciscan_render_dashboard_view() {
                 
                 
                 <!-- Add New Photo Card (Clean Responsive Alignment) -->
-                <div class="form-section" style="background: rgba(255,255,255,0.02); border: 1px solid var(--c-gold); border-radius: 12px; padding: 1.8rem; margin-bottom: 2rem;">
+                <div class="form-section" style="background: rgba(255,255,255,0.02); border: 1px solid var(--c-gold); border-radius: 12px; padding: 1.5rem; margin-bottom: 2rem;">
                     <h3 class="form-section-title" style="color: var(--c-gold); margin-bottom: 1.2rem; display: flex; align-items: center; gap: 0.5rem;">
                         <span>➕</span> Add New Photo to Gallery
                     </h3>
                     
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin-bottom: 1.2rem;">
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.2rem; margin-bottom: 1.2rem;">
                         <div class="form-group" style="margin-bottom: 0;">
-                            <label style="display: block; margin-bottom: 0.5rem; font-size: 0.85rem; color: var(--c-text-muted);">Select Category / Tab</label>
+                            <label style="display: block; margin-bottom: 0.5rem; font-size: 0.85rem; color: var(--c-text-muted); font-weight: 600;">Select Category / Tab</label>
                             <select id="new-photo-category" class="form-control" style="width: 100%; height: 42px;">
                                 <option value="Pastoral Ministry">Pastoral Ministry</option>
                                 <option value="Formation Ministry">Formation Ministry</option>
@@ -3402,16 +3458,16 @@ function franciscan_render_dashboard_view() {
                             </select>
                         </div>
                         <div class="form-group" style="margin-bottom: 0;">
-                            <label style="display: block; margin-bottom: 0.5rem; font-size: 0.85rem; color: var(--c-text-muted);">Photo Caption / Alt Title</label>
+                            <label style="display: block; margin-bottom: 0.5rem; font-size: 0.85rem; color: var(--c-text-muted); font-weight: 600;">Photo Caption / Alt Title</label>
                             <input type="text" id="new-photo-title" class="form-control" placeholder="e.g. Annual Feast Mass in Harmu" style="width: 100%; height: 42px;">
                         </div>
                     </div>
 
                     <div class="form-group" style="margin-bottom: 0;">
-                        <label style="display: block; margin-bottom: 0.5rem; font-size: 0.85rem; color: var(--c-text-muted);">Image Source / Media Uploader</label>
+                        <label style="display: block; margin-bottom: 0.5rem; font-size: 0.85rem; color: var(--c-text-muted); font-weight: 600;">Image Source / Media Uploader</label>
                         <div style="display: flex; gap: 0.8rem; align-items: center; flex-wrap: wrap;">
-                            <input type="text" id="new-photo-url" class="form-control" placeholder="https://... or click Browse Media" readonly style="flex: 1 1 300px; height: 42px; background: rgba(0,0,0,0.3);">
-                            <button type="button" class="btn btn-secondary" id="btn-upload-gallery-photo" style="height: 42px; padding: 0 1.2rem; display: inline-flex; align-items: center; gap: 0.5rem; white-space: nowrap; flex-shrink: 0;">
+                            <input type="text" id="new-photo-url" class="form-control" placeholder="https://... or click Browse Media" readonly style="flex: 1 1 200px; min-width: 180px; height: 42px; background: rgba(0,0,0,0.3);">
+                            <button type="button" class="btn btn-secondary" id="btn-upload-gallery-photo" style="height: 42px; padding: 0 1.2rem; display: inline-flex; align-items: center; gap: 0.5rem; white-space: nowrap; flex-shrink: 0; font-weight: 600;">
                                 📁 Browse Media
                             </button>
                             <button type="button" class="btn btn-primary" id="btn-add-gallery-item" style="height: 42px; padding: 0 1.5rem; font-weight: 700; display: inline-flex; align-items: center; gap: 0.5rem; white-space: nowrap; flex-shrink: 0;">
@@ -3429,38 +3485,40 @@ function franciscan_render_dashboard_view() {
                 </div>
 
                 <!-- Category Filter Tabs -->
-                <div style="display: flex; gap: 0.6rem; margin-bottom: 1.8rem; overflow-x: auto; padding-bottom: 0.5rem;" id="gallery-category-filter-bar">
-                    <button type="button" class="btn btn-secondary active-cat-filter" data-cat="all" style="background: var(--c-gold); color: #12100e; font-weight: 700; border-radius: 20px; padding: 0.4rem 1.2rem; font-size: 0.85rem;">All Photos</button>
-                    <button type="button" class="btn btn-secondary" data-cat="Pastoral Ministry" style="border-radius: 20px; padding: 0.4rem 1.2rem; font-size: 0.85rem;">Pastoral Ministry</button>
-                    <button type="button" class="btn btn-secondary" data-cat="Formation Ministry" style="border-radius: 20px; padding: 0.4rem 1.2rem; font-size: 0.85rem;">Formation Ministry</button>
-                    <button type="button" class="btn btn-secondary" data-cat="Education Ministry" style="border-radius: 20px; padding: 0.4rem 1.2rem; font-size: 0.85rem;">Education Ministry</button>
-                    <button type="button" class="btn btn-secondary" data-cat="Provincial Assembly" style="border-radius: 20px; padding: 0.4rem 1.2rem; font-size: 0.85rem;">Provincial Assembly</button>
-                    <button type="button" class="btn btn-secondary" data-cat="Sacred Ordination" style="border-radius: 20px; padding: 0.4rem 1.2rem; font-size: 0.85rem;">Ordinations &amp; Feasts</button>
-                    <button type="button" class="btn btn-secondary" data-cat="Youth Ministry" style="border-radius: 20px; padding: 0.4rem 1.2rem; font-size: 0.85rem;">Youth &amp; Schools</button>
-                    <button type="button" class="btn btn-secondary" data-cat="Mission Apostolate" style="border-radius: 20px; padding: 0.4rem 1.2rem; font-size: 0.85rem;">Mission Apostolate</button>
-                    <button type="button" class="btn btn-secondary" data-cat="Parish Service" style="border-radius: 20px; padding: 0.4rem 1.2rem; font-size: 0.85rem;">Parish Service</button>
-                    <button type="button" class="btn btn-secondary" data-cat="Community Fellowship" style="border-radius: 20px; padding: 0.4rem 1.2rem; font-size: 0.85rem;">Community Fellowship</button>
+                <div style="display: flex; gap: 0.5rem; margin-bottom: 1.8rem; flex-wrap: wrap; align-items: center;" id="gallery-category-filter-bar">
+                    <button type="button" class="btn btn-secondary active-cat-filter" data-cat="all" style="background: var(--c-gold); color: #12100e; font-weight: 700; border-radius: 20px; padding: 0.4rem 1.1rem; font-size: 0.82rem; white-space: nowrap;">All Photos</button>
+                    <button type="button" class="btn btn-secondary" data-cat="Pastoral Ministry" style="border-radius: 20px; padding: 0.4rem 1.1rem; font-size: 0.82rem; white-space: nowrap;">Pastoral Ministry</button>
+                    <button type="button" class="btn btn-secondary" data-cat="Formation Ministry" style="border-radius: 20px; padding: 0.4rem 1.1rem; font-size: 0.82rem; white-space: nowrap;">Formation Ministry</button>
+                    <button type="button" class="btn btn-secondary" data-cat="Education Ministry" style="border-radius: 20px; padding: 0.4rem 1.1rem; font-size: 0.82rem; white-space: nowrap;">Education Ministry</button>
+                    <button type="button" class="btn btn-secondary" data-cat="Provincial Assembly" style="border-radius: 20px; padding: 0.4rem 1.1rem; font-size: 0.82rem; white-space: nowrap;">Provincial Assembly</button>
+                    <button type="button" class="btn btn-secondary" data-cat="Sacred Ordination" style="border-radius: 20px; padding: 0.4rem 1.1rem; font-size: 0.82rem; white-space: nowrap;">Ordinations &amp; Feasts</button>
+                    <button type="button" class="btn btn-secondary" data-cat="Youth Ministry" style="border-radius: 20px; padding: 0.4rem 1.1rem; font-size: 0.82rem; white-space: nowrap;">Youth &amp; Schools</button>
+                    <button type="button" class="btn btn-secondary" data-cat="Mission Apostolate" style="border-radius: 20px; padding: 0.4rem 1.1rem; font-size: 0.82rem; white-space: nowrap;">Mission Apostolate</button>
+                    <button type="button" class="btn btn-secondary" data-cat="Parish Service" style="border-radius: 20px; padding: 0.4rem 1.1rem; font-size: 0.82rem; white-space: nowrap;">Parish Service</button>
+                    <button type="button" class="btn btn-secondary" data-cat="Community Fellowship" style="border-radius: 20px; padding: 0.4rem 1.1rem; font-size: 0.82rem; white-space: nowrap;">Community Fellowship</button>
                 </div>
 
                 <!-- Gallery Photos Grid -->
-                <div id="dashboard-gallery-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1.2rem;">
+                <div id="dashboard-gallery-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1.2rem; width: 100%;">
                     <?php 
                     $all_gal_items = franciscan_get_gallery_items();
                     foreach ( $all_gal_items as $g_item ) : 
                     ?>
-                        <div class="dash-gal-card" data-cat="<?php echo esc_attr( $g_item['category'] ?? 'Pastoral Ministry' ); ?>" data-id="<?php echo esc_attr( $g_item['id'] ?? '' ); ?>" style="background: var(--c-card); border: 1px solid var(--c-card-border); border-radius: 12px; overflow: hidden; position: relative; transition: transform 0.2s ease;">
-                            <img src="<?php echo esc_url( $g_item['src'] ); ?>" style="width: 100%; height: 150px; object-fit: cover; display: block;" loading="lazy">
-                            <div style="padding: 0.8rem;">
-                                <span style="display: inline-block; background: rgba(197, 169, 99, 0.15); color: var(--c-gold); font-size: 0.72rem; font-weight: 700; padding: 0.2rem 0.6rem; border-radius: 10px; text-transform: uppercase; margin-bottom: 0.4rem;">
+                        <div class="dash-gal-card" data-cat="<?php echo esc_attr( $g_item['category'] ?? 'Pastoral Ministry' ); ?>" data-id="<?php echo esc_attr( $g_item['id'] ?? '' ); ?>" style="background: var(--c-card); border: 1px solid var(--c-card-border); border-radius: 12px; overflow: hidden; position: relative; transition: transform 0.2s ease, box-shadow 0.2s ease; display: flex; flex-direction: column;">
+                            <div style="position: relative; width: 100%; height: 160px; overflow: hidden; background: #0c1727;">
+                                <img src="<?php echo esc_url( $g_item['src'] ); ?>" style="width: 100%; height: 100%; object-fit: cover; display: block;" loading="lazy" onerror="this.src='<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/logo.svg' ); ?>';">
+                                <button type="button" class="btn-delete-gal-item" data-id="<?php echo esc_attr( $g_item['id'] ?? '' ); ?>" title="Delete Photo" style="position: absolute; top: 8px; right: 8px; background: rgba(200, 16, 46, 0.9); color: #fff; border: none; border-radius: 50%; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1rem; line-height: 1; box-shadow: 0 2px 6px rgba(0,0,0,0.5); z-index: 2;">
+                                    &times;
+                                </button>
+                            </div>
+                            <div style="padding: 0.85rem; display: flex; flex-direction: column; gap: 0.35rem; flex-grow: 1;">
+                                <span style="display: inline-block; background: rgba(197, 169, 99, 0.15); color: var(--c-gold); font-size: 0.7rem; font-weight: 700; padding: 0.2rem 0.6rem; border-radius: 10px; text-transform: uppercase; width: fit-content;">
                                     <?php echo esc_html( $g_item['category'] ?? 'Pastoral Ministry' ); ?>
                                 </span>
-                                <div style="font-size: 0.82rem; font-weight: 600; color: var(--c-text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                <div style="font-size: 0.85rem; font-weight: 600; color: var(--c-text); overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; line-height: 1.35;" title="<?php echo esc_attr( $g_item['alt'] ?? 'Franciscan Photo' ); ?>">
                                     <?php echo esc_html( $g_item['alt'] ?? 'Franciscan Photo' ); ?>
                                 </div>
                             </div>
-                            <button type="button" class="btn-delete-gal-item" data-id="<?php echo esc_attr( $g_item['id'] ?? '' ); ?>" title="Delete Photo" style="position: absolute; top: 8px; right: 8px; background: rgba(200, 16, 46, 0.85); color: #fff; border: none; border-radius: 50%; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 0.8rem; box-shadow: 0 2px 6px rgba(0,0,0,0.4);">
-                                &times;
-                            </button>
                         </div>
                     <?php endforeach; ?>
                 </div>
@@ -6344,19 +6402,21 @@ function franciscan_render_dashboard_view() {
                     const safeId  = $('<div>').text(item.id).html();
 
                     const newCard = `
-                        <div class="dash-gal-card" data-cat="${safeCat}" data-id="${safeId}" style="background: var(--c-card); border: 1px solid var(--c-card-border); border-radius: 12px; overflow: hidden; position: relative; transition: transform 0.2s ease;">
-                            <img src="${safeSrc}" style="width: 100%; height: 150px; object-fit: cover; display: block;" loading="lazy">
-                            <div style="padding: 0.8rem;">
-                                <span style="display: inline-block; background: rgba(197, 169, 99, 0.15); color: var(--c-gold); font-size: 0.72rem; font-weight: 700; padding: 0.2rem 0.6rem; border-radius: 10px; text-transform: uppercase; margin-bottom: 0.4rem;">
+                        <div class="dash-gal-card" data-cat="${safeCat}" data-id="${safeId}" style="background: var(--c-card); border: 1px solid var(--c-card-border); border-radius: 12px; overflow: hidden; position: relative; transition: transform 0.2s ease, box-shadow 0.2s ease; display: flex; flex-direction: column;">
+                            <div style="position: relative; width: 100%; height: 160px; overflow: hidden; background: #0c1727;">
+                                <img src="${safeSrc}" style="width: 100%; height: 100%; object-fit: cover; display: block;" loading="lazy">
+                                <button type="button" class="btn-delete-gal-item" data-id="${safeId}" title="Delete Photo" style="position: absolute; top: 8px; right: 8px; background: rgba(200, 16, 46, 0.9); color: #fff; border: none; border-radius: 50%; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1rem; line-height: 1; box-shadow: 0 2px 6px rgba(0,0,0,0.5); z-index: 2;">
+                                    &times;
+                                </button>
+                            </div>
+                            <div style="padding: 0.85rem; display: flex; flex-direction: column; gap: 0.35rem; flex-grow: 1;">
+                                <span style="display: inline-block; background: rgba(197, 169, 99, 0.15); color: var(--c-gold); font-size: 0.7rem; font-weight: 700; padding: 0.2rem 0.6rem; border-radius: 10px; text-transform: uppercase; width: fit-content;">
                                     ${safeCat}
                                 </span>
-                                <div style="font-size: 0.82rem; font-weight: 600; color: var(--c-text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                <div style="font-size: 0.85rem; font-weight: 600; color: var(--c-text); overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; line-height: 1.35;" title="${safeAlt}">
                                     ${safeAlt}
                                 </div>
                             </div>
-                            <button type="button" class="btn-delete-gal-item" data-id="${safeId}" title="Delete Photo" style="position: absolute; top: 8px; right: 8px; background: rgba(200, 16, 46, 0.85); color: #fff; border: none; border-radius: 50%; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 0.8rem; box-shadow: 0 2px 6px rgba(0,0,0,0.4);">
-                                &times;
-                            </button>
                         </div>
                     `;
                     $('#dashboard-gallery-grid').prepend(newCard);
