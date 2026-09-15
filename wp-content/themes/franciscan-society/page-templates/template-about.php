@@ -853,19 +853,6 @@ button.fs-mega-toggle:focus::after {
                             <?php endforeach; ?>
                         </div>
                     </div>
-                    
-                    <!-- Watch Our Video Mini Card (Positioned Outside the Image Box) -->
-                    <div class="about-video-card about-page-video-card" style="position: absolute !important; bottom: -35px !important; right: 20px !important; left: auto !important; width: 190px !important; max-width: 190px !important; background: #ffffff !important; padding: 10px !important; border-radius: 16px !important; box-shadow: 0 20px 45px rgba(0, 0, 0, 0.22) !important; text-align: center !important; z-index: 25 !important; display: block !important;">
-                        <div style="position: relative; border-radius: 12px; overflow: hidden; height: 95px; background-color: #1c1917;">
-                            <video src="<?php echo esc_url( $about_sec_video ); ?>" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" autoplay loop muted playsinline></video>
-                            <a rel="noopener noreferrer" href="https://youtube.com/@tormediaranchi3804?si=UPTCSJUSj9tbcjeB" target="_blank" class="video-play-btn" aria-label="Watch our video on YouTube">
-                                <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16" aria-hidden="true">
-                                    <path d="M8 5v14l11-7z"/>
-                                </svg>
-                            </a>
-                        </div>
-                        <span style="display: block; margin-top: 8px; font-weight: 800; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: #1c1917; font-family: 'Instrument Sans', sans-serif;">WATCH OUR VIDEO</span>
-                    </div>
                 </div>
 
                 <!-- Right Column: Text Content & Mission/Vision Grid -->

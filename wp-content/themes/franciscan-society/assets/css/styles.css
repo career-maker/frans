@@ -4784,8 +4784,8 @@ header.header::-webkit-scrollbar {
 @media (max-width: 991px) {
     .hero-grid-layout {
         grid-template-columns: 1fr;
-        gap: 2rem;
-        padding: 6rem 1.5rem 2rem 1.5rem; /* more padding top to clear header */
+        gap: 1.25rem !important;
+        padding: 1rem 1.25rem 1.5rem 1.25rem !important;
     }
     
     .hero-grid-layout h1 {
@@ -4973,8 +4973,8 @@ header.header::-webkit-scrollbar {
     .hero-grid-layout {
         display: flex !important;
         flex-direction: column !important;
-        padding: 8rem 1.5rem 3rem 1.5rem !important;
-        gap: 2rem !important;
+        padding: 1rem 1.25rem 1.5rem 1.25rem !important;
+        gap: 1.25rem !important;
         align-items: center !important;
         text-align: center !important;
     }
@@ -4985,7 +4985,7 @@ header.header::-webkit-scrollbar {
         flex-shrink: 0 !important;
     }
     .hero-buttons-row {
-        margin-top: 1.5rem !important;
+        margin-top: 0 !important;
         justify-content: center !important;
         flex-wrap: wrap !important;
         width: 100% !important;
@@ -7066,7 +7066,7 @@ button:not(.btn-fill-animation):not(.footer-accordion-toggle):not(.fs-mega-toggl
         z-index: 2 !important;
     }
     
-    /* First block: title and buttons — reduce vertical padding to eliminate empty space on mobile */
+    /* First block: buttons — zero empty space where title/subtitle used to be on mobile */
     .hero-section .hero-grid-layout > div:first-child {
         min-height: auto !important; /* no 100svh anymore */
         width: 100% !important;
@@ -7074,7 +7074,7 @@ button:not(.btn-fill-animation):not(.footer-accordion-toggle):not(.fs-mega-toggl
         flex-direction: column !important;
         justify-content: flex-start !important;
         align-items: flex-start !important;
-        padding: 0.75rem 1.25rem 0.5rem 1.25rem !important;
+        padding: 0.5rem 1.25rem 0.25rem 1.25rem !important;
         box-sizing: border-box !important;
         text-align: left !important;
     }
@@ -7121,8 +7121,8 @@ button:not(.btn-fill-animation):not(.footer-accordion-toggle):not(.fs-mega-toggl
         flex-wrap: wrap !important;
         width: 100% !important;
         justify-content: center !important;
-        margin-top: 0.75rem !important;
-        gap: 0.75rem !important;
+        margin-top: 0 !important;
+        gap: 0.65rem !important;
     }
 
     .hero-section .hero-grid-layout .hero-buttons-row > a {

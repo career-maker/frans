@@ -855,11 +855,30 @@ get_header();
 
     <?php endif; ?>
     <?php if ( empty( franciscan_get_page_field( 'home', 'hide_inquiry_section', '0' ) ) ) : ?>
+    <?php
+    $inq_eyebrow = franciscan_get_page_field( 'home', 'inquiry_eyebrow', 'SUBMIT AN INQUIRY', true );
+    $inq_btn     = franciscan_get_page_field( 'home', 'inquiry_btn_text', 'SUBMIT INQUIRY', true );
+    if ( empty( trim( $inq_btn ) ) ) {
+        $inq_btn = 'SUBMIT INQUIRY';
+    }
+    $inq_title   = franciscan_get_page_field( 'home', 'inquiry_title', 'HAVE A QUESTION OR NEED PRAYER? REACH OUT TO US', false );
+    if ( empty( trim( $inq_title ) ) ) {
+        $inq_title = 'HAVE A QUESTION OR NEED PRAYER? REACH OUT TO US';
+    }
+    $inq_bg      = franciscan_get_page_field( 'home', 'inquiry_bg_img', '' );
+    if ( empty( $inq_bg ) ) {
+        $inq_bg = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_51_30_PM.png';
+    }
+    $inq_person  = franciscan_get_page_field( 'home', 'inquiry_person_img', '' );
+    if ( empty( $inq_person ) ) {
+        $inq_person = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_56_24_PM.png';
+    }
+    ?>
     <section id="inquiry-section" style="padding: clamp(1.5rem, 3vw, 2.5rem) 0 clamp(2rem, 4vw, 3.5rem) 0; background-color: #FFFFFF; color: #ffffff; box-sizing: border-box;">
             <div style="max-width: 1320px; margin: 0 auto; padding: 0 clamp(1rem, 5vw, 3rem);">
                 
                 <!-- Main Inset Card Container with 32px Rounded Corners & Background Image -->
-                <div style="position: relative; border-radius: 32px; overflow: hidden; background: url('<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_51_30_PM.png' ); ?>') no-repeat center center / cover fixed !important; background-attachment: fixed !important; box-shadow: 0 20px 50px rgba(0,0,0,0.15); min-height: 520px;">
+                <div style="position: relative; border-radius: 32px; overflow: hidden; background: url('<?php echo esc_url( $inq_bg ); ?>') no-repeat center center / cover fixed !important; background-attachment: fixed !important; box-shadow: 0 20px 50px rgba(0,0,0,0.15); min-height: 520px;">
                     
                     <!-- Dark Vignette Overlay -->
                     <div style="position: absolute; inset: 0; background: linear-gradient(to right, rgba(15,10,6,0.75) 0%, rgba(15,10,6,0.85) 60%, rgba(15,10,6,0.92) 100%); z-index: 1;"></div>
