@@ -296,18 +296,18 @@ get_header();
                         $about_video_btn_url = 'https://youtube.com/@tormediaranchi3804?si=UPTCSJUSj9tbcjeB';
                     }
                     ?>
-                    <div class="about-video-card" style="position: absolute; bottom: 20px; left: 20px; background: #ffffff; padding: 10px; border-radius: 16px; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.18); width: 185px; text-align: center; z-index: 10;">
-                        <div class="about-video-thumb-wrap" style="position: relative; border-radius: 12px; overflow: hidden; height: 95px; background-color: #1c1917;">
-                            <video src="<?php echo esc_url( $about_video ); ?>" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" autoplay loop muted playsinline></video>
+                    <div class="about-video-card" style="position: absolute !important; bottom: 20px !important; left: 20px !important; width: 185px !important; max-width: 185px !important; background: #ffffff !important; padding: 10px !important; border-radius: 16px !important; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.18) !important; text-align: center !important; z-index: 10 !important; box-sizing: border-box !important; display: block !important;">
+                        <div class="about-video-thumb-wrap" style="position: relative !important; border-radius: 12px !important; overflow: hidden !important; height: 95px !important; width: 100% !important; background-color: #1c1917 !important;">
+                            <video src="<?php echo esc_url( $about_video ); ?>" style="width: 100% !important; height: 100% !important; object-fit: cover !important; pointer-events: none !important; display: block !important;" autoplay loop muted playsinline></video>
                             <a rel="noopener noreferrer" href="<?php echo esc_url( $about_video_btn_url ); ?>" target="_blank" class="video-play-btn" aria-label="Watch our video on YouTube">
                                 <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16" aria-hidden="true">
                                     <path d="M8 5v14l11-7z"/>
                                 </svg>
                             </a>
                         </div>
-                        <div class="video-info-wrap" style="margin-top: 8px;">
-                            <span class="about-video-badge" style="display: block; font-weight: 800; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: #1c1917; font-family: 'Instrument Sans', sans-serif;"><?php echo esc_html( franciscan_get_page_field( 'home', 'about_video_btn_text', 'WATCH OUR VIDEO' ) ); ?></span>
-                            <span class="about-video-sub" style="display: none; font-size: 0.76rem; color: #78716c; font-family: 'Instrument Sans', sans-serif;">Explore our mission &amp; ministry on YouTube</span>
+                        <div class="video-info-wrap" style="margin-top: 8px !important; text-align: center !important;">
+                            <span class="about-video-badge" style="display: block !important; font-weight: 800 !important; font-size: 0.72rem !important; text-transform: uppercase !important; letter-spacing: 0.08em !important; color: #1c1917 !important; font-family: 'Instrument Sans', sans-serif !important; text-align: center !important;"><?php echo esc_html( franciscan_get_page_field( 'home', 'about_video_btn_text', 'WATCH OUR VIDEO' ) ); ?></span>
+                            <span class="about-video-sub" style="display: none !important; font-size: 0.76rem; color: #78716c; font-family: 'Instrument Sans', sans-serif;">Explore our mission &amp; ministry on YouTube</span>
                         </div>
                     </div>
                 </div>
@@ -1159,8 +1159,8 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    // 5. Images Fade Reveal (Zero scale on rounded/overflow-hidden containers to eliminate subpixel bottom-edge flicker on scroll)
-    gsap.utils.toArray(".about-img-container, .mission-church-img, .about-video-card").forEach(img => {
+    // 5. Images Fade Reveal
+    gsap.utils.toArray(".about-img-container, .mission-church-img").forEach(img => {
         gsap.from(img, {
             scrollTrigger: {
                 trigger: img,
@@ -1170,10 +1170,24 @@ document.addEventListener("DOMContentLoaded", function() {
             opacity: 0,
             y: 20,
             duration: 1.0,
-            ease: "power2.out",
-            clearProps: "all"
+            ease: "power2.out"
         });
     });
+
+    const aboutVidCard = document.querySelector(".about-video-card");
+    if (aboutVidCard) {
+        gsap.from(aboutVidCard, {
+            scrollTrigger: {
+                trigger: aboutVidCard,
+                start: "top 85%",
+                toggleActions: "play none none none"
+            },
+            opacity: 0,
+            scale: 0.94,
+            duration: 1.0,
+            ease: "power3.out"
+        });
+    }
 
     // 6. Floating Icon Animation
     gsap.to(".about-video-card span, .about-section div[style*='background: #c8102e']", {
