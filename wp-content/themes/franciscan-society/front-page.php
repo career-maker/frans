@@ -563,11 +563,11 @@ get_header();
                     </h2>
 
                     <!-- Centered Scroll Navigation Arrow Buttons -->
-                    <div id="news-slider-nav" style="display: flex; gap: 0.85rem; align-items: center; justify-content: center;">
-                        <button class="slider-btn slider-btn--prev" onclick="fsSlideTrack('news-scroll-track', -1)" aria-label="Scroll Left">
+                    <div id="news-slider-nav" style="display: flex; gap: 0.85rem; align-items: center; justify-content: center; position: relative; z-index: 10;">
+                        <button type="button" class="slider-btn slider-btn--prev" onclick="fsSlideTrack('news-scroll-track', -1)" aria-label="Scroll Left">
                             &#8592;
                         </button>
-                        <button class="slider-btn slider-btn--next" onclick="fsSlideTrack('news-scroll-track', 1)" aria-label="Scroll Right">
+                        <button type="button" class="slider-btn slider-btn--next" onclick="fsSlideTrack('news-scroll-track', 1)" aria-label="Scroll Right">
                             &#8594;
                         </button>
                     </div>
@@ -701,11 +701,11 @@ get_header();
                     </h2>
 
                     <!-- Centered Scroll Navigation Arrow Buttons (matches News &amp; Events) -->
-                    <div id="blogs-slider-nav" style="display: flex; gap: 0.85rem; align-items: center; justify-content: center;">
-                        <button class="slider-btn slider-btn--prev" onclick="fsSlideTrack('blogs-scroll-track', -1)" aria-label="Scroll Left">
+                    <div id="blogs-slider-nav" style="display: flex; gap: 0.85rem; align-items: center; justify-content: center; position: relative; z-index: 10;">
+                        <button type="button" class="slider-btn slider-btn--prev" onclick="fsSlideTrack('blogs-scroll-track', -1)" aria-label="Scroll Left">
                             &#8592;
                         </button>
-                        <button class="slider-btn slider-btn--next" onclick="fsSlideTrack('blogs-scroll-track', 1)" aria-label="Scroll Right">
+                        <button type="button" class="slider-btn slider-btn--next" onclick="fsSlideTrack('blogs-scroll-track', 1)" aria-label="Scroll Right">
                             &#8594;
                         </button>
                     </div>
@@ -1776,45 +1776,58 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 <script>
-function fsSlideTrack(trackId, direction) {
-    var track = document.getElementById(trackId);
+window.fsSlideTrack = function(trackId, direction) {
+    var track = typeof trackId === 'string' ? document.getElementById(trackId) : trackId;
     if (!track) return;
-    var cards = Array.from(track.querySelectorAll('.blog-card, .blog-padded-card'));
-    if (!cards.length) return;
 
-    var trackScrollLeft = track.scrollLeft;
-    var cardWidth = (cards[0].offsetWidth || 340) + 24;
-    var desiredLeft = trackScrollLeft + (direction * cardWidth);
-    
-    // Find card closest to desired position
-    var targetCard = cards[0];
-    var minDiff = Infinity;
-    cards.forEach(function(card) {
-        var centerDiff = Math.abs((card.offsetLeft - track.offsetLeft) - desiredLeft);
-        if (centerDiff < minDiff) {
-            minDiff = centerDiff;
-            targetCard = card;
-        }
-    });
+    var cards = track.querySelectorAll('.blog-card, .blog-padded-card');
+    var scrollStep = 415; // default 380px card + ~35px gap
 
-    if (targetCard) {
-        var cardOffset = targetCard.offsetLeft - track.offsetLeft;
-        var centeredLeft = Math.max(0, cardOffset - Math.round((track.clientWidth - targetCard.offsetWidth) / 2));
-        
-        // Temporarily release mandatory scroll-snap so iOS Safari / Blink smooth scrolls without snapping lock
-        track.style.scrollSnapType = 'none';
-        track.style.webkitOverflowScrolling = 'auto';
+    if (cards.length > 0) {
+        var card = cards[0];
+        var cardWidth = card.offsetWidth || 380;
+        var gap = 35;
         try {
-            track.scrollTo({ left: centeredLeft, behavior: 'smooth' });
-        } catch(e) {
-            track.scrollLeft = centeredLeft;
-        }
-        setTimeout(function() {
-            track.style.scrollSnapType = 'x mandatory';
-            track.style.webkitOverflowScrolling = 'touch';
-        }, 450);
+            var style = window.getComputedStyle(track);
+            var computedGap = parseFloat(style.gap) || parseFloat(style.columnGap);
+            if (!isNaN(computedGap) && computedGap > 0) {
+                gap = computedGap;
+            }
+        } catch(e) {}
+        scrollStep = cardWidth + gap;
     }
-}
+
+    var maxScroll = Math.max(0, track.scrollWidth - track.clientWidth);
+    
+    // Track target position across rapid clicks
+    var currentBase = (typeof track._targetScrollLeft === 'number' && Math.abs(track._targetScrollLeft - track.scrollLeft) < (scrollStep * 2))
+        ? track._targetScrollLeft
+        : track.scrollLeft;
+
+    var targetScroll = currentBase + (direction * scrollStep);
+    if (targetScroll < 0) targetScroll = 0;
+    if (targetScroll > maxScroll) targetScroll = maxScroll;
+
+    track._targetScrollLeft = targetScroll;
+
+    var originalSnap = track.style.scrollSnapType;
+    track.style.scrollSnapType = 'none';
+
+    try {
+        track.scrollTo({
+            left: targetScroll,
+            behavior: 'smooth'
+        });
+    } catch(e) {
+        track.scrollLeft = targetScroll;
+    }
+
+    clearTimeout(track._snapTimer);
+    track._snapTimer = setTimeout(function() {
+        track.style.scrollSnapType = originalSnap || 'x proximity';
+        track._targetScrollLeft = undefined;
+    }, 450);
+};
 
 function fsUpdateSliderArrows() {
     ['news', 'blogs'].forEach(function(type) {
@@ -1827,7 +1840,27 @@ function fsUpdateSliderArrows() {
     });
 }
 
-document.addEventListener('DOMContentLoaded', fsUpdateSliderArrows);
+document.addEventListener('DOMContentLoaded', function() {
+    ['news', 'blogs'].forEach(function(type) {
+        var nav = document.getElementById(type + '-slider-nav');
+        if (!nav) return;
+        var prevBtn = nav.querySelector('.slider-btn--prev');
+        var nextBtn = nav.querySelector('.slider-btn--next');
+        if (prevBtn) {
+            prevBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.fsSlideTrack(type + '-scroll-track', -1);
+            });
+        }
+        if (nextBtn) {
+            nextBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.fsSlideTrack(type + '-scroll-track', 1);
+            });
+        }
+    });
+    fsUpdateSliderArrows();
+});
 window.addEventListener('resize', fsUpdateSliderArrows);
 window.addEventListener('load', fsUpdateSliderArrows);
 </script>

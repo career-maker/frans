@@ -364,3 +364,73 @@ if (document.readyState === 'loading') {
     initWelcomeSliders();
 }
 
+/**
+ * Universal Horizontal Card Track Slider Controller (News & Blogs)
+ */
+window.fsSlideTrack = function(trackId, direction) {
+    var track = typeof trackId === 'string' ? document.getElementById(trackId) : trackId;
+    if (!track) return;
+
+    var cards = track.querySelectorAll('.blog-card, .blog-padded-card');
+    var scrollStep = 415;
+
+    if (cards.length > 0) {
+        var card = cards[0];
+        var cardWidth = card.offsetWidth || 380;
+        var gap = 35;
+        try {
+            var style = window.getComputedStyle(track);
+            var computedGap = parseFloat(style.gap) || parseFloat(style.columnGap);
+            if (!isNaN(computedGap) && computedGap > 0) {
+                gap = computedGap;
+            }
+        } catch(e) {}
+        scrollStep = cardWidth + gap;
+    }
+
+    var maxScroll = Math.max(0, track.scrollWidth - track.clientWidth);
+
+    var currentBase = (typeof track._targetScrollLeft === 'number' && Math.abs(track._targetScrollLeft - track.scrollLeft) < (scrollStep * 2))
+        ? track._targetScrollLeft
+        : track.scrollLeft;
+
+    var targetScroll = currentBase + (direction * scrollStep);
+    if (targetScroll < 0) targetScroll = 0;
+    if (targetScroll > maxScroll) targetScroll = maxScroll;
+
+    track._targetScrollLeft = targetScroll;
+
+    var originalSnap = track.style.scrollSnapType;
+    track.style.scrollSnapType = 'none';
+
+    try {
+        track.scrollTo({
+            left: targetScroll,
+            behavior: 'smooth'
+        });
+    } catch(e) {
+        track.scrollLeft = targetScroll;
+    }
+
+    clearTimeout(track._snapTimer);
+    track._snapTimer = setTimeout(function() {
+        track.style.scrollSnapType = originalSnap || 'x proximity';
+        track._targetScrollLeft = undefined;
+    }, 450);
+};
+
+window.fsUpdateSliderArrows = function() {
+    ['news', 'blogs'].forEach(function(type) {
+        var track = document.getElementById(type + '-scroll-track');
+        var nav = document.getElementById(type + '-slider-nav');
+        if (track && nav) {
+            var canScroll = track.scrollWidth > (track.clientWidth + 15);
+            nav.style.display = canScroll ? 'flex' : 'none';
+        }
+    });
+};
+
+document.addEventListener('DOMContentLoaded', window.fsUpdateSliderArrows);
+window.addEventListener('resize', window.fsUpdateSliderArrows);
+window.addEventListener('load', window.fsUpdateSliderArrows);
+

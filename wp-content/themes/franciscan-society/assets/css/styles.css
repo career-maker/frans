@@ -8909,3 +8909,69 @@ button.fs-mega-toggle::after,
         color: #ffffff !important;
     }
 }
+
+/* ============================================================
+   SLIDER ARROWS HOVER ANIMATION & BUTTON STYLES (Blogs & News)
+   ============================================================ */
+.slider-btn,
+button.slider-btn,
+.slider-btn--prev,
+.slider-btn--next {
+    width: 48px !important;
+    height: 48px !important;
+    min-width: 48px !important;
+    min-height: 48px !important;
+    border-radius: 50% !important;
+    background-color: #4A2A18 !important;
+    border: 1.5px solid #4A2A18 !important;
+    color: #ffffff !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 1.35rem !important;
+    line-height: 1 !important;
+    cursor: pointer !important;
+    box-shadow: 0 4px 14px rgba(74, 42, 24, 0.25) !important;
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease, transform 0.25s ease, box-shadow 0.3s ease !important;
+    outline: none !important;
+    position: relative !important;
+    z-index: 10 !important;
+    overflow: hidden !important;
+    padding: 0 !important;
+    user-select: none !important;
+    -webkit-tap-highlight-color: transparent !important;
+}
+
+.slider-btn::before,
+.slider-btn::after,
+button.slider-btn::before,
+button.slider-btn::after {
+    display: none !important;
+    content: none !important;
+}
+
+.slider-btn:hover,
+button.slider-btn:hover,
+.slider-btn--prev:hover,
+.slider-btn--next:hover,
+.slider-btn:focus,
+button.slider-btn:focus {
+    background-color: #e6c888 !important;
+    border-color: #e6c888 !important;
+    color: #4A2A18 !important;
+    transform: scale(1.1) translateY(-2px) !important;
+    box-shadow: 0 8px 20px rgba(230, 200, 136, 0.4) !important;
+}
+
+.slider-btn:hover *,
+button.slider-btn:hover *,
+.slider-btn:focus *,
+button.slider-btn:focus * {
+    color: #4A2A18 !important;
+}
+
+.slider-btn:active,
+button.slider-btn:active {
+    transform: scale(0.95) !important;
+}
+
