@@ -1140,7 +1140,7 @@ function franciscan_render_dashboard_view() {
                                     </label>
                                     <label style="display: flex; align-items: center; gap: 0.65rem; cursor: pointer; font-size: 0.92rem; background: rgba(0,0,0,0.2); padding: 0.75rem 1rem; border-radius: 8px; border: 1px solid rgba(255,255,255,0.08);">
                                         <input type="hidden" name="hide_values_section" value="0">
-                                        <input type="checkbox" name="hide_values_section" value="1" <?php checked( $data['hide_values_section'] ?? '0', '1' ); ?> style="width: 18px; height: 18px; accent-color: #c8102e;">
+                                        <input type="checkbox" name="hide_values_section" value="1" <?php checked( $data['hide_values_section'] ?? '1', '1' ); ?> style="width: 18px; height: 18px; accent-color: #c8102e;">
                                         <span>Hide Our Values Section</span>
                                     </label>
                                     <label style="display: flex; align-items: center; gap: 0.65rem; cursor: pointer; font-size: 0.92rem; background: rgba(0,0,0,0.2); padding: 0.75rem 1rem; border-radius: 8px; border: 1px solid rgba(255,255,255,0.08);">
@@ -1701,7 +1701,7 @@ function franciscan_render_dashboard_view() {
                                 </h3>
                                 <label style="display: flex; align-items: center; gap: 0.65rem; cursor: pointer; font-size: 0.92rem; background: rgba(0,0,0,0.2); padding: 0.75rem 1rem; border-radius: 8px; border: 1px solid rgba(255,255,255,0.08); max-width: 360px;">
                                     <input type="hidden" name="hide_values_section" value="0">
-                                    <input type="checkbox" name="hide_values_section" value="1" <?php checked( $data['hide_values_section'] ?? '0', '1' ); ?> style="width: 18px; height: 18px; accent-color: #c8102e;">
+                                    <input type="checkbox" name="hide_values_section" value="1" <?php checked( $data['hide_values_section'] ?? '1', '1' ); ?> style="width: 18px; height: 18px; accent-color: #c8102e;">
                                     <span>Hide "Our Values" Section</span>
                                 </label>
                             </div>

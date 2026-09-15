@@ -245,7 +245,7 @@ function franciscan_get_default_page_content( $slug = '' ) {
             'hide_hero_section'           => '0',
             'hide_welcome_section'        => '0',
             'hide_about_section'          => '0',
-            'hide_values_section'         => '0',
+            'hide_values_section'         => '1',
             'hide_bible_section'          => '0',
             'hide_news_section'           => '0',
             'hide_blogs_section'          => '0',
@@ -255,7 +255,7 @@ function franciscan_get_default_page_content( $slug = '' ) {
         ),
         'about' => array(
             // Section Visibility Toggles
-            'hide_values_section'    => '0',
+            'hide_values_section'    => '1',
 
             // Top Banner
             'hero_badge'             => 'WHO WE ARE',
@@ -882,7 +882,7 @@ function franciscan_resync_legacy_content_options() {
                     // If corrupted state where 2 or more sections are hidden, or one-time healing flag not set:
                     if ( $corrupted_count >= 2 || ! get_option( 'franciscan_healed_sections_v4', false ) ) {
                         foreach ( $sec_toggles as $st ) {
-                            $clean[ $st ] = '0';
+                            $clean[ $st ] = ( 'hide_values_section' === $st ) ? '1' : '0';
                         }
                         if ( empty( trim( $clean['hero_title'] ?? '' ) ) ) {
                             $clean['hero_title'] = "Let us begin again,\nfor we have only begun to serve the Lord.";
@@ -894,7 +894,7 @@ function franciscan_resync_legacy_content_options() {
 
                 if ( 'about' === $slug ) {
                     if ( ! get_option( 'franciscan_healed_about_v4', false ) ) {
-                        $clean['hide_values_section'] = '0';
+                        $clean['hide_values_section'] = '1';
                         update_option( 'franciscan_healed_about_v4', '1' );
                     }
                     if ( empty( trim( $clean['hero_title'] ?? '' ) ) ) {

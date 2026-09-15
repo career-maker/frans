@@ -4986,9 +4986,11 @@ header.header::-webkit-scrollbar {
     }
     .hero-buttons-row {
         margin-top: 0 !important;
-        justify-content: center !important;
-        flex-wrap: wrap !important;
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
         width: 100% !important;
+        gap: 0.65rem !important;
     }
     .hero-grid-layout .js-hero-text p {
         text-align: center !important;
@@ -7073,7 +7075,7 @@ button:not(.btn-fill-animation):not(.footer-accordion-toggle):not(.fs-mega-toggl
         display: flex !important;
         flex-direction: column !important;
         justify-content: flex-start !important;
-        align-items: flex-start !important;
+        align-items: stretch !important;
         padding: 0.5rem 1.25rem 0.25rem 1.25rem !important;
         box-sizing: border-box !important;
         text-align: left !important;
@@ -7081,8 +7083,9 @@ button:not(.btn-fill-animation):not(.footer-accordion-toggle):not(.fs-mega-toggl
     
     /* Title colors and styles for white background */
     .hero-section .hero-grid-layout .js-hero-text {
-        align-items: flex-start !important;
+        align-items: stretch !important;
         text-align: left !important;
+        width: 100% !important;
     }
     
     .hero-section .hero-grid-layout .js-hero-text > div:first-child {
@@ -7114,37 +7117,43 @@ button:not(.btn-fill-animation):not(.footer-accordion-toggle):not(.fs-mega-toggl
         color: #44403c !important;
     }
 
-    /* Buttons */
+    /* Buttons: Align 2 buttons side-by-side on same line on mobile */
     .hero-section .hero-grid-layout .hero-buttons-row {
         display: flex !important;
-        flex-direction: column !important;
-        flex-wrap: wrap !important;
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
         width: 100% !important;
-        justify-content: center !important;
+        justify-content: space-between !important;
+        align-items: stretch !important;
         margin-top: 0 !important;
+        margin-bottom: 0.5rem !important;
         gap: 0.65rem !important;
+        box-sizing: border-box !important;
     }
 
     .hero-section .hero-grid-layout .hero-buttons-row > a {
-        width: 100% !important;
-        flex: 0 0 100% !important;
-        padding: 0.9rem 1.4rem !important;
+        flex: 1 1 50% !important;
+        width: 50% !important;
+        max-width: 50% !important;
+        padding: 0.85rem 0.5rem !important;
         justify-content: center !important;
         text-align: center !important;
         margin: 0 !important;
         min-width: 0 !important;
-        gap: 0.5rem !important;
+        gap: 0.35rem !important;
+        box-sizing: border-box !important;
     }
     
     .hero-section .hero-grid-layout .hero-buttons-row > a span {
-        font-size: 11px !important;
+        font-size: clamp(0.72rem, 2.8vw, 0.82rem) !important;
         white-space: nowrap !important;
-        letter-spacing: 0 !important;
+        letter-spacing: 0.01em !important;
     }
     
     .hero-section .hero-grid-layout .hero-buttons-row > a span.btn-arrow svg {
-        width: 12px !important;
-        height: 12px !important;
+        width: 11px !important;
+        height: 11px !important;
+        flex-shrink: 0 !important;
     }
 
     /* Ensure GET STARTED button (btn-fill-outline) is ALWAYS visible on mobile */

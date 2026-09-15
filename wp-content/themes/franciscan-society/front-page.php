@@ -80,10 +80,10 @@ get_header();
                 <div class="hero-grid hero-grid-layout" style="position: relative; z-index: 10;">
                     
                     <!-- Left Column: Action Buttons -->
-                    <div class="js-hero-text" style="display: flex; flex-direction: column; justify-content: flex-end;">
+                    <div class="js-hero-text" style="display: flex; flex-direction: column; justify-content: flex-end; width: 100%;">
 
                         <!-- Buttons Row -->
-                        <div class="hero-buttons-row" style="display: flex; gap: 1.25rem; align-items: center; flex-wrap: wrap;">
+                        <div class="hero-buttons-row" style="display: flex; gap: 0.75rem; align-items: center; width: 100%;">
                             <?php
                             $hero_cta_url = franciscan_get_page_field( 'home', 'hero_cta_url', '/contact' );
                             $hero_sec_cta_url = franciscan_get_page_field( 'home', 'hero_sec_cta_url', '/about' );
@@ -392,7 +392,7 @@ get_header();
         </section>
 
     <?php endif; ?>
-    <?php if ( empty( franciscan_get_page_field( 'home', 'hide_values_section', '0' ) ) ) : ?>
+    <?php if ( false ) : // Our Values section hidden per request ?>
         <!-- Our Mission Section -->
         <section id="mission-section" style="padding: clamp(2rem, 4vw, 3.5rem) 0; background-color: #ffffff; color: #1c1917; box-sizing: border-box; overflow: hidden;">
             <div class="responsive-grid-2" style="max-width: 1320px; margin: 0 auto; padding: 0 clamp(1rem, 5vw, 3rem); display: grid; gap: 5rem; align-items: center;">

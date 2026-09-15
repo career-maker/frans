@@ -939,7 +939,7 @@ button.fs-mega-toggle:focus::after {
             </div>
         </section>
 
-        <?php if ( empty( franciscan_get_page_field( 'about', 'hide_values_section', '0' ) ) ) : ?>
+        <?php if ( false ) : // Our Values section hidden per request ?>
         <!-- Our Mission Section -->
         <section id="mission-section" style="padding: 6.5rem 0; background-color: #ffffff; color: #1c1917; box-sizing: border-box; overflow: hidden;">
             <div style="max-width: 1320px; margin: 0 auto; padding: 0 3rem; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center;">
