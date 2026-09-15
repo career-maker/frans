@@ -103,19 +103,31 @@ function franciscan_ajax_save_dashboard() {
         // Sync friaries flat list when saving community-friaries sections
         if ( 'community-friaries' === $page_slug && isset( $page_data['friaries_sections'] ) && is_array( $page_data['friaries_sections'] ) ) {
             $flat_list = array();
-            foreach ( $page_data['friaries_sections'] as $sec ) {
+            $sec_idx = 1;
+            foreach ( $page_data['friaries_sections'] as &$sec ) {
                 $sec_title = ! empty( $sec['title'] ) ? trim( $sec['title'] ) : '';
+                $sec_order = isset( $sec['order'] ) && $sec['order'] !== '' ? intval( $sec['order'] ) : $sec_idx;
+                $sec['order'] = $sec_order;
                 if ( ! empty( $sec['friaries'] ) && is_array( $sec['friaries'] ) ) {
-                    foreach ( $sec['friaries'] as $fr ) {
+                    $fr_idx = 1;
+                    foreach ( $sec['friaries'] as &$fr ) {
+                        $fr_order = isset( $fr['order'] ) && $fr['order'] !== '' ? intval( $fr['order'] ) : $fr_idx;
+                        $fr['order'] = $fr_order;
                         $flat_list[] = array(
-                            'diocese' => $sec_title,
-                            'title'   => $fr['title'] ?? '',
-                            'desc'    => $fr['desc'] ?? '',
-                            'image'   => $fr['image'] ?? '',
+                            'diocese'       => $sec_title,
+                            'title'         => $fr['title'] ?? '',
+                            'desc'          => $fr['desc'] ?? '',
+                            'image'         => $fr['image'] ?? '',
+                            'order'         => $fr_order,
+                            'section_order' => $sec_order,
                         );
+                        $fr_idx++;
                     }
+                    unset( $fr );
                 }
+                $sec_idx++;
             }
+            unset( $sec );
             $page_data['friaries_list'] = $flat_list;
         }
 
@@ -2533,6 +2545,12 @@ function franciscan_render_dashboard_view() {
                                                     <span class="diocese-section-badge" style="background: var(--c-gold); color: #12100e; font-weight: 800; font-size: 0.78rem; padding: 0.3rem 0.65rem; border-radius: 6px; white-space: nowrap;">
                                                         SECTION #<?php echo $sec_idx + 1; ?>
                                                     </span>
+                                                    <div style="width: 75px; flex-shrink: 0;">
+                                                        <label style="display: block; font-size: 0.72rem; text-transform: uppercase; color: var(--c-gold); font-weight: 700; margin-bottom: 0.25rem; letter-spacing: 0.05em;">
+                                                            Order
+                                                        </label>
+                                                        <input type="number" name="friaries_sections[<?php echo esc_attr( $sec_idx ); ?>][order]" class="form-control diocese-input-order" value="<?php echo esc_attr( isset( $section['order'] ) && $section['order'] !== '' ? $section['order'] : ( $sec_idx + 1 ) ); ?>" min="1" step="1" style="font-weight: 700; text-align: center; color: #ffffff; background: rgba(0,0,0,0.35); border: 1px solid rgba(230, 200, 136, 0.4);" title="Sort order of this diocese section on frontend">
+                                                    </div>
                                                     <div style="flex: 1;">
                                                         <label style="display: block; font-size: 0.72rem; text-transform: uppercase; color: var(--c-gold); font-weight: 700; margin-bottom: 0.25rem; letter-spacing: 0.05em;">
                                                             🏛️ Main Section Title (e.g. ARCHDIOCESE OF RANCHI, DIOCESE OF KHUNTI)
@@ -2573,7 +2591,11 @@ function franciscan_render_dashboard_view() {
                                                                 <span class="friary-num-badge" style="background: rgba(230, 200, 136, 0.2); color: #e6c888; font-weight: 700; font-size: 0.72rem; padding: 0.15rem 0.5rem; border-radius: 4px;">#<?php echo $fr_idx + 1; ?></span>
                                                                 <strong class="friary-card-title-preview" style="color: var(--c-text); font-size: 0.92rem;"><?php echo esc_html( ! empty( $fr_title ) ? $fr_title : 'New Friary' ); ?></strong>
                                                             </div>
-                                                            <div style="display: flex; gap: 0.35rem; align-items: center;">
+                                                            <div style="display: flex; gap: 0.5rem; align-items: center;">
+                                                                <div style="display: flex; align-items: center; gap: 0.3rem;" title="Sort order of this friary within the section">
+                                                                    <label style="font-size: 0.72rem; color: var(--c-gold); font-weight: 700; text-transform: uppercase; margin: 0;">Order:</label>
+                                                                    <input type="number" name="friaries_sections[<?php echo esc_attr( $sec_idx ); ?>][friaries][<?php echo esc_attr( $fr_idx ); ?>][order]" class="form-control friary-input-order" value="<?php echo esc_attr( isset( $friary['order'] ) && $friary['order'] !== '' ? $friary['order'] : ( $fr_idx + 1 ) ); ?>" min="1" step="1" style="width: 60px; padding: 0.2rem 0.4rem; font-size: 0.8rem; text-align: center; height: auto;">
+                                                                </div>
                                                                 <button type="button" class="btn btn-secondary btn-move-friary-up" title="Move Up" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;">▲</button>
                                                                 <button type="button" class="btn btn-secondary btn-move-friary-down" title="Move Down" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;">▼</button>
                                                                 <button type="button" class="btn btn-secondary btn-delete-friary-item" title="Remove Friary" style="padding: 0.25rem 0.6rem; font-size: 0.75rem; background: rgba(239, 68, 68, 0.15); color: #fca5a5; border-color: rgba(239, 68, 68, 0.4);">🗑️ Remove</button>
@@ -5547,6 +5569,7 @@ function franciscan_render_dashboard_view() {
             const imgUrl = imgVal ? imgVal : defaultImg;
             const titleVal = friary.title || '';
             const descVal = friary.desc || '';
+            const orderVal = (friary.order !== undefined && friary.order !== '') ? friary.order : (frIdx + 1);
 
             return `
                 <div class="friary-item-card" data-fr-index="${frIdx}" style="background: rgba(0,0,0,0.25); border: 1px solid var(--c-card-border); border-radius: 10px; padding: 1.1rem; position: relative;">
@@ -5555,7 +5578,11 @@ function franciscan_render_dashboard_view() {
                             <span class="friary-num-badge" style="background: rgba(230, 200, 136, 0.2); color: #e6c888; font-weight: 700; font-size: 0.72rem; padding: 0.15rem 0.5rem; border-radius: 4px;">#${frIdx + 1}</span>
                             <strong class="friary-card-title-preview" style="color: var(--c-text); font-size: 0.92rem;">${titleVal ? titleVal : 'New Friary'}</strong>
                         </div>
-                        <div style="display: flex; gap: 0.35rem; align-items: center;">
+                        <div style="display: flex; gap: 0.5rem; align-items: center;">
+                            <div style="display: flex; align-items: center; gap: 0.3rem;" title="Sort order of this friary within the section">
+                                <label style="font-size: 0.72rem; color: var(--c-gold); font-weight: 700; text-transform: uppercase; margin: 0;">Order:</label>
+                                <input type="number" name="friaries_sections[${secIdx}][friaries][${frIdx}][order]" class="form-control friary-input-order" value="${orderVal}" min="1" step="1" style="width: 60px; padding: 0.2rem 0.4rem; font-size: 0.8rem; text-align: center; height: auto;">
+                            </div>
                             <button type="button" class="btn btn-secondary btn-move-friary-up" title="Move Up" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;">▲</button>
                             <button type="button" class="btn btn-secondary btn-move-friary-down" title="Move Down" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;">▼</button>
                             <button type="button" class="btn btn-secondary btn-delete-friary-item" title="Remove Friary" style="padding: 0.25rem 0.6rem; font-size: 0.75rem; background: rgba(239, 68, 68, 0.15); color: #fca5a5; border-color: rgba(239, 68, 68, 0.4);">🗑️ Remove</button>
@@ -5586,8 +5613,9 @@ function franciscan_render_dashboard_view() {
             `;
         }
 
-        function getNewDioceseSectionHtml(secIdx, dioceseTitle) {
+        function getNewDioceseSectionHtml(secIdx, dioceseTitle, secOrder) {
             dioceseTitle = dioceseTitle || '';
+            const orderVal = (secOrder !== undefined && secOrder !== '') ? secOrder : (secIdx + 1);
             return `
                 <div class="diocese-section-card" data-sec-index="${secIdx}" style="background: rgba(255,255,255,0.025); border: 1px solid rgba(230, 200, 136, 0.35); border-radius: 14px; padding: 1.4rem; position: relative; box-shadow: 0 4px 18px rgba(0,0,0,0.18);">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.2rem; border-bottom: 1px solid rgba(230, 200, 136, 0.2); padding-bottom: 0.9rem; flex-wrap: wrap; gap: 1rem;">
@@ -5595,6 +5623,12 @@ function franciscan_render_dashboard_view() {
                             <span class="diocese-section-badge" style="background: var(--c-gold); color: #12100e; font-weight: 800; font-size: 0.78rem; padding: 0.3rem 0.65rem; border-radius: 6px; white-space: nowrap;">
                                 SECTION #${secIdx + 1}
                             </span>
+                            <div style="width: 75px; flex-shrink: 0;">
+                                <label style="display: block; font-size: 0.72rem; text-transform: uppercase; color: var(--c-gold); font-weight: 700; margin-bottom: 0.25rem; letter-spacing: 0.05em;">
+                                    Order
+                                </label>
+                                <input type="number" name="friaries_sections[${secIdx}][order]" class="form-control diocese-input-order" value="${orderVal}" min="1" step="1" style="font-weight: 700; text-align: center; color: #ffffff; background: rgba(0,0,0,0.35); border: 1px solid rgba(230, 200, 136, 0.4);" title="Sort order of this diocese section on frontend">
+                            </div>
                             <div style="flex: 1;">
                                 <label style="display: block; font-size: 0.72rem; text-transform: uppercase; color: var(--c-gold); font-weight: 700; margin-bottom: 0.25rem; letter-spacing: 0.05em;">
                                     🏛️ Main Section Title (e.g. ARCHDIOCESE OF RANCHI, DIOCESE OF KHUNTI)
@@ -5632,13 +5666,19 @@ function franciscan_render_dashboard_view() {
             `;
         }
 
-        function reindexFriariesSections() {
+        function reindexFriariesSections(syncOrderFromPosition) {
             let totalFriaries = 0;
             const sections = $('#diocese-sections-wrapper .diocese-section-card');
             sections.each(function(secIdx) {
                 const sec = $(this);
                 sec.attr('data-sec-index', secIdx);
                 sec.find('.diocese-section-badge').text('SECTION #' + (secIdx + 1));
+                sec.find('.diocese-input-order').attr('name', 'friaries_sections[' + secIdx + '][order]');
+                if (syncOrderFromPosition) {
+                    sec.find('.diocese-input-order').val(secIdx + 1);
+                } else if (!sec.find('.diocese-input-order').val()) {
+                    sec.find('.diocese-input-order').val(secIdx + 1);
+                }
                 sec.find('.diocese-input-title').attr('name', 'friaries_sections[' + secIdx + '][title]');
 
                 const friaryCards = sec.find('.friary-item-card');
@@ -5657,6 +5697,12 @@ function franciscan_render_dashboard_view() {
                     const card = $(this);
                     card.attr('data-fr-index', frIdx);
                     card.find('.friary-num-badge').text('#' + (frIdx + 1));
+                    card.find('.friary-input-order').attr('name', 'friaries_sections[' + secIdx + '][friaries][' + frIdx + '][order]');
+                    if (syncOrderFromPosition) {
+                        card.find('.friary-input-order').val(frIdx + 1);
+                    } else if (!card.find('.friary-input-order').val()) {
+                        card.find('.friary-input-order').val(frIdx + 1);
+                    }
                     card.find('.friary-input-image').attr('name', 'friaries_sections[' + secIdx + '][friaries][' + frIdx + '][image]');
                     card.find('.friary-input-title').attr('name', 'friaries_sections[' + secIdx + '][friaries][' + frIdx + '][title]');
                     card.find('.friary-input-desc').attr('name', 'friaries_sections[' + secIdx + '][friaries][' + frIdx + '][desc]');
@@ -5670,11 +5716,11 @@ function franciscan_render_dashboard_view() {
         $(document).on('click', '#btn-add-diocese-section, #btn-add-diocese-section-bottom', function(e) {
             e.preventDefault();
             const count = $('#diocese-sections-wrapper .diocese-section-card').length;
-            const newSec = $(getNewDioceseSectionHtml(count, ''));
+            const newSec = $(getNewDioceseSectionHtml(count, '', count + 1));
             $('#diocese-sections-wrapper').append(newSec);
             newSec.hide().fadeIn(300);
             newSec.find('.diocese-input-title').focus();
-            reindexFriariesSections();
+            reindexFriariesSections(false);
             $('html, body').animate({ scrollTop: newSec.offset().top - 80 }, 400);
         });
 
@@ -5686,7 +5732,7 @@ function franciscan_render_dashboard_view() {
             if (confirm('Are you sure you want to delete "' + title + '" and all friaries inside it?')) {
                 sec.fadeOut(200, function() {
                     $(this).remove();
-                    reindexFriariesSections();
+                    reindexFriariesSections(false);
                 });
             }
         });
@@ -5698,7 +5744,7 @@ function franciscan_render_dashboard_view() {
             const prev = sec.prev('.diocese-section-card');
             if (prev.length) {
                 sec.insertBefore(prev);
-                reindexFriariesSections();
+                reindexFriariesSections(true);
                 sec.css('border-color', 'var(--c-gold)');
                 setTimeout(() => sec.css('border-color', 'rgba(230, 200, 136, 0.35)'), 600);
             }
@@ -5710,7 +5756,7 @@ function franciscan_render_dashboard_view() {
             const next = sec.next('.diocese-section-card');
             if (next.length) {
                 sec.insertAfter(next);
-                reindexFriariesSections();
+                reindexFriariesSections(true);
                 sec.css('border-color', 'var(--c-gold)');
                 setTimeout(() => sec.css('border-color', 'rgba(230, 200, 136, 0.35)'), 600);
             }
@@ -5723,11 +5769,11 @@ function franciscan_render_dashboard_view() {
             const secIdx = parseInt(sec.attr('data-sec-index'), 10) || 0;
             const container = sec.find('.diocese-friaries-container');
             const frIdx = container.find('.friary-item-card').length;
-            const newFrHtml = $(getNewFriaryCardHtml(secIdx, frIdx, {}));
+            const newFrHtml = $(getNewFriaryCardHtml(secIdx, frIdx, { order: frIdx + 1 }));
             container.append(newFrHtml);
             newFrHtml.hide().fadeIn(250);
             newFrHtml.find('.friary-input-title').focus();
-            reindexFriariesSections();
+            reindexFriariesSections(false);
         });
 
         // Delete Friary
@@ -5738,7 +5784,7 @@ function franciscan_render_dashboard_view() {
             if (confirm('Are you sure you want to remove "' + title + '"?')) {
                 card.fadeOut(200, function() {
                     $(this).remove();
-                    reindexFriariesSections();
+                    reindexFriariesSections(false);
                 });
             }
         });
@@ -5750,7 +5796,7 @@ function franciscan_render_dashboard_view() {
             const prev = card.prev('.friary-item-card');
             if (prev.length) {
                 card.insertBefore(prev);
-                reindexFriariesSections();
+                reindexFriariesSections(true);
                 card.css('border-color', 'var(--c-gold)');
                 setTimeout(() => card.css('border-color', 'var(--c-card-border)'), 600);
             }
@@ -5762,7 +5808,7 @@ function franciscan_render_dashboard_view() {
             const next = card.next('.friary-item-card');
             if (next.length) {
                 card.insertAfter(next);
-                reindexFriariesSections();
+                reindexFriariesSections(true);
                 card.css('border-color', 'var(--c-gold)');
                 setTimeout(() => card.css('border-color', 'var(--c-card-border)'), 600);
             }

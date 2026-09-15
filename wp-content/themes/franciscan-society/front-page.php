@@ -289,18 +289,18 @@ get_header();
                         <img loading="lazy" decoding="async" class="about-main-img" src="<?php echo esc_url( $about_img ); ?>" style="width: 100%; height: 460px; object-fit: cover; border-radius: 24px; display: block;" alt="Franciscan Rosary & Prayer">
                     </div>
                     
-                    <!-- Inset Video Overlay Card (Positioned inside bottom-right on desktop, sleek bar on mobile) -->
+                    <!-- Inset Video Overlay Card (Positioned inside bottom-left corner) -->
                     <?php
                     $about_video_btn_url = franciscan_get_page_field( 'home', 'about_video_btn_url', '' );
                     if ( empty( $about_video_btn_url ) ) {
                         $about_video_btn_url = 'https://youtube.com/@tormediaranchi3804?si=UPTCSJUSj9tbcjeB';
                     }
                     ?>
-                    <div class="about-video-card" style="position: absolute; bottom: 20px; right: 20px; background: #ffffff; padding: 10px; border-radius: 16px; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.18); width: 185px; text-align: center; z-index: 10;">
+                    <div class="about-video-card" style="position: absolute; bottom: 20px; left: 20px; background: #ffffff; padding: 10px; border-radius: 16px; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.18); width: 185px; text-align: center; z-index: 10;">
                         <div class="about-video-thumb-wrap" style="position: relative; border-radius: 12px; overflow: hidden; height: 95px; background-color: #1c1917;">
                             <video src="<?php echo esc_url( $about_video ); ?>" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" autoplay loop muted playsinline></video>
-                            <a rel="noopener noreferrer" href="<?php echo esc_url( $about_video_btn_url ); ?>" target="_blank" class="video-play-btn" aria-label="Watch our video on YouTube" style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.35); color: #ffffff; border-radius: 12px;">
-                                <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20" aria-hidden="true">
+                            <a rel="noopener noreferrer" href="<?php echo esc_url( $about_video_btn_url ); ?>" target="_blank" class="video-play-btn" aria-label="Watch our video on YouTube">
+                                <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16" aria-hidden="true">
                                     <path d="M8 5v14l11-7z"/>
                                 </svg>
                             </a>

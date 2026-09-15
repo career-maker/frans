@@ -508,7 +508,6 @@ header, section, main, div, footer, nav {
 
 /* Small Inset Video Card Shine */
 .about-video-card {
-    position: relative !important;
     overflow: hidden !important;
     transition: transform 0.4s ease !important;
 }

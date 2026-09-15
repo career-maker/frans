@@ -1386,13 +1386,49 @@ function franciscan_get_default_friaries_data() {
 }
 
 /**
+ * Comparison helper to sort arrays by an 'order' key.
+ */
+function franciscan_sort_by_order_field( $a, $b ) {
+    $order_a = isset( $a['order'] ) && is_numeric( $a['order'] ) ? intval( $a['order'] ) : 9999;
+    $order_b = isset( $b['order'] ) && is_numeric( $b['order'] ) ? intval( $b['order'] ) : 9999;
+    if ( $order_a === $order_b ) {
+        return 0;
+    }
+    return ( $order_a < $order_b ) ? -1 : 1;
+}
+
+/**
  * Retrieve curated/custom Friaries list (flat array).
  */
 function franciscan_get_friaries_data() {
     $data = franciscan_get_page_content( 'community-friaries' );
     if ( isset( $data['friaries_sections'] ) && is_array( $data['friaries_sections'] ) && ! empty( $data['friaries_sections'] ) ) {
+        $sections = array_values( $data['friaries_sections'] );
+        foreach ( $sections as $i => &$sec ) {
+            if ( ! isset( $sec['order'] ) || $sec['order'] === '' ) {
+                $sec['order'] = $i + 1;
+            } else {
+                $sec['order'] = intval( $sec['order'] );
+            }
+            if ( ! empty( $sec['friaries'] ) && is_array( $sec['friaries'] ) ) {
+                $sec_friaries = array_values( $sec['friaries'] );
+                foreach ( $sec_friaries as $j => &$fr ) {
+                    if ( ! isset( $fr['order'] ) || $fr['order'] === '' ) {
+                        $fr['order'] = $j + 1;
+                    } else {
+                        $fr['order'] = intval( $fr['order'] );
+                    }
+                }
+                unset( $fr );
+                usort( $sec_friaries, 'franciscan_sort_by_order_field' );
+                $sec['friaries'] = $sec_friaries;
+            }
+        }
+        unset( $sec );
+        usort( $sections, 'franciscan_sort_by_order_field' );
+
         $flat = array();
-        foreach ( $data['friaries_sections'] as $sec ) {
+        foreach ( $sections as $sec ) {
             $sec_title = ! empty( $sec['title'] ) ? trim( $sec['title'] ) : 'OTHER FRIARIES';
             if ( ! empty( $sec['friaries'] ) && is_array( $sec['friaries'] ) ) {
                 foreach ( $sec['friaries'] as $fr ) {
@@ -1406,7 +1442,9 @@ function franciscan_get_friaries_data() {
         }
     }
     if ( isset( $data['friaries_list'] ) && is_array( $data['friaries_list'] ) && ! empty( $data['friaries_list'] ) ) {
-        return array_values( $data['friaries_list'] );
+        $list = array_values( $data['friaries_list'] );
+        usort( $list, 'franciscan_sort_by_order_field' );
+        return $list;
     }
     $global_opt = get_option( 'franciscan_friaries_data', null );
     if ( is_array( $global_opt ) && ! empty( $global_opt ) ) {
@@ -1421,8 +1459,32 @@ function franciscan_get_friaries_data() {
 function franciscan_get_friaries_grouped() {
     $data = franciscan_get_page_content( 'community-friaries' );
     if ( isset( $data['friaries_sections'] ) && is_array( $data['friaries_sections'] ) && ! empty( $data['friaries_sections'] ) ) {
+        $sections = array_values( $data['friaries_sections'] );
+        foreach ( $sections as $i => &$sec ) {
+            if ( ! isset( $sec['order'] ) || $sec['order'] === '' ) {
+                $sec['order'] = $i + 1;
+            } else {
+                $sec['order'] = intval( $sec['order'] );
+            }
+            if ( ! empty( $sec['friaries'] ) && is_array( $sec['friaries'] ) ) {
+                $sec_friaries = array_values( $sec['friaries'] );
+                foreach ( $sec_friaries as $j => &$fr ) {
+                    if ( ! isset( $fr['order'] ) || $fr['order'] === '' ) {
+                        $fr['order'] = $j + 1;
+                    } else {
+                        $fr['order'] = intval( $fr['order'] );
+                    }
+                }
+                unset( $fr );
+                usort( $sec_friaries, 'franciscan_sort_by_order_field' );
+                $sec['friaries'] = $sec_friaries;
+            }
+        }
+        unset( $sec );
+        usort( $sections, 'franciscan_sort_by_order_field' );
+
         $grouped = array();
-        foreach ( $data['friaries_sections'] as $sec ) {
+        foreach ( $sections as $sec ) {
             $sec_title = ! empty( $sec['title'] ) ? trim( $sec['title'] ) : 'OTHER FRIARIES';
             if ( ! isset( $grouped[ $sec_title ] ) ) {
                 $grouped[ $sec_title ] = array();
@@ -1456,25 +1518,54 @@ function franciscan_get_friaries_grouped() {
 function franciscan_get_friaries_sections() {
     $data = franciscan_get_page_content( 'community-friaries' );
     if ( isset( $data['friaries_sections'] ) && is_array( $data['friaries_sections'] ) && ! empty( $data['friaries_sections'] ) ) {
-        return array_values( $data['friaries_sections'] );
+        $sections = array_values( $data['friaries_sections'] );
+        foreach ( $sections as $i => &$sec ) {
+            if ( ! isset( $sec['order'] ) || $sec['order'] === '' ) {
+                $sec['order'] = $i + 1;
+            } else {
+                $sec['order'] = intval( $sec['order'] );
+            }
+            if ( ! empty( $sec['friaries'] ) && is_array( $sec['friaries'] ) ) {
+                $sec_friaries = array_values( $sec['friaries'] );
+                foreach ( $sec_friaries as $j => &$fr ) {
+                    if ( ! isset( $fr['order'] ) || $fr['order'] === '' ) {
+                        $fr['order'] = $j + 1;
+                    } else {
+                        $fr['order'] = intval( $fr['order'] );
+                    }
+                }
+                unset( $fr );
+                usort( $sec_friaries, 'franciscan_sort_by_order_field' );
+                $sec['friaries'] = $sec_friaries;
+            }
+        }
+        unset( $sec );
+        usort( $sections, 'franciscan_sort_by_order_field' );
+        return $sections;
     }
     
     // Group from existing flat list or defaults
     $grouped = franciscan_get_friaries_grouped();
     $sections = array();
+    $sec_idx = 1;
     foreach ( $grouped as $diocese_name => $friaries ) {
         $sec_friaries = array();
+        $fr_idx = 1;
         foreach ( $friaries as $fr ) {
             $sec_friaries[] = array(
                 'title' => $fr['title'] ?? '',
                 'desc'  => $fr['desc'] ?? '',
                 'image' => $fr['image'] ?? '',
+                'order' => isset( $fr['order'] ) && $fr['order'] !== '' ? intval( $fr['order'] ) : $fr_idx,
             );
+            $fr_idx++;
         }
         $sections[] = array(
             'title'    => $diocese_name,
+            'order'    => $sec_idx,
             'friaries' => $sec_friaries,
         );
+        $sec_idx++;
     }
     return $sections;
 }

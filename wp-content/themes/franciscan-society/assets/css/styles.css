@@ -3549,7 +3549,6 @@ header, section, main, div, footer, nav {
 
 /* Small Inset Video Card Shine */
 .about-video-card {
-    position: relative !important;
     overflow: hidden !important;
     transition: transform 0.4s ease !important;
 }
@@ -8766,68 +8765,6 @@ button.fs-mega-toggle::after,
         width: 100% !important;
         object-fit: cover !important;
         border-radius: 20px !important;
-        display: block !important;
-    }
-
-    /* On mobile/tablet: move the video card OUT of the absolute overlay, show below image */
-    .about-video-card {
-        position: relative !important;
-        inset: auto !important;
-        bottom: auto !important;
-        right: auto !important;
-        display: flex !important;
-        flex-direction: row !important;
-        align-items: center !important;
-        gap: 1.1rem !important;
-        width: 100% !important;
-        box-sizing: border-box !important;
-        border-radius: 16px !important;
-        margin: 0 !important;
-        padding: 0.85rem 1.1rem !important;
-        background: #FFFFFF !important;
-        box-shadow: 0 10px 28px rgba(0, 0, 0, 0.07) !important;
-        border: 1px solid rgba(197, 169, 99, 0.25) !important;
-        text-align: left !important;
-    }
-
-    .about-video-card .about-video-thumb-wrap,
-    .about-video-card > div:first-child {
-        width: 95px !important;
-        height: 65px !important;
-        min-width: 95px !important;
-        flex-shrink: 0 !important;
-        border-radius: 10px !important;
-        overflow: hidden !important;
-        position: relative !important;
-    }
-
-    .about-video-card .video-info-wrap {
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: flex-start !important;
-        justify-content: center !important;
-        margin: 0 !important;
-        flex-grow: 1 !important;
-    }
-
-    .about-video-card span.about-video-badge {
-        font-family: 'Instrument Sans', sans-serif !important;
-        font-size: 0.82rem !important;
-        font-weight: 800 !important;
-        text-align: left !important;
-        text-transform: uppercase !important;
-        letter-spacing: 0.08em !important;
-        color: #1c1917 !important;
-        margin: 0 0 0.2rem 0 !important;
-        display: block !important;
-    }
-
-    .about-video-card span.about-video-sub {
-        font-family: 'Instrument Sans', sans-serif !important;
-        font-size: 0.76rem !important;
-        color: #78716c !important;
-        text-align: left !important;
-        margin: 0 !important;
         display: block !important;
     }
 }
