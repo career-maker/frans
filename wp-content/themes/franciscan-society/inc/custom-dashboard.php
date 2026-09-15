@@ -100,6 +100,25 @@ function franciscan_ajax_save_dashboard() {
             }
         }
         
+        // Sync friaries flat list when saving community-friaries sections
+        if ( 'community-friaries' === $page_slug && isset( $page_data['friaries_sections'] ) && is_array( $page_data['friaries_sections'] ) ) {
+            $flat_list = array();
+            foreach ( $page_data['friaries_sections'] as $sec ) {
+                $sec_title = ! empty( $sec['title'] ) ? trim( $sec['title'] ) : '';
+                if ( ! empty( $sec['friaries'] ) && is_array( $sec['friaries'] ) ) {
+                    foreach ( $sec['friaries'] as $fr ) {
+                        $flat_list[] = array(
+                            'diocese' => $sec_title,
+                            'title'   => $fr['title'] ?? '',
+                            'desc'    => $fr['desc'] ?? '',
+                            'image'   => $fr['image'] ?? '',
+                        );
+                    }
+                }
+            }
+            $page_data['friaries_list'] = $flat_list;
+        }
+
         $current = get_option( 'franciscan_page_' . $page_slug, array() );
         $merged = array_merge( $current, $page_data );
         update_option( 'franciscan_page_' . $page_slug, $merged );
@@ -2471,75 +2490,134 @@ function franciscan_render_dashboard_view() {
                             </div>
 
                             <?php
-                            $all_friaries = franciscan_get_friaries_data();
+                            $diocese_sections = franciscan_get_friaries_sections();
+                            $total_friaries_count = 0;
+                            foreach ( $diocese_sections as $sec ) {
+                                if ( ! empty( $sec['friaries'] ) && is_array( $sec['friaries'] ) ) {
+                                    $total_friaries_count += count( $sec['friaries'] );
+                                }
+                            }
                             ?>
-                            <!-- Section: Friaries & Ashrams Directory -->
+                            <!-- Section: Dioceses & Friaries Directory -->
                             <div class="form-section">
-                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.2rem; flex-wrap: wrap; gap: 1rem;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 1rem;">
                                     <div>
                                         <h3 class="form-section-title" style="margin-bottom: 0.3rem;">
-                                            🏘️ Friaries &amp; Ashrams Cards (<span id="friaries-count"><?php echo count( $all_friaries ); ?></span> Friaries)
+                                            🏛️ Dioceses &amp; Friaries Manager
                                         </h3>
                                         <p style="color: var(--c-text-muted); font-size: 0.88rem; margin: 0;">
-                                            Edit dioceses, friary names, address details, upload custom photos, or add and delete friaries.
+                                            Create main section titles (such as <strong>ARCHDIOCESE OF RANCHI</strong>, <strong>DIOCESE OF KHUNTI</strong>) and add multiple friaries under each section.
                                         </p>
                                     </div>
                                     <div style="display: flex; gap: 0.8rem; align-items: center; flex-wrap: wrap;">
-                                        <input type="text" id="filter-friaries" class="form-control" placeholder="🔍 Search friaries or diocese..." style="width: 240px; font-size: 0.85rem; padding: 0.4rem 0.8rem;">
-                                        <button type="button" class="btn btn-primary" id="btn-add-friary" style="display: inline-flex; align-items: center; gap: 0.5rem;">
-                                            <span>➕</span> Add New Friary
+                                        <span style="background: rgba(230, 200, 136, 0.15); color: #e6c888; font-size: 0.8rem; padding: 0.35rem 0.75rem; border-radius: 6px; font-weight: 700;">
+                                            <span id="diocese-sections-count"><?php echo count( $diocese_sections ); ?></span> Sections | <span id="friaries-total-count"><?php echo $total_friaries_count; ?></span> Friaries Total
+                                        </span>
+                                        <input type="text" id="filter-friaries" class="form-control" placeholder="🔍 Search sections or friaries..." style="width: 220px; font-size: 0.85rem; padding: 0.4rem 0.8rem;">
+                                        <button type="button" class="btn btn-primary" id="btn-add-diocese-section" style="display: inline-flex; align-items: center; gap: 0.5rem; font-weight: 700;">
+                                            <span>➕</span> Add New Diocese / Section
                                         </button>
                                     </div>
                                 </div>
 
-                                <div id="friaries-list-container" style="display: flex; flex-direction: column; gap: 1.2rem; max-height: 800px; overflow-y: auto; padding-right: 0.5rem;">
-                                    <?php foreach ( $all_friaries as $fr_idx => $friary ) :
-                                        $fr_diocese = $friary['diocese'] ?? '';
-                                        $fr_title   = $friary['title'] ?? '';
-                                        $fr_desc    = $friary['desc'] ?? '';
-                                        $fr_img     = $friary['image'] ?? '';
-                                        $fr_img_url = ! empty( $fr_img ) ? franciscan_resolve_friar_image_url( $fr_img ) : ( FRANCISCAN_THEME_URI . '/assets/images/logo.svg' );
+                                <div id="diocese-sections-wrapper" style="display: flex; flex-direction: column; gap: 1.6rem;">
+                                    <?php foreach ( $diocese_sections as $sec_idx => $section ) :
+                                        $sec_title = $section['title'] ?? '';
+                                        $sec_friaries = ! empty( $section['friaries'] ) && is_array( $section['friaries'] ) ? $section['friaries'] : array();
+                                        $sec_fr_count = count( $sec_friaries );
                                     ?>
-                                        <div class="friary-item-card" data-index="<?php echo esc_attr( $fr_idx ); ?>" style="background: rgba(255,255,255,0.02); border: 1px solid var(--c-card-border); border-radius: 12px; padding: 1.2rem; position: relative;">
-                                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 0.6rem; flex-wrap: wrap; gap: 0.5rem;">
-                                                <div style="display: flex; align-items: center; gap: 0.6rem;">
-                                                    <span style="background: var(--c-gold); color: #12100e; font-weight: 800; font-size: 0.75rem; padding: 0.2rem 0.55rem; border-radius: 5px;">#<?php echo $fr_idx + 1; ?></span>
-                                                    <strong class="friary-card-title-preview" style="color: var(--c-text); font-size: 0.92rem;"><?php echo esc_html( ! empty( $fr_title ) ? $fr_title : 'New Friary' ); ?></strong>
-                                                    <span class="friary-card-diocese-preview" style="background: rgba(230, 200, 136, 0.15); color: #e6c888; font-size: 0.72rem; padding: 0.15rem 0.5rem; border-radius: 4px; font-weight: 600;"><?php echo esc_html( ! empty( $fr_diocese ) ? $fr_diocese : 'DIOCESE' ); ?></span>
+                                        <div class="diocese-section-card" data-sec-index="<?php echo esc_attr( $sec_idx ); ?>" style="background: rgba(255,255,255,0.025); border: 1px solid rgba(230, 200, 136, 0.35); border-radius: 14px; padding: 1.4rem; position: relative; box-shadow: 0 4px 18px rgba(0,0,0,0.18);">
+                                            <!-- Diocese Section Header -->
+                                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.2rem; border-bottom: 1px solid rgba(230, 200, 136, 0.2); padding-bottom: 0.9rem; flex-wrap: wrap; gap: 1rem;">
+                                                <div style="display: flex; align-items: center; gap: 0.8rem; flex: 1; min-width: 260px;">
+                                                    <span class="diocese-section-badge" style="background: var(--c-gold); color: #12100e; font-weight: 800; font-size: 0.78rem; padding: 0.3rem 0.65rem; border-radius: 6px; white-space: nowrap;">
+                                                        SECTION #<?php echo $sec_idx + 1; ?>
+                                                    </span>
+                                                    <div style="flex: 1;">
+                                                        <label style="display: block; font-size: 0.72rem; text-transform: uppercase; color: var(--c-gold); font-weight: 700; margin-bottom: 0.25rem; letter-spacing: 0.05em;">
+                                                            🏛️ Main Section Title (e.g. ARCHDIOCESE OF RANCHI, DIOCESE OF KHUNTI)
+                                                        </label>
+                                                        <input type="text" name="friaries_sections[<?php echo esc_attr( $sec_idx ); ?>][title]" class="form-control diocese-input-title" value="<?php echo esc_attr( $sec_title ); ?>" placeholder="e.g. ARCHDIOCESE OF RANCHI" style="font-size: 1.05rem; font-weight: 700; color: #ffffff; background: rgba(0,0,0,0.35); border: 1px solid rgba(230, 200, 136, 0.4);" required>
+                                                    </div>
                                                 </div>
-                                                <div style="display: flex; gap: 0.35rem; align-items: center;">
-                                                    <button type="button" class="btn btn-secondary btn-move-friary-up" title="Move Up" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;">▲</button>
-                                                    <button type="button" class="btn btn-secondary btn-move-friary-down" title="Move Down" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;">▼</button>
-                                                    <button type="button" class="btn btn-secondary btn-delete-friary-item" title="Remove Friary" style="padding: 0.25rem 0.6rem; font-size: 0.75rem; background: rgba(239, 68, 68, 0.15); color: #fca5a5; border-color: rgba(239, 68, 68, 0.4);">🗑️ Remove</button>
+                                                <div style="display: flex; gap: 0.4rem; align-items: center; flex-wrap: wrap;">
+                                                    <span class="diocese-friary-count-badge" style="background: rgba(255,255,255,0.08); color: #e2e8f0; font-size: 0.78rem; padding: 0.35rem 0.65rem; border-radius: 6px; font-weight: 600;">
+                                                        <?php echo $sec_fr_count . ( $sec_fr_count === 1 ? ' Friary' : ' Friaries' ); ?>
+                                                    </span>
+                                                    <button type="button" class="btn btn-secondary btn-move-diocese-up" title="Move Section Up" style="padding: 0.35rem 0.6rem; font-size: 0.8rem;">▲</button>
+                                                    <button type="button" class="btn btn-secondary btn-move-diocese-down" title="Move Section Down" style="padding: 0.35rem 0.6rem; font-size: 0.8rem;">▼</button>
+                                                    <button type="button" class="btn btn-primary btn-add-friary-to-diocese" style="padding: 0.35rem 0.75rem; font-size: 0.8rem; display: inline-flex; align-items: center; gap: 0.3rem;">
+                                                        <span>➕</span> Add Friary
+                                                    </button>
+                                                    <button type="button" class="btn btn-secondary btn-delete-diocese-section" title="Delete Entire Section" style="padding: 0.35rem 0.65rem; font-size: 0.8rem; background: rgba(239, 68, 68, 0.15); color: #fca5a5; border-color: rgba(239, 68, 68, 0.4);">
+                                                        🗑️ Remove Section
+                                                    </button>
                                                 </div>
                                             </div>
 
-                                            <div style="display: flex; gap: 1.2rem; align-items: flex-start; flex-wrap: wrap;">
-                                                <div style="width: 100px; text-align: center; flex-shrink: 0;">
-                                                    <div style="width: 100px; height: 75px; border-radius: 8px; overflow: hidden; border: 1px solid var(--c-gold); margin: 0 auto 0.5rem; background: #0c1727; display: flex; align-items: center; justify-content: center;">
-                                                        <img src="<?php echo esc_url( $fr_img_url ); ?>" class="friary-img-preview" style="width: 100%; height: 100%; object-fit: cover; display: block;" onerror="this.src='<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/logo.svg' ); ?>';">
-                                                    </div>
-                                                    <input type="hidden" name="friaries_list[<?php echo esc_attr( $fr_idx ); ?>][image]" class="friary-input-image" value="<?php echo esc_attr( $fr_img ); ?>">
-                                                    <button type="button" class="btn btn-secondary btn-upload-friary-img" style="padding: 0.2rem 0.4rem; font-size: 0.7rem; width: 100%; margin-bottom: 0.25rem;">📷 Photo</button>
-                                                    <button type="button" class="btn btn-secondary btn-reset-friary-img" style="padding: 0.15rem 0.3rem; font-size: 0.68rem; width: 100%; <?php echo empty( $fr_img ) ? 'display:none;' : ''; ?>">Reset</button>
+                                            <!-- Friaries container under this section -->
+                                            <div class="diocese-friaries-container" style="display: flex; flex-direction: column; gap: 1rem; padding-left: 0.5rem;">
+                                                <div class="diocese-empty-notice" style="padding: 1.5rem; text-align: center; border: 1px dashed rgba(255,255,255,0.15); border-radius: 8px; color: var(--c-text-muted); font-size: 0.88rem; <?php echo $sec_fr_count > 0 ? 'display: none;' : ''; ?>">
+                                                    No friaries under this section yet. Click <strong>"➕ Add Friary"</strong> to add houses to this diocese.
                                                 </div>
-                                                <div style="flex: 1; min-width: 260px;" class="form-grid">
-                                                    <div class="form-group">
-                                                        <label>Diocese (Grouping Heading)</label>
-                                                        <input type="text" name="friaries_list[<?php echo esc_attr( $fr_idx ); ?>][diocese]" class="form-control friary-input-diocese" value="<?php echo esc_attr( $fr_diocese ); ?>" placeholder="e.g. ARCHDIOCESE OF RANCHI" required>
+
+                                                <?php foreach ( $sec_friaries as $fr_idx => $friary ) :
+                                                    $fr_title   = $friary['title'] ?? '';
+                                                    $fr_desc    = $friary['desc'] ?? '';
+                                                    $fr_img     = $friary['image'] ?? '';
+                                                    $fr_img_url = ! empty( $fr_img ) ? franciscan_resolve_friar_image_url( $fr_img ) : ( FRANCISCAN_THEME_URI . '/assets/images/logo.svg' );
+                                                ?>
+                                                    <div class="friary-item-card" data-fr-index="<?php echo esc_attr( $fr_idx ); ?>" style="background: rgba(0,0,0,0.25); border: 1px solid var(--c-card-border); border-radius: 10px; padding: 1.1rem; position: relative;">
+                                                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.9rem; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 0.5rem; flex-wrap: wrap; gap: 0.5rem;">
+                                                            <div style="display: flex; align-items: center; gap: 0.6rem;">
+                                                                <span class="friary-num-badge" style="background: rgba(230, 200, 136, 0.2); color: #e6c888; font-weight: 700; font-size: 0.72rem; padding: 0.15rem 0.5rem; border-radius: 4px;">#<?php echo $fr_idx + 1; ?></span>
+                                                                <strong class="friary-card-title-preview" style="color: var(--c-text); font-size: 0.92rem;"><?php echo esc_html( ! empty( $fr_title ) ? $fr_title : 'New Friary' ); ?></strong>
+                                                            </div>
+                                                            <div style="display: flex; gap: 0.35rem; align-items: center;">
+                                                                <button type="button" class="btn btn-secondary btn-move-friary-up" title="Move Up" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;">▲</button>
+                                                                <button type="button" class="btn btn-secondary btn-move-friary-down" title="Move Down" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;">▼</button>
+                                                                <button type="button" class="btn btn-secondary btn-delete-friary-item" title="Remove Friary" style="padding: 0.25rem 0.6rem; font-size: 0.75rem; background: rgba(239, 68, 68, 0.15); color: #fca5a5; border-color: rgba(239, 68, 68, 0.4);">🗑️ Remove</button>
+                                                            </div>
+                                                        </div>
+
+                                                        <div style="display: flex; gap: 1.2rem; align-items: flex-start; flex-wrap: wrap;">
+                                                            <div style="width: 100px; text-align: center; flex-shrink: 0;">
+                                                                <div style="width: 100px; height: 75px; border-radius: 8px; overflow: hidden; border: 1px solid var(--c-gold); margin: 0 auto 0.5rem; background: #0c1727; display: flex; align-items: center; justify-content: center;">
+                                                                    <img src="<?php echo esc_url( $fr_img_url ); ?>" class="friary-img-preview" style="width: 100%; height: 100%; object-fit: cover; display: block;" onerror="this.src='<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/logo.svg' ); ?>';">
+                                                                </div>
+                                                                <input type="hidden" name="friaries_sections[<?php echo esc_attr( $sec_idx ); ?>][friaries][<?php echo esc_attr( $fr_idx ); ?>][image]" class="friary-input-image" value="<?php echo esc_attr( $fr_img ); ?>">
+                                                                <button type="button" class="btn btn-secondary btn-upload-friary-img" style="padding: 0.2rem 0.4rem; font-size: 0.7rem; width: 100%; margin-bottom: 0.25rem;">📷 Photo</button>
+                                                                <button type="button" class="btn btn-secondary btn-reset-friary-img" style="padding: 0.15rem 0.3rem; font-size: 0.68rem; width: 100%; <?php echo empty( $fr_img ) ? 'display:none;' : ''; ?>">Reset</button>
+                                                            </div>
+                                                            <div style="flex: 1; min-width: 240px;" class="form-grid">
+                                                                <div class="form-group full-width">
+                                                                    <label>Friary / Ashram / Parish Title</label>
+                                                                    <input type="text" name="friaries_sections[<?php echo esc_attr( $sec_idx ); ?>][friaries][<?php echo esc_attr( $fr_idx ); ?>][title]" class="form-control friary-input-title" value="<?php echo esc_attr( $fr_title ); ?>" placeholder="e.g. Provincial House (Assisi Ashram)" required>
+                                                                </div>
+                                                                <div class="form-group full-width">
+                                                                    <label>Description &amp; Postal Address</label>
+                                                                    <textarea name="friaries_sections[<?php echo esc_attr( $sec_idx ); ?>][friaries][<?php echo esc_attr( $fr_idx ); ?>][desc]" class="form-control friary-input-desc" rows="2" placeholder="e.g. Harmu P.O., Ranchi-834 002, JHARKHAND, Estd. 1989"><?php echo esc_textarea( $fr_desc ); ?></textarea>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                    <div class="form-group">
-                                                        <label>Friary / Ashram / Parish Title</label>
-                                                        <input type="text" name="friaries_list[<?php echo esc_attr( $fr_idx ); ?>][title]" class="form-control friary-input-title" value="<?php echo esc_attr( $fr_title ); ?>" placeholder="e.g. Provincial House (Assisi Ashram)" required>
-                                                    </div>
-                                                    <div class="form-group full-width">
-                                                        <label>Description &amp; Postal Address</label>
-                                                        <textarea name="friaries_list[<?php echo esc_attr( $fr_idx ); ?>][desc]" class="form-control friary-input-desc" rows="2" placeholder="e.g. Harmu P.O., Ranchi-834 002, JHARKHAND, Estd. 1989"><?php echo esc_textarea( $fr_desc ); ?></textarea>
-                                                    </div>
-                                                </div>
+                                                <?php endforeach; ?>
+                                            </div>
+
+                                            <!-- Bottom Add Friary Button -->
+                                            <div style="margin-top: 1rem; padding-top: 0.8rem; border-top: 1px dashed rgba(255,255,255,0.1); display: flex; justify-content: flex-end;">
+                                                <button type="button" class="btn btn-secondary btn-add-friary-to-diocese" style="font-size: 0.82rem; padding: 0.35rem 0.8rem; display: inline-flex; align-items: center; gap: 0.4rem; border-color: rgba(230, 200, 136, 0.4); color: var(--c-gold);">
+                                                    <span>➕</span> Add Friary Under This Section
+                                                </button>
                                             </div>
                                         </div>
                                     <?php endforeach; ?>
+                                </div>
+
+                                <div style="margin-top: 1.5rem; text-align: center;">
+                                    <button type="button" class="btn btn-primary" id="btn-add-diocese-section-bottom" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.6rem 1.4rem; font-size: 0.95rem;">
+                                        <span>➕</span> Add Another Main Section / Diocese
+                                    </button>
                                 </div>
                             </div>
                         <?php endif; ?>
@@ -5460,17 +5538,22 @@ function franciscan_render_dashboard_view() {
         });
 
         // ==========================================
-        // FRIARIES & ASHRAMS REPEATER MANAGER
+        // DIOCESES & FRIARIES REPEATER MANAGER
         // ==========================================
-        function getNewFriaryCardHtml(index) {
+        function getNewFriaryCardHtml(secIdx, frIdx, friary) {
+            friary = friary || {};
             const defaultImg = defaultThemeUri ? defaultThemeUri + '/assets/images/logo.svg' : '';
+            const imgVal = friary.image || '';
+            const imgUrl = imgVal ? imgVal : defaultImg;
+            const titleVal = friary.title || '';
+            const descVal = friary.desc || '';
+
             return `
-                <div class="friary-item-card" data-index="${index}" style="background: rgba(255,255,255,0.02); border: 1px solid var(--c-gold); border-radius: 12px; padding: 1.2rem; position: relative;">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 0.6rem; flex-wrap: wrap; gap: 0.5rem;">
+                <div class="friary-item-card" data-fr-index="${frIdx}" style="background: rgba(0,0,0,0.25); border: 1px solid var(--c-card-border); border-radius: 10px; padding: 1.1rem; position: relative;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.9rem; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 0.5rem; flex-wrap: wrap; gap: 0.5rem;">
                         <div style="display: flex; align-items: center; gap: 0.6rem;">
-                            <span style="background: var(--c-gold); color: #12100e; font-weight: 800; font-size: 0.75rem; padding: 0.2rem 0.55rem; border-radius: 5px;">#${index + 1}</span>
-                            <strong class="friary-card-title-preview" style="color: var(--c-text); font-size: 0.92rem;">New Friary</strong>
-                            <span class="friary-card-diocese-preview" style="background: rgba(230, 200, 136, 0.15); color: #e6c888; font-size: 0.72rem; padding: 0.15rem 0.5rem; border-radius: 4px; font-weight: 600;">DIOCESE</span>
+                            <span class="friary-num-badge" style="background: rgba(230, 200, 136, 0.2); color: #e6c888; font-weight: 700; font-size: 0.72rem; padding: 0.15rem 0.5rem; border-radius: 4px;">#${frIdx + 1}</span>
+                            <strong class="friary-card-title-preview" style="color: var(--c-text); font-size: 0.92rem;">${titleVal ? titleVal : 'New Friary'}</strong>
                         </div>
                         <div style="display: flex; gap: 0.35rem; align-items: center;">
                             <button type="button" class="btn btn-secondary btn-move-friary-up" title="Move Up" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;">▲</button>
@@ -5482,24 +5565,20 @@ function franciscan_render_dashboard_view() {
                     <div style="display: flex; gap: 1.2rem; align-items: flex-start; flex-wrap: wrap;">
                         <div style="width: 100px; text-align: center; flex-shrink: 0;">
                             <div style="width: 100px; height: 75px; border-radius: 8px; overflow: hidden; border: 1px solid var(--c-gold); margin: 0 auto 0.5rem; background: #0c1727; display: flex; align-items: center; justify-content: center;">
-                                <img src="${defaultImg}" class="friary-img-preview" style="width: 100%; height: 100%; object-fit: cover; display: block;" onerror="this.src='${defaultImg}';">
+                                <img src="${imgUrl}" class="friary-img-preview" style="width: 100%; height: 100%; object-fit: cover; display: block;" onerror="this.src='${defaultImg}';">
                             </div>
-                            <input type="hidden" name="friaries_list[${index}][image]" class="friary-input-image" value="">
+                            <input type="hidden" name="friaries_sections[${secIdx}][friaries][${frIdx}][image]" class="friary-input-image" value="${imgVal}">
                             <button type="button" class="btn btn-secondary btn-upload-friary-img" style="padding: 0.2rem 0.4rem; font-size: 0.7rem; width: 100%; margin-bottom: 0.25rem;">📷 Photo</button>
-                            <button type="button" class="btn btn-secondary btn-reset-friary-img" style="padding: 0.15rem 0.3rem; font-size: 0.68rem; width: 100%; display: none;">Reset</button>
+                            <button type="button" class="btn btn-secondary btn-reset-friary-img" style="padding: 0.15rem 0.3rem; font-size: 0.68rem; width: 100%; ${!imgVal ? 'display:none;' : ''}">Reset</button>
                         </div>
-                        <div style="flex: 1; min-width: 260px;" class="form-grid">
-                            <div class="form-group">
-                                <label>Diocese (Grouping Heading)</label>
-                                <input type="text" name="friaries_list[${index}][diocese]" class="form-control friary-input-diocese" value="" placeholder="e.g. ARCHDIOCESE OF RANCHI" required>
-                            </div>
-                            <div class="form-group">
+                        <div style="flex: 1; min-width: 240px;" class="form-grid">
+                            <div class="form-group full-width">
                                 <label>Friary / Ashram / Parish Title</label>
-                                <input type="text" name="friaries_list[${index}][title]" class="form-control friary-input-title" value="" placeholder="e.g. Provincial House (Assisi Ashram)" required>
+                                <input type="text" name="friaries_sections[${secIdx}][friaries][${frIdx}][title]" class="form-control friary-input-title" value="${titleVal}" placeholder="e.g. Provincial House (Assisi Ashram)" required>
                             </div>
                             <div class="form-group full-width">
                                 <label>Description &amp; Postal Address</label>
-                                <textarea name="friaries_list[${index}][desc]" class="form-control friary-input-desc" rows="2" placeholder="e.g. Harmu P.O., Ranchi-834 002, JHARKHAND, Estd. 1989"></textarea>
+                                <textarea name="friaries_sections[${secIdx}][friaries][${frIdx}][desc]" class="form-control friary-input-desc" rows="2" placeholder="e.g. Harmu P.O., Ranchi-834 002, JHARKHAND, Estd. 1989">${descVal}</textarea>
                             </div>
                         </div>
                     </div>
@@ -5507,52 +5586,171 @@ function franciscan_render_dashboard_view() {
             `;
         }
 
-        function reindexFriariesList() {
-            $('#friaries-list-container .friary-item-card').each(function(newIdx) {
-                const card = $(this);
-                card.attr('data-index', newIdx);
-                card.find('span:first').text('#' + (newIdx + 1));
-                card.find('input, textarea').each(function() {
-                    const name = $(this).attr('name');
-                    if (name && name.startsWith('friaries_list[')) {
-                        const updated = name.replace(/friaries_list\[\d+\]/, 'friaries_list[' + newIdx + ']');
-                        $(this).attr('name', updated);
-                    }
-                });
-            });
-            $('#friaries-count').text($('#friaries-list-container .friary-item-card').length);
+        function getNewDioceseSectionHtml(secIdx, dioceseTitle) {
+            dioceseTitle = dioceseTitle || '';
+            return `
+                <div class="diocese-section-card" data-sec-index="${secIdx}" style="background: rgba(255,255,255,0.025); border: 1px solid rgba(230, 200, 136, 0.35); border-radius: 14px; padding: 1.4rem; position: relative; box-shadow: 0 4px 18px rgba(0,0,0,0.18);">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.2rem; border-bottom: 1px solid rgba(230, 200, 136, 0.2); padding-bottom: 0.9rem; flex-wrap: wrap; gap: 1rem;">
+                        <div style="display: flex; align-items: center; gap: 0.8rem; flex: 1; min-width: 260px;">
+                            <span class="diocese-section-badge" style="background: var(--c-gold); color: #12100e; font-weight: 800; font-size: 0.78rem; padding: 0.3rem 0.65rem; border-radius: 6px; white-space: nowrap;">
+                                SECTION #${secIdx + 1}
+                            </span>
+                            <div style="flex: 1;">
+                                <label style="display: block; font-size: 0.72rem; text-transform: uppercase; color: var(--c-gold); font-weight: 700; margin-bottom: 0.25rem; letter-spacing: 0.05em;">
+                                    🏛️ Main Section Title (e.g. ARCHDIOCESE OF RANCHI, DIOCESE OF KHUNTI)
+                                </label>
+                                <input type="text" name="friaries_sections[${secIdx}][title]" class="form-control diocese-input-title" value="${dioceseTitle}" placeholder="e.g. ARCHDIOCESE OF RANCHI" style="font-size: 1.05rem; font-weight: 700; color: #ffffff; background: rgba(0,0,0,0.35); border: 1px solid rgba(230, 200, 136, 0.4);" required>
+                            </div>
+                        </div>
+                        <div style="display: flex; gap: 0.4rem; align-items: center; flex-wrap: wrap;">
+                            <span class="diocese-friary-count-badge" style="background: rgba(255,255,255,0.08); color: #e2e8f0; font-size: 0.78rem; padding: 0.35rem 0.65rem; border-radius: 6px; font-weight: 600;">
+                                0 Friaries
+                            </span>
+                            <button type="button" class="btn btn-secondary btn-move-diocese-up" title="Move Section Up" style="padding: 0.35rem 0.6rem; font-size: 0.8rem;">▲</button>
+                            <button type="button" class="btn btn-secondary btn-move-diocese-down" title="Move Section Down" style="padding: 0.35rem 0.6rem; font-size: 0.8rem;">▼</button>
+                            <button type="button" class="btn btn-primary btn-add-friary-to-diocese" style="padding: 0.35rem 0.75rem; font-size: 0.8rem; display: inline-flex; align-items: center; gap: 0.3rem;">
+                                <span>➕</span> Add Friary
+                            </button>
+                            <button type="button" class="btn btn-secondary btn-delete-diocese-section" title="Delete Entire Section" style="padding: 0.35rem 0.65rem; font-size: 0.8rem; background: rgba(239, 68, 68, 0.15); color: #fca5a5; border-color: rgba(239, 68, 68, 0.4);">
+                                🗑️ Remove Section
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="diocese-friaries-container" style="display: flex; flex-direction: column; gap: 1rem; padding-left: 0.5rem;">
+                        <div class="diocese-empty-notice" style="padding: 1.5rem; text-align: center; border: 1px dashed rgba(255,255,255,0.15); border-radius: 8px; color: var(--c-text-muted); font-size: 0.88rem;">
+                            No friaries under this section yet. Click <strong>"➕ Add Friary"</strong> to add houses to this diocese.
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 1rem; padding-top: 0.8rem; border-top: 1px dashed rgba(255,255,255,0.1); display: flex; justify-content: flex-end;">
+                        <button type="button" class="btn btn-secondary btn-add-friary-to-diocese" style="font-size: 0.82rem; padding: 0.35rem 0.8rem; display: inline-flex; align-items: center; gap: 0.4rem; border-color: rgba(230, 200, 136, 0.4); color: var(--c-gold);">
+                            <span>➕</span> Add Friary Under This Section
+                        </button>
+                    </div>
+                </div>
+            `;
         }
 
-        $(document).on('click', '#btn-add-friary', function(e) {
+        function reindexFriariesSections() {
+            let totalFriaries = 0;
+            const sections = $('#diocese-sections-wrapper .diocese-section-card');
+            sections.each(function(secIdx) {
+                const sec = $(this);
+                sec.attr('data-sec-index', secIdx);
+                sec.find('.diocese-section-badge').text('SECTION #' + (secIdx + 1));
+                sec.find('.diocese-input-title').attr('name', 'friaries_sections[' + secIdx + '][title]');
+
+                const friaryCards = sec.find('.friary-item-card');
+                const count = friaryCards.length;
+                totalFriaries += count;
+                sec.find('.diocese-friary-count-badge').text(count + (count === 1 ? ' Friary' : ' Friaries'));
+
+                const emptyNotice = sec.find('.diocese-empty-notice');
+                if (count > 0) {
+                    emptyNotice.hide();
+                } else {
+                    emptyNotice.show();
+                }
+
+                friaryCards.each(function(frIdx) {
+                    const card = $(this);
+                    card.attr('data-fr-index', frIdx);
+                    card.find('.friary-num-badge').text('#' + (frIdx + 1));
+                    card.find('.friary-input-image').attr('name', 'friaries_sections[' + secIdx + '][friaries][' + frIdx + '][image]');
+                    card.find('.friary-input-title').attr('name', 'friaries_sections[' + secIdx + '][friaries][' + frIdx + '][title]');
+                    card.find('.friary-input-desc').attr('name', 'friaries_sections[' + secIdx + '][friaries][' + frIdx + '][desc]');
+                });
+            });
+            $('#diocese-sections-count').text(sections.length);
+            $('#friaries-total-count').text(totalFriaries);
+        }
+
+        // Add New Diocese / Main Section
+        $(document).on('click', '#btn-add-diocese-section, #btn-add-diocese-section-bottom', function(e) {
             e.preventDefault();
-            const count = $('#friaries-list-container .friary-item-card').length;
-            const newHtml = $(getNewFriaryCardHtml(count));
-            $('#friaries-list-container').prepend(newHtml);
-            newHtml.hide().fadeIn(300);
-            $('#friaries-list-container').animate({ scrollTop: 0 }, 300);
-            newHtml.find('.friary-input-title').focus();
-            reindexFriariesList();
+            const count = $('#diocese-sections-wrapper .diocese-section-card').length;
+            const newSec = $(getNewDioceseSectionHtml(count, ''));
+            $('#diocese-sections-wrapper').append(newSec);
+            newSec.hide().fadeIn(300);
+            newSec.find('.diocese-input-title').focus();
+            reindexFriariesSections();
+            $('html, body').animate({ scrollTop: newSec.offset().top - 80 }, 400);
         });
 
-        $(document).on('click', '.btn-delete-friary-item', function(e) {
+        // Delete Diocese Section
+        $(document).on('click', '.btn-delete-diocese-section', function(e) {
             e.preventDefault();
-            const card = $(this).closest('.friary-item-card');
-            const name = card.find('.friary-input-title').val() || 'this friary';
-            if (confirm('Are you sure you want to remove "' + name + '"?')) {
-                card.fadeOut(200, function() {
+            const sec = $(this).closest('.diocese-section-card');
+            const title = sec.find('.diocese-input-title').val().trim() || 'this section';
+            if (confirm('Are you sure you want to delete "' + title + '" and all friaries inside it?')) {
+                sec.fadeOut(200, function() {
                     $(this).remove();
-                    reindexFriariesList();
+                    reindexFriariesSections();
                 });
             }
         });
 
+        // Move Diocese Section Up / Down
+        $(document).on('click', '.btn-move-diocese-up', function(e) {
+            e.preventDefault();
+            const sec = $(this).closest('.diocese-section-card');
+            const prev = sec.prev('.diocese-section-card');
+            if (prev.length) {
+                sec.insertBefore(prev);
+                reindexFriariesSections();
+                sec.css('border-color', 'var(--c-gold)');
+                setTimeout(() => sec.css('border-color', 'rgba(230, 200, 136, 0.35)'), 600);
+            }
+        });
+
+        $(document).on('click', '.btn-move-diocese-down', function(e) {
+            e.preventDefault();
+            const sec = $(this).closest('.diocese-section-card');
+            const next = sec.next('.diocese-section-card');
+            if (next.length) {
+                sec.insertAfter(next);
+                reindexFriariesSections();
+                sec.css('border-color', 'var(--c-gold)');
+                setTimeout(() => sec.css('border-color', 'rgba(230, 200, 136, 0.35)'), 600);
+            }
+        });
+
+        // Add Friary to specific Diocese Section
+        $(document).on('click', '.btn-add-friary-to-diocese', function(e) {
+            e.preventDefault();
+            const sec = $(this).closest('.diocese-section-card');
+            const secIdx = parseInt(sec.attr('data-sec-index'), 10) || 0;
+            const container = sec.find('.diocese-friaries-container');
+            const frIdx = container.find('.friary-item-card').length;
+            const newFrHtml = $(getNewFriaryCardHtml(secIdx, frIdx, {}));
+            container.append(newFrHtml);
+            newFrHtml.hide().fadeIn(250);
+            newFrHtml.find('.friary-input-title').focus();
+            reindexFriariesSections();
+        });
+
+        // Delete Friary
+        $(document).on('click', '.btn-delete-friary-item', function(e) {
+            e.preventDefault();
+            const card = $(this).closest('.friary-item-card');
+            const title = card.find('.friary-input-title').val() || 'this friary';
+            if (confirm('Are you sure you want to remove "' + title + '"?')) {
+                card.fadeOut(200, function() {
+                    $(this).remove();
+                    reindexFriariesSections();
+                });
+            }
+        });
+
+        // Move Friary Up / Down within Diocese
         $(document).on('click', '.btn-move-friary-up', function(e) {
             e.preventDefault();
             const card = $(this).closest('.friary-item-card');
             const prev = card.prev('.friary-item-card');
             if (prev.length) {
                 card.insertBefore(prev);
-                reindexFriariesList();
+                reindexFriariesSections();
                 card.css('border-color', 'var(--c-gold)');
                 setTimeout(() => card.css('border-color', 'var(--c-card-border)'), 600);
             }
@@ -5564,22 +5762,19 @@ function franciscan_render_dashboard_view() {
             const next = card.next('.friary-item-card');
             if (next.length) {
                 card.insertAfter(next);
-                reindexFriariesList();
+                reindexFriariesSections();
                 card.css('border-color', 'var(--c-gold)');
                 setTimeout(() => card.css('border-color', 'var(--c-card-border)'), 600);
             }
         });
 
+        // Title preview update
         $(document).on('input', '.friary-input-title', function() {
             const val = $(this).val().trim();
             $(this).closest('.friary-item-card').find('.friary-card-title-preview').text(val || 'New Friary');
         });
 
-        $(document).on('input', '.friary-input-diocese', function() {
-            const val = $(this).val().trim();
-            $(this).closest('.friary-item-card').find('.friary-card-diocese-preview').text(val || 'DIOCESE');
-        });
-
+        // Upload Friary Photo
         $(document).on('click', '.btn-upload-friary-img', function(e) {
             e.preventDefault();
             const card = $(this).closest('.friary-item-card');
@@ -5604,6 +5799,7 @@ function franciscan_render_dashboard_view() {
             frame.open();
         });
 
+        // Reset Friary Photo
         $(document).on('click', '.btn-reset-friary-img', function(e) {
             e.preventDefault();
             const card = $(this).closest('.friary-item-card');
@@ -5616,16 +5812,61 @@ function franciscan_render_dashboard_view() {
         // Filter friaries by title or diocese
         $(document).on('input', '#filter-friaries', function() {
             const q = $(this).val().toLowerCase().trim();
-            $('#friaries-list-container .friary-item-card').each(function() {
-                const title = $(this).find('.friary-input-title').val().toLowerCase();
-                const diocese = $(this).find('.friary-input-diocese').val().toLowerCase();
-                if (!q || title.indexOf(q) !== -1 || diocese.indexOf(q) !== -1) {
-                    $(this).show();
+            $('#diocese-sections-wrapper .diocese-section-card').each(function() {
+                const sec = $(this);
+                const dioceseTitle = sec.find('.diocese-input-title').val().toLowerCase();
+                let hasMatchingFriary = false;
+
+                sec.find('.friary-item-card').each(function() {
+                    const fr = $(this);
+                    const frTitle = fr.find('.friary-input-title').val().toLowerCase();
+                    const frDesc = fr.find('.friary-input-desc').val().toLowerCase();
+
+                    if (!q || frTitle.indexOf(q) !== -1 || frDesc.indexOf(q) !== -1 || dioceseTitle.indexOf(q) !== -1) {
+                        fr.show();
+                        hasMatchingFriary = true;
+                    } else {
+                        fr.hide();
+                    }
+                });
+
+                if (!q || dioceseTitle.indexOf(q) !== -1 || hasMatchingFriary) {
+                    sec.show();
                 } else {
-                    $(this).hide();
+                    sec.hide();
                 }
             });
         });
+
+        // Universal Nested Form Serializer for Dashboard
+        function assignNested(target, path, value) {
+            const baseMatch = path.match(/^([^\[]+)/);
+            if (!baseMatch) return;
+            const baseKey = baseMatch[1];
+            const tokens = [];
+            const regex = /\[([^\]]*)\]/g;
+            let m;
+            while ((m = regex.exec(path)) !== null) {
+                tokens.push(m[1]);
+            }
+            if (tokens.length === 0) {
+                target[baseKey] = value;
+                return;
+            }
+            
+            let cur = target;
+            let curKey = baseKey;
+            for (let i = 0; i < tokens.length; i++) {
+                const nextToken = tokens[i];
+                const isNextIndex = /^\d+$/.test(nextToken);
+                if (!cur[curKey]) {
+                    cur[curKey] = isNextIndex ? [] : {};
+                }
+                cur = cur[curKey];
+                curKey = nextToken;
+            }
+            cur[curKey] = value;
+        }
 
         // Save Page Content Form
         $('.page-editor-form').on('submit', function(e) {
@@ -5638,23 +5879,7 @@ function franciscan_render_dashboard_view() {
                 const name = $(this).attr('name');
                 if (!name) return;
                 const val = $(this).val();
-
-                // Check for nested array syntax like publications_list[0][title]
-                const match = name.match(/^([a-zA-Z0-9_-]+)\[(\d+)\]\[([a-zA-Z0-9_-]+)\]$/);
-                if (match) {
-                    const listKey = match[1];
-                    const idx = parseInt(match[2], 10);
-                    const subKey = match[3];
-                    if (!pageData[listKey]) {
-                        pageData[listKey] = [];
-                    }
-                    if (!pageData[listKey][idx]) {
-                        pageData[listKey][idx] = {};
-                    }
-                    pageData[listKey][idx][subKey] = val;
-                } else {
-                    pageData[name] = val;
-                }
+                assignNested(pageData, name, val);
             });
 
             const submitBtn = form.find('button[type="submit"]');

@@ -1390,6 +1390,21 @@ function franciscan_get_default_friaries_data() {
  */
 function franciscan_get_friaries_data() {
     $data = franciscan_get_page_content( 'community-friaries' );
+    if ( isset( $data['friaries_sections'] ) && is_array( $data['friaries_sections'] ) && ! empty( $data['friaries_sections'] ) ) {
+        $flat = array();
+        foreach ( $data['friaries_sections'] as $sec ) {
+            $sec_title = ! empty( $sec['title'] ) ? trim( $sec['title'] ) : 'OTHER FRIARIES';
+            if ( ! empty( $sec['friaries'] ) && is_array( $sec['friaries'] ) ) {
+                foreach ( $sec['friaries'] as $fr ) {
+                    $fr['diocese'] = $sec_title;
+                    $flat[] = $fr;
+                }
+            }
+        }
+        if ( ! empty( $flat ) ) {
+            return $flat;
+        }
+    }
     if ( isset( $data['friaries_list'] ) && is_array( $data['friaries_list'] ) && ! empty( $data['friaries_list'] ) ) {
         return array_values( $data['friaries_list'] );
     }
@@ -1404,6 +1419,25 @@ function franciscan_get_friaries_data() {
  * Group flat friaries array by Diocese for frontend rendering.
  */
 function franciscan_get_friaries_grouped() {
+    $data = franciscan_get_page_content( 'community-friaries' );
+    if ( isset( $data['friaries_sections'] ) && is_array( $data['friaries_sections'] ) && ! empty( $data['friaries_sections'] ) ) {
+        $grouped = array();
+        foreach ( $data['friaries_sections'] as $sec ) {
+            $sec_title = ! empty( $sec['title'] ) ? trim( $sec['title'] ) : 'OTHER FRIARIES';
+            if ( ! isset( $grouped[ $sec_title ] ) ) {
+                $grouped[ $sec_title ] = array();
+            }
+            if ( ! empty( $sec['friaries'] ) && is_array( $sec['friaries'] ) ) {
+                foreach ( $sec['friaries'] as $fr ) {
+                    $fr['diocese'] = $sec_title;
+                    $grouped[ $sec_title ][] = $fr;
+                }
+            }
+        }
+        if ( ! empty( $grouped ) ) {
+            return $grouped;
+        }
+    }
     $list = franciscan_get_friaries_data();
     $grouped = array();
     foreach ( $list as $item ) {
@@ -1414,6 +1448,35 @@ function franciscan_get_friaries_grouped() {
         $grouped[ $diocese ][] = $item;
     }
     return $grouped;
+}
+
+/**
+ * Get Friaries organized as sections for the dashboard repeater.
+ */
+function franciscan_get_friaries_sections() {
+    $data = franciscan_get_page_content( 'community-friaries' );
+    if ( isset( $data['friaries_sections'] ) && is_array( $data['friaries_sections'] ) && ! empty( $data['friaries_sections'] ) ) {
+        return array_values( $data['friaries_sections'] );
+    }
+    
+    // Group from existing flat list or defaults
+    $grouped = franciscan_get_friaries_grouped();
+    $sections = array();
+    foreach ( $grouped as $diocese_name => $friaries ) {
+        $sec_friaries = array();
+        foreach ( $friaries as $fr ) {
+            $sec_friaries[] = array(
+                'title' => $fr['title'] ?? '',
+                'desc'  => $fr['desc'] ?? '',
+                'image' => $fr['image'] ?? '',
+            );
+        }
+        $sections[] = array(
+            'title'    => $diocese_name,
+            'friaries' => $sec_friaries,
+        );
+    }
+    return $sections;
 }
 
 /**

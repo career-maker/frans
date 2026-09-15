@@ -777,7 +777,6 @@ button.fs-mega-toggle:focus::after {
         );
 
         $dioceses = franciscan_get_friaries_grouped();
-
         $color_index = 0;
         foreach ( $dioceses as $diocese_title => $friary_list ) :
         ?>
@@ -786,48 +785,48 @@ button.fs-mega-toggle:focus::after {
             </h3>
 
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-bottom: 2.5rem;">
-                <?php foreach ( $friary_list as $friary ) :
-                    $pal = $pastel_palettes[$color_index % count( $pastel_palettes )];
-                    $color_index++;
-                ?>
-                    <div class="friary-card" style="border-radius: 16px; overflow: hidden; box-shadow: 0 10px 24px rgba(0,0,0,0.04); display: flex; flex-direction: column; background: #ffffff; border: 1px solid #ebe8e3; transition: transform 0.3s ease, box-shadow 0.3s ease;">
-                        <?php if ( ! empty( $friary['image'] ) ) : ?>
-                            <div style="height: 200px; width: 100%; overflow: hidden; position: relative;">
-                                <img loading="lazy" decoding="async" src="<?php echo esc_url( $friary['image'] ); ?>" alt="<?php echo esc_attr( $friary['title'] ); ?>" style="width: 100%; height: 100%; object-fit: cover;">
-                            </div>
-                        <?php else : ?>
-                            <!-- Fallback Big Outline Text with Pastel Palette -->
-                            <div style="height: 200px; width: 100%; background-color: <?php echo esc_attr( $pal['bg'] ); ?>; border-bottom: 1px solid <?php echo esc_attr( $pal['border'] ); ?>; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; padding: 1.5rem; text-align: center;">
-                                <!-- Subtle Decorative Cross Watermark -->
-                                <svg style="position: absolute; right: -15px; bottom: -20px; width: 130px; height: 130px; opacity: 0.12; color: <?php echo esc_attr( $pal['stroke'] ); ?>; pointer-events: none;" viewBox="0 0 24 24" fill="currentColor">
-                                    <path d="M11 2h2v7h7v2h-7v11h-2V11H4V9h7V2z"/>
-                                </svg>
-                                <!-- Big Outline Title -->
-                                <span style="font-family: 'Phudu', sans-serif; font-size: clamp(1.25rem, 2vw, 1.6rem); font-weight: 900; line-height: 1.2; text-transform: uppercase; letter-spacing: 0.02em; color: transparent; -webkit-text-stroke: 1.5px <?php echo esc_attr( $pal['stroke'] ); ?>; position: relative; z-index: 2; word-break: break-word;">
-                                    <?php echo esc_html( $friary['title'] ); ?>
-                                </span>
-                            </div>
-                        <?php endif; ?>
+                <?php if ( empty( $friary_list ) ) : ?>
+                    <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #78716c; font-style: italic; margin: 0.5rem 0;">Houses of prayer and friaries in this diocese will be listed shortly.</p>
+                <?php else : ?>
+                    <?php foreach ( $friary_list as $friary ) :
+                        $pal = $pastel_palettes[$color_index % count( $pastel_palettes )];
+                        $color_index++;
+                    ?>
+                        <div class="friary-card" style="border-radius: 16px; overflow: hidden; box-shadow: 0 10px 24px rgba(0,0,0,0.04); display: flex; flex-direction: column; background: #ffffff; border: 1px solid #ebe8e3; transition: transform 0.3s ease, box-shadow 0.3s ease;">
+                            <?php if ( ! empty( $friary['image'] ) ) : ?>
+                                <div style="height: 200px; width: 100%; overflow: hidden; position: relative;">
+                                    <img loading="lazy" decoding="async" src="<?php echo esc_url( $friary['image'] ); ?>" alt="<?php echo esc_attr( $friary['title'] ); ?>" style="width: 100%; height: 100%; object-fit: cover;">
+                                </div>
+                            <?php else : ?>
+                                <!-- Fallback Big Outline Text with Pastel Palette -->
+                                <div style="height: 200px; width: 100%; background-color: <?php echo esc_attr( $pal['bg'] ); ?>; border-bottom: 1px solid <?php echo esc_attr( $pal['border'] ); ?>; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; padding: 1.5rem; text-align: center;">
+                                    <!-- Subtle Decorative Cross Watermark -->
+                                    <svg style="position: absolute; right: -15px; bottom: -20px; width: 130px; height: 130px; opacity: 0.12; color: <?php echo esc_attr( $pal['stroke'] ); ?>; pointer-events: none;" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M11 2h2v7h7v2h-7v11h-2V11H4V9h7V2z"/>
+                                    </svg>
+                                    <!-- Big Outline Title -->
+                                    <span style="font-family: 'Phudu', sans-serif; font-size: clamp(1.25rem, 2vw, 1.6rem); font-weight: 900; line-height: 1.2; text-transform: uppercase; letter-spacing: 0.02em; color: transparent; -webkit-text-stroke: 1.5px <?php echo esc_attr( $pal['stroke'] ); ?>; position: relative; z-index: 2; word-break: break-word;">
+                                        <?php echo esc_html( $friary['title'] ); ?>
+                                    </span>
+                                </div>
+                            <?php endif; ?>
 
-                        <div style="padding: 1.6rem; display: flex; flex-direction: column; flex-grow: 1; justify-content: space-between;">
-                            <div>
-                                <h4 style="font-family: 'Phudu', sans-serif; font-size: 1.15rem; font-weight: 700; color: #1c1917; margin-top: 0; margin-bottom: 0.5rem; line-height: 1.35;">
-                                    <?php echo esc_html( $friary['title'] ); ?>
-                                </h4>
-                                <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.55; margin: 0;">
-                                    <?php echo esc_html( $friary['desc'] ); ?>
-                                </p>
+                            <div style="padding: 1.6rem; display: flex; flex-direction: column; flex-grow: 1; justify-content: space-between;">
+                                <div>
+                                    <h4 style="font-family: 'Phudu', sans-serif; font-size: 1.15rem; font-weight: 700; color: #1c1917; margin-top: 0; margin-bottom: 0.5rem; line-height: 1.35;">
+                                        <?php echo esc_html( $friary['title'] ); ?>
+                                    </h4>
+                                    <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.55; margin: 0;">
+                                        <?php echo esc_html( $friary['desc'] ); ?>
+                                    </p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                <?php endforeach; ?>
+                    <?php endforeach; ?>
+                <?php endif; ?>
             </div>
         <?php endforeach; ?>
     </div>
-    <!-- FOOTER + BOTTOM WIDGETS + BIBLE MODAL UNIFIED SECTION -->
-<!-- Use exact copy from home page for all inner pages -->
-
-
 
 <?php
 get_footer();
