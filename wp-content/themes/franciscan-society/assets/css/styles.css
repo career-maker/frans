@@ -3679,6 +3679,23 @@ header, section, main, div, footer, nav {
     transform: scale(1.02) !important;
 }
 
+.about-page-video-card {
+    position: absolute !important;
+    bottom: -30px !important;
+    right: -24px !important;
+    left: auto !important;
+    z-index: 25 !important;
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.22) !important;
+}
+
+@media (max-width: 768px) {
+    .about-page-video-card {
+        bottom: -22px !important;
+        right: 12px !important;
+        left: auto !important;
+    }
+}
+
 .about-video-thumb-wrap {
     position: relative !important;
     border-radius: 12px !important;

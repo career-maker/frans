@@ -730,7 +730,10 @@ button.fs-mega-toggle:focus::after {
     <?php
     $comm_hero_bg    = franciscan_get_page_field( 'community', 'hero_image', FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_51_30_PM.png' );
     $comm_hero_badge = franciscan_get_page_field( 'community', 'hero_badge', 'OUR BROTHERHOOD', true );
-    $comm_hero_title = franciscan_get_page_field( 'community', 'hero_title', 'COMMUNITY', true );
+    $comm_hero_title = franciscan_get_page_field( 'community', 'hero_title', 'COMMUNITY', false );
+    if ( empty( trim( $comm_hero_title ) ) ) {
+        $comm_hero_title = 'COMMUNITY';
+    }
     $comm_hero_sub   = franciscan_get_page_field( 'community', 'hero_subtitle', '', true );
     ?>
     <section class="page-hero-banner" style="padding: 12rem 2rem 8rem 2rem; background-image: url('<?php echo esc_url( $comm_hero_bg ); ?>'); background-size: cover; background-position: center; position: relative; overflow: hidden;">

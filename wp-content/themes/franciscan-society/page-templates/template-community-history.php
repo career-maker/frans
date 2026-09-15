@@ -758,7 +758,10 @@ button.fs-mega-toggle:focus::after {
         $hist_hero_bg = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/history-banner.jpeg';
     }
     $hist_hero_badge = franciscan_get_page_field( 'community-history', 'hero_badge', 'HERITAGE', true );
-    $hist_hero_title = franciscan_get_page_field( 'community-history', 'hero_title', 'HISTORY OF THE PROVINCE', true );
+    $hist_hero_title = franciscan_get_page_field( 'community-history', 'hero_title', 'HISTORY OF THE PROVINCE', false );
+    if ( empty( trim( $hist_hero_title ) ) ) {
+        $hist_hero_title = 'HISTORY OF THE PROVINCE';
+    }
     $hist_hero_desc  = franciscan_get_page_field( 'community-history', 'hero_subtitle', '', true );
     if ( empty( $hist_hero_desc ) && ! array_key_exists( 'hero_subtitle', franciscan_get_page_content( 'community-history' ) ) ) {
         $hist_hero_desc = franciscan_get_page_field( 'community-history', 'heritage_text', 'Tracing our origins from the ancient 4th-century Order of Penance, to St. Francis of Assisi, to thirty years of dedicated growth in Ranchi Province.' );

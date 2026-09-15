@@ -717,7 +717,10 @@ button.fs-mega-toggle:focus::after {
         $pastoral_hero_bg = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/pastoral-ministry-banner.jpg';
     }
     $pastoral_hero_badge = franciscan_get_page_field( 'ministries-pastoral', 'hero_badge', '', true );
-    $pastoral_hero_title = franciscan_get_page_field( "ministries-pastoral", "hero_title", "PASTORAL MINISTRY" );
+    $pastoral_hero_title = franciscan_get_page_field( "ministries-pastoral", "hero_title", "PASTORAL MINISTRY", false );
+    if ( empty( trim( $pastoral_hero_title ) ) ) {
+        $pastoral_hero_title = "PASTORAL MINISTRY";
+    }
     $pastoral_hero_desc  = franciscan_get_page_field( "ministries-pastoral", "hero_subtitle", "“The brothers should rejoice when they live among people who are considered of little worth and who are despised.”\n— St. Francis of Assisi, Earlier Rule, Ch. IX" );
     ?>
     <section class="page-hero-banner" style="padding: 11rem 2rem 7rem 2rem; background-image: url('<?php echo esc_url( $pastoral_hero_bg ); ?>'); background-size: cover; background-position: center; position: relative; overflow: hidden;">

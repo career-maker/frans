@@ -1138,7 +1138,10 @@ button.fs-mega-toggle:focus::after {
         $friars_hero_bg = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/friars-banner.jpg';
     }
     $friars_hero_badge = franciscan_get_page_field( 'community-friars', 'hero_badge', '', true );
-    $friars_hero_title = franciscan_get_page_field( 'community-friars', 'hero_title', 'OUR FRIARS', true );
+    $friars_hero_title = franciscan_get_page_field( 'community-friars', 'hero_title', 'OUR FRIARS', false );
+    if ( empty( trim( $friars_hero_title ) ) ) {
+        $friars_hero_title = 'OUR FRIARS';
+    }
     $friars_hero_desc  = franciscan_get_page_field( 'community-friars', 'hero_subtitle', '', true );
     ?>
     <section class="page-hero-banner" style="background-image: url('<?php echo esc_url( $friars_hero_bg ); ?>');">

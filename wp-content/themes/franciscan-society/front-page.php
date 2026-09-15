@@ -7,7 +7,6 @@
 
 get_header();
 ?>
-
 <main id="main-content" style="padding-top: 0; background-color: #FFFFFF;">
 
     <?php if ( empty( franciscan_get_page_field( 'home', 'hide_hero_section', '0' ) ) ) : ?>
@@ -90,7 +89,10 @@ get_header();
 
                         <!-- Main Title: Phudu, 600 weight, 43px size, 50px line-height on desktop -->
                         <?php 
-                        $home_hero_title = franciscan_get_page_field( 'home', 'hero_title', "Let us begin again,\nfor we have only begun to serve the Lord.", true );
+                        $home_hero_title = franciscan_get_page_field( 'home', 'hero_title', "Let us begin again,\nfor we have only begun to serve the Lord.", false );
+                        if ( empty( trim( $home_hero_title ) ) ) {
+                            $home_hero_title = "Let us begin again,\nfor we have only begun to serve the Lord.";
+                        }
                         if ( ! empty( $home_hero_title ) ) : 
                         ?>
                         <h1 class="hero-title" style="font-family: 'Phudu', sans-serif !important; font-size: 43px !important; font-weight: 600 !important; color: #ffffff; text-transform: uppercase; line-height: 50px !important; letter-spacing: -0.01em; margin-bottom: 1.5rem; text-shadow: none !important;">

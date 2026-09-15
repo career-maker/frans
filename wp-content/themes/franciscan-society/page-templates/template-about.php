@@ -717,7 +717,10 @@ button.fs-mega-toggle:focus::after {
         $about_hero_bg = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/about-banner-sept01.jpeg';
     }
     $about_hero_badge = franciscan_get_page_field( 'about', 'hero_badge', 'WHO WE ARE', true );
-    $about_hero_title = franciscan_get_page_field( 'about', 'hero_title', 'ABOUT US', true );
+    $about_hero_title = franciscan_get_page_field( 'about', 'hero_title', 'ABOUT US', false );
+    if ( empty( trim( $about_hero_title ) ) ) {
+        $about_hero_title = 'ABOUT US';
+    }
     $about_hero_desc  = franciscan_get_page_field( 'about', 'hero_subtitle', '', true );
     ?>
     <section class="page-hero-banner" style="padding: 12rem 2rem 8rem 2rem; background-image: url('<?php echo esc_url( $about_hero_bg ); ?>'); background-size: cover; background-position: center; position: relative; overflow: hidden;">
@@ -820,7 +823,7 @@ button.fs-mega-toggle:focus::after {
                     ),
                 );
                 ?>
-                <div style="position: relative; border-radius: 24px;">
+                <div class="about-slider-wrapper" style="position: relative; border-radius: 24px; margin-bottom: 2.5rem;">
                     <div class="welcome-slider-container">
                         <div class="welcome-slider-track">
                             <?php foreach ( $about_slides as $index => $slide ) : $is_active = ( 0 === $index ); ?>
@@ -851,8 +854,8 @@ button.fs-mega-toggle:focus::after {
                         </div>
                     </div>
                     
-                    <!-- Inset Video Overlay Card (Positioned inside bottom-right corner) -->
-                    <div class="about-video-card" style="position: absolute; bottom: 20px; right: 20px; background: #ffffff; padding: 10px; border-radius: 16px; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.18); width: 185px; text-align: center; z-index: 10;">
+                    <!-- Watch Our Video Mini Card (Positioned Outside the Image Box) -->
+                    <div class="about-video-card about-page-video-card" style="position: absolute !important; bottom: -30px !important; right: -24px !important; left: auto !important; width: 190px !important; max-width: 190px !important; background: #ffffff !important; padding: 10px !important; border-radius: 16px !important; box-shadow: 0 20px 45px rgba(0, 0, 0, 0.22) !important; text-align: center !important; z-index: 25 !important; display: block !important;">
                         <div style="position: relative; border-radius: 12px; overflow: hidden; height: 95px; background-color: #1c1917;">
                             <video src="<?php echo esc_url( $about_sec_video ); ?>" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" autoplay loop muted playsinline></video>
                             <a rel="noopener noreferrer" href="https://youtube.com/@tormediaranchi3804?si=UPTCSJUSj9tbcjeB" target="_blank" class="video-play-btn" aria-label="Watch our video on YouTube">

@@ -141,7 +141,10 @@ if ( ! $blogs_query->have_posts() ) {
     <!-- Page Hero Banner -->
     <?php
     $blogs_hero_badge = franciscan_get_page_field( 'blogs', 'hero_badge', 'FRANCISCAN REFLECTIONS', true );
-    $blogs_hero_title = franciscan_get_page_field( 'blogs', 'hero_title', 'BLOGS & ARTICLES', true );
+    $blogs_hero_title = franciscan_get_page_field( 'blogs', 'hero_title', 'BLOGS & ARTICLES', false );
+    if ( empty( trim( $blogs_hero_title ) ) ) {
+        $blogs_hero_title = 'BLOGS & ARTICLES';
+    }
     $blogs_hero_sub   = franciscan_get_page_field( 'blogs', 'hero_subtitle', 'Spiritual reflections, theological essays, and Franciscan wisdom for daily Christian living.', true );
     ?>
     <section class="page-hero-banner" style="padding: 12rem 2rem 8rem 2rem; background-image: url('<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/new_uploads/hero-banner-aug20.jpeg' ); ?>'); background-size: cover; background-position: center; position: relative; overflow: hidden;">

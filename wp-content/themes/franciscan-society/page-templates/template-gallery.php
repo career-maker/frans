@@ -715,7 +715,10 @@ button.fs-mega-toggle:focus::after {
         $gal_hero_bg = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/gallery-banner.jpg';
     }
     $gal_hero_badge = franciscan_get_page_field( 'gallery', 'hero_badge', 'MOMENTS OF GRACE', true );
-    $gal_hero_title = franciscan_get_page_field( 'gallery', 'hero_title', 'PHOTO & VIDEO GALLERY', true );
+    $gal_hero_title = franciscan_get_page_field( 'gallery', 'hero_title', 'PHOTO & VIDEO GALLERY', false );
+    if ( empty( trim( $gal_hero_title ) ) ) {
+        $gal_hero_title = 'PHOTO & VIDEO GALLERY';
+    }
     $gal_hero_sub   = franciscan_get_page_field( 'gallery', 'hero_subtitle', 'Visual chronicles of feast days, ordinations, jubilees, missions, and community living across Ranchi Province.', true );
     ?>
     <section class="page-hero-banner" style="position: relative; padding-top: 180px; padding-bottom: 120px; background: url('<?php echo esc_url( $gal_hero_bg ); ?>') center/cover no-repeat;">

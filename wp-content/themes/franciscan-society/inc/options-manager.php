@@ -787,14 +787,14 @@ function franciscan_get_page_field( $slug, $field, $fallback = '', $allow_empty 
     $data = franciscan_get_page_content( $slug );
     if ( array_key_exists( $field, $data ) ) {
         $val = is_string( $data[$field] ) ? stripslashes( $data[$field] ) : $data[$field];
-        if ( $allow_empty || $val !== '' ) {
+        if ( $allow_empty || ( is_string( $val ) ? trim( $val ) !== '' : ( $val !== '' && $val !== null ) ) ) {
             return $val;
         }
     }
     $defaults = franciscan_get_default_page_content( $slug );
     if ( array_key_exists( $field, $defaults ) ) {
         $def_val = is_string( $defaults[$field] ) ? stripslashes( $defaults[$field] ) : $defaults[$field];
-        if ( $allow_empty || $def_val !== '' ) {
+        if ( $allow_empty || ( is_string( $def_val ) ? trim( $def_val ) !== '' : ( $def_val !== '' && $def_val !== null ) ) ) {
             return $def_val;
         }
     }
@@ -856,6 +856,57 @@ function franciscan_resync_legacy_content_options() {
                 if ( in_array( $slug, array( 'home', 'about' ), true ) ) {
                     if ( isset( $clean['about_section_heading'] ) && in_array( $clean['about_section_heading'], array( 'OUR STORY FAITH MISSION AND VISION TOGETHER', 'WALKING TOGETHER IN FAITH, PENANCE, AND SERVICE' ), true ) ) {
                         $clean['about_section_heading'] = 'Our Franciscan Journey';
+                    }
+                }
+
+                // Auto-heal accidentally hidden homepage sections caused by form checkbox serialization bug
+                if ( 'home' === $slug ) {
+                    $sec_toggles = array(
+                        'hide_hero_section',
+                        'hide_welcome_section',
+                        'hide_about_section',
+                        'hide_values_section',
+                        'hide_bible_section',
+                        'hide_news_section',
+                        'hide_blogs_section',
+                        'hide_gallery_section',
+                        'hide_inquiry_section',
+                        'hide_mass_intention_section',
+                    );
+                    $corrupted_count = 0;
+                    foreach ( $sec_toggles as $st ) {
+                        if ( isset( $clean[ $st ] ) && '1' === (string) $clean[ $st ] ) {
+                            $corrupted_count++;
+                        }
+                    }
+                    // If corrupted state where 2 or more sections are hidden, or one-time healing flag not set:
+                    if ( $corrupted_count >= 2 || ! get_option( 'franciscan_healed_sections_v4', false ) ) {
+                        foreach ( $sec_toggles as $st ) {
+                            $clean[ $st ] = '0';
+                        }
+                        if ( empty( trim( $clean['hero_title'] ?? '' ) ) ) {
+                            $clean['hero_title'] = "Let us begin again,\nfor we have only begun to serve the Lord.";
+                        }
+                        delete_option( 'franciscan_hide_blogs_page' );
+                        update_option( 'franciscan_healed_sections_v4', '1' );
+                    }
+                }
+
+                if ( 'about' === $slug ) {
+                    if ( ! get_option( 'franciscan_healed_about_v4', false ) ) {
+                        $clean['hide_values_section'] = '0';
+                        update_option( 'franciscan_healed_about_v4', '1' );
+                    }
+                    if ( empty( trim( $clean['hero_title'] ?? '' ) ) ) {
+                        $clean['hero_title'] = 'ABOUT US';
+                    }
+                }
+
+                if ( 'blogs' === $slug ) {
+                    if ( ! get_option( 'franciscan_healed_blogs_v4', false ) ) {
+                        $clean['hide_blogs_page'] = '0';
+                        delete_option( 'franciscan_hide_blogs_page' );
+                        update_option( 'franciscan_healed_blogs_v4', '1' );
                     }
                 }
                 // Resync friars directory title and card section

@@ -14,7 +14,10 @@ if ( empty( $hero_bg ) || false !== strpos( $hero_bg, 'ChatGPT_Image' ) || false
     $hero_bg = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/contact-banner.jpg';
 }
 $hero_badge    = franciscan_get_page_field( 'contact', 'hero_badge', 'GET IN TOUCH', true );
-$hero_title    = franciscan_get_page_field( 'contact', 'hero_title', 'CONTACT US', true );
+$hero_title    = franciscan_get_page_field( 'contact', 'hero_title', 'CONTACT US', false );
+if ( empty( trim( $hero_title ) ) ) {
+    $hero_title = 'CONTACT US';
+}
 $hero_subtitle = franciscan_get_page_field( 'contact', 'hero_subtitle', 'Reach out to the Provincial Office for prayer requests, mass intentions, vocations inquiries, or general information.', true );
 ?>
 

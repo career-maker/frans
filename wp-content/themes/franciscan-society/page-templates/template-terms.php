@@ -644,7 +644,10 @@ button.fs-mega-toggle:focus::after {
 
     <?php
     $hero_badge     = function_exists('franciscan_get_page_field') ? franciscan_get_page_field( 'terms', 'hero_badge', 'LEGAL POLICIES', true ) : 'LEGAL POLICIES';
-    $hero_title     = function_exists('franciscan_get_page_field') ? franciscan_get_page_field( 'terms', 'hero_title', 'TERMS & CONDITIONS', true ) : 'TERMS & CONDITIONS';
+    $hero_title     = function_exists('franciscan_get_page_field') ? franciscan_get_page_field( 'terms', 'hero_title', 'TERMS & CONDITIONS', false ) : 'TERMS & CONDITIONS';
+    if ( empty( trim( $hero_title ) ) ) {
+        $hero_title = 'TERMS & CONDITIONS';
+    }
     $hero_subtitle  = function_exists('franciscan_get_page_field') ? franciscan_get_page_field( 'terms', 'hero_subtitle', 'Province of St. Francis of Assisi, Ranchi', true ) : 'Province of St. Francis of Assisi, Ranchi';
     $hero_image     = function_exists('franciscan_get_page_field') ? franciscan_get_page_field( 'terms', 'hero_image', FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_51_30_PM.png' ) : ( FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_51_30_PM.png' );
     $eyebrow        = function_exists('franciscan_get_page_field') ? franciscan_get_page_field( 'terms', 'eyebrow', 'LEGAL' ) : 'LEGAL';

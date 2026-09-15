@@ -6140,6 +6140,17 @@ function franciscan_render_dashboard_view() {
             form.find('input, textarea, select').each(function() {
                 const name = $(this).attr('name');
                 if (!name) return;
+
+                if ($(this).is(':checkbox')) {
+                    assignNested(pageData, name, $(this).is(':checked') ? ($(this).val() || '1') : '0');
+                    return;
+                }
+                if ($(this).is(':radio')) {
+                    if ($(this).is(':checked')) {
+                        assignNested(pageData, name, $(this).val());
+                    }
+                    return;
+                }
                 const val = $(this).val();
                 assignNested(pageData, name, val);
             });
@@ -6172,7 +6183,16 @@ function franciscan_render_dashboard_view() {
             const settingsData = {};
             $(this).find('input, textarea, select').each(function() {
                 const name = $(this).attr('name');
-                if (name) settingsData[name] = $(this).val();
+                if (!name) return;
+                if ($(this).is(':checkbox')) {
+                    settingsData[name] = $(this).is(':checked') ? ($(this).val() || '1') : '0';
+                    return;
+                }
+                if ($(this).is(':radio')) {
+                    if ($(this).is(':checked')) settingsData[name] = $(this).val();
+                    return;
+                }
+                settingsData[name] = $(this).val();
             });
 
             $.post(ajaxUrl, {
@@ -6195,7 +6215,16 @@ function franciscan_render_dashboard_view() {
             const navData = {};
             $(this).find('input, textarea, select').each(function() {
                 const name = $(this).attr('name');
-                if (name) navData[name] = $(this).val();
+                if (!name) return;
+                if ($(this).is(':checkbox')) {
+                    navData[name] = $(this).is(':checked') ? ($(this).val() || '1') : '0';
+                    return;
+                }
+                if ($(this).is(':radio')) {
+                    if ($(this).is(':checked')) navData[name] = $(this).val();
+                    return;
+                }
+                navData[name] = $(this).val();
             });
 
             $.post(ajaxUrl, {
@@ -6222,7 +6251,16 @@ function franciscan_render_dashboard_view() {
             const footerData = {};
             $(this).find('input, textarea, select').each(function() {
                 const name = $(this).attr('name');
-                if (name) footerData[name] = $(this).val();
+                if (!name) return;
+                if ($(this).is(':checkbox')) {
+                    footerData[name] = $(this).is(':checked') ? ($(this).val() || '1') : '0';
+                    return;
+                }
+                if ($(this).is(':radio')) {
+                    if ($(this).is(':checked')) footerData[name] = $(this).val();
+                    return;
+                }
+                footerData[name] = $(this).val();
             });
 
             $.post(ajaxUrl, {
@@ -6246,7 +6284,16 @@ function franciscan_render_dashboard_view() {
             const seoData = {};
             $(this).find('input, textarea, select').each(function() {
                 const name = $(this).attr('name');
-                if (name) seoData[name] = $(this).val();
+                if (!name) return;
+                if ($(this).is(':checkbox')) {
+                    seoData[name] = $(this).is(':checked') ? ($(this).val() || '1') : '0';
+                    return;
+                }
+                if ($(this).is(':radio')) {
+                    if ($(this).is(':checked')) seoData[name] = $(this).val();
+                    return;
+                }
+                seoData[name] = $(this).val();
             });
 
             $.post(ajaxUrl, {

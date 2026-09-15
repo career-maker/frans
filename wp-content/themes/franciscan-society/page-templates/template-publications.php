@@ -725,7 +725,10 @@ button.fs-mega-toggle:focus::after {
         $pub_hero_bg = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_51_30_PM.png';
     }
     $pub_hero_badge = franciscan_get_page_field( "publications", "hero_badge", "PROVINCIAL CHRONICLES" );
-    $pub_hero_title = franciscan_get_page_field( "publications", "hero_title", "PUBLICATIONS" );
+    $pub_hero_title = franciscan_get_page_field( "publications", "hero_title", "PUBLICATIONS", false );
+    if ( empty( trim( $pub_hero_title ) ) ) {
+        $pub_hero_title = "PUBLICATIONS";
+    }
     $pub_hero_sub   = franciscan_get_page_field( "publications", "hero_subtitle", "" );
     ?>
     <section class="page-hero-banner" style="padding: 11rem 2rem 7rem 2rem; background-image: url('<?php echo esc_url( $pub_hero_bg ); ?>'); background-size: cover; background-position: center; position: relative; overflow: hidden;">

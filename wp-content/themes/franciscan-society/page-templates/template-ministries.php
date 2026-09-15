@@ -715,7 +715,10 @@ button.fs-mega-toggle:focus::after {
     <?php
     $min_hero_bg    = franciscan_get_page_field( "ministries", "hero_image", FRANCISCAN_THEME_URI . "/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_51_30_PM.png" );
     $min_hero_badge = franciscan_get_page_field( "ministries", "hero_badge", "SERVING GOD & PEOPLE" );
-    $min_hero_title = franciscan_get_page_field( "ministries", "hero_title", "OUR MINISTRIES" );
+    $min_hero_title = franciscan_get_page_field( "ministries", "hero_title", "OUR MINISTRIES", false );
+    if ( empty( trim( $min_hero_title ) ) ) {
+        $min_hero_title = "OUR MINISTRIES";
+    }
     $min_hero_sub   = franciscan_get_page_field( "ministries", "hero_subtitle", "Living the Gospel through pastoral care, spiritual formation, and transformative education across India and abroad." );
     ?>
     <section class="page-hero-banner" style="padding: 11rem 2rem 7rem 2rem; background-image: url('<?php echo esc_url( $min_hero_bg ); ?>'); background-size: cover; background-position: center; position: relative; overflow: hidden;">

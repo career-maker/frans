@@ -795,7 +795,10 @@ button.fs-mega-toggle:focus::after {
         $ldr_hero_bg = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/leadership-banner.jpg';
     }
     $ldr_hero_badge = franciscan_get_page_field( 'community-leadership', 'hero_badge', 'To lead is to serve; to be greater is to become lesser.', true );
-    $ldr_hero_title = franciscan_get_page_field( 'community-leadership', 'hero_title', 'LEADERSHIP', true );
+    $ldr_hero_title = franciscan_get_page_field( 'community-leadership', 'hero_title', 'LEADERSHIP', false );
+    if ( empty( trim( $ldr_hero_title ) ) ) {
+        $ldr_hero_title = 'LEADERSHIP';
+    }
     $ldr_hero_desc  = franciscan_get_page_field( 'community-leadership', 'hero_subtitle', '', true );
     if ( empty( $ldr_hero_desc ) && ! array_key_exists( 'hero_subtitle', franciscan_get_page_content( 'community-leadership' ) ) ) {
         $ldr_hero_desc = franciscan_get_page_field( 'community-leadership', 'card_subtitle', 'Guiding the Province in fraternity, governance, and mission.' );
