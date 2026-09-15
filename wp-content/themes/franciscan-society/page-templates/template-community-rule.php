@@ -706,9 +706,9 @@ button.fs-mega-toggle:focus::after {
     if ( empty( $rule_hero_bg ) || false !== strpos( $rule_hero_bg, 'ChatGPT_Image' ) ) {
         $rule_hero_bg = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/third-rule-banner.jpg';
     }
-    $hero_badge        = franciscan_get_page_field( 'community-rule', 'hero_badge', 'OUR RULE… OUR LIFE' );
-    $hero_title        = franciscan_get_page_field( 'community-rule', 'hero_title', 'THIRD ORDER REGULAR RULE' );
-    $hero_subtitle     = franciscan_get_page_field( 'community-rule', 'hero_subtitle', 'Discovering the authentic meaning of Franciscan life' );
+    $hero_badge        = franciscan_get_page_field( 'community-rule', 'hero_badge', 'OUR RULE… OUR LIFE', true );
+    $hero_title        = franciscan_get_page_field( 'community-rule', 'hero_title', 'THIRD ORDER REGULAR RULE', true );
+    $hero_subtitle     = franciscan_get_page_field( 'community-rule', 'hero_subtitle', 'Discovering the authentic meaning of Franciscan life', true );
 
     $prologue_badge    = franciscan_get_page_field( 'community-rule', 'prologue_badge', 'PROLOGUE TO THE RULE' );
     $prologue_title    = franciscan_get_page_field( 'community-rule', 'prologue_title', 'Third Order Regular Rule' );

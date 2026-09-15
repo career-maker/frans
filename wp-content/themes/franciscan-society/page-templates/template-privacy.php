@@ -643,9 +643,9 @@ button.fs-mega-toggle:focus::after {
 <main id="main-content" style="padding-top: 0; background-color: #FFFFFF;">
 
     <?php
-    $hero_badge     = function_exists('franciscan_get_page_field') ? franciscan_get_page_field( 'privacy', 'hero_badge', 'LEGAL & PRIVACY' ) : 'LEGAL & PRIVACY';
-    $hero_title     = function_exists('franciscan_get_page_field') ? franciscan_get_page_field( 'privacy', 'hero_title', 'PRIVACY POLICY' ) : 'PRIVACY POLICY';
-    $hero_subtitle  = function_exists('franciscan_get_page_field') ? franciscan_get_page_field( 'privacy', 'hero_subtitle', 'Province of St. Francis of Assisi, Ranchi' ) : 'Province of St. Francis of Assisi, Ranchi';
+    $hero_badge     = function_exists('franciscan_get_page_field') ? franciscan_get_page_field( 'privacy', 'hero_badge', 'LEGAL & PRIVACY', true ) : 'LEGAL & PRIVACY';
+    $hero_title     = function_exists('franciscan_get_page_field') ? franciscan_get_page_field( 'privacy', 'hero_title', 'PRIVACY POLICY', true ) : 'PRIVACY POLICY';
+    $hero_subtitle  = function_exists('franciscan_get_page_field') ? franciscan_get_page_field( 'privacy', 'hero_subtitle', 'Province of St. Francis of Assisi, Ranchi', true ) : 'Province of St. Francis of Assisi, Ranchi';
     $hero_image     = function_exists('franciscan_get_page_field') ? franciscan_get_page_field( 'privacy', 'hero_image', FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_51_30_PM.png' ) : ( FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_51_30_PM.png' );
     $eyebrow        = function_exists('franciscan_get_page_field') ? franciscan_get_page_field( 'privacy', 'eyebrow', 'PRIVACY' ) : 'PRIVACY';
     $custom_content = function_exists('franciscan_get_page_field') ? franciscan_get_page_field( 'privacy', 'page_content', '' ) : '';

@@ -714,7 +714,7 @@ button.fs-mega-toggle:focus::after {
     <!-- Page Hero -->
     <?php
     $form_hero_bg    = franciscan_get_page_field( "ministries-formation", "hero_image", FRANCISCAN_THEME_URI . "/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_51_30_PM.png" );
-    $form_hero_badge = franciscan_get_page_field( 'ministries-formation', 'hero_badge', '' );
+    $form_hero_badge = franciscan_get_page_field( 'ministries-formation', 'hero_badge', '', true );
     $form_hero_title = franciscan_get_page_field( "ministries-formation", "hero_title", "FORMATION MINISTRY" );
     $form_hero_desc  = franciscan_get_page_field( "ministries-formation", "hero_subtitle", "“The Most High Himself revealed to me that I should live according to the pattern of the Holy Gospel.”\n— St. Francis of Assisi, Testament" );
     ?>

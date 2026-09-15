@@ -716,9 +716,9 @@ button.fs-mega-toggle:focus::after {
     if ( empty( $edu_hero_bg ) || false !== strpos( $edu_hero_bg, 'ChatGPT_Image' ) ) {
         $edu_hero_bg = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/education-ministry-banner.jpg';
     }
-    $edu_hero_badge = franciscan_get_page_field( 'ministries-education', 'hero_badge', '' );
-    $edu_hero_title = franciscan_get_page_field( 'ministries-education', 'hero_title', 'EDUCATION MINISTRY' );
-    $edu_hero_desc  = franciscan_get_page_field( 'ministries-education', 'hero_subtitle', '“Where there is charity and wisdom, there is neither fear nor ignorance.”' );
+    $edu_hero_badge = franciscan_get_page_field( 'ministries-education', 'hero_badge', '', true );
+    $edu_hero_title = franciscan_get_page_field( 'ministries-education', 'hero_title', 'EDUCATION MINISTRY', true );
+    $edu_hero_desc  = franciscan_get_page_field( 'ministries-education', 'hero_subtitle', '“Where there is charity and wisdom, there is neither fear nor ignorance.”', true );
     ?>
     <section class="page-hero-banner" style="padding: 11rem 2rem 7rem 2rem; background-image: url('<?php echo esc_url( $edu_hero_bg ); ?>'); background-size: cover; background-position: center; position: relative; overflow: hidden;">
         <div style="position: absolute; inset: 0; background-color: rgba(12, 11, 10, 0.74);"></div>

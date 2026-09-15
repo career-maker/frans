@@ -783,14 +783,20 @@ function franciscan_get_page_content( $slug ) {
     return $merged;
 }
 
-function franciscan_get_page_field( $slug, $field, $fallback = '' ) {
+function franciscan_get_page_field( $slug, $field, $fallback = '', $allow_empty = false ) {
     $data = franciscan_get_page_content( $slug );
     if ( array_key_exists( $field, $data ) ) {
-        return is_string( $data[$field] ) ? stripslashes( $data[$field] ) : $data[$field];
+        $val = is_string( $data[$field] ) ? stripslashes( $data[$field] ) : $data[$field];
+        if ( $allow_empty || $val !== '' ) {
+            return $val;
+        }
     }
     $defaults = franciscan_get_default_page_content( $slug );
     if ( array_key_exists( $field, $defaults ) ) {
-        return is_string( $defaults[$field] ) ? stripslashes( $defaults[$field] ) : $defaults[$field];
+        $def_val = is_string( $defaults[$field] ) ? stripslashes( $defaults[$field] ) : $defaults[$field];
+        if ( $allow_empty || $def_val !== '' ) {
+            return $def_val;
+        }
     }
     return $fallback;
 }

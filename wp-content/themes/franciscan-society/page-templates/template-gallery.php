@@ -714,9 +714,9 @@ button.fs-mega-toggle:focus::after {
     if ( empty( $gal_hero_bg ) || false !== strpos( $gal_hero_bg, 'ChatGPT_Image' ) ) {
         $gal_hero_bg = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/gallery-banner.jpg';
     }
-    $gal_hero_badge = franciscan_get_page_field( 'gallery', 'hero_badge', 'MOMENTS OF GRACE' );
-    $gal_hero_title = franciscan_get_page_field( 'gallery', 'hero_title', 'PHOTO & VIDEO GALLERY' );
-    $gal_hero_sub   = franciscan_get_page_field( 'gallery', 'hero_subtitle', 'Visual chronicles of feast days, ordinations, jubilees, missions, and community living across Ranchi Province.' );
+    $gal_hero_badge = franciscan_get_page_field( 'gallery', 'hero_badge', 'MOMENTS OF GRACE', true );
+    $gal_hero_title = franciscan_get_page_field( 'gallery', 'hero_title', 'PHOTO & VIDEO GALLERY', true );
+    $gal_hero_sub   = franciscan_get_page_field( 'gallery', 'hero_subtitle', 'Visual chronicles of feast days, ordinations, jubilees, missions, and community living across Ranchi Province.', true );
     ?>
     <section class="page-hero-banner" style="position: relative; padding-top: 180px; padding-bottom: 120px; background: url('<?php echo esc_url( $gal_hero_bg ); ?>') center/cover no-repeat;">
         <div style="position: absolute; inset: 0; background: rgba(20, 33, 58, 0.75);"></div>

@@ -794,9 +794,9 @@ button.fs-mega-toggle:focus::after {
     if ( empty( $ldr_hero_bg ) || false !== strpos( $ldr_hero_bg, 'ChatGPT_Image' ) ) {
         $ldr_hero_bg = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/leadership-banner.jpg';
     }
-    $ldr_hero_badge = franciscan_get_page_field( 'community-leadership', 'hero_badge', 'To lead is to serve; to be greater is to become lesser.' );
-    $ldr_hero_title = franciscan_get_page_field( 'community-leadership', 'hero_title', 'LEADERSHIP' );
-    $ldr_hero_desc  = franciscan_get_page_field( 'community-leadership', 'hero_subtitle', '' );
+    $ldr_hero_badge = franciscan_get_page_field( 'community-leadership', 'hero_badge', 'To lead is to serve; to be greater is to become lesser.', true );
+    $ldr_hero_title = franciscan_get_page_field( 'community-leadership', 'hero_title', 'LEADERSHIP', true );
+    $ldr_hero_desc  = franciscan_get_page_field( 'community-leadership', 'hero_subtitle', '', true );
     if ( empty( $ldr_hero_desc ) && ! array_key_exists( 'hero_subtitle', franciscan_get_page_content( 'community-leadership' ) ) ) {
         $ldr_hero_desc = franciscan_get_page_field( 'community-leadership', 'card_subtitle', 'Guiding the Province in fraternity, governance, and mission.' );
     }
@@ -826,7 +826,7 @@ button.fs-mega-toggle:focus::after {
     $ldr_default_text = 'Led by the Minister Provincial and provincial leadership team committed to spiritual excellence.';
     $ldr_card_desc = franciscan_get_page_field( 'community-leadership', 'card_subtitle', '' );
     if ( empty( $ldr_card_desc ) || $ldr_card_desc === $ldr_default_text ) {
-        $ldr_custom_hero = franciscan_get_page_field( 'community-leadership', 'hero_subtitle', '' );
+        $ldr_custom_hero = franciscan_get_page_field( 'community-leadership', 'hero_subtitle', '', true );
         if ( ! empty( $ldr_custom_hero ) && 'Guiding the Province in fraternity, governance, and mission.' !== $ldr_custom_hero ) {
             $ldr_card_desc = $ldr_custom_hero;
         } else {

@@ -716,9 +716,9 @@ button.fs-mega-toggle:focus::after {
     if ( empty( $about_hero_bg ) || strpos( $about_hero_bg, 'ChatGPT_Image' ) !== false ) {
         $about_hero_bg = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/about-banner-sept01.jpeg';
     }
-    $about_hero_badge = franciscan_get_page_field( 'about', 'hero_badge', 'WHO WE ARE' );
-    $about_hero_title = franciscan_get_page_field( 'about', 'hero_title', 'ABOUT US' );
-    $about_hero_desc  = franciscan_get_page_field( 'about', 'hero_subtitle', '' );
+    $about_hero_badge = franciscan_get_page_field( 'about', 'hero_badge', 'WHO WE ARE', true );
+    $about_hero_title = franciscan_get_page_field( 'about', 'hero_title', 'ABOUT US', true );
+    $about_hero_desc  = franciscan_get_page_field( 'about', 'hero_subtitle', '', true );
     ?>
     <section class="page-hero-banner" style="padding: 12rem 2rem 8rem 2rem; background-image: url('<?php echo esc_url( $about_hero_bg ); ?>'); background-size: cover; background-position: center; position: relative; overflow: hidden;">
         <div style="position: absolute; inset: 0; background-color: rgba(12, 11, 10, 0.7);"></div>

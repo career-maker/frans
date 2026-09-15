@@ -712,9 +712,9 @@ button.fs-mega-toggle:focus::after {
     if ( empty( $friaries_hero_bg ) || false !== strpos( $friaries_hero_bg, 'ChatGPT_Image' ) ) {
         $friaries_hero_bg = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/friaries-banner.jpg';
     }
-    $friaries_hero_badge = franciscan_get_page_field( 'community-friaries', 'hero_badge', '' );
-    $friaries_hero_title = franciscan_get_page_field( 'community-friaries', 'hero_title', 'OUR FRIARIES & ASHRAMS' );
-    $friaries_hero_desc  = franciscan_get_page_field( 'community-friaries', 'hero_subtitle', '' );
+    $friaries_hero_badge = franciscan_get_page_field( 'community-friaries', 'hero_badge', '', true );
+    $friaries_hero_title = franciscan_get_page_field( 'community-friaries', 'hero_title', 'OUR FRIARIES & ASHRAMS', true );
+    $friaries_hero_desc  = franciscan_get_page_field( 'community-friaries', 'hero_subtitle', '', true );
     ?>
     <section class="page-hero-banner" style="padding: 12rem 2rem 8rem 2rem; background-image: url('<?php echo esc_url( $friaries_hero_bg ); ?>'); background-size: cover; background-position: center; position: relative; overflow: hidden;">
         <div style="position: absolute; inset: 0; background-color: rgba(12, 11, 10, 0.7);"></div>

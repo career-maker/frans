@@ -405,9 +405,9 @@ $banner_bg = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/hero-banner-aug2
 
     <!-- ── NEWS LIST VIEW ── -->
     <?php
-    $news_hero_badge = franciscan_get_page_field( 'news', 'hero_badge', 'PROVINCE CHRONICLES' );
-    $news_hero_title = franciscan_get_page_field( 'news', 'hero_title', 'NEWS & UPDATES' );
-    $news_hero_sub   = franciscan_get_page_field( 'news', 'hero_subtitle', 'Stay informed with the latest updates, jubilee celebrations, feast days, and missionary reports from Ranchi Province.' );
+    $news_hero_badge = franciscan_get_page_field( 'news', 'hero_badge', 'PROVINCE CHRONICLES', true );
+    $news_hero_title = franciscan_get_page_field( 'news', 'hero_title', 'NEWS & UPDATES', true );
+    $news_hero_sub   = franciscan_get_page_field( 'news', 'hero_subtitle', 'Stay informed with the latest updates, jubilee celebrations, feast days, and missionary reports from Ranchi Province.', true );
     ?>
     <section class="page-hero-banner" style="padding: 12rem 2rem 8rem 2rem; background-image: url('<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/new_uploads/hero-banner-aug20.jpeg' ); ?>'); background-size: cover; background-position: center; position: relative; overflow: hidden;">
         <div style="position: absolute; inset: 0; background-color: rgba(12, 11, 10, 0.72);"></div>
