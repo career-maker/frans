@@ -117,13 +117,10 @@ function franciscan_render_dynamic_meta_tags() {
 add_action( 'wp_head', 'franciscan_render_dynamic_meta_tags', 1 );
 
 /**
- * Filter robots.txt to disallow crawling on staging and local environments.
+ * Filter robots.txt to disallow search engine crawling.
  */
 function franciscan_custom_robots_txt( $output, $public ) {
-    $host = isset( $_SERVER['HTTP_HOST'] ) ? strtolower( $_SERVER['HTTP_HOST'] ) : '';
-    if ( false !== strpos( $host, 'intersmarthosting.in' ) || false !== strpos( $host, 'localhost' ) || false !== strpos( $host, '.local' ) ) {
-        return "User-agent: *\nDisallow: /\n";
-    }
-    return $output;
+    return "User-agent: *\nDisallow: /\n";
 }
-add_filter( 'robots_txt', 'franciscan_custom_robots_txt', 10, 2 );
+add_filter( 'robots_txt', 'franciscan_custom_robots_txt', 99, 2 );
+
