@@ -855,7 +855,7 @@ button.fs-mega-toggle:focus::after {
                     </div>
                     
                     <!-- Watch Our Video Mini Card (Positioned Outside the Image Box) -->
-                    <div class="about-video-card about-page-video-card" style="position: absolute !important; bottom: -30px !important; right: -24px !important; left: auto !important; width: 190px !important; max-width: 190px !important; background: #ffffff !important; padding: 10px !important; border-radius: 16px !important; box-shadow: 0 20px 45px rgba(0, 0, 0, 0.22) !important; text-align: center !important; z-index: 25 !important; display: block !important;">
+                    <div class="about-video-card about-page-video-card" style="position: absolute !important; bottom: -35px !important; right: 20px !important; left: auto !important; width: 190px !important; max-width: 190px !important; background: #ffffff !important; padding: 10px !important; border-radius: 16px !important; box-shadow: 0 20px 45px rgba(0, 0, 0, 0.22) !important; text-align: center !important; z-index: 25 !important; display: block !important;">
                         <div style="position: relative; border-radius: 12px; overflow: hidden; height: 95px; background-color: #1c1917;">
                             <video src="<?php echo esc_url( $about_sec_video ); ?>" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" autoplay loop muted playsinline></video>
                             <a rel="noopener noreferrer" href="https://youtube.com/@tormediaranchi3804?si=UPTCSJUSj9tbcjeB" target="_blank" class="video-play-btn" aria-label="Watch our video on YouTube">

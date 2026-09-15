@@ -1186,8 +1186,7 @@ function franciscan_render_dashboard_view() {
                                     <label>Hero Badge / Eyebrow Text</label>
                                     <input type="text" name="hero_badge" class="form-control" value="<?php echo esc_attr( $hero_badge_val ); ?>" placeholder="<?php echo esc_attr( $defaults['hero_badge'] ?? '' ); ?>">
                                 </div>
-                                <?php endif; ?>
-                                <div class="form-group <?php echo $slug === 'home' ? 'full-width' : ''; ?>">
+                                <div class="form-group">
                                     <label>Hero Main Heading (Title)</label>
                                     <input type="text" name="hero_title" class="form-control" value="<?php echo esc_attr( $hero_title_val ); ?>" placeholder="<?php echo esc_attr( $defaults['hero_title'] ?? '' ); ?>">
                                 </div>
@@ -1198,6 +1197,7 @@ function franciscan_render_dashboard_view() {
                                         <small style="color:var(--c-gold); font-size:0.82rem; margin-top:5px; display:block;">💡 Note: Updates here update the banner description on the live website (and seamlessly synchronize with the brown banner card below).</small>
                                     <?php endif; ?>
                                 </div>
+                                <?php endif; ?>
                                 <div class="form-group full-width">
                                     <label>Hero Banner Image (Replaces default background)</label>
                                     <?php

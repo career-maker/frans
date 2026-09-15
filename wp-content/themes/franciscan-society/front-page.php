@@ -79,32 +79,8 @@ get_header();
                 <!-- Content Grid (Exact Reference Screenshot 1 Parallel Alignment & Spacing) -->
                 <div class="hero-grid hero-grid-layout" style="position: relative; z-index: 10;">
                     
-                    <!-- Left Column: Title & Buttons -->
+                    <!-- Left Column: Action Buttons -->
                     <div class="js-hero-text" style="display: flex; flex-direction: column; justify-content: flex-end;">
-                        <?php
-                        $home_hero_badge = franciscan_get_page_field( 'home', 'hero_badge', '', true );
-                        $home_hero_sub   = franciscan_get_page_field( 'home', 'hero_subtitle', '', true );
-                        ?>
-                        <!-- Hero badge pill removed per design spec -->
-
-                        <!-- Main Title: Phudu, 600 weight, 43px size, 50px line-height on desktop -->
-                        <?php 
-                        $home_hero_title = franciscan_get_page_field( 'home', 'hero_title', "Let us begin again,\nfor we have only begun to serve the Lord.", false );
-                        if ( empty( trim( $home_hero_title ) ) ) {
-                            $home_hero_title = "Let us begin again,\nfor we have only begun to serve the Lord.";
-                        }
-                        if ( ! empty( $home_hero_title ) ) : 
-                        ?>
-                        <h1 class="hero-title" style="font-family: 'Phudu', sans-serif !important; font-size: 43px !important; font-weight: 600 !important; color: #ffffff; text-transform: uppercase; line-height: 50px !important; letter-spacing: -0.01em; margin-bottom: 1.5rem; text-shadow: none !important;">
-                            <?php echo nl2br( esc_html( $home_hero_title ) ); ?>
-                        </h1>
-                        <?php endif; ?>
-
-                        <?php if ( ! empty( $home_hero_sub ) ) : ?>
-                            <p style="font-family: 'Instrument Sans', sans-serif; font-size: clamp(1rem, 1.8vw, 1.2rem); color: rgba(255, 255, 255, 0.9); max-width: 680px; margin: 0 0 1.8rem 0; line-height: 1.55; font-weight: 400;">
-                                <?php echo nl2br( esc_html( $home_hero_sub ) ); ?>
-                            </p>
-                        <?php endif; ?>
 
                         <!-- Buttons Row -->
                         <div class="hero-buttons-row" style="display: flex; gap: 1.25rem; align-items: center; flex-wrap: wrap;">

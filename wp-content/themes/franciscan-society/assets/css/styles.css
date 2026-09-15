@@ -2827,7 +2827,7 @@ body.menu-open { overflow: hidden; }
 .page-hero-banner h1,
 .page-hero-banner .page-hero-title,
 .contact-hero-banner .contact-hero-h1 {
-    font-size: clamp(0.7rem, 1.3vw, 1.125rem) !important;
+    font-size: clamp(1.4rem, 2.6vw, 2.25rem) !important;
     line-height: 1.2 !important;
     text-align: left !important;
     margin-left: 0 !important;
@@ -3681,8 +3681,8 @@ header, section, main, div, footer, nav {
 
 .about-page-video-card {
     position: absolute !important;
-    bottom: -30px !important;
-    right: -24px !important;
+    bottom: -35px !important;
+    right: 20px !important;
     left: auto !important;
     z-index: 25 !important;
     box-shadow: 0 20px 45px rgba(0, 0, 0, 0.22) !important;
@@ -9105,7 +9105,12 @@ button.slider-btn:active {
 
 
 @media (min-width: 992px) {
-    .about-video-card {
+    .about-video-card:not(.about-page-video-card) {
         left: -50px !important;
+    }
+    .about-page-video-card {
+        left: auto !important;
+        right: 20px !important;
+        bottom: -35px !important;
     }
 }
