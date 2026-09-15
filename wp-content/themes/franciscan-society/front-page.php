@@ -149,6 +149,7 @@ get_header();
             </div>
         </section>
 
+    <?php endif; ?>
     <?php if ( empty( franciscan_get_page_field( 'home', 'hide_welcome_section', '0' ) ) ) : ?>
         <!-- 2. Welcome Message Section (Pure White Canvas #FFFFFF & Panoramic Bottom Sketch Illustration) -->
         <!-- Unclippable Flying Bible PNG Container (Flies in front of eyes on scroll) -->
@@ -276,6 +277,7 @@ get_header();
             <img  loading="lazy"loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/sketch-bg.png' ); ?>" alt="Church Line Art Panorama" style="position: absolute; bottom: 0; left: 0; width: 100%; height: auto; max-height: 220px; object-fit: contain; object-position: bottom center; filter: opacity(0.3) drop-shadow(0 0 12px rgba(255, 255, 255, 1)) drop-shadow(0 0 24px rgba(255, 255, 255, 0.8)) contrast(110%); pointer-events: none; z-index: 1;">
         </section>
 
+    <?php endif; ?>
     <?php if ( empty( franciscan_get_page_field( 'home', 'hide_about_section', '0' ) ) ) : ?>
         <!-- 3. About Us Section (Exact Match to Reference Screenshot) -->
         <section id="about-section" style="position: relative; padding: clamp(2rem, 4vw, 3.5rem) 0 0 0; background-color: #FFFFFF; color: #1c1917; overflow: hidden;">
@@ -411,6 +413,7 @@ get_header();
             </div>
         </section>
 
+    <?php endif; ?>
     <?php if ( empty( franciscan_get_page_field( 'home', 'hide_values_section', '0' ) ) ) : ?>
         <!-- Our Mission Section -->
         <section id="mission-section" style="padding: clamp(2rem, 4vw, 3.5rem) 0; background-color: #ffffff; color: #1c1917; box-sizing: border-box; overflow: hidden;">
@@ -498,6 +501,7 @@ get_header();
 
         <!-- 4. News & Events Section (Exact Reference Center-Aligned Header & Scroll Track) -->
         
+    <?php if ( empty( franciscan_get_page_field( 'home', 'hide_bible_section', '0' ) ) ) : ?>
           <!-- 3.5 Bible Quote Section -->
           <?php
           $bible_line1     = franciscan_get_page_field( 'home', 'bible_quote_line1', '' );
@@ -554,6 +558,8 @@ get_header();
               </div>
           </section>
 
+    <?php endif; ?>
+    <?php if ( empty( franciscan_get_page_field( 'home', 'hide_news_section', '0' ) ) ) : ?>
           <section id="news-section" class="has-vine-watermark" style="position: relative; padding: clamp(2rem, 4vw, 3.5rem) 0; background-color: #F5F3EC; color: #1c1917; box-sizing: border-box; overflow: hidden;">
             <img src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/shapes/vine-corner-watermark.png' ); ?>" class="vine-corner-watermark" alt="" aria-hidden="true">
             <div style="max-width: 1320px; margin: 0 auto; padding: 0 clamp(1rem, 5vw, 3rem);">
@@ -694,6 +700,7 @@ get_header();
     transform: rotate(45deg) !important;
 }
 </style>
+    <?php if ( empty( franciscan_get_page_field( 'blogs', 'hide_blogs_page', '0' ) ) ) : ?>
 <section id="blogs-section" style="padding: clamp(2rem, 4vw, 3.5rem) 0; background-color: #FFFFFF; color: #1c1917; box-sizing: border-box; overflow: hidden;">
             <div style="max-width: 1320px; margin: 0 auto; padding: 0 clamp(1rem, 5vw, 3rem);">
                 
@@ -806,6 +813,7 @@ get_header();
 
 
     
+    <?php endif; ?>
     <?php if ( empty( franciscan_get_page_field( 'home', 'hide_gallery_section', '0' ) ) ) : ?>
         <!-- 6. Gallery Section -->
         <section id="gallery-grid" style="padding: clamp(1.5rem, 3vw, 2.5rem) 0 clamp(2rem, 3vw, 2.5rem) 0; background-color: #FFFFFF; box-sizing: border-box;">
@@ -867,6 +875,8 @@ get_header();
         });
         </script>
 
+    <?php endif; ?>
+    <?php if ( empty( franciscan_get_page_field( 'home', 'hide_inquiry_section', '0' ) ) ) : ?>
     <section id="inquiry-section" style="padding: clamp(1.5rem, 3vw, 2.5rem) 0 clamp(2rem, 4vw, 3.5rem) 0; background-color: #FFFFFF; color: #ffffff; box-sizing: border-box;">
             <div style="max-width: 1320px; margin: 0 auto; padding: 0 clamp(1rem, 5vw, 3rem);">
                 
