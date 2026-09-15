@@ -29,7 +29,7 @@ get_header();
 
     .archive-title {
         font-family: 'Phudu', sans-serif;
-        font-size: clamp(2rem, 4vw, 3rem);
+        font-size: clamp(1.4rem, 2.2vw, 1.85rem);
         font-weight: 700;
         color: #e6c888;
         text-transform: uppercase;

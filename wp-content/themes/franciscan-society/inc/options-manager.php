@@ -233,8 +233,30 @@ function franciscan_get_default_page_content( $slug = '' ) {
             'gallery_heading'        => 'EXPLORE OUR BEAUTIFUL CHURCH',
             'gallery_btn_text'       => 'VIEW ALL PHOTOS',
             'gallery_btn_url'        => '/gallery',
+
+            // Section 9: Quick Inquiry / Contact Form
+            'inquiry_eyebrow'        => 'SUBMIT AN INQUIRY',
+            'inquiry_title'          => 'HAVE A QUESTION OR NEED PRAYER? REACH OUT TO US',
+            'inquiry_btn_text'       => 'SUBMIT INQUIRY',
+            'inquiry_bg_img'         => '',
+            'inquiry_person_img'     => '',
+
+            // Section Visibility Toggles (0 = Show, 1 = Hide)
+            'hide_hero_section'           => '0',
+            'hide_welcome_section'        => '0',
+            'hide_about_section'          => '0',
+            'hide_values_section'         => '0',
+            'hide_bible_section'          => '0',
+            'hide_news_section'           => '0',
+            'hide_blogs_section'          => '0',
+            'hide_gallery_section'        => '0',
+            'hide_inquiry_section'        => '0',
+            'hide_mass_intention_section' => '0',
         ),
         'about' => array(
+            // Section Visibility Toggles
+            'hide_values_section'    => '0',
+
             // Top Banner
             'hero_badge'             => 'WHO WE ARE',
             'hero_title'             => 'ABOUT US',
@@ -702,6 +724,7 @@ function franciscan_get_default_page_content( $slug = '' ) {
             'hero_image'    => '',
         ),
         'blogs' => array(
+            'hide_blogs_page' => '0',
             'hero_badge'    => 'FRANCISCAN REFLECTIONS',
             'hero_title'    => 'BLOGS & ARTICLES',
             'hero_subtitle' => 'Spiritual reflections, theological essays, and Franciscan wisdom from our friars.',
@@ -742,10 +765,10 @@ function franciscan_get_page_content( $slug ) {
     if ( ! is_array( $saved ) ) {
         $saved = array();
     }
-    // Filter out empty string or null values so default values are preserved and prefilled in editor
+    // Only filter null values, preserve empty strings so cleared/removed fields remain empty
     $filtered_saved = array();
     foreach ( $saved as $k => $v ) {
-        if ( $v !== '' && $v !== null ) {
+        if ( $v !== null ) {
             $filtered_saved[ $k ] = $v;
         }
     }
@@ -762,11 +785,11 @@ function franciscan_get_page_content( $slug ) {
 
 function franciscan_get_page_field( $slug, $field, $fallback = '' ) {
     $data = franciscan_get_page_content( $slug );
-    if ( isset( $data[$field] ) && $data[$field] !== '' ) {
+    if ( array_key_exists( $field, $data ) ) {
         return is_string( $data[$field] ) ? stripslashes( $data[$field] ) : $data[$field];
     }
     $defaults = franciscan_get_default_page_content( $slug );
-    if ( isset( $defaults[$field] ) && $defaults[$field] !== '' ) {
+    if ( array_key_exists( $field, $defaults ) ) {
         return is_string( $defaults[$field] ) ? stripslashes( $defaults[$field] ) : $defaults[$field];
     }
     return $fallback;
@@ -787,10 +810,10 @@ function franciscan_resync_legacy_content_options() {
             if ( empty( $saved ) || ! is_array( $saved ) ) {
                 update_option( 'franciscan_page_' . $slug, $def_values );
             } else {
-                // If saved option exists, merge missing or empty fields with live defaults
+                // If saved option exists, merge missing fields while preserving user-saved empty strings
                 $clean = array();
                 foreach ( $saved as $k => $v ) {
-                    if ( $v !== '' && $v !== null ) {
+                    if ( $v !== null ) {
                         $clean[ $k ] = $v;
                     }
                 }
@@ -875,29 +898,29 @@ function franciscan_resync_legacy_content_options() {
                 }
                 // Resync ministry banner subtitles
                 if ( 'ministries-pastoral' === $slug ) {
-                    if ( empty( $clean['hero_subtitle'] ) ) {
+                    if ( ! array_key_exists( 'hero_subtitle', $clean ) ) {
                         $clean['hero_subtitle'] = "“The brothers should rejoice when they live among people who are considered of little worth and who are despised.”\n— St. Francis of Assisi, Earlier Rule, Ch. IX";
                     }
                 }
                 if ( 'ministries-education' === $slug ) {
-                    if ( empty( $clean['hero_subtitle'] ) ) {
+                    if ( ! array_key_exists( 'hero_subtitle', $clean ) ) {
                         $clean['hero_subtitle'] = "“Where there is charity and wisdom, there is neither fear nor ignorance.”";
                     }
                 }
                 if ( 'ministries-formation' === $slug ) {
-                    if ( empty( $clean['hero_subtitle'] ) ) {
+                    if ( ! array_key_exists( 'hero_subtitle', $clean ) ) {
                         $clean['hero_subtitle'] = "“The Most High Himself revealed to me that I should live according to the pattern of the Holy Gospel.”\n— St. Francis of Assisi, Testament";
                     }
                 }
                 // Resync Third Order Rule page
                 if ( 'community-rule' === $slug ) {
-                    if ( empty( $clean['hero_badge'] ) || 'SPIRITUAL FOUNDATION' === $clean['hero_badge'] ) {
+                    if ( ! array_key_exists( 'hero_badge', $clean ) || 'SPIRITUAL FOUNDATION' === $clean['hero_badge'] ) {
                         $clean['hero_badge'] = 'OUR RULE… OUR LIFE';
                     }
-                    if ( empty( $clean['hero_title'] ) || 'RULE & CONSTITUTIONS' === $clean['hero_title'] ) {
+                    if ( ! array_key_exists( 'hero_title', $clean ) || 'RULE & CONSTITUTIONS' === $clean['hero_title'] ) {
                         $clean['hero_title'] = 'THIRD ORDER REGULAR RULE';
                     }
-                    if ( empty( $clean['hero_subtitle'] ) || 'Rooted in Franciscan spirituality and commitment to Christ-centered living.' === $clean['hero_subtitle'] ) {
+                    if ( ! array_key_exists( 'hero_subtitle', $clean ) || 'Rooted in Franciscan spirituality and commitment to Christ-centered living.' === $clean['hero_subtitle'] ) {
                         $clean['hero_subtitle'] = 'Discovering the authentic meaning of Franciscan life';
                     }
                     if ( empty( $clean['prologue_title'] ) ) {
@@ -920,7 +943,9 @@ function franciscan_resync_legacy_content_options() {
                 }
                 // Resync publications page
                 if ( 'publications' === $slug ) {
-                    $clean['hero_title']    = 'PUBLICATIONS';
+                    if ( ! array_key_exists( 'hero_title', $clean ) ) {
+                        $clean['hero_title']    = 'PUBLICATIONS';
+                    }
                     $clean['hero_subtitle'] = '';
                     if ( ! empty( $clean['publications_list'] ) && is_array( $clean['publications_list'] ) ) {
                         $farmer_items = array();

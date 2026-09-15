@@ -10,6 +10,7 @@ get_header();
 
 <main id="main-content" style="padding-top: 0; background-color: #FFFFFF;">
 
+    <?php if ( empty( franciscan_get_page_field( 'home', 'hide_hero_section', '0' ) ) ) : ?>
         <!-- 1. Hero Section (Rounded Card Container on Cream Canvas) -->
     <section class="hero-section" style="position: relative; background-color: #FFFFFF; box-sizing: border-box;">
         
@@ -39,44 +40,44 @@ get_header();
                         v.muted = true;
                         v.defaultMuted = true;
                         v.playsInline = true;
+                        v.setAttribute('muted', '');
                         v.setAttribute('playsinline', '');
                         v.setAttribute('webkit-playsinline', '');
-                        if (v.paused) {
-                            var p = v.play();
-                            if (p !== undefined) {
-                                p.catch(function() {});
-                            }
+                        var p = v.play();
+                        if (p && typeof p.catch === 'function') {
+                            p.catch(function(e) {
+                                console.log('Hero video autoplay retry', e);
+                            });
                         }
                     }
-                    fsPlayHeroVideo();
-                    document.addEventListener('DOMContentLoaded', fsPlayHeroVideo);
+                    if (document.readyState === 'loading') {
+                        document.addEventListener('DOMContentLoaded', fsPlayHeroVideo);
+                    } else {
+                        fsPlayHeroVideo();
+                    }
                     window.addEventListener('load', fsPlayHeroVideo);
+                    window.addEventListener('pageshow', fsPlayHeroVideo);
                     document.addEventListener('visibilitychange', function() {
                         if (!document.hidden) fsPlayHeroVideo();
                     });
-                    (function() {
-                        var touchEvents = ['touchstart', 'touchend', 'scroll', 'click', 'pointerdown'];
-                        function unlockHeroVideo() {
-                            fsPlayHeroVideo();
-                            touchEvents.forEach(function(evt) {
-                                window.removeEventListener(evt, unlockHeroVideo, { passive: true });
-                                document.removeEventListener(evt, unlockHeroVideo);
-                            });
-                        }
-                        touchEvents.forEach(function(evt) {
-                            window.addEventListener(evt, unlockHeroVideo, { passive: true });
-                            document.addEventListener(evt, unlockHeroVideo);
-                        });
-                    })();
+                    ['click', 'touchstart', 'scroll'].forEach(function(ev) {
+                        window.addEventListener(ev, fsPlayHeroVideo, { once: true, passive: true });
+                    });
                     </script>
                 <?php else : ?>
-                    <img id="hero-bg-video" src="<?php echo esc_url( $hero_img ); ?>" alt="Franciscan Friars Hero" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1;">
+                    <div style="position: absolute; inset: 0; width: 100%; height: 100%; background-image: url('<?php echo esc_url( $poster_img ); ?>'); background-size: cover; background-position: center;"></div>
                 <?php endif; ?>
-                <!-- Black Overlay (Soft Opacity) -->
-                <div class="video-overlay" style="position: absolute; inset: 0; width: 100%; height: 100%; background: linear-gradient(180deg, rgba(12, 11, 10, 0.35) 0%, rgba(12, 11, 10, 0.58) 100%); z-index: 2; pointer-events: none;"></div>
             </div>
 
-                <!-- Content Grid (Exact Reference Screenshot 1 Parallel Alignment & Spacing) -->
+            <!-- Dark Overlay for Contrast (55% Black) -->
+            <div style="position: absolute; inset: 0; background: rgba(0, 0, 0, 0.45); border-radius: 24px; z-index: 2;"></div>
+
+            <!-- Subtle Texture / Watermark (No Yellow Line-Art) -->
+            <div style="position: absolute; inset: 0; opacity: 0.15; z-index: 2; pointer-events: none; border-radius: 24px;"></div>
+
+            <!-- Content Area (Inside Rounded Hero Card) -->
+            <div class="hero-content-padding" style="position: relative; z-index: 3; max-width: 1320px; width: 100%; margin: 0 auto; box-sizing: border-box;">
+                
                 <div class="hero-grid hero-grid-layout" style="position: relative; z-index: 10;">
                     
                     <!-- Left Column: Title & Buttons -->
@@ -84,13 +85,16 @@ get_header();
                         <?php
                         $home_hero_badge = franciscan_get_page_field( 'home', 'hero_badge', '' );
                         $home_hero_sub   = franciscan_get_page_field( 'home', 'hero_subtitle', '' );
+                        $home_hero_title = franciscan_get_page_field( 'home', 'hero_title', "Let us begin again,\nfor we have only begun to serve the Lord." );
                         ?>
                         <!-- Hero badge pill removed per design spec -->
 
-                        <!-- Main Title: Phudu, 600 weight, 43px size, 50px line-height on desktop -->
-                        <h1 class="hero-title" style="font-family: 'Phudu', sans-serif !important; font-size: 43px !important; font-weight: 600 !important; color: #ffffff; text-transform: uppercase; line-height: 50px !important; letter-spacing: -0.01em; margin-bottom: 1.5rem; text-shadow: none !important;">
-                            <?php echo nl2br( esc_html( franciscan_get_page_field( 'home', 'hero_title', "Let us begin again,\nfor we have only begun to serve the Lord." ) ) ); ?>
-                        </h1>
+                        <?php if ( ! empty( $home_hero_title ) ) : ?>
+                            <!-- Main Title: Phudu, 600 weight, 43px size, 50px line-height on desktop -->
+                            <h1 class="hero-title" style="font-family: 'Phudu', sans-serif !important; font-size: 43px !important; font-weight: 600 !important; color: #ffffff; text-transform: uppercase; line-height: 50px !important; letter-spacing: -0.01em; margin-bottom: 1.5rem; text-shadow: none !important;">
+                                <?php echo nl2br( esc_html( $home_hero_title ) ); ?>
+                            </h1>
+                        <?php endif; ?>
 
                         <?php if ( ! empty( $home_hero_sub ) ) : ?>
                             <p style="font-family: 'Instrument Sans', sans-serif; font-size: clamp(1rem, 1.8vw, 1.2rem); color: rgba(255, 255, 255, 0.9); max-width: 680px; margin: 0 0 1.8rem 0; line-height: 1.55; font-weight: 400;">
@@ -142,7 +146,9 @@ get_header();
                 <img  loading="lazy" decoding="async"src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/bible.png' ); ?>" alt="Holy Bible" class="hero-bible-img" style="position: absolute !important; top: 28% !important; right: 9% !important; width: 90px !important; height: auto !important; z-index: 2 !important; filter: drop-shadow(0 12px 28px rgba(0,0,0,0.85)) !important; pointer-events: none !important;">
             </div>
         </section>
+    <?php endif; ?>
 
+    <?php if ( empty( franciscan_get_page_field( 'home', 'hide_welcome_section', '0' ) ) ) : ?>
         <!-- 2. Welcome Message Section (Pure White Canvas #FFFFFF & Panoramic Bottom Sketch Illustration) -->
         <!-- Unclippable Flying Bible PNG Container (Flies in front of eyes on scroll) -->
 <div id="welcome-scroll-bible-container" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 99999; display: none;">
@@ -268,7 +274,9 @@ get_header();
             <!-- Panoramic Bottom Church Sketch Line-Art (Matching Reference Screenshot) -->
             <img  loading="lazy"loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/sketch-bg.png' ); ?>" alt="Church Line Art Panorama" style="position: absolute; bottom: 0; left: 0; width: 100%; height: auto; max-height: 220px; object-fit: contain; object-position: bottom center; filter: opacity(0.3) drop-shadow(0 0 12px rgba(255, 255, 255, 1)) drop-shadow(0 0 24px rgba(255, 255, 255, 0.8)) contrast(110%); pointer-events: none; z-index: 1;">
         </section>
+    <?php endif; ?>
 
+    <?php if ( empty( franciscan_get_page_field( 'home', 'hide_about_section', '0' ) ) ) : ?>
         <!-- 3. About Us Section (Exact Match to Reference Screenshot) -->
         <section id="about-section" style="position: relative; padding: clamp(2rem, 4vw, 3.5rem) 0 0 0; background-color: #FFFFFF; color: #1c1917; overflow: hidden;">
             <div class="responsive-grid-about" style="max-width: 1320px; margin: 0 auto; padding: 0 clamp(1rem, 5vw, 3rem); display: grid; gap: 4.5rem; align-items: center;">
@@ -402,7 +410,9 @@ get_header();
                 </div>
             </div>
         </section>
+    <?php endif; ?>
 
+    <?php if ( empty( franciscan_get_page_field( 'home', 'hide_values_section', '0' ) ) ) : ?>
         <!-- Our Mission Section -->
         <section id="mission-section" style="padding: clamp(2rem, 4vw, 3.5rem) 0; background-color: #ffffff; color: #1c1917; box-sizing: border-box; overflow: hidden;">
             <div class="responsive-grid-2" style="max-width: 1320px; margin: 0 auto; padding: 0 clamp(1rem, 5vw, 3rem); display: grid; gap: 5rem; align-items: center;">
@@ -485,7 +495,9 @@ get_header();
 
             </div>
         </section>
+    <?php endif; ?>
 
+    <?php if ( empty( franciscan_get_page_field( 'home', 'hide_bible_section', '0' ) ) ) : ?>
         <!-- 4. News & Events Section (Exact Reference Center-Aligned Header & Scroll Track) -->
         
           <!-- 3.5 Bible Quote Section -->
@@ -543,7 +555,9 @@ get_header();
                   </p>
               </div>
           </section>
+    <?php endif; ?>
 
+    <?php if ( empty( franciscan_get_page_field( 'home', 'hide_news_section', '0' ) ) ) : ?>
           <section id="news-section" class="has-vine-watermark" style="position: relative; padding: clamp(2rem, 4vw, 3.5rem) 0; background-color: #F5F3EC; color: #1c1917; box-sizing: border-box; overflow: hidden;">
             <img src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/shapes/vine-corner-watermark.png' ); ?>" class="vine-corner-watermark" alt="" aria-hidden="true">
             <div style="max-width: 1320px; margin: 0 auto; padding: 0 clamp(1rem, 5vw, 3rem);">
@@ -666,6 +680,7 @@ get_header();
 
             </div>
         </section>
+    <?php endif; ?>
 
 
         <!-- 4.5 Inquiry Form Section (Fixed Background + Praying Woman Image + Glassmorphic Form) -->
@@ -678,6 +693,11 @@ get_header();
         
         <!-- 5. Blogs Section (White Container Cards with Generous Inner Padding) -->
         
+    <?php
+    $blogs_page_hidden = ( '1' === (string) franciscan_get_page_field( 'blogs', 'hide_blogs_page', '0' ) ) || ( '1' === (string) get_option( 'franciscan_hide_blogs_page', '0' ) );
+    $hide_blogs_sec  = ( '1' === (string) franciscan_get_page_field( 'home', 'hide_blogs_section', '0' ) );
+    if ( ! $blogs_page_hidden && ! $hide_blogs_sec ) :
+    ?>
 <style>
 .blog-padded-card:hover .news-text-link .btn-arrow {
     transform: rotate(45deg) !important;
@@ -711,32 +731,32 @@ get_header();
                     </div>
                 </div>
 
-                          <!-- Blog Cards Scroll Track -->
-                <div id="blogs-scroll-track" style="display: flex; gap: 2.2rem; overflow-x: auto; -webkit-overflow-scrolling: touch; touch-action: pan-y pinch-zoom; scroll-behavior: smooth; scroll-snap-type: x proximity; padding: 0.5rem 0 1.5rem 0; margin-bottom: 2rem; scrollbar-width: none; -ms-overflow-style: none;">
+                <!-- Blogs Horizontal Scroll Track -->
+                <div id="blogs-scroll-track" class="news-scroll-track" style="display: flex; gap: 35px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 1.5rem 0 2rem 0; -webkit-overflow-scrolling: touch; scrollbar-width: none;">
                     <?php
-                    $blog_slider_args = array(
+                    $blog_posts = new WP_Query( array(
                         'post_type'      => 'post',
-                        'post_status'    => 'publish',
                         'posts_per_page' => 8,
-                    );
-                    $blog_cat = get_term_by( 'slug', 'blogs', 'category' );
-                    if ( ! $blog_cat ) {
-                        $blog_cat = get_term_by( 'slug', 'blog', 'category' );
+                        'category_name'  => 'blog,blogs',
+                        'post_status'    => 'publish',
+                    ) );
+
+                    if ( ! $blog_posts->have_posts() ) {
+                        $blog_posts = new WP_Query( array(
+                            'post_type'      => 'post',
+                            'posts_per_page' => 8,
+                            'post_status'    => 'publish',
+                        ) );
                     }
-                    if ( $blog_cat ) {
-                        $blog_slider_args['cat'] = $blog_cat->term_id;
-                    } else {
-                        // Exclude news if news category exists
-                        $news_cat = get_term_by( 'slug', 'news', 'category' );
-                        if ( $news_cat ) {
-                            $blog_slider_args['category__not_in'] = array( $news_cat->term_id );
-                        }
-                    }
-                    $blogs_query = new WP_Query( $blog_slider_args );
-                    if ( $blogs_query->have_posts() ) :
-                        while ( $blogs_query->have_posts() ) : $blogs_query->the_post();
-                            $thumb_url = has_post_thumbnail() ? get_the_post_thumbnail_url( get_the_ID(), 'medium_large' ) : FRANCISCAN_THEME_URI . '/assets/images/news-blog/WhatsApp Image 2025-09-10 at 4.28.51 AM.jpeg';
+
+                    if ( $blog_posts->have_posts() ) :
+                        while ( $blog_posts->have_posts() ) : $blog_posts->the_post();
+                            $thumb_url = get_the_post_thumbnail_url( get_the_ID(), 'large' );
+                            if ( ! $thumb_url ) {
+                                $thumb_url = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/WhatsApp Image 2025-09-10 at 4.28.51 AM.jpeg';
+                            }
                     ?>
+                    <!-- Blog Card -->
                     <div class="blog-padded-card" style="flex: 0 0 380px; scroll-snap-align: start; background: #ffffff; border-radius: 24px; padding: 1.8rem; box-shadow: 0 15px 35px rgba(0,0,0,0.06); display: flex; flex-direction: column; transition: transform 0.4s ease, box-shadow 0.4s ease;">
                         <div style="border-radius: 16px; overflow: hidden; height: 260px; margin-bottom: 1.6rem; background-color: #d6ccc2;">
                             <a href="<?php the_permalink(); ?>" style="display: block; width: 100%; height: 100%;" aria-label="<?php the_title_attribute(); ?>">
@@ -792,10 +812,12 @@ get_header();
 
             </div>
         </section>
+    <?php endif; ?>
 
 
     
         <!-- 6. Gallery Section -->
+    <?php if ( empty( franciscan_get_page_field( 'home', 'hide_gallery_section', '0' ) ) ) : ?>
         <section id="gallery-grid" style="padding: clamp(1.5rem, 3vw, 2.5rem) 0 clamp(2rem, 3vw, 2.5rem) 0; background-color: #FFFFFF; box-sizing: border-box;">
             <div style="max-width: 1320px; margin: 0 auto; padding: 0 clamp(1rem, 5vw, 3rem);">
 
@@ -854,12 +876,26 @@ get_header();
             }
         });
         </script>
+    <?php endif; ?>
 
+    <?php if ( empty( franciscan_get_page_field( 'home', 'hide_inquiry_section', '0' ) ) ) : 
+        $inq_bg = franciscan_get_page_field( 'home', 'inquiry_bg_img', '' );
+        if ( empty( $inq_bg ) ) {
+            $inq_bg = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_51_30_PM.png';
+        }
+        $inq_person = franciscan_get_page_field( 'home', 'inquiry_person_img', '' );
+        if ( empty( $inq_person ) ) {
+            $inq_person = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_56_24_PM.png';
+        }
+        $inq_eyebrow = franciscan_get_page_field( 'home', 'inquiry_eyebrow', 'SUBMIT AN INQUIRY' );
+        $inq_title   = franciscan_get_page_field( 'home', 'inquiry_title', 'HAVE A QUESTION OR NEED PRAYER? REACH OUT TO US' );
+        $inq_btn     = franciscan_get_page_field( 'home', 'inquiry_btn_text', 'SUBMIT INQUIRY' );
+    ?>
     <section id="inquiry-section" style="padding: clamp(1.5rem, 3vw, 2.5rem) 0 clamp(2rem, 4vw, 3.5rem) 0; background-color: #FFFFFF; color: #ffffff; box-sizing: border-box;">
             <div style="max-width: 1320px; margin: 0 auto; padding: 0 clamp(1rem, 5vw, 3rem);">
                 
                 <!-- Main Inset Card Container with 32px Rounded Corners & Background Image -->
-                <div style="position: relative; border-radius: 32px; overflow: hidden; background: url('<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_51_30_PM.png' ); ?>') no-repeat center center / cover fixed !important; background-attachment: fixed !important; box-shadow: 0 20px 50px rgba(0,0,0,0.15); min-height: 520px;">
+                <div style="position: relative; border-radius: 32px; overflow: hidden; background: url('<?php echo esc_url( $inq_bg ); ?>') no-repeat center center / cover fixed !important; background-attachment: fixed !important; box-shadow: 0 20px 50px rgba(0,0,0,0.15); min-height: 520px;">
                     
                     <!-- Dark Vignette Overlay -->
                     <div style="position: absolute; inset: 0; background: linear-gradient(to right, rgba(15,10,6,0.75) 0%, rgba(15,10,6,0.85) 60%, rgba(15,10,6,0.92) 100%); z-index: 1;"></div>
@@ -869,22 +905,28 @@ get_header();
                         
                         <!-- Left Side: Praying Woman PNG Image (Pinned directly to bottom edge) -->
                         <div style="position: relative; display: flex; align-items: flex-end; justify-content: flex-start; min-height: 480px;">
-                            <img  loading="lazy"loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_56_24_PM.png' ); ?>" alt="Praying Sister" style="position: absolute; bottom: 0; left: 0; height: 100%; max-height: 500px; width: auto; object-fit: contain; object-position: bottom left; filter: drop-shadow(0 15px 30px rgba(0,0,0,0.8)); display: block; pointer-events: none; ">
+                            <?php if ( ! empty( $inq_person ) ) : ?>
+                            <img loading="lazy" decoding="async" src="<?php echo esc_url( $inq_person ); ?>" alt="Praying Sister" style="position: absolute; bottom: 0; left: 0; height: 100%; max-height: 500px; width: auto; object-fit: contain; object-position: bottom left; filter: drop-shadow(0 15px 30px rgba(0,0,0,0.8)); display: block; pointer-events: none;">
+                            <?php endif; ?>
                         </div>
 
                         <!-- Right Side: Inquiry Form Content -->
                         <div style="padding: 3.5rem 0; display: flex; flex-direction: column; justify-content: center;">
                             
                             <!-- Eyebrow Tag -->
+                            <?php if ( ! empty( $inq_eyebrow ) ) : ?>
                             <div style="display: inline-flex; align-items: center; gap: 0.5rem; margin-bottom: 1.2rem;">
                                 <span style="width: 6px; height: 6px; background-color: #e6c888; border-radius: 50%; display: inline-block;"></span>
-                                <span style="color: #e6c888; font-size: 0.78rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; font-family: 'Instrument Sans', sans-serif;">SUBMIT AN INQUIRY</span>
+                                <span style="color: #e6c888; font-size: 0.78rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; font-family: 'Instrument Sans', sans-serif;"><?php echo esc_html( $inq_eyebrow ); ?></span>
                             </div>
+                            <?php endif; ?>
 
                             <!-- Heading in Phudu 600 -->
+                            <?php if ( ! empty( $inq_title ) ) : ?>
                             <h2 style="font-family: 'Phudu', sans-serif !important; font-size: clamp(2rem, 3vw, 2.5rem) !important; font-weight: 600 !important; color: #ffffff !important; text-transform: uppercase; line-height: 1.18; letter-spacing: -0.01em; margin-bottom: 1.8rem;">
-                                HAVE A QUESTION OR NEED PRAYER? REACH OUT TO US
+                                <?php echo nl2br( esc_html( $inq_title ) ); ?>
                             </h2>
+                            <?php endif; ?>
 
                             <!-- Inquiry Form -->
                             <!-- Inquiry Form (Hardened AJAX & Security) -->
@@ -921,7 +963,7 @@ get_header();
 
                                 <div style="margin-top: 0.4rem;">
                                     <button type="submit" class="btn-fill-animation" style="width: 100%; justify-content: center; background: #4A2A18; border: 1.5px solid #4A2A18; color: #ffffff;">
-                                        <span>SUBMIT INQUIRY</span> <span class="btn-arrow"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; vertical-align: text-bottom;"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></span>
+                                        <span><?php echo esc_html( $inq_btn ); ?></span> <span class="btn-arrow"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; vertical-align: text-bottom;"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></span>
                                     </button>
                                 </div>
 
@@ -935,6 +977,7 @@ get_header();
 
             </div>
         </section>
+    <?php endif; ?>
 </main>
 
 <script>
@@ -1644,7 +1687,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
         
-        <?php if ( '1' === (string) franciscan_get_option( 'show_donation_section', '0' ) ) : ?>
+        <?php if ( '1' === (string) franciscan_get_option( 'show_donation_section', '0' ) && empty( franciscan_get_page_field( 'home', 'hide_mass_intention_section', '0' ) ) ) : ?>
         <!-- Mass Intention in USA Section -->
         <section style="padding: clamp(2rem, 4vw, 3.5rem) 0 clamp(1.5rem, 3vw, 2.5rem) 0; background-color: #FAFAFA; box-sizing: border-box;">
             <!-- Rounded Card Container -->

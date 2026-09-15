@@ -726,19 +726,32 @@ button.fs-mega-toggle:focus::after {
         }
     </style>
 
-<main id="main-content" style="padding-top: 0; background-color: #FFFFFF;">
-
-    <!-- Page Hero Section -->
-    <section style="padding: 12rem 2rem 8rem 2rem; background-image: url('<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_51_30_PM.png' ); ?>'); background-size: cover; background-position: center; position: relative; overflow: hidden;">
-    <div style="position: absolute; inset: 0; background-color: rgba(12, 11, 10, 0.7);"></div>
-    <div style="max-width: 800px; margin: 0 auto; position: relative; z-index: 2; text-align: center;">
-        <div style="display: inline-flex; align-items: center; gap: 0.6rem; background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); padding: 0.5rem 1rem; border-radius: 50px; margin-bottom: 1.5rem; border: 1px solid rgba(255,255,255,0.2);">
-            <span style="width: 8px; height: 8px; background-color: #c8102e; border-radius: 50%; display: inline-block;"></span>
-            <span style="color: #ffffff; font-size: 0.85rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; font-family: 'Instrument Sans', sans-serif;"><?php echo esc_html( franciscan_get_page_field( "community", "hero_badge", "OUR BROTHERHOOD" ) ); ?>
+<main id="main-content" style="padding-top: 0; background-color: #FFFFFF;">    <!-- Page Hero Section -->
+    <?php
+    $comm_hero_bg    = franciscan_get_page_field( 'community', 'hero_image', FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_51_30_PM.png' );
+    $comm_hero_badge = franciscan_get_page_field( 'community', 'hero_badge', 'OUR BROTHERHOOD' );
+    $comm_hero_title = franciscan_get_page_field( 'community', 'hero_title', 'COMMUNITY' );
+    $comm_hero_sub   = franciscan_get_page_field( 'community', 'hero_subtitle', '' );
+    ?>
+    <section class="page-hero-banner" style="padding: 12rem 2rem 8rem 2rem; background-image: url('<?php echo esc_url( $comm_hero_bg ); ?>'); background-size: cover; background-position: center; position: relative; overflow: hidden;">
+        <div style="position: absolute; inset: 0; background-color: rgba(12, 11, 10, 0.7);"></div>
+        <div style="max-width: 1320px; margin: 0 auto; padding: 0 clamp(1rem, 5vw, 3rem); position: relative; z-index: 2; text-align: left;">
+            <?php if ( ! empty( $comm_hero_badge ) ) : ?>
+            <div style="display: inline-flex; align-items: center; gap: 0.6rem; background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); padding: 0.5rem 1rem; border-radius: 50px; margin-bottom: 1.5rem; border: 1px solid rgba(255,255,255,0.2);">
+                <span style="width: 8px; height: 8px; background-color: #c8102e; border-radius: 50%; display: inline-block;"></span>
+                <span style="color: #ffffff; font-size: 0.85rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; font-family: 'Instrument Sans', sans-serif;"><?php echo esc_html( $comm_hero_badge ); ?></span>
+            </div>
+            <?php endif; ?>
+            <?php if ( ! empty( $comm_hero_title ) ) : ?>
+            <h1 style="font-family: 'Phudu', sans-serif; font-size: clamp(1.4rem, 2.6vw, 2.25rem); font-weight: 700; color: #ffffff; text-transform: uppercase; margin: 0 0 1rem 0; line-height: 1.2; text-align: left;"><?php echo esc_html( $comm_hero_title ); ?></h1>
+            <?php endif; ?>
+            <?php if ( ! empty( $comm_hero_sub ) ) : ?>
+                <p style="font-family: 'Instrument Sans', sans-serif; font-size: clamp(1rem, 1.8vw, 1.18rem); color: rgba(255, 255, 255, 0.92); max-width: 760px; margin: 0.8rem 0 0 0; line-height: 1.6; font-weight: 400; text-align: left;">
+                    <?php echo nl2br( esc_html( $comm_hero_sub ) ); ?>
+                </p>
+            <?php endif; ?>
         </div>
-        <h1 style="font-family: 'Phudu', sans-serif; font-size: clamp(2.8rem, 5.2vw, 4.5rem); font-weight: 700; color: #ffffff; text-transform: uppercase; margin: 0 0 1rem 0; line-height: 1.1;"><?php echo esc_html( franciscan_get_page_field( "community", "hero_title", "COMMUNITY" ) ); ?></h1>
-    </div>
-</section>
+    </section>
 
     <!-- General Council Section -->
     <section style="padding: clamp(2rem, 4vw, 3.5rem) 2rem; background-color: #FFFFFF; max-width: 1320px; margin: 0 auto;">

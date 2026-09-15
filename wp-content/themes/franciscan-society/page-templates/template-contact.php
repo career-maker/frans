@@ -34,13 +34,13 @@ $hero_subtitle = franciscan_get_page_field( 'contact', 'hero_subtitle', 'Reach o
 
 /* Page Hero Banner */
 .contact-hero-banner {
-    padding: 12rem 2rem 7rem 2rem;
+    padding: 12rem 2rem 8rem 2rem;
     background-image: url('<?php echo esc_url( $hero_bg ); ?>');
     background-size: cover;
     background-position: center;
     position: relative;
     overflow: hidden;
-    text-align: center;
+    text-align: left;
 }
 .contact-hero-overlay {
     position: absolute;
@@ -48,10 +48,12 @@ $hero_subtitle = franciscan_get_page_field( 'contact', 'hero_subtitle', 'Reach o
     background-color: rgba(12, 11, 10, 0.72);
 }
 .contact-hero-inner {
-    max-width: 860px;
+    max-width: 1320px;
     margin: 0 auto;
+    padding: 0 clamp(1rem, 5vw, 3rem);
     position: relative;
     z-index: 2;
+    text-align: left;
 }
 .contact-hero-badge-pill {
     display: inline-flex;
@@ -82,13 +84,14 @@ $hero_subtitle = franciscan_get_page_field( 'contact', 'hero_subtitle', 'Reach o
 }
 .contact-hero-h1 {
     font-family: 'Phudu', sans-serif;
-    font-size: clamp(2.8rem, 5.2vw, 4.5rem);
+    font-size: clamp(1.4rem, 2.6vw, 2.25rem);
     font-weight: 700;
     color: #ffffff;
     text-transform: uppercase;
     margin: 0 0 1.2rem 0;
-    line-height: 1.1;
+    line-height: 1.2;
     letter-spacing: -0.01em;
+    text-align: left;
 }
 .contact-hero-sub {
     font-family: 'Instrument Sans', sans-serif;
@@ -479,12 +482,18 @@ $hero_subtitle = franciscan_get_page_field( 'contact', 'hero_subtitle', 'Reach o
 <section class="contact-hero-banner">
     <div class="contact-hero-overlay"></div>
     <div class="contact-hero-inner">
+        <?php if ( ! empty( $hero_badge ) ) : ?>
         <div class="contact-hero-badge-pill">
             <span class="contact-hero-dot"></span>
             <span class="contact-hero-badge-text"><?php echo esc_html( $hero_badge ); ?></span>
         </div>
+        <?php endif; ?>
+        <?php if ( ! empty( $hero_title ) ) : ?>
         <h1 class="contact-hero-h1"><?php echo esc_html( $hero_title ); ?></h1>
+        <?php endif; ?>
+        <?php if ( ! empty( $hero_subtitle ) ) : ?>
         <p class="contact-hero-sub"><?php echo esc_html( $hero_subtitle ); ?></p>
+        <?php endif; ?>
     </div>
 </section>
 

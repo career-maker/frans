@@ -654,14 +654,18 @@ button.fs-mega-toggle:focus::after {
     <!-- Page Hero -->
     <section class="page-hero-banner" style="position: relative; padding: 11rem 2rem 7rem 2rem; background: url('<?php echo esc_url( $hero_image ); ?>') center/cover no-repeat; text-align: center; overflow: hidden;">
         <div style="position: absolute; inset: 0; background-color: rgba(12, 11, 10, 0.72);"></div>
-        <div style="max-width: 800px; margin: 0 auto; position: relative; z-index: 2; text-align: center;">
+        <div style="max-width: 1320px; margin: 0 auto; padding: 0 clamp(1rem, 5vw, 3rem); position: relative; z-index: 2; text-align: left;">
+            <?php if ( ! empty( $hero_badge ) ) : ?>
             <div style="display: inline-flex; align-items: center; gap: 0.6rem; background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); padding: 0.5rem 1.2rem; border-radius: 50px; margin-bottom: 1.5rem; border: 1px solid rgba(255,255,255,0.2);">
                 <span style="width: 8px; height: 8px; background-color: #e6c888; border-radius: 50%; display: inline-block;"></span>
                 <span style="color: #ffffff; font-size: 0.85rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; font-family: 'Instrument Sans', sans-serif;"><?php echo esc_html( $hero_badge ); ?></span>
             </div>
-            <h1 style="font-family: 'Phudu', sans-serif; font-size: clamp(2.8rem, 5vw, 4.2rem); font-weight: 700; color: #ffffff; text-transform: uppercase; margin: 0;"><?php echo esc_html( $hero_title ); ?></h1>
+            <?php endif; ?>
+            <?php if ( ! empty( $hero_title ) ) : ?>
+            <h1 style="font-family: 'Phudu', sans-serif; font-size: clamp(1.4rem, 2.6vw, 2.25rem); font-weight: 700; color: #ffffff; text-transform: uppercase; margin: 0; text-align: left;"><?php echo esc_html( $hero_title ); ?></h1>
+            <?php endif; ?>
             <?php if ( ! empty( $hero_subtitle ) ) : ?>
-                <p style="font-family: 'Instrument Sans', sans-serif; font-size: clamp(1rem, 2vw, 1.15rem); color: rgba(255, 255, 255, 0.88); line-height: 1.6; margin: 1rem auto 0 auto; max-width: 680px;"><?php echo esc_html( $hero_subtitle ); ?></p>
+                <p style="font-family: 'Instrument Sans', sans-serif; font-size: clamp(1rem, 2vw, 1.15rem); color: rgba(255, 255, 255, 0.88); line-height: 1.6; margin: 1rem 0 0 0; max-width: 680px; text-align: left;"><?php echo esc_html( $hero_subtitle ); ?></p>
             <?php endif; ?>
         </div>
     </section>

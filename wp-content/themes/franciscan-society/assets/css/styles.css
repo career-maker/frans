@@ -2747,6 +2747,106 @@ body.menu-open { overflow: hidden; }
     transition-delay: 0s;
 }
 
+.welcome-slide-center-title {
+    position: absolute !important;
+    bottom: 24px !important;
+    left: 24px !important;
+    top: auto !important;
+    right: auto !important;
+    inset: auto auto 24px 24px !important;
+    display: inline-flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    gap: 0.5rem !important;
+    pointer-events: none;
+    z-index: 4;
+    text-align: left !important;
+    padding: 0.45rem 0.9rem !important;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.5s ease 0.1s, transform 0.5s ease 0.1s;
+    background: rgba(12, 11, 10, 0.65) !important;
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+    border-radius: 12px !important;
+    border: 1px solid rgba(255, 255, 255, 0.18) !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35) !important;
+}
+.welcome-slide.is-active .welcome-slide-center-title {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+}
+.welcome-slide-center-title .cross-mark {
+    font-size: 0.95rem !important;
+    color: #e6c888 !important;
+    margin-bottom: 0 !important;
+    filter: drop-shadow(0 2px 6px rgba(0,0,0,0.85));
+    line-height: 1;
+}
+.welcome-slide-center-title .slide-title-text {
+    font-family: 'Phudu', sans-serif !important;
+    font-size: clamp(1rem, 1.8vw, 1.35rem) !important;
+    font-weight: 700 !important;
+    color: #ffffff !important;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    line-height: 1.2;
+    margin: 0;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+}
+@media (max-width: 768px) {
+    .welcome-slide-center-title {
+        bottom: 14px !important;
+        left: 14px !important;
+        padding: 0.35rem 0.7rem !important;
+    }
+    .welcome-slide-center-title .slide-title-text {
+        font-size: 0.95rem !important;
+    }
+}
+
+/* ============================================================
+   GLOBAL INNER PAGES HERO BANNER (LEFT-ALIGNED & 50% TITLE SIZE)
+   ============================================================ */
+.page-hero-banner,
+.page-hero-section,
+.contact-hero-banner {
+    text-align: left !important;
+}
+.page-hero-banner > div:not(.hero-overlay),
+.page-hero-banner .hero-content,
+.contact-hero-banner .contact-hero-inner {
+    max-width: 1320px !important;
+    margin: 0 auto !important;
+    padding-left: clamp(1rem, 5vw, 3rem) !important;
+    padding-right: clamp(1rem, 5vw, 3rem) !important;
+    text-align: left !important;
+    align-items: flex-start !important;
+}
+.page-hero-banner h1,
+.page-hero-banner .page-hero-title,
+.contact-hero-banner .contact-hero-h1 {
+    font-size: clamp(1.4rem, 2.6vw, 2.25rem) !important;
+    line-height: 1.2 !important;
+    text-align: left !important;
+    margin-left: 0 !important;
+    margin-right: auto !important;
+}
+.page-hero-banner p,
+.page-hero-banner .page-hero-desc,
+.contact-hero-banner .contact-hero-sub {
+    text-align: left !important;
+    margin-left: 0 !important;
+    margin-right: auto !important;
+}
+.page-hero-banner .hero-badge,
+.page-hero-banner .hero-badge-pill,
+.contact-hero-banner .contact-hero-badge-pill {
+    margin-left: 0 !important;
+    margin-right: auto !important;
+}
+
 .cta-dock__item {
     opacity: 0;
     transform: translateY(10px) scale(0.94);

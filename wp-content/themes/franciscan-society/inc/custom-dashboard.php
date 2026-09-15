@@ -135,6 +135,10 @@ function franciscan_ajax_save_dashboard() {
         $merged = array_merge( $current, $page_data );
         update_option( 'franciscan_page_' . $page_slug, $merged );
 
+        if ( 'blogs' === $page_slug && isset( $page_data['hide_blogs_page'] ) ) {
+            update_option( 'franciscan_hide_blogs_page', $page_data['hide_blogs_page'] );
+        }
+
         wp_send_json_success( array( 'message' => 'Content for page "' . esc_html( $page_slug ) . '" updated and synchronized with frontend!' ) );
     }
 
@@ -1101,21 +1105,89 @@ function franciscan_render_dashboard_view() {
                     if ( ! is_array( $data ) ) {
                         $data = array();
                     }
-                    $hero_badge_val = ( isset( $data['hero_badge'] ) && $data['hero_badge'] !== '' ) ? $data['hero_badge'] : ( $defaults['hero_badge'] ?? '' );
-                    $hero_title_val = ( isset( $data['hero_title'] ) && $data['hero_title'] !== '' ) ? $data['hero_title'] : ( $defaults['hero_title'] ?? '' );
-                    $hero_sub_val   = ( isset( $data['hero_subtitle'] ) && $data['hero_subtitle'] !== '' ) ? $data['hero_subtitle'] : ( $defaults['hero_subtitle'] ?? '' );
+                    $hero_badge_val = array_key_exists( 'hero_badge', $data ) ? $data['hero_badge'] : ( $defaults['hero_badge'] ?? '' );
+                    $hero_title_val = array_key_exists( 'hero_title', $data ) ? $data['hero_title'] : ( $defaults['hero_title'] ?? '' );
+                    $hero_sub_val   = array_key_exists( 'hero_subtitle', $data ) ? $data['hero_subtitle'] : ( $defaults['hero_subtitle'] ?? '' );
                 ?>
                     <form class="page-editor-form" id="form-page-<?php echo esc_attr( $slug ); ?>" data-slug="<?php echo esc_attr( $slug ); ?>" style="<?php echo $slug === 'home' ? '' : 'display:none;'; ?>">
                         
+                        <?php if ( $slug === 'home' ) : 
+                            $blogs_page_hidden = ( '1' === (string) franciscan_get_page_field( 'blogs', 'hide_blogs_page', '0' ) ) || ( '1' === (string) get_option( 'franciscan_hide_blogs_page', '0' ) );
+                        ?>
+                            <!-- Home Page Section Visibility Toggles -->
+                            <div class="form-section" style="background: rgba(230, 200, 136, 0.05); border: 1px solid rgba(230, 200, 136, 0.25); border-radius: 14px; padding: 1.5rem; margin-bottom: 2rem;">
+                                <h3 class="form-section-title" style="color: #e6c888; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.6rem;">
+                                    <span>👁️</span> Home Page Section Visibility
+                                </h3>
+                                <p style="color: var(--c-text-muted); font-size: 0.88rem; margin-bottom: 1.25rem; line-height: 1.5;">
+                                    Enable or hide any section on the Home page. Check the box to hide that section from visitors.
+                                </p>
+                                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem;">
+                                    <label style="display: flex; align-items: center; gap: 0.65rem; cursor: pointer; font-size: 0.92rem; background: rgba(0,0,0,0.2); padding: 0.75rem 1rem; border-radius: 8px; border: 1px solid rgba(255,255,255,0.08);">
+                                        <input type="hidden" name="hide_hero_section" value="0">
+                                        <input type="checkbox" name="hide_hero_section" value="1" <?php checked( $data['hide_hero_section'] ?? '0', '1' ); ?> style="width: 18px; height: 18px; accent-color: #c8102e;">
+                                        <span>Hide Hero Banner</span>
+                                    </label>
+                                    <label style="display: flex; align-items: center; gap: 0.65rem; cursor: pointer; font-size: 0.92rem; background: rgba(0,0,0,0.2); padding: 0.75rem 1rem; border-radius: 8px; border: 1px solid rgba(255,255,255,0.08);">
+                                        <input type="hidden" name="hide_welcome_section" value="0">
+                                        <input type="checkbox" name="hide_welcome_section" value="1" <?php checked( $data['hide_welcome_section'] ?? '0', '1' ); ?> style="width: 18px; height: 18px; accent-color: #c8102e;">
+                                        <span>Hide Welcome Section</span>
+                                    </label>
+                                    <label style="display: flex; align-items: center; gap: 0.65rem; cursor: pointer; font-size: 0.92rem; background: rgba(0,0,0,0.2); padding: 0.75rem 1rem; border-radius: 8px; border: 1px solid rgba(255,255,255,0.08);">
+                                        <input type="hidden" name="hide_about_section" value="0">
+                                        <input type="checkbox" name="hide_about_section" value="1" <?php checked( $data['hide_about_section'] ?? '0', '1' ); ?> style="width: 18px; height: 18px; accent-color: #c8102e;">
+                                        <span>Hide About Us Section</span>
+                                    </label>
+                                    <label style="display: flex; align-items: center; gap: 0.65rem; cursor: pointer; font-size: 0.92rem; background: rgba(0,0,0,0.2); padding: 0.75rem 1rem; border-radius: 8px; border: 1px solid rgba(255,255,255,0.08);">
+                                        <input type="hidden" name="hide_values_section" value="0">
+                                        <input type="checkbox" name="hide_values_section" value="1" <?php checked( $data['hide_values_section'] ?? '0', '1' ); ?> style="width: 18px; height: 18px; accent-color: #c8102e;">
+                                        <span>Hide Our Values Section</span>
+                                    </label>
+                                    <label style="display: flex; align-items: center; gap: 0.65rem; cursor: pointer; font-size: 0.92rem; background: rgba(0,0,0,0.2); padding: 0.75rem 1rem; border-radius: 8px; border: 1px solid rgba(255,255,255,0.08);">
+                                        <input type="hidden" name="hide_bible_section" value="0">
+                                        <input type="checkbox" name="hide_bible_section" value="1" <?php checked( $data['hide_bible_section'] ?? '0', '1' ); ?> style="width: 18px; height: 18px; accent-color: #c8102e;">
+                                        <span>Hide Bible Quote Section</span>
+                                    </label>
+                                    <label style="display: flex; align-items: center; gap: 0.65rem; cursor: pointer; font-size: 0.92rem; background: rgba(0,0,0,0.2); padding: 0.75rem 1rem; border-radius: 8px; border: 1px solid rgba(255,255,255,0.08);">
+                                        <input type="hidden" name="hide_news_section" value="0">
+                                        <input type="checkbox" name="hide_news_section" value="1" <?php checked( $data['hide_news_section'] ?? '0', '1' ); ?> style="width: 18px; height: 18px; accent-color: #c8102e;">
+                                        <span>Hide News &amp; Updates Section</span>
+                                    </label>
+                                    <label style="display: flex; align-items: center; gap: 0.65rem; cursor: pointer; font-size: 0.92rem; background: rgba(0,0,0,0.2); padding: 0.75rem 1rem; border-radius: 8px; border: 1px solid rgba(255,255,255,0.08); <?php echo $blogs_page_hidden ? 'opacity: 0.75;' : ''; ?>">
+                                        <input type="hidden" name="hide_blogs_section" value="0">
+                                        <input type="checkbox" name="hide_blogs_section" value="1" <?php checked( ( $blogs_page_hidden || ( $data['hide_blogs_section'] ?? '0' ) === '1' ), true ); ?> <?php echo $blogs_page_hidden ? 'disabled' : ''; ?> style="width: 18px; height: 18px; accent-color: #c8102e;">
+                                        <span>Hide Blogs Section <?php if ( $blogs_page_hidden ) : ?><small style="color:#e6c888; display:block; font-size:0.75rem;">(Auto-hidden: Blog page is hidden)</small><?php endif; ?></span>
+                                    </label>
+                                    <label style="display: flex; align-items: center; gap: 0.65rem; cursor: pointer; font-size: 0.92rem; background: rgba(0,0,0,0.2); padding: 0.75rem 1rem; border-radius: 8px; border: 1px solid rgba(255,255,255,0.08);">
+                                        <input type="hidden" name="hide_gallery_section" value="0">
+                                        <input type="checkbox" name="hide_gallery_section" value="1" <?php checked( $data['hide_gallery_section'] ?? '0', '1' ); ?> style="width: 18px; height: 18px; accent-color: #c8102e;">
+                                        <span>Hide Gallery Section</span>
+                                    </label>
+                                    <label style="display: flex; align-items: center; gap: 0.65rem; cursor: pointer; font-size: 0.92rem; background: rgba(0,0,0,0.2); padding: 0.75rem 1rem; border-radius: 8px; border: 1px solid rgba(255,255,255,0.08);">
+                                        <input type="hidden" name="hide_inquiry_section" value="0">
+                                        <input type="checkbox" name="hide_inquiry_section" value="1" <?php checked( $data['hide_inquiry_section'] ?? '0', '1' ); ?> style="width: 18px; height: 18px; accent-color: #c8102e;">
+                                        <span>Hide Contact / Inquiry Form</span>
+                                    </label>
+                                    <label style="display: flex; align-items: center; gap: 0.65rem; cursor: pointer; font-size: 0.92rem; background: rgba(0,0,0,0.2); padding: 0.75rem 1rem; border-radius: 8px; border: 1px solid rgba(255,255,255,0.08);">
+                                        <input type="hidden" name="hide_mass_intention_section" value="0">
+                                        <input type="checkbox" name="hide_mass_intention_section" value="1" <?php checked( $data['hide_mass_intention_section'] ?? '0', '1' ); ?> style="width: 18px; height: 18px; accent-color: #c8102e;">
+                                        <span>Hide Mass Intention in USA</span>
+                                    </label>
+                                </div>
+                            </div>
+                        <?php endif; ?>
+
                         <!-- Hero Section Fields -->
                         <div class="form-section">
                             <h3 class="form-section-title">🌟 Top Banner & Hero Section</h3>
                             <div class="form-grid">
+                                <?php if ( $slug !== 'home' ) : ?>
                                 <div class="form-group">
                                     <label>Hero Badge / Eyebrow Text</label>
                                     <input type="text" name="hero_badge" class="form-control" value="<?php echo esc_attr( $hero_badge_val ); ?>" placeholder="<?php echo esc_attr( $defaults['hero_badge'] ?? '' ); ?>">
                                 </div>
-                                <div class="form-group">
+                                <?php endif; ?>
+                                <div class="form-group <?php echo $slug === 'home' ? 'full-width' : ''; ?>">
                                     <label>Hero Main Heading (Title)</label>
                                     <input type="text" name="hero_title" class="form-control" value="<?php echo esc_attr( $hero_title_val ); ?>" placeholder="<?php echo esc_attr( $defaults['hero_title'] ?? '' ); ?>">
                                 </div>
@@ -1518,6 +1590,7 @@ function franciscan_render_dashboard_view() {
                                 </div>
                             </div>
 
+                            <?php if ( ! $blogs_page_hidden ) : ?>
                             <!-- Blogs / Ministries Section Header -->
                             <div class="form-section">
                                 <h3 class="form-section-title">&#x1F4DD; Blogs &amp; Ministries Section</h3>
@@ -1540,6 +1613,7 @@ function franciscan_render_dashboard_view() {
                                     </div>
                                 </div>
                             </div>
+                            <?php endif; ?>
 
                             <!-- Gallery Section Header -->
                             <div class="form-section">
@@ -1564,9 +1638,74 @@ function franciscan_render_dashboard_view() {
                                 </div>
                             </div>
 
+                            <!-- Quick Inquiry / Contact Form Section -->
+                            <div class="form-section">
+                                <h3 class="form-section-title">✉️ Contact &amp; Inquiry Section</h3>
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label>Eyebrow Badge</label>
+                                        <input type="text" name="inquiry_eyebrow" class="form-control" value="<?php echo esc_attr( $data['inquiry_eyebrow'] ?? 'SUBMIT AN INQUIRY' ); ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Submit Button Label</label>
+                                        <input type="text" name="inquiry_btn_text" class="form-control" value="<?php echo esc_attr( $data['inquiry_btn_text'] ?? 'SUBMIT INQUIRY' ); ?>">
+                                    </div>
+                                    <div class="form-group full-width">
+                                        <label>Section Heading (Title)</label>
+                                        <input type="text" name="inquiry_title" class="form-control" value="<?php echo esc_attr( $data['inquiry_title'] ?? 'HAVE A QUESTION OR NEED PRAYER? REACH OUT TO US' ); ?>">
+                                    </div>
+                                    <div class="form-group full-width">
+                                        <label>Card Background Image (Full-width card background)</label>
+                                        <?php
+                                        $def_inq_bg = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_51_30_PM.png';
+                                        $cur_inq_bg = ! empty( $data['inquiry_bg_img'] ) ? $data['inquiry_bg_img'] : $def_inq_bg;
+                                        ?>
+                                        <div class="image-uploader-box">
+                                            <div style="width: 100px; height: 64px; border-radius: 8px; overflow: hidden; background: #0c1727; border: 1px solid var(--c-gold); flex-shrink: 0; display: flex; align-items: center; justify-content: center;">
+                                                <img src="<?php echo esc_url( $cur_inq_bg ); ?>" class="image-preview-thumb" id="preview-inquiry_bg_img-home" style="width: 100%; height: 100%; object-fit: cover; display: block;" onerror="this.src='<?php echo esc_url( $def_inq_bg ); ?>';">
+                                            </div>
+                                            <input type="hidden" name="inquiry_bg_img" id="input-inquiry_bg_img-home" value="<?php echo esc_attr( $data['inquiry_bg_img'] ?? '' ); ?>">
+                                            <div style="display: flex; gap: 0.8rem; align-items: center; flex-wrap: wrap;">
+                                                <button type="button" class="btn btn-secondary btn-upload-media" data-target="inquiry_bg_img-home">Choose Background Image</button>
+                                                <button type="button" class="btn btn-secondary btn-reset-media" data-target="inquiry_bg_img-home" data-default="<?php echo esc_url( $def_inq_bg ); ?>" style="<?php echo empty( $data['inquiry_bg_img'] ) ? 'display:none;' : ''; ?>">Reset to Default</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group full-width">
+                                        <label>Side Featured Person Image (Left PNG artwork)</label>
+                                        <?php
+                                        $def_inq_person = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/ChatGPT_Image_Aug_18_2026_05_56_24_PM.png';
+                                        $cur_inq_person = ! empty( $data['inquiry_person_img'] ) ? $data['inquiry_person_img'] : $def_inq_person;
+                                        ?>
+                                        <div class="image-uploader-box">
+                                            <div style="width: 64px; height: 64px; border-radius: 8px; overflow: hidden; background: #0c1727; border: 1px solid var(--c-gold); flex-shrink: 0; display: flex; align-items: center; justify-content: center;">
+                                                <img src="<?php echo esc_url( $cur_inq_person ); ?>" class="image-preview-thumb" id="preview-inquiry_person_img-home" style="width: 100%; height: 100%; object-fit: contain; display: block;" onerror="this.src='<?php echo esc_url( $def_inq_person ); ?>';">
+                                            </div>
+                                            <input type="hidden" name="inquiry_person_img" id="input-inquiry_person_img-home" value="<?php echo esc_attr( $data['inquiry_person_img'] ?? '' ); ?>">
+                                            <div style="display: flex; gap: 0.8rem; align-items: center; flex-wrap: wrap;">
+                                                <button type="button" class="btn btn-secondary btn-upload-media" data-target="inquiry_person_img-home">Choose Side Image</button>
+                                                <button type="button" class="btn btn-secondary btn-reset-media" data-target="inquiry_person_img-home" data-default="<?php echo esc_url( $def_inq_person ); ?>" style="<?php echo empty( $data['inquiry_person_img'] ) ? 'display:none;' : ''; ?>">Reset to Default</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                         <?php endif; ?>
 
                         <?php if ( $slug === 'about' ) : ?>
+                            <!-- About Page Section Visibility -->
+                            <div class="form-section" style="background: rgba(230, 200, 136, 0.05); border: 1px solid rgba(230, 200, 136, 0.25); border-radius: 14px; padding: 1.5rem; margin-bottom: 2rem;">
+                                <h3 class="form-section-title" style="color: #e6c888; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.6rem;">
+                                    <span>👁️</span> Section Visibility
+                                </h3>
+                                <label style="display: flex; align-items: center; gap: 0.65rem; cursor: pointer; font-size: 0.92rem; background: rgba(0,0,0,0.2); padding: 0.75rem 1rem; border-radius: 8px; border: 1px solid rgba(255,255,255,0.08); max-width: 360px;">
+                                    <input type="hidden" name="hide_values_section" value="0">
+                                    <input type="checkbox" name="hide_values_section" value="1" <?php checked( $data['hide_values_section'] ?? '0', '1' ); ?> style="width: 18px; height: 18px; accent-color: #c8102e;">
+                                    <span>Hide "Our Values" Section</span>
+                                </label>
+                            </div>
+
                             <!-- About Page Specific Sections -->
                             <div class="form-section">
                                 <h3 class="form-section-title">🏛️ Story &amp; Heritage Section</h3>
@@ -3383,6 +3522,25 @@ function franciscan_render_dashboard_view() {
                                             💡 You can customize headings, bullet points, and clauses directly here. If left empty, the official Franciscan Province standard legal text is displayed.
                                         </small>
                                     </div>
+                                </div>
+                            </div>
+                        <?php endif; ?>
+
+                        <?php if ( $slug === 'blogs' ) : ?>
+                            <!-- Blog Page Global Visibility Settings -->
+                            <div class="form-section" style="border-left: 4px solid #c8102e; background: rgba(200, 16, 46, 0.05); padding: 1.5rem; border-radius: 12px; margin-bottom: 2rem;">
+                                <h3 class="form-section-title" style="color: #c8102e; margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.6rem;">
+                                    <span>🚫</span> Blog Page Visibility
+                                </h3>
+                                <div class="form-group" style="margin-bottom: 0;">
+                                    <label style="display: flex; align-items: center; gap: 0.85rem; font-weight: 700; font-size: 1rem; cursor: pointer;">
+                                        <input type="hidden" name="hide_blogs_page" value="0">
+                                        <input type="checkbox" name="hide_blogs_page" value="1" <?php checked( $data['hide_blogs_page'] ?? '0', '1' ); ?> style="width: 20px; height: 20px; accent-color: #c8102e;">
+                                        <span>Hide Entire Blog Page</span>
+                                    </label>
+                                    <p style="margin: 0.5rem 0 0 2.2rem; font-size: 0.88rem; color: var(--c-text-muted); line-height: 1.5;">
+                                        When checked, the public Blog page is completely hidden and disabled (visitors are redirected to home), and the Blogs section on the Home Page is automatically hidden.
+                                    </p>
                                 </div>
                             </div>
                         <?php endif; ?>

@@ -712,24 +712,28 @@ button.fs-mega-toggle:focus::after {
         
     <!-- Page Hero -->
     <?php
-    $about_hero_bg = franciscan_get_page_field( 'about', 'hero_image', '' );
+    $about_hero_bg    = franciscan_get_page_field( 'about', 'hero_image', '' );
     if ( empty( $about_hero_bg ) || strpos( $about_hero_bg, 'ChatGPT_Image' ) !== false ) {
         $about_hero_bg = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/about-banner-sept01.jpeg';
     }
+    $about_hero_badge = franciscan_get_page_field( 'about', 'hero_badge', 'WHO WE ARE' );
+    $about_hero_title = franciscan_get_page_field( 'about', 'hero_title', 'ABOUT US' );
+    $about_hero_desc  = franciscan_get_page_field( 'about', 'hero_subtitle', '' );
     ?>
-    <section style="padding: 12rem 2rem 8rem 2rem; background-image: url('<?php echo esc_url( $about_hero_bg ); ?>'); background-size: cover; background-position: center; position: relative; overflow: hidden;">
+    <section class="page-hero-banner" style="padding: 12rem 2rem 8rem 2rem; background-image: url('<?php echo esc_url( $about_hero_bg ); ?>'); background-size: cover; background-position: center; position: relative; overflow: hidden;">
         <div style="position: absolute; inset: 0; background-color: rgba(12, 11, 10, 0.7);"></div>
-        <div style="max-width: 800px; margin: 0 auto; position: relative; z-index: 2; text-align: center;">
+        <div style="max-width: 1320px; margin: 0 auto; padding: 0 clamp(1rem, 5vw, 3rem); position: relative; z-index: 2; text-align: left;">
+            <?php if ( ! empty( $about_hero_badge ) ) : ?>
             <div style="display: inline-flex; align-items: center; gap: 0.6rem; background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); padding: 0.5rem 1rem; border-radius: 50px; margin-bottom: 1.5rem; border: 1px solid rgba(255,255,255,0.2);">
                 <span style="width: 8px; height: 8px; background-color: #c8102e; border-radius: 50%; display: inline-block;"></span>
-                <span style="color: #ffffff; font-size: 0.85rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; font-family: 'Instrument Sans', sans-serif;"><?php echo esc_html( franciscan_get_page_field( "about", "hero_badge", "WHO WE ARE" ) ); ?></span>
+                <span style="color: #ffffff; font-size: 0.85rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; font-family: 'Instrument Sans', sans-serif;"><?php echo esc_html( $about_hero_badge ); ?></span>
             </div>
-            <h1 style="font-family: 'Phudu', sans-serif; font-size: clamp(2.8rem, 5.2vw, 4.5rem); font-weight: 700; color: #ffffff; text-transform: uppercase; margin: 0 0 1rem 0; line-height: 1.1;"><?php echo esc_html( franciscan_get_page_field( "about", "hero_title", "ABOUT US" ) ); ?></h1>
-            <?php
-            $about_hero_desc = franciscan_get_page_field( 'about', 'hero_subtitle', '' );
-            if ( ! empty( $about_hero_desc ) ) :
-            ?>
-                <p style="font-family: 'Instrument Sans', sans-serif; font-size: clamp(1rem, 1.8vw, 1.18rem); color: rgba(255, 255, 255, 0.92); max-width: 760px; margin: 0.8rem auto 0; line-height: 1.6; font-weight: 400;">
+            <?php endif; ?>
+            <?php if ( ! empty( $about_hero_title ) ) : ?>
+            <h1 style="font-family: 'Phudu', sans-serif; font-size: clamp(1.4rem, 2.6vw, 2.25rem); font-weight: 700; color: #ffffff; text-transform: uppercase; margin: 0 0 1rem 0; line-height: 1.2; text-align: left;"><?php echo esc_html( $about_hero_title ); ?></h1>
+            <?php endif; ?>
+            <?php if ( ! empty( $about_hero_desc ) ) : ?>
+                <p style="font-family: 'Instrument Sans', sans-serif; font-size: clamp(1rem, 1.8vw, 1.18rem); color: rgba(255, 255, 255, 0.92); max-width: 760px; margin: 0.8rem 0 0 0; line-height: 1.6; font-weight: 400; text-align: left;">
                     <?php echo nl2br( esc_html( $about_hero_desc ) ); ?>
                 </p>
             <?php endif; ?>
@@ -945,6 +949,7 @@ button.fs-mega-toggle:focus::after {
             </div>
         </section>
 
+        <?php if ( empty( franciscan_get_page_field( 'about', 'hide_values_section', '0' ) ) ) : ?>
         <!-- Our Mission Section -->
         <section id="mission-section" style="padding: 6.5rem 0; background-color: #ffffff; color: #1c1917; box-sizing: border-box; overflow: hidden;">
             <div style="max-width: 1320px; margin: 0 auto; padding: 0 3rem; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center;">
@@ -1027,6 +1032,7 @@ button.fs-mega-toggle:focus::after {
 
             </div>
         </section>
+        <?php endif; ?>
 
     <!-- Charism & Foundation Section - Redesigned -->
     <!-- ============================================================
@@ -1077,7 +1083,7 @@ button.fs-mega-toggle:focus::after {
                             <div style="width: 42px; height: 42px; border-radius: 50%; background: #4A2A18; color: #ffffff; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L14.4 9.6L22 12L14.4 14.4L12 22L9.6 14.4L2 12L9.6 9.6L12 2Z"/></svg>
                             </div>
-                            <span style="font-family: 'Montserrat', sans-serif; font-size: 0.88rem; font-weight: 700; color: #1c1917; line-height: 1.3;">
+                            <span style="font-family: 'Montserrat', sans-serif; font-size: 0.88rem; font-weight: 400; color: #1c1917; line-height: 1.3;">
                                 <?php echo nl2br( esc_html( franciscan_get_page_field( 'about', 'charism_p1_title', "Ongoing\nConversion" ) ) ); ?>
                             </span>
                         </div>
@@ -1087,7 +1093,7 @@ button.fs-mega-toggle:focus::after {
                             <div style="width: 42px; height: 42px; border-radius: 50%; background: #4A2A18; color: #ffffff; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.38 3.46L16 2a4 4 0 01-8 0L3.62 3.46a2 2 0 00-1.34 2.23l.58 3.47a1 1 0 00.99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 002-2V10h2.15a1 1 0 00.99-.84l.58-3.47a2 2 0 00-1.34-2.23z"/></svg>
                             </div>
-                            <span style="font-family: 'Montserrat', sans-serif; font-size: 0.88rem; font-weight: 700; color: #1c1917; line-height: 1.3;">
+                            <span style="font-family: 'Montserrat', sans-serif; font-size: 0.88rem; font-weight: 400; color: #1c1917; line-height: 1.3;">
                                 <?php echo nl2br( esc_html( franciscan_get_page_field( 'about', 'charism_p2_title', "Poverty &\nHumility" ) ) ); ?>
                             </span>
                         </div>
@@ -1097,7 +1103,7 @@ button.fs-mega-toggle:focus::after {
                             <div style="width: 42px; height: 42px; border-radius: 50%; background: #4A2A18; color: #ffffff; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
                             </div>
-                            <span style="font-family: 'Montserrat', sans-serif; font-size: 0.88rem; font-weight: 700; color: #1c1917; line-height: 1.3;">
+                            <span style="font-family: 'Montserrat', sans-serif; font-size: 0.88rem; font-weight: 400; color: #1c1917; line-height: 1.3;">
                                 <?php echo nl2br( esc_html( franciscan_get_page_field( 'about', 'charism_p3_title', "Charity\nto All" ) ) ); ?>
                             </span>
                         </div>
@@ -1107,7 +1113,7 @@ button.fs-mega-toggle:focus::after {
                             <div style="width: 42px; height: 42px; border-radius: 50%; background: #4A2A18; color: #ffffff; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M10 2v6H4v4h6v10h4v-10h6V8h-6V2h-4z"/></svg>
                             </div>
-                            <span style="font-family: 'Montserrat', sans-serif; font-size: 0.88rem; font-weight: 700; color: #1c1917; line-height: 1.3;">
+                            <span style="font-family: 'Montserrat', sans-serif; font-size: 0.88rem; font-weight: 400; color: #1c1917; line-height: 1.3;">
                                 <?php echo nl2br( esc_html( franciscan_get_page_field( 'about', 'charism_p4_title', "Reconciled\nin Love" ) ) ); ?>
                             </span>
                         </div>

@@ -720,16 +720,20 @@ button.fs-mega-toggle:focus::after {
     ?>
     <section class="page-hero-banner" style="position: relative; padding-top: 180px; padding-bottom: 120px; background: url('<?php echo esc_url( $gal_hero_bg ); ?>') center/cover no-repeat;">
         <div style="position: absolute; inset: 0; background: rgba(20, 33, 58, 0.75);"></div>
-        <div style="position: relative; z-index: 10; max-width: 1200px; margin: 0 auto; padding: 0 2rem; text-align: center;">
+        <div style="position: relative; z-index: 10; max-width: 1320px; margin: 0 auto; padding: 0 clamp(1rem, 5vw, 3rem); text-align: left;">
             <?php if ( ! empty( $gal_hero_badge ) ) : ?>
                 <div style="display: inline-block; padding: 0.35rem 1.1rem; background: rgba(230, 200, 136, 0.18); border: 1px solid rgba(230, 200, 136, 0.4); border-radius: 50px; font-family: 'Instrument Sans', sans-serif; font-size: 0.85rem; font-weight: 700; color: #e6c888; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.85rem;">
                     <?php echo esc_html( $gal_hero_badge ); ?>
                 </div>
             <?php endif; ?>
-            <h1 style="font-family: 'Phudu', sans-serif; font-size: clamp(2.8rem, 5.2vw, 4.5rem); font-weight: 700; color: #ffffff; text-transform: uppercase; margin: 0 0 1rem 0; line-height: 1.1;"><?php echo esc_html( $gal_hero_title ); ?></h1>
-            <div style="font-family: 'Instrument Sans', sans-serif; font-size: 1.05rem; font-weight: 600; color: #e7e2d6;">
-                <?php echo esc_html( $gal_hero_sub ); ?>
-            </div>
+            <?php if ( ! empty( $gal_hero_title ) ) : ?>
+                <h1 style="font-family: 'Phudu', sans-serif; font-size: clamp(1.4rem, 2.6vw, 2.25rem); font-weight: 700; color: #ffffff; text-transform: uppercase; margin: 0 0 1rem 0; line-height: 1.1; text-align: left;"><?php echo esc_html( $gal_hero_title ); ?></h1>
+            <?php endif; ?>
+            <?php if ( ! empty( $gal_hero_sub ) ) : ?>
+                <div style="font-family: 'Instrument Sans', sans-serif; font-size: 1.05rem; font-weight: 600; color: #e7e2d6; text-align: left; max-width: 800px;">
+                    <?php echo esc_html( $gal_hero_sub ); ?>
+                </div>
+            <?php endif; ?>
         </div>
     </section>
 
