@@ -453,17 +453,23 @@ function franciscan_get_default_page_content( $slug = '' ) {
             ),
         ),
         'community-leadership' => array(
-            'hero_badge'             => 'To lead is to serve; to be greater is to become lesser.',
+            'hero_badge'             => 'LEADERSHIP',
             'hero_title'             => 'LEADERSHIP',
             'hero_subtitle'          => 'Guiding the Province in fraternity, governance, and mission.',
             'hero_image'             => FRANCISCAN_THEME_URI . '/assets/images/new_uploads/leadership-banner.jpg',
             'card_badge'             => 'GOVERNANCE',
             'card_title'             => 'SERVING IN COMMUNION',
             'card_subtitle'          => 'Led by the Minister Provincial and provincial leadership team committed to spiritual excellence.',
+            'general_eyebrow'        => '',
+            'general_heading'        => 'GENERAL COUNCIL',
+            'general_subtitle'       => 'The General Council guides the Franciscan Third Order Regular globally, ensuring fidelity to our charism and mission across all provinces and regions.',
+            'provincial_eyebrow'     => '',
+            'provincial_heading'     => 'PROVINCIAL COUNCIL',
+            'provincial_subtitle'    => "The Provincial Council oversees the spiritual and apostolic life of our community in Ranchi Province, ensuring our friars flourish in their vocations and effectively serve the Church's mission across India.",
             'general_council_badge'  => 'GENERAL COUNCIL',
-            'general_council_title'  => 'LEADERSHIP OF THE ORDER',
+            'general_council_title'  => '',
             'provincial_council_badge'=> 'PROVINCIAL COUNCIL',
-            'provincial_council_title'=> 'RANCHI PROVINCE LEADERSHIP',
+            'provincial_council_title'=> '',
             'general_council_list'   => function_exists( 'franciscan_get_default_general_council' ) ? franciscan_get_default_general_council() : array(),
             'provincial_council_list'=> function_exists( 'franciscan_get_default_provincial_council' ) ? franciscan_get_default_provincial_council() : array(),
         ),
@@ -720,8 +726,8 @@ function franciscan_get_default_page_content( $slug = '' ) {
         'news' => array(
             'hero_badge'    => 'PROVINCE CHRONICLES',
             'hero_title'    => 'NEWS & UPDATES',
-            'hero_subtitle' => 'Stay informed with the latest updates, feast days, community celebrations, and missionary reports.',
-            'hero_image'    => '',
+            'hero_subtitle' => 'Stay informed with the latest updates, jubilee celebrations, feast days, and missionary reports from Ranchi Province.',
+            'hero_image'    => FRANCISCAN_THEME_URI . '/assets/images/new_uploads/hero-banner-aug20.jpeg',
         ),
         'blogs' => array(
             'hide_blogs_page' => '0',
@@ -837,8 +843,26 @@ function franciscan_resync_legacy_content_options() {
                     if ( ! isset( $clean['hero_title'] ) || in_array( $clean['hero_title'], array( 'LEADERSHIP & COUNCILS', 'PROVINCIAL LEADERSHIP' ), true ) ) {
                         $clean['hero_title'] = 'LEADERSHIP';
                     }
-                    if ( ! isset( $clean['hero_badge'] ) || in_array( $clean['hero_badge'], array( 'SERVANT LEADERSHIP', 'PROVINCIAL ADMINISTRATION' ), true ) ) {
-                        $clean['hero_badge'] = 'To lead is to serve; to be greater is to become lesser.';
+                    if ( ! isset( $clean['hero_badge'] ) || 'To lead is to serve; to be greater is to become lesser.' === $clean['hero_badge'] || in_array( $clean['hero_badge'], array( 'SERVANT LEADERSHIP', 'PROVINCIAL ADMINISTRATION' ), true ) ) {
+                        $clean['hero_badge'] = 'LEADERSHIP';
+                    }
+                    if ( isset( $clean['general_eyebrow'] ) && 'To lead is to serve; to be greater is to become lesser.' === $clean['general_eyebrow'] ) {
+                        $clean['general_eyebrow'] = '';
+                    }
+                    if ( isset( $clean['provincial_eyebrow'] ) && 'To lead is to serve; to be greater is to become lesser.' === $clean['provincial_eyebrow'] ) {
+                        $clean['provincial_eyebrow'] = '';
+                    }
+                    if ( empty( $clean['general_heading'] ) ) {
+                        $clean['general_heading'] = 'GENERAL COUNCIL';
+                    }
+                    if ( empty( $clean['general_subtitle'] ) ) {
+                        $clean['general_subtitle'] = 'The General Council guides the Franciscan Third Order Regular globally, ensuring fidelity to our charism and mission across all provinces and regions.';
+                    }
+                    if ( empty( $clean['provincial_heading'] ) ) {
+                        $clean['provincial_heading'] = 'PROVINCIAL COUNCIL';
+                    }
+                    if ( empty( $clean['provincial_subtitle'] ) ) {
+                        $clean['provincial_subtitle'] = "The Provincial Council oversees the spiritual and apostolic life of our community in Ranchi Province, ensuring our friars flourish in their vocations and effectively serve the Church's mission across India.";
                     }
                     if ( empty( $clean['card_badge'] ) || preg_match( '/^GOVERNANCE\s*\d*$/i', trim( $clean['card_badge'] ) ) ) {
                         $clean['card_badge'] = 'GOVERNANCE';

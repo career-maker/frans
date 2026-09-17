@@ -768,7 +768,7 @@ button.fs-mega-toggle:focus::after {
     }
     ?>
     <section class="page-hero-banner" style="background-image: url('<?php echo esc_url( $hist_hero_bg ); ?>');">
-        <div style="position: absolute; inset: 0; background-color: rgba(12, 11, 10, 0.74);"></div>
+        <div class="hero-overlay page-hero-overlay" style="position: absolute; inset: 0; background-color: rgba(12, 11, 10, 0.74);"></div>
         <div style="max-width: 1320px; margin: 0 auto; padding: 0 clamp(1rem, 5vw, 3rem); position: relative; z-index: 2; text-align: left;">
             <?php if ( ! empty( $hist_hero_badge ) ) : ?>
             <div style="display: inline-flex; align-items: center; gap: 0.6rem; background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); padding: 0.5rem 1.2rem; border-radius: 50px; margin-bottom: 1.5rem; border: 1px solid rgba(255,255,255,0.2);">
@@ -777,11 +777,11 @@ button.fs-mega-toggle:focus::after {
             </div>
             <?php endif; ?>
             <?php if ( ! empty( $hist_hero_title ) ) : ?>
-            <h1 style="font-family: 'Phudu', sans-serif; font-size: clamp(1.4rem, 2.6vw, 2.25rem); font-weight: 700; color: #ffffff; text-transform: uppercase; margin: 0 0 1rem 0; line-height: 1.2; text-align: left;"><?php echo esc_html( $hist_hero_title ); ?></h1>
+            <h1 style="font-family: 'Phudu', sans-serif; font-size: clamp(1.4rem, 2.6vw, 2.25rem); font-weight: 700; color: #ffffff; text-transform: uppercase; margin: 0 0 1rem 0; line-height: 1.2; text-align: left;"><?php echo franciscan_render_rich_text( $hist_hero_title ); ?></h1>
             <?php endif; ?>
             <?php if ( ! empty( $hist_hero_desc ) ) : ?>
                 <p style="font-family: 'Instrument Sans', sans-serif; font-size: clamp(1rem, 1.8vw, 1.18rem); color: rgba(255, 255, 255, 0.92); max-width: 760px; margin: 0.8rem 0 0 0; line-height: 1.6; font-weight: 400; text-align: left;">
-                    <?php echo nl2br( esc_html( $hist_hero_desc ) ); ?>
+                    <?php echo franciscan_render_rich_text( $hist_hero_desc ); ?>
                 </p>
             <?php endif; ?>
         </div>

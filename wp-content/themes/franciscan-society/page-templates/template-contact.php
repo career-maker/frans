@@ -482,8 +482,8 @@ $hero_subtitle = franciscan_get_page_field( 'contact', 'hero_subtitle', 'Reach o
 <div id="contact-toast">Details Copied!</div>
 
 <!-- Dynamic Editable Contact Hero Banner -->
-<section class="contact-hero-banner">
-    <div class="contact-hero-overlay"></div>
+<section class="contact-hero-banner page-hero-banner">
+    <div class="contact-hero-overlay hero-overlay page-hero-overlay"></div>
     <div class="contact-hero-inner">
         <?php if ( ! empty( $hero_badge ) ) : ?>
         <div class="contact-hero-badge-pill">
@@ -492,10 +492,10 @@ $hero_subtitle = franciscan_get_page_field( 'contact', 'hero_subtitle', 'Reach o
         </div>
         <?php endif; ?>
         <?php if ( ! empty( $hero_title ) ) : ?>
-        <h1 class="contact-hero-h1"><?php echo esc_html( $hero_title ); ?></h1>
+        <h1 class="contact-hero-h1"><?php echo franciscan_render_rich_text( $hero_title ); ?></h1>
         <?php endif; ?>
         <?php if ( ! empty( $hero_subtitle ) ) : ?>
-        <p class="contact-hero-sub"><?php echo esc_html( $hero_subtitle ); ?></p>
+        <p class="contact-hero-sub"><?php echo franciscan_render_rich_text( $hero_subtitle ); ?></p>
         <?php endif; ?>
     </div>
 </section>

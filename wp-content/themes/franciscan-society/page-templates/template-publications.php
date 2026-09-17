@@ -732,7 +732,7 @@ button.fs-mega-toggle:focus::after {
     $pub_hero_sub   = franciscan_get_page_field( "publications", "hero_subtitle", "" );
     ?>
     <section class="page-hero-banner" style="padding: 11rem 2rem 7rem 2rem; background-image: url('<?php echo esc_url( $pub_hero_bg ); ?>'); background-size: cover; background-position: center; position: relative; overflow: hidden;">
-        <div style="position: absolute; inset: 0; background-color: rgba(12, 11, 10, 0.72);"></div>
+        <div class="hero-overlay page-hero-overlay" style="position: absolute; inset: 0; background-color: rgba(12, 11, 10, 0.72);"></div>
         <div style="max-width: 1320px; margin: 0 auto; padding: 0 clamp(1rem, 5vw, 3rem); position: relative; z-index: 2; text-align: left;">
             <?php if ( ! empty( $pub_hero_badge ) ) : ?>
             <div style="display: inline-flex; align-items: center; gap: 0.6rem; background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); padding: 0.5rem 1.2rem; border-radius: 50px; margin-bottom: 1.5rem; border: 1px solid rgba(255,255,255,0.2);">
@@ -741,11 +741,11 @@ button.fs-mega-toggle:focus::after {
             </div>
             <?php endif; ?>
             <?php if ( ! empty( $pub_hero_title ) ) : ?>
-            <h1 style="font-family: 'Phudu', sans-serif; font-size: clamp(1.4rem, 2.6vw, 2.25rem); font-weight: 700; color: #ffffff; text-transform: uppercase; margin: 0 0 1rem 0; line-height: 1.1; text-align: left;"><?php echo esc_html( $pub_hero_title ); ?></h1>
+            <h1 style="font-family: 'Phudu', sans-serif; font-size: clamp(1.4rem, 2.6vw, 2.25rem); font-weight: 700; color: #ffffff; text-transform: uppercase; margin: 0 0 1rem 0; line-height: 1.1; text-align: left;"><?php echo franciscan_render_rich_text( $pub_hero_title ); ?></h1>
             <?php endif; ?>
             <?php if ( ! empty( $pub_hero_sub ) && false === stripos( $pub_hero_sub, 'Books, newsletters' ) ) : ?>
                 <p style="font-family: 'Instrument Sans', sans-serif; font-size: clamp(1rem, 1.8vw, 1.2rem); color: #e6c888; max-width: 680px; margin: 0; line-height: 1.5; font-weight: 500; text-align: left;">
-                    <?php echo esc_html( $pub_hero_sub ); ?>
+                    <?php echo franciscan_render_rich_text( $pub_hero_sub ); ?>
                 </p>
             <?php endif; ?>
         </div>

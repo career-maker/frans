@@ -805,7 +805,7 @@ button.fs-mega-toggle:focus::after {
     }
     ?>
     <section class="page-hero-banner" style="background-image: url('<?php echo esc_url( $ldr_hero_bg ); ?>');">
-        <div style="position: absolute; inset: 0; background-color: rgba(12, 11, 10, 0.74);"></div>
+        <div class="hero-overlay page-hero-overlay" style="position: absolute; inset: 0; background-color: rgba(12, 11, 10, 0.74);"></div>
         <div style="max-width: 1320px; margin: 0 auto; padding: 0 clamp(1rem, 5vw, 3rem); position: relative; z-index: 2; text-align: left;">
             <?php if ( ! empty( $ldr_hero_badge ) ) : ?>
             <div class="leadership-hero-badge" style="display: inline-flex; align-items: center; justify-content: flex-start; gap: 0.6rem; background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); padding: 0.5rem 1.2rem; border-radius: 50px; margin-bottom: 1.5rem; border: 1px solid rgba(255,255,255,0.2); max-width: 95%;">
@@ -814,11 +814,11 @@ button.fs-mega-toggle:focus::after {
             </div>
             <?php endif; ?>
             <?php if ( ! empty( $ldr_hero_title ) ) : ?>
-            <h1 style="font-family: 'Phudu', sans-serif; font-size: clamp(1.4rem, 2.6vw, 2.25rem); font-weight: 700; color: #ffffff; text-transform: uppercase; margin: 0 0 1rem 0; line-height: 1.2; text-align: left;"><?php echo esc_html( $ldr_hero_title ); ?></h1>
+            <h1 style="font-family: 'Phudu', sans-serif; font-size: clamp(1.4rem, 2.6vw, 2.25rem); font-weight: 700; color: #ffffff; text-transform: uppercase; margin: 0 0 1rem 0; line-height: 1.2; text-align: left;"><?php echo franciscan_render_rich_text( $ldr_hero_title ); ?></h1>
             <?php endif; ?>
             <?php if ( ! empty( $ldr_hero_desc ) ) : ?>
                 <p style="font-family: 'Instrument Sans', sans-serif; font-size: clamp(1rem, 1.8vw, 1.18rem); color: rgba(255, 255, 255, 0.92); max-width: 760px; margin: 0.8rem 0 0 0; line-height: 1.6; font-weight: 400; text-align: left;">
-                    <?php echo nl2br( esc_html( $ldr_hero_desc ) ); ?>
+                    <?php echo franciscan_render_rich_text( $ldr_hero_desc ); ?>
                 </p>
             <?php endif; ?>
         </div>
@@ -869,19 +869,18 @@ button.fs-mega-toggle:focus::after {
 
             <!-- GENERAL COUNCIL -->
             <div style="text-align: center; margin-bottom: 2.5rem;">
+                <?php
+                $general_eyebrow = franciscan_get_page_field( 'community-leadership', 'general_eyebrow', '' );
+                if ( ! empty( $general_eyebrow ) && $general_eyebrow !== 'To lead is to serve; to be greater is to become lesser.' && $general_eyebrow !== 'LEADERSHIP OF THE ORDER' ) :
+                ?>
                 <div class="leadership-eyebrow-container">
                     <span class="leadership-eyebrow-bullet"></span>
-                    <?php
-                    $general_eyebrow = franciscan_get_page_field( 'community-leadership', 'general_eyebrow', '' );
-                    if ( empty( $general_eyebrow ) || $general_eyebrow === 'LEADERSHIP OF THE ORDER' ) {
-                        $general_eyebrow = 'To lead is to serve; to be greater is to become lesser.';
-                    }
-                    ?>
                     <span class="leadership-eyebrow-text" style="color: #4A2A18; font-size: 0.78rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; font-family: 'Instrument Sans', sans-serif; line-height: 1.45;"><?php echo esc_html( $general_eyebrow ); ?></span>
                 </div>
-                <h2 style="font-family: 'Phudu', sans-serif; font-size: clamp(2rem, 3.5vw, 2.6rem); font-weight: 700; color: #1c1917; text-transform: uppercase; margin: 0 0 1rem 0;"><?php echo esc_html( franciscan_get_page_field( 'community-leadership', 'general_heading', 'GENERAL COUNCIL' ) ); ?></h2>
+                <?php endif; ?>
+                <h2 style="font-family: 'Phudu', sans-serif; font-size: clamp(2rem, 3.5vw, 2.6rem); font-weight: 700; color: #1c1917; text-transform: uppercase; margin: 0 0 1rem 0;"><?php echo franciscan_render_rich_text( franciscan_get_page_field( 'community-leadership', 'general_heading', 'GENERAL COUNCIL' ) ); ?></h2>
                 <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.52; max-width: 750px; margin: 0 auto;">
-                    <?php echo esc_html( franciscan_get_page_field( 'community-leadership', 'general_subtitle', 'The General Council guides the Franciscan Third Order Regular globally, ensuring fidelity to our charism and mission across all provinces and regions.' ) ); ?>
+                    <?php echo franciscan_render_rich_text( franciscan_get_page_field( 'community-leadership', 'general_subtitle', 'The General Council guides the Franciscan Third Order Regular globally, ensuring fidelity to our charism and mission across all provinces and regions.' ) ); ?>
                 </p>
             </div>
 
@@ -942,19 +941,18 @@ button.fs-mega-toggle:focus::after {
 
             <!-- PROVINCIAL COUNCIL -->
             <div style="text-align: center; margin-bottom: 2.5rem; padding-top: 3rem; border-top: 1px solid rgba(74,42,24,0.1);">
+                <?php
+                $provincial_eyebrow = franciscan_get_page_field( 'community-leadership', 'provincial_eyebrow', '' );
+                if ( ! empty( $provincial_eyebrow ) && $provincial_eyebrow !== 'To lead is to serve; to be greater is to become lesser.' && $provincial_eyebrow !== 'RANCHI PROVINCE LEADERSHIP' ) :
+                ?>
                 <div class="leadership-eyebrow-container">
                     <span class="leadership-eyebrow-bullet"></span>
-                    <?php
-                    $provincial_eyebrow = franciscan_get_page_field( 'community-leadership', 'provincial_eyebrow', '' );
-                    if ( empty( $provincial_eyebrow ) || $provincial_eyebrow === 'RANCHI PROVINCE LEADERSHIP' ) {
-                        $provincial_eyebrow = 'To lead is to serve; to be greater is to become lesser.';
-                    }
-                    ?>
                     <span class="leadership-eyebrow-text" style="color: #4A2A18; font-size: 0.78rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; font-family: 'Instrument Sans', sans-serif; line-height: 1.45;"><?php echo esc_html( $provincial_eyebrow ); ?></span>
                 </div>
-                <h2 style="font-family: 'Phudu', sans-serif; font-size: clamp(2rem, 3.5vw, 2.6rem); font-weight: 700; color: #1c1917; text-transform: uppercase; margin: 0 0 1rem 0;"><?php echo esc_html( franciscan_get_page_field( 'community-leadership', 'provincial_heading', 'PROVINCIAL COUNCIL' ) ); ?></h2>
+                <?php endif; ?>
+                <h2 style="font-family: 'Phudu', sans-serif; font-size: clamp(2rem, 3.5vw, 2.6rem); font-weight: 700; color: #1c1917; text-transform: uppercase; margin: 0 0 1rem 0;"><?php echo franciscan_render_rich_text( franciscan_get_page_field( 'community-leadership', 'provincial_heading', 'PROVINCIAL COUNCIL' ) ); ?></h2>
                 <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.52; max-width: 750px; margin: 0 auto;">
-                    <?php echo esc_html( franciscan_get_page_field( 'community-leadership', 'provincial_subtitle', "The Provincial Council oversees the spiritual and apostolic life of our community in Ranchi Province, ensuring our friars flourish in their vocations and effectively serve the Church's mission across India." ) ); ?>
+                    <?php echo franciscan_render_rich_text( franciscan_get_page_field( 'community-leadership', 'provincial_subtitle', "The Provincial Council oversees the spiritual and apostolic life of our community in Ranchi Province, ensuring our friars flourish in their vocations and effectively serve the Church's mission across India." ) ); ?>
                 </p>
             </div>
 

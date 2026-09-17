@@ -397,6 +397,63 @@ function franciscan_save_post_banner_metabox( $post_id ) {
 add_action( 'save_post', 'franciscan_save_post_banner_metabox' );
 
 /**
+ * Render text with support for HTML line breaks (<br>) and newlines
+ */
+if ( ! function_exists( 'franciscan_render_rich_text' ) ) {
+    function franciscan_render_rich_text( $text ) {
+        if ( empty( $text ) && '0' !== (string) $text ) {
+            return '';
+        }
+        $allowed = array(
+            'br'     => array(),
+            'span'   => array( 'class' => array(), 'style' => array() ),
+            'strong' => array(),
+            'b'      => array(),
+            'em'     => array(),
+            'i'      => array(),
+        );
+        return wp_kses( nl2br( (string) $text ), $allowed );
+    }
+}
+
+/**
+ * Ensure standard WordPress posts have a valid category upon save
+ */
+function franciscan_auto_assign_news_category( $post_id, $post, $update ) {
+    if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+        return;
+    }
+    if ( wp_is_post_revision( $post_id ) || 'post' !== $post->post_type || 'auto-draft' === $post->post_status ) {
+        return;
+    }
+    
+    // Check existing categories
+    $cats = wp_get_post_categories( $post_id, array( 'fields' => 'slugs' ) );
+    $has_specific_cat = false;
+    foreach ( $cats as $c_slug ) {
+        if ( 'uncategorized' !== $c_slug ) {
+            $has_specific_cat = true;
+            break;
+        }
+    }
+    
+    // If no specific category (or only uncategorized), assign 'news'
+    if ( ! $has_specific_cat ) {
+        $news_cat = get_term_by( 'slug', 'news', 'category' );
+        if ( ! $news_cat ) {
+            $created = wp_insert_term( 'News', 'category', array( 'slug' => 'news' ) );
+            $news_cat_id = ! is_wp_error( $created ) ? $created['term_id'] : (int) $created->get_error_data();
+        } else {
+            $news_cat_id = $news_cat->term_id;
+        }
+        if ( $news_cat_id ) {
+            wp_set_post_categories( $post_id, array( $news_cat_id ) );
+        }
+    }
+}
+add_action( 'save_post', 'franciscan_auto_assign_news_category', 20, 3 );
+
+/**
  * Automatically clean up unwanted dummy news posts and preserve legitimate news post
  */
 function franciscan_cleanup_dummy_news_posts() {

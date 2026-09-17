@@ -570,10 +570,8 @@ get_header();
 
                 <div id="news-scroll-track" style="display: flex; gap: 2.2rem; overflow-x: auto; -webkit-overflow-scrolling: touch; touch-action: pan-y pinch-zoom; scroll-behavior: smooth; scroll-snap-type: x proximity; padding: 0.5rem 0 1.5rem 0; scrollbar-width: none; -ms-overflow-style: none;">
                     <?php
-                    // STRICT: Only show posts from the 'news' category.
-                    // If the 'news' category doesn't exist OR has no published posts,
-                    // show the hardcoded fallback card instead.
-                    $news_cat = get_term_by( 'slug', 'news', 'category' );
+                    // Fetch published posts that belong to 'news' or are not categorized as 'blogs'
+                    $blog_cat = get_term_by( 'slug', 'blogs', 'category' );
                     $news_slider_args = array(
                         'post_type'      => 'post',
                         'post_status'    => 'publish',
@@ -582,13 +580,15 @@ get_header();
                         'orderby'        => 'date',
                         'order'          => 'DESC',
                     );
-                    if ( $news_cat ) {
-                        // Only fetch posts that are STRICTLY in the news category
-                        $news_slider_args['cat'] = $news_cat->term_id;
-                        $news_slider_args['category__in'] = array( $news_cat->term_id );
-                    } else {
-                        // No 'news' category exists at all — skip the query
-                        $news_slider_args['post__in'] = array( 0 ); // returns nothing
+                    if ( $blog_cat ) {
+                        $news_slider_args['tax_query'] = array(
+                            array(
+                                'taxonomy' => 'category',
+                                'field'    => 'term_id',
+                                'terms'    => array( $blog_cat->term_id ),
+                                'operator' => 'NOT IN',
+                            ),
+                        );
                     }
                     $news_slider_query = new WP_Query( $news_slider_args );
                     if ( $news_slider_query->have_posts() ) :
