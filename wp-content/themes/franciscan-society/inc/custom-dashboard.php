@@ -90,13 +90,46 @@ function franciscan_ajax_save_dashboard() {
 
         // Cross-sync banner description for Community History and Leadership
         if ( 'community-history' === $page_slug ) {
-            if ( isset( $page_data['hero_subtitle'] ) && ( ! isset( $page_data['heritage_text'] ) || empty( $page_data['heritage_text'] ) ) ) {
+            $current_hist   = get_option( 'franciscan_page_community-history', array() );
+            $old_card       = isset( $current_hist['heritage_text'] ) ? trim( $current_hist['heritage_text'] ) : '';
+            $old_hero       = isset( $current_hist['hero_subtitle'] ) ? trim( $current_hist['hero_subtitle'] ) : '';
+            $submitted_card = isset( $page_data['heritage_text'] ) ? trim( $page_data['heritage_text'] ) : '';
+            $submitted_hero = isset( $page_data['hero_subtitle'] ) ? trim( $page_data['hero_subtitle'] ) : '';
+
+            if ( $submitted_card !== $old_card && ! empty( $submitted_card ) ) {
+                $page_data['heritage_text'] = $page_data['heritage_text'];
+                $page_data['hero_subtitle'] = $page_data['heritage_text'];
+            } elseif ( $submitted_hero !== $old_hero && ! empty( $submitted_hero ) ) {
+                $page_data['hero_subtitle'] = $page_data['hero_subtitle'];
                 $page_data['heritage_text'] = $page_data['hero_subtitle'];
+            } else {
+                if ( ! empty( $page_data['heritage_text'] ) ) {
+                    $page_data['hero_subtitle'] = $page_data['heritage_text'];
+                } elseif ( ! empty( $page_data['hero_subtitle'] ) ) {
+                    $page_data['heritage_text'] = $page_data['hero_subtitle'];
+                }
             }
         }
         if ( 'community-leadership' === $page_slug ) {
-            if ( isset( $page_data['hero_subtitle'] ) && ( ! isset( $page_data['card_subtitle'] ) || empty( $page_data['card_subtitle'] ) ) ) {
+            $current_lead   = get_option( 'franciscan_page_community-leadership', array() );
+            $old_card       = isset( $current_lead['card_subtitle'] ) ? trim( $current_lead['card_subtitle'] ) : '';
+            $old_hero       = isset( $current_lead['hero_subtitle'] ) ? trim( $current_lead['hero_subtitle'] ) : '';
+            $submitted_card = isset( $page_data['card_subtitle'] ) ? trim( $page_data['card_subtitle'] ) : '';
+            $submitted_hero = isset( $page_data['hero_subtitle'] ) ? trim( $page_data['hero_subtitle'] ) : '';
+
+            // Prioritize Governance Card Description edits and keep both synchronized
+            if ( $submitted_card !== $old_card && ! empty( $submitted_card ) ) {
+                $page_data['card_subtitle'] = $page_data['card_subtitle'];
+                $page_data['hero_subtitle'] = $page_data['card_subtitle'];
+            } elseif ( $submitted_hero !== $old_hero && ! empty( $submitted_hero ) ) {
+                $page_data['hero_subtitle'] = $page_data['hero_subtitle'];
                 $page_data['card_subtitle'] = $page_data['hero_subtitle'];
+            } else {
+                if ( ! empty( $page_data['card_subtitle'] ) ) {
+                    $page_data['hero_subtitle'] = $page_data['card_subtitle'];
+                } elseif ( ! empty( $page_data['hero_subtitle'] ) ) {
+                    $page_data['card_subtitle'] = $page_data['hero_subtitle'];
+                }
             }
         }
         
@@ -1161,6 +1194,12 @@ function franciscan_render_dashboard_view() {
                     $hero_badge_val = array_key_exists( 'hero_badge', $data ) ? $data['hero_badge'] : ( $defaults['hero_badge'] ?? '' );
                     $hero_title_val = array_key_exists( 'hero_title', $data ) ? $data['hero_title'] : ( $defaults['hero_title'] ?? '' );
                     $hero_sub_val   = array_key_exists( 'hero_subtitle', $data ) ? $data['hero_subtitle'] : ( $defaults['hero_subtitle'] ?? '' );
+                    if ( 'community-leadership' === $slug ) {
+                        $ldr_default_quote = '"We must never desire to be above others, but, instead, we must be servants and subject to every human creature for God’s sake." Francis of Assisi, Letter to the Faithful';
+                        $hero_sub_val = ! empty( $data['card_subtitle'] ) && 'Led by the Minister Provincial and provincial leadership team committed to spiritual excellence.' !== $data['card_subtitle'] ? $data['card_subtitle'] : ( ! empty( $data['hero_subtitle'] ) && 'Guiding the Province in fraternity, governance, and mission.' !== $data['hero_subtitle'] ? $data['hero_subtitle'] : $ldr_default_quote );
+                    } elseif ( 'community-history' === $slug ) {
+                        $hero_sub_val = ! empty( $data['heritage_text'] ) ? $data['heritage_text'] : ( ! empty( $data['hero_subtitle'] ) ? $data['hero_subtitle'] : ( $defaults['hero_subtitle'] ?? '' ) );
+                    }
                 ?>
                     <form class="page-editor-form" id="form-page-<?php echo esc_attr( $slug ); ?>" data-slug="<?php echo esc_attr( $slug ); ?>" style="<?php echo $slug === 'home' ? '' : 'display:none;'; ?>">
                         
@@ -6246,6 +6285,21 @@ function franciscan_render_dashboard_view() {
             }
             cur[curKey] = value;
         }
+
+        // Live sync between hero_subtitle and card banner descriptions for Leadership & History
+        $('#form-page-community-leadership [name="card_subtitle"]').on('input', function() {
+            $('#form-page-community-leadership [name="hero_subtitle"]').val($(this).val());
+        });
+        $('#form-page-community-leadership [name="hero_subtitle"]').on('input', function() {
+            $('#form-page-community-leadership [name="card_subtitle"]').val($(this).val());
+        });
+
+        $('#form-page-community-history [name="heritage_text"]').on('input', function() {
+            $('#form-page-community-history [name="hero_subtitle"]').val($(this).val());
+        });
+        $('#form-page-community-history [name="hero_subtitle"]').on('input', function() {
+            $('#form-page-community-history [name="heritage_text"]').val($(this).val());
+        });
 
         // Save Page Content Form
         $('.page-editor-form').on('submit', function(e) {

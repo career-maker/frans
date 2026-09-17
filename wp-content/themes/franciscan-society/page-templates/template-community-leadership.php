@@ -799,9 +799,13 @@ button.fs-mega-toggle:focus::after {
     if ( empty( trim( $ldr_hero_title ) ) ) {
         $ldr_hero_title = 'LEADERSHIP';
     }
-    $ldr_hero_desc  = franciscan_get_page_field( 'community-leadership', 'hero_subtitle', '', true );
-    if ( empty( $ldr_hero_desc ) && ! array_key_exists( 'hero_subtitle', franciscan_get_page_content( 'community-leadership' ) ) ) {
-        $ldr_hero_desc = franciscan_get_page_field( 'community-leadership', 'card_subtitle', 'Guiding the Province in fraternity, governance, and mission.' );
+    $ldr_default_text = '"We must never desire to be above others, but, instead, we must be servants and subject to every human creature for God’s sake." Francis of Assisi, Letter to the Faithful';
+    $ldr_hero_desc  = franciscan_get_page_field( 'community-leadership', 'card_subtitle', '', true );
+    if ( empty( $ldr_hero_desc ) ) {
+        $ldr_hero_desc = franciscan_get_page_field( 'community-leadership', 'hero_subtitle', '', true );
+    }
+    if ( empty( $ldr_hero_desc ) || 'Led by the Minister Provincial and provincial leadership team committed to spiritual excellence.' === $ldr_hero_desc || 'Guiding the Province in fraternity, governance, and mission.' === $ldr_hero_desc ) {
+        $ldr_hero_desc = $ldr_default_text;
     }
     ?>
     <section class="page-hero-banner" style="background-image: url('<?php echo esc_url( $ldr_hero_bg ); ?>');">
@@ -826,15 +830,12 @@ button.fs-mega-toggle:focus::after {
 
     <!-- Hero Banner Card with Vine Watermark -->
     <?php
-    $ldr_default_text = '"We must never desire to be above others, but, instead, we must be servants and subject to every human creature for God’s sake." Francis of Assisi, Letter to the Faithful';
-    $ldr_card_desc = franciscan_get_page_field( 'community-leadership', 'card_subtitle', '' );
-    if ( empty( $ldr_card_desc ) || 'Led by the Minister Provincial and provincial leadership team committed to spiritual excellence.' === $ldr_card_desc ) {
-        $ldr_custom_hero = franciscan_get_page_field( 'community-leadership', 'hero_subtitle', '', true );
-        if ( ! empty( $ldr_custom_hero ) && 'Guiding the Province in fraternity, governance, and mission.' !== $ldr_custom_hero && $ldr_custom_hero !== $ldr_card_desc ) {
-            $ldr_card_desc = $ldr_custom_hero;
-        } else {
-            $ldr_card_desc = $ldr_default_text;
-        }
+    $ldr_card_desc = franciscan_get_page_field( 'community-leadership', 'card_subtitle', '', true );
+    if ( empty( $ldr_card_desc ) ) {
+        $ldr_card_desc = franciscan_get_page_field( 'community-leadership', 'hero_subtitle', '', true );
+    }
+    if ( empty( $ldr_card_desc ) || 'Led by the Minister Provincial and provincial leadership team committed to spiritual excellence.' === $ldr_card_desc || 'Guiding the Province in fraternity, governance, and mission.' === $ldr_card_desc ) {
+        $ldr_card_desc = $ldr_default_text;
     }
     ?>
     <section class="page-hero" style="position: relative; background-color: #FFFFFF; padding: 2rem 2rem 0 2rem; box-sizing: border-box;">
