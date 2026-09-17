@@ -473,6 +473,19 @@ function franciscan_render_dashboard_view() {
             #adminmenuwrap {
                 display: none !important;
             }
+
+            /* Homepage Hero: Exclusively Video - Ensure Banner Image field is never displayed */
+            #form-page-home [name="hero_image"],
+            #form-page-home #preview-hero_image-home,
+            #form-page-home .form-group:has([name="hero_image"]),
+            #form-page-home .form-group:has(#input-hero_image-home) {
+                display: none !important;
+                visibility: hidden !important;
+                height: 0 !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                overflow: hidden !important;
+            }
             #wpcontent {
                 margin-left: 0 !important;
                 padding: 0 !important;
@@ -1277,6 +1290,7 @@ function franciscan_render_dashboard_view() {
                                     <?php else : ?>
                                         <small style="color:var(--c-gold); font-size:0.82rem; margin-top:5px; display:block;">💡 Supports &lt;br&gt; tags to break lines onto the next line.</small>
                                     <?php endif; ?>
+                                </div>
                                 <?php if ( $slug !== 'home' ) : ?>
                                 <div class="form-group full-width">
                                     <label>Hero Banner Image (Replaces default background)</label>
@@ -4699,7 +4713,11 @@ function franciscan_render_dashboard_view() {
             $('.page-editor-form').hide();
             $('#form-page-' + slug).fadeIn(150);
             localStorage.setItem('fs_studio_active_page', slug);
+            if (slug === 'home') {
+                $('#form-page-home [name="hero_image"]').closest('.form-group').remove();
+            }
         });
+        $('#form-page-home [name="hero_image"]').closest('.form-group').remove();
 
         // Restore active tab and active page from hash or localStorage on page load
         const savedHash = window.location.hash ? window.location.hash.replace('#', '') : localStorage.getItem('fs_studio_active_tab');
