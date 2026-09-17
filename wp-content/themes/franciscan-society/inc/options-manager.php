@@ -153,8 +153,8 @@ function franciscan_get_default_page_content( $slug = '' ) {
         'home' => array(
             // Hero (Pill removed per design spec)
             'hero_badge'        => '',
-            'hero_title'        => "Let us begin again,\nfor we have only begun to serve the Lord.",
-            'hero_subtitle'     => 'In the spirit of the Seraphic Minstrel of Divine Love, we walk the way of the Gospel—our hearts rooted in prayer, our lives woven together in fraternity, and our footsteps shaped by the simplicity and humility of Christ. Drawn to the least, we seek to become gentle instruments of His peace, singing into the world the melody of mercy, hope, and love.',
+            'hero_title'        => '“The Lord gave me some brothers.”',
+            'hero_subtitle'     => '— St. Francis of Assisi, Testament 14',
             'hero_image'        => '',
             'hero_video'        => '',
             'hero_stat_1_num'   => '104+',
@@ -339,7 +339,7 @@ function franciscan_get_default_page_content( $slug = '' ) {
             'hero_subtitle'          => 'Tracing our origins from the ancient 4th-century Order of Penance, to St. Francis of Assisi, to thirty years of dedicated growth in Ranchi Province.',
             'hero_image'             => FRANCISCAN_THEME_URI . '/assets/images/new_uploads/history-banner.jpeg',
             'heritage_badge'         => 'OUR HERITAGE',
-            'heritage_title'         => 'The Lord Himself led me among them',
+            'heritage_title'         => '"The Lord Himself led me among them." St. Francis of Assisi, Testament',
             'heritage_text'          => 'Tracing our origins from the ancient 4th-century Order of Penance, to St. Francis of Assisi, to thirty years of dedicated growth in Ranchi Province.',
             'era1_badge'             => 'ORIGINS & ROOTS',
             'era1_title'             => 'The Order of Penance & St. Francis of Assisi',
@@ -459,7 +459,7 @@ function franciscan_get_default_page_content( $slug = '' ) {
             'hero_image'             => FRANCISCAN_THEME_URI . '/assets/images/new_uploads/leadership-banner.jpg',
             'card_badge'             => 'GOVERNANCE',
             'card_title'             => 'SERVING IN COMMUNION',
-            'card_subtitle'          => 'Led by the Minister Provincial and provincial leadership team committed to spiritual excellence.',
+            'card_subtitle'          => '"We must never desire to be above others, but, instead, we must be servants and subject to every human creature for God’s sake." Francis of Assisi, Letter to the Faithful',
             'general_eyebrow'        => '',
             'general_heading'        => 'GENERAL COUNCIL',
             'general_subtitle'       => 'The General Council guides the Franciscan Third Order Regular globally, ensuring fidelity to our charism and mission across all provinces and regions.',
@@ -872,8 +872,8 @@ function franciscan_resync_legacy_content_options() {
                     if ( empty( $clean['card_title'] ) ) {
                         $clean['card_title'] = 'SERVING IN COMMUNION';
                     }
-                    if ( empty( $clean['card_subtitle'] ) ) {
-                        $clean['card_subtitle'] = ! empty( $clean['hero_subtitle'] ) ? $clean['hero_subtitle'] : 'Led by the Minister Provincial and provincial leadership team committed to spiritual excellence.';
+                    if ( empty( $clean['card_subtitle'] ) || 'Led by the Minister Provincial and provincial leadership team committed to spiritual excellence.' === $clean['card_subtitle'] ) {
+                        $clean['card_subtitle'] = ( ! empty( $clean['hero_subtitle'] ) && 'Guiding the Province in fraternity, governance, and mission.' !== $clean['hero_subtitle'] ) ? $clean['hero_subtitle'] : '"We must never desire to be above others, but, instead, we must be servants and subject to every human creature for God’s sake." Francis of Assisi, Letter to the Faithful';
                     }
                 }
                 // Resync legacy about section heading
@@ -908,11 +908,14 @@ function franciscan_resync_legacy_content_options() {
                         foreach ( $sec_toggles as $st ) {
                             $clean[ $st ] = ( 'hide_values_section' === $st ) ? '1' : '0';
                         }
-                        if ( empty( trim( $clean['hero_title'] ?? '' ) ) ) {
-                            $clean['hero_title'] = "Let us begin again,\nfor we have only begun to serve the Lord.";
-                        }
                         delete_option( 'franciscan_hide_blogs_page' );
                         update_option( 'franciscan_healed_sections_v4', '1' );
+                    }
+                    if ( empty( trim( $clean['hero_title'] ?? '' ) ) || false !== strpos( $clean['hero_title'] ?? '', 'Let us begin again' ) ) {
+                        $clean['hero_title'] = '“The Lord gave me some brothers.”';
+                    }
+                    if ( empty( trim( $clean['hero_subtitle'] ?? '' ) ) || false !== strpos( $clean['hero_subtitle'] ?? '', 'In the spirit of the Seraphic Minstrel' ) ) {
+                        $clean['hero_subtitle'] = '— St. Francis of Assisi, Testament 14';
                     }
                 }
 
@@ -952,8 +955,8 @@ function franciscan_resync_legacy_content_options() {
                 }
                 // Resync history heritage title
                 if ( 'community-history' === $slug ) {
-                    if ( ! isset( $clean['heritage_title'] ) || in_array( $clean['heritage_title'], array( 'A LEGACY OF FAITH AND SERVICE' ), true ) ) {
-                        $clean['heritage_title'] = 'The Lord Himself led me among them';
+                    if ( ! isset( $clean['heritage_title'] ) || in_array( $clean['heritage_title'], array( 'A LEGACY OF FAITH AND SERVICE', 'The Lord Himself led me among them' ), true ) ) {
+                        $clean['heritage_title'] = '"The Lord Himself led me among them." St. Francis of Assisi, Testament';
                     }
                     if ( empty( $clean['heritage_text'] ) && ! empty( $clean['hero_subtitle'] ) ) {
                         $clean['heritage_text'] = $clean['hero_subtitle'];

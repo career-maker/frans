@@ -810,7 +810,7 @@ button.fs-mega-toggle:focus::after {
             <?php if ( ! empty( $ldr_hero_badge ) ) : ?>
             <div class="leadership-hero-badge" style="display: inline-flex; align-items: center; justify-content: flex-start; gap: 0.6rem; background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); padding: 0.5rem 1.2rem; border-radius: 50px; margin-bottom: 1.5rem; border: 1px solid rgba(255,255,255,0.2); max-width: 95%;">
                 <span class="leadership-hero-bullet" style="width: 8px; height: 8px; min-width: 8px; min-height: 8px; background-color: #e6c888; border-radius: 50%; display: inline-block; flex-shrink: 0;"></span>
-                <span style="color: #ffffff; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.04em; font-family: 'Instrument Sans', sans-serif; line-height: 1.4; text-align: left;"><?php echo esc_html( $ldr_hero_badge ); ?></span>
+                <span style="color: #ffffff; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.04em; font-family: 'Instrument Sans', sans-serif; line-height: 1.4; text-align: left;"><?php echo franciscan_render_rich_text( $ldr_hero_badge ); ?></span>
             </div>
             <?php endif; ?>
             <?php if ( ! empty( $ldr_hero_title ) ) : ?>
@@ -826,11 +826,11 @@ button.fs-mega-toggle:focus::after {
 
     <!-- Hero Banner Card with Vine Watermark -->
     <?php
-    $ldr_default_text = 'Led by the Minister Provincial and provincial leadership team committed to spiritual excellence.';
+    $ldr_default_text = '"We must never desire to be above others, but, instead, we must be servants and subject to every human creature for God’s sake." Francis of Assisi, Letter to the Faithful';
     $ldr_card_desc = franciscan_get_page_field( 'community-leadership', 'card_subtitle', '' );
-    if ( empty( $ldr_card_desc ) || $ldr_card_desc === $ldr_default_text ) {
+    if ( empty( $ldr_card_desc ) || 'Led by the Minister Provincial and provincial leadership team committed to spiritual excellence.' === $ldr_card_desc ) {
         $ldr_custom_hero = franciscan_get_page_field( 'community-leadership', 'hero_subtitle', '', true );
-        if ( ! empty( $ldr_custom_hero ) && 'Guiding the Province in fraternity, governance, and mission.' !== $ldr_custom_hero ) {
+        if ( ! empty( $ldr_custom_hero ) && 'Guiding the Province in fraternity, governance, and mission.' !== $ldr_custom_hero && $ldr_custom_hero !== $ldr_card_desc ) {
             $ldr_card_desc = $ldr_custom_hero;
         } else {
             $ldr_card_desc = $ldr_default_text;
@@ -851,13 +851,13 @@ button.fs-mega-toggle:focus::after {
                         $ldr_badge = preg_replace( '/(\D+)\d+$/', '$1', trim( $ldr_badge ) );
                     }
                     ?>
-                    <span style="color: #ffffff; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; font-family: 'Instrument Sans', sans-serif;"><?php echo esc_html( $ldr_badge ); ?></span>
+                    <span style="color: #ffffff; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; font-family: 'Instrument Sans', sans-serif;"><?php echo franciscan_render_rich_text( $ldr_badge ); ?></span>
                 </div>
                 <h2 style="font-family: 'Phudu', sans-serif; font-size: clamp(2rem, 3.8vw, 44px); font-weight: 600; color: #ffffff; text-transform: uppercase; line-height: 1.15; letter-spacing: -0.01em; margin-bottom: 1.2rem; max-width: 800px;">
-                    <?php echo esc_html( franciscan_get_page_field( 'community-leadership', 'card_title', 'SERVING IN COMMUNION' ) ); ?>
+                    <?php echo franciscan_render_rich_text( franciscan_get_page_field( 'community-leadership', 'card_title', 'SERVING IN COMMUNION' ) ); ?>
                 </h2>
                 <p style="font-family: 'Instrument Sans', sans-serif; font-size: 1.05rem; font-weight: 400; color: rgba(255, 255, 255, 0.9); line-height: 1.52; max-width: 650px; margin: 0;">
-                    <?php echo nl2br( esc_html( $ldr_card_desc ) ); ?>
+                    <?php echo franciscan_render_rich_text( $ldr_card_desc ); ?>
                 </p>
             </div>
         </div>

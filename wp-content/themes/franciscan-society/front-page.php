@@ -79,8 +79,32 @@ get_header();
                 <!-- Content Grid (Exact Reference Screenshot 1 Parallel Alignment & Spacing) -->
                 <div class="hero-grid hero-grid-layout" style="position: relative; z-index: 10;">
                     
-                    <!-- Left Column: Action Buttons -->
-                    <div class="js-hero-text" style="display: flex; flex-direction: column; justify-content: flex-end; width: 100%;">
+                    <!-- Left Column: Title, Subtitle & Action Buttons -->
+                    <div class="js-hero-text hero-left-content" style="display: flex; flex-direction: column; justify-content: flex-end; width: 100%;">
+
+                        <?php
+                        $hero_title = franciscan_get_page_field( 'home', 'hero_title', '“The Lord gave me some brothers.”' );
+                        if ( empty( trim( $hero_title ) ) || false !== strpos( $hero_title, 'Let us begin again' ) ) {
+                            $hero_title = '“The Lord gave me some brothers.”';
+                        }
+                        $hero_subtitle = franciscan_get_page_field( 'home', 'hero_subtitle', '— St. Francis of Assisi, Testament 14' );
+                        if ( empty( trim( $hero_subtitle ) ) || false !== strpos( $hero_subtitle, 'In the spirit of the Seraphic Minstrel' ) ) {
+                            $hero_subtitle = '— St. Francis of Assisi, Testament 14';
+                        }
+                        ?>
+
+                        <div class="hero-quote-block">
+                            <?php if ( ! empty( $hero_title ) ) : ?>
+                                <h1 class="hero-title home-hero-title">
+                                    <?php echo franciscan_render_rich_text( $hero_title ); ?>
+                                </h1>
+                            <?php endif; ?>
+                            <?php if ( ! empty( $hero_subtitle ) ) : ?>
+                                <p class="hero-subtitle home-hero-sub">
+                                    <em><?php echo franciscan_render_rich_text( $hero_subtitle ); ?></em>
+                                </p>
+                            <?php endif; ?>
+                        </div>
 
                         <!-- Buttons Row -->
                         <div class="hero-buttons-row" style="display: flex; gap: 0.75rem; align-items: center; width: 100%;">

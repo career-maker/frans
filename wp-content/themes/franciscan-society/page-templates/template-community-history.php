@@ -773,7 +773,7 @@ button.fs-mega-toggle:focus::after {
             <?php if ( ! empty( $hist_hero_badge ) ) : ?>
             <div style="display: inline-flex; align-items: center; gap: 0.6rem; background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); padding: 0.5rem 1.2rem; border-radius: 50px; margin-bottom: 1.5rem; border: 1px solid rgba(255,255,255,0.2);">
                 <span style="width: 8px; height: 8px; background-color: #e6c888; border-radius: 50%; display: inline-block;"></span>
-                <span style="color: #ffffff; font-size: 0.85rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; font-family: 'Instrument Sans', sans-serif;"><?php echo esc_html( $hist_hero_badge ); ?></span>
+                <span style="color: #ffffff; font-size: 0.85rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; font-family: 'Instrument Sans', sans-serif;"><?php echo franciscan_render_rich_text( $hist_hero_badge ); ?></span>
             </div>
             <?php endif; ?>
             <?php if ( ! empty( $hist_hero_title ) ) : ?>
@@ -806,13 +806,19 @@ button.fs-mega-toggle:focus::after {
             <div style="position: relative; z-index: 2;">
                 <div style="display: inline-flex; align-items: center; gap: 0.5rem; margin-bottom: 1.2rem;">
                     <span style="width: 6px; height: 6px; background-color: #e6c888; border-radius: 50%; display: inline-block;"></span>
-                    <span style="color: #ffffff; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; font-family: 'Instrument Sans', sans-serif;"><?php echo esc_html( franciscan_get_page_field( 'community-history', 'heritage_badge', 'OUR HERITAGE' ) ); ?></span>
+                    <span style="color: #ffffff; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; font-family: 'Instrument Sans', sans-serif;"><?php echo franciscan_render_rich_text( franciscan_get_page_field( 'community-history', 'heritage_badge', 'OUR HERITAGE' ) ); ?></span>
                 </div>
                 <h2 style="font-family: 'Phudu', sans-serif; font-size: clamp(2rem, 3.8vw, 44px); font-weight: 600; color: #ffffff; text-transform: uppercase; line-height: 1.15; letter-spacing: -0.01em; margin-bottom: 1.2rem; max-width: 800px;">
-                    <?php echo esc_html( franciscan_get_page_field( 'community-history', 'heritage_title', 'The Lord Himself led me among them' ) ); ?>
+                    <?php
+                    $hist_card_title = franciscan_get_page_field( 'community-history', 'heritage_title', '"The Lord Himself led me among them." St. Francis of Assisi, Testament' );
+                    if ( empty( trim( $hist_card_title ) ) || in_array( trim( $hist_card_title ), array( 'The Lord Himself led me among them', 'A LEGACY OF FAITH AND SERVICE' ), true ) ) {
+                        $hist_card_title = '"The Lord Himself led me among them." St. Francis of Assisi, Testament';
+                    }
+                    echo franciscan_render_rich_text( $hist_card_title );
+                    ?>
                 </h2>
                 <p style="font-family: 'Instrument Sans', sans-serif; font-size: 1.05rem; font-weight: 400; color: rgba(255, 255, 255, 0.9); line-height: 1.52; max-width: 650px; margin: 0;">
-                    <?php echo nl2br( esc_html( $hist_card_desc ) ); ?>
+                    <?php echo franciscan_render_rich_text( $hist_card_desc ); ?>
                 </p>
             </div>
         </div>

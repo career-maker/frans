@@ -1215,18 +1215,25 @@ function franciscan_render_dashboard_view() {
                                     <label>Hero Badge / Eyebrow Text</label>
                                     <input type="text" name="hero_badge" class="form-control" value="<?php echo esc_attr( $hero_badge_val ); ?>" placeholder="<?php echo esc_attr( $defaults['hero_badge'] ?? '' ); ?>">
                                 </div>
-                                <div class="form-group">
-                                    <label>Hero Main Heading (Title)</label>
-                                    <input type="text" name="hero_title" class="form-control" value="<?php echo esc_attr( $hero_title_val ); ?>" placeholder="<?php echo esc_attr( $defaults['hero_title'] ?? '' ); ?>">
-                                </div>
-                                <div class="form-group full-width">
-                                    <label>Hero Subtitle / Description (Banner Description)</label>
-                                    <textarea name="hero_subtitle" class="form-control" placeholder="<?php echo esc_attr( $defaults['hero_subtitle'] ?? '' ); ?>"><?php echo esc_textarea( $hero_sub_val ); ?></textarea>
-                                    <?php if ( in_array( $slug, array( 'community-history', 'community-leadership' ), true ) ) : ?>
-                                        <small style="color:var(--c-gold); font-size:0.82rem; margin-top:5px; display:block;">💡 Note: Updates here update the banner description on the live website (and seamlessly synchronize with the brown banner card below).</small>
+                                <?php endif; ?>
+                                <div class="form-group <?php echo ( $slug === 'home' ) ? 'full-width' : ''; ?>">
+                                    <label><?php echo ( $slug === 'home' ) ? 'Hero Main Title (Bottom-Left Banner Title)' : 'Hero Main Heading (Title)'; ?></label>
+                                    <input type="text" name="hero_title" class="form-control" value="<?php echo esc_attr( $hero_title_val ); ?>" placeholder="<?php echo esc_attr( $defaults['hero_title'] ?? '“The Lord gave me some brothers.”' ); ?>">
+                                    <?php if ( $slug === 'home' ) : ?>
+                                        <small style="color:var(--c-gold); font-size:0.82rem; margin-top:4px; display:block;">💡 Supports &lt;br&gt; tags to break lines onto the next line.</small>
                                     <?php endif; ?>
                                 </div>
-                                <?php endif; ?>
+                                <div class="form-group full-width">
+                                    <label><?php echo ( $slug === 'home' ) ? 'Hero Subtitle / Quote (Displayed in Italics)' : 'Hero Subtitle / Description (Banner Description)'; ?></label>
+                                    <textarea name="hero_subtitle" class="form-control" rows="2" placeholder="<?php echo esc_attr( $defaults['hero_subtitle'] ?? '— St. Francis of Assisi, Testament 14' ); ?>"><?php echo esc_textarea( $hero_sub_val ); ?></textarea>
+                                    <?php if ( in_array( $slug, array( 'community-history', 'community-leadership' ), true ) ) : ?>
+                                        <small style="color:var(--c-gold); font-size:0.82rem; margin-top:5px; display:block;">💡 Note: Updates here update the banner description on the live website (and seamlessly synchronize with the brown banner card below). Supports &lt;br&gt; tags.</small>
+                                    <?php elseif ( $slug === 'home' ) : ?>
+                                        <small style="color:var(--c-gold); font-size:0.82rem; margin-top:5px; display:block;">💡 Note: Displays in italics under the hero title. Supports &lt;br&gt; tags to break lines onto the next line.</small>
+                                    <?php else : ?>
+                                        <small style="color:var(--c-gold); font-size:0.82rem; margin-top:5px; display:block;">💡 Supports &lt;br&gt; tags to break lines onto the next line.</small>
+                                    <?php endif; ?>
+                                </div>
                                 <div class="form-group full-width">
                                     <label>Hero Banner Image (Replaces default background)</label>
                                     <?php
@@ -2077,7 +2084,11 @@ function franciscan_render_dashboard_view() {
                                     </div>
                                     <div class="form-group">
                                         <label>Heritage Card Title</label>
-                                        <input type="text" name="heritage_title" class="form-control" value="<?php echo esc_attr( $data['heritage_title'] ?? 'The Lord Himself led me among them' ); ?>">
+                                        <?php
+                                        $hist_title_val = ! empty( $data['heritage_title'] ) && 'The Lord Himself led me among them' !== $data['heritage_title'] ? $data['heritage_title'] : '"The Lord Himself led me among them." St. Francis of Assisi, Testament';
+                                        ?>
+                                        <input type="text" name="heritage_title" class="form-control" value="<?php echo esc_attr( $hist_title_val ); ?>" placeholder='"The Lord Himself led me among them." St. Francis of Assisi, Testament'>
+                                        <small style="color:var(--c-gold); font-size:0.82rem; margin-top:4px; display:block;">💡 Supports &lt;br&gt; tags for line breaks.</small>
                                     </div>
                                     <div class="form-group full-width">
                                         <label>Heritage Banner Card Description (Brown Vine Watermark Card)</label>
@@ -2086,6 +2097,7 @@ function franciscan_render_dashboard_view() {
                                         ?>
                                         <textarea name="heritage_text" class="form-control" rows="3" placeholder="Tracing our origins from the ancient 4th-century Order of Penance..."><?php echo esc_textarea( $hist_card_val ); ?></textarea>
                                         <small style="color:var(--c-text-muted); font-size:0.8rem; margin-top:4px; display:block;">Controls the description paragraph displayed inside the brown Heritage Banner Card with vine watermark.</small>
+                                        <small style="color:var(--c-gold); font-size:0.82rem; margin-top:4px; display:block;">💡 Supports &lt;br&gt; tags to break lines onto the next line.</small>
                                     </div>
                                 </div>
                             </div>
@@ -2384,14 +2396,23 @@ function franciscan_render_dashboard_view() {
                                     <div class="form-group">
                                         <label>Card Heading (Title)</label>
                                         <input type="text" name="card_title" class="form-control" value="<?php echo esc_attr( $data['card_title'] ?? 'SERVING IN COMMUNION' ); ?>" placeholder="SERVING IN COMMUNION">
+                                        <small style="color:var(--c-gold); font-size:0.82rem; margin-top:4px; display:block;">💡 Supports &lt;br&gt; tags for line breaks.</small>
                                     </div>
                                     <div class="form-group full-width">
                                         <label>Governance Banner Card Description (Brown Vine Watermark Card)</label>
                                         <?php
-                                        $ldr_card_val = ! empty( $data['card_subtitle'] ) ? $data['card_subtitle'] : ( ! empty( $data['hero_subtitle'] ) ? $data['hero_subtitle'] : 'Led by the Minister Provincial and provincial leadership team committed to spiritual excellence.' );
+                                        $ldr_default_quote = '"We must never desire to be above others, but, instead, we must be servants and subject to every human creature for God’s sake." Francis of Assisi, Letter to the Faithful';
+                                        $ldr_card_val = ! empty( $data['card_subtitle'] ) && 'Led by the Minister Provincial and provincial leadership team committed to spiritual excellence.' !== $data['card_subtitle'] ? $data['card_subtitle'] : ( ! empty( $data['hero_subtitle'] ) && 'Guiding the Province in fraternity, governance, and mission.' !== $data['hero_subtitle'] ? $data['hero_subtitle'] : $ldr_default_quote );
                                         ?>
-                                        <textarea name="card_subtitle" class="form-control" rows="3" placeholder="Led by the Minister Provincial and provincial leadership team committed to spiritual excellence."><?php echo esc_textarea( $ldr_card_val ); ?></textarea>
-                                        <small style="color:var(--c-text-muted); font-size:0.8rem; margin-top:4px; display:block;">Controls the description paragraph displayed inside the brown Governance Banner                                 <h3 class="form-section-title">👑 General &amp; Provincial Council Headers</h3>
+                                        <textarea name="card_subtitle" class="form-control" rows="3" placeholder="<?php echo esc_attr( $ldr_default_quote ); ?>"><?php echo esc_textarea( $ldr_card_val ); ?></textarea>
+                                        <small style="color:var(--c-text-muted); font-size:0.8rem; margin-top:4px; display:block;">Controls the description paragraph displayed inside the brown Governance Banner Card with vine watermark.</small>
+                                        <small style="color:var(--c-gold); font-size:0.82rem; margin-top:4px; display:block;">💡 Supports &lt;br&gt; tags to break lines onto the next line.</small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-section">
+                                <h3 class="form-section-title">👑 General &amp; Provincial Council Headers</h3>
                                 <div class="form-grid">
                                     <div class="form-group">
                                         <label>General Council Eyebrow (Optional)</label>

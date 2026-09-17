@@ -411,8 +411,11 @@ if ( ! function_exists( 'franciscan_render_rich_text' ) ) {
             'b'      => array(),
             'em'     => array(),
             'i'      => array(),
+            'p'      => array( 'class' => array(), 'style' => array() ),
         );
-        return wp_kses( nl2br( (string) $text ), $allowed );
+        // Decode any entity-escaped <br> tags (&lt;br&gt;, &lt;br/&gt;, &lt;br /&gt;) so they render as HTML
+        $decoded = html_entity_decode( (string) $text, ENT_QUOTES, 'UTF-8' );
+        return wp_kses( nl2br( $decoded ), $allowed );
     }
 }
 

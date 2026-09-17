@@ -34,17 +34,19 @@ if ( function_exists( 'franciscan_get_option' ) && franciscan_get_option( 'disab
 function franciscan_sanitize_array( $array ) {
     $clean = array();
     if ( ! is_array( $array ) ) {
-        return sanitize_text_field( $array );
+        $val = is_string( $array ) ? wp_unslash( $array ) : $array;
+        return is_string( $val ) ? wp_kses_post( $val ) : $val;
     }
     foreach ( $array as $key => $value ) {
         $key = sanitize_key( $key );
         if ( is_array( $value ) ) {
             $clean[$key] = franciscan_sanitize_array( $value );
         } elseif ( is_string( $value ) ) {
-            if ( preg_match( '/<[^>]+>/', $value ) ) {
-                $clean[$key] = wp_kses_post( $value );
+            $val_unslashed = wp_unslash( $value );
+            if ( preg_match( '/<[^>]+>/', $val_unslashed ) ) {
+                $clean[$key] = wp_kses_post( $val_unslashed );
             } else {
-                $clean[$key] = sanitize_text_field( $value );
+                $clean[$key] = sanitize_textarea_field( $val_unslashed );
             }
         } else {
             $clean[$key] = $value;
