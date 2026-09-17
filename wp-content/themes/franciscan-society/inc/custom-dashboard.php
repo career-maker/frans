@@ -1498,9 +1498,24 @@ function franciscan_render_dashboard_view() {
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label>Play Video Button URL (Rosary Modal / YouTube)</label>
-                                        <input type="text" name="about_video_btn_url" class="form-control" placeholder="https://www.youtube.com/@franciscans" value="<?php echo esc_attr( $data['about_video_btn_url'] ?? 'https://www.youtube.com/@franciscans' ); ?>">
+                                    <div style="background: rgba(184, 134, 11, 0.05); border: 1px solid rgba(184, 134, 11, 0.25); border-radius: 8px; padding: 1.25rem; margin: 1.5rem 0;">
+                                        <h4 style="margin: 0 0 1rem 0; font-size: 0.95rem; font-weight: 700; color: #b8860b; display: flex; align-items: center; gap: 0.5rem;">
+                                            <span style="font-size: 1.1rem;">🎥</span> "Watch Our Video" Overlay Box Settings (On About Section Image)
+                                        </h4>
+                                        <div class="form-group">
+                                            <label style="font-weight: 600;">"Watch Our Video" Box Link / Target URL (YouTube / Video URL)</label>
+                                            <input type="text" name="about_video_btn_url" class="form-control" placeholder="https://youtube.com/@tormediaranchi3804?si=UPTCSJUSj9tbcjeB" value="<?php echo esc_attr( $data['about_video_btn_url'] ?? 'https://youtube.com/@tormediaranchi3804?si=UPTCSJUSj9tbcjeB' ); ?>">
+                                            <small style="color: #666; display: block; margin-top: 4px;">Clicking anywhere on the "WATCH OUR VIDEO" overlay box opens this link in a new tab.</small>
+                                        </div>
+                                        <div class="form-group">
+                                            <label style="font-weight: 600;">"Watch Our Video" Box Button / Badge Text</label>
+                                            <input type="text" name="about_video_btn_text" class="form-control" placeholder="WATCH OUR VIDEO" value="<?php echo esc_attr( $data['about_video_btn_text'] ?? 'WATCH OUR VIDEO' ); ?>">
+                                        </div>
+                                        <div class="form-group" style="margin-bottom: 0;">
+                                            <label style="font-weight: 600;">Card Thumbnail Loop Video URL (Optional MP4)</label>
+                                            <input type="text" name="about_video_url" class="form-control" placeholder="Leave empty for default theme video" value="<?php echo esc_attr( $data['about_video_url'] ?? '' ); ?>">
+                                            <small style="color: #666; display: block; margin-top: 4px;">Background video preview loop inside the small box thumbnail.</small>
+                                        </div>
                                     </div>
                                     <div class="form-group">
                                         <label>About Learn More Button Label</label>
@@ -1509,10 +1524,6 @@ function franciscan_render_dashboard_view() {
                                     <div class="form-group">
                                         <label>About Learn More Button URL</label>
                                         <input type="text" name="about_cta_btn_url" class="form-control" placeholder="/about" value="<?php echo esc_attr( $data['about_cta_btn_url'] ?? '/about' ); ?>">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Video Loop URL</label>
-                                        <input type="text" name="about_video_url" class="form-control" value="<?php echo esc_attr( $data['about_video_url'] ?? '' ); ?>">
                                     </div>
                                     <div class="form-group">
                                         <label>Mission Box Title</label>
@@ -1847,9 +1858,24 @@ function franciscan_render_dashboard_view() {
                                             </div>
                                         </div>
                                     <?php endforeach; ?>
-                                    <div class="form-group">
-                                        <label>Play Video Button URL (Rosary Modal / YouTube)</label>
-                                        <input type="text" name="about_video_btn_url" class="form-control" placeholder="https://www.youtube.com/@franciscans" value="<?php echo esc_attr( $data['about_video_btn_url'] ?? 'https://www.youtube.com/@franciscans' ); ?>">
+                                    <div style="background: rgba(184, 134, 11, 0.05); border: 1px solid rgba(184, 134, 11, 0.25); border-radius: 8px; padding: 1.25rem; margin: 1.5rem 0;">
+                                        <h4 style="margin: 0 0 1rem 0; font-size: 0.95rem; font-weight: 700; color: #b8860b; display: flex; align-items: center; gap: 0.5rem;">
+                                            <span style="font-size: 1.1rem;">🎥</span> "Watch Our Video" Overlay Box Settings (On About Section Image)
+                                        </h4>
+                                        <div class="form-group">
+                                            <label style="font-weight: 600;">"Watch Our Video" Box Link / Target URL (YouTube / Video URL)</label>
+                                            <input type="text" name="about_video_btn_url" class="form-control" placeholder="https://youtube.com/@tormediaranchi3804?si=UPTCSJUSj9tbcjeB" value="<?php echo esc_attr( $data['about_video_btn_url'] ?? 'https://youtube.com/@tormediaranchi3804?si=UPTCSJUSj9tbcjeB' ); ?>">
+                                            <small style="color: #666; display: block; margin-top: 4px;">Clicking anywhere on the "WATCH OUR VIDEO" overlay box opens this link in a new tab.</small>
+                                        </div>
+                                        <div class="form-group">
+                                            <label style="font-weight: 600;">"Watch Our Video" Box Button / Badge Text</label>
+                                            <input type="text" name="about_video_btn_text" class="form-control" placeholder="WATCH OUR VIDEO" value="<?php echo esc_attr( $data['about_video_btn_text'] ?? 'WATCH OUR VIDEO' ); ?>">
+                                        </div>
+                                        <div class="form-group" style="margin-bottom: 0;">
+                                            <label style="font-weight: 600;">Card Thumbnail Loop Video URL (Optional MP4)</label>
+                                            <input type="text" name="about_video_url" class="form-control" placeholder="Leave empty for default theme video" value="<?php echo esc_attr( $data['about_video_url'] ?? '' ); ?>">
+                                            <small style="color: #666; display: block; margin-top: 4px;">Background video preview loop inside the small box thumbnail.</small>
+                                        </div>
                                     </div>
                                     <div class="form-group">
                                         <label>About Learn More Button Label</label>
@@ -1858,10 +1884,6 @@ function franciscan_render_dashboard_view() {
                                     <div class="form-group">
                                         <label>About Learn More Button URL</label>
                                         <input type="text" name="about_cta_btn_url" class="form-control" placeholder="/about" value="<?php echo esc_attr( $data['about_cta_btn_url'] ?? '/about' ); ?>">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Video Loop URL</label>
-                                        <input type="text" name="about_video_url" class="form-control" value="<?php echo esc_attr( $data['about_video_url'] ?? '' ); ?>">
                                     </div>
                                     <div class="form-group">
                                         <label>Mission Box Title</label>

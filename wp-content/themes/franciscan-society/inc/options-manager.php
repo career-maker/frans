@@ -195,6 +195,7 @@ function franciscan_get_default_page_content( $slug = '' ) {
             'about_cta_btn_text'     => 'LEARN MORE ABOUT',
             'about_cta_btn_url'      => '/about',
             'about_video_btn_text'   => 'WATCH OUR VIDEO',
+            'about_video_btn_url'    => 'https://youtube.com/@tormediaranchi3804?si=UPTCSJUSj9tbcjeB',
 
             // Section 4: Mission & Values
             'mission_eyebrow'        => 'Our Values',
