@@ -213,7 +213,19 @@ function franciscan_ajax_save_post() {
     );
 
     if ( ! empty( $post_date ) ) {
-        $post_arr['post_date'] = $post_date . ' 12:00:00';
+        // Use midnight + 1 second so the post is always treated as already-published
+        // (noon was causing "future" scheduling when the server clock was before noon)
+        $today_local = date_i18n( 'Y-m-d' );
+        if ( $post_date >= $today_local ) {
+            // Today or future date selected — anchor to current time so it publishes immediately
+            $post_arr['post_date']     = current_time( 'Y-m-d H:i:s' );
+            $post_arr['post_date_gmt'] = current_time( 'Y-m-d H:i:s', true );
+        } else {
+            // Past date — set to 10:00:00 of that day
+            $post_arr['post_date']     = $post_date . ' 10:00:00';
+            $post_arr['post_date_gmt'] = get_gmt_from_date( $post_date . ' 10:00:00' );
+        }
+        $post_arr['edit_date'] = true;
     }
 
     if ( $post_id > 0 ) {
@@ -228,6 +240,18 @@ function franciscan_ajax_save_post() {
     if ( is_wp_error( $saved_id ) || empty( $saved_id ) ) {
         $err_msg = is_wp_error( $saved_id ) ? $saved_id->get_error_message() : 'Failed to save post to database.';
         wp_send_json_error( array( 'message' => $err_msg ) );
+    }
+
+    // Guarantee the post status is published immediately (WordPress auto-schedules to 'future' if timestamp differs)
+    $actual_status = get_post_status( $saved_id );
+    if ( 'future' === $actual_status || 'draft' === $actual_status ) {
+        wp_update_post( array(
+            'ID'            => $saved_id,
+            'post_status'   => 'publish',
+            'post_date'     => current_time( 'Y-m-d H:i:s' ),
+            'post_date_gmt' => current_time( 'Y-m-d H:i:s', true ),
+            'edit_date'     => true,
+        ) );
     }
 
     // Set Category Safely (works in AJAX without requiring wp-admin taxonomy files)
@@ -374,7 +398,7 @@ function franciscan_render_dashboard_view() {
     $all_posts = get_posts( array(
         'post_type'      => 'post',
         'posts_per_page' => 50,
-        'post_status'    => 'publish',
+        'post_status'    => array( 'publish', 'future', 'draft' ),
     ) );
     $is_wp_admin = is_admin();
     ?>

@@ -617,7 +617,7 @@ function franciscan_get_default_page_content( $slug = '' ) {
             'meta_og_image'     => '',
         ),
         'publications' => array(
-            'hero_badge'        => 'PROVINCIAL CHRONICLES',
+            'hero_badge'        => '',
             'hero_title'        => 'PUBLICATIONS',
             'hero_subtitle'     => '',
             'hero_image'        => '',
@@ -1031,6 +1031,10 @@ function franciscan_resync_legacy_content_options() {
                         $clean['hero_title']    = 'PUBLICATIONS';
                     }
                     $clean['hero_subtitle'] = '';
+                    // Clear old hardcoded badge value so the admin can remove it
+                    if ( ! array_key_exists( 'hero_badge', $clean ) || 'PROVINCIAL CHRONICLES' === $clean['hero_badge'] ) {
+                        $clean['hero_badge'] = '';
+                    }
                     if ( ! empty( $clean['publications_list'] ) && is_array( $clean['publications_list'] ) ) {
                         $farmer_items = array();
                         $other_items  = array();
@@ -1115,6 +1119,24 @@ function franciscan_resync_legacy_content_options() {
     $merged_opts['address_text']    = "Franciscan Ashram (Provincial Residence)\nP.O. Harmu Housing Colony, Ranchi – 834002, JHARKHAND";
 
     update_option( 'franciscan_theme_options', $merged_opts );
+
+    // Auto-publish any news/blog posts that were accidentally set to 'future' or scheduled status
+    $future_posts = get_posts( array(
+        'post_type'      => 'post',
+        'post_status'    => 'future',
+        'posts_per_page' => -1,
+    ) );
+    if ( ! empty( $future_posts ) && is_array( $future_posts ) ) {
+        foreach ( $future_posts as $f_post ) {
+            wp_update_post( array(
+                'ID'            => $f_post->ID,
+                'post_status'   => 'publish',
+                'post_date'     => current_time( 'Y-m-d H:i:s' ),
+                'post_date_gmt' => current_time( 'Y-m-d H:i:s', true ),
+                'edit_date'     => true,
+            ) );
+        }
+    }
 }
 add_action( 'init', 'franciscan_resync_legacy_content_options' );
 add_action( 'admin_init', 'franciscan_resync_legacy_content_options' );
