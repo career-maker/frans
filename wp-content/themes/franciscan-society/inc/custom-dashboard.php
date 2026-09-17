@@ -422,7 +422,6 @@ function franciscan_render_dashboard_view() {
         'gallery'               => 'Our Gallery',
         'news'                  => 'News & Updates',
         'blogs'                 => 'Blogs & Articles',
-        'news_details'          => 'News & Blog Details (Single Article)',
         'contact'               => 'Contact Us',
         'privacy'               => 'Privacy Policy',
         'terms'                 => 'Terms & Conditions',
