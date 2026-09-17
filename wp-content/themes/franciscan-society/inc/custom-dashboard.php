@@ -112,6 +112,10 @@ function franciscan_ajax_save_dashboard() {
         }
 
         
+        if ( 'home' === $page_slug ) {
+            $page_data['hero_image'] = '';
+        }
+
         // Sync friaries flat list when saving community-friaries sections
         if ( 'community-friaries' === $page_slug && isset( $page_data['friaries_sections'] ) && is_array( $page_data['friaries_sections'] ) ) {
             $flat_list = array();
@@ -1273,14 +1277,11 @@ function franciscan_render_dashboard_view() {
                                     <?php else : ?>
                                         <small style="color:var(--c-gold); font-size:0.82rem; margin-top:5px; display:block;">💡 Supports &lt;br&gt; tags to break lines onto the next line.</small>
                                     <?php endif; ?>
-                                </div>
+                                <?php if ( $slug !== 'home' ) : ?>
                                 <div class="form-group full-width">
                                     <label>Hero Banner Image (Replaces default background)</label>
                                     <?php
                                     switch ( $slug ) {
-                                        case 'home':
-                                            $default_banner = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/hero-banner-aug20.jpeg';
-                                            break;
                                         case 'gallery':
                                             $default_banner = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/gallery-banner.jpg';
                                             break;
@@ -1325,11 +1326,12 @@ function franciscan_render_dashboard_view() {
                                                 Choose from Media Library
                                             </button>
                                             <button type="button" class="btn btn-secondary btn-reset-media" data-target="hero_image-<?php echo esc_attr( $slug ); ?>" data-default="<?php echo esc_url( $default_banner ); ?>" style="<?php echo empty( $data["hero_image"] ) ? "display:none;" : ""; ?>" title="Reset to default theme banner">
-                                                ? Reset to Default
+                                                ↺ Reset to Default
                                             </button>
                                         </div>
                                     </div>
                                 </div>
+                                <?php endif; ?>
                                 <?php if ( $slug === 'home' ) : ?>
                                     <div class="form-group full-width" style="margin-top: 1.2rem; padding: 1.2rem; background: rgba(230, 200, 136, 0.05); border: 1px dashed rgba(230, 200, 136, 0.35); border-radius: 12px;">
                                         <label style="color: #e6c888; font-weight: 700; font-size: 0.98rem; display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.6rem;">

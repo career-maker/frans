@@ -16,15 +16,12 @@ get_header();
         <!-- Rounded Card Container -->
         <div class="hero-container" style="position: relative; width: 100%; display: flex; flex-direction: column; justify-content: flex-end; box-sizing: border-box;">
             
-            <!-- Background Image or Video inside Rounded Card -->
+            <!-- Background Hero Video inside Rounded Card -->
             <?php 
-            $hero_img = franciscan_get_page_field( 'home', 'hero_image', FRANCISCAN_THEME_URI . '/assets/images/new_uploads/hero-banner-aug20.jpeg' );
-            $hero_vid = franciscan_get_page_field( 'home', 'hero_video', '' );
-            
-            // Check if hero_image itself was set to a video file (.mp4, .webm, etc.)
-            $is_img_video = preg_match( '/\.(mp4|webm|ogg|mov)(\?.*)?$/i', $hero_img );
-            $active_video = ! empty( $hero_vid ) ? $hero_vid : ( $is_img_video ? $hero_img : '' );
-            $poster_img   = ! $is_img_video ? $hero_img : ( FRANCISCAN_THEME_URI . '/assets/images/new_uploads/hero-banner-aug20.jpeg' );
+            $hero_vid           = franciscan_get_page_field( 'home', 'hero_video', '' );
+            $default_home_video = defined( 'FRANCISCAN_THEME_URI' ) ? FRANCISCAN_THEME_URI . '/assets/videos/franciscan-hero.mp4' : '';
+            $active_video       = ! empty( $hero_vid ) ? $hero_vid : $default_home_video;
+            $poster_img         = defined( 'FRANCISCAN_THEME_URI' ) ? FRANCISCAN_THEME_URI . '/assets/images/new_uploads/hero-banner-aug20.jpeg' : '';
             ?>
 
             <div class="hero-media-wrapper" style="position: absolute; inset: 0; width: 100%; height: 100%; overflow: hidden; z-index: 1; border-radius: 24px;">
@@ -69,8 +66,6 @@ get_header();
                         });
                     })();
                     </script>
-                <?php else : ?>
-                    <img id="hero-bg-video" src="<?php echo esc_url( $hero_img ); ?>" alt="Franciscan Friars Hero" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1;">
                 <?php endif; ?>
                 <!-- Black Overlay (Soft Opacity) -->
                 <div class="video-overlay" style="position: absolute; inset: 0; width: 100%; height: 100%; background: linear-gradient(180deg, rgba(12, 11, 10, 0.35) 0%, rgba(12, 11, 10, 0.58) 100%); z-index: 2; pointer-events: none;"></div>

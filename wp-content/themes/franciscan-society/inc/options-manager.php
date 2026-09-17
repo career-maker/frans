@@ -1075,6 +1075,9 @@ function franciscan_resync_legacy_content_options() {
                         $clean['hero_image'] = $banner_migrations[ $slug ];
                     }
                 }
+                if ( 'home' === $slug ) {
+                    $clean['hero_image'] = '';
+                }
                 $merged = wp_parse_args( $clean, $def_values );
                 update_option( 'franciscan_page_' . $slug, $merged );
             }
