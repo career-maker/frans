@@ -110,28 +110,7 @@ function franciscan_ajax_save_dashboard() {
                 }
             }
         }
-        if ( 'community-leadership' === $page_slug ) {
-            $current_lead   = get_option( 'franciscan_page_community-leadership', array() );
-            $old_card       = isset( $current_lead['card_subtitle'] ) ? trim( $current_lead['card_subtitle'] ) : '';
-            $old_hero       = isset( $current_lead['hero_subtitle'] ) ? trim( $current_lead['hero_subtitle'] ) : '';
-            $submitted_card = isset( $page_data['card_subtitle'] ) ? trim( $page_data['card_subtitle'] ) : '';
-            $submitted_hero = isset( $page_data['hero_subtitle'] ) ? trim( $page_data['hero_subtitle'] ) : '';
 
-            // Prioritize Governance Card Description edits and keep both synchronized
-            if ( $submitted_card !== $old_card && ! empty( $submitted_card ) ) {
-                $page_data['card_subtitle'] = $page_data['card_subtitle'];
-                $page_data['hero_subtitle'] = $page_data['card_subtitle'];
-            } elseif ( $submitted_hero !== $old_hero && ! empty( $submitted_hero ) ) {
-                $page_data['hero_subtitle'] = $page_data['hero_subtitle'];
-                $page_data['card_subtitle'] = $page_data['hero_subtitle'];
-            } else {
-                if ( ! empty( $page_data['card_subtitle'] ) ) {
-                    $page_data['hero_subtitle'] = $page_data['card_subtitle'];
-                } elseif ( ! empty( $page_data['hero_subtitle'] ) ) {
-                    $page_data['card_subtitle'] = $page_data['hero_subtitle'];
-                }
-            }
-        }
         
         // Sync friaries flat list when saving community-friaries sections
         if ( 'community-friaries' === $page_slug && isset( $page_data['friaries_sections'] ) && is_array( $page_data['friaries_sections'] ) ) {
@@ -1193,10 +1172,7 @@ function franciscan_render_dashboard_view() {
                     $hero_badge_val = array_key_exists( 'hero_badge', $data ) ? $data['hero_badge'] : ( $defaults['hero_badge'] ?? '' );
                     $hero_title_val = array_key_exists( 'hero_title', $data ) ? $data['hero_title'] : ( $defaults['hero_title'] ?? '' );
                     $hero_sub_val   = array_key_exists( 'hero_subtitle', $data ) ? $data['hero_subtitle'] : ( $defaults['hero_subtitle'] ?? '' );
-                    if ( 'community-leadership' === $slug ) {
-                        $ldr_default_quote = '"We must never desire to be above others, but, instead, we must be servants and subject to every human creature for God’s sake." Francis of Assisi, Letter to the Faithful';
-                        $hero_sub_val = ! empty( $data['card_subtitle'] ) && 'Led by the Minister Provincial and provincial leadership team committed to spiritual excellence.' !== $data['card_subtitle'] ? $data['card_subtitle'] : ( ! empty( $data['hero_subtitle'] ) && 'Guiding the Province in fraternity, governance, and mission.' !== $data['hero_subtitle'] ? $data['hero_subtitle'] : $ldr_default_quote );
-                    } elseif ( 'community-history' === $slug ) {
+                    if ( 'community-history' === $slug ) {
                         $hero_sub_val = ! empty( $data['heritage_text'] ) ? $data['heritage_text'] : ( ! empty( $data['hero_subtitle'] ) ? $data['hero_subtitle'] : ( $defaults['hero_subtitle'] ?? '' ) );
                     }
                 ?>
@@ -1288,8 +1264,10 @@ function franciscan_render_dashboard_view() {
                                 <div class="form-group full-width">
                                     <label><?php echo ( $slug === 'home' ) ? 'Hero Subtitle / Quote (Displayed in Italics)' : 'Hero Subtitle / Description (Banner Description)'; ?></label>
                                     <textarea name="hero_subtitle" class="form-control" rows="2" placeholder="<?php echo esc_attr( $defaults['hero_subtitle'] ?? '— St. Francis of Assisi, Testament 14' ); ?>"><?php echo esc_textarea( $hero_sub_val ); ?></textarea>
-                                    <?php if ( in_array( $slug, array( 'community-history', 'community-leadership' ), true ) ) : ?>
+                                    <?php if ( 'community-history' === $slug ) : ?>
                                         <small style="color:var(--c-gold); font-size:0.82rem; margin-top:5px; display:block;">💡 Note: Updates here update the banner description on the live website (and seamlessly synchronize with the brown banner card below). Supports &lt;br&gt; tags.</small>
+                                    <?php elseif ( 'community-leadership' === $slug ) : ?>
+                                        <small style="color:var(--c-gold); font-size:0.82rem; margin-top:5px; display:block;">💡 Controls the description paragraph in the top hero banner. Supports &lt;br&gt; tags.</small>
                                     <?php elseif ( $slug === 'home' ) : ?>
                                         <small style="color:var(--c-gold); font-size:0.82rem; margin-top:5px; display:block;">💡 Note: Displays in italics under the hero title. Supports &lt;br&gt; tags to break lines onto the next line.</small>
                                     <?php else : ?>
@@ -2464,7 +2442,7 @@ function franciscan_render_dashboard_view() {
                                         <label>Governance Banner Card Description (Brown Vine Watermark Card)</label>
                                         <?php
                                         $ldr_default_quote = '"We must never desire to be above others, but, instead, we must be servants and subject to every human creature for God’s sake." Francis of Assisi, Letter to the Faithful';
-                                        $ldr_card_val = ! empty( $data['card_subtitle'] ) && 'Led by the Minister Provincial and provincial leadership team committed to spiritual excellence.' !== $data['card_subtitle'] ? $data['card_subtitle'] : ( ! empty( $data['hero_subtitle'] ) && 'Guiding the Province in fraternity, governance, and mission.' !== $data['hero_subtitle'] ? $data['hero_subtitle'] : $ldr_default_quote );
+                                        $ldr_card_val = ! empty( $data['card_subtitle'] ) && 'Led by the Minister Provincial and provincial leadership team committed to spiritual excellence.' !== $data['card_subtitle'] ? $data['card_subtitle'] : $ldr_default_quote;
                                         ?>
                                         <textarea name="card_subtitle" class="form-control" rows="3" placeholder="<?php echo esc_attr( $ldr_default_quote ); ?>"><?php echo esc_textarea( $ldr_card_val ); ?></textarea>
                                         <small style="color:var(--c-text-muted); font-size:0.8rem; margin-top:4px; display:block;">Controls the description paragraph displayed inside the brown Governance Banner Card with vine watermark.</small>
@@ -6285,13 +6263,7 @@ function franciscan_render_dashboard_view() {
             cur[curKey] = value;
         }
 
-        // Live sync between hero_subtitle and card banner descriptions for Leadership & History
-        $('#form-page-community-leadership [name="card_subtitle"]').on('input', function() {
-            $('#form-page-community-leadership [name="hero_subtitle"]').val($(this).val());
-        });
-        $('#form-page-community-leadership [name="hero_subtitle"]').on('input', function() {
-            $('#form-page-community-leadership [name="card_subtitle"]').val($(this).val());
-        });
+
 
         $('#form-page-community-history [name="heritage_text"]').on('input', function() {
             $('#form-page-community-history [name="hero_subtitle"]').val($(this).val());

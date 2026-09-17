@@ -455,7 +455,7 @@ function franciscan_get_default_page_content( $slug = '' ) {
         'community-leadership' => array(
             'hero_badge'             => 'LEADERSHIP',
             'hero_title'             => 'LEADERSHIP',
-            'hero_subtitle'          => '"We must never desire to be above others, but, instead, we must be servants and subject to every human creature for God\'s sake." Francis of Assisi, Letter to the Faithful',
+            'hero_subtitle'          => 'Guiding the Province in fraternity, governance, and mission.',
             'hero_image'             => FRANCISCAN_THEME_URI . '/assets/images/new_uploads/leadership-banner.jpg',
             'card_badge'             => 'GOVERNANCE',
             'card_title'             => 'SERVING IN COMMUNION',
@@ -873,10 +873,10 @@ function franciscan_resync_legacy_content_options() {
                         $clean['card_title'] = 'SERVING IN COMMUNION';
                     }
                     if ( empty( $clean['card_subtitle'] ) || 'Led by the Minister Provincial and provincial leadership team committed to spiritual excellence.' === $clean['card_subtitle'] ) {
-                        $clean['card_subtitle'] = ( ! empty( $clean['hero_subtitle'] ) && 'Guiding the Province in fraternity, governance, and mission.' !== $clean['hero_subtitle'] ) ? $clean['hero_subtitle'] : '"We must never desire to be above others, but, instead, we must be servants and subject to every human creature for God’s sake." Francis of Assisi, Letter to the Faithful';
+                        $clean['card_subtitle'] = '"We must never desire to be above others, but, instead, we must be servants and subject to every human creature for God’s sake." Francis of Assisi, Letter to the Faithful';
                     }
-                    if ( empty( $clean['hero_subtitle'] ) || 'Guiding the Province in fraternity, governance, and mission.' === $clean['hero_subtitle'] ) {
-                        $clean['hero_subtitle'] = $clean['card_subtitle'];
+                    if ( empty( $clean['hero_subtitle'] ) ) {
+                        $clean['hero_subtitle'] = 'Guiding the Province in fraternity, governance, and mission.';
                     }
                 }
                 // Resync legacy about section heading
