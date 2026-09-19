@@ -1627,6 +1627,7 @@ button.fs-mega-toggle:focus::after {
     font-weight: 600;
     text-decoration: none;
     font-size: 1.1rem;
+    line-height: 1;
     background: none;
     border: none;
     border-bottom: 1px solid rgba(255,255,255,0.1);
@@ -1638,7 +1639,7 @@ button.fs-mega-toggle:focus::after {
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    padding: 1rem 0;
+    padding: 0.85rem 0;
   }
 
   .fs-mobile-nav > a:hover,
@@ -1671,15 +1672,17 @@ button.fs-mega-toggle:focus::after {
   }
 
   .fs-mobile-submenu a {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     color: #d6d3d1;
     font-weight: 500;
-    padding: 0.75rem 0;
-    border-bottom: 1px solid rgba(255,255,255,0.06);
+    padding: 0.45rem 0;
+    line-height: 1.3;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
     margin-bottom: 0;
   }
   .fs-mobile-submenu a:last-child {
     border-bottom: none;
+    padding-bottom: 0.75rem;
   }
 
   .fs-mobile-submenu a:hover {
