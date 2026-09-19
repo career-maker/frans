@@ -79,7 +79,7 @@ $banner_bg = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/hero-banner-aug2
     .article-hero-overlay {
         position: absolute;
         inset: 0;
-        background-color: rgba(12, 11, 10, 0.72);
+        background-color: rgba(12, 11, 10, 0.50);
         backdrop-filter: blur(2px);
         -webkit-backdrop-filter: blur(2px);
     }
@@ -550,3 +550,4 @@ $banner_bg = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/hero-banner-aug2
 
 <?php
 get_footer();
+

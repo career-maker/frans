@@ -29,6 +29,10 @@ get_header();
                     <video id="hero-bg-video" autoplay muted="muted" loop playsinline="playsinline" webkit-playsinline="webkit-playsinline" preload="auto" src="<?php echo esc_url( $active_video ); ?>" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; background: #0c0b0a;">
                         <source src="<?php echo esc_url( $active_video ); ?>" type="video/mp4">
                     </video>
+                    <?php if ( ! empty( $poster_img ) ) : ?>
+                    <!-- Static image fallback shown only on mobile (video hidden via CSS) -->
+                    <img class="hero-mobile-poster" src="<?php echo esc_url( $poster_img ); ?>" alt="Franciscan Society Hero" loading="eager" decoding="async">
+                    <?php endif; ?>
                     <script>
                     function fsPlayHeroVideo() {
                         var v = document.getElementById('hero-bg-video');
@@ -1912,3 +1916,4 @@ window.addEventListener('load', fsUpdateSliderArrows);
 
 <?php
 get_footer();
+

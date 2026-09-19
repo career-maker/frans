@@ -236,9 +236,9 @@ function franciscan_get_default_page_content( $slug = '' ) {
             'gallery_btn_url'        => '/gallery',
 
             // Section 9: Quick Inquiry / Contact Form
-            'inquiry_eyebrow'        => 'SUBMIT AN INQUIRY',
+            'inquiry_eyebrow'        => 'SUBMIT AN ENQUIRY',
             'inquiry_title'          => 'HAVE A QUESTION OR NEED PRAYER? REACH OUT TO US',
-            'inquiry_btn_text'       => 'SUBMIT INQUIRY',
+            'inquiry_btn_text'       => 'SUBMIT ENQUIRY',
             'inquiry_bg_img'         => '',
             'inquiry_person_img'     => '',
 
@@ -1931,4 +1931,5 @@ function franciscan_render_breadcrumbs() {
         echo '</nav>';
     }
 }
+
 

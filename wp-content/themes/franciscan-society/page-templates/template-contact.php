@@ -48,7 +48,7 @@ $hero_subtitle = franciscan_get_page_field( 'contact', 'hero_subtitle', 'Reach o
 .contact-hero-overlay {
     position: absolute;
     inset: 0;
-    background-color: rgba(12, 11, 10, 0.72);
+    background-color: rgba(12, 11, 10, 0.50);
 }
 .contact-hero-inner {
     max-width: 1320px;
@@ -777,3 +777,4 @@ document.addEventListener("DOMContentLoaded", function() {
 
 <?php
 get_footer();
+

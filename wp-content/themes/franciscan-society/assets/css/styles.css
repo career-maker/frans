@@ -2841,7 +2841,7 @@ body.menu-open { overflow: hidden; }
     max-width: 100% !important;
     margin: 0 !important;
     padding: 0 !important;
-    background: linear-gradient(180deg, rgba(12, 11, 10, 0.65) 0%, rgba(12, 11, 10, 0.88) 100%) !important;
+    background: linear-gradient(180deg, rgba(12, 11, 10, 0.45) 0%, rgba(12, 11, 10, 0.65) 100%) !important;
     z-index: 1 !important;
     pointer-events: none !important;
 }
@@ -2883,6 +2883,7 @@ body.menu-open { overflow: hidden; }
     max-width: 860px !important;
     line-height: 1.6 !important;
     font-size: clamp(0.95rem, 1.8vw, 1.15rem) !important;
+    font-style: italic !important;
 }
 .page-hero-banner .hero-badge,
 .page-hero-banner .hero-badge-pill,
@@ -9218,5 +9219,73 @@ button.slider-btn:active {
         left: auto !important;
         right: 20px !important;
         bottom: -35px !important;
+    }
+}
+
+/* ============================================================
+   MOBILE: Inner page banners — content pinned to BOTTOM-LEFT
+   ============================================================ */
+@media (max-width: 767px) {
+    /* Ensure the banner section itself is flex-col with content at bottom */
+    .page-hero-banner,
+    .page-hero-section {
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: flex-end !important;
+        align-items: stretch !important;
+    }
+
+    /* Content container: bottom-left alignment */
+    .page-hero-banner > div:not(.hero-overlay):not(.page-hero-overlay),
+    .page-hero-banner .hero-content,
+    .contact-hero-banner .contact-hero-inner {
+        justify-content: flex-end !important;
+        align-items: flex-start !important;
+        text-align: left !important;
+    }
+
+    /* Title left-aligned on mobile */
+    .page-hero-banner h1,
+    .page-hero-banner .page-hero-title,
+    .contact-hero-banner .contact-hero-h1 {
+        text-align: left !important;
+        font-size: clamp(1.25rem, 5.5vw, 1.7rem) !important;
+    }
+
+    /* Description left-aligned and italic */
+    .page-hero-banner p,
+    .page-hero-banner .page-hero-desc,
+    .contact-hero-banner .contact-hero-sub {
+        text-align: left !important;
+        font-size: clamp(0.9rem, 3.5vw, 1.05rem) !important;
+        font-style: italic !important;
+    }
+}
+
+/* ============================================================
+   MOBILE: Hero section — hide heavy video, show static poster
+   ============================================================ */
+@media (max-width: 767px) {
+    /* Hide the video element on mobile for faster load */
+    #hero-bg-video {
+        display: none !important;
+    }
+
+    /* Show the static poster fallback image instead */
+    .hero-mobile-poster {
+        display: block !important;
+        position: absolute !important;
+        inset: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+        z-index: 1 !important;
+    }
+}
+
+/* On desktop: always hide the static poster (video takes over) */
+@media (min-width: 768px) {
+    .hero-mobile-poster {
+        display: none !important;
     }
 }

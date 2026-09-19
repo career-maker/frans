@@ -148,7 +148,7 @@ if ( ! $blogs_query->have_posts() ) {
     $blogs_hero_sub   = franciscan_get_page_field( 'blogs', 'hero_subtitle', 'Spiritual reflections, theological essays, and Franciscan wisdom for daily Christian living.', true );
     ?>
     <section class="page-hero-banner" style="padding: 12rem 2rem 8rem 2rem; background-image: url('<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/new_uploads/hero-banner-aug20.jpeg' ); ?>'); background-size: cover; background-position: center; position: relative; overflow: hidden;">
-        <div class="hero-overlay page-hero-overlay" style="position: absolute; inset: 0; background-color: rgba(12, 11, 10, 0.72);"></div>
+        <div class="hero-overlay page-hero-overlay" style="position: absolute; inset: 0; background-color: rgba(12, 11, 10, 0.50);"></div>
         <div style="max-width: 1320px; margin: 0 auto; padding: 0 clamp(1rem, 5vw, 3rem); position: relative; z-index: 2; text-align: left;">
             <?php if ( ! empty( $blogs_hero_badge ) ) : ?>
             <div class="hero-badge" style="display: inline-flex; align-items: center; gap: 0.6rem; background: rgba(255,255,255,0.12); backdrop-filter: blur(10px); padding: 0.5rem 1.2rem; border-radius: 50px; margin-bottom: 1.5rem; border: 1px solid rgba(255,255,255,0.25);">
@@ -243,3 +243,4 @@ if ( ! $blogs_query->have_posts() ) {
 
 <?php
 get_footer();
+
