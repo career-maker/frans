@@ -102,6 +102,7 @@ $hero_subtitle = franciscan_get_page_field( 'contact', 'hero_subtitle', 'Reach o
     color: rgba(255, 255, 255, 0.88);
     line-height: 1.6;
     margin: 0;
+    font-style: italic;
 }
 
 #main-content {

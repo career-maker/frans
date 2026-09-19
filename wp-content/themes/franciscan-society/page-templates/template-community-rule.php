@@ -829,12 +829,12 @@ button.fs-mega-toggle:focus::after {
 
             <!-- Sacred Proclamation Ribbon (Compact margins) -->
             <?php if ( ! empty( $proclamation_text ) ) : ?>
-                <div style="margin: 0 0 2.5rem 0; background: linear-gradient(135deg, #371e11 0%, #4a2a18 50%, #2a160b 100%); border-radius: 14px; padding: 1.6rem 1.8rem; text-align: center; border: 1.5px solid #e6c888; box-shadow: 0 8px 24px rgba(74, 42, 24, 0.15);">
-                    <div style="display: inline-block; width: 40px; height: 2px; background: #e6c888; margin-bottom: 0.6rem;"></div>
+                <div style="margin: 0 0 2.5rem 0; background: linear-gradient(135deg, #371e11 0%, #4a2a18 50%, #2a160b 100%); border-radius: 14px; padding: 1.6rem 1.8rem; text-align: center; border: 1.5px solid #e6c888; box-shadow: 0 8px 24px rgba(74, 42, 24, 0.15); font-style: italic;">
+                    <div style="display: inline-block; width: 40px; height: 2px; background: #e6c888; margin-bottom: 0.6rem; font-style: italic;"></div>
                     <h3 style="font-family: 'Phudu', sans-serif; font-size: clamp(1rem, 1.8vw, 1.25rem); font-weight: 700; color: #ffffff; letter-spacing: 0.05em; line-height: 1.45; margin: 0; text-transform: uppercase;">
                         <?php echo esc_html( $proclamation_text ); ?>
                     </h3>
-                    <div style="display: inline-block; width: 40px; height: 2px; background: #e6c888; margin-top: 0.6rem;"></div>
+                    <div style="display: inline-block; width: 40px; height: 2px; background: #e6c888; margin-top: 0.6rem; font-style: italic;"></div>
                 </div>
             <?php endif; ?>
 

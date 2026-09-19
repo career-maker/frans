@@ -304,7 +304,7 @@ $banner_bg = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/hero-banner-aug2
 
             <!-- Franciscan Blessing -->
             <div class="provincial-blessing-card">
-                <div style="font-size:1.8rem;margin-bottom:0.4rem;color:#e6c888;"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#e6c888" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;"><path d="M12 2v20M7 7h10"/></svg></div>
+                <div style="font-size:1.8rem;margin-bottom:0.4rem;color:#e6c888; font-style: italic;"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#e6c888" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;"><path d="M12 2v20M7 7h10"/></svg></div>
                 <h4>Pax et Bonum &mdash; Peace and Good</h4>
                 <p>&ldquo;The Lord bless you and keep you; the Lord make his face shine upon you and be gracious to you; the Lord turn his face toward you and give you peace.&rdquo; &mdash; Numbers 6:24-26</p>
             </div>
@@ -381,7 +381,7 @@ $banner_bg = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/hero-banner-aug2
             </div>
 
             <div class="sidebar-prayer-box">
-                <div style="font-size:2rem;margin-bottom:0.6rem;color:#e6c888;"><svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="#e6c888" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;"><path d="M12 2v20M7 7h10"/></svg></div>
+                <div style="font-size:2rem;margin-bottom:0.6rem;color:#e6c888; font-style: italic;"><svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="#e6c888" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;"><path d="M12 2v20M7 7h10"/></svg></div>
                 <h4>Request Prayer Support</h4>
                 <p>Our Franciscan Friars remember all your intentions in our daily community Eucharistic celebrations and Morning Liturgy.</p>
                 <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" style="display:block;text-align:center;background:#e6c888;color:#0c1727;font-weight:700;padding:0.8rem 1.2rem;border-radius:10px;text-decoration:none;font-family:'Instrument Sans',sans-serif;transition:transform 0.2s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
@@ -420,7 +420,7 @@ $banner_bg = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/hero-banner-aug2
         <div class="hero-overlay page-hero-overlay"></div>
         <div style="max-width: 1320px; margin: 0 auto; padding: 0 clamp(1rem, 5vw, 3rem); position: relative; z-index: 2; text-align: left;">
             <?php if ( ! empty( $news_hero_badge ) ) : ?>
-            <div style="display: inline-flex; align-items: center; gap: 0.6rem; background: rgba(255,255,255,0.12); backdrop-filter: blur(10px); padding: 0.5rem 1.2rem; border-radius: 50px; margin-bottom: 1.5rem; border: 1px solid rgba(255,255,255,0.25);">
+            <div style="display: inline-flex; align-items: center; gap: 0.6rem; background: rgba(255,255,255,0.12); backdrop-filter: blur(10px); padding: 0.5rem 1.2rem; border-radius: 50px; margin-bottom: 1.5rem; border: 1px solid rgba(255,255,255,0.25); font-style: italic;">
                 <span style="width: 8px; height: 8px; background-color: #e6c888; border-radius: 50%; display: inline-block;"></span>
                 <span style="color: #ffffff; font-size: 0.85rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; font-family: 'Instrument Sans', sans-serif;">
                     <?php echo franciscan_render_rich_text( $news_hero_badge ); ?>

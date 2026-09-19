@@ -522,7 +522,7 @@ if ( ! empty( $custom_banner ) ) {
 
                 <!-- Provincial Blessing -->
                 <div class="provincial-blessing-card">
-                    <div style="font-size:1.8rem; margin-bottom:0.4rem; color:#e6c888;"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#e6c888" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;"><path d="M12 2v20M7 7h10"/></svg></div>
+                    <div style="font-size:1.8rem; margin-bottom:0.4rem; color:#e6c888; font-style: italic;"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#e6c888" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;"><path d="M12 2v20M7 7h10"/></svg></div>
                     <h4>Pax et Bonum &mdash; Peace and Good</h4>
                     <p>&ldquo;The Lord bless you and keep you; the Lord make his face shine upon you and be gracious to you; the Lord turn his face toward you and give you peace.&rdquo; &mdash; Numbers 6:24-26</p>
                 </div>
@@ -607,7 +607,7 @@ if ( ! empty( $custom_banner ) ) {
 
                 <!-- Prayer Support Callout Box -->
                 <div class="sidebar-prayer-box">
-                    <div style="font-size:2rem; margin-bottom:0.6rem; color:#e6c888;"><svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="#e6c888" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;"><path d="M12 2v20M7 7h10"/></svg></div>
+                    <div style="font-size:2rem; margin-bottom:0.6rem; color:#e6c888; font-style: italic;"><svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="#e6c888" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;"><path d="M12 2v20M7 7h10"/></svg></div>
                     <h4>Request Prayer Support</h4>
                     <p>Our Franciscan Friars remember all your intentions in our daily community Eucharistic celebrations and Morning Liturgy.</p>
                     <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" style="display:block; text-align:center; background:#e6c888; color:#0c1727; font-weight:700; padding:0.8rem 1.2rem; border-radius:10px; text-decoration:none; font-family:'Instrument Sans', sans-serif; transition:transform 0.2s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">

@@ -725,7 +725,7 @@ button.fs-mega-toggle:focus::after {
         <div class="hero-overlay page-hero-overlay"></div>
         <div style="max-width: 1320px; margin: 0 auto; padding: 0 clamp(1rem, 5vw, 3rem); position: relative; z-index: 2; text-align: left;">
             <?php if ( ! empty( $min_hero_badge ) ) : ?>
-            <div style="display: inline-flex; align-items: center; gap: 0.6rem; background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); padding: 0.5rem 1.2rem; border-radius: 50px; margin-bottom: 1.5rem; border: 1px solid rgba(255,255,255,0.2);">
+            <div style="display: inline-flex; align-items: center; gap: 0.6rem; background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); padding: 0.5rem 1.2rem; border-radius: 50px; margin-bottom: 1.5rem; border: 1px solid rgba(255,255,255,0.2); font-style: italic;">
                 <span style="width: 8px; height: 8px; background-color: #e6c888; border-radius: 50%; display: inline-block;"></span>
                 <span style="color: #ffffff; font-size: 0.85rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; font-family: 'Instrument Sans', sans-serif;"><?php echo esc_html( $min_hero_badge ); ?></span> 
             </div>
@@ -832,7 +832,7 @@ button.fs-mega-toggle:focus::after {
                         <img loading="lazy" decoding="async" src="<?php echo esc_url( franciscan_get_page_field( "ministries", "pastoral_image", FRANCISCAN_THEME_URI . "/assets/images/gallery/WhatsApp Image 2026-08-07 at 1.39.44 PM.jpeg" ) ); ?>" alt="Pastoral Ministry in Action" style="width: 100%; height: 520px; object-fit: cover; display: block; transition: transform 0.6s ease;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'">
                         <div style="position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(12,11,10,0.85)); padding: 2rem 1.8rem; color: #ffffff;">
                             <div style="font-family: 'Phudu', sans-serif; font-size: 1.15rem; font-weight: 700; text-transform: uppercase;"><?php echo esc_html( franciscan_get_page_field( "ministries", "pastoral_img_caption_title", "15 Parishes in 9 Dioceses" ) ); ?></div>
-                            <div style="font-family: 'Instrument Sans', sans-serif; font-size: 0.88rem; color: #e6c888;"><?php echo esc_html( franciscan_get_page_field( "ministries", "pastoral_img_caption_sub", "India & Archdiocese of Freiburg, Germany" ) ); ?></div>
+                            <div style="font-family: 'Instrument Sans', sans-serif; font-size: 0.88rem; color: #e6c888; font-style: italic;"><?php echo esc_html( franciscan_get_page_field( "ministries", "pastoral_img_caption_sub", "India & Archdiocese of Freiburg, Germany" ) ); ?></div>
                         </div>
                     </div>
                 </div>
@@ -843,7 +843,7 @@ button.fs-mega-toggle:focus::after {
                         <img loading="lazy" decoding="async" src="<?php echo esc_url( franciscan_get_page_field( "ministries", "formation_image", FRANCISCAN_THEME_URI . "/assets/images/gallery/WhatsApp Image 2025-09-17 at 11.30.25 AM (1).jpeg" ) ); ?>" alt="Franciscan Formation and Consecrated Life" style="width: 100%; height: 520px; object-fit: cover; display: block; transition: transform 0.6s ease;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'">
                         <div style="position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(12,11,10,0.85)); padding: 2rem 1.8rem; color: #ffffff;">
                             <div style="font-family: 'Phudu', sans-serif; font-size: 1.15rem; font-weight: 700; text-transform: uppercase;"><?php echo esc_html( franciscan_get_page_field( "ministries", "formation_img_caption_title", "4 Sacred Formation Houses" ) ); ?></div>
-                            <div style="font-family: 'Instrument Sans', sans-serif; font-size: 0.88rem; color: #e6c888;"><?php echo esc_html( franciscan_get_page_field( "ministries", "formation_img_caption_sub", "Dorma • Bichna • Ranchi Clericate" ) ); ?></div>
+                            <div style="font-family: 'Instrument Sans', sans-serif; font-size: 0.88rem; color: #e6c888; font-style: italic;"><?php echo esc_html( franciscan_get_page_field( "ministries", "formation_img_caption_sub", "Dorma • Bichna • Ranchi Clericate" ) ); ?></div>
                         </div>
                     </div>
 
@@ -936,7 +936,7 @@ button.fs-mega-toggle:focus::after {
                         <img loading="lazy" decoding="async" src="<?php echo esc_url( franciscan_get_page_field( "ministries", "education_image", FRANCISCAN_THEME_URI . "/assets/images/gallery/WhatsApp Image 2026-08-07 at 8.39.44 AM (1).jpeg" ) ); ?>" alt="Education Ministry in Franciscan Schools" style="width: 100%; height: 520px; object-fit: cover; display: block; transition: transform 0.6s ease;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'">
                         <div style="position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(12,11,10,0.85)); padding: 2rem 1.8rem; color: #ffffff;">
                             <div style="font-family: 'Phudu', sans-serif; font-size: 1.15rem; font-weight: 700; text-transform: uppercase;"><?php echo esc_html( franciscan_get_page_field( "ministries", "education_img_caption_title", "22 Schools Across 3 States" ) ); ?></div>
-                            <div style="font-family: 'Instrument Sans', sans-serif; font-size: 0.88rem; color: #e6c888;"><?php echo esc_html( franciscan_get_page_field( "ministries", "education_img_caption_sub", "Jharkhand • Bihar • West Bengal" ) ); ?></div>
+                            <div style="font-family: 'Instrument Sans', sans-serif; font-size: 0.88rem; color: #e6c888; font-style: italic;"><?php echo esc_html( franciscan_get_page_field( "ministries", "education_img_caption_sub", "Jharkhand • Bihar • West Bengal" ) ); ?></div>
                         </div>
                     </div>
                 </div>
@@ -954,7 +954,7 @@ button.fs-mega-toggle:focus::after {
                 <h2 style="font-family: 'Phudu', sans-serif; font-size: clamp(2.2rem, 4vw, 3.4rem); font-weight: 700; color: #ffffff; text-transform: uppercase; line-height: 1.2; margin: 0 0 1.5rem 0; letter-spacing: -0.01em;">
                     <?php echo esc_html( franciscan_get_page_field( "ministries", "mission_title", "“PEACE AND JOY TO THE WORLD”" ) ); ?>
                 </h2>
-                <p style="font-family: 'Instrument Sans', sans-serif; font-size: clamp(1.05rem, 1.8vw, 1.2rem); color: #d6d3d1; max-width: 780px; margin: 0 auto 2.5rem auto; line-height: 1.52;">
+                <p style="font-family: 'Instrument Sans', sans-serif; font-size: clamp(1.05rem, 1.8vw, 1.2rem); color: #d6d3d1; max-width: 780px; margin: 0 auto 2.5rem auto; line-height: 1.52; font-style: italic;">
                     <?php echo esc_html( franciscan_get_page_field( "ministries", "mission_desc", "Whether in rural parish mission stations, classrooms of growing minds, or quiet contemplative chapels, our friars serve as instruments of Christ’s peace and fraternal love." ) ); ?>
                 </p>
                 <div style="display: flex; gap: 1.2rem; justify-content: center; flex-wrap: wrap;">

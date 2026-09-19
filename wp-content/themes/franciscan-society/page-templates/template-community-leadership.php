@@ -891,7 +891,7 @@ button.fs-mega-toggle:focus::after {
                 ?>
                 <div class="council-card" style="text-align: center; background: #FAF7F0; padding: 2.5rem 1.8rem 2rem 1.8rem; border-radius: 24px; border: 1px solid rgba(74,42,24,0.08); box-shadow: 0 10px 30px rgba(74,42,24,0.05); display: flex; flex-direction: column; justify-content: space-between; transition: transform 0.3s ease, box-shadow 0.3s ease;">
                     <div>
-                        <div style="width: 140px; height: 140px; border-radius: 50%; overflow: hidden; margin: 0 auto 1.3rem auto; box-shadow: 0 10px 25px rgba(74,42,24,0.16); border: 3px solid #e6c888; background: #ffffff;">
+                        <div style="width: 140px; height: 140px; border-radius: 50%; overflow: hidden; margin: 0 auto 1.3rem auto; box-shadow: 0 10px 25px rgba(74,42,24,0.16); border: 3px solid #e6c888; background: #ffffff; font-style: italic;">
                             <img loading="lazy" decoding="async" src="<?php echo esc_url( $photo ); ?>" alt="<?php echo esc_attr( $name ); ?>" style="width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block;">
                         </div>
                         <?php if ( ! empty( $role ) ) : ?>
@@ -961,7 +961,7 @@ button.fs-mega-toggle:focus::after {
                 ?>
                 <div style="text-align: center; background: #FAF7F0; padding: 2.2rem 1.5rem; border-radius: 20px; border: 1px solid rgba(74,42,24,0.06); box-shadow: 0 4px 20px rgba(74,42,24,0.04); display: flex; flex-direction: column; justify-content: space-between;">
                     <div>
-                        <div style="width: 130px; height: 130px; border-radius: 50%; overflow: hidden; margin: 0 auto 1.2rem auto; box-shadow: 0 8px 20px rgba(74,42,24,0.14); border: 3px solid #e6c888; background: #ffffff;">
+                        <div style="width: 130px; height: 130px; border-radius: 50%; overflow: hidden; margin: 0 auto 1.2rem auto; box-shadow: 0 8px 20px rgba(74,42,24,0.14); border: 3px solid #e6c888; background: #ffffff; font-style: italic;">
                             <img loading="lazy" decoding="async" src="<?php echo esc_url( $photo ); ?>" alt="<?php echo esc_attr( $name ); ?>" style="width: 100%; height: 100%; object-fit: cover; display: block;" onerror="this.src='<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/logo.svg' ); ?>';">
                         </div>
                         <?php if ( ! empty( $role ) ) : ?>
