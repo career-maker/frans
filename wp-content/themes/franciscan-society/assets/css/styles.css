@@ -9323,29 +9323,13 @@ button.slider-btn:active {
 
 
 /* ============================================================
-   MOBILE: Hero section — hide heavy video, show static poster
+   HERO: Always load and play video on all screens, never show fallback image
    ============================================================ */
-@media (max-width: 767px) {
-    /* Hide the video element on mobile for faster load */
-    #hero-bg-video {
-        display: none !important;
-    }
-
-    /* Show the static poster fallback image instead */
-    .hero-mobile-poster {
-        display: block !important;
-        position: absolute !important;
-        inset: 0 !important;
-        width: 100% !important;
-        height: 100% !important;
-        object-fit: cover !important;
-        z-index: 1 !important;
-    }
+.hero-mobile-poster {
+    display: none !important;
+    visibility: hidden !important;
 }
 
-/* On desktop: always hide the static poster (video takes over) */
-@media (min-width: 768px) {
-    .hero-mobile-poster {
-        display: none !important;
-    }
+#hero-bg-video {
+    display: block !important;
 }
