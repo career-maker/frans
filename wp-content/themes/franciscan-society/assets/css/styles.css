@@ -7518,11 +7518,19 @@ button:not(.btn-fill-animation):not(.footer-accordion-toggle):not(.fs-mega-toggl
     box-sizing: border-box !important;
 }
 
+.fs-mobile-nav {
+    gap: 0 !important;
+}
+
+.fs-mobile-nav > * {
+    flex-shrink: 0 !important;
+}
+
 .fs-mobile-nav.active {
     display: flex !important;
     flex-direction: column !important;
     right: 0 !important;
-    gap: 0.5rem !important;
+    gap: 0 !important;
 }
 
 .fs-mobile-close {
@@ -7542,6 +7550,7 @@ button:not(.btn-fill-animation):not(.footer-accordion-toggle):not(.fs-mega-toggl
     margin-bottom: 1rem !important;
     transition: background 0.2s ease, color 0.2s ease !important;
     outline: none !important;
+    flex-shrink: 0 !important;
 }
 
 .fs-mobile-close:hover,
@@ -7573,6 +7582,7 @@ button:not(.btn-fill-animation):not(.footer-accordion-toggle):not(.fs-mega-toggl
     transition: color 0.2s ease !important;
     outline: none !important;
     box-shadow: none !important;
+    flex-shrink: 0 !important;
 }
 
 .fs-mobile-nav > a:hover,
@@ -7616,6 +7626,7 @@ button:not(.btn-fill-animation):not(.footer-accordion-toggle):not(.fs-mega-toggl
     background: rgba(255, 255, 255, 0.04) !important;
     border-left: 2px solid #e6c888 !important;
     border-radius: 0 8px 8px 0 !important;
+    flex-shrink: 0 !important;
 }
 
 .fs-mobile-submenu.open {
@@ -7634,6 +7645,7 @@ button:not(.btn-fill-animation):not(.footer-accordion-toggle):not(.fs-mega-toggl
     border: none !important;
     background: transparent !important;
     transition: color 0.2s ease, padding-left 0.2s ease !important;
+    flex-shrink: 0 !important;
 }
 
 .fs-mobile-submenu a:hover,
@@ -9277,6 +9289,22 @@ button.slider-btn:active {
     .contact-hero-banner .contact-hero-badge-pill {
         margin-bottom: 0.6rem !important;
     }
+}
+
+/* ============================================================
+   GLOBAL: All innerpage banner descriptions MUST be italic on all screens
+   ============================================================ */
+.page-hero-banner p,
+.page-hero-banner .page-hero-desc,
+.page-hero-banner .hero-subtitle,
+.page-hero-banner .hero-description,
+.page-hero-banner [class*="desc"],
+.page-hero-banner [class*="sub"]:not(.page-hero-overlay),
+.page-hero-banner div[style*="Instrument Sans"],
+.contact-hero-banner .contact-hero-sub,
+.contact-hero-sub,
+.article-hero-inner p {
+    font-style: italic !important;
 }
 
 /* ============================================================

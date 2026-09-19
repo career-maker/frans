@@ -557,3 +557,4 @@ function franciscan_ensure_provincial_council_photos() {
 }
 add_action( 'init', 'franciscan_ensure_provincial_council_photos', 4 );
 
+

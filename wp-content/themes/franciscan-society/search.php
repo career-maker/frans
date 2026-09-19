@@ -455,3 +455,4 @@ $total_results = $wp_query->found_posts;
 
 <?php
 get_footer();
+

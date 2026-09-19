@@ -54,3 +54,4 @@ function franciscan_sanitize_array( $array ) {
     }
     return $clean;
 }
+

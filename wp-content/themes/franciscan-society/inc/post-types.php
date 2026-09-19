@@ -30,3 +30,4 @@ function franciscan_register_post_types() {
     ) );
 }
 add_action( 'init', 'franciscan_register_post_types' );
+

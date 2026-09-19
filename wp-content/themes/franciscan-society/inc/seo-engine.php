@@ -124,3 +124,4 @@ function franciscan_custom_robots_txt( $output, $public ) {
 }
 add_filter( 'robots_txt', 'franciscan_custom_robots_txt', 99, 2 );
 
+

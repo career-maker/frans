@@ -1598,11 +1598,16 @@ button.fs-mega-toggle:focus::after {
     padding: 2rem;
     transition: right 0.4s ease;
     flex-direction: column;
-    gap: 0;
+    gap: 0 !important;
   }
 
   .fs-mobile-nav.active {
     right: 0;
+    gap: 0 !important;
+  }
+
+  .fs-mobile-nav > * {
+    flex-shrink: 0 !important;
   }
 
   .fs-mobile-close {
@@ -1619,6 +1624,7 @@ button.fs-mega-toggle:focus::after {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-shrink: 0 !important;
   }
 
   .fs-mobile-nav > a,
@@ -1640,6 +1646,7 @@ button.fs-mega-toggle:focus::after {
     align-items: center;
     width: 100%;
     padding: 0.85rem 0;
+    flex-shrink: 0 !important;
   }
 
   .fs-mobile-nav > a:hover,
@@ -1665,6 +1672,7 @@ button.fs-mega-toggle:focus::after {
     gap: 0;
     padding-left: 1.5rem;
     border-bottom: 1px solid rgba(255,255,255,0.1);
+    flex-shrink: 0 !important;
   }
 
   .fs-mobile-submenu.open {
@@ -1679,6 +1687,7 @@ button.fs-mega-toggle:focus::after {
     line-height: 1.3;
     border-bottom: 1px solid rgba(255,255,255,0.05);
     margin-bottom: 0;
+    flex-shrink: 0 !important;
   }
   .fs-mobile-submenu a:last-child {
     border-bottom: none;
@@ -1825,6 +1834,20 @@ button.fs-mega-toggle:focus::after {
   main, #main-content {
     position: relative;
     z-index: 1;
+  }
+
+  /* Universal guarantee: All innerpage banner descriptions MUST be italic on all devices */
+  .page-hero-banner p,
+  .page-hero-banner .page-hero-desc,
+  .page-hero-banner .hero-subtitle,
+  .page-hero-banner .hero-description,
+  .page-hero-banner [class*="desc"],
+  .page-hero-banner [class*="sub"]:not(.page-hero-overlay),
+  .page-hero-banner div[style*="Instrument Sans"],
+  .contact-hero-banner .contact-hero-sub,
+  .contact-hero-sub,
+  .article-hero-inner p {
+    font-style: italic !important;
   }
 </style>
 

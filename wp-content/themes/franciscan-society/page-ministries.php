@@ -6,3 +6,4 @@
  */
 
 require get_template_directory() . '/page-templates/template-ministries.php';
+

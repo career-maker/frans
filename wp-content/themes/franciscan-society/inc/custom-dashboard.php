@@ -6984,3 +6984,4 @@ function franciscan_ajax_delete_gallery_photo() {
 }
 add_action( 'wp_ajax_franciscan_delete_gallery_photo', 'franciscan_ajax_delete_gallery_photo' );
 
+

@@ -628,3 +628,4 @@ function franciscan_render_christian_email_html( $args ) {
     <?php
     return ob_get_clean();
 }
+
