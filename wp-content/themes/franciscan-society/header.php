@@ -1598,7 +1598,7 @@ button.fs-mega-toggle:focus::after {
     padding: 2rem;
     transition: right 0.4s ease;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 0;
   }
 
   .fs-mobile-nav.active {
@@ -1621,14 +1621,15 @@ button.fs-mega-toggle:focus::after {
     justify-content: center;
   }
 
-  .fs-mobile-nav a,
-  .fs-mobile-submenu-toggle {
+  .fs-mobile-nav > a,
+  .fs-mobile-nav > .fs-mobile-submenu-toggle {
     color: #fff;
     font-weight: 600;
     text-decoration: none;
     font-size: 1.1rem;
     background: none;
     border: none;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
     text-align: left;
     cursor: pointer;
     font-family: 'Instrument Sans', sans-serif;
@@ -1637,17 +1638,15 @@ button.fs-mega-toggle:focus::after {
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    padding: 0;
+    padding: 1rem 0;
   }
 
-  .fs-mobile-nav a:hover,
-  .fs-mobile-submenu-toggle:hover {
+  .fs-mobile-nav > a:hover,
+  .fs-mobile-nav > .fs-mobile-submenu-toggle:hover {
     color: #e6c888;
   }
 
-  .fs-mobile-submenu-toggle {
-    margin-bottom: 0;
-  }
+  /* submenu-toggle specific — handled by > a, > .fs-mobile-submenu-toggle above */
 
   .fs-mobile-submenu-arrow {
     display: inline-flex; align-items: center; justify-content: center;
@@ -1664,8 +1663,7 @@ button.fs-mega-toggle:focus::after {
     flex-direction: column;
     gap: 0;
     padding-left: 1.5rem;
-    margin-top: 0.5rem;
-    margin-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
   }
 
   .fs-mobile-submenu.open {
@@ -1676,7 +1674,12 @@ button.fs-mega-toggle:focus::after {
     font-size: 0.95rem;
     color: #d6d3d1;
     font-weight: 500;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
     margin-bottom: 0;
+  }
+  .fs-mobile-submenu a:last-child {
+    border-bottom: none;
   }
 
   .fs-mobile-submenu a:hover {
