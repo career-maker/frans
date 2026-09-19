@@ -668,7 +668,7 @@ button.fs-mega-toggle:focus::after {
             <h1 style="font-family: 'Phudu', sans-serif; font-size: clamp(1.4rem, 2.6vw, 2.25rem); font-weight: 700; color: #ffffff; text-transform: uppercase; margin: 0; text-align: left;"><?php echo franciscan_render_rich_text( $hero_title ); ?></h1>
             <?php endif; ?>
             <?php if ( ! empty( $hero_subtitle ) ) : ?>
-                <p style="font-family: 'Instrument Sans', sans-serif; font-size: clamp(1rem, 2vw, 1.15rem); color: rgba(255, 255, 255, 0.88); line-height: 1.6; margin: 1rem 0 0 0; max-width: 680px; text-align: left;"><?php echo franciscan_render_rich_text( $hero_subtitle ); ?></p>
+                <p style="font-family: 'Instrument Sans', sans-serif; font-size: clamp(1rem, 2vw, 1.15rem); color: rgba(255, 255, 255, 0.88); line-height: 1.6; margin: 1rem 0 0 0; max-width: 680px; text-align: left; font-style: italic;"><?php echo franciscan_render_rich_text( $hero_subtitle ); ?></p>
             <?php endif; ?>
         </div>
     </section>

@@ -814,7 +814,7 @@ button.fs-mega-toggle:focus::after {
             <h1 style="font-family: 'Phudu', sans-serif; font-size: clamp(1.4rem, 2.6vw, 2.25rem); font-weight: 700; color: #ffffff; text-transform: uppercase; margin: 0 0 1rem 0; line-height: 1.2; text-align: left;"><?php echo franciscan_render_rich_text( $ldr_hero_title ); ?></h1>
             <?php endif; ?>
             <?php if ( ! empty( $ldr_hero_desc ) ) : ?>
-                <p style="font-family: 'Instrument Sans', sans-serif; font-size: clamp(1rem, 1.8vw, 1.18rem); color: rgba(255, 255, 255, 0.92); max-width: 760px; margin: 0.8rem 0 0 0; line-height: 1.6; font-weight: 400; text-align: left;">
+                <p style="font-family: 'Instrument Sans', sans-serif; font-size: clamp(1rem, 1.8vw, 1.18rem); color: rgba(255, 255, 255, 0.92); max-width: 760px; margin: 0.8rem 0 0 0; line-height: 1.6; font-weight: 400; text-align: left; font-style: italic;">
                     <?php echo franciscan_render_rich_text( $ldr_hero_desc ); ?>
                 </p>
             <?php endif; ?>
@@ -848,7 +848,7 @@ button.fs-mega-toggle:focus::after {
                 <h2 style="font-family: 'Phudu', sans-serif; font-size: clamp(2rem, 3.8vw, 44px); font-weight: 600; color: #ffffff; text-transform: uppercase; line-height: 1.15; letter-spacing: -0.01em; margin-bottom: 1.2rem; max-width: 800px;">
                     <?php echo franciscan_render_rich_text( franciscan_get_page_field( 'community-leadership', 'card_title', 'SERVING IN COMMUNION' ) ); ?>
                 </h2>
-                <p style="font-family: 'Instrument Sans', sans-serif; font-size: 1.05rem; font-weight: 400; color: rgba(255, 255, 255, 0.9); line-height: 1.52; max-width: 650px; margin: 0;">
+                <p style="font-family: 'Instrument Sans', sans-serif; font-size: 1.05rem; font-weight: 400; color: rgba(255, 255, 255, 0.9); line-height: 1.52; max-width: 650px; margin: 0; font-style: italic;">
                     <?php echo franciscan_render_rich_text( $ldr_card_desc ); ?>
                 </p>
             </div>
@@ -989,3 +989,4 @@ button.fs-mega-toggle:focus::after {
 
 <?php
 get_footer();
+

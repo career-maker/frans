@@ -1646,7 +1646,7 @@ button.fs-mega-toggle:focus::after {
   }
 
   .fs-mobile-submenu-toggle {
-    margin-bottom: 1rem;
+    margin-bottom: 0;
   }
 
   .fs-mobile-submenu-arrow {
@@ -1662,9 +1662,10 @@ button.fs-mega-toggle:focus::after {
   .fs-mobile-submenu {
     display: none;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 0;
     padding-left: 1.5rem;
-    margin-top: 0.8rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
   }
 
   .fs-mobile-submenu.open {
@@ -2483,3 +2484,4 @@ if ( ! $fs_is_home ) {
 
 <!-- Main Content Area with Cream Background (#FAF7F0) -->
     
+

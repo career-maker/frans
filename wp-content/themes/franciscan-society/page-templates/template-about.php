@@ -736,7 +736,7 @@ button.fs-mega-toggle:focus::after {
             <h1 style="font-family: 'Phudu', sans-serif; font-size: clamp(1.4rem, 2.6vw, 2.25rem); font-weight: 700; color: #ffffff; text-transform: uppercase; margin: 0 0 1rem 0; line-height: 1.2; text-align: left;"><?php echo franciscan_render_rich_text( $about_hero_title ); ?></h1>
             <?php endif; ?>
             <?php if ( ! empty( $about_hero_desc ) ) : ?>
-                <p style="font-family: 'Instrument Sans', sans-serif; font-size: clamp(1rem, 1.8vw, 1.18rem); color: rgba(255, 255, 255, 0.92); max-width: 760px; margin: 0.8rem 0 0 0; line-height: 1.6; font-weight: 400; text-align: left;">
+                <p style="font-family: 'Instrument Sans', sans-serif; font-size: clamp(1rem, 1.8vw, 1.18rem); color: rgba(255, 255, 255, 0.92); max-width: 760px; margin: 0.8rem 0 0 0; line-height: 1.6; font-weight: 400; text-align: left; font-style: italic;">
                     <?php echo franciscan_render_rich_text( $about_hero_desc ); ?>
                 </p>
             <?php endif; ?>
@@ -1200,3 +1200,4 @@ button.fs-mega-toggle:focus::after {
 
 <?php
 get_footer();
+

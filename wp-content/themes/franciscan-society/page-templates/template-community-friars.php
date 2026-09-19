@@ -1157,7 +1157,7 @@ button.fs-mega-toggle:focus::after {
             <h1 style="font-family: 'Phudu', sans-serif; font-size: clamp(1.4rem, 2.6vw, 2.25rem); font-weight: 700; color: #ffffff; text-transform: uppercase; margin: 0 0 1rem 0; line-height: 1.2; text-align: left;"><?php echo franciscan_render_rich_text( $friars_hero_title ); ?></h1>
             <?php endif; ?>
             <?php if ( ! empty( $friars_hero_desc ) ) : ?>
-                <p style="font-family: 'Instrument Sans', sans-serif; font-size: clamp(1rem, 1.8vw, 1.18rem); color: rgba(255, 255, 255, 0.92); max-width: 760px; margin: 0.8rem 0 0 0; line-height: 1.6; font-weight: 400; text-align: left;">
+                <p style="font-family: 'Instrument Sans', sans-serif; font-size: clamp(1rem, 1.8vw, 1.18rem); color: rgba(255, 255, 255, 0.92); max-width: 760px; margin: 0.8rem 0 0 0; line-height: 1.6; font-weight: 400; text-align: left; font-style: italic;">
                     <?php echo franciscan_render_rich_text( $friars_hero_desc ); ?>
                 </p>
             <?php endif; ?>
@@ -1176,7 +1176,7 @@ button.fs-mega-toggle:focus::after {
                 <h2 style="font-family: 'Phudu'; font-size: clamp(2.6rem, 4.2vw, 62px); font-weight: 600; color: #fff; text-transform: uppercase; line-height: 1.05; margin-bottom: 1.5rem;">
                     <?php echo esc_html( franciscan_get_page_field( 'community-friars', 'card_title', 'BROTHERS IN CHRIST' ) ); ?>
                 </h2>
-                <p style="font-family: 'Instrument Sans'; font-size: 1.1rem; color: rgba(255,255,255,0.9); max-width: 600px;">
+                <p style="font-family: 'Instrument Sans'; font-size: 1.1rem; color: rgba(255,255,255,0.9); max-width: 600px; font-style: italic;">
                     <?php echo nl2br( esc_html( franciscan_get_page_field( 'community-friars', 'card_subtitle', 'Over 104 professed friars dedicated to prayer, community, and active ministry.' ) ) ); ?>
                 </p>
             </div>
@@ -1278,3 +1278,4 @@ button.fs-mega-toggle:focus::after {
 
 <?php
 get_footer();
+

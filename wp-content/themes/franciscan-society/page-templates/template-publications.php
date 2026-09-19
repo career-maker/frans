@@ -744,7 +744,7 @@ button.fs-mega-toggle:focus::after {
             <h1 style="font-family: 'Phudu', sans-serif; font-size: clamp(1.4rem, 2.6vw, 2.25rem); font-weight: 700; color: #ffffff; text-transform: uppercase; margin: 0 0 1rem 0; line-height: 1.1; text-align: left;"><?php echo franciscan_render_rich_text( $pub_hero_title ); ?></h1>
             <?php endif; ?>
             <?php if ( ! empty( $pub_hero_sub ) && false === stripos( $pub_hero_sub, 'Books, newsletters' ) ) : ?>
-                <p style="font-family: 'Instrument Sans', sans-serif; font-size: clamp(1rem, 1.8vw, 1.2rem); color: #e6c888; max-width: 680px; margin: 0; line-height: 1.5; font-weight: 500; text-align: left;">
+                <p style="font-family: 'Instrument Sans', sans-serif; font-size: clamp(1rem, 1.8vw, 1.2rem); color: #e6c888; max-width: 680px; margin: 0; line-height: 1.5; font-weight: 500; text-align: left; font-style: italic;">
                     <?php echo franciscan_render_rich_text( $pub_hero_sub ); ?>
                 </p>
             <?php endif; ?>

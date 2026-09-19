@@ -759,7 +759,7 @@ button.fs-mega-toggle:focus::after {
             </h1>
             <?php endif; ?>
             <?php if ( ! empty( $hero_subtitle ) ) : ?>
-                <p style="font-family: 'Instrument Sans', sans-serif; font-size: clamp(0.95rem, 1.6vw, 1.15rem); font-weight: 500; color: rgba(255, 255, 255, 0.9); margin: 0.8rem 0 0 0; max-width: 760px; letter-spacing: 0.03em; line-height: 1.6; text-align: left;">
+                <p style="font-family: 'Instrument Sans', sans-serif; font-size: clamp(0.95rem, 1.6vw, 1.15rem); font-weight: 500; color: rgba(255, 255, 255, 0.9); margin: 0.8rem 0 0 0; max-width: 760px; letter-spacing: 0.03em; line-height: 1.6; text-align: left; font-style: italic;">
                     <?php echo franciscan_render_rich_text( $hero_subtitle ); ?>
                 </p>
             <?php endif; ?>
@@ -900,7 +900,7 @@ button.fs-mega-toggle:focus::after {
                             <?php echo esc_html( $chap_data['title'] ?? '' ); ?>
                         </h3>
                         <?php if ( ! empty( $chap_data['subtitle'] ) ) : ?>
-                            <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.9rem; color: #e6c888; margin: 0; font-weight: 500;">
+                            <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.9rem; color: #e6c888; margin: 0; font-weight: 500; font-style: italic;">
                                 <?php echo esc_html( $chap_data['subtitle'] ); ?>
                             </p>
                         <?php endif; ?>
@@ -1273,3 +1273,4 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <?php
 get_footer();
+

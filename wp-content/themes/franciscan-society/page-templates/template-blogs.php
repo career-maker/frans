@@ -164,7 +164,7 @@ if ( ! $blogs_query->have_posts() ) {
             </h1>
             <?php endif; ?>
             <?php if ( ! empty( $blogs_hero_sub ) ) : ?>
-            <p style="font-family: 'Instrument Sans', sans-serif; font-size: 1.05rem; color: rgba(255,255,255,0.85); line-height: 1.6; margin: 0; text-align: left;">
+            <p style="font-family: 'Instrument Sans', sans-serif; font-size: 1.05rem; color: rgba(255,255,255,0.85); line-height: 1.6; margin: 0; text-align: left; font-style: italic;">
                 <?php echo franciscan_render_rich_text( $blogs_hero_sub ); ?>
             </p>
             <?php endif; ?>
