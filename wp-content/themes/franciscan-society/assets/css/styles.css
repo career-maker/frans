@@ -2872,7 +2872,7 @@ body.menu-open { overflow: hidden; }
     text-align: left !important;
     margin-left: 0 !important;
     margin-right: auto !important;
-    margin-bottom: 0.85rem !important;
+    margin-bottom: 0.5rem !important;
 }
 .page-hero-banner p,
 .page-hero-banner .page-hero-desc,
@@ -9226,41 +9226,73 @@ button.slider-btn:active {
    MOBILE: Inner page banners — content pinned to BOTTOM-LEFT
    ============================================================ */
 @media (max-width: 767px) {
-    /* Ensure the banner section itself is flex-col with content at bottom */
+    /* Section fills height and pushes all content to the bottom */
     .page-hero-banner,
     .page-hero-section {
         display: flex !important;
         flex-direction: column !important;
         justify-content: flex-end !important;
         align-items: stretch !important;
+        padding-top: clamp(6rem, 18vw, 8rem) !important;
+        padding-bottom: clamp(2rem, 6vw, 3rem) !important;
     }
 
-    /* Content container: bottom-left alignment */
+    /* Content wrapper: sits at the very bottom */
     .page-hero-banner > div:not(.hero-overlay):not(.page-hero-overlay),
     .page-hero-banner .hero-content,
     .contact-hero-banner .contact-hero-inner {
+        display: flex !important;
+        flex-direction: column !important;
         justify-content: flex-end !important;
         align-items: flex-start !important;
         text-align: left !important;
+        margin-top: auto !important;
+        padding-bottom: 0 !important;
     }
 
-    /* Title left-aligned on mobile */
+    /* Title: left-aligned, smaller, tight margin to description */
     .page-hero-banner h1,
     .page-hero-banner .page-hero-title,
     .contact-hero-banner .contact-hero-h1 {
         text-align: left !important;
-        font-size: clamp(1.25rem, 5.5vw, 1.7rem) !important;
+        font-size: clamp(1.2rem, 5.5vw, 1.65rem) !important;
+        margin-bottom: 0.3rem !important;
+        line-height: 1.2 !important;
     }
 
-    /* Description left-aligned and italic */
+    /* Description: left-aligned, italic, compact */
     .page-hero-banner p,
     .page-hero-banner .page-hero-desc,
     .contact-hero-banner .contact-hero-sub {
         text-align: left !important;
-        font-size: clamp(0.9rem, 3.5vw, 1.05rem) !important;
+        font-size: clamp(0.85rem, 3.5vw, 1rem) !important;
         font-style: italic !important;
+        margin-top: 0.3rem !important;
+        line-height: 1.5 !important;
+    }
+
+    /* Badge: tight bottom margin */
+    .page-hero-banner .hero-badge,
+    .page-hero-banner .hero-badge-pill,
+    .contact-hero-banner .contact-hero-badge-pill {
+        margin-bottom: 0.6rem !important;
     }
 }
+
+/* ============================================================
+   GLOBAL: Preserve <br> line breaks from admin on ALL screens
+   Never collapse or hide <br> tags inside banners or content
+   ============================================================ */
+.page-hero-banner p br,
+.page-hero-banner .page-hero-desc br,
+.contact-hero-banner .contact-hero-sub br,
+.hero-subtitle br,
+.home-hero-subtitle br {
+    display: block !important;
+    content: '' !important;
+    margin-top: 0.1em !important;
+}
+
 
 /* ============================================================
    MOBILE: Hero section — hide heavy video, show static poster
