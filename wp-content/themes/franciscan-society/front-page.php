@@ -26,7 +26,7 @@ get_header();
 
             <div class="hero-media-wrapper" style="position: absolute; inset: 0; width: 100%; height: 100%; overflow: hidden; z-index: 1; border-radius: 24px;">
                 <?php if ( ! empty( $active_video ) ) : ?>
-                    <video id="hero-bg-video" autoplay muted="muted" loop playsinline="playsinline" webkit-playsinline="webkit-playsinline" preload="auto" src="<?php echo esc_url( $active_video ); ?>" poster="<?php echo esc_url( $poster_img ); ?>" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1;">
+                    <video id="hero-bg-video" autoplay muted="muted" loop playsinline="playsinline" webkit-playsinline="webkit-playsinline" preload="auto" src="<?php echo esc_url( $active_video ); ?>" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; background: #0c0b0a;">
                         <source src="<?php echo esc_url( $active_video ); ?>" type="video/mp4">
                     </video>
                     <script>
