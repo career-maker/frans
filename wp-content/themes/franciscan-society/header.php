@@ -1854,7 +1854,7 @@ button.fs-mega-toggle:focus::after {
       background-position: center top !important;
       background-size: cover !important;
       padding-top: 0 !important;
-      padding-bottom: clamp(0.75rem, 2.5vw, 1.25rem) !important;
+      padding-bottom: 2.5rem !important;
       padding-left: 0 !important;
       padding-right: 0 !important;
       box-sizing: border-box !important;

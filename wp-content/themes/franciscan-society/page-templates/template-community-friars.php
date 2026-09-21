@@ -896,7 +896,7 @@ button.fs-mega-toggle:focus::after {
         /* Friars Directory & Hero Responsive Styles */
         .page-hero-banner {
             position: relative;
-            padding: 10rem 2rem 4rem 2rem;
+            padding: 10rem 2rem 2rem 2rem;
             background-size: cover;
             background-position: center;
             overflow: hidden;
