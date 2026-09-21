@@ -57,6 +57,102 @@ echo "--- git status ---\n";
 $status = run_cmd( "cd " . escapeshellarg( $project_dir ) . " && git status" );
 echo htmlspecialchars( $status['output'] ) . "\n\n";
 
+// --- WORDPRESS HEALTH & CONFIG DIAGNOSTICS ---
+echo "--- WordPress Config & Database Diagnostics ---\n";
+$wp_config_file   = $project_dir . '/wp-config.php';
+$wp_config_backup = $project_dir . '/wp-config-live-backup.php';
+
+if ( ! file_exists( $wp_config_file ) ) {
+    echo '<span class="warn">⚠️  wp-config.php NOT found in ' . htmlspecialchars( $project_dir ) . '!</span>' . "\n";
+    if ( file_exists( $wp_config_backup ) ) {
+        if ( copy( $wp_config_backup, $wp_config_file ) ) {
+            chmod( $wp_config_file, 0644 );
+            echo '<span class="ok">✅ Restored wp-config.php from wp-config-live-backup.php!</span>' . "\n\n";
+        } else {
+            echo '<span class="err">❌ Failed to copy backup to wp-config.php</span>' . "\n\n";
+        }
+    } else {
+        echo '<span class="err">❌ Backup wp-config-live-backup.php not found either!</span>' . "\n\n";
+    }
+} else {
+    $config_size = filesize( $wp_config_file );
+    echo '<span class="ok">✅ wp-config.php exists (' . $config_size . ' bytes)</span>' . "\n";
+    if ( $config_size < 100 && file_exists( $wp_config_backup ) ) {
+        copy( $wp_config_backup, $wp_config_file );
+        chmod( $wp_config_file, 0644 );
+        echo '<span class="ok">✅ Restored truncated wp-config.php with live backup!</span>' . "\n";
+    }
+}
+
+// Inspect DB connection if wp-config.php exists
+if ( file_exists( $wp_config_file ) ) {
+    $cfg = file_get_contents( $wp_config_file );
+    preg_match( "/define\s*\(\s*['\"]DB_NAME['\"]\s*,\s*['\"]([^'\"]+)['\"]\s*\)/", $cfg, $m_name );
+    preg_match( "/define\s*\(\s*['\"]DB_USER['\"]\s*,\s*['\"]([^'\"]+)['\"]\s*\)/", $cfg, $m_user );
+    preg_match( "/define\s*\(\s*['\"]DB_PASSWORD['\"]\s*,\s*['\"]([^'\"]+)['\"]\s*\)/", $cfg, $m_pass );
+    preg_match( "/define\s*\(\s*['\"]DB_HOST['\"]\s*,\s*['\"]([^'\"]+)['\"]\s*\)/", $cfg, $m_host );
+    preg_match( "/\\\$table_prefix\s*=\s*['\"]([^'\"]+)['\"]/", $cfg, $m_prefix );
+
+    $db_name = $m_name[1] ?? '';
+    $db_user = $m_user[1] ?? '';
+    $db_pass = $m_pass[1] ?? '';
+    $db_host = $m_host[1] ?? 'localhost';
+    $prefix  = $m_prefix[1] ?? 'wp_';
+
+    echo "DB Name: " . htmlspecialchars( $db_name ) . "\n";
+    echo "DB User: " . htmlspecialchars( $db_user ) . "\n";
+    echo "DB Host: " . htmlspecialchars( $db_host ) . "\n";
+    echo "Table Prefix in wp-config.php: " . htmlspecialchars( $prefix ) . "\n";
+
+    if ( function_exists( 'mysqli_connect' ) ) {
+        $conn = @mysqli_connect( $db_host, $db_user, $db_pass, $db_name );
+        if ( ! $conn ) {
+            echo '<span class="err">❌ DB Connection Failed: ' . htmlspecialchars( mysqli_connect_error() ) . '</span>' . "\n\n";
+        } else {
+            echo '<span class="ok">✅ DB Connection Successful!</span>' . "\n";
+            $res = mysqli_query( $conn, "SHOW TABLES" );
+            $all_tables = [];
+            while ( $row = mysqli_fetch_array( $res ) ) {
+                $all_tables[] = $row[0];
+            }
+            echo "Total Tables in DB: " . count( $all_tables ) . "\n";
+            echo "Tables: " . htmlspecialchars( implode( ', ', array_slice( $all_tables, 0, 15 ) ) ) . "\n";
+
+            // Check options table
+            $opt_table = $prefix . 'options';
+            if ( in_array( $opt_table, $all_tables ) ) {
+                $opt_res = mysqli_query( $conn, "SELECT option_value FROM `{$opt_table}` WHERE option_name='siteurl'" );
+                if ( $opt_res && $row = mysqli_fetch_assoc( $opt_res ) ) {
+                    echo '<span class="ok">✅ siteurl found in ' . $opt_table . ': ' . htmlspecialchars( $row['option_value'] ) . '</span>' . "\n";
+                } else {
+                    echo '<span class="err">❌ siteurl NOT found in ' . $opt_table . '!</span>' . "\n";
+                }
+                $home_res = mysqli_query( $conn, "SELECT option_value FROM `{$opt_table}` WHERE option_name='home'" );
+                if ( $home_res && $row = mysqli_fetch_assoc( $home_res ) ) {
+                    echo '<span class="ok">✅ home found in ' . $opt_table . ': ' . htmlspecialchars( $row['option_value'] ) . '</span>' . "\n";
+                }
+                // Check if table needs repair
+                $chk = mysqli_query( $conn, "CHECK TABLE `{$opt_table}`" );
+                if ( $chk && $chk_row = mysqli_fetch_assoc( $chk ) ) {
+                    echo "Table check: " . htmlspecialchars( $chk_row['Msg_type'] . ': ' . $chk_row['Msg_text'] ) . "\n";
+                }
+            } else {
+                echo '<span class="err">❌ Expected options table "' . $opt_table . '" NOT found in DB!</span>' . "\n";
+                // Try finding what options table exists
+                foreach ( $all_tables as $tbl ) {
+                    if ( substr( $tbl, -7 ) === 'options' ) {
+                        echo '<span class="warn">Found alternative options table: ' . htmlspecialchars( $tbl ) . '</span>' . "\n";
+                        $actual_prefix = substr( $tbl, 0, -7 );
+                        echo '<span class="warn">Detected actual prefix in DB: ' . htmlspecialchars( $actual_prefix ) . '</span>' . "\n";
+                    }
+                }
+            }
+            mysqli_close( $conn );
+            echo "\n";
+        }
+    }
+}
+
 // git fetch
 echo "--- git fetch origin ---\n";
 $fetch = run_cmd( "cd " . escapeshellarg( $project_dir ) . " && git fetch origin 2>&1" );
