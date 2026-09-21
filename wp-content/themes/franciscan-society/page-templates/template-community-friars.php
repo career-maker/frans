@@ -1115,10 +1115,10 @@ button.fs-mega-toggle:focus::after {
 
         @media (max-width: 480px) {
             .page-hero-banner {
-                min-height: 68vh !important;
-                min-height: 480px !important;
-                padding-top: clamp(10rem, 30vw, 14rem) !important;
-                padding-bottom: 1.75rem !important;
+                min-height: 70vh !important;
+                min-height: 500px !important;
+                padding-top: clamp(12rem, 36vw, 18rem) !important;
+                padding-bottom: clamp(0.75rem, 2.5vw, 1.1rem) !important;
                 background-position: center top !important;
             }
             .page-hero-friars {

@@ -1879,16 +1879,16 @@ button.fs-mega-toggle:focus::after {
   @media (max-width: 767px) {
     .page-hero-banner,
     .page-hero-section {
-      min-height: 68vh !important;
-      min-height: 480px !important;
+      min-height: 70vh !important;
+      min-height: 500px !important;
       display: flex !important;
       flex-direction: column !important;
       justify-content: flex-end !important;
       align-items: stretch !important;
       background-position: center top !important;
       background-size: cover !important;
-      padding-top: clamp(10rem, 30vw, 15rem) !important;
-      padding-bottom: clamp(1.5rem, 5vw, 2.2rem) !important;
+      padding-top: clamp(12rem, 36vw, 18rem) !important;
+      padding-bottom: clamp(0.75rem, 2.5vw, 1.1rem) !important;
       padding-left: 0 !important;
       padding-right: 0 !important;
       box-sizing: border-box !important;
