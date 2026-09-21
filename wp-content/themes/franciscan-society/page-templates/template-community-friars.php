@@ -896,11 +896,14 @@ button.fs-mega-toggle:focus::after {
         /* Friars Directory & Hero Responsive Styles */
         .page-hero-banner {
             position: relative;
-            padding: 10rem 2rem 2rem 2rem;
+            min-height: 480px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 0 2rem 3rem 2rem;
             background-size: cover;
             background-position: center;
             overflow: hidden;
-            text-align: center;
         }
         .page-hero-banner .hero-overlay {
             position: absolute;
@@ -908,11 +911,8 @@ button.fs-mega-toggle:focus::after {
             background-color: rgba(12, 11, 10, 0.7);
         }
         .page-hero-banner .hero-content {
-            max-width: 800px;
-            margin: 0 auto;
             position: relative;
             z-index: 2;
-            text-align: center;
         }
         .page-hero-banner h1 {
             font-family: 'Phudu', sans-serif;
@@ -1011,22 +1011,13 @@ button.fs-mega-toggle:focus::after {
         /* Mobile & Tablet Responsiveness */
         @media (max-width: 991px) {
             .page-hero-banner {
-                min-height: 65vh !important;
-                display: flex !important;
-                flex-direction: column !important;
-                justify-content: flex-end !important;
-                padding: 0 0 1rem 0 !important;
-                background-position: center top !important;
-            }
-            .page-hero-banner .hero-content {
-                margin-top: auto !important;
-                padding-top: 0 !important;
-                padding-bottom: 0 !important;
-                width: 100% !important;
+                min-height: 65vh;
+                padding: 0 1.5rem 2rem 1.5rem;
+                background-position: center top;
             }
             .page-hero-banner h1 {
-                font-size: clamp(1.6rem, 5.5vw, 2.2rem) !important;
-                margin-bottom: 0.25rem !important;
+                font-size: clamp(1.6rem, 5.5vw, 2.2rem);
+                margin-bottom: 0.25rem;
             }
             .page-hero-friars {
                 padding: 1.25rem 1rem 0 1rem !important;
@@ -1120,16 +1111,9 @@ button.fs-mega-toggle:focus::after {
 
         @media (max-width: 480px) {
             .page-hero-banner {
-                min-height: 72vh !important;
-                min-height: 520px !important;
-                padding: 0 0 1rem 0 !important;
-                background-position: center top !important;
-            }
-            .page-hero-banner .hero-content {
-                margin-top: auto !important;
-                padding-top: 0 !important;
-                padding-bottom: 0 !important;
-                width: 100% !important;
+                min-height: max(72vh, 520px);
+                padding: 0 1rem 1.5rem 1rem;
+                background-position: center top;
             }
             .page-hero-friars {
                 padding: 1rem 0.75rem 0 0.75rem !important;
