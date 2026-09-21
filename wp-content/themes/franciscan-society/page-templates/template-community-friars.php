@@ -938,6 +938,7 @@ button.fs-mega-toggle:focus::after {
             font-family: 'Phudu', sans-serif;
             font-size: clamp(1.4rem, 2.4vw, 2.2rem);
             font-weight: 700;
+            font-style: italic !important;
             color: #1c1917;
             margin-bottom: 2.5rem;
             text-align: center;
@@ -950,6 +951,7 @@ button.fs-mega-toggle:focus::after {
             font-family: 'Phudu', sans-serif;
             font-size: clamp(1.8rem, 3vw, 2.2rem);
             font-weight: 900;
+            font-style: italic !important;
             color: #1c1917;
             margin-bottom: 2.5rem;
             text-align: center;
@@ -1009,10 +1011,17 @@ button.fs-mega-toggle:focus::after {
         /* Mobile & Tablet Responsiveness */
         @media (max-width: 991px) {
             .page-hero-banner {
-                padding: 6.5rem 1.25rem 2rem 1.25rem !important;
+                min-height: 65vh !important;
+                display: flex !important;
+                flex-direction: column !important;
+                justify-content: flex-end !important;
+                padding-top: clamp(8rem, 25vw, 12rem) !important;
+                padding-bottom: 2rem !important;
+                background-position: center top !important;
             }
             .page-hero-banner h1 {
-                font-size: clamp(2rem, 6.5vw, 2.8rem) !important;
+                font-size: clamp(1.6rem, 5.5vw, 2.2rem) !important;
+                margin-bottom: 0.25rem !important;
             }
             .page-hero-friars {
                 padding: 1.25rem 1rem 0 1rem !important;
@@ -1106,7 +1115,11 @@ button.fs-mega-toggle:focus::after {
 
         @media (max-width: 480px) {
             .page-hero-banner {
-                padding: 5.5rem 1rem 1.5rem 1rem !important;
+                min-height: 68vh !important;
+                min-height: 480px !important;
+                padding-top: clamp(10rem, 30vw, 14rem) !important;
+                padding-bottom: 1.75rem !important;
+                background-position: center top !important;
             }
             .page-hero-friars {
                 padding: 1rem 0.75rem 0 0.75rem !important;
@@ -1148,16 +1161,16 @@ button.fs-mega-toggle:focus::after {
         <div class="hero-overlay page-hero-overlay"></div>
         <div class="hero-content" style="max-width: 1320px; margin: 0 auto; padding: 0 clamp(1rem, 5vw, 3rem); text-align: left; align-items: flex-start;">
             <?php if ( ! empty( $friars_hero_badge ) ) : ?>
-            <div style="display: inline-flex; align-items: center; gap: 0.6rem; background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); padding: 0.5rem 1rem; border-radius: 50px; margin-bottom: 1.5rem; border: 1px solid rgba(255,255,255,0.2); font-style: italic;">
+            <div class="page-hero-badge hero-badge" style="display: inline-flex; align-items: center; gap: 0.6rem; background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); padding: 0.5rem 1rem; border-radius: 50px; margin-bottom: 0.4rem; border: 1px solid rgba(255,255,255,0.2); font-style: italic;">
                 <span style="width: 8px; height: 8px; background-color: #c8102e; border-radius: 50%; display: inline-block;"></span>
                 <span style="color: #ffffff; font-size: 0.85rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; font-family: 'Instrument Sans', sans-serif;"><?php echo esc_html( $friars_hero_badge ); ?></span>
             </div>
             <?php endif; ?>
             <?php if ( ! empty( $friars_hero_title ) ) : ?>
-            <h1 style="font-family: 'Phudu', sans-serif; font-size: clamp(1.4rem, 2.6vw, 2.25rem); font-weight: 700; color: #ffffff; text-transform: uppercase; margin: 0 0 1rem 0; line-height: 1.2; text-align: left;"><?php echo franciscan_render_rich_text( $friars_hero_title ); ?></h1>
+            <h1 class="page-hero-title" style="font-family: 'Phudu', sans-serif; font-size: clamp(1.4rem, 2.6vw, 2.25rem); font-weight: 700; color: #ffffff; text-transform: uppercase; margin: 0 0 0.25rem 0; line-height: 1.2; text-align: left;"><?php echo franciscan_render_rich_text( $friars_hero_title ); ?></h1>
             <?php endif; ?>
             <?php if ( ! empty( $friars_hero_desc ) ) : ?>
-                <p style="font-family: 'Instrument Sans', sans-serif; font-size: clamp(1rem, 1.8vw, 1.18rem); color: rgba(255, 255, 255, 0.92); max-width: 760px; margin: 0.8rem 0 0 0; line-height: 1.6; font-weight: 400; text-align: left; font-style: italic;">
+                <p class="page-hero-desc" style="font-family: 'Instrument Sans', sans-serif; font-size: clamp(1rem, 1.8vw, 1.18rem); color: rgba(255, 255, 255, 0.92); max-width: 760px; margin: 0.25rem 0 0 0; line-height: 1.5; font-weight: 400; text-align: left; font-style: italic;">
                     <?php echo franciscan_render_rich_text( $friars_hero_desc ); ?>
                 </p>
             <?php endif; ?>
@@ -1193,8 +1206,8 @@ button.fs-mega-toggle:focus::after {
         ?>
 
         <?php if ( ! empty( $directory_title ) ) : ?>
-            <h2 class="friars-directory-title">
-                <?php echo esc_html( $directory_title ); ?>
+            <h2 class="friars-directory-title" style="font-style: italic !important;">
+                <em><?php echo esc_html( $directory_title ); ?></em>
             </h2>
         <?php endif; ?>
 
@@ -1234,8 +1247,8 @@ button.fs-mega-toggle:focus::after {
 
         <?php if ( ! empty( $deceased_friars ) ) : ?>
             <div class="deceased-friars-section">
-                <h2 class="deceased-section-title">
-                    <?php echo esc_html( $deceased_heading ); ?>
+                <h2 class="deceased-section-title" style="font-style: italic !important;">
+                    <em><?php echo esc_html( $deceased_heading ); ?></em>
                 </h2>
 
                 <!-- Mobile Slider Navigation Controls -->

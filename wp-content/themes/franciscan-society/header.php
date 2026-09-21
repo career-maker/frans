@@ -1868,6 +1868,88 @@ button.fs-mega-toggle:focus::after {
   .article-hero-inner p {
     font-style: italic !important;
   }
+
+  /* Friars section titles in italics */
+  .friars-directory-title,
+  .deceased-section-title {
+    font-style: italic !important;
+  }
+
+  /* Universal Mobile Innerpage Banners: Photo visible, title downwarded close to description */
+  @media (max-width: 767px) {
+    .page-hero-banner,
+    .page-hero-section {
+      min-height: 68vh !important;
+      min-height: 480px !important;
+      display: flex !important;
+      flex-direction: column !important;
+      justify-content: flex-end !important;
+      align-items: stretch !important;
+      background-position: center top !important;
+      background-size: cover !important;
+      padding-top: clamp(10rem, 30vw, 15rem) !important;
+      padding-bottom: clamp(1.5rem, 5vw, 2.2rem) !important;
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+      box-sizing: border-box !important;
+    }
+
+    .page-hero-banner .hero-overlay,
+    .page-hero-banner .page-hero-overlay,
+    .page-hero-section .hero-overlay {
+      background: linear-gradient(180deg, rgba(12, 11, 10, 0.12) 0%, rgba(12, 11, 10, 0.28) 40%, rgba(12, 11, 10, 0.82) 85%, rgba(12, 11, 10, 0.94) 100%) !important;
+    }
+
+    .page-hero-banner > div:not(.hero-overlay):not(.page-hero-overlay),
+    .page-hero-banner .hero-content,
+    .contact-hero-banner .contact-hero-inner {
+      display: flex !important;
+      flex-direction: column !important;
+      justify-content: flex-end !important;
+      align-items: flex-start !important;
+      text-align: left !important;
+      margin-top: auto !important;
+      margin-bottom: 0 !important;
+      padding-top: 0 !important;
+      padding-bottom: 0 !important;
+    }
+
+    .page-hero-banner .hero-badge,
+    .page-hero-banner .hero-badge-pill,
+    .page-hero-banner .page-hero-badge,
+    .contact-hero-banner .contact-hero-badge-pill,
+    .page-hero-banner div[style*="border-radius: 50px"],
+    .page-hero-banner div[style*="border-radius:50px"] {
+      margin-bottom: 0.35rem !important;
+      margin-top: 0 !important;
+    }
+
+    .page-hero-banner h1,
+    .page-hero-banner .page-hero-title,
+    .contact-hero-banner .contact-hero-h1 {
+      text-align: left !important;
+      font-size: clamp(1.35rem, 5.5vw, 1.8rem) !important;
+      margin-top: 0 !important;
+      margin-bottom: 0.25rem !important;
+      line-height: 1.18 !important;
+    }
+
+    .page-hero-banner p,
+    .page-hero-banner .page-hero-desc,
+    .page-hero-banner .hero-subtitle,
+    .page-hero-banner .hero-description,
+    .page-hero-banner [class*="desc"],
+    .page-hero-banner [class*="sub"]:not(.page-hero-overlay),
+    .page-hero-banner div[style*="Instrument Sans"],
+    .contact-hero-banner .contact-hero-sub {
+      text-align: left !important;
+      font-size: clamp(0.88rem, 3.5vw, 1.02rem) !important;
+      font-style: italic !important;
+      margin-top: 0.25rem !important;
+      margin-bottom: 0 !important;
+      line-height: 1.45 !important;
+    }
+  }
 </style>
 
 <?php

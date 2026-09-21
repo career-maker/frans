@@ -162,12 +162,10 @@ $banner_bg = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/hero-banner-aug2
         border: 1px solid rgba(230,200,136,0.25);
     }
     @media (max-width: 768px) {
-        .page-hero-banner,
         .article-hero-masthead {
             padding: 6.5rem 1.25rem 2.8rem 1.25rem !important;
             min-height: auto !important;
         }
-        .page-hero-banner h1,
         .article-headline {
             font-size: clamp(1.8rem, 6vw, 2.5rem) !important;
             line-height: 1.2 !important;

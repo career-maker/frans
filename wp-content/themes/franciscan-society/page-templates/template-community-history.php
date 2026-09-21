@@ -218,12 +218,6 @@ button.slider-btn:active {
         }
 
         @media (max-width: 991px) {
-            .page-hero-banner {
-                padding: 6.5rem 1.25rem 2rem 1.25rem !important;
-            }
-            .page-hero-banner h1 {
-                font-size: clamp(2rem, 6.5vw, 2.8rem) !important;
-            }
             .page-hero {
                 padding: 1.25rem 1rem 0 1rem !important;
             }
