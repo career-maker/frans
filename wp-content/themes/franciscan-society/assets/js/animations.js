@@ -23,9 +23,8 @@ const initAnimations = () => {
     const ctx = gsap.context(() => {
         // 1. Hero content card reveal (Ken Burns zoom on slides is handled via CSS keyframe;
         // slide cycling itself is handled by main.js so it keeps working even without GSAP)
-        if (document.querySelector(".js-hero-text")) {
-            gsap.from(".js-hero-text", { y: 15, opacity: 0, duration: 0.5, ease: "power3.out" });
-        }
+        // The hero copy is intentionally NOT hidden/animated here: it must be painted (and stay
+        // visible) from the first frame so it can be the page's Largest Contentful Paint.
         // 2. Hero Scroll Parallax
         if (document.querySelector(".hero__gallery") && document.querySelector(".section--hero")) {
             gsap.to(".hero__gallery", {

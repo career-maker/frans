@@ -6007,27 +6007,43 @@ header.header::-webkit-scrollbar {
     transform: translateX(-50%);
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 0;
     z-index: 6;
     background: rgba(0, 0, 0, 0.5);
-    padding: 6px 14px;
+    padding: 2px 10px;
     border-radius: 30px;
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     border: 1px solid rgba(255, 255, 255, 0.15);
 }
+/* 24x24 hit area (WCAG 2.5.8 target size); the visible dot is drawn by ::before */
 .welcome-dot {
+    position: relative;
+    width: 24px;
+    height: 24px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    outline: none;
+}
+.welcome-dot::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
     width: 8px;
     height: 8px;
     border-radius: 50%;
     background: rgba(255, 255, 255, 0.5);
-    border: none;
-    cursor: pointer;
-    padding: 0;
+    transform: translate(-50%, -50%);
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    outline: none;
 }
-.welcome-dot.is-active {
+.welcome-dot:focus-visible::before {
+    outline: 2px solid #e6c888;
+    outline-offset: 3px;
+}
+.welcome-dot.is-active::before {
     width: 24px;
     border-radius: 4px;
     background: #e6c888;
@@ -8352,6 +8368,12 @@ button.fs-mega-toggle.active::after,
     opacity: 0.65 !important;
     z-index: 1 !important;
     user-select: none !important;
+}
+
+/* The lazy-loaded <img> is a placeholder until main.js attaches it; keep its (duplicate) CSS
+   background image from being fetched before then. */
+.vine-corner-watermark[data-fs-src] {
+    background-image: none !important;
 }
 
 

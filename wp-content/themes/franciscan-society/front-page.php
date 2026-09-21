@@ -25,43 +25,53 @@ get_header();
 
             <div class="hero-media-wrapper" style="position: absolute; inset: 0; width: 100%; height: 100%; overflow: hidden; z-index: 1; border-radius: 24px; background: #0c0b0a !important; background-image: none !important;">
                 <?php if ( ! empty( $active_video ) ) : ?>
-                    <video id="hero-bg-video" autoplay muted="muted" loop playsinline preload="auto" poster="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; background: #0c0b0a !important; background-image: none !important;">
-                        <source src="<?php echo esc_url( $active_video ); ?>" type="video/mp4">
+                    <video id="hero-bg-video" muted="muted" loop playsinline preload="none" data-src="<?php echo esc_url( $active_video ); ?>" poster="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; background: #0c0b0a !important; background-image: none !important;">
+                        <track kind="captions" src="data:text/vtt;charset=utf-8,WEBVTT" srclang="en" label="No audio" default>
                     </video>
                     <script>
-                    function fsPlayHeroVideo() {
+                    /* Hero background video. It is decorative, so it must never compete with the HTML, CSS,
+                       fonts and first paint (or become the Largest Contentful Paint). It starts on the first
+                       user interaction, or a few seconds after the page has finished loading, and not at all
+                       on Data Saver / 2G connections. */
+                    (function () {
                         var v = document.getElementById('hero-bg-video');
-                        if (!v || v.tagName.toLowerCase() !== 'video') return;
-                        v.muted = true;
-                        v.defaultMuted = true;
-                        v.playsInline = true;
-                        v.setAttribute('playsinline', '');
-                        v.setAttribute('webkit-playsinline', '');
-                        if (v.paused) {
+                        if (!v) return;
+                        var started = false;
+                        function play() {
                             var p = v.play();
-                            if (p !== undefined) {
-                                p.catch(function() {});
-                            }
+                            if (p && p.catch) p.catch(function () {});
                         }
-                    }
-                    fsPlayHeroVideo();
-                    document.addEventListener('DOMContentLoaded', fsPlayHeroVideo);
-                    window.addEventListener('load', fsPlayHeroVideo);
-                    document.addEventListener('visibilitychange', function() {
-                        if (!document.hidden) fsPlayHeroVideo();
-                    });
-                    (function() {
-                        var touchEvents = ['touchstart', 'touchend', 'scroll', 'click', 'pointerdown'];
-                        function unlockHeroVideo() {
-                            fsPlayHeroVideo();
-                            touchEvents.forEach(function(evt) {
-                                window.removeEventListener(evt, unlockHeroVideo, { passive: true });
-                                document.removeEventListener(evt, unlockHeroVideo);
-                            });
+                        function start() {
+                            if (started) return;
+                            var c = navigator.connection;
+                            if (c && (c.saveData || /(^|-)2g$/.test(c.effectiveType || ''))) return;
+                            started = true;
+                            var src = document.createElement('source');
+                            src.src = v.getAttribute('data-src');
+                            src.type = 'video/mp4';
+                            v.appendChild(src);
+                            v.muted = true;
+                            v.defaultMuted = true;
+                            v.playsInline = true;
+                            v.setAttribute('playsinline', '');
+                            v.setAttribute('webkit-playsinline', '');
+                            v.load();
+                            play();
                         }
-                        touchEvents.forEach(function(evt) {
-                            window.addEventListener(evt, unlockHeroVideo, { passive: true });
-                            document.addEventListener(evt, unlockHeroVideo);
+                        // Resume helper used by the preloader script / tab return (never starts the download).
+                        window.fsPlayHeroVideo = function () {
+                            if (started && v.paused) play();
+                        };
+                        var events = ['touchstart', 'pointerdown', 'pointermove', 'scroll', 'keydown', 'wheel'];
+                        function onInput() {
+                            events.forEach(function (evt) { window.removeEventListener(evt, onInput); });
+                            start();
+                        }
+                        events.forEach(function (evt) { window.addEventListener(evt, onInput, { passive: true }); });
+                        function later() { setTimeout(start, 5000); }
+                        if (document.readyState === 'complete') { later(); } else { window.addEventListener('load', later); }
+                        document.addEventListener('visibilitychange', function () {
+                            if (!document.hidden) window.fsPlayHeroVideo();
                         });
                     })();
                     </script>
@@ -141,7 +151,7 @@ get_header();
                                 <!-- Holy Bible PNG Positioned at Center-Right of Hero Container with Smaller Size (95px) -->
                                 <!-- Holy Bible PNG Positioned Upward Above Paragraph (No Overlap) -->
 
-                <img loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/bible.png' ); ?>" alt="Holy Bible" class="hero-bible-img" style="position: absolute !important; top: 28% !important; right: 9% !important; width: 90px !important; height: auto !important; z-index: 2 !important; filter: drop-shadow(0 12px 28px rgba(0,0,0,0.85)) !important; pointer-events: none !important;">
+                <img loading="eager" fetchpriority="low" decoding="async" width="516" height="544" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/bible.png' ); ?>" alt="Holy Bible" class="hero-bible-img" style="position: absolute !important; top: 28% !important; right: 9% !important; width: 90px !important; height: auto !important; z-index: 2 !important; filter: drop-shadow(0 12px 28px rgba(0,0,0,0.85)) !important; pointer-events: none !important;">
             </div>
         </section>
 
@@ -150,7 +160,7 @@ get_header();
         <!-- 2. Welcome Message Section (Pure White Canvas #FFFFFF & Panoramic Bottom Sketch Illustration) -->
         <!-- Unclippable Flying Bible PNG Container (Flies in front of eyes on scroll) -->
 <div id="welcome-scroll-bible-container" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 99999; display: none;">
-    <img loading="lazy" decoding="async" id="welcome-scroll-bible-img" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/bible.png' ); ?>" alt="Flying Bible" style="position: absolute; width: 90px; height: auto; filter: drop-shadow(0 15px 30px rgba(0,0,0,0.5)); transform-origin: center center;">
+    <img loading="lazy" decoding="async" width="516" height="544" id="welcome-scroll-bible-img" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/bible.png' ); ?>" alt="Flying Bible" style="position: absolute; width: 90px; height: auto; filter: drop-shadow(0 15px 30px rgba(0,0,0,0.5)); transform-origin: center center;">
 </div>
 
 <section id="welcome-section" style="position: relative; padding: clamp(2rem, 4vw, 3.5rem) 2rem clamp(2rem, 3.5vw, 3rem) 2rem; background-color: #FFFFFF; color: #1c1917; overflow: hidden; box-sizing: border-box;">
@@ -240,7 +250,7 @@ get_header();
                         <div class="welcome-slider-track">
                             <?php foreach ( $welcome_slides as $index => $slide ) : $is_active = ( 0 === $index ); ?>
                                 <div class="welcome-slide <?php echo $is_active ? 'is-active' : ''; ?>">
-                                    <img loading="<?php echo $index === 0 ? 'eager' : 'lazy'; ?>" decoding="async" src="<?php echo esc_url( $slide['url'] ); ?>" alt="<?php echo esc_attr( $slide['alt'] ); ?>">
+                                    <img loading="lazy" decoding="async" src="<?php echo esc_url( $slide['url'] ); ?>"<?php echo franciscan_responsive_attrs( $slide['url'], '(max-width: 991px) 100vw, 640px' ); // phpcs:ignore ?> alt="<?php echo esc_attr( $slide['alt'] ); ?>">
                                     <div class="welcome-slide-overlay"></div>
                                     <div class="welcome-slide-center-title">
                                         <span class="cross-mark">&#10013;</span>
@@ -292,7 +302,7 @@ get_header();
                 ?>
                 <div class="about-media-column" style="position: relative; border-radius: 24px;">
                     <div class="about-img-container" style="position: relative; border-radius: 24px; overflow: hidden; box-shadow: 0 20px 45px rgba(0, 0, 0, 0.08);">
-                        <img loading="lazy" decoding="async" class="about-main-img" src="<?php echo esc_url( $about_img ); ?>" style="width: 100%; height: 460px; object-fit: cover; border-radius: 24px; display: block;" alt="Franciscan Rosary & Prayer">
+                        <img loading="lazy" decoding="async" class="about-main-img" src="<?php echo esc_url( $about_img ); ?>"<?php echo franciscan_responsive_attrs( $about_img, '(max-width: 991px) 100vw, 640px' ); // phpcs:ignore ?> style="width: 100%; height: 460px; object-fit: cover; border-radius: 24px; display: block;" alt="Franciscan Rosary & Prayer">
                     </div>
                     
                     <!-- Inset Video Overlay Card (Positioned inside bottom-left corner) -->
@@ -304,7 +314,7 @@ get_header();
                     ?>
                     <a href="<?php echo esc_url( $about_video_btn_url ); ?>" target="_blank" rel="noopener noreferrer" class="about-video-card" style="text-decoration: none !important; cursor: pointer !important; position: absolute !important; bottom: 20px !important; left: 20px !important; width: 185px !important; max-width: 185px !important; background: #ffffff !important; padding: 10px !important; border-radius: 16px !important; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.18) !important; text-align: center !important; z-index: 10 !important; box-sizing: border-box !important; display: block !important;" aria-label="<?php echo esc_attr( franciscan_get_page_field( 'home', 'about_video_btn_text', 'WATCH OUR VIDEO' ) ); ?>">
                         <div class="about-video-thumb-wrap" style="position: relative !important; border-radius: 12px !important; overflow: hidden !important; height: 95px !important; width: 100% !important; background-color: #1c1917 !important;">
-                            <video src="<?php echo esc_url( $about_video ); ?>" style="width: 100% !important; height: 100% !important; object-fit: cover !important; pointer-events: none !important; display: block !important;" autoplay loop muted playsinline></video>
+                            <video data-fs-lazy data-src="<?php echo esc_url( $about_video ); ?>" preload="none" style="width: 100% !important; height: 100% !important; object-fit: cover !important; pointer-events: none !important; display: block !important;" loop muted playsinline aria-hidden="true" tabindex="-1"></video>
                             <span class="video-play-btn" style="pointer-events: none !important;" aria-hidden="true">
                                 <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16" aria-hidden="true">
                                     <path d="M8 5v14l11-7z"/>
@@ -366,11 +376,11 @@ get_header();
                         <?php
                         $provincial_avatar = franciscan_get_page_field( 'home', 'about_provincial_avatar', '' );
                         if ( empty( $provincial_avatar ) ) {
-                            $provincial_avatar = FRANCISCAN_THEME_URI . '/assets/images/fr-manoj-vengathanam.png';
+                            $provincial_avatar = FRANCISCAN_THEME_URI . '/assets/images/fr-manoj-vengathanam-avatar.webp';
                         }
                         ?>
                         <div style="display: flex; align-items: center; gap: 0.85rem;">
-                            <img loading="lazy" decoding="async" src="<?php echo esc_url( $provincial_avatar ); ?>" style="width: 44px; height: 44px; border-radius: 50%; object-fit: cover;" alt="<?php echo esc_attr( franciscan_get_page_field( 'home', 'about_provincial_name', 'Fr. Manoj Vengathanam, TOR' ) ); ?>">
+                            <img loading="lazy" decoding="async" width="44" height="44" src="<?php echo esc_url( $provincial_avatar ); ?>" style="width: 44px; height: 44px; border-radius: 50%; object-fit: cover;" alt="<?php echo esc_attr( franciscan_get_page_field( 'home', 'about_provincial_name', 'Fr. Manoj Vengathanam, TOR' ) ); ?>">
                             <div>
                                 <div style="font-family: 'Phudu', sans-serif !important; font-weight: 600; font-size: 0.85rem; text-transform: uppercase; color: #1c1917;"><?php echo esc_html( franciscan_get_page_field( 'home', 'about_provincial_name', 'FR. MANOJ VENGATHANAM, TOR' ) ); ?></div>
                                 <div style="font-family: 'Instrument Sans', sans-serif !important; font-size: 0.75rem; color: #78716c;"><?php echo esc_html( franciscan_get_page_field( 'home', 'about_provincial_title', 'Minister Provincial' ) ); ?></div>
@@ -468,12 +478,12 @@ get_header();
                 <div class="gsap-fade-left hover-trigger" style="position: relative; height: 650px;">
                     <!-- Left Church Image -->
                     <div class="about-img-container mission-church-img">
-                        <img loading="lazy" decoding="async" src="<?php echo esc_url( $mission_church ); ?>" alt="Church Interior" style="width: 100%; height: 100%; object-fit: cover;">
+                        <img loading="lazy" decoding="async" src="<?php echo esc_url( $mission_church ); ?>"<?php echo franciscan_responsive_attrs( $mission_church, '(max-width: 991px) 100vw, 600px' ); // phpcs:ignore ?> alt="Church Interior" style="width: 100%; height: 100%; object-fit: cover;">
                     </div>
                     
                     <!-- Right Father Image -->
                     <div class="mission-priest-container">
-                        <img loading="lazy" decoding="async" class="priest-zoom" src="<?php echo esc_url( $mission_priest ); ?>" alt="Priest" style="width: 100%; height: auto; object-fit: contain; object-position: bottom center; max-height: 100%;">
+                        <img loading="lazy" decoding="async" class="priest-zoom" src="<?php echo esc_url( $mission_priest ); ?>"<?php echo franciscan_responsive_attrs( $mission_priest, '(max-width: 991px) 60vw, 400px' ); // phpcs:ignore ?> alt="Priest" style="width: 100%; height: auto; object-fit: contain; object-position: bottom center; max-height: 100%;">
                     </div>
                 </div>
 
@@ -521,7 +531,7 @@ get_header();
               $rendered_quote = '&ldquo;BE STILL AND<br><span style="color: #4A2A18 !important; -webkit-text-fill-color: #4A2A18 !important; -webkit-text-stroke: 1.5px #ffffff !important; display: inline-block;">KNOW</span> THAT I AM GOD.&rdquo;';
           }
           ?>
-          <section id="bible-quote-section" style="padding: clamp(2rem, 4vw, 3.5rem) 0; background-color: #0a0a0a; background-image: url('<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/word-of-god-bg.jpg' ); ?>'); background-size: cover; background-position: center; background-repeat: no-repeat; color: #ffffff; text-align: center; border-radius: 32px; margin: 0 clamp(1rem, 3vw, 3rem) clamp(1.5rem, 3vw, 2.5rem) clamp(1rem, 3vw, 3rem); position: relative; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.2);">
+          <section id="bible-quote-section" data-fs-bg="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/word-of-god-bg.jpg' ); ?>" style="padding: clamp(2rem, 4vw, 3.5rem) 0; background-color: #0a0a0a; background-size: cover; background-position: center; background-repeat: no-repeat; color: #ffffff; text-align: center; border-radius: 32px; margin: 0 clamp(1rem, 3vw, 3rem) clamp(1.5rem, 3vw, 2.5rem) clamp(1rem, 3vw, 3rem); position: relative; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.2);">
               <!-- Black overlay so the verse stays legible over the photograph -->
               <div aria-hidden="true" style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(8,7,6,0.86) 0%, rgba(8,7,6,0.78) 50%, rgba(8,7,6,0.88) 100%); z-index: 1; pointer-events: none;"></div>
               <div style="position: relative; z-index: 2; max-width: 800px; margin: 0 auto; padding: 0 2rem;">
@@ -543,7 +553,7 @@ get_header();
     <?php endif; ?>
     <?php if ( empty( franciscan_get_page_field( 'home', 'hide_news_section', '0' ) ) ) : ?>
           <section id="news-section" class="has-vine-watermark" style="position: relative; padding: clamp(2rem, 4vw, 3.5rem) 0; background-color: #F5F3EC; color: #1c1917; box-sizing: border-box; overflow: hidden;">
-            <img src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/shapes/vine-corner-watermark.png' ); ?>" class="vine-corner-watermark" alt="" aria-hidden="true">
+            <img src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/shapes/vine-corner-watermark.png' ); ?>" class="vine-corner-watermark" alt="" aria-hidden="true" loading="lazy" decoding="async" width="800" height="533">
             <div style="max-width: 1320px; margin: 0 auto; padding: 0 clamp(1rem, 5vw, 3rem);">
                 
                 <!-- Section Header (100% Center-Aligned Eyebrow, 2-Line Title & Scroll Navigation Arrows) -->
@@ -604,7 +614,7 @@ get_header();
                     <div class="blog-card" style="flex: 0 0 min(540px, 90vw); margin: 0 auto; scroll-snap-align: center; display: flex; flex-direction: column; background: transparent;">
                         <div style="border-radius: 20px; overflow: hidden; height: 300px; margin-bottom: 1.6rem; box-shadow: 0 10px 25px rgba(0,0,0,0.10); background-color: #d6ccc2;">
                             <a href="<?php the_permalink(); ?>" style="display: block; width: 100%; height: 100%;" aria-label="<?php the_title_attribute(); ?>">
-                                <img loading="lazy" decoding="async" src="<?php echo esc_url( $thumb_url ); ?>" style="width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s ease;" alt="<?php the_title_attribute(); ?>" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform='scale(1)'">
+                                <img loading="lazy" decoding="async" src="<?php echo esc_url( $thumb_url ); ?>"<?php echo franciscan_responsive_attrs( $thumb_url, '(max-width: 767px) 90vw, 420px' ); // phpcs:ignore ?> style="width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s ease;" alt="<?php the_title_attribute(); ?>" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform='scale(1)'">
                             </a>
                         </div>
                         <div style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 0.9rem;">
@@ -619,7 +629,7 @@ get_header();
                         </p>
                         <div>
                             <a href="<?php the_permalink(); ?>" class="news-text-link" style="font-family: 'Instrument Sans', sans-serif !important; font-weight: 800 !important; font-size: 0.88rem !important; color: #1c1917 !important; text-transform: uppercase !important; letter-spacing: 0.06em !important; text-decoration: none !important; display: inline-flex !important; align-items: center !important; gap: 0.4rem !important; transition: color 0.3s ease !important;">
-                                <span>READ MORE</span> <span class="btn-arrow" style="font-size: 1rem; transition: transform 0.3s ease;"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; vertical-align: text-bottom;"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></span>
+                                <span>READ MORE<span class="screen-reader-text"> about this story</span></span> <span class="btn-arrow" style="font-size: 1rem; transition: transform 0.3s ease;"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; vertical-align: text-bottom;"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></span>
                             </a>
                         </div>
                     </div>
@@ -645,7 +655,7 @@ get_header();
                         </p>
                         <div>
                             <a href="<?php echo esc_url( home_url( '/news' ) ); ?>" class="news-text-link" style="font-family: 'Instrument Sans', sans-serif !important; font-weight: 800 !important; font-size: 0.88rem !important; color: #1c1917 !important; text-transform: uppercase !important; letter-spacing: 0.06em !important; text-decoration: none !important; display: inline-flex !important; align-items: center !important; gap: 0.4rem !important; transition: color 0.3s ease !important;">
-                                <span>READ MORE</span> <span class="btn-arrow" style="font-size: 1rem; transition: transform 0.3s ease;"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; vertical-align: text-bottom;"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></span>
+                                <span>READ MORE<span class="screen-reader-text"> about this story</span></span> <span class="btn-arrow" style="font-size: 1rem; transition: transform 0.3s ease;"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; vertical-align: text-bottom;"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></span>
                             </a>
                         </div>
                     </div>
@@ -733,7 +743,7 @@ get_header();
                     <div class="blog-padded-card" style="flex: 0 0 380px; scroll-snap-align: start; background: #ffffff; border-radius: 24px; padding: 1.8rem; box-shadow: 0 15px 35px rgba(0,0,0,0.06); display: flex; flex-direction: column; transition: transform 0.4s ease, box-shadow 0.4s ease;">
                         <div style="border-radius: 16px; overflow: hidden; height: 260px; margin-bottom: 1.6rem; background-color: #d6ccc2;">
                             <a href="<?php the_permalink(); ?>" style="display: block; width: 100%; height: 100%;" aria-label="<?php the_title_attribute(); ?>">
-                                <img loading="lazy" decoding="async" src="<?php echo esc_url( $thumb_url ); ?>" style="width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s ease;" alt="<?php the_title_attribute(); ?>" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform='scale(1)'">
+                                <img loading="lazy" decoding="async" src="<?php echo esc_url( $thumb_url ); ?>"<?php echo franciscan_responsive_attrs( $thumb_url, '(max-width: 767px) 90vw, 420px' ); // phpcs:ignore ?> style="width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s ease;" alt="<?php the_title_attribute(); ?>" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform='scale(1)'">
                             </a>
                         </div>
                         <h3 style="font-family: 'Phudu', sans-serif !important; font-size: 1.25rem !important; font-weight: 600 !important; color: #1c1917 !important; text-transform: uppercase; margin-bottom: 0.8rem; letter-spacing: 0.01em; line-height: 1.3;">
@@ -744,7 +754,7 @@ get_header();
                         </p>
                         <div style="margin-top: auto;">
                             <a href="<?php the_permalink(); ?>" class="news-text-link" style="font-family: 'Instrument Sans', sans-serif !important; font-weight: 800 !important; font-size: 0.88rem !important; color: #1c1917 !important; text-transform: uppercase !important; letter-spacing: 0.06em !important; text-decoration: none !important; display: inline-flex !important; align-items: center !important; gap: 0.4rem !important; transition: color 0.3s ease !important;">
-                                <span>READ MORE</span> <span class="btn-arrow" style="font-size: 1rem; transition: transform 0.3s ease;"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; vertical-align: text-bottom;"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></span>
+                                <span>READ MORE<span class="screen-reader-text"> about this story</span></span> <span class="btn-arrow" style="font-size: 1rem; transition: transform 0.3s ease;"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; vertical-align: text-bottom;"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></span>
                             </a>
                         </div>
                     </div>
@@ -766,7 +776,7 @@ get_header();
                         </p>
                         <div style="margin-top: auto;">
                             <a href="<?php echo esc_url( home_url( '/blogs' ) ); ?>" class="news-text-link" style="font-family: 'Instrument Sans', sans-serif !important; font-weight: 800 !important; font-size: 0.88rem !important; color: #1c1917 !important; text-transform: uppercase !important; letter-spacing: 0.06em !important; text-decoration: none !important; display: inline-flex !important; align-items: center !important; gap: 0.4rem !important;">
-                                <span>READ MORE</span> <span class="btn-arrow" style="font-size: 1rem;"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; vertical-align: text-bottom;"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></span>
+                                <span>READ MORE<span class="screen-reader-text"> about this story</span></span> <span class="btn-arrow" style="font-size: 1rem;"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; vertical-align: text-bottom;"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></span>
                             </a>
                         </div>
                     </div>
@@ -875,7 +885,7 @@ get_header();
             <div style="max-width: 1320px; margin: 0 auto; padding: 0 clamp(1rem, 5vw, 3rem);">
                 
                 <!-- Main Inset Card Container with 32px Rounded Corners & Background Image -->
-                <div style="position: relative; border-radius: 32px; overflow: hidden; background: url('<?php echo esc_url( $inq_bg ); ?>') no-repeat center center / cover fixed !important; background-attachment: fixed !important; box-shadow: 0 20px 50px rgba(0,0,0,0.15); min-height: 520px;">
+                <div data-fs-bg="<?php echo esc_url( $inq_bg ); ?>" data-fs-bg-sm="<?php echo esc_url( franciscan_upload_size_url( $inq_bg, 'large' ) ); ?>" style="position: relative; border-radius: 32px; overflow: hidden; background: #1c1917 no-repeat center center / cover fixed !important; background-attachment: fixed !important; box-shadow: 0 20px 50px rgba(0,0,0,0.15); min-height: 520px;">
                     
                     <!-- Dark Vignette Overlay -->
                     <div style="position: absolute; inset: 0; background: linear-gradient(to right, rgba(15,10,6,0.75) 0%, rgba(15,10,6,0.85) 60%, rgba(15,10,6,0.92) 100%); z-index: 1;"></div>
@@ -886,7 +896,7 @@ get_header();
                         <!-- Left Side: Praying Woman PNG Image (Pinned directly to bottom edge) -->
                         <div style="position: relative; display: flex; align-items: flex-end; justify-content: flex-start; min-height: 480px;">
                             <?php if ( ! empty( $inq_person ) ) : ?>
-                            <img loading="lazy" decoding="async" src="<?php echo esc_url( $inq_person ); ?>" alt="Praying Sister" style="position: absolute; bottom: 0; left: 0; height: 100%; max-height: 500px; width: auto; object-fit: contain; object-position: bottom left; filter: drop-shadow(0 15px 30px rgba(0,0,0,0.8)); display: block; pointer-events: none;">
+                            <img loading="lazy" decoding="async" src="<?php echo esc_url( $inq_person ); ?>"<?php echo franciscan_responsive_attrs( $inq_person, '(max-width: 991px) 60vw, 420px' ); // phpcs:ignore ?> alt="Praying Sister" style="position: absolute; bottom: 0; left: 0; height: 100%; max-height: 500px; width: auto; object-fit: contain; object-position: bottom left; filter: drop-shadow(0 15px 30px rgba(0,0,0,0.8)); display: block; pointer-events: none;">
                             <?php endif; ?>
                         </div>
 
@@ -926,7 +936,7 @@ get_header();
                                 </div>
 
                                 <div class="input-wrap">
-                                    <select name="subject" required style="width: 100%; padding: 1rem 1.3rem; background: rgba(28, 25, 23, 0.95); border: 1.5px solid rgba(255, 255, 255, 0.18); border-radius: 12px; color: #ffffff; font-family: 'Instrument Sans', sans-serif; font-size: 0.92rem; outline: none; cursor: pointer;" onfocus="this.style.borderColor='#e6c888'" onblur="this.style.borderColor='rgba(255, 255, 255, 0.18)'">
+                                    <select name="subject" required aria-label="Inquiry subject" style="width: 100%; padding: 1rem 1.3rem; background: rgba(28, 25, 23, 0.95); border: 1.5px solid rgba(255, 255, 255, 0.18); border-radius: 12px; color: #ffffff; font-family: 'Instrument Sans', sans-serif; font-size: 0.92rem; outline: none; cursor: pointer;" onfocus="this.style.borderColor='#e6c888'" onblur="this.style.borderColor='rgba(255, 255, 255, 0.18)'">
                                         <option value="" disabled selected>Select an Inquiry Subject *</option>
                                         <option value="General Inquiries">General Inquiry</option>
                                         <option value="Prayer Request / Intercession">Prayer Request &amp; Intentions</option>
@@ -1123,13 +1133,8 @@ document.addEventListener("DOMContentLoaded", function() {
 document.addEventListener("DOMContentLoaded", function() {
     gsap.registerPlugin(ScrollTrigger);
 
-    // 1. Navbar Slide Down Reveal
-    if (document.querySelector(".fs-header")) { gsap.from(".fs-header", {
-        y: -80,
-        opacity: 0,
-        duration: 1.2,
-        ease: "power3.out"
-    }); }
+    // 1. Navbar: no entrance tween. The header is painted with the first frame; hiding it again
+    //    when GSAP finishes loading caused a visible flicker and delayed the Largest Contentful Paint.
 
     // 2. Hero Content Reveal is owned by revealHeroTitle() in the preloader
     // script below, so it plays in sync with the circle expanding. The old
@@ -1137,7 +1142,11 @@ document.addEventListener("DOMContentLoaded", function() {
     // left the h1 parked at opacity 0 while the word stagger fought it.
 
     // 3. Section Titles (H2) Staggered Reveal
+    // Only content below the fold is animated in; anything already on screen stays visible.
+    const belowFold = (el) => el.getBoundingClientRect().top >= window.innerHeight * 0.95;
+
     gsap.utils.toArray("h2").forEach(h2 => {
+        if (!belowFold(h2)) return;
         gsap.from(h2, {
             scrollTrigger: {
                 trigger: h2,
@@ -1153,6 +1162,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // 4. Paragraphs Fade Up Animation
     gsap.utils.toArray("p").forEach(p => {
+        if (!belowFold(p)) return;
         gsap.from(p, {
             scrollTrigger: {
                 trigger: p,
@@ -1265,6 +1275,9 @@ document.addEventListener("DOMContentLoaded", function() {
         headings.forEach(heading => {
             // Avoid double splitting or splitting inside sliders
             if (heading.dataset.wordSplit === "true" || heading.closest('#news-scroll-track, #blogs-scroll-track, .blog-card, .blog-padded-card')) return;
+            // Headings already on screen (hero title, first section title) stay visible: hiding them
+            // for a word-by-word reveal delays the page's Largest Contentful Paint.
+            if (heading.classList.contains("hero-title") || heading.getBoundingClientRect().top < window.innerHeight * 0.95) return;
             heading.dataset.wordSplit = "true";
 
             // Process inner HTML to preserve <br> tags while splitting text nodes into words
@@ -1406,15 +1419,8 @@ document.addEventListener("DOMContentLoaded", function() {
         revealHeroTitle(timeline, "-=0.4");
     }
 
-    // Small pop in animation for the circle
-    if (preloaderCircle && typeof gsap !== "undefined") {
-        gsap.from(preloaderCircle, {
-            scale: 0,
-            opacity: 0,
-            duration: 0.35,
-            ease: "back.out(1.5)"
-        });
-    }
+    // The preloader now shows/hides itself with CSS (see #cinematic-preloader in header.php), so the
+    // circle is not hidden and re-animated here any more.
 
     // Launch immediately on window load or max 500ms after DOM ready
     window.addEventListener("load", runPreloaderExit);

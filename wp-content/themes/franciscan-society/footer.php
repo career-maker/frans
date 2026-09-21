@@ -46,7 +46,7 @@
                             ?>
                             <div class="footer-brand-wrap" style="margin-bottom: 2rem; text-align: start; width: 100%; max-width: 100%;">
                                 <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="footer-brand-link" style="text-decoration: none; display: flex; align-items: center; gap: 0.85rem; width: 100%; max-width: 100%; text-align: start; min-width: 0; overflow: hidden; box-sizing: border-box;">
-                                    <img loading="lazy" decoding="async" class="footer-logo-img" src="<?php echo esc_url( $footer_logo ); ?>" alt="<?php echo esc_attr( $footer_org_title ); ?>" style="height: 48px; max-height: 48px; width: auto; max-width: 48px; flex-shrink: 0; min-width: 40px; object-fit: contain; display: block;" onerror="this.style.display='none'">
+                                    <img loading="lazy" decoding="async" width="41" height="48" class="footer-logo-img" src="<?php echo esc_url( $footer_logo ); ?>" alt="<?php echo esc_attr( $footer_org_title ); ?>" style="height: 48px; max-height: 48px; width: auto; max-width: 48px; flex-shrink: 0; min-width: 40px; object-fit: contain; display: block;" onerror="this.style.display='none'">
                                     <div class="footer-brand-text-wrap" style="display: flex; flex-direction: column; text-align: start; flex: 1 1 auto; min-width: 0; max-width: calc(100% - 56px); box-sizing: border-box; overflow: hidden;">
                                         <span class="footer-logo-title" style="font-family: 'Instrument Sans', sans-serif; font-weight: 600; font-size: 0.88rem; color: #ffffff; line-height: 1.25; letter-spacing: 0.01em; display: block; width: 100%; white-space: normal; overflow-wrap: break-word; word-break: normal; text-align: start; margin: 0;"><?php echo esc_html( $footer_org_title ); ?></span>
                                         <span class="footer-logo-subtitle" style="font-family: 'Instrument Sans', sans-serif; font-size: 0.72rem; color: rgba(255, 255, 255, 0.75); line-height: 1.25; margin-top: 2px; display: block; width: 100%; white-space: normal; overflow-wrap: break-word; word-break: normal; text-align: start; margin: 0;"><?php echo esc_html( $footer_org_subtitle ); ?></span>
@@ -127,7 +127,7 @@
                             <!-- Embedded Interactive Map -->
                             <?php if ( ! empty( $footer_maps_embed_url ) ) : ?>
                             <div class="footer-map-container" style="border-radius: 14px; overflow: hidden; height: 150px; border: 1px solid rgba(255,255,255,0.12); box-shadow: 0 6px 16px rgba(0,0,0,0.3); margin-bottom: 1.3rem;">
-                                <iframe src="<?php echo esc_url( $footer_maps_embed_url ); ?>" width="600" height="450" style="width: 100%; height: 100%; border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Franciscan Society Location Map"></iframe>
+                                <iframe data-fs-src="<?php echo esc_url( $footer_maps_embed_url ); ?>" src="about:blank" width="600" height="450" style="width: 100%; height: 100%; border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Franciscan Society Location Map"></iframe>
                             </div>
                             <?php endif; ?>
 
@@ -271,9 +271,9 @@
         })();
         </script>
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"></script>
         <script>
             document.addEventListener("DOMContentLoaded", function() {
+                if (typeof VanillaTilt === "undefined") return;
                 VanillaTilt.init(document.querySelectorAll(".mission-tilt"), {
                     max: 8,
                     speed: 600,
@@ -397,7 +397,7 @@
 <!-- Fullscreen Sacred Illuminated Bible Page Modal -->
 <div id="bible-modal" onclick="window.fsHandleModalClick(event)">
     <button id="bible-modal-close" onclick="window.fsCloseBibleModal(event)" aria-label="Close Scripture Modal">&times;</button>
-    <audio id="bible-audio" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/audio/bible-music.mp3' ); ?>" preload="auto"></audio>
+    <audio id="bible-audio" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/audio/bible-music.mp3' ); ?>" preload="none"></audio>
 
     <!-- 3D Book Flip Animation -->
     <div id="bible-flip-container" onclick="window.fsRevealQuote(event)">

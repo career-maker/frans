@@ -690,7 +690,8 @@ $hero_subtitle = franciscan_get_page_field( 'contact', 'hero_subtitle', 'Reach o
             <div class="map-embed-frame">
                 <iframe 
                     title="Franciscan Society Ranchi Provincial Headquarters"
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d117223.77977469733!2d85.2513369!3d23.3432048!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f4e104aa5db7dd%3A0xdc09d490b7aa945b!2sRanchi%2C%20Jharkhand!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" 
+                    src="about:blank"
+                    data-fs-src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d117223.77977469733!2d85.2513369!3d23.3432048!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f4e104aa5db7dd%3A0xdc09d490b7aa945b!2sRanchi%2C%20Jharkhand!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" 
                     width="100%" 
                     height="100%" 
                     style="border:0;" 

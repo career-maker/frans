@@ -1128,6 +1128,7 @@ button.fs-mega-toggle:focus::after {
 
         <script>
             document.addEventListener("DOMContentLoaded", function() {
+                if (typeof VanillaTilt === "undefined") return;
                 VanillaTilt.init(document.querySelectorAll(".blog-padded-card"), {
                     max: 8,
                     speed: 600,

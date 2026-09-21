@@ -45,46 +45,59 @@ function franciscan_theme_setup() {
 add_action( 'after_setup_theme', 'franciscan_theme_setup' );
 
 function franciscan_enqueue_assets() {
-    // 1. Optimized Google Fonts (Essential weights only with font-display: swap)
-    wp_enqueue_style(
-        'franciscan-google-fonts',
-        'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Phudu:wght@500;600;700;800&display=swap',
-        array(),
-        null
-    );
-
-    // 2. Design System & Theme Styles
+    // 1. Stylesheets. Fonts are self-hosted (assets/css/fonts.css, assets/fonts/) so there is no
+    //    render-blocking Google Fonts request. theme.min.css is the minified bundle produced by
+    //    tools/build-css.mjs (design-system + styles + bible-widget, in that order).
     $theme_ver   = FRANCISCAN_THEME_VERSION;
     $styles_file = FRANCISCAN_THEME_DIR . '/assets/css/styles.css';
     if ( file_exists( $styles_file ) ) {
         $theme_ver .= '.' . filemtime( $styles_file );
     }
 
-    wp_enqueue_style(
-        'franciscan-design-system',
-        FRANCISCAN_THEME_URI . '/assets/css/design-system.css',
-        array(),
-        $theme_ver
-    );
+    $bundle    = FRANCISCAN_THEME_DIR . '/assets/css/theme.min.css';
+    $src_mtime = 0;
+    foreach ( array( 'styles.css', 'design-system.css', 'bible-widget.css', 'fonts.css' ) as $src_css ) {
+        $src_mtime = max( $src_mtime, (int) @filemtime( FRANCISCAN_THEME_DIR . '/assets/css/' . $src_css ) );
+    }
+    if ( file_exists( $bundle ) && filemtime( $bundle ) >= $src_mtime - 120 ) {
+        wp_enqueue_style(
+            'franciscan-theme',
+            FRANCISCAN_THEME_URI . '/assets/css/theme.min.css',
+            array(),
+            FRANCISCAN_THEME_VERSION . '.' . filemtime( $bundle )
+        );
+    } else {
+        // Bundle missing or older than the source: fall back to the readable sources.
+        wp_enqueue_style(
+            'franciscan-fonts',
+            FRANCISCAN_THEME_URI . '/assets/css/fonts.css',
+            array(),
+            $theme_ver
+        );
+        wp_enqueue_style(
+            'franciscan-design-system',
+            FRANCISCAN_THEME_URI . '/assets/css/design-system.css',
+            array( 'franciscan-fonts' ),
+            $theme_ver
+        );
+        wp_enqueue_style(
+            'franciscan-main-styles',
+            FRANCISCAN_THEME_URI . '/assets/css/styles.css',
+            array( 'franciscan-design-system' ),
+            $theme_ver
+        );
+        wp_enqueue_style(
+            'franciscan-bible-widget-style',
+            FRANCISCAN_THEME_URI . '/assets/css/bible-widget.css',
+            array(),
+            $theme_ver
+        );
+    }
 
-    wp_enqueue_style(
-        'franciscan-main-styles',
-        FRANCISCAN_THEME_URI . '/assets/css/styles.css',
-        array( 'franciscan-design-system' ),
-        $theme_ver
-    );
-
-    wp_enqueue_style(
-        'franciscan-bible-widget-style',
-        FRANCISCAN_THEME_URI . '/assets/css/bible-widget.css',
-        array(),
-        $theme_ver
-    );
-
-    // 3. GSAP & ScrollTrigger
+    // 2. GSAP & ScrollTrigger (self-hosted: no third-party connection on the critical path)
     wp_enqueue_script(
         'gsap',
-        'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js',
+        FRANCISCAN_THEME_URI . '/assets/js/vendor/gsap.min.js',
         array(),
         '3.12.5',
         true
@@ -92,22 +105,24 @@ function franciscan_enqueue_assets() {
 
     wp_enqueue_script(
         'gsap-scroll-trigger',
-        'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js',
+        FRANCISCAN_THEME_URI . '/assets/js/vendor/ScrollTrigger.min.js',
         array( 'gsap' ),
         '3.12.5',
         true
     );
 
-    // 4. DotLottie Web Component
-    wp_enqueue_script(
-        'dotlottie-wc',
-        'https://unpkg.com/@lottiefiles/dotlottie-wc@0.9.4/dist/dotlottie-wc.js',
-        array(),
-        '0.9.4',
-        array( 'strategy' => 'defer', 'in_footer' => true )
-    );
+    // 3. Card tilt effect (home page .mission-tilt cards, About page .blog-padded-card cards)
+    if ( is_front_page() || is_page_template( 'page-templates/template-about.php' ) ) {
+        wp_enqueue_script(
+            'vanilla-tilt',
+            FRANCISCAN_THEME_URI . '/assets/js/vendor/vanilla-tilt.min.js',
+            array(),
+            '1.8.1',
+            true
+        );
+    }
 
-    // 5. Custom JS Modules
+    // 4. Custom JS Modules
     wp_enqueue_script(
         'franciscan-animations',
         FRANCISCAN_THEME_URI . '/assets/js/animations.js',
@@ -163,12 +178,10 @@ function franciscan_defer_scripts( $tag, $handle, $src ) {
     if ( is_admin() ) {
         return $tag;
     }
-    if ( 'dotlottie-wc' === $handle ) {
-        return '<script type="module" src="' . esc_url( $src ) . '"></script>';
-    }
     $defer_handles = array(
         'gsap',
         'gsap-scroll-trigger',
+        'vanilla-tilt',
         'franciscan-animations',
         'franciscan-bible-widget',
         'franciscan-main-js',
@@ -202,21 +215,11 @@ add_action( 'init', function() {
     remove_filter( 'wp_mail', 'wp_staticize_emoji_for_email' );
 } );
 
-// High-speed Resource Hints for early DNS resolution & TLS handshakes
+// No third-party origins are on the critical path any more (fonts, GSAP and tilt are self-hosted),
+// so drop the preconnect/dns-prefetch hints WordPress would otherwise print for them.
 add_filter( 'wp_resource_hints', function( $hints, $relation_type ) {
-    if ( 'preconnect' === $relation_type ) {
-        $hints[] = array(
-            'href'        => 'https://fonts.googleapis.com',
-            'crossorigin' => 'use-credentials',
-        );
-        $hints[] = array(
-            'href'        => 'https://fonts.gstatic.com',
-            'crossorigin' => '',
-        );
-        $hints[] = array(
-            'href'        => 'https://cdnjs.cloudflare.com',
-            'crossorigin' => '',
-        );
+    if ( in_array( $relation_type, array( 'preconnect', 'dns-prefetch' ), true ) ) {
+        $hints = array();
     }
     return $hints;
 }, 10, 2 );

@@ -270,18 +270,9 @@ const initWelcomeSliders = () => {
                 }
             });
 
+            // Dot appearance (24px hit area, 8px / 24px visual) lives in styles.css (.welcome-dot).
             dots.forEach((dot, i) => {
-                if (i === currentIndex) {
-                    dot.classList.add('is-active');
-                    dot.style.width = '24px';
-                    dot.style.borderRadius = '4px';
-                    dot.style.background = '#e6c888';
-                } else {
-                    dot.classList.remove('is-active');
-                    dot.style.width = '8px';
-                    dot.style.borderRadius = '50%';
-                    dot.style.background = 'rgba(255, 255, 255, 0.5)';
-                }
+                dot.classList.toggle('is-active', i === currentIndex);
             });
         };
 
@@ -434,3 +425,92 @@ document.addEventListener('DOMContentLoaded', window.fsUpdateSliderArrows);
 window.addEventListener('resize', window.fsUpdateSliderArrows);
 window.addEventListener('load', window.fsUpdateSliderArrows);
 
+
+
+// ---------------------------------------------------------------------------
+// Deferred media. Third-party embeds (Google Maps, ~450 KB of JS) and decorative videos are only
+// fetched when they are about to be seen, so they never compete with the first paint.
+// ---------------------------------------------------------------------------
+(function () {
+    const onReady = (fn) => (document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', fn) : fn());
+
+    onReady(() => {
+        // <iframe data-fs-src="..."> -> real src once within 300px of the viewport
+        const frames = document.querySelectorAll('iframe[data-fs-src]');
+        if (frames.length) {
+            const load = (f) => {
+                f.src = f.getAttribute('data-fs-src');
+                f.removeAttribute('data-fs-src');
+            };
+            if ('IntersectionObserver' in window) {
+                const io = new IntersectionObserver((entries) => {
+                    entries.forEach((e) => {
+                        if (e.isIntersecting) {
+                            load(e.target);
+                            io.unobserve(e.target);
+                        }
+                    });
+                }, { rootMargin: '300px 0px' });
+                frames.forEach((f) => io.observe(f));
+            } else {
+                frames.forEach(load);
+            }
+        }
+
+        // <img data-fs-src data-fs-srcset> and [data-fs-bg] (see franciscan_defer_lazy_images() in
+        // inc/performance.php) -> real image / background once within 150px of the viewport
+        const attach = (el) => {
+            if (el.hasAttribute('data-fs-bg')) {
+                const small = el.getAttribute('data-fs-bg-sm');
+                const url = small && window.innerWidth < 900 ? small : el.getAttribute('data-fs-bg');
+                el.style.setProperty('background-image', 'url("' + url + '")', 'important');
+                el.removeAttribute('data-fs-bg');
+                el.removeAttribute('data-fs-bg-sm');
+                return;
+            }
+            const set = el.getAttribute('data-fs-srcset');
+            if (set) el.setAttribute('srcset', set);
+            const src = el.getAttribute('data-fs-src');
+            if (src) el.setAttribute('src', src);
+            el.removeAttribute('data-fs-srcset');
+            el.removeAttribute('data-fs-src');
+        };
+        const deferred = document.querySelectorAll('img[data-fs-src], [data-fs-bg]');
+        if (deferred.length) {
+            if ('IntersectionObserver' in window) {
+                const dio = new IntersectionObserver((entries) => {
+                    entries.forEach((e) => {
+                        if (e.isIntersecting) {
+                            attach(e.target);
+                            dio.unobserve(e.target);
+                        }
+                    });
+                }, { rootMargin: '150px 0px' });
+                deferred.forEach((el) => dio.observe(el));
+            } else {
+                deferred.forEach(attach);
+            }
+        }
+
+        // <video data-fs-lazy data-src="..."> -> loads and plays only while visible
+        const vids = document.querySelectorAll('video[data-fs-lazy]');
+        if (vids.length && 'IntersectionObserver' in window) {
+            const vo = new IntersectionObserver((entries) => {
+                entries.forEach((e) => {
+                    const v = e.target;
+                    if (e.isIntersecting) {
+                        if (!v.getAttribute('src') && v.dataset.src) {
+                            v.src = v.dataset.src;
+                            v.load();
+                        }
+                        const p = v.play();
+                        if (p && p.catch) p.catch(() => {});
+                    } else if (!v.paused) {
+                        v.pause();
+                    }
+                });
+            }, { rootMargin: '100px 0px', threshold: 0.01 });
+            vids.forEach((v) => vo.observe(v));
+        }
+    });
+})();

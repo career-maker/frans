@@ -1,0 +1,14 @@
+{
+  "name": "franciscan-society-tools",
+  "private": true,
+  "type": "module",
+  "description": "Build-time helpers for the Franciscan Society theme (CSS minify + critical CSS).",
+  "scripts": {
+    "css": "node build-css.mjs",
+    "critical": "node build-critical.mjs"
+  },
+  "devDependencies": {
+    "lightningcss": "^1.30.0",
+    "puppeteer-core": "^24.0.0"
+  }
+}

@@ -77,13 +77,17 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="format-detection" content="telephone=no, date=no, address=no, email=no">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <?php if ( ( ! is_front_page() && ! is_home() ) && ! empty( $meta_image ) ) : ?>
     <link rel="preload" as="image" href="<?php echo esc_url( $meta_image ); ?>" fetchpriority="high">
     <?php endif; ?>
     
     <style>
+        /* Preloader overlay: removed by CSS alone (~0.65s) so it never waits on JS, GSAP or the load event. */
+        #cinematic-preloader { animation: fs-preloader-exit 0.35s ease 0.3s forwards; }
+        @keyframes fs-preloader-exit { to { opacity: 0; visibility: hidden; } }
+        /* Visually hidden, still announced by screen readers (WordPress core class, not loaded on the front end). */
+        .screen-reader-text { border: 0; clip: rect(1px, 1px, 1px, 1px); clip-path: inset(50%); height: 1px; margin: -1px; overflow: hidden; padding: 0; position: absolute; width: 1px; word-wrap: normal !important; }
+
         /* Global body padding for fixed header */
          body.home { padding-top: 0 !important; }
 
@@ -2031,7 +2035,7 @@ if ( ! $fs_is_home ) {
   <div class="fs-header-inner">
     <!-- Logo -->
     <a href="<?php echo esc_url( $nav_url_home ); ?>" class="fs-logo">
-      <img  loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . "/assets/images/logo.svg" ); ?>" alt="Franciscan Society" width="48" height="58">
+      <img loading="eager" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . "/assets/images/logo.svg" ); ?>" alt="Franciscan Society" width="48" height="58">
       <div class="fs-logo-text">
         <span class="fs-logo-name">Franciscan Friars of the Third Order Regular</span>
         <span class="fs-logo-sub">Province of St Francis of Assisi Ranchi</span>
@@ -2498,7 +2502,7 @@ if ( ! $fs_is_home ) {
 <!-- Preloader with Expanding Circle -->
 <div id="cinematic-preloader" style="position: fixed; inset: 0; width: 100vw; height: 100vh; background: #FFFFFF; z-index: 999999; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; pointer-events: auto; transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);">
     <div id="preloader-circle" style="position: relative; width: 140px; height: 140px; background-color: #4A2A18; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 1000000; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);">
-        <img loading="eager" id="preloader-logo" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/logo.svg' ); ?>" alt="Franciscan Preloader Logo" style="width: 60px; height: auto; filter: brightness(0) invert(1);">
+        <img loading="eager" id="preloader-logo" width="60" height="70" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/logo.svg' ); ?>" alt="Franciscan Preloader Logo" style="width: 60px; height: auto; filter: brightness(0) invert(1);">
     </div>
 </div>
 

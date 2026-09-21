@@ -20,3 +20,6 @@ desktop.ini
 .agents/
 *.env
 git-credentials.json
+
+# Page cache (generated at runtime)
+wp-content/cache/
