@@ -9325,11 +9325,26 @@ button.slider-btn:active {
 /* ============================================================
    HERO: Always load and play video on all screens, never show fallback image
    ============================================================ */
-.hero-mobile-poster {
+.hero-mobile-poster,
+.hero-media-wrapper img:not(.hero-bible-img) {
     display: none !important;
     visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
 }
 
 #hero-bg-video {
     display: block !important;
+    background-color: #0c0b0a !important;
+    background-image: none !important;
 }
+
+.hero-media-wrapper {
+    background-color: #0c0b0a !important;
+    background-image: none !important;
+}
+
+.hero-container {
+    background-image: none !important;
+}
+

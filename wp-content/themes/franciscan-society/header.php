@@ -96,7 +96,15 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <?php if ( ! empty( $meta_image ) ) : ?>
+    <?php if ( is_front_page() || is_home() ) : ?>
+        <?php
+        $hero_vid_pre   = function_exists( 'franciscan_get_page_field' ) ? franciscan_get_page_field( 'home', 'hero_video', '' ) : '';
+        $def_home_vid   = defined( 'FRANCISCAN_THEME_URI' ) ? FRANCISCAN_THEME_URI . '/assets/videos/franciscan-hero.mp4' : '';
+        $act_home_vid   = ! empty( $hero_vid_pre ) ? $hero_vid_pre : $def_home_vid;
+        if ( ! empty( $act_home_vid ) ) : ?>
+    <link rel="preload" as="video" href="<?php echo esc_url( $act_home_vid ); ?>" type="video/mp4">
+        <?php endif; ?>
+    <?php elseif ( ! empty( $meta_image ) ) : ?>
     <link rel="preload" as="image" href="<?php echo esc_url( $meta_image ); ?>" fetchpriority="high">
     <?php endif; ?>
     
@@ -147,6 +155,14 @@
                 display: block !important;
                 margin: 0 !important;
                 padding: 0 !important;
+                background-color: #0c0b0a !important;
+                background-image: none !important;
+            }
+            .hero-media-wrapper img:not(.hero-bible-img) {
+                display: none !important;
+                visibility: hidden !important;
+                opacity: 0 !important;
+                pointer-events: none !important;
             }
             .hero-media-wrapper #hero-bg-video,
             #hero-bg-video {
@@ -163,6 +179,8 @@
                 padding: 0 !important;
                 object-fit: cover !important;
                 z-index: 1 !important;
+                background-color: #0c0b0a !important;
+                background-image: none !important;
             }
             .hero-media-wrapper .video-overlay,
             .video-overlay {
@@ -183,9 +201,10 @@
         /* Desktop layout */
         @media (min-width: 992px) {
             .hero-section { padding: 0 1.5rem 0 1.5rem !important; margin-top: 0 !important; }
-            .hero-section > div.hero-container { min-height: 100vh; border-radius: 0 0 24px 24px; box-shadow: 0 20px 50px rgba(0,0,0,0.18); max-width: 1400px; margin: 0 auto; position: relative; overflow: hidden !important; }
-            .hero-media-wrapper { border-radius: 0 0 24px 24px !important; position: absolute !important; inset: 0 !important; width: 100% !important; height: 100% !important; overflow: hidden !important; z-index: 1 !important; }
-            #hero-bg-video { border-radius: 0 0 24px 24px; position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; }
+            .hero-section > div.hero-container { min-height: 100vh; border-radius: 0 0 24px 24px; box-shadow: 0 20px 50px rgba(0,0,0,0.18); max-width: 1400px; margin: 0 auto; position: relative; overflow: hidden !important; background-image: none !important; }
+            .hero-media-wrapper { border-radius: 0 0 24px 24px !important; position: absolute !important; inset: 0 !important; width: 100% !important; height: 100% !important; overflow: hidden !important; z-index: 1 !important; background-color: #0c0b0a !important; background-image: none !important; }
+            .hero-media-wrapper img:not(.hero-bible-img) { display: none !important; visibility: hidden !important; opacity: 0 !important; pointer-events: none !important; }
+            #hero-bg-video { border-radius: 0 0 24px 24px; position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; background-color: #0c0b0a !important; background-image: none !important; }
             .video-overlay { position: absolute !important; inset: 0 !important; width: 100% !important; height: 100% !important; border-radius: 0 0 24px 24px !important; z-index: 2 !important; }
         }
         

@@ -23,9 +23,9 @@ get_header();
             $active_video       = ! empty( $hero_vid ) ? $hero_vid : $default_home_video;
             ?>
 
-            <div class="hero-media-wrapper" style="position: absolute; inset: 0; width: 100%; height: 100%; overflow: hidden; z-index: 1; border-radius: 24px;">
+            <div class="hero-media-wrapper" style="position: absolute; inset: 0; width: 100%; height: 100%; overflow: hidden; z-index: 1; border-radius: 24px; background: #0c0b0a !important; background-image: none !important;">
                 <?php if ( ! empty( $active_video ) ) : ?>
-                    <video id="hero-bg-video" autoplay muted="muted" loop playsinline="playsinline" webkit-playsinline="webkit-playsinline" preload="auto" src="<?php echo esc_url( $active_video ); ?>" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; background: #0c0b0a;">
+                    <video id="hero-bg-video" autoplay muted="muted" loop playsinline="playsinline" webkit-playsinline="webkit-playsinline" preload="auto" poster="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" src="<?php echo esc_url( $active_video ); ?>" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; background: #0c0b0a !important; background-image: none !important;">
                         <source src="<?php echo esc_url( $active_video ); ?>" type="video/mp4">
                     </video>
                     <script>
