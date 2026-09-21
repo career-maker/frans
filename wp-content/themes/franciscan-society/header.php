@@ -1876,8 +1876,20 @@ button.fs-mega-toggle:focus::after {
       text-align: left !important;
       margin-top: auto !important;
       margin-bottom: 0 !important;
+      margin-left: 0 !important;
+      margin-right: 0 !important;
       padding-top: 0 !important;
       padding-bottom: 0 !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      padding-left: clamp(1rem, 5vw, 2rem) !important;
+      padding-right: clamp(1rem, 5vw, 2rem) !important;
+      box-sizing: border-box !important;
+    }
+
+    /* Ensure section padding-bottom creates tight bottom anchor */
+    .page-hero-banner {
+      padding-bottom: 1.5rem !important;
     }
 
     .page-hero-banner .hero-badge,
