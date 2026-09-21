@@ -473,7 +473,7 @@ function franciscan_maybe_store_page_cache( $html ) {
     if ( ! headers_sent() ) {
         header( 'X-FS-Cache: MISS' );
     }
-    if ( franciscan_page_cache_bypass() || is_user_logged_in() || is_search() || is_404() || is_preview() || is_customize_preview() || is_feed() ) {
+    if ( franciscan_page_cache_bypass() || is_user_logged_in() || is_search() || is_404() || is_author() || is_preview() || is_customize_preview() || is_feed() ) {
         return;
     }
     if ( ! ( is_front_page() || is_home() || is_singular() || is_archive() ) || ( is_singular() && post_password_required() ) ) {
