@@ -878,14 +878,14 @@ button.fs-mega-toggle:focus::after {
                         <div style="display: flex; gap: 1rem; align-items: flex-start;">
                             <div style="width: 38px; height: 38px; background: #4A2A18; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 700; font-size: 0.9rem; flex-shrink: 0; box-shadow: 0 4px 10px rgba(74,42,24,0.3);">&#10013;</div>
                             <div>
-                                <h4 style="font-family: 'Phudu', sans-serif !important; font-size: 0.92rem; font-weight: 600; text-transform: uppercase; margin-bottom: 0.3rem; color: #1c1917;"><?php echo esc_html( franciscan_get_page_field( 'about', 'about_mission_title', 'OUR MISSION' ) ); ?></h4>
+                                <h3 style="font-family: 'Phudu', sans-serif !important; font-size: 0.92rem; font-weight: 600; text-transform: uppercase; margin-bottom: 0.3rem; color: #1c1917;"><?php echo esc_html( franciscan_get_page_field( 'about', 'about_mission_title', 'OUR MISSION' ) ); ?></h3>
                                 <p style="font-family: 'Instrument Sans', sans-serif !important; font-size: 0.8rem; color: #78716c; line-height: 1.45; margin: 0;"><?php echo esc_html( franciscan_get_page_field( 'about', 'about_mission_text', 'Serving 15 parishes & 22 schools across Ranchi and global mission fields.' ) ); ?></p>
                             </div>
                         </div>
                         <div style="display: flex; gap: 1rem; align-items: flex-start;">
                             <div style="width: 38px; height: 38px; background: #4A2A18; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 700; font-size: 0.9rem; flex-shrink: 0; box-shadow: 0 4px 10px rgba(74,42,24,0.3);">&#10013;</div>
                             <div>
-                                <h4 style="font-family: 'Phudu', sans-serif !important; font-size: 0.92rem; font-weight: 600; text-transform: uppercase; margin-bottom: 0.3rem; color: #1c1917;"><?php echo esc_html( franciscan_get_page_field( 'about', 'about_vision_title', 'OUR VISION' ) ); ?></h4>
+                                <h3 style="font-family: 'Phudu', sans-serif !important; font-size: 0.92rem; font-weight: 600; text-transform: uppercase; margin-bottom: 0.3rem; color: #1c1917;"><?php echo esc_html( franciscan_get_page_field( 'about', 'about_vision_title', 'OUR VISION' ) ); ?></h3>
                                 <p style="font-family: 'Instrument Sans', sans-serif !important; font-size: 0.8rem; color: #78716c; line-height: 1.45; margin: 0;"><?php echo esc_html( franciscan_get_page_field( 'about', 'about_vision_text', 'Promoting peace, joy, and dignity under "Peace and Joy to the World".' ) ); ?></p>
                             </div>
                         </div>
@@ -912,20 +912,6 @@ button.fs-mega-toggle:focus::after {
 
             </div>
 
-            <!-- Large Watermark Medium Speed Marquee Text -->
-            <style>
-                @keyframes marquee-scroll {
-                    0% { transform: translateX(0); }
-                    100% { transform: translateX(-50%); }
-                }
-                .marquee-track-scroll {
-                    display: flex !important;
-                    width: max-content !important;
-                    white-space: nowrap !important;
-                    animation: marquee-scroll 22s linear infinite !important;
-                    will-change: transform;
-                }
-            </style>
             <div style="width: 100% !important; max-width: 100% !important; overflow-x: hidden !important; overflow-y: hidden !important; white-space: nowrap !important; padding: 3rem 0 1rem 0 !important; margin-top: 2rem !important; pointer-events: none !important; user-select: none !important; position: relative !important;">
                 <div class="marquee-track-scroll">
                     <span style="font-family: 'Phudu', sans-serif !important; font-size: clamp(3.5rem, 6vw, 5.5rem) !important; font-weight: 700 !important; text-transform: uppercase !important; color: transparent !important; -webkit-text-stroke: 1.5px rgba(0, 0, 0, 0.15) !important; letter-spacing: 0.04em !important; white-space: nowrap !important; padding-right: 4rem !important; display: inline-block !important;">

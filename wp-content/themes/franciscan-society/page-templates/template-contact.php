@@ -657,6 +657,7 @@ $hero_subtitle = franciscan_get_page_field( 'contact', 'hero_subtitle', 'Reach o
                         <div class="fs-input-group">
                             <label for="f_subject">SUBJECT / PURPOSE *</label>
                             <select id="f_subject" name="subject" required aria-required="true">
+                                <option value="" disabled selected>Select a Subject / Purpose *</option>
                                 <option value="General Inquiries">General Inquiries</option>
                                 <option value="Prayer Request / Intercession">Prayer Request / Intercession</option>
                                 <option value="Holy Mass Intention">Holy Mass Intention</option>

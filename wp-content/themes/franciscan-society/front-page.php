@@ -25,7 +25,7 @@ get_header();
 
             <div class="hero-media-wrapper" style="position: absolute; inset: 0; width: 100%; height: 100%; overflow: hidden; z-index: 1; border-radius: 24px; background: #0c0b0a !important; background-image: none !important;">
                 <?php if ( ! empty( $active_video ) ) : ?>
-                    <video id="hero-bg-video" autoplay muted="muted" loop playsinline="playsinline" webkit-playsinline="webkit-playsinline" preload="auto" poster="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" src="<?php echo esc_url( $active_video ); ?>" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; background: #0c0b0a !important; background-image: none !important;">
+                    <video id="hero-bg-video" autoplay muted="muted" loop playsinline preload="auto" poster="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; background: #0c0b0a !important; background-image: none !important;">
                         <source src="<?php echo esc_url( $active_video ); ?>" type="video/mp4">
                     </video>
                     <script>
@@ -141,7 +141,7 @@ get_header();
                                 <!-- Holy Bible PNG Positioned at Center-Right of Hero Container with Smaller Size (95px) -->
                                 <!-- Holy Bible PNG Positioned Upward Above Paragraph (No Overlap) -->
 
-                <img  loading="lazy" decoding="async"src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/bible.png' ); ?>" alt="Holy Bible" class="hero-bible-img" style="position: absolute !important; top: 28% !important; right: 9% !important; width: 90px !important; height: auto !important; z-index: 2 !important; filter: drop-shadow(0 12px 28px rgba(0,0,0,0.85)) !important; pointer-events: none !important;">
+                <img loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/bible.png' ); ?>" alt="Holy Bible" class="hero-bible-img" style="position: absolute !important; top: 28% !important; right: 9% !important; width: 90px !important; height: auto !important; z-index: 2 !important; filter: drop-shadow(0 12px 28px rgba(0,0,0,0.85)) !important; pointer-events: none !important;">
             </div>
         </section>
 
@@ -270,7 +270,7 @@ get_header();
             </div>
 
             <!-- Panoramic Bottom Church Sketch Line-Art (Matching Reference Screenshot) -->
-            <img  loading="lazy"loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/sketch-bg.png' ); ?>" alt="Church Line Art Panorama" style="position: absolute; bottom: 0; left: 0; width: 100%; height: auto; max-height: 220px; object-fit: contain; object-position: bottom center; filter: opacity(0.3) drop-shadow(0 0 12px rgba(255, 255, 255, 1)) drop-shadow(0 0 24px rgba(255, 255, 255, 0.8)) contrast(110%); pointer-events: none; z-index: 1;">
+            <img loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/sketch-bg.png' ); ?>" alt="Church Line Art Panorama" style="position: absolute; bottom: 0; left: 0; width: 100%; height: auto; max-height: 220px; object-fit: contain; object-position: bottom center; filter: opacity(0.3) drop-shadow(0 0 12px rgba(255, 255, 255, 1)) drop-shadow(0 0 24px rgba(255, 255, 255, 0.8)) contrast(110%); pointer-events: none; z-index: 1;">
         </section>
 
     <?php endif; ?>
@@ -341,14 +341,14 @@ get_header();
                         <div style="display: flex; gap: 1rem; align-items: flex-start;">
                             <div style="width: 38px; height: 38px; background: #4A2A18; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 700; flex-shrink: 0; box-shadow: 0 4px 10px rgba(74,42,24,0.3);"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" style="display:block;"><path d="M10 2h4v6h6v4h-6v10h-4v-10h-6v-4h6z"/></svg></div>
                             <div>
-                                <h4 style="font-family: 'Phudu', sans-serif !important; font-size: 0.92rem; font-weight: 600; text-transform: uppercase; margin-bottom: 0.3rem; color: #1c1917;"><?php echo esc_html( franciscan_get_page_field( 'home', 'about_mission_title', 'OUR MISSION' ) ); ?></h4>
+                                <h3 style="font-family: 'Phudu', sans-serif !important; font-size: 0.92rem; font-weight: 600; text-transform: uppercase; margin-bottom: 0.3rem; color: #1c1917;"><?php echo esc_html( franciscan_get_page_field( 'home', 'about_mission_title', 'OUR MISSION' ) ); ?></h3>
                                 <p style="font-family: 'Instrument Sans', sans-serif !important; font-size: 0.8rem; color: #78716c; line-height: 1.45; margin: 0;"><?php echo esc_html( franciscan_get_page_field( 'home', 'about_mission_text', 'Serving 15 parishes & 22 schools across Ranchi and global mission fields.' ) ); ?></p>
                             </div>
                         </div>
                         <div style="display: flex; gap: 1rem; align-items: flex-start;">
                             <div style="width: 38px; height: 38px; background: #4A2A18; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 700; flex-shrink: 0; box-shadow: 0 4px 10px rgba(74,42,24,0.3);"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" style="display:block;"><path d="M10 2h4v6h6v4h-6v10h-4v-10h-6v-4h6z"/></svg></div>
                             <div>
-                                <h4 style="font-family: 'Phudu', sans-serif !important; font-size: 0.92rem; font-weight: 600; text-transform: uppercase; margin-bottom: 0.3rem; color: #1c1917;"><?php echo esc_html( franciscan_get_page_field( 'home', 'about_vision_title', 'OUR VISION' ) ); ?></h4>
+                                <h3 style="font-family: 'Phudu', sans-serif !important; font-size: 0.92rem; font-weight: 600; text-transform: uppercase; margin-bottom: 0.3rem; color: #1c1917;"><?php echo esc_html( franciscan_get_page_field( 'home', 'about_vision_title', 'OUR VISION' ) ); ?></h3>
                                 <p style="font-family: 'Instrument Sans', sans-serif !important; font-size: 0.8rem; color: #78716c; line-height: 1.45; margin: 0;"><?php echo esc_html( franciscan_get_page_field( 'home', 'about_vision_text', 'Promoting peace, joy, and dignity under "Peace and Joy to the World".' ) ); ?></p>
                             </div>
                         </div>
@@ -382,20 +382,6 @@ get_header();
 
             </div>
 
-            <!-- Large Watermark Medium Speed Marquee Text -->
-            <style>
-                @keyframes marquee-scroll {
-                    0% { transform: translateX(0); }
-                    100% { transform: translateX(-50%); }
-                }
-                .marquee-track-scroll {
-                    display: flex !important;
-                    width: max-content !important;
-                    white-space: nowrap !important;
-                    animation: marquee-scroll 22s linear infinite !important;
-                    will-change: transform;
-                }
-            </style>
             <div style="width: 100% !important; max-width: 100% !important; overflow-x: hidden !important; overflow-y: hidden !important; white-space: nowrap !important; padding: 1.5rem 0 0.5rem 0 !important; margin-top: 1rem !important; pointer-events: none !important; user-select: none !important; position: relative !important;">
                 <div class="marquee-track-scroll">
                     <span style="font-family: 'Phudu', sans-serif !important; font-size: clamp(3.5rem, 6vw, 5.5rem) !important; font-weight: 700 !important; text-transform: uppercase !important; color: transparent !important; -webkit-text-stroke: 1.5px rgba(0, 0, 0, 0.15) !important; letter-spacing: 0.04em !important; white-space: nowrap !important; padding-right: 4rem !important; display: inline-block !important;">
@@ -689,13 +675,6 @@ get_header();
 
         <!-- 5. Our Ministries Section (Exact Match to Reference Screenshots) -->
         
-        <!-- 5. Blogs Section (White Container Cards with Generous Inner Padding) -->
-        
-<style>
-.blog-padded-card:hover .news-text-link .btn-arrow {
-    transform: rotate(45deg) !important;
-}
-</style>
     <?php if ( empty( franciscan_get_page_field( 'blogs', 'hide_blogs_page', '0' ) ) ) : ?>
 <section id="blogs-section" style="padding: clamp(2rem, 4vw, 3.5rem) 0; background-color: #FFFFFF; color: #1c1917; box-sizing: border-box; overflow: hidden;">
             <div style="max-width: 1320px; margin: 0 auto; padding: 0 clamp(1rem, 5vw, 3rem);">
@@ -948,6 +927,7 @@ get_header();
 
                                 <div class="input-wrap">
                                     <select name="subject" required style="width: 100%; padding: 1rem 1.3rem; background: rgba(28, 25, 23, 0.95); border: 1.5px solid rgba(255, 255, 255, 0.18); border-radius: 12px; color: #ffffff; font-family: 'Instrument Sans', sans-serif; font-size: 0.92rem; outline: none; cursor: pointer;" onfocus="this.style.borderColor='#e6c888'" onblur="this.style.borderColor='rgba(255, 255, 255, 0.18)'">
+                                        <option value="" disabled selected>Select an Inquiry Subject *</option>
                                         <option value="General Inquiries">General Inquiry</option>
                                         <option value="Prayer Request / Intercession">Prayer Request &amp; Intentions</option>
                                         <option value="Vocation Guidance">Vocational &amp; Priesthood Guidance</option>
@@ -1026,8 +1006,6 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 </script>
 
-</div>
-
 <!-- Floating Contact Dock (Chat / Call / Email) -->
 <div class="cta-dock" data-cta-dock>
 
@@ -1086,7 +1064,7 @@ document.addEventListener("DOMContentLoaded", function() {
     <button type="button" class="cta-dock__trigger" id="cta-dock-trigger" aria-expanded="false" aria-controls="cta-dock-menu" aria-label="Contact us">
         
         <span class="cta-dock__glyph cta-dock__glyph--tau" aria-hidden="true">
-            <img  loading="lazy"loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/christian-cross.png' ); ?>" alt="Christian Cross" style="width: 48px; height: 48px; object-fit: contain; filter: brightness(0) saturate(100%) invert(18%) sepia(21%) saturate(2311%) hue-rotate(341deg) brightness(95%) contrast(86%);" />
+            <img loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/christian-cross.png' ); ?>" alt="Christian Cross" style="width: 48px; height: 48px; object-fit: contain; filter: brightness(0) saturate(100%) invert(18%) sepia(21%) saturate(2311%) hue-rotate(341deg) brightness(95%) contrast(86%);" />
         </span>
         <span class="cta-dock__glyph cta-dock__glyph--close" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" focusable="false">

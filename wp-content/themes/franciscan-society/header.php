@@ -71,40 +71,15 @@
     }
     $canonical_url = home_url( add_query_arg( array(), $GLOBALS['wp']->request ?? '' ) );
     ?>
-    <title><?php echo esc_html( $meta_title ); ?></title>
-    <meta name="description" content="<?php echo esc_attr( $meta_desc ); ?>">
-    <meta name="keywords" content="<?php echo esc_attr( $meta_keys ); ?>">
-    <link rel="canonical" href="<?php echo esc_url( $canonical_url ); ?>">
-
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="<?php echo esc_attr( $meta_title ); ?>">
-    <meta property="og:description" content="<?php echo esc_attr( $meta_desc ); ?>">
-    <meta property="og:url" content="<?php echo esc_url( $canonical_url ); ?>">
-    <meta property="og:image" content="<?php echo esc_url( $meta_image ); ?>">
-
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="<?php echo esc_attr( $meta_title ); ?>">
-    <meta name="twitter:description" content="<?php echo esc_attr( $meta_desc ); ?>">
-    <meta name="twitter:image" content="<?php echo esc_url( $meta_image ); ?>">
-
-    <!-- Apple Mobile Tags -->
+    <!-- Mobile Tags -->
+    <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="format-detection" content="telephone=no, date=no, address=no, email=no">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <?php if ( is_front_page() || is_home() ) : ?>
-        <?php
-        $hero_vid_pre   = function_exists( 'franciscan_get_page_field' ) ? franciscan_get_page_field( 'home', 'hero_video', '' ) : '';
-        $def_home_vid   = defined( 'FRANCISCAN_THEME_URI' ) ? FRANCISCAN_THEME_URI . '/assets/videos/franciscan-hero.mp4' : '';
-        $act_home_vid   = ! empty( $hero_vid_pre ) ? $hero_vid_pre : $def_home_vid;
-        if ( ! empty( $act_home_vid ) ) : ?>
-    <link rel="preload" as="video" href="<?php echo esc_url( $act_home_vid ); ?>" type="video/mp4">
-        <?php endif; ?>
-    <?php elseif ( ! empty( $meta_image ) ) : ?>
+    <?php if ( ( ! is_front_page() && ! is_home() ) && ! empty( $meta_image ) ) : ?>
     <link rel="preload" as="image" href="<?php echo esc_url( $meta_image ); ?>" fetchpriority="high">
     <?php endif; ?>
     
@@ -1344,15 +1319,7 @@ button.fs-mega-toggle:focus::after {
             -webkit-backdrop-filter: blur(10px) !important;
         }
     }
-</style>
 
-<?php wp_head(); ?>
-</head>
-<body <?php body_class(); ?> style="background:#FFFFFF; color:#1c2430; font-family:var(--font-body); line-height:1.7; margin:0;">
-<?php wp_body_open(); ?>
-
-<!-- Franciscan Society - Responsive Menu Component -->
-<style>
   /* Reset & Base */
   .fs-menu * { box-sizing: border-box; }
   .fs-menu { margin: 0; padding: 0; }
@@ -1392,7 +1359,6 @@ button.fs-mega-toggle:focus::after {
     gap: 0.75rem;
     z-index: 101;
     position: relative;
-    aria-label: "Franciscan Friars of the Third Order Regular, Province of St Francis of Assisi Ranchi";
   }
 
   .fs-logo img {
@@ -1952,6 +1918,11 @@ button.fs-mega-toggle:focus::after {
   }
 </style>
 
+<?php wp_head(); ?>
+</head>
+<body <?php body_class(); ?> style="background:#FFFFFF; color:#1c2430; font-family:var(--font-body); line-height:1.7; margin:0;">
+<?php wp_body_open(); ?>
+
 <?php
 // Dynamic Navigation Links & Labels
 $opt = function_exists( 'franciscan_get_options' ) ? franciscan_get_options() : ( function_exists( 'franciscan_get_default_options' ) ? franciscan_get_default_options() : array() );
@@ -1980,47 +1951,50 @@ $nav_lbl_c_history   = ! empty( $opt['nav_label_community_history'] ) ? $opt['na
 $nav_url_c_history   = function_exists( 'franciscan_resolve_nav_url' ) ? franciscan_resolve_nav_url( $opt['nav_link_community_history'] ?? '/community-history/', '/community-history/' ) : home_url( '/community-history/' );
 $nav_lbl_c_rule      = ! empty( $opt['nav_label_community_rule'] ) ? $opt['nav_label_community_rule'] : 'Third Order Rule';
 $nav_url_c_rule      = function_exists( 'franciscan_resolve_nav_url' ) ? franciscan_resolve_nav_url( $opt['nav_link_community_rule'] ?? '/community-rule/', '/community-rule/' ) : home_url( '/community-rule/' );
-$nav_lbl_c_leader    = ! empty( $opt['nav_label_community_leadership'] ) ? $opt['nav_label_community_leadership'] : 'Leadership';
+$nav_lbl_c_leader    = ! empty( $opt['nav_label_community_leadership'] ) ? $opt['nav_label_community_leadership'] : 'Our Leadership';
 $nav_url_c_leader    = function_exists( 'franciscan_resolve_nav_url' ) ? franciscan_resolve_nav_url( $opt['nav_link_community_leadership'] ?? '/community-leadership/', '/community-leadership/' ) : home_url( '/community-leadership/' );
-$nav_lbl_c_friars    = ! empty( $opt['nav_label_community_friars'] ) ? $opt['nav_label_community_friars'] : 'Our Friars';
-$nav_url_c_friars    = function_exists( 'franciscan_resolve_nav_url' ) ? franciscan_resolve_nav_url( $opt['nav_link_community_friars'] ?? '/community-friars/', '/community-friars/' ) : home_url( '/community-friars/' );
 $nav_lbl_c_friaries  = ! empty( $opt['nav_label_community_friaries'] ) ? $opt['nav_label_community_friaries'] : 'Our Friaries';
 $nav_url_c_friaries  = function_exists( 'franciscan_resolve_nav_url' ) ? franciscan_resolve_nav_url( $opt['nav_link_community_friaries'] ?? '/community-friaries/', '/community-friaries/' ) : home_url( '/community-friaries/' );
+$nav_lbl_c_friars    = ! empty( $opt['nav_label_community_friars'] ) ? $opt['nav_label_community_friars'] : 'Our Friars';
+$nav_url_c_friars    = function_exists( 'franciscan_resolve_nav_url' ) ? franciscan_resolve_nav_url( $opt['nav_link_community_friars'] ?? '/community-friars/', '/community-friars/' ) : home_url( '/community-friars/' );
 
-$nav_lbl_news        = ! empty( $opt['nav_label_news'] ) ? $opt['nav_label_news'] : 'News';
+$nav_lbl_news        = ! empty( $opt['nav_label_news'] ) ? $opt['nav_label_news'] : 'News & Events';
 $nav_url_news        = function_exists( 'franciscan_resolve_nav_url' ) ? franciscan_resolve_nav_url( $opt['nav_link_news'] ?? '/news/', '/news/' ) : home_url( '/news/' );
+
+$is_blogs_hidden_nav = ( '1' === (string) franciscan_get_page_field( 'blogs', 'hide_blogs_page', '0' ) ) || ( '1' === (string) get_option( 'franciscan_hide_blogs_page', '0' ) );
+$nav_lbl_blogs       = ! empty( $opt['nav_label_blogs'] ) ? $opt['nav_label_blogs'] : 'Blogs & Reflections';
+$nav_url_blogs       = function_exists( 'franciscan_resolve_nav_url' ) ? franciscan_resolve_nav_url( $opt['nav_link_blogs'] ?? '/blogs/', '/blogs/' ) : home_url( '/blogs/' );
 
 $nav_lbl_contact     = ! empty( $opt['nav_label_contact'] ) ? $opt['nav_label_contact'] : 'Contact Us';
 $nav_url_contact     = function_exists( 'franciscan_resolve_nav_url' ) ? franciscan_resolve_nav_url( $opt['nav_link_contact'] ?? '/contact/', '/contact/' ) : home_url( '/contact/' );
 
-// Active Page Detection
-$fs_req_uri = isset( $_SERVER['REQUEST_URI'] ) ? strtolower( strtok( $_SERVER['REQUEST_URI'], '?' ) ) : '';
+// Active page indicator helper
+$fs_cur_url = home_url( add_query_arg( array(), $GLOBALS['wp']->request ?? '' ) );
+$fs_req_uri = $_SERVER['REQUEST_URI'] ?? '';
 
-$fs_is_home = is_front_page() || ( is_home() && ! is_paged() );
-if ( ! $fs_is_home && ( $fs_req_uri === '' || $fs_req_uri === '/' || $fs_req_uri === '/fransiscan' || $fs_req_uri === '/fransiscan/' ) ) {
-    $fs_is_home = true;
-}
+$fs_is_home    = is_front_page() || is_home();
+$fs_is_about   = false;
+$fs_is_gallery = false;
+$fs_is_ministries = false;
+$fs_is_community  = false;
+$fs_is_news       = false;
+$fs_is_contact    = false;
 
-$fs_is_about         = false;
-$fs_is_gallery       = false;
-$fs_is_m_pastoral    = false;
-$fs_is_m_formation   = false;
-$fs_is_m_education   = false;
+$fs_is_m_pastoral   = false;
+$fs_is_m_formation  = false;
+$fs_is_m_education  = false;
 $fs_is_m_publication = false;
-$fs_is_ministries    = false;
-$fs_is_c_history     = false;
-$fs_is_c_rule        = false;
-$fs_is_c_leader      = false;
-$fs_is_c_friars      = false;
-$fs_is_c_friaries    = false;
-$fs_is_community     = false;
-$fs_is_news          = false;
-$fs_is_contact       = false;
+
+$fs_is_c_history  = false;
+$fs_is_c_rule     = false;
+$fs_is_c_leader   = false;
+$fs_is_c_friaries = false;
+$fs_is_c_friars   = false;
 
 if ( ! $fs_is_home ) {
     $fs_is_about   = is_page_template( 'page-templates/template-about.php' ) || is_page( array( 'about', 'about-us' ) ) || ( strpos( $fs_req_uri, '/about' ) !== false );
-    $fs_is_gallery = is_page_template( 'page-templates/template-gallery.php' ) || is_page( 'gallery' ) || ( strpos( $fs_req_uri, '/gallery' ) !== false );
-
+    $fs_is_gallery = is_page_template( 'page-templates/template-gallery.php' ) || is_page( array( 'gallery' ) ) || ( strpos( $fs_req_uri, '/gallery' ) !== false );
+    
     // Ministries sub-pages
     $fs_is_m_pastoral    = is_page_template( 'page-templates/template-ministries-pastoral.php' ) || is_page( array( 'ministries-pastoral', 'pastoral-ministry', 'pastoral' ) ) || ( strpos( $fs_req_uri, 'pastoral' ) !== false );
     $fs_is_m_formation   = is_page_template( 'page-templates/template-ministries-formation.php' ) || is_page( array( 'ministries-formation', 'formation-ministry', 'formation' ) ) || ( strpos( $fs_req_uri, 'formation' ) !== false );
@@ -2045,7 +2019,7 @@ if ( ! $fs_is_home ) {
   <div class="fs-header-inner">
     <!-- Logo -->
     <a href="<?php echo esc_url( $nav_url_home ); ?>" class="fs-logo">
-      <img  loading="lazy" decoding="async"src="<?php echo esc_url( FRANCISCAN_THEME_URI . "/assets/images/logo.svg" ); ?>" alt="Franciscan Society" width="48" height="58">
+      <img  loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . "/assets/images/logo.svg" ); ?>" alt="Franciscan Society" width="48" height="58">
       <div class="fs-logo-text">
         <span class="fs-logo-name">Franciscan Friars of the Third Order Regular</span>
         <span class="fs-logo-sub">Province of St Francis of Assisi Ranchi</span>

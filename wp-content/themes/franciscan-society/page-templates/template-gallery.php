@@ -1455,7 +1455,7 @@ document.addEventListener("DOMContentLoaded", function() {
     <button type="button" class="cta-dock__trigger" id="cta-dock-trigger" aria-expanded="false" aria-controls="cta-dock-menu" aria-label="Contact us">
         
         <span class="cta-dock__glyph cta-dock__glyph--tau" aria-hidden="true">
-            <img  loading="lazy"loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/christian-cross.png' ); ?>" alt="Christian Cross" style="width: 48px; height: 48px; object-fit: contain; filter: brightness(0) saturate(100%) invert(18%) sepia(21%) saturate(2311%) hue-rotate(341deg) brightness(95%) contrast(86%);" />
+            <img loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/christian-cross.png' ); ?>" alt="Christian Cross" style="width: 48px; height: 48px; object-fit: contain; filter: brightness(0) saturate(100%) invert(18%) sepia(21%) saturate(2311%) hue-rotate(341deg) brightness(95%) contrast(86%);" />
         </span>
         <span class="cta-dock__glyph cta-dock__glyph--close" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" focusable="false">

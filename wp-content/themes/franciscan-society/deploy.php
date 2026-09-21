@@ -80,6 +80,19 @@ if ( $pull['code'] === 0 ) {
     }
 }
 
+// Preserve WordPress .htaccess for subdirectory /fransiscan/
+$htaccess_path = $project_dir . '/.htaccess';
+$htaccess_content = "# BEGIN WordPress\n<IfModule mod_rewrite.c>\nRewriteEngine On\nRewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]\nRewriteBase /fransiscan/\nRewriteRule ^index\\.php$ - [L]\nRewriteCond %{REQUEST_FILENAME} !-f\nRewriteCond %{REQUEST_FILENAME} !-d\nRewriteRule . /fransiscan/index.php [L]\n</IfModule>\n# END WordPress\n";
+if ( file_exists( $htaccess_path ) ) {
+    $curr_htaccess = file_get_contents( $htaccess_path );
+    if ( false === strpos( $curr_htaccess, 'RewriteBase /fransiscan/' ) ) {
+        file_put_contents( $htaccess_path, $htaccess_content );
+        echo '<span class="ok">✅ Restored .htaccess RewriteBase /fransiscan/</span>' . "\n\n";
+    } else {
+        echo '<span class="ok">✅ .htaccess RewriteBase /fransiscan/ verified intact</span>' . "\n\n";
+    }
+}
+
 // Confirm latest commit
 echo "--- Latest commit ---\n";
 $log = run_cmd( "cd " . escapeshellarg( $project_dir ) . " && git log --oneline -5" );

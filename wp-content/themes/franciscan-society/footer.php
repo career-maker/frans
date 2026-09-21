@@ -6,212 +6,6 @@
  */
 ?>
 <footer class="site-footer" style="position: relative; padding: 2.75rem 0 2.5rem 0; background: linear-gradient(180deg, #ffffff 0%, #FAF7F2 40px, #1a1715 125px, #0c0b0a 185px, #0c0b0a 100%); color: #ffffff; box-sizing: border-box;">
-    <!-- Critical inline styles for mobile footer layout, logo containment, and strict left alignment -->
-    <style id="footer-alignment-critical">
-        footer.site-footer,
-        footer {
-            background: linear-gradient(180deg, #ffffff 0%, #FAF7F2 40px, #1a1715 125px, #0c0b0a 185px, #0c0b0a 100%) !important;
-        }
-        .footer-main-card {
-            border: 1px solid rgba(230, 200, 136, 0.18) !important;
-            box-shadow: 0 -12px 35px rgba(12, 11, 10, 0.25), 0 25px 60px rgba(0,0,0,0.45) !important;
-        }
-        /* Ensure 4 columns on desktop */
-        @media (min-width: 992px) {
-            .responsive-grid-footer,
-            footer .responsive-grid-footer {
-                display: grid !important;
-                grid-template-columns: 1.25fr 0.85fr 1.05fr 1.15fr !important;
-                gap: 3.5rem !important;
-                align-items: start !important;
-            }
-            .footer-accordion-toggle {
-                display: none !important;
-            }
-            .footer-accordion-body {
-                display: block !important;
-            }
-            .footer-desktop-heading {
-                display: block !important;
-            }
-            .responsive-grid-footer > div:nth-child(2),
-            .responsive-grid-footer > div:nth-child(3),
-            .responsive-grid-footer > div:nth-child(4) {
-                border-bottom: none !important;
-                padding-top: 0 !important;
-            }
-        }
-        @media (max-width: 991px) and (min-width: 769px) {
-            .responsive-grid-footer,
-            footer .responsive-grid-footer {
-                display: grid !important;
-                grid-template-columns: 1fr 1fr !important;
-                gap: 2.5rem !important;
-                align-items: start !important;
-            }
-        }
-        @media (max-width: 768px) {
-            footer > div > div,
-            footer .footer-main-card {
-                padding: 2.25rem 1.25rem 1.75rem 1.25rem !important;
-                border-radius: 24px !important;
-            }
-            .responsive-grid-footer,
-            footer .responsive-grid-footer {
-                display: grid !important;
-                grid-template-columns: 1fr !important;
-                gap: 0 !important;
-                margin-bottom: 2rem !important;
-            }
-        }
-        footer .footer-col-brand,
-        footer .footer-brand-wrap,
-        footer .footer-brand-link,
-        footer .footer-brand-text-wrap,
-        footer .footer-contact-list,
-        footer .footer-contact-item,
-        footer .footer-address-text {
-            text-align: left !important;
-            text-align: start !important;
-        }
-        footer .footer-brand-link {
-            text-decoration: none !important;
-            display: flex !important;
-            flex-direction: row !important;
-            align-items: center !important;
-            justify-content: flex-start !important;
-            gap: 0.85rem !important;
-            width: 100% !important;
-            max-width: 100% !important;
-            min-width: 0 !important;
-            box-sizing: border-box !important;
-            overflow: hidden !important;
-        }
-        footer .footer-brand-link img,
-        footer img.footer-logo-img {
-            height: 46px !important;
-            max-height: 48px !important;
-            width: auto !important;
-            max-width: 48px !important;
-            min-width: 38px !important;
-            flex-shrink: 0 !important;
-            object-fit: contain !important;
-            display: block !important;
-        }
-        footer .footer-brand-text-wrap {
-            display: flex !important;
-            flex-direction: column !important;
-            align-items: flex-start !important;
-            text-align: left !important;
-            text-align: start !important;
-            flex: 1 1 auto !important;
-            min-width: 0 !important;
-            max-width: calc(100% - 56px) !important;
-            box-sizing: border-box !important;
-            overflow: hidden !important;
-        }
-        footer .footer-logo-title {
-            font-family: 'Instrument Sans', sans-serif !important;
-            font-weight: 600 !important;
-            font-size: 0.88rem !important;
-            color: #ffffff !important;
-            line-height: 1.25 !important;
-            letter-spacing: 0.01em !important;
-            display: block !important;
-            width: 100% !important;
-            white-space: normal !important;
-            overflow-wrap: break-word !important;
-            word-break: normal !important;
-            text-align: left !important;
-            text-align: start !important;
-            margin: 0 !important;
-        }
-        footer .footer-logo-subtitle {
-            font-family: 'Instrument Sans', sans-serif !important;
-            font-size: 0.72rem !important;
-            color: rgba(255, 255, 255, 0.75) !important;
-            line-height: 1.25 !important;
-            margin-top: 3px !important;
-            display: block !important;
-            width: 100% !important;
-            white-space: normal !important;
-            overflow-wrap: break-word !important;
-            word-break: normal !important;
-            text-align: left !important;
-            text-align: start !important;
-            margin-bottom: 0 !important;
-        }
-        footer .footer-contact-list {
-            display: flex !important;
-            flex-direction: column !important;
-            gap: 1.1rem !important;
-            font-family: 'Instrument Sans', sans-serif !important;
-            font-size: 0.92rem !important;
-            color: #d6d3d1 !important;
-            text-align: left !important;
-            text-align: start !important;
-            align-items: flex-start !important;
-            width: 100% !important;
-        }
-        footer .footer-contact-item {
-            display: flex !important;
-            flex-direction: row !important;
-            align-items: center !important;
-            justify-content: flex-start !important;
-            gap: 0.8rem !important;
-            text-align: left !important;
-            text-align: start !important;
-            width: 100% !important;
-        }
-        footer .footer-contact-item.is-address {
-            align-items: flex-start !important;
-            margin-top: 0.3rem !important;
-        }
-        footer .footer-contact-icon {
-            width: 36px !important;
-            height: 36px !important;
-            border-radius: 50% !important;
-            background: rgba(255,255,255,0.08) !important;
-            border: 1px solid rgba(255,255,255,0.18) !important;
-            display: flex !important;
-            align-items: center !important;
-            justify-content: center !important;
-            color: #ffffff !important;
-            flex-shrink: 0 !important;
-        }
-        footer .footer-contact-item.is-address .footer-contact-icon {
-            margin-top: 2px !important;
-        }
-        footer .footer-address-text {
-            line-height: 1.5 !important;
-            font-size: 0.88rem !important;
-            color: #d6d3d1 !important;
-            text-align: left !important;
-            text-align: start !important;
-            display: block !important;
-            flex: 1 1 auto !important;
-            min-width: 0 !important;
-            margin: 0 !important;
-            padding: 0 !important;
-        }
-        /* Small font for Copyright & Designer Credit Row */
-        footer .footer-bottom-row,
-        footer .footer-bottom-row p,
-        footer .footer-copyright-p,
-        footer .footer-copyright-text,
-        footer .footer-designer-text,
-        footer .footer-designer-text a,
-        footer .footer-designer-text span,
-        footer .footer-legal-links,
-        footer .footer-legal-links a {
-            font-size: 0.75rem !important;
-            line-height: 1.6 !important;
-        }
-        footer .footer-bottom-row .footer-sep {
-            font-size: 0.7rem !important;
-            opacity: 0.3 !important;
-        }
-    </style>
             <div style="max-width: 1320px; margin: 0 auto; padding: 0 clamp(1rem, 5vw, 3rem);">
                 
                 <!-- Main Inset Card Container with 32px Rounded Corners & Dark Texture -->
@@ -286,9 +80,9 @@
 
                         <!-- Column 2: Quick Links -->
                         <div>
-                            <h4 class="footer-desktop-heading" style="font-family: 'Phudu', sans-serif !important; font-size: 1.15rem !important; font-weight: 600 !important; color: #ffffff !important; text-transform: uppercase; margin-bottom: 1.6rem; letter-spacing: 0.04em;">
+                            <h3 class="footer-desktop-heading" style="font-family: 'Phudu', sans-serif !important; font-size: 1.15rem !important; font-weight: 600 !important; color: #ffffff !important; text-transform: uppercase; margin-bottom: 1.6rem; letter-spacing: 0.04em;">
                                 <?php echo esc_html( $footer_quick_links_title ); ?>
-                            </h4>
+                            </h3>
                             <button class="footer-accordion-toggle" type="button" aria-expanded="false" aria-controls="footer-quick-links"><?php echo esc_html( $footer_quick_links_title ); ?></button>
                             <div class="footer-accordion-body" id="footer-quick-links">
                             <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.95rem; font-family: 'Instrument Sans', sans-serif; font-size: 0.92rem;">
@@ -310,9 +104,9 @@
 
                         <!-- Column 3: Our Services -->
                         <div>
-                            <h4 class="footer-desktop-heading" style="font-family: 'Phudu', sans-serif !important; font-size: 1.15rem !important; font-weight: 600 !important; color: #ffffff !important; text-transform: uppercase; margin-bottom: 1.6rem; letter-spacing: 0.04em;">
+                            <h3 class="footer-desktop-heading" style="font-family: 'Phudu', sans-serif !important; font-size: 1.15rem !important; font-weight: 600 !important; color: #ffffff !important; text-transform: uppercase; margin-bottom: 1.6rem; letter-spacing: 0.04em;">
                                 <?php echo esc_html( $footer_services_title ); ?>
-                            </h4>
+                            </h3>
                             <button class="footer-accordion-toggle" type="button" aria-expanded="false" aria-controls="footer-services"><?php echo esc_html( $footer_services_title ); ?></button>
                             <div class="footer-accordion-body" id="footer-services">
                             <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.95rem; font-family: 'Instrument Sans', sans-serif; font-size: 0.92rem;">
@@ -326,14 +120,14 @@
 
                         <!-- Column 4: Location Map & Social Media -->
                         <div>
-                            <h4 class="footer-location-heading" style="font-family: 'Phudu', sans-serif !important; font-size: 1.15rem !important; font-weight: 600 !important; color: #ffffff !important; text-transform: uppercase; margin-bottom: 1.6rem; letter-spacing: 0.04em;">
+                            <h3 class="footer-location-heading" style="font-family: 'Phudu', sans-serif !important; font-size: 1.15rem !important; font-weight: 600 !important; color: #ffffff !important; text-transform: uppercase; margin-bottom: 1.6rem; letter-spacing: 0.04em;">
                                 <?php echo esc_html( $footer_location_title ); ?>
-                            </h4>
+                            </h3>
 
                             <!-- Embedded Interactive Map -->
                             <?php if ( ! empty( $footer_maps_embed_url ) ) : ?>
                             <div class="footer-map-container" style="border-radius: 14px; overflow: hidden; height: 150px; border: 1px solid rgba(255,255,255,0.12); box-shadow: 0 6px 16px rgba(0,0,0,0.3); margin-bottom: 1.3rem;">
-                                <iframe src="<?php echo esc_url( $footer_maps_embed_url ); ?>" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Franciscan Society Location Map"></iframe>
+                                <iframe src="<?php echo esc_url( $footer_maps_embed_url ); ?>" width="600" height="450" style="width: 100%; height: 100%; border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Franciscan Society Location Map"></iframe>
                             </div>
                             <?php endif; ?>
 
@@ -558,227 +352,6 @@
 <!-- ============================================================
      LIQUID GLASSMORPHIC DOCK & SACRED ILLUMINATED BIBLE ARTWORK
      ============================================================ -->
-<style id="fs-liquid-dock-and-bible-styles">
-    /* ============================================================
-       ELEGANT NAVY & GOLD FLOATING SCRIPTURE & ACTION DOCK
-       ============================================================ */
-    #bottom-widgets-container {
-        position: fixed !important;
-        bottom: 18px !important;
-        left: 50% !important;
-        transform: translateX(-50%) translateY(0) !important;
-        width: calc(100% - 60px) !important;
-        max-width: 1040px !important;
-        height: 74px !important;
-        background: #182232 !important;
-        border: 1.5px solid #d4af37 !important;
-        border-radius: 16px !important;
-        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6) !important;
-        padding: 0 1.5rem !important;
-        margin: 0 !important;
-        display: flex !important;
-        flex-direction: row !important;
-        align-items: center !important;
-        justify-content: space-between !important;
-        z-index: 9999 !important;
-        pointer-events: auto !important;
-        transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease !important;
-        box-sizing: border-box !important;
-    }
-
-    #bottom-widgets-container.hidden-near-footer {
-        transform: translateX(-50%) translateY(120%) !important;
-        opacity: 0 !important;
-        pointer-events: none !important;
-    }
-
-    .bottom-dock-inner {
-        width: 100% !important;
-        padding: 0 !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: space-between !important;
-        height: 100% !important;
-        box-sizing: border-box !important;
-    }
-
-    /* Left Section: Daily Bible Verse Trigger */
-    .dock-left-group {
-        display: flex !important;
-        align-items: center !important;
-        flex-shrink: 0 !important;
-    }
-
-    #bible-widget-btn {
-        display: flex !important;
-        align-items: center !important;
-        gap: 12px !important;
-        background: transparent !important;
-        border: none !important;
-        padding: 0 !important;
-        box-shadow: none !important;
-        cursor: pointer !important;
-        user-select: none !important;
-        height: auto !important;
-        transition: transform 0.2s ease !important;
-    }
-    #bible-widget-btn:hover {
-        transform: scale(1.02) !important;
-    }
-
-    .dock-bible-circle {
-        width: 48px !important;
-        height: 48px !important;
-        border-radius: 50% !important;
-        background: linear-gradient(135deg, #dfba76 0%, #c4994b 100%) !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        flex-shrink: 0 !important;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.35) !important;
-    }
-    .dock-bible-circle svg {
-        width: 26px !important;
-        height: 26px !important;
-        fill: #1c1917 !important;
-    }
-
-    .dock-text-group {
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: flex-start !important;
-        line-height: 1.2 !important;
-    }
-    .dock-main-label {
-        font-family: 'Instrument Sans', sans-serif !important;
-        font-size: 0.95rem !important;
-        font-weight: 800 !important;
-        color: #ffffff !important;
-        text-transform: uppercase !important;
-        letter-spacing: 0.05em !important;
-        white-space: nowrap !important;
-    }
-    .dock-sub-label {
-        font-family: 'Instrument Sans', sans-serif !important;
-        font-size: 0.78rem !important;
-        font-weight: 600 !important;
-        color: #dfba76 !important;
-        white-space: nowrap !important;
-        margin-top: 3px !important;
-    }
-
-    /* Center Vertical Divider */
-    .dock-vertical-divider {
-        width: 1.5px !important;
-        height: 36px !important;
-        background: rgba(255, 255, 255, 0.22) !important;
-        margin: 0 1.8rem !important;
-        flex-shrink: 0 !important;
-    }
-
-    /* Center Live Scripture Quote */
-    .dock-scripture-quote {
-        display: flex !important;
-        align-items: center !important;
-        flex: 1 !important;
-        min-width: 0 !important;
-        margin-right: 1.5rem !important;
-    }
-    .dock-quote-mark {
-        color: #dfba76 !important;
-        font-size: 2.2rem !important;
-        font-family: Georgia, serif !important;
-        line-height: 0.8 !important;
-        margin-right: 10px !important;
-        flex-shrink: 0 !important;
-        font-weight: 900 !important;
-    }
-    .dock-quote-text-wrap {
-        display: flex !important;
-        flex-direction: column !important;
-        overflow: hidden !important;
-    }
-    .dock-quote-content {
-        font-family: 'Instrument Sans', sans-serif !important;
-        font-size: 0.84rem !important;
-        color: #f1f5f9 !important;
-        line-height: 1.35 !important;
-        font-weight: 500 !important;
-        white-space: nowrap !important;
-        overflow: hidden !important;
-        text-overflow: ellipsis !important;
-    }
-    .dock-quote-reference {
-        font-family: 'Instrument Sans', sans-serif !important;
-        font-size: 0.78rem !important;
-        color: #dfba76 !important;
-        font-weight: 700 !important;
-        margin-top: 2px !important;
-    }
-
-    /* Right Action Buttons in Dock */
-    #prayer-chat-menu {
-        display: flex !important;
-        align-items: center !important;
-        gap: 12px !important;
-        flex-shrink: 0 !important;
-    }
-    .chat-icon {
-        width: 44px !important;
-        height: 44px !important;
-        border-radius: 50% !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3) !important;
-        transition: transform 0.25s ease, box-shadow 0.25s ease !important;
-        text-decoration: none !important;
-        flex-shrink: 0 !important;
-    }
-    .chat-icon:hover {
-        transform: translateY(-2px) scale(1.08) !important;
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.45) !important;
-    }
-    .whatsapp-icon {
-        background: #25D366 !important;
-        color: #ffffff !important;
-        box-shadow: 0 4px 14px rgba(37, 211, 102, 0.35) !important;
-    }
-    .email-icon {
-        background: #b91c1c !important;
-        color: #ffffff !important;
-        box-shadow: 0 4px 14px rgba(185, 28, 28, 0.35) !important;
-    }
-
-    @media (max-width: 900px) {
-        .dock-scripture-quote,
-        .dock-vertical-divider {
-            display: none !important;
-        }
-        #bottom-widgets-container {
-            max-width: 420px !important;
-            width: calc(100% - 32px) !important;
-            height: 64px !important;
-            padding: 0 1rem !important;
-        }
-        .dock-bible-circle {
-            width: 40px !important;
-            height: 40px !important;
-        }
-        .dock-bible-circle svg {
-            width: 22px !important;
-            height: 22px !important;
-        }
-        .dock-main-label {
-            font-size: 0.82rem !important;
-        }
-        .chat-icon {
-            width: 38px !important;
-            height: 38px !important;
-        }
-    }
-</style>
-
 <!-- Universal Liquid Glassmorphic Bottom Floating Bar -->
 <!-- Universal Navy & Gold Bottom Floating Bar -->
 <div id="bottom-widgets-container">
