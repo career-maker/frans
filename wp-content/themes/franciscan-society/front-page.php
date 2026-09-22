@@ -20,7 +20,6 @@ get_header();
             <?php 
             $hero_vid           = franciscan_get_page_field( 'home', 'hero_video', '' );
             $default_home_video = defined( 'FRANCISCAN_THEME_URI' ) ? FRANCISCAN_THEME_URI . '/assets/videos/franciscan-hero.mp4' : '';
-            $active_video       = ! empty( $hero_vid ) ? $hero_vid : $default_home_video;
             $hero_banner_photo  = defined( 'FRANCISCAN_THEME_URI' ) ? FRANCISCAN_THEME_URI . '/assets/images/hero-banner-courtyard.webp' : '';
             ?>
 
@@ -28,116 +27,133 @@ get_header();
                 <!-- High-Resolution Courtyard Monastery Banner Image: Displayed before video loads -->
                 <img id="hero-fallback-image" src="<?php echo esc_url( $hero_banner_photo ); ?>" alt="Franciscan Society" fetchpriority="high" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; pointer-events: none; display: block !important; opacity: 1 !important; visibility: visible !important; transition: opacity 0.8s ease;">
 
-                <?php if ( ! empty( $active_video ) ) : ?>
-                    <style>
-                    video::-webkit-media-controls,
-                    video::-webkit-media-controls-enclosure,
-                    video::-webkit-media-controls-panel,
-                    video::-webkit-media-controls-start-playback-button,
-                    video::-webkit-media-controls-overlay-play-button,
-                    video::-webkit-media-controls-play-button,
-                    video::-webkit-media-controls-overlay-enclosure,
-                    *::-webkit-media-controls,
-                    *::-webkit-media-controls-start-playback-button,
-                    *::-webkit-media-controls-overlay-play-button,
-                    *::-webkit-media-controls-play-button {
-                        display: none !important;
-                        -webkit-appearance: none !important;
-                        opacity: 0 !important;
-                        visibility: hidden !important;
-                        pointer-events: none !important;
-                        width: 0 !important;
-                        height: 0 !important;
-                        max-width: 0 !important;
-                        max-height: 0 !important;
+                <style>
+                video::-webkit-media-controls,
+                video::-webkit-media-controls-enclosure,
+                video::-webkit-media-controls-panel,
+                video::-webkit-media-controls-start-playback-button,
+                video::-webkit-media-controls-overlay-play-button,
+                video::-webkit-media-controls-play-button,
+                video::-webkit-media-controls-overlay-enclosure,
+                *::-webkit-media-controls,
+                *::-webkit-media-controls-start-playback-button,
+                *::-webkit-media-controls-overlay-play-button,
+                *::-webkit-media-controls-play-button {
+                    display: none !important;
+                    -webkit-appearance: none !important;
+                    opacity: 0 !important;
+                    visibility: hidden !important;
+                    pointer-events: none !important;
+                    width: 0 !important;
+                    height: 0 !important;
+                    max-width: 0 !important;
+                    max-height: 0 !important;
+                }
+                </style>
+                <video id="hero-bg-video" autoplay loop muted playsinline webkit-playsinline preload="auto" tabindex="-1" aria-hidden="true" poster="<?php echo esc_url( $hero_banner_photo ); ?>" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 2; pointer-events: none; opacity: 0; transition: opacity 0.8s ease; background: transparent;">
+                    <source src="<?php echo esc_url( $default_home_video ); ?>" type="video/mp4">
+                    <?php if ( ! empty( $hero_vid ) && $hero_vid !== $default_home_video ) : ?>
+                        <source src="<?php echo esc_url( $hero_vid ); ?>" type="video/mp4">
+                    <?php endif; ?>
+                </video>
+                <script>
+                (function() {
+                    var v = document.getElementById('hero-bg-video');
+                    var img = document.getElementById('hero-fallback-image');
+                    if (!v) return;
+
+                    v.muted = true;
+                    v.defaultMuted = true;
+                    v.playsInline = true;
+
+                    var hasRevealed = false;
+                    function revealVideo() {
+                        if (hasRevealed) return;
+                        hasRevealed = true;
+                        v.style.opacity = '1';
+                        if (img) {
+                            setTimeout(function() {
+                                img.style.opacity = '0';
+                            }, 800);
+                        }
                     }
-                    </style>
-                    <video id="hero-bg-video" autoplay loop muted playsinline webkit-playsinline preload="auto" tabindex="-1" aria-hidden="true" poster="<?php echo esc_url( $hero_banner_photo ); ?>" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 2; pointer-events: none; opacity: 0; transition: opacity 0.8s ease; background: transparent;">
-                        <source src="<?php echo esc_url( $active_video ); ?>" type="video/mp4">
-                    </video>
-                    <script>
-                    (function() {
-                        var v = document.getElementById('hero-bg-video');
-                        var img = document.getElementById('hero-fallback-image');
+
+                    // Smooth cross-fade to video as soon as frames render
+                    v.addEventListener('playing', revealVideo);
+                    v.addEventListener('timeupdate', function() {
+                        if (v.currentTime > 0) {
+                            revealVideo();
+                        }
+                    });
+
+                    function doPlay() {
                         if (!v) return;
-
                         v.muted = true;
-                        v.defaultMuted = true;
-                        v.playsInline = true;
-
-                        var hasRevealed = false;
-                        function revealVideo() {
-                            if (hasRevealed) return;
-                            hasRevealed = true;
-                            v.style.opacity = '1';
-                            if (img) {
-                                setTimeout(function() {
-                                    img.style.opacity = '0';
-                                }, 800);
-                            }
+                        var p = v.play();
+                        if (p !== undefined && p.catch) {
+                            p.catch(function() {});
                         }
+                    }
 
-                        // Smooth cross-fade to video as soon as frames render
-                        v.addEventListener('playing', revealVideo);
-                        v.addEventListener('timeupdate', function() {
-                            if (v.currentTime > 0) {
-                                revealVideo();
-                            }
-                        });
+                    window.fsPlayHeroVideo = doPlay;
 
-                        function doPlay() {
-                            if (!v) return;
-                            v.muted = true;
-                            var p = v.play();
-                            if (p !== undefined && p.catch) {
-                                p.catch(function() {});
-                            }
-                        }
+                    // Immediate attempt
+                    doPlay();
 
-                        window.fsPlayHeroVideo = doPlay;
+                    // Media readiness listeners
+                    v.addEventListener('loadedmetadata', doPlay);
+                    v.addEventListener('canplay', doPlay);
+                    v.addEventListener('canplaythrough', doPlay);
 
-                        // Immediate attempt
+                    // Additional lifecycle triggers
+                    if (document.readyState === 'complete') {
                         doPlay();
+                    } else {
+                        document.addEventListener('DOMContentLoaded', doPlay);
+                        window.addEventListener('load', doPlay);
+                    }
+                    window.addEventListener('pageshow', doPlay);
+                    document.addEventListener('visibilitychange', function() {
+                        if (!document.hidden) doPlay();
+                    });
 
-                        // Additional lifecycle triggers
-                        if (document.readyState === 'complete') {
-                            doPlay();
+                    // Continuous verification timer during first 3 seconds
+                    var attempts = 0;
+                    var pollTimer = setInterval(function() {
+                        attempts++;
+                        if (!v.paused || attempts > 15) {
+                            clearInterval(pollTimer);
                         } else {
-                            document.addEventListener('DOMContentLoaded', doPlay);
-                            window.addEventListener('load', doPlay);
-                        }
-                        window.addEventListener('pageshow', doPlay);
-                        document.addEventListener('visibilitychange', function() {
-                            if (!document.hidden) doPlay();
-                        });
-
-                        // Touch/scroll activation fallback
-                        var unlockEvents = ['touchstart', 'touchmove', 'touchend', 'click', 'scroll', 'pointerdown'];
-                        function unlockOnTouch() {
                             doPlay();
-                            unlockEvents.forEach(function(evt) {
-                                window.removeEventListener(evt, unlockOnTouch, { passive: true });
-                                document.removeEventListener(evt, unlockOnTouch, { passive: true });
-                            });
                         }
-                        unlockEvents.forEach(function(evt) {
-                            window.addEventListener(evt, unlockOnTouch, { once: true, passive: true });
-                            document.addEventListener(evt, unlockOnTouch, { once: true, passive: true });
-                        });
+                    }, 200);
 
-                        // Infinite loop enforcement
-                        v.addEventListener('ended', function() {
-                            v.currentTime = 0;
+                    // Touch/scroll activation fallback
+                    var unlockEvents = ['touchstart', 'touchmove', 'touchend', 'click', 'scroll', 'pointerdown'];
+                    function unlockOnTouch() {
+                        doPlay();
+                        unlockEvents.forEach(function(evt) {
+                            window.removeEventListener(evt, unlockOnTouch, { passive: true });
+                            document.removeEventListener(evt, unlockOnTouch, { passive: true });
+                        });
+                    }
+                    unlockEvents.forEach(function(evt) {
+                        window.addEventListener(evt, unlockOnTouch, { once: true, passive: true });
+                        document.addEventListener(evt, unlockOnTouch, { once: true, passive: true });
+                    });
+
+                    // Infinite loop enforcement
+                    v.addEventListener('ended', function() {
+                        v.currentTime = 0;
+                        v.play().catch(function() {});
+                    });
+                    v.addEventListener('pause', function() {
+                        if (!document.hidden && v.currentTime < v.duration) {
                             v.play().catch(function() {});
-                        });
-                        v.addEventListener('pause', function() {
-                            if (!document.hidden && v.currentTime < v.duration) {
-                                v.play().catch(function() {});
-                            }
-                        });
-                    })();
-                    </script>
-                <?php endif; ?>
+                        }
+                    });
+                })();
+                </script>
                 <!-- Black Overlay (Soft Opacity) -->
                 <div class="video-overlay" style="position: absolute; inset: 0; width: 100%; height: 100%; background: linear-gradient(180deg, rgba(12, 11, 10, 0.35) 0%, rgba(12, 11, 10, 0.58) 100%); z-index: 3; pointer-events: none;"></div>
             </div>
