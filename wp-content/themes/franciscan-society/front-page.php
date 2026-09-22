@@ -21,13 +21,9 @@ get_header();
             $hero_vid           = franciscan_get_page_field( 'home', 'hero_video', '' );
             $default_home_video = defined( 'FRANCISCAN_THEME_URI' ) ? FRANCISCAN_THEME_URI . '/assets/videos/franciscan-hero.mp4' : '';
             $active_video       = ! empty( $hero_vid ) ? $hero_vid : $default_home_video;
-            $hero_poster        = defined( 'FRANCISCAN_THEME_URI' ) ? FRANCISCAN_THEME_URI . '/assets/images/hero-1-crucifix-baroque.webp' : '';
             ?>
 
             <div class="hero-media-wrapper" style="position: absolute; inset: 0; width: 100%; height: 100%; overflow: hidden; z-index: 1; border-radius: 24px; background: #0c0b0a !important; background-image: none !important;">
-                <!-- High-Resolution Hero Fallback Poster: Always visible underneath, guarantees no black screen or lag on iOS -->
-                <img src="<?php echo esc_url( $hero_poster ); ?>" class="hero-fallback-poster" alt="" aria-hidden="true" fetchpriority="high" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; pointer-events: none; display: block !important; opacity: 1 !important; visibility: visible !important;">
-
                 <?php if ( ! empty( $active_video ) ) : ?>
                     <style>
                     video::-webkit-media-controls,
@@ -52,21 +48,13 @@ get_header();
                         max-height: 0 !important;
                     }
                     </style>
-                    <video id="hero-bg-video" src="<?php echo esc_url( $active_video ); ?>" autoplay muted="muted" defaultmuted playsinline webkit-playsinline x5-playsinline loop preload="auto" tabindex="-1" aria-hidden="true" disablepictureinpicture disableremoteplayback controlslist="nodownload nofullscreen noremoteplayback noplaybackrate" poster="<?php echo esc_url( $hero_poster ); ?>" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 2; pointer-events: none; opacity: 0; transition: opacity 0.5s ease; background: transparent;">
+                    <video id="hero-bg-video" src="<?php echo esc_url( $active_video ); ?>" autoplay muted="muted" defaultmuted playsinline webkit-playsinline x5-playsinline loop preload="auto" tabindex="-1" aria-hidden="true" disablepictureinpicture disableremoteplayback controlslist="nodownload nofullscreen noremoteplayback noplaybackrate" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; pointer-events: none; opacity: 1 !important; background: #0c0b0a;">
                         <source src="<?php echo esc_url( $active_video ); ?>" type="video/mp4">
                     </video>
                     <script>
                     (function() {
                         var v = document.getElementById('hero-bg-video');
                         if (!v) return;
-
-                        function revealVideo() {
-                            v.style.opacity = '1';
-                        }
-                        v.addEventListener('playing', revealVideo);
-                        v.addEventListener('timeupdate', function() {
-                            if (v.currentTime > 0) revealVideo();
-                        });
 
                         function tryPlay() {
                             v.muted = true;

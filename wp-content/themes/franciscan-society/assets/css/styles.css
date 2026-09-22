@@ -9600,26 +9600,13 @@ button.slider-btn:active {
 
 
 /* ============================================================
-   HERO: High-res fallback poster underneath, universal WebKit controls suppression
+   HERO: No image display, pure video, universal WebKit controls suppression
    ============================================================ */
 .hero-mobile-poster,
-.hero-media-wrapper img:not(.hero-fallback-poster) {
+.hero-media-wrapper img {
     display: none !important;
     visibility: hidden !important;
     opacity: 0 !important;
-    pointer-events: none !important;
-}
-
-.hero-media-wrapper img.hero-fallback-poster {
-    display: block !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-    position: absolute !important;
-    inset: 0 !important;
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: cover !important;
-    z-index: 1 !important;
     pointer-events: none !important;
 }
 
