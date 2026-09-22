@@ -164,32 +164,18 @@ get_header();
 
                 </div>
 
-                <!-- Holy Bible PNG Aligned 100% Directly Over Watermark Icon inside Rounded Hero Card -->
-                                <!-- Holy Bible PNG Positioned in Exact Center of Hero Card Container -->
-                                <!-- Holy Bible PNG Positioned at Center-Right of Hero Container with Smaller Size (95px) -->
-                                <!-- Holy Bible PNG Positioned Upward Above Paragraph (No Overlap) -->
-
-                <img loading="eager" fetchpriority="low" decoding="async" width="516" height="544" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/bible.png' ); ?>" alt="Holy Bible" class="hero-bible-img" style="position: absolute !important; top: 28% !important; right: 9% !important; width: 90px !important; height: auto !important; z-index: 2 !important; filter: drop-shadow(0 12px 28px rgba(0,0,0,0.85)) !important; pointer-events: none !important;">
             </div>
         </section>
 
     <?php endif; ?>
     <?php if ( empty( franciscan_get_page_field( 'home', 'hide_welcome_section', '0' ) ) ) : ?>
         <!-- 2. Welcome Message Section (Pure White Canvas #FFFFFF & Panoramic Bottom Sketch Illustration) -->
-        <!-- Unclippable Flying Bible PNG Container (Flies in front of eyes on scroll) -->
-<div id="welcome-scroll-bible-container" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 99999; display: none;">
-    <img loading="lazy" decoding="async" width="516" height="544" id="welcome-scroll-bible-img" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/bible.png' ); ?>" alt="Flying Bible" style="position: absolute; width: 90px; height: auto; filter: drop-shadow(0 15px 30px rgba(0,0,0,0.5)); transform-origin: center center;">
-</div>
-
-<section id="welcome-section" style="position: relative; padding: clamp(2rem, 4vw, 3.5rem) 2rem clamp(2rem, 3.5vw, 3rem) 2rem; background-color: #FFFFFF; color: #1c1917; overflow: hidden; box-sizing: border-box;">
+        <section id="welcome-section" style="position: relative; padding: clamp(2rem, 4vw, 3.5rem) 2rem clamp(2rem, 3.5vw, 3rem) 2rem; background-color: #FFFFFF; color: #1c1917; overflow: hidden; box-sizing: border-box;">
 
             <div class="welcome-grid" style="position: relative; z-index: 10; max-width: 1320px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 4vw, 4.5rem); align-items: center;">
 
                 <!-- Left Column: Copy -->
                 <div class="welcome-copy" style="position: relative;">
-
-                    <!-- Bible Watermark behind text: naturally anchored inside Welcome Section so it never follows scroll to other sections -->
-                    <img src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/bible.png' ); ?>" id="welcome-bible-watermark" class="welcome-bible-watermark" alt="" aria-hidden="true" loading="lazy" decoding="async" width="516" height="544" style="position: absolute; top: 40%; left: 45%; transform: translate(-50%, -50%) rotate(-35deg) scale(3.2); width: 90px; height: auto; opacity: 0.15; pointer-events: none !important; z-index: 0; filter: drop-shadow(0 15px 30px rgba(0,0,0,0.4));">
 
                     <!-- Eyebrow Tag -->
                     <div style="position: relative; z-index: 2; display: inline-flex; align-items: center; gap: 0.5rem; margin-bottom: 1.4rem;">
@@ -1395,11 +1381,6 @@ document.addEventListener("DOMContentLoaded", function() {
 <script>
 document.addEventListener("DOMContentLoaded", function() {
     gsap.registerPlugin(ScrollTrigger);
-
-    // GSAP ScrollTrigger: Bible PNG flies to left side behind Welcome section title on scroll
-    const heroBibleEl = document.querySelector(".hero-bible-img");
-    const welcomeHeading = document.querySelector("#welcome-section h2");
-
     // Function to split headings (H1, H2, H3) into word spans for word-by-word stagger
     // Exclude blog & news card titles to prevent font-size mismatch / FOUT shifts on first paint
     function splitHeadingsWordByWord() {
@@ -1489,10 +1470,8 @@ document.addEventListener("DOMContentLoaded", function() {
     const preloader = document.getElementById("cinematic-preloader");
     const preloaderCircle = document.getElementById("preloader-circle");
     const preloaderLogo = document.getElementById("preloader-logo");
-    const heroBible = document.querySelector(".hero-bible-img");
     const navLogoText = document.querySelector(".header__logo span");
 
-    if (heroBible) heroBible.style.opacity = "1";
     if (navLogoText) navLogoText.style.opacity = "1";
 
     let heroRevealed = false;
@@ -1565,20 +1544,7 @@ document.addEventListener("DOMContentLoaded", function() {
 <script>
 document.addEventListener("DOMContentLoaded", function() {
 
-    // 1. Bible Gentle Floating & Rotation Motion (3-5px float, +-2deg rotation)
-    const heroBible = document.querySelector(".hero-bible-img");
-    if (heroBible) {
-        gsap.to(heroBible, {
-            y: -5,
-            rotation: 2,
-            duration: 3.5,
-            repeat: -1,
-            yoyo: true,
-            ease: "sine.inOut"
-        });
-    }
-
-    // 2. Subtle Golden Aura Glow Pulse (Every 4-6 seconds)
+    // Subtle Golden Aura Glow Pulse (Every 4-6 seconds)
     const auraGlow = document.getElementById("divine-aura-glow");
     if (auraGlow) {
         gsap.to(auraGlow, {
@@ -1731,143 +1697,6 @@ document.addEventListener("DOMContentLoaded", function() {
 </script>
 
 
-<!-- GSAP Butter-Smooth Scroll Flight Engine for Bible PNG -->
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
-    gsap.registerPlugin(ScrollTrigger);
-
-    const heroBible = document.querySelector(".hero-bible-img");
-    const flyingContainer = document.getElementById("welcome-scroll-bible-container");
-    const flyingImg = document.getElementById("welcome-scroll-bible-img");
-    const welcomeSection = document.getElementById("welcome-section");
-    const welcomeWatermark = document.getElementById("welcome-bible-watermark");
-    const heroSection = document.getElementById("hero-section") || document.querySelector(".hero-section");
-
-    if (!heroBible || !flyingContainer || !flyingImg || !heroSection || !welcomeSection) return;
-
-    // On mobile devices (<= 768px), keep flying container disabled so mobile scrolling is 100% native
-    // and welcome-bible-watermark remains statically visible in the welcome section
-    if (window.innerWidth <= 768) {
-        flyingContainer.style.setProperty('display', 'none', 'important');
-        if (welcomeWatermark) welcomeWatermark.style.opacity = "0.15";
-        return;
-    }
-
-    let flightTimeline = null;
-
-    function initBibleFlight() {
-        if (flightTimeline) {
-            flightTimeline.kill();
-            flightTimeline = null;
-        }
-
-        if (window.innerWidth <= 768) {
-            flyingContainer.style.setProperty('display', 'none', 'important');
-            if (welcomeWatermark) welcomeWatermark.style.opacity = "0.15";
-            return;
-        }
-
-        // Measure starting geometry ONCE on load/resize, never on scroll
-        const heroRect = heroBible.getBoundingClientRect();
-        if (heroRect.width === 0 || heroRect.height === 0) return;
-
-        const startLeft = heroRect.left;
-        const startTop = heroRect.top;
-
-        // Target: Center of Welcome heading in viewport
-        let targetX = (window.innerWidth * 0.35) - 45;
-        let targetY = window.innerHeight * 0.45;
-
-        const welcomeH2 = welcomeSection.querySelector(".gsap-reveal-h2") || welcomeSection.querySelector("h2");
-        if (welcomeH2) {
-            const h2Rect = welcomeH2.getBoundingClientRect();
-            targetX = h2Rect.left + (h2Rect.width * 0.4) - 45;
-        }
-
-        const deltaX = targetX - startLeft;
-        const deltaY = targetY - startTop;
-
-        gsap.set(flyingContainer, {
-            display: "none",
-            position: "fixed",
-            top: 0,
-            left: 0,
-            width: "100%",
-            height: "100%",
-            zIndex: 15,
-            pointerEvents: "none"
-        });
-
-        gsap.set(flyingImg, {
-            position: "absolute",
-            left: startLeft + "px",
-            top: startTop + "px",
-            x: 0,
-            y: 0,
-            rotation: 0,
-            scale: 1,
-            opacity: 0,
-            willChange: "transform, opacity",
-            transformOrigin: "center center"
-        });
-
-        // Initially if at top of page, watermark in welcome is hidden until landed or scrolled into
-        if (welcomeWatermark) {
-            if (window.scrollY > (heroSection.offsetHeight * 0.75)) {
-                welcomeWatermark.style.opacity = "0.15";
-            } else {
-                welcomeWatermark.style.opacity = "0";
-            }
-        }
-
-        flightTimeline = gsap.timeline({
-            scrollTrigger: {
-                trigger: heroSection,
-                start: "top top",
-                end: "bottom 30%",
-                scrub: 0.5,
-                invalidateOnRefresh: true,
-                onUpdate: (self) => {
-                    const p = self.progress;
-                    if (p <= 0.02) {
-                        heroBible.style.opacity = "1";
-                        flyingContainer.style.display = "none";
-                        flyingImg.style.opacity = "0";
-                        if (welcomeWatermark) welcomeWatermark.style.opacity = "0";
-                    } else if (p >= 0.95) {
-                        // Landed state: Hand over to the static watermark inside welcome section!
-                        // Flying container is HIDDEN so it NEVER follows the user down into other sections!
-                        heroBible.style.opacity = "0";
-                        flyingContainer.style.display = "none";
-                        flyingImg.style.opacity = "0";
-                        if (welcomeWatermark) welcomeWatermark.style.opacity = "0.15";
-                    } else {
-                        // Active flight state
-                        heroBible.style.opacity = "0";
-                        flyingContainer.style.display = "block";
-                        flyingImg.style.opacity = String(Math.max(0.15, 1 - (p * 0.85)));
-                        if (welcomeWatermark) welcomeWatermark.style.opacity = "0";
-                    }
-                }
-            }
-        });
-
-        flightTimeline.to(flyingImg, {
-            x: deltaX,
-            y: deltaY,
-            rotation: -35,
-            scale: 3.2,
-            ease: "power1.inOut"
-        });
-    }
-
-    setTimeout(initBibleFlight, 250);
-    window.addEventListener("resize", () => {
-        setTimeout(initBibleFlight, 100);
-    }, { passive: true });
-});
-</script>
 
 
         
