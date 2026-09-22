@@ -2059,6 +2059,115 @@ button.fs-mega-toggle:focus::after {
 </style>
 
 <?php wp_head(); ?>
+<style id="fs-mobile-header-first-paint">
+@media (max-width: 1200px) {
+  .fs-header-inner {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    position: relative !important;
+    width: 100% !important;
+  }
+  .fs-header-actions {
+    order: 1 !important;
+    display: flex !important;
+    align-items: center !important;
+    position: static !important;
+    transform: none !important;
+    left: auto !important;
+    top: auto !important;
+    z-index: 110 !important;
+  }
+  .fs-logo {
+    order: 2 !important;
+    display: flex !important;
+    flex-direction: row-reverse !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    flex: 1 1 auto !important;
+    gap: 0.6rem !important;
+    min-width: 0 !important;
+    position: static !important;
+    transform: none !important;
+    left: auto !important;
+    top: auto !important;
+    right: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    text-decoration: none !important;
+  }
+  .fs-logo img {
+    height: 34px !important;
+    width: auto !important;
+    max-width: 40px !important;
+    position: static !important;
+    left: auto !important;
+    top: auto !important;
+    right: auto !important;
+    transform: none !important;
+    flex-shrink: 0 !important;
+    margin: 0 !important;
+    display: block !important;
+    object-fit: contain !important;
+    filter: drop-shadow(0 2px 6px rgba(0,0,0,0.4)) !important;
+  }
+  .fs-logo-text {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    justify-content: center !important;
+    text-align: left !important;
+    max-width: none !important;
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+    position: static !important;
+    right: auto !important;
+    top: auto !important;
+    transform: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  .fs-logo-name {
+    font-family: 'Instrument Sans', sans-serif !important;
+    font-size: 0.58rem !important;
+    font-weight: 600 !important;
+    line-height: 1.2 !important;
+    color: #ffffff !important;
+    white-space: normal !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+    max-width: 100% !important;
+    display: block !important;
+  }
+  .fs-logo-sub {
+    font-family: 'Instrument Sans', sans-serif !important;
+    font-size: 0.46rem !important;
+    font-weight: 400 !important;
+    line-height: 1.2 !important;
+    color: rgba(255, 255, 255, 0.85) !important;
+    white-space: normal !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+    max-width: 100% !important;
+    display: block !important;
+  }
+}
+@media (max-width: 380px) {
+  .fs-logo img {
+    height: 28px !important;
+    max-width: 34px !important;
+  }
+  .fs-logo-text {
+    max-width: 100px !important;
+  }
+  .fs-logo-name {
+    font-size: 0.5rem !important;
+  }
+  .fs-logo-sub {
+    font-size: 0.38rem !important;
+  }
+}
+</style>
 </head>
 <body <?php body_class(); ?> style="background:#FFFFFF; color:#1c2430; font-family:var(--font-body); line-height:1.7; margin:0;">
 <?php wp_body_open(); ?>
