@@ -274,6 +274,118 @@ get_header();
                                 <button type="button" class="welcome-dot <?php echo 0 === $index ? 'is-active' : ''; ?>" data-index="<?php echo esc_attr( $index ); ?>" aria-label="Go to slide <?php echo esc_attr( $index + 1 ); ?>"></button>
                             <?php endforeach; ?>
                         </div>
+                        <style>
+                        .welcome-slider-dots {
+                            position: absolute !important;
+                            bottom: 16px !important;
+                            left: 50% !important;
+                            transform: translateX(-50%) !important;
+                            display: inline-flex !important;
+                            align-items: center !important;
+                            justify-content: center !important;
+                            gap: 7px !important;
+                            z-index: 10 !important;
+                            background: rgba(12, 11, 10, 0.65) !important;
+                            padding: 6px 14px !important;
+                            border-radius: 30px !important;
+                            backdrop-filter: blur(8px) !important;
+                            -webkit-backdrop-filter: blur(8px) !important;
+                            border: 1px solid rgba(255, 255, 255, 0.25) !important;
+                            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.35) !important;
+                        }
+                        .welcome-slider-dots .welcome-dot,
+                        .welcome-dot {
+                            position: relative !important;
+                            width: 20px !important;
+                            height: 20px !important;
+                            min-width: 20px !important;
+                            min-height: 20px !important;
+                            background: transparent !important;
+                            border: none !important;
+                            cursor: pointer !important;
+                            padding: 0 !important;
+                            margin: 0 !important;
+                            outline: none !important;
+                            box-shadow: none !important;
+                            overflow: visible !important;
+                            display: inline-flex !important;
+                            align-items: center !important;
+                            justify-content: center !important;
+                        }
+                        .welcome-slider-dots .welcome-dot::before,
+                        .welcome-dot::before {
+                            content: "" !important;
+                            position: absolute !important;
+                            top: 50% !important;
+                            left: 50% !important;
+                            width: 8px !important;
+                            height: 8px !important;
+                            border-radius: 50% !important;
+                            background-color: rgba(255, 255, 255, 0.6) !important;
+                            transform: translate(-50%, -50%) scale(1) !important;
+                            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+                            pointer-events: none !important;
+                            z-index: 2 !important;
+                            opacity: 1 !important;
+                            visibility: visible !important;
+                        }
+                        .welcome-slider-dots .welcome-dot:hover::before,
+                        .welcome-slider-dots .welcome-dot:focus-visible::before,
+                        .welcome-dot:hover::before,
+                        .welcome-dot:focus-visible::before {
+                            background-color: #ffffff !important;
+                            transform: translate(-50%, -50%) scale(1.2) !important;
+                        }
+                        .welcome-slider-dots .welcome-dot.is-active::before,
+                        .welcome-dot.is-active::before {
+                            width: 22px !important;
+                            height: 8px !important;
+                            border-radius: 4px !important;
+                            background-color: #e6c888 !important;
+                            transform: translate(-50%, -50%) scale(1) !important;
+                            box-shadow: 0 0 10px rgba(230, 200, 136, 0.7) !important;
+                        }
+                        @media (max-width: 768px) {
+                            .welcome-slider-dots {
+                                left: auto !important;
+                                right: 14px !important;
+                                bottom: 14px !important;
+                                transform: none !important;
+                                padding: 3px 8px !important;
+                                gap: 4px !important;
+                                border-radius: 20px !important;
+                            }
+                            .welcome-slider-dots .welcome-dot,
+                            .welcome-dot {
+                                width: 14px !important;
+                                height: 14px !important;
+                                min-width: 14px !important;
+                                min-height: 14px !important;
+                            }
+                            .welcome-slider-dots .welcome-dot::before,
+                            .welcome-dot::before {
+                                width: 5px !important;
+                                height: 5px !important;
+                            }
+                            .welcome-slider-dots .welcome-dot:hover::before,
+                            .welcome-slider-dots .welcome-dot:focus-visible::before,
+                            .welcome-dot:hover::before,
+                            .welcome-dot:focus-visible::before {
+                                transform: translate(-50%, -50%) scale(1.15) !important;
+                            }
+                            .welcome-slider-dots .welcome-dot.is-active::before,
+                            .welcome-dot.is-active::before {
+                                width: 14px !important;
+                                height: 5px !important;
+                                border-radius: 3px !important;
+                            }
+                            .welcome-slide-center-title {
+                                bottom: 14px !important;
+                                left: 14px !important;
+                                max-width: calc(100% - 110px) !important;
+                            }
+                        }
+                        </style>
                     </div>
                 </div>
 
@@ -582,7 +694,7 @@ get_header();
 
                 </div>
 
-                <div id="news-scroll-track" style="display: flex; gap: 2.2rem; overflow-x: auto; -webkit-overflow-scrolling: touch; touch-action: pan-y pinch-zoom; scroll-behavior: smooth; scroll-snap-type: x proximity; padding: 0.5rem 0 1.5rem 0; scrollbar-width: none; -ms-overflow-style: none;">
+                <div id="news-scroll-track" style="display: flex; gap: 2.2rem; overflow-x: auto; overflow-y: hidden; -webkit-overflow-scrolling: touch; touch-action: pan-x pan-y; overscroll-behavior-x: contain; overscroll-behavior-y: auto; scroll-behavior: smooth; scroll-snap-type: x proximity; padding: 0.5rem 0 1.5rem 0; scrollbar-width: none; -ms-overflow-style: none;">
                     <?php
                     // Fetch published posts that belong to 'news' or are not categorized as 'blogs'
                     $blog_cat = get_term_by( 'slug', 'blogs', 'category' );
@@ -715,7 +827,7 @@ get_header();
                 </div>
 
                           <!-- Blog Cards Scroll Track -->
-                <div id="blogs-scroll-track" style="display: flex; gap: 2.2rem; overflow-x: auto; -webkit-overflow-scrolling: touch; touch-action: pan-y pinch-zoom; scroll-behavior: smooth; scroll-snap-type: x proximity; padding: 0.5rem 0 1.5rem 0; margin-bottom: 2rem; scrollbar-width: none; -ms-overflow-style: none;">
+                <div id="blogs-scroll-track" style="display: flex; gap: 2.2rem; overflow-x: auto; overflow-y: hidden; -webkit-overflow-scrolling: touch; touch-action: pan-x pan-y; overscroll-behavior-x: contain; overscroll-behavior-y: auto; scroll-behavior: smooth; scroll-snap-type: x proximity; padding: 0.5rem 0 1.5rem 0; margin-bottom: 2rem; scrollbar-width: none; -ms-overflow-style: none;">
                     <?php
                     $blog_slider_args = array(
                         'post_type'      => 'post',
@@ -1160,8 +1272,8 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 
-    // 4. Paragraphs Fade Up Animation
-    gsap.utils.toArray("p").forEach(p => {
+    // 4. Paragraphs Fade Up Animation (exclude horizontal slider cards)
+    gsap.utils.toArray("p:not(#news-scroll-track p):not(#blogs-scroll-track p):not(.blog-card p):not(.blog-padded-card p)").forEach(p => {
         if (!belowFold(p)) return;
         gsap.from(p, {
             scrollTrigger: {

@@ -194,7 +194,8 @@ button.slider-btn:active {
         filter: drop-shadow(0 2px 6px rgba(0,0,0,0.4)) !important;
     }
     .fs-logo-text {
-        display: none !important;
+        display: flex !important;
+        flex-direction: column !important;
     }
 }
 @media (max-width: 380px) {
@@ -320,7 +321,8 @@ button.slider-btn:active {
         max-width: 48px !important;
     }
     .fs-logo-text {
-        display: none !important;
+        display: flex !important;
+        flex-direction: column !important;
     }
 }
 
@@ -381,7 +383,8 @@ button.slider-btn:active {
         max-width: 48px !important;
     }
     .fs-logo-text {
-        display: none !important;
+        display: flex !important;
+        flex-direction: column !important;
     }
 }
 
