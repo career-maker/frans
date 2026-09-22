@@ -186,16 +186,19 @@ get_header();
             <div class="welcome-grid" style="position: relative; z-index: 10; max-width: 1320px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 4vw, 4.5rem); align-items: center;">
 
                 <!-- Left Column: Copy -->
-                <div class="welcome-copy">
+                <div class="welcome-copy" style="position: relative;">
+
+                    <!-- Bible Watermark behind text: naturally anchored inside Welcome Section so it never follows scroll to other sections -->
+                    <img src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/bible.png' ); ?>" id="welcome-bible-watermark" class="welcome-bible-watermark" alt="" aria-hidden="true" loading="lazy" decoding="async" width="516" height="544" style="position: absolute; top: 40%; left: 45%; transform: translate(-50%, -50%) rotate(-35deg) scale(3.2); width: 90px; height: auto; opacity: 0.15; pointer-events: none !important; z-index: 0; filter: drop-shadow(0 15px 30px rgba(0,0,0,0.4));">
 
                     <!-- Eyebrow Tag -->
-                    <div style="display: inline-flex; align-items: center; gap: 0.5rem; margin-bottom: 1.4rem;">
+                    <div style="position: relative; z-index: 2; display: inline-flex; align-items: center; gap: 0.5rem; margin-bottom: 1.4rem;">
                         <span style="width: 6px; height: 6px; background-color: #4A2A18; border-radius: 50%; display: inline-block;"></span>
                         <span style="color: #4A2A18; font-size: 0.78rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; font-family: 'Instrument Sans', sans-serif;"><?php echo esc_html( franciscan_get_page_field( 'home', 'welcome_eyebrow', 'WELCOME TO THE FRANCISCAN SOCIETY' ) ); ?></span>
                     </div>
 
                     <!-- Section Heading in Phudu 600 -->
-                    <h2 class="gsap-reveal-h2" style="font-family: 'Phudu', sans-serif !important; font-size: clamp(2.1rem, 3.4vw, 3.2rem) !important; font-weight: 600 !important; color: #1c1917 !important; text-transform: uppercase; line-height: 1.15; letter-spacing: -0.01em; margin-bottom: 1.6rem;">
+                    <h2 class="gsap-reveal-h2" style="position: relative; z-index: 2; font-family: 'Phudu', sans-serif !important; font-size: clamp(2.1rem, 3.4vw, 3.2rem) !important; font-weight: 600 !important; color: #1c1917 !important; text-transform: uppercase; line-height: 1.15; letter-spacing: -0.01em; margin-bottom: 1.6rem;">
                         <?php echo esc_html( franciscan_get_page_field( 'home', 'welcome_section_heading', 'WALKING TOGETHER IN FAITH, PENANCE, AND SERVICE' ) ); ?>
                     </h2>
 
@@ -206,7 +209,7 @@ get_header();
                         $welcome_text = 'In the spirit of the Seraphic Minstrel of Divine Love, we walk the way of the Gospel—our hearts rooted in prayer, our lives woven together in fraternity, and our footsteps shaped by the simplicity and humility of Christ. Drawn to the least, we seek to become gentle instruments of His peace, singing into the world the melody of mercy, hope, and love.';
                     }
                     ?>
-                    <p class="gsap-reveal-p" style="font-family: 'Instrument Sans', sans-serif !important; font-size: 0.95rem !important; font-weight: 500 !important; color: #44403c !important; line-height: 1.52 !important; margin: 0;">
+                    <p class="gsap-reveal-p" style="position: relative; z-index: 2; font-family: 'Instrument Sans', sans-serif !important; font-size: 0.95rem !important; font-weight: 500 !important; color: #44403c !important; line-height: 1.52 !important; margin: 0;">
                         <?php echo esc_html( $welcome_text ); ?>
                     </p>
 
@@ -712,7 +715,7 @@ get_header();
 
                 </div>
 
-                <div id="news-scroll-track" style="display: flex; gap: 2.2rem; overflow-x: auto; overflow-y: hidden; -webkit-overflow-scrolling: touch; touch-action: pan-x pan-y; overscroll-behavior-x: contain; overscroll-behavior-y: auto; scroll-behavior: smooth; scroll-snap-type: x proximity; padding: 0.5rem 0 1.5rem 0; scrollbar-width: none; -ms-overflow-style: none;">
+                <div id="news-scroll-track" style="display: flex; gap: 2.2rem; overflow-x: auto; overflow-y: hidden !important; -webkit-overflow-scrolling: touch; touch-action: pan-x pan-y; overscroll-behavior-x: contain; overscroll-behavior-y: auto; scroll-behavior: smooth; scroll-snap-type: x proximity; padding: 0.5rem 0 1.5rem 0; scrollbar-width: none; -ms-overflow-style: none;">
                     <?php
                     // Fetch published posts that belong to 'news' or are not categorized as 'blogs'
                     $blog_cat = get_term_by( 'slug', 'blogs', 'category' );
@@ -1738,13 +1741,16 @@ document.addEventListener("DOMContentLoaded", function() {
     const flyingContainer = document.getElementById("welcome-scroll-bible-container");
     const flyingImg = document.getElementById("welcome-scroll-bible-img");
     const welcomeSection = document.getElementById("welcome-section");
+    const welcomeWatermark = document.getElementById("welcome-bible-watermark");
     const heroSection = document.getElementById("hero-section") || document.querySelector(".hero-section");
 
     if (!heroBible || !flyingContainer || !flyingImg || !heroSection || !welcomeSection) return;
 
-    // On mobile devices (<= 768px), keep both disabled so mobile scrolling is 100% native and lightning fast
+    // On mobile devices (<= 768px), keep flying container disabled so mobile scrolling is 100% native
+    // and welcome-bible-watermark remains statically visible in the welcome section
     if (window.innerWidth <= 768) {
         flyingContainer.style.setProperty('display', 'none', 'important');
+        if (welcomeWatermark) welcomeWatermark.style.opacity = "0.15";
         return;
     }
 
@@ -1758,26 +1764,32 @@ document.addEventListener("DOMContentLoaded", function() {
 
         if (window.innerWidth <= 768) {
             flyingContainer.style.setProperty('display', 'none', 'important');
+            if (welcomeWatermark) welcomeWatermark.style.opacity = "0.15";
             return;
         }
 
         // Measure starting geometry ONCE on load/resize, never on scroll
         const heroRect = heroBible.getBoundingClientRect();
+        if (heroRect.width === 0 || heroRect.height === 0) return;
+
         const startLeft = heroRect.left;
         const startTop = heroRect.top;
 
-        if (heroRect.width === 0 || heroRect.height === 0) return;
+        // Target: Center of Welcome heading in viewport
+        let targetX = (window.innerWidth * 0.35) - 45;
+        let targetY = window.innerHeight * 0.45;
 
-        // Welcome landing target
-        const welcomeH2 = welcomeSection.querySelector("h2");
-        const targetX = (window.innerWidth / 2) - 50;
-        const targetY = startTop + (heroSection.offsetHeight * 0.72);
+        const welcomeH2 = welcomeSection.querySelector(".gsap-reveal-h2") || welcomeSection.querySelector("h2");
+        if (welcomeH2) {
+            const h2Rect = welcomeH2.getBoundingClientRect();
+            targetX = h2Rect.left + (h2Rect.width * 0.4) - 45;
+        }
 
         const deltaX = targetX - startLeft;
         const deltaY = targetY - startTop;
 
         gsap.set(flyingContainer, {
-            display: "block",
+            display: "none",
             position: "fixed",
             top: 0,
             left: 0,
@@ -1800,20 +1812,42 @@ document.addEventListener("DOMContentLoaded", function() {
             transformOrigin: "center center"
         });
 
+        // Initially if at top of page, watermark in welcome is hidden until landed or scrolled into
+        if (welcomeWatermark) {
+            if (window.scrollY > (heroSection.offsetHeight * 0.75)) {
+                welcomeWatermark.style.opacity = "0.15";
+            } else {
+                welcomeWatermark.style.opacity = "0";
+            }
+        }
+
         flightTimeline = gsap.timeline({
             scrollTrigger: {
                 trigger: heroSection,
                 start: "top top",
-                end: "bottom center",
+                end: "bottom 30%",
                 scrub: 0.5,
                 invalidateOnRefresh: true,
                 onUpdate: (self) => {
-                    if (self.progress > 0.02) {
-                        heroBible.style.opacity = "0";
-                        flyingImg.style.opacity = String(Math.max(0.18, 1 - (self.progress * 0.82)));
-                    } else {
+                    const p = self.progress;
+                    if (p <= 0.02) {
                         heroBible.style.opacity = "1";
+                        flyingContainer.style.display = "none";
                         flyingImg.style.opacity = "0";
+                        if (welcomeWatermark) welcomeWatermark.style.opacity = "0";
+                    } else if (p >= 0.95) {
+                        // Landed state: Hand over to the static watermark inside welcome section!
+                        // Flying container is HIDDEN so it NEVER follows the user down into other sections!
+                        heroBible.style.opacity = "0";
+                        flyingContainer.style.display = "none";
+                        flyingImg.style.opacity = "0";
+                        if (welcomeWatermark) welcomeWatermark.style.opacity = "0.15";
+                    } else {
+                        // Active flight state
+                        heroBible.style.opacity = "0";
+                        flyingContainer.style.display = "block";
+                        flyingImg.style.opacity = String(Math.max(0.15, 1 - (p * 0.85)));
+                        if (welcomeWatermark) welcomeWatermark.style.opacity = "0";
                     }
                 }
             }
@@ -1822,13 +1856,13 @@ document.addEventListener("DOMContentLoaded", function() {
         flightTimeline.to(flyingImg, {
             x: deltaX,
             y: deltaY,
-            rotation: -30,
-            scale: 2.2,
+            rotation: -35,
+            scale: 3.2,
             ease: "power1.inOut"
         });
     }
 
-    setTimeout(initBibleFlight, 200);
+    setTimeout(initBibleFlight, 250);
     window.addEventListener("resize", () => {
         setTimeout(initBibleFlight, 100);
     }, { passive: true });

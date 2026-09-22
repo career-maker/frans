@@ -9329,20 +9329,37 @@ button.fs-mega-toggle::after,
 }
 
 /* ============================================================
-   NEWS SECTION MOBILE — allow vertical scroll through cards
+   NEWS SECTION & BLOGS — horizontal scroll tracks only, strictly NO vertical scroll
    ============================================================ */
-#news-scroll-track {
+#news-scroll-track,
+#blogs-scroll-track {
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    -webkit-overflow-scrolling: touch !important;
+    touch-action: pan-x pan-y !important;
     overscroll-behavior-x: contain !important;
     overscroll-behavior-y: auto !important;
-    touch-action: pan-x pan-y pinch-zoom !important;
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+}
+
+#news-scroll-track::-webkit-scrollbar,
+#blogs-scroll-track::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
 }
 
 @media (max-width: 768px) {
-    #news-scroll-track {
-        touch-action: pan-x pan-y pinch-zoom !important;
+    #news-scroll-track,
+    #blogs-scroll-track {
+        overflow-x: auto !important;
+        overflow-y: hidden !important;
+        touch-action: pan-x pan-y !important;
         overscroll-behavior-x: contain !important;
         overscroll-behavior-y: auto !important;
-        overflow-y: visible !important;
+        scrollbar-width: none !important;
+        -ms-overflow-style: none !important;
     }
 
     #news-section {
@@ -9350,6 +9367,14 @@ button.fs-mega-toggle::after,
         overscroll-behavior: auto !important;
         overscroll-behavior-y: auto !important;
     }
+}
+
+/* Welcome Section Bible Watermark */
+.welcome-bible-watermark {
+    max-width: 90px;
+    height: auto;
+    pointer-events: none !important;
+    user-select: none !important;
 }
 
 /* ============================================================
