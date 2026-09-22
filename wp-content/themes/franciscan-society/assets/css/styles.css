@@ -8454,6 +8454,68 @@ button.fs-mega-toggle.active::after,
     }
 }
 
+/* ============================================================
+   MOBILE HEADER LOGO TEXT — show small logo name/subtitle next
+   to the emblem (same idea as the footer logo block, smaller).
+   Placed last on purpose: several earlier duplicate blocks above
+   set .fs-logo-text to display:none !important for mobile; this
+   is the one that actually wins by source order.
+   ============================================================ */
+@media (max-width: 1200px) {
+    .fs-logo {
+        gap: 0.5rem !important;
+    }
+    .fs-logo img {
+        height: 34px !important;
+        max-width: 40px !important;
+    }
+    .fs-logo-text {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: flex-end !important;
+        justify-content: center !important;
+        text-align: right !important;
+        max-width: 130px !important;
+    }
+    .fs-logo-name {
+        font-family: 'Instrument Sans', sans-serif !important;
+        font-size: 0.6rem !important;
+        font-weight: 600 !important;
+        line-height: 1.15 !important;
+        color: #ffffff !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        max-width: 100% !important;
+    }
+    .fs-logo-sub {
+        font-family: 'Instrument Sans', sans-serif !important;
+        font-size: 0.46rem !important;
+        font-weight: 400 !important;
+        line-height: 1.15 !important;
+        color: rgba(255, 255, 255, 0.85) !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        max-width: 100% !important;
+    }
+}
+@media (max-width: 380px) {
+    .fs-logo img {
+        height: 28px !important;
+        max-width: 34px !important;
+    }
+    .fs-logo-text {
+        max-width: 100px !important;
+    }
+    .fs-logo-name {
+        font-size: 0.5rem !important;
+    }
+    .fs-logo-sub {
+        font-size: 0.38rem !important;
+    }
+}
+
 
 /* ==========================================================================
    SCROLL REVEAL & INTERACTIVE ENTRANCE ANIMATIONS
@@ -9132,12 +9194,12 @@ button.fs-mega-toggle::after,
    ============================================================ */
 #news-scroll-track {
     overscroll-behavior-x: contain !important;
-    touch-action: pan-x pinch-zoom !important;
+    touch-action: pan-y pinch-zoom !important;
 }
 
 @media (max-width: 768px) {
     #news-scroll-track {
-        touch-action: pan-x pinch-zoom !important;
+        touch-action: pan-y pinch-zoom !important;
         overscroll-behavior-x: contain !important;
         /* Ensure parent section can receive vertical scroll */
         overflow-y: visible !important;
