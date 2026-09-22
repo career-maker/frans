@@ -936,19 +936,6 @@ button.fs-mega-toggle:focus::after {
                     updateLightboxContent();
                 }
 
-                function alignLightboxArrows() {
-                    const imgEl = document.getElementById('fs-lightbox-img');
-                    const prevBtn = document.getElementById('fs-lightbox-prev');
-                    const nextBtn = document.getElementById('fs-lightbox-next');
-                    if (!imgEl || !prevBtn || !nextBtn) return;
-                    const rect = imgEl.getBoundingClientRect();
-                    if (rect.height > 20) {
-                        const centerY = Math.round(rect.top + (rect.height / 2));
-                        prevBtn.style.top = centerY + 'px';
-                        nextBtn.style.top = centerY + 'px';
-                    }
-                }
-
                 function updateLightboxContent() {
                     const item = activeFilteredList[currentLightboxIndex];
                     if (!item) return;
@@ -962,7 +949,6 @@ button.fs-mega-toggle:focus::after {
                         imgEl.style.transform = 'scale(0.96)';
                         
                         setTimeout(() => {
-                            imgEl.onload = alignLightboxArrows;
                             imgEl.src = item.src;
                             imgEl.alt = item.alt;
                             if (captionEl) captionEl.textContent = item.alt;
@@ -971,8 +957,7 @@ button.fs-mega-toggle:focus::after {
                             if (mobileCounterEl) mobileCounterEl.textContent = countText;
                             imgEl.style.opacity = '1';
                             imgEl.style.transform = 'scale(1)';
-                            setTimeout(alignLightboxArrows, 60);
-                        }, 100);
+                        }, 80);
                     }
                 }
 
@@ -1040,11 +1025,29 @@ button.fs-mega-toggle:focus::after {
                     const nextBtn = document.getElementById('fs-lightbox-next');
                     const modal = document.getElementById('fs-gallery-lightbox');
 
-                    if (closeBtn) closeBtn.addEventListener('click', closeLightbox);
+                    if (closeBtn) {
+                        closeBtn.addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); closeLightbox(); });
+                        closeBtn.onclick = (e) => { e.preventDefault(); e.stopPropagation(); closeLightbox(); };
+                    }
                     
+                    if (prevBtn) {
+                        prevBtn.addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); prevLightboxImage(); });
+                        prevBtn.onclick = (e) => { e.preventDefault(); e.stopPropagation(); prevLightboxImage(); };
+                    }
+                    if (nextBtn) {
+                        nextBtn.addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); nextLightboxImage(); });
+                        nextBtn.onclick = (e) => { e.preventDefault(); e.stopPropagation(); nextLightboxImage(); };
+                    }
+
                     // Unified button listeners for desktop and mobile navigation
-                    document.querySelectorAll('.fs-lightbox-prev-btn').forEach(b => b.addEventListener('click', (e) => { e.stopPropagation(); prevLightboxImage(); }));
-                    document.querySelectorAll('.fs-lightbox-next-btn').forEach(b => b.addEventListener('click', (e) => { e.stopPropagation(); nextLightboxImage(); }));
+                    document.querySelectorAll('.fs-lightbox-prev-btn').forEach(b => {
+                        b.addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); prevLightboxImage(); });
+                        b.onclick = (e) => { e.preventDefault(); e.stopPropagation(); prevLightboxImage(); };
+                    });
+                    document.querySelectorAll('.fs-lightbox-next-btn').forEach(b => {
+                        b.addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); nextLightboxImage(); });
+                        b.onclick = (e) => { e.preventDefault(); e.stopPropagation(); nextLightboxImage(); };
+                    });
 
                     if (modal) {
                         modal.addEventListener('click', (e) => {
@@ -1084,9 +1087,6 @@ button.fs-mega-toggle:focus::after {
                             }
                         }, { passive: true });
                     }
-
-                    window.addEventListener('resize', alignLightboxArrows);
-                    window.addEventListener('orientationchange', () => setTimeout(alignLightboxArrows, 150));
                 }
 
                 document.addEventListener('DOMContentLoaded', initGallery);
@@ -1195,13 +1195,13 @@ button.fs-mega-toggle:focus::after {
         transition: transform 0.25s ease, opacity 0.2s ease !important;
     }
     .fs-lightbox-nav-btn {
-        position: fixed !important;
-        top: 50%;
+        position: absolute !important;
+        top: 50% !important;
         transform: translateY(-50%) !important;
         width: 56px !important;
         height: 56px !important;
-        background: rgba(12, 23, 39, 0.85) !important;
-        border: 1.5px solid rgba(230, 200, 136, 0.5) !important;
+        background: rgba(12, 23, 39, 0.88) !important;
+        border: 1.5px solid rgba(230, 200, 136, 0.6) !important;
         color: #e6c888 !important;
         border-radius: 50% !important;
         cursor: pointer !important;
@@ -1209,9 +1209,10 @@ button.fs-mega-toggle:focus::after {
         align-items: center !important;
         justify-content: center !important;
         transition: all 0.2s ease !important;
-        z-index: 20 !important;
+        z-index: 99999 !important;
         box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5) !important;
         padding: 0 !important;
+        pointer-events: auto !important;
     }
     .fs-lightbox-nav-btn:hover {
         background: #e6c888 !important;
@@ -1229,16 +1230,21 @@ button.fs-mega-toggle:focus::after {
         display: block !important;
         margin: auto !important;
         flex-shrink: 0 !important;
+        pointer-events: none !important;
     }
     .fs-lightbox-footer {
         width: 100% !important;
-        padding: 1rem 1.5rem 1.8rem 1.5rem !important;
+        padding: 0.8rem 1.5rem 1.6rem 1.5rem !important;
         display: flex !important;
         flex-direction: column !important;
         align-items: center !important;
         gap: 0.6rem !important;
         box-sizing: border-box !important;
         z-index: 10 !important;
+        pointer-events: none !important;
+    }
+    .fs-lightbox-footer > * {
+        pointer-events: auto !important;
     }
     .fs-lightbox-caption-text {
         color: #e6c888 !important;
@@ -1267,15 +1273,19 @@ button.fs-mega-toggle:focus::after {
             max-height: 62vh !important;
         }
         .fs-lightbox-nav-btn {
+            position: absolute !important;
+            top: 50% !important;
+            transform: translateY(-50%) !important;
             width: 44px !important;
             height: 44px !important;
             background: rgba(12, 23, 39, 0.9) !important;
+            z-index: 99999 !important;
         }
         .fs-lightbox-prev {
-            left: 0.4rem !important;
+            left: 0.5rem !important;
         }
         .fs-lightbox-next {
-            right: 0.4rem !important;
+            right: 0.5rem !important;
         }
         .fs-lightbox-footer {
             padding: 0.6rem 1rem 1.4rem 1rem !important;
