@@ -2500,7 +2500,7 @@ if ( ! $fs_is_home ) {
 
 
 <!-- Preloader with Expanding Circle -->
-<div id="cinematic-preloader" style="position: fixed; inset: 0; width: 100vw; height: 100vh; background: #FFFFFF; z-index: 999999; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; pointer-events: auto; transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);">
+<div id="cinematic-preloader" style="position: fixed; inset: 0; background: #FFFFFF; z-index: 999999; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; pointer-events: auto; transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);">
     <div id="preloader-circle" style="position: relative; width: 140px; height: 140px; background-color: #4A2A18; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 1000000; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);">
         <img loading="eager" id="preloader-logo" width="60" height="70" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/logo.svg' ); ?>" alt="Franciscan Preloader Logo" style="width: 60px; height: auto; filter: brightness(0) invert(1);">
     </div>

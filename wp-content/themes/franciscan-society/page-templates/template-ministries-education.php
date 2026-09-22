@@ -652,16 +652,50 @@ button.fs-mega-toggle:focus::after {
     }
     .fs-logo img {
       display: block !important;
-      height: 38px !important;
+      height: 34px !important;
       width: auto !important;
-      max-width: 48px !important;
+      max-width: 40px !important;
       object-fit: contain !important;
       position: static !important;
       transform: none !important;
       filter: drop-shadow(0 2px 6px rgba(0,0,0,0.4)) !important;
     }
     .fs-logo-text {
-      display: none !important;
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: flex-end !important;
+      justify-content: center !important;
+      text-align: right !important;
+      max-width: 130px !important;
+      margin-left: 0.4rem !important;
+      position: static !important;
+      right: auto !important;
+      top: auto !important;
+      transform: none !important;
+    }
+    .fs-logo-name {
+      font-family: 'Instrument Sans', sans-serif !important;
+      font-size: 0.6rem !important;
+      font-weight: 600 !important;
+      line-height: 1.15 !important;
+      color: #ffffff !important;
+      white-space: nowrap !important;
+      overflow: hidden !important;
+      text-overflow: ellipsis !important;
+      max-width: 100% !important;
+      display: block !important;
+    }
+    .fs-logo-sub {
+      font-family: 'Instrument Sans', sans-serif !important;
+      font-size: 0.46rem !important;
+      font-weight: 400 !important;
+      line-height: 1.15 !important;
+      color: rgba(255, 255, 255, 0.85) !important;
+      white-space: nowrap !important;
+      overflow: hidden !important;
+      text-overflow: ellipsis !important;
+      max-width: 100% !important;
+      display: block !important;
     }
         }
         @media (max-width: 380px) {
