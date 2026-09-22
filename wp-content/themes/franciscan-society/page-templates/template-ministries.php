@@ -990,7 +990,7 @@ button.fs-mega-toggle:focus::after {
 
         <!-- Franciscan Ministry Mission Banner -->
         <section class="has-vine-watermark" style="position: relative; background: #0c0b0a; color: #ffffff; padding: clamp(4rem, 7vw, 6rem) 0; overflow: hidden;">
-            <img src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/shapes/vine-corner-watermark.png' ); ?>" class="vine-corner-watermark" alt="" aria-hidden="true" style="opacity: 0.35; filter: brightness(1.6);">
+            <img src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/shapes/vine-corner-watermark.png' ); ?>" class="vine-corner-watermark" alt="" aria-hidden="true" style="opacity: 0.28; filter: none !important;">
             <div style="max-width: 1100px; margin: 0 auto; padding: 0 clamp(1.5rem, 5vw, 3rem); text-align: center; position: relative; z-index: 2;">
                 <div style="display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(230,200,136,0.15); padding: 0.45rem 1.2rem; border-radius: 50px; border: 1px solid rgba(230,200,136,0.3); margin-bottom: 1.8rem;">
                     <span style="color: #e6c888; font-size: 0.82rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; font-family: 'Instrument Sans', sans-serif;"><?php echo esc_html( franciscan_get_page_field( "ministries", "mission_badge", "OUR CALLING" ) ); ?></span>

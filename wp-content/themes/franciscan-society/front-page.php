@@ -683,7 +683,7 @@ get_header();
     <?php endif; ?>
     <?php if ( empty( franciscan_get_page_field( 'home', 'hide_news_section', '0' ) ) ) : ?>
           <section id="news-section" class="has-vine-watermark" style="position: relative; padding: clamp(2rem, 4vw, 3.5rem) 0; background-color: #F5F3EC; color: #1c1917; box-sizing: border-box; overflow: hidden;">
-            <img src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/shapes/vine-corner-watermark.png' ); ?>" class="vine-corner-watermark" alt="" aria-hidden="true" loading="lazy" decoding="async" width="800" height="533" style="position: absolute; top: 0; right: 0; width: clamp(280px, 36vw, 540px); height: 100%; object-fit: contain; object-position: top right; pointer-events: none !important; opacity: 0.38; filter: brightness(1.6) contrast(1.1); z-index: 1;">
+            <img src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/shapes/vine-corner-watermark.png' ); ?>" class="vine-corner-watermark" alt="" aria-hidden="true" loading="lazy" decoding="async" width="800" height="533" style="position: absolute; top: 0; right: 0; width: clamp(260px, 32vw, 480px); height: auto; max-height: 95%; object-fit: contain; object-position: top right; pointer-events: none !important; opacity: 0.28; filter: none !important; z-index: 1;">
             <div style="max-width: 1320px; margin: 0 auto; padding: 0 clamp(1rem, 5vw, 3rem);">
                 
                 <!-- Section Header (100% Center-Aligned Eyebrow, 2-Line Title & Scroll Navigation Arrows) -->
@@ -1728,75 +1728,110 @@ document.addEventListener("DOMContentLoaded", function() {
 </script>
 
 
-<!-- 100% Bulletproof Window Scroll Flight Engine for Bible PNG -->
+<!-- GSAP Butter-Smooth Scroll Flight Engine for Bible PNG -->
 <script>
 document.addEventListener("DOMContentLoaded", function() {
-    const heroBibleRef = document.querySelector(".hero-bible-img");
-    const welcomeTitleRef = document.querySelector(".gsap-reveal-h2");
+    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+    gsap.registerPlugin(ScrollTrigger);
+
+    const heroBible = document.querySelector(".hero-bible-img");
     const flyingContainer = document.getElementById("welcome-scroll-bible-container");
     const flyingImg = document.getElementById("welcome-scroll-bible-img");
+    const welcomeSection = document.getElementById("welcome-section");
+    const heroSection = document.getElementById("hero-section") || document.querySelector(".hero-section");
 
-    if (flyingContainer && flyingImg) {
-        function updateBibleFlight() {
-            const scrollY = window.scrollY;
-            const heroSection = document.getElementById("hero-section");
-            const heroHeight = heroSection ? heroSection.offsetHeight : 650;
-            
-            // Activate flight when scrolling down from Hero section into Welcome section
-            if (scrollY > 10) {
-                flyingContainer.style.display = "block";
-                
-                // Fly during the first 60% of the hero height scroll
-                const progress = Math.min(1, (scrollY - 10) / (heroHeight * 0.6));
-                
-                // Z-index: Over everything during flight, behind text once landed
-                flyingContainer.style.zIndex = (progress < 0.95) ? "99999" : "2";
-                
-                if (heroBibleRef) heroBibleRef.style.setProperty('visibility', 'hidden', 'important');
+    if (!heroBible || !flyingContainer || !flyingImg || !heroSection || !welcomeSection) return;
 
-                // Starting position (Hero Bible top-right)
-                const startX = window.innerWidth * 0.82;
-                const startY = 160;
+    // On mobile devices (<= 768px), keep both disabled so mobile scrolling is 100% native and lightning fast
+    if (window.innerWidth <= 768) {
+        flyingContainer.style.setProperty('display', 'none', 'important');
+        return;
+    }
 
-                // Target position: Exactly in the center of the screen, pinned to the Welcome section title
-                let targetX = window.innerWidth / 2 - 45; // 45 is half of the 90px width
-                let targetY = 300;
-                
-                if (welcomeTitleRef) {
-                    const tRect = welcomeTitleRef.getBoundingClientRect();
-                    targetX = tRect.left + (tRect.width / 2) - 45;
-                    targetY = tRect.top + (tRect.height / 2) - 20; // Center vertically on title
-                }
+    let flightTimeline = null;
 
-                if (progress < 1) {
-                    // Flying state
-                    const currentX = startX + (targetX - startX) * progress;
-                    const currentY = startY + (targetY - startY) * Math.pow(progress, 0.8);
-                    const rotation = -35 * progress;
-                    const opacity = 1 - (progress * 0.85); // Fades down to 0.15 (watermark)
-
-                    flyingImg.style.left = currentX + "px";
-                    flyingImg.style.top = currentY + "px";
-                    flyingImg.style.transform = `rotate(${rotation}deg) scale(${1 + progress * 2.5})`;
-                    flyingImg.style.opacity = opacity;
-                } else {
-                    // Landed state: pinned to the Welcome section
-                    flyingImg.style.left = targetX + "px";
-                    flyingImg.style.top = targetY + "px";
-                    flyingImg.style.transform = `rotate(-35deg) scale(3.5)`;
-                    flyingImg.style.opacity = 0.15; // Very subtle watermark behind text
-                }
-            } else {
-                // At top in Hero
-                flyingContainer.style.display = "none";
-                if (heroBibleRef) heroBibleRef.style.setProperty('visibility', 'visible', 'important');
-            }
+    function initBibleFlight() {
+        if (flightTimeline) {
+            flightTimeline.kill();
+            flightTimeline = null;
         }
 
-        window.addEventListener("scroll", updateBibleFlight);
-        window.addEventListener("resize", updateBibleFlight);
-        updateBibleFlight();
+        if (window.innerWidth <= 768) {
+            flyingContainer.style.setProperty('display', 'none', 'important');
+            return;
+        }
+
+        // Measure starting geometry ONCE on load/resize, never on scroll
+        const heroRect = heroBible.getBoundingClientRect();
+        const startLeft = heroRect.left;
+        const startTop = heroRect.top;
+
+        if (heroRect.width === 0 || heroRect.height === 0) return;
+
+        // Welcome landing target
+        const welcomeH2 = welcomeSection.querySelector("h2");
+        const targetX = (window.innerWidth / 2) - 50;
+        const targetY = startTop + (heroSection.offsetHeight * 0.72);
+
+        const deltaX = targetX - startLeft;
+        const deltaY = targetY - startTop;
+
+        gsap.set(flyingContainer, {
+            display: "block",
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            zIndex: 15,
+            pointerEvents: "none"
+        });
+
+        gsap.set(flyingImg, {
+            position: "absolute",
+            left: startLeft + "px",
+            top: startTop + "px",
+            x: 0,
+            y: 0,
+            rotation: 0,
+            scale: 1,
+            opacity: 0,
+            willChange: "transform, opacity",
+            transformOrigin: "center center"
+        });
+
+        flightTimeline = gsap.timeline({
+            scrollTrigger: {
+                trigger: heroSection,
+                start: "top top",
+                end: "bottom center",
+                scrub: 0.5,
+                invalidateOnRefresh: true,
+                onUpdate: (self) => {
+                    if (self.progress > 0.02) {
+                        heroBible.style.opacity = "0";
+                        flyingImg.style.opacity = String(Math.max(0.18, 1 - (self.progress * 0.82)));
+                    } else {
+                        heroBible.style.opacity = "1";
+                        flyingImg.style.opacity = "0";
+                    }
+                }
+            }
+        });
+
+        flightTimeline.to(flyingImg, {
+            x: deltaX,
+            y: deltaY,
+            rotation: -30,
+            scale: 2.2,
+            ease: "power1.inOut"
+        });
     }
+
+    setTimeout(initBibleFlight, 200);
+    window.addEventListener("resize", () => {
+        setTimeout(initBibleFlight, 100);
+    }, { passive: true });
 });
 </script>
 

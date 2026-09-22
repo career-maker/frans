@@ -8372,19 +8372,38 @@ button.fs-mega-toggle.active::after,
     overflow: hidden !important;
 }
 
-.vine-corner-watermark {
+div.vine-corner-watermark {
     position: absolute !important;
     top: 0 !important;
     right: 0 !important;
-    width: clamp(200px, 24vw, 380px) !important;
-    height: clamp(220px, 26vw, 420px) !important;
+    width: clamp(240px, 30vw, 480px) !important;
+    height: clamp(240px, 30vw, 480px) !important;
     background-image: url('../images/shapes/vine-corner-watermark.png') !important;
     background-repeat: no-repeat !important;
     background-position: top right !important;
     background-size: contain !important;
     pointer-events: none !important;
-    opacity: 0.22 !important;
+    opacity: 0.28 !important;
     z-index: 1 !important;
+}
+
+img.vine-corner-watermark {
+    position: absolute !important;
+    top: 0 !important;
+    right: 0 !important;
+    width: clamp(240px, 30vw, 480px) !important;
+    height: auto !important;
+    max-height: 95% !important;
+    object-fit: contain !important;
+    object-position: top right !important;
+    pointer-events: none !important;
+    opacity: 0.28 !important;
+    z-index: 1 !important;
+    user-select: none !important;
+    background: none !important;
+    background-image: none !important;
+    filter: none !important;
+    image-rendering: auto !important;
 }
 
 
@@ -8461,21 +8480,17 @@ button.fs-mega-toggle.active::after,
     position: absolute !important;
     top: 0 !important;
     right: 0 !important;
-    width: clamp(260px, 32vw, 520px) !important;
+    width: clamp(240px, 30vw, 480px) !important;
     height: auto !important;
     max-height: 95% !important;
     object-fit: contain !important;
     object-position: top right !important;
     pointer-events: none !important;
-    opacity: 0.65 !important;
+    opacity: 0.28 !important;
     z-index: 1 !important;
     user-select: none !important;
-}
-
-/* The lazy-loaded <img> is a placeholder until main.js attaches it; keep its (duplicate) CSS
-   background image from being fetched before then. */
-.vine-corner-watermark[data-fs-src] {
     background-image: none !important;
+    filter: none !important;
 }
 
 

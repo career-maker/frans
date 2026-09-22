@@ -1259,7 +1259,7 @@ button.fs-mega-toggle:focus::after {
     <!-- Page Hero Featured Card -->
     <section class="page-hero page-hero-friars">
         <div class="has-vine-watermark" style="position: relative; width: 100%; display: flex; flex-direction: column; justify-content: center; background: linear-gradient(135deg, #4A2A18, #6b3d28); min-height: 380px; border-radius: 24px; padding: 4rem clamp(2rem, 5vw, 4rem); max-width: 1400px; margin: 0 auto; overflow: hidden; box-shadow: 0 15px 35px rgba(74,42,24,0.18);">
-            <img src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/shapes/vine-corner-watermark.png' ); ?>" class="vine-corner-watermark" alt="" aria-hidden="true" style="position: absolute; top: 0; right: 0; width: clamp(280px, 36vw, 540px); height: 100%; object-fit: contain; object-position: top right; pointer-events: none; opacity: 0.38; filter: brightness(1.6) contrast(1.1); z-index: 1;">
+            <img src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/shapes/vine-corner-watermark.png' ); ?>" class="vine-corner-watermark" alt="" aria-hidden="true" style="position: absolute; top: 0; right: 0; width: clamp(260px, 32vw, 480px); height: auto; max-height: 95%; object-fit: contain; object-position: top right; pointer-events: none; opacity: 0.28; filter: none !important; z-index: 1;">
             <div style="position: relative; z-index: 2;">
                 <div style="display: inline-flex; align-items: center; gap: 0.5rem; margin-bottom: 1.4rem;">
                     <span style="width: 6px; height: 6px; background-color: #e6c888; border-radius: 50%;"></span>
