@@ -21,76 +21,104 @@ get_header();
             $hero_vid           = franciscan_get_page_field( 'home', 'hero_video', '' );
             $default_home_video = defined( 'FRANCISCAN_THEME_URI' ) ? FRANCISCAN_THEME_URI . '/assets/videos/franciscan-hero.mp4' : '';
             $active_video       = ! empty( $hero_vid ) ? $hero_vid : $default_home_video;
+            $hero_poster        = defined( 'FRANCISCAN_THEME_URI' ) ? FRANCISCAN_THEME_URI . '/assets/images/hero-1-crucifix-baroque.webp' : '';
             ?>
 
             <div class="hero-media-wrapper" style="position: absolute; inset: 0; width: 100%; height: 100%; overflow: hidden; z-index: 1; border-radius: 24px; background: #0c0b0a !important; background-image: none !important;">
+                <!-- High-Resolution Hero Fallback Poster: Always visible underneath, guarantees no black screen or lag on iOS -->
+                <img src="<?php echo esc_url( $hero_poster ); ?>" class="hero-fallback-poster" alt="" aria-hidden="true" fetchpriority="high" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; pointer-events: none; display: block !important; opacity: 1 !important; visibility: visible !important;">
+
                 <?php if ( ! empty( $active_video ) ) : ?>
                     <style>
-                    #hero-bg-video::-webkit-media-controls,
-                    #hero-bg-video::-webkit-media-controls-enclosure,
-                    #hero-bg-video::-webkit-media-controls-panel,
-                    #hero-bg-video::-webkit-media-controls-start-playback-button,
-                    #hero-bg-video::-webkit-media-controls-overlay-play-button,
-                    #hero-bg-video::-webkit-media-controls-play-button {
+                    video::-webkit-media-controls,
+                    video::-webkit-media-controls-enclosure,
+                    video::-webkit-media-controls-panel,
+                    video::-webkit-media-controls-start-playback-button,
+                    video::-webkit-media-controls-overlay-play-button,
+                    video::-webkit-media-controls-play-button,
+                    video::-webkit-media-controls-overlay-enclosure,
+                    *::-webkit-media-controls,
+                    *::-webkit-media-controls-start-playback-button,
+                    *::-webkit-media-controls-overlay-play-button,
+                    *::-webkit-media-controls-play-button {
                         display: none !important;
                         -webkit-appearance: none !important;
                         opacity: 0 !important;
                         visibility: hidden !important;
                         pointer-events: none !important;
+                        width: 0 !important;
+                        height: 0 !important;
+                        max-width: 0 !important;
+                        max-height: 0 !important;
                     }
                     </style>
-                    <video id="hero-bg-video" autoplay muted loop playsinline webkit-playsinline x5-playsinline preload="auto" tabindex="-1" aria-hidden="true" disablepictureinpicture disableremoteplayback controlslist="nodownload nofullscreen noremoteplayback noplaybackrate" poster="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; pointer-events: none; background: #0c0b0a !important; background-image: none !important;">
+                    <video id="hero-bg-video" src="<?php echo esc_url( $active_video ); ?>" autoplay muted="muted" defaultmuted playsinline webkit-playsinline x5-playsinline loop preload="auto" tabindex="-1" aria-hidden="true" disablepictureinpicture disableremoteplayback controlslist="nodownload nofullscreen noremoteplayback noplaybackrate" poster="<?php echo esc_url( $hero_poster ); ?>" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 2; pointer-events: none; opacity: 0; transition: opacity 0.5s ease; background: transparent;">
                         <source src="<?php echo esc_url( $active_video ); ?>" type="video/mp4">
                     </video>
                     <script>
-                    function fsPlayHeroVideo() {
-                        var v = document.getElementById('hero-bg-video');
-                        if (!v || v.tagName.toLowerCase() !== 'video') return;
-                        v.muted = true;
-                        v.defaultMuted = true;
-                        v.volume = 0;
-                        v.playsInline = true;
-                        v.setAttribute('playsinline', '');
-                        v.setAttribute('webkit-playsinline', '');
-                        v.setAttribute('x5-playsinline', '');
-                        var p = v.play();
-                        if (p !== undefined) {
-                            p.then(function() {}).catch(function() {
-                                var unlock = function() {
-                                    v.muted = true;
-                                    v.defaultMuted = true;
-                                    v.play().catch(function() {});
-                                    ['touchstart', 'touchend', 'pointerdown', 'click', 'scroll'].forEach(function(evt) {
-                                        window.removeEventListener(evt, unlock, { passive: true });
-                                        document.removeEventListener(evt, unlock, { passive: true });
-                                    });
-                                };
-                                ['touchstart', 'touchend', 'pointerdown', 'click', 'scroll'].forEach(function(evt) {
-                                    window.addEventListener(evt, unlock, { once: true, passive: true });
-                                    document.addEventListener(evt, unlock, { once: true, passive: true });
-                                });
-                            });
-                        }
-                    }
-                    fsPlayHeroVideo();
-                    window.addEventListener('load', fsPlayHeroVideo);
-                    document.addEventListener('DOMContentLoaded', fsPlayHeroVideo);
-                    document.addEventListener('visibilitychange', function() {
-                        if (!document.hidden) fsPlayHeroVideo();
-                    });
                     (function() {
-                        var vHero = document.getElementById('hero-bg-video');
-                        if (vHero) {
-                            vHero.addEventListener('ended', function() {
-                                vHero.currentTime = 0;
-                                vHero.play().catch(function() {});
-                            });
-                            vHero.addEventListener('pause', function() {
-                                if (!document.hidden && vHero.currentTime < vHero.duration) {
-                                    vHero.play().catch(function() {});
+                        var v = document.getElementById('hero-bg-video');
+                        if (!v) return;
+
+                        function revealVideo() {
+                            v.style.opacity = '1';
+                        }
+                        v.addEventListener('playing', revealVideo);
+                        v.addEventListener('timeupdate', function() {
+                            if (v.currentTime > 0) revealVideo();
+                        });
+
+                        function tryPlay() {
+                            v.muted = true;
+                            v.defaultMuted = true;
+                            v.volume = 0;
+                            v.playsInline = true;
+                            v.setAttribute('muted', '');
+                            v.setAttribute('playsinline', '');
+                            v.setAttribute('webkit-playsinline', '');
+                            if (v.paused) {
+                                var p = v.play();
+                                if (p && p.catch) {
+                                    p.catch(function() {});
                                 }
+                            }
+                        }
+
+                        // Immediate attempt
+                        tryPlay();
+
+                        // Additional browser event triggers
+                        document.addEventListener('DOMContentLoaded', tryPlay);
+                        window.addEventListener('load', tryPlay);
+                        window.addEventListener('pageshow', tryPlay);
+                        document.addEventListener('visibilitychange', function() {
+                            if (!document.hidden) tryPlay();
+                        });
+
+                        // Touch/pointer activation for iOS Low Power Mode
+                        var unlockEvents = ['touchstart', 'touchend', 'click', 'pointerdown'];
+                        function unlockOnTouch() {
+                            tryPlay();
+                            unlockEvents.forEach(function(evt) {
+                                window.removeEventListener(evt, unlockOnTouch, { passive: true });
+                                document.removeEventListener(evt, unlockOnTouch, { passive: true });
                             });
                         }
+                        unlockEvents.forEach(function(evt) {
+                            window.addEventListener(evt, unlockOnTouch, { once: true, passive: true });
+                            document.addEventListener(evt, unlockOnTouch, { once: true, passive: true });
+                        });
+
+                        // Infinite loop enforcement
+                        v.addEventListener('ended', function() {
+                            v.currentTime = 0;
+                            v.play().catch(function() {});
+                        });
+                        v.addEventListener('pause', function() {
+                            if (!document.hidden && v.currentTime < v.duration) {
+                                v.play().catch(function() {});
+                            }
+                        });
                     })();
                     </script>
                 <?php endif; ?>

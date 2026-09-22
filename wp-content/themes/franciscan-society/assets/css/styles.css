@@ -9600,34 +9600,54 @@ button.slider-btn:active {
 
 
 /* ============================================================
-   HERO: Always load and play video on all screens, never show fallback image
+   HERO: High-res fallback poster underneath, universal WebKit controls suppression
    ============================================================ */
 .hero-mobile-poster,
-.hero-media-wrapper img:not(.hero-bible-img) {
+.hero-media-wrapper img:not(.hero-fallback-poster) {
     display: none !important;
     visibility: hidden !important;
     opacity: 0 !important;
+    pointer-events: none !important;
+}
+
+.hero-media-wrapper img.hero-fallback-poster {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    z-index: 1 !important;
     pointer-events: none !important;
 }
 
 #hero-bg-video {
     display: block !important;
-    background-color: #0c0b0a !important;
-    background-image: none !important;
     pointer-events: none !important;
 }
 
-#hero-bg-video::-webkit-media-controls,
-#hero-bg-video::-webkit-media-controls-enclosure,
-#hero-bg-video::-webkit-media-controls-panel,
-#hero-bg-video::-webkit-media-controls-start-playback-button,
-#hero-bg-video::-webkit-media-controls-overlay-play-button,
-#hero-bg-video::-webkit-media-controls-play-button {
+video::-webkit-media-controls,
+video::-webkit-media-controls-enclosure,
+video::-webkit-media-controls-panel,
+video::-webkit-media-controls-start-playback-button,
+video::-webkit-media-controls-overlay-play-button,
+video::-webkit-media-controls-play-button,
+video::-webkit-media-controls-overlay-enclosure,
+*::-webkit-media-controls,
+*::-webkit-media-controls-start-playback-button,
+*::-webkit-media-controls-overlay-play-button,
+*::-webkit-media-controls-play-button {
     display: none !important;
     -webkit-appearance: none !important;
     opacity: 0 !important;
     visibility: hidden !important;
     pointer-events: none !important;
+    width: 0 !important;
+    height: 0 !important;
+    max-width: 0 !important;
+    max-height: 0 !important;
 }
 
 .hero-media-wrapper {

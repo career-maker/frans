@@ -137,10 +137,16 @@
                 background-color: #0c0b0a !important;
                 background-image: none !important;
             }
-            .hero-media-wrapper img:not(.hero-bible-img) {
+            .hero-media-wrapper img:not(.hero-fallback-poster) {
                 display: none !important;
                 visibility: hidden !important;
                 opacity: 0 !important;
+                pointer-events: none !important;
+            }
+            .hero-media-wrapper img.hero-fallback-poster {
+                display: block !important;
+                visibility: visible !important;
+                opacity: 1 !important;
                 pointer-events: none !important;
             }
             .hero-media-wrapper #hero-bg-video,
@@ -182,7 +188,8 @@
             .hero-section { padding: 0 1.5rem 0 1.5rem !important; margin-top: 0 !important; }
             .hero-section > div.hero-container { min-height: 100vh; border-radius: 0 0 24px 24px; box-shadow: 0 20px 50px rgba(0,0,0,0.18); max-width: 1400px; margin: 0 auto; position: relative; overflow: hidden !important; background-image: none !important; }
             .hero-media-wrapper { border-radius: 0 0 24px 24px !important; position: absolute !important; inset: 0 !important; width: 100% !important; height: 100% !important; overflow: hidden !important; z-index: 1 !important; background-color: #0c0b0a !important; background-image: none !important; }
-            .hero-media-wrapper img:not(.hero-bible-img) { display: none !important; visibility: hidden !important; opacity: 0 !important; pointer-events: none !important; }
+            .hero-media-wrapper img:not(.hero-fallback-poster) { display: none !important; visibility: hidden !important; opacity: 0 !important; pointer-events: none !important; }
+            .hero-media-wrapper img.hero-fallback-poster { display: block !important; visibility: visible !important; opacity: 1 !important; pointer-events: none !important; }
             #hero-bg-video { border-radius: 0 0 24px 24px; position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; background-color: #0c0b0a !important; background-image: none !important; }
             .video-overlay { position: absolute !important; inset: 0 !important; width: 100% !important; height: 100% !important; border-radius: 0 0 24px 24px !important; z-index: 2 !important; }
         }
