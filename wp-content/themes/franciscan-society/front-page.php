@@ -25,55 +25,30 @@ get_header();
 
             <div class="hero-media-wrapper" style="position: absolute; inset: 0; width: 100%; height: 100%; overflow: hidden; z-index: 1; border-radius: 24px; background: #0c0b0a !important; background-image: none !important;">
                 <?php if ( ! empty( $active_video ) ) : ?>
-                    <video id="hero-bg-video" muted="muted" loop playsinline preload="none" data-src="<?php echo esc_url( $active_video ); ?>" poster="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; background: #0c0b0a !important; background-image: none !important;">
-                        <track kind="captions" src="data:text/vtt;charset=utf-8,WEBVTT" srclang="en" label="No audio" default>
+                    <video id="hero-bg-video" autoplay muted="muted" loop playsinline preload="auto" poster="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; background: #0c0b0a !important; background-image: none !important;">
+                        <source src="<?php echo esc_url( $active_video ); ?>" type="video/mp4">
                     </video>
                     <script>
-                    /* Hero background video. It is decorative, so it must never compete with the HTML, CSS,
-                       fonts and first paint (or become the Largest Contentful Paint). It starts on the first
-                       user interaction, or a few seconds after the page has finished loading, and not at all
-                       on Data Saver / 2G connections. */
-                    (function () {
+                    function fsPlayHeroVideo() {
                         var v = document.getElementById('hero-bg-video');
-                        if (!v) return;
-                        var started = false;
-                        function play() {
+                        if (!v || v.tagName.toLowerCase() !== 'video') return;
+                        v.muted = true;
+                        v.defaultMuted = true;
+                        v.playsInline = true;
+                        v.setAttribute('playsinline', '');
+                        v.setAttribute('webkit-playsinline', '');
+                        if (v.paused) {
                             var p = v.play();
-                            if (p && p.catch) p.catch(function () {});
+                            if (p !== undefined) {
+                                p.catch(function() {});
+                            }
                         }
-                        function start() {
-                            if (started) return;
-                            var c = navigator.connection;
-                            if (c && (c.saveData || /(^|-)2g$/.test(c.effectiveType || ''))) return;
-                            started = true;
-                            var src = document.createElement('source');
-                            src.src = v.getAttribute('data-src');
-                            src.type = 'video/mp4';
-                            v.appendChild(src);
-                            v.muted = true;
-                            v.defaultMuted = true;
-                            v.playsInline = true;
-                            v.setAttribute('playsinline', '');
-                            v.setAttribute('webkit-playsinline', '');
-                            v.load();
-                            play();
-                        }
-                        // Resume helper used by the preloader script / tab return (never starts the download).
-                        window.fsPlayHeroVideo = function () {
-                            if (started && v.paused) play();
-                        };
-                        var events = ['touchstart', 'pointerdown', 'pointermove', 'scroll', 'keydown', 'wheel'];
-                        function onInput() {
-                            events.forEach(function (evt) { window.removeEventListener(evt, onInput); });
-                            start();
-                        }
-                        events.forEach(function (evt) { window.addEventListener(evt, onInput, { passive: true }); });
-                        function later() { setTimeout(start, 5000); }
-                        if (document.readyState === 'complete') { later(); } else { window.addEventListener('load', later); }
-                        document.addEventListener('visibilitychange', function () {
-                            if (!document.hidden) window.fsPlayHeroVideo();
-                        });
-                    })();
+                    }
+                    window.addEventListener('load', fsPlayHeroVideo);
+                    document.addEventListener('DOMContentLoaded', fsPlayHeroVideo);
+                    document.addEventListener('visibilitychange', function() {
+                        if (!document.hidden) fsPlayHeroVideo();
+                    });
                     </script>
                 <?php endif; ?>
                 <!-- Black Overlay (Soft Opacity) -->
@@ -665,7 +640,7 @@ get_header();
     <?php endif; ?>
     <?php if ( empty( franciscan_get_page_field( 'home', 'hide_news_section', '0' ) ) ) : ?>
           <section id="news-section" class="has-vine-watermark" style="position: relative; padding: clamp(2rem, 4vw, 3.5rem) 0; background-color: #F5F3EC; color: #1c1917; box-sizing: border-box; overflow: hidden;">
-            <img src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/shapes/vine-corner-watermark.png' ); ?>" class="vine-corner-watermark" alt="" aria-hidden="true" loading="lazy" decoding="async" width="800" height="533">
+            <img src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/shapes/vine-corner-watermark.png' ); ?>" class="vine-corner-watermark" alt="" aria-hidden="true" loading="lazy" decoding="async" width="800" height="533" style="position: absolute; top: 0; right: 0; width: clamp(280px, 36vw, 540px); height: 100%; object-fit: contain; object-position: top right; pointer-events: none !important; opacity: 0.38; filter: brightness(1.6) contrast(1.1); z-index: 1;">
             <div style="max-width: 1320px; margin: 0 auto; padding: 0 clamp(1rem, 5vw, 3rem);">
                 
                 <!-- Section Header (100% Center-Aligned Eyebrow, 2-Line Title & Scroll Navigation Arrows) -->

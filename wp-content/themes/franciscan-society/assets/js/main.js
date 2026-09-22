@@ -1,14 +1,3 @@
-// Remote imagery is served from a CDN that occasionally retires a photo id.
-// Swap any image that fails to load for a local asset instead of leaving a
-// broken-image box in the layout. Registered in the capture phase because
-// `error` does not bubble.
-document.addEventListener("error", (e) => {
-    const img = e.target;
-    if (img && img.tagName === "IMG" && !img.dataset.fallbackApplied) {
-        img.dataset.fallbackApplied = "1";
-        img.src = (typeof franciscan_ajax !== "undefined" && franciscan_ajax.theme_uri) ? franciscan_ajax.theme_uri + "/assets/images/church-bg.jpg" : img.src;
-    }
-}, true);
 
 document.addEventListener("DOMContentLoaded", () => {
     // 0. Loader Animation

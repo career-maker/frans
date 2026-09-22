@@ -121,15 +121,10 @@ function franciscan_filter_html( $html ) {
         return $html;
     }
     try {
-        $out = franciscan_swap_webp( $html );
-        $out = franciscan_inject_malayalam_fonts( $out );
-        if ( is_front_page() ) {
-            $out = franciscan_defer_lazy_images( $out );
-        }
+        $out = franciscan_inject_malayalam_fonts( $html );
         if ( ! is_string( $out ) || '' === $out ) {
             return $html;
         }
-        franciscan_maybe_store_page_cache( $out );
         return $out;
     } catch ( \Throwable $e ) {
         return $html;

@@ -9318,20 +9318,22 @@ button.fs-mega-toggle::after,
    ============================================================ */
 #news-scroll-track {
     overscroll-behavior-x: contain !important;
-    touch-action: pan-y pinch-zoom !important;
+    overscroll-behavior-y: auto !important;
+    touch-action: pan-x pan-y pinch-zoom !important;
 }
 
 @media (max-width: 768px) {
     #news-scroll-track {
-        touch-action: pan-y pinch-zoom !important;
+        touch-action: pan-x pan-y pinch-zoom !important;
         overscroll-behavior-x: contain !important;
-        /* Ensure parent section can receive vertical scroll */
+        overscroll-behavior-y: auto !important;
         overflow-y: visible !important;
     }
 
     #news-section {
-        /* Allow vertical scroll to pass through */
-        overscroll-behavior: contain !important;
+        touch-action: auto !important;
+        overscroll-behavior: auto !important;
+        overscroll-behavior-y: auto !important;
     }
 }
 
