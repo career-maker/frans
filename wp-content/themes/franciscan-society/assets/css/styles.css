@@ -9600,19 +9600,32 @@ button.slider-btn:active {
 
 
 /* ============================================================
-   HERO: No image display, pure video, universal WebKit controls suppression
+   HERO: Courtyard banner photo fallback, smooth video cross-fade, WebKit controls suppression
    ============================================================ */
 .hero-mobile-poster,
-.hero-media-wrapper img {
+.hero-media-wrapper img:not(#hero-fallback-image) {
     display: none !important;
     visibility: hidden !important;
     opacity: 0 !important;
     pointer-events: none !important;
 }
 
+#hero-fallback-image {
+    display: block !important;
+    visibility: visible !important;
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    z-index: 1 !important;
+    pointer-events: none !important;
+}
+
 #hero-bg-video {
     display: block !important;
     pointer-events: none !important;
+    z-index: 2 !important;
 }
 
 video::-webkit-media-controls,

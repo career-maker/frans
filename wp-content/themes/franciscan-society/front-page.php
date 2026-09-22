@@ -21,9 +21,13 @@ get_header();
             $hero_vid           = franciscan_get_page_field( 'home', 'hero_video', '' );
             $default_home_video = defined( 'FRANCISCAN_THEME_URI' ) ? FRANCISCAN_THEME_URI . '/assets/videos/franciscan-hero.mp4' : '';
             $active_video       = ! empty( $hero_vid ) ? $hero_vid : $default_home_video;
+            $hero_banner_photo  = defined( 'FRANCISCAN_THEME_URI' ) ? FRANCISCAN_THEME_URI . '/assets/images/hero-banner-courtyard.webp' : '';
             ?>
 
             <div class="hero-media-wrapper" style="position: absolute; inset: 0; width: 100%; height: 100%; overflow: hidden; z-index: 1; border-radius: 24px; background: #0c0b0a !important; background-image: none !important;">
+                <!-- High-Resolution Courtyard Monastery Banner Image: Displayed before video loads -->
+                <img id="hero-fallback-image" src="<?php echo esc_url( $hero_banner_photo ); ?>" alt="Franciscan Society" fetchpriority="high" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; pointer-events: none; display: block !important; opacity: 1 !important; visibility: visible !important; transition: opacity 0.8s ease;">
+
                 <?php if ( ! empty( $active_video ) ) : ?>
                     <style>
                     video::-webkit-media-controls,
@@ -48,45 +52,69 @@ get_header();
                         max-height: 0 !important;
                     }
                     </style>
-                    <video id="hero-bg-video" src="<?php echo esc_url( $active_video ); ?>" autoplay muted="muted" defaultmuted playsinline webkit-playsinline x5-playsinline loop preload="auto" tabindex="-1" aria-hidden="true" disablepictureinpicture disableremoteplayback controlslist="nodownload nofullscreen noremoteplayback noplaybackrate" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; pointer-events: none; opacity: 1 !important; background: #0c0b0a;">
+                    <video id="hero-bg-video" autoplay loop muted playsinline webkit-playsinline preload="auto" tabindex="-1" aria-hidden="true" poster="<?php echo esc_url( $hero_banner_photo ); ?>" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 2; pointer-events: none; opacity: 0; transition: opacity 0.8s ease; background: transparent;">
                         <source src="<?php echo esc_url( $active_video ); ?>" type="video/mp4">
                     </video>
                     <script>
                     (function() {
                         var v = document.getElementById('hero-bg-video');
+                        var img = document.getElementById('hero-fallback-image');
                         if (!v) return;
 
-                        function tryPlay() {
-                            v.muted = true;
-                            v.defaultMuted = true;
-                            v.volume = 0;
-                            v.playsInline = true;
-                            v.setAttribute('muted', '');
-                            v.setAttribute('playsinline', '');
-                            v.setAttribute('webkit-playsinline', '');
-                            if (v.paused) {
-                                var p = v.play();
-                                if (p && p.catch) {
-                                    p.catch(function() {});
-                                }
+                        v.muted = true;
+                        v.defaultMuted = true;
+                        v.playsInline = true;
+
+                        var hasRevealed = false;
+                        function revealVideo() {
+                            if (hasRevealed) return;
+                            hasRevealed = true;
+                            v.style.opacity = '1';
+                            if (img) {
+                                setTimeout(function() {
+                                    img.style.opacity = '0';
+                                }, 800);
                             }
                         }
 
-                        // Immediate attempt
-                        tryPlay();
-
-                        // Additional browser event triggers
-                        document.addEventListener('DOMContentLoaded', tryPlay);
-                        window.addEventListener('load', tryPlay);
-                        window.addEventListener('pageshow', tryPlay);
-                        document.addEventListener('visibilitychange', function() {
-                            if (!document.hidden) tryPlay();
+                        // Smooth cross-fade to video as soon as frames render
+                        v.addEventListener('playing', revealVideo);
+                        v.addEventListener('timeupdate', function() {
+                            if (v.currentTime > 0) {
+                                revealVideo();
+                            }
                         });
 
-                        // Touch/pointer activation for iOS Low Power Mode
-                        var unlockEvents = ['touchstart', 'touchend', 'click', 'pointerdown'];
+                        function doPlay() {
+                            if (!v) return;
+                            v.muted = true;
+                            var p = v.play();
+                            if (p !== undefined && p.catch) {
+                                p.catch(function() {});
+                            }
+                        }
+
+                        window.fsPlayHeroVideo = doPlay;
+
+                        // Immediate attempt
+                        doPlay();
+
+                        // Additional lifecycle triggers
+                        if (document.readyState === 'complete') {
+                            doPlay();
+                        } else {
+                            document.addEventListener('DOMContentLoaded', doPlay);
+                            window.addEventListener('load', doPlay);
+                        }
+                        window.addEventListener('pageshow', doPlay);
+                        document.addEventListener('visibilitychange', function() {
+                            if (!document.hidden) doPlay();
+                        });
+
+                        // Touch/scroll activation fallback
+                        var unlockEvents = ['touchstart', 'touchmove', 'touchend', 'click', 'scroll', 'pointerdown'];
                         function unlockOnTouch() {
-                            tryPlay();
+                            doPlay();
                             unlockEvents.forEach(function(evt) {
                                 window.removeEventListener(evt, unlockOnTouch, { passive: true });
                                 document.removeEventListener(evt, unlockOnTouch, { passive: true });
@@ -111,7 +139,7 @@ get_header();
                     </script>
                 <?php endif; ?>
                 <!-- Black Overlay (Soft Opacity) -->
-                <div class="video-overlay" style="position: absolute; inset: 0; width: 100%; height: 100%; background: linear-gradient(180deg, rgba(12, 11, 10, 0.35) 0%, rgba(12, 11, 10, 0.58) 100%); z-index: 2; pointer-events: none;"></div>
+                <div class="video-overlay" style="position: absolute; inset: 0; width: 100%; height: 100%; background: linear-gradient(180deg, rgba(12, 11, 10, 0.35) 0%, rgba(12, 11, 10, 0.58) 100%); z-index: 3; pointer-events: none;"></div>
             </div>
 
                 <!-- Content Grid (Exact Reference Screenshot 1 Parallel Alignment & Spacing) -->
