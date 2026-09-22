@@ -644,8 +644,12 @@ button.fs-mega-toggle:focus::after {
     .fs-logo {
       order: 2 !important;
       display: flex !important;
+      flex-direction: row-reverse !important;
       align-items: center !important;
-      justify-content: flex-end !important;
+      justify-content: space-between !important;
+      flex: 1 1 auto !important;
+      gap: 0.6rem !important;
+      min-width: 0 !important;
       text-decoration: none !important;
       position: static !important;
       transform: none !important;
@@ -658,16 +662,19 @@ button.fs-mega-toggle:focus::after {
       object-fit: contain !important;
       position: static !important;
       transform: none !important;
+      flex-shrink: 0 !important;
       filter: drop-shadow(0 2px 6px rgba(0,0,0,0.4)) !important;
     }
     .fs-logo-text {
       display: flex !important;
       flex-direction: column !important;
-      align-items: flex-end !important;
+      align-items: flex-start !important;
       justify-content: center !important;
-      text-align: right !important;
-      max-width: 130px !important;
-      margin-left: 0.4rem !important;
+      text-align: left !important;
+      max-width: none !important;
+      flex: 1 1 auto !important;
+      min-width: 0 !important;
+      margin-left: 0 !important;
       position: static !important;
       right: auto !important;
       top: auto !important;
@@ -675,13 +682,13 @@ button.fs-mega-toggle:focus::after {
     }
     .fs-logo-name {
       font-family: 'Instrument Sans', sans-serif !important;
-      font-size: 0.6rem !important;
+      font-size: 0.58rem !important;
       font-weight: 600 !important;
-      line-height: 1.15 !important;
+      line-height: 1.2 !important;
       color: #ffffff !important;
-      white-space: nowrap !important;
-      overflow: hidden !important;
-      text-overflow: ellipsis !important;
+      white-space: normal !important;
+      overflow: visible !important;
+      text-overflow: clip !important;
       max-width: 100% !important;
       display: block !important;
     }
@@ -689,11 +696,11 @@ button.fs-mega-toggle:focus::after {
       font-family: 'Instrument Sans', sans-serif !important;
       font-size: 0.46rem !important;
       font-weight: 400 !important;
-      line-height: 1.15 !important;
+      line-height: 1.2 !important;
       color: rgba(255, 255, 255, 0.85) !important;
-      white-space: nowrap !important;
-      overflow: hidden !important;
-      text-overflow: ellipsis !important;
+      white-space: normal !important;
+      overflow: visible !important;
+      text-overflow: clip !important;
       max-width: 100% !important;
       display: block !important;
     }

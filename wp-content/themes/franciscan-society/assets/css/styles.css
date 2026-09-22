@@ -2807,11 +2807,15 @@ body.menu-open { overflow: hidden; }
     .welcome-slide-center-title .slide-title-text {
         font-size: 0.95rem !important;
     }
-    /* Dots moved to the top so they never collide with the title pill
-       (both previously sat in the same bottom band). */
+    /* Dots pinned bottom-right (was moved to top in an earlier pass, but
+       that put them outside the gradient-darkened zone and made the pale
+       dots hard to see against bright photos). Bottom-right keeps them in
+       the same darkened band as before while staying clear of the
+       bottom-left title pill. */
     .welcome-slider-dots {
-        bottom: auto !important;
-        top: 14px !important;
+        left: auto !important;
+        right: 12px !important;
+        transform: none !important;
     }
 }
 
@@ -8486,8 +8490,18 @@ button.fs-mega-toggle.active::after,
    is the one that actually wins by source order.
    ============================================================ */
 @media (max-width: 1200px) {
+    /* Text on the left (next to the hamburger), emblem pinned to the
+       far right — reversed from DOM order (img, then text) via
+       row-reverse, and spread across the header with space-between
+       so the text isn't cramped against the image. */
     .fs-logo {
-        gap: 0.5rem !important;
+        display: flex !important;
+        flex-direction: row-reverse !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        flex: 1 1 auto !important;
+        gap: 0.6rem !important;
+        min-width: 0 !important;
     }
     .fs-logo img {
         height: 34px !important;
@@ -8496,14 +8510,17 @@ button.fs-mega-toggle.active::after,
         left: auto !important;
         top: auto !important;
         transform: none !important;
+        flex-shrink: 0 !important;
     }
     .fs-logo-text {
         display: flex !important;
         flex-direction: column !important;
-        align-items: flex-end !important;
+        align-items: flex-start !important;
         justify-content: center !important;
-        text-align: right !important;
-        max-width: 130px !important;
+        text-align: left !important;
+        max-width: none !important;
+        flex: 1 1 auto !important;
+        min-width: 0 !important;
         position: static !important;
         right: auto !important;
         top: auto !important;
@@ -8511,24 +8528,24 @@ button.fs-mega-toggle.active::after,
     }
     .fs-logo-name {
         font-family: 'Instrument Sans', sans-serif !important;
-        font-size: 0.6rem !important;
+        font-size: 0.58rem !important;
         font-weight: 600 !important;
-        line-height: 1.15 !important;
+        line-height: 1.2 !important;
         color: #ffffff !important;
-        white-space: nowrap !important;
-        overflow: hidden !important;
-        text-overflow: ellipsis !important;
+        white-space: normal !important;
+        overflow: visible !important;
+        text-overflow: clip !important;
         max-width: 100% !important;
     }
     .fs-logo-sub {
         font-family: 'Instrument Sans', sans-serif !important;
         font-size: 0.46rem !important;
         font-weight: 400 !important;
-        line-height: 1.15 !important;
+        line-height: 1.2 !important;
         color: rgba(255, 255, 255, 0.85) !important;
-        white-space: nowrap !important;
-        overflow: hidden !important;
-        text-overflow: ellipsis !important;
+        white-space: normal !important;
+        overflow: visible !important;
+        text-overflow: clip !important;
         max-width: 100% !important;
     }
 }
