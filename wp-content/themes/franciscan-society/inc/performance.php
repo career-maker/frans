@@ -100,22 +100,9 @@ function franciscan_maybe_write_htaccess() {
 add_action( 'init', 'franciscan_maybe_write_htaccess', 20 );
 
 /* -------------------------------------------------------------------------
- * 2. Compress the HTML document when the web server does not.
- *    (Static files are covered by the .htaccess block above.)
+ * 2. HTML compression is handled by Apache mod_deflate via .htaccess.
+ *    (Runtime zlib.output_compression is omitted to avoid ob_end_flush buffer notices)
  * ---------------------------------------------------------------------- */
-function franciscan_enable_html_compression() {
-    if ( is_admin() || headers_sent() || ! extension_loaded( 'zlib' ) || ini_get( 'zlib.output_compression' ) ) {
-        return;
-    }
-    foreach ( ob_list_handlers() as $handler ) {
-        if ( false !== stripos( $handler, 'gzhandler' ) || false !== stripos( $handler, 'zlib' ) ) {
-            return;
-        }
-    }
-    @ini_set( 'zlib.output_compression', 'On' );
-    @ini_set( 'zlib.output_compression_level', '6' );
-}
-add_action( 'template_redirect', 'franciscan_enable_html_compression', 0 );
 
 /* -------------------------------------------------------------------------
  * 3. Output filter: serve .webp siblings of theme images, load Malayalam
@@ -454,10 +441,6 @@ function franciscan_serve_cached_page() {
     $file = franciscan_page_cache_file();
     if ( ! is_file( $file ) || ( time() - (int) filemtime( $file ) ) > FRANCISCAN_PAGE_CACHE_TTL ) {
         return;
-    }
-    if ( extension_loaded( 'zlib' ) && ! ini_get( 'zlib.output_compression' ) ) {
-        @ini_set( 'zlib.output_compression', 'On' );
-        @ini_set( 'zlib.output_compression_level', '6' );
     }
     header( 'Content-Type: text/html; charset=UTF-8' );
     header( 'X-FS-Cache: HIT' );

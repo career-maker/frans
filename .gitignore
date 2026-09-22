@@ -23,3 +23,7 @@ git-credentials.json
 
 # Page cache (generated at runtime)
 wp-content/cache/
+
+# User uploads (never wipe or overwrite server uploads)
+wp-content/uploads/
+
