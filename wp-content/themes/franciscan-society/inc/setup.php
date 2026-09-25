@@ -156,6 +156,19 @@ function franciscan_enqueue_assets() {
         true
     );
 
+    // Google reCAPTCHA
+    $recaptcha_enabled = function_exists( 'franciscan_get_option' ) ? franciscan_get_option( 'recaptcha_enabled', '0' ) : '0';
+    $recaptcha_site_key = function_exists( 'franciscan_get_option' ) ? franciscan_get_option( 'recaptcha_site_key', '' ) : '';
+    $recaptcha_version = function_exists( 'franciscan_get_option' ) ? franciscan_get_option( 'recaptcha_version', 'v3' ) : 'v3';
+
+    if ( $recaptcha_enabled === '1' && ! empty( $recaptcha_site_key ) ) {
+        $recaptcha_url = 'https://www.google.com/recaptcha/api.js';
+        if ( $recaptcha_version === 'v3' ) {
+            $recaptcha_url .= '?render=' . esc_attr( $recaptcha_site_key );
+        }
+        wp_enqueue_script( 'google-recaptcha', $recaptcha_url, array(), null, true );
+    }
+
     wp_localize_script( 'franciscan-main-js', 'franciscan_ajax', array(
         'ajax_url'   => admin_url( 'admin-ajax.php' ),
         'nonce'      => wp_create_nonce( 'franciscan_nonce' ),
