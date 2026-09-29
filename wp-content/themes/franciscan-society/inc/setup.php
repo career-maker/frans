@@ -340,6 +340,212 @@ function franciscan_configure_smtp_phpmailer( $phpmailer ) {
 }
 add_action( 'phpmailer_init', 'franciscan_configure_smtp_phpmailer' );
 
+/**
+ * Register Custom Post Author & Article Metadata
+ */
+function franciscan_register_post_author_metabox() {
+    add_meta_box(
+        'franciscan_post_author_box',
+        '✍️ News & Article Author Details',
+        'franciscan_render_post_author_metabox',
+        'post',
+        'normal',
+        'high'
+    );
+}
+add_action( 'add_meta_boxes', 'franciscan_register_post_author_metabox' );
+
+function franciscan_register_post_meta_fields() {
+    register_post_meta( 'post', '_franciscan_author_name', array(
+        'show_in_rest'      => true,
+        'single'            => true,
+        'type'              => 'string',
+        'sanitize_callback' => 'sanitize_text_field',
+        'auth_callback'     => function() { return current_user_can( 'edit_posts' ); },
+    ) );
+    register_post_meta( 'post', '_franciscan_author_avatar', array(
+        'show_in_rest'      => true,
+        'single'            => true,
+        'type'              => 'string',
+        'sanitize_callback' => 'esc_url_raw',
+        'auth_callback'     => function() { return current_user_can( 'edit_posts' ); },
+    ) );
+}
+add_action( 'init', 'franciscan_register_post_meta_fields' );
+
+function franciscan_render_post_author_metabox( $post ) {
+    wp_nonce_field( 'franciscan_post_author_nonce', 'franciscan_author_nonce' );
+    $author_name   = get_post_meta( $post->ID, '_franciscan_author_name', true );
+    if ( empty( $author_name ) ) {
+        $author_name = get_post_meta( $post->ID, 'franciscan_author_name', true );
+    }
+    $author_avatar = get_post_meta( $post->ID, '_franciscan_author_avatar', true );
+    $wp_author     = get_the_author_meta( 'display_name', $post->post_author );
+    ?>
+    <div style="padding: 10px 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+        <div style="margin-bottom: 16px;">
+            <label for="franciscan_author_name_input" style="display: block; font-weight: 600; margin-bottom: 6px; font-size: 13px;">Author / Reporter Name:</label>
+            <input type="text" name="franciscan_author_name" id="franciscan_author_name_input" value="<?php echo esc_attr( $author_name ); ?>" style="width: 100%; max-width: 500px; padding: 6px 10px; border-radius: 4px; border: 1px solid #8c8f94;" placeholder="e.g. Fr. Manoj Vengathanam, TOR / Ranchi Media Cell / Br. Anthony, TOR" />
+            <p style="margin: 5px 0 0 0; color: #64748b; font-size: 12px;">
+                Displayed on News Details banner, News Archive list cards, and Homepage news cards. If left blank, defaults to "<?php echo esc_html( ( ! empty( $wp_author ) && 'admin' !== strtolower( $wp_author ) ) ? $wp_author : 'Province of St. Francis of Assisi' ); ?>".
+            </p>
+        </div>
+
+        <div style="margin-bottom: 10px;">
+            <label for="franciscan_author_avatar_input" style="display: block; font-weight: 600; margin-bottom: 6px; font-size: 13px;">Author Photo / Avatar (Optional):</label>
+            <div style="display: flex; gap: 10px; align-items: center; max-width: 650px;">
+                <input type="text" name="franciscan_author_avatar" id="franciscan_author_avatar_input" value="<?php echo esc_attr( $author_avatar ); ?>" style="flex: 1; padding: 6px 10px; border-radius: 4px; border: 1px solid #8c8f94;" placeholder="https://... or click Upload / Select Photo" />
+                <button type="button" class="button button-secondary" id="franciscan_author_avatar_upload_btn">Upload / Select Photo</button>
+                <button type="button" class="button" id="franciscan_author_avatar_clear_btn" style="<?php echo empty( $author_avatar ) ? 'display:none;' : ''; ?>">Clear</button>
+            </div>
+            <p style="margin: 5px 0 0 0; color: #64748b; font-size: 12px;">
+                Optional author portrait. If empty, a luxury author badge icon is shown (or the Provincial portrait if the author is Fr. Manoj Vengathanam).
+            </p>
+            <div id="franciscan_author_avatar_preview" style="margin-top: 10px; <?php echo empty( $author_avatar ) ? 'display:none;' : ''; ?>">
+                <img src="<?php echo esc_url( $author_avatar ); ?>" style="width: 56px; height: 56px; border-radius: 50%; object-fit: cover; border: 2px solid #C5A963; display: block;" />
+            </div>
+        </div>
+    </div>
+    <script>
+    jQuery(document).ready(function($){
+        var avatarFrame;
+        $('#franciscan_author_avatar_upload_btn').on('click', function(e){
+            e.preventDefault();
+            if (avatarFrame) { avatarFrame.open(); return; }
+            avatarFrame = wp.media({
+                title: 'Select Author Photo',
+                button: { text: 'Use this photo' },
+                multiple: false
+            });
+            avatarFrame.on('select', function(){
+                var attachment = avatarFrame.state().get('selection').first().toJSON();
+                $('#franciscan_author_avatar_input').val(attachment.url);
+                $('#franciscan_author_avatar_preview').show().find('img').attr('src', attachment.url);
+                $('#franciscan_author_avatar_clear_btn').show();
+            });
+            avatarFrame.open();
+        });
+        $('#franciscan_author_avatar_clear_btn').on('click', function(){
+            $('#franciscan_author_avatar_input').val('');
+            $('#franciscan_author_avatar_preview').hide();
+            $(this).hide();
+        });
+    });
+    </script>
+    <?php
+}
+
+function franciscan_save_post_author_metabox( $post_id ) {
+    if ( ! isset( $_POST['franciscan_author_nonce'] ) || ! wp_verify_nonce( $_POST['franciscan_author_nonce'], 'franciscan_post_author_nonce' ) ) {
+        return;
+    }
+    if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+        return;
+    }
+    if ( ! current_user_can( 'edit_post', $post_id ) ) {
+        return;
+    }
+    if ( isset( $_POST['franciscan_author_name'] ) ) {
+        $clean_name = sanitize_text_field( $_POST['franciscan_author_name'] );
+        update_post_meta( $post_id, '_franciscan_author_name', $clean_name );
+        update_post_meta( $post_id, 'franciscan_author_name', $clean_name );
+    }
+    if ( isset( $_POST['franciscan_author_avatar'] ) ) {
+        $clean_avatar = esc_url_raw( trim( $_POST['franciscan_author_avatar'] ) );
+        update_post_meta( $post_id, '_franciscan_author_avatar', $clean_avatar );
+    }
+}
+add_action( 'save_post', 'franciscan_save_post_author_metabox' );
+
+/**
+ * Add News Author column in WP Admin Posts list table
+ */
+function franciscan_add_custom_author_column( $columns ) {
+    $new_cols = array();
+    foreach ( $columns as $key => $title ) {
+        $new_cols[ $key ] = $title;
+        if ( 'title' === $key ) {
+            $new_cols['franciscan_author'] = __( 'News Author', 'franciscan-society' );
+        }
+    }
+    if ( ! isset( $new_cols['franciscan_author'] ) ) {
+        $new_cols['franciscan_author'] = __( 'News Author', 'franciscan-society' );
+    }
+    return $new_cols;
+}
+add_filter( 'manage_post_posts_columns', 'franciscan_add_custom_author_column' );
+
+function franciscan_render_custom_author_column( $column, $post_id ) {
+    if ( 'franciscan_author' === $column ) {
+        $author = get_post_meta( $post_id, '_franciscan_author_name', true );
+        if ( empty( $author ) ) {
+            $author = get_post_meta( $post_id, 'franciscan_author_name', true );
+        }
+        if ( ! empty( $author ) ) {
+            echo '<strong style="color:#4A2A18;">' . esc_html( $author ) . '</strong>';
+        } else {
+            $wp_author = get_the_author_meta( 'display_name', get_post_field( 'post_author', $post_id ) );
+            $fallback  = ( ! empty( $wp_author ) && 'admin' !== strtolower( $wp_author ) ) ? $wp_author : 'Province of St. Francis of Assisi';
+            echo '<span style="color:#8c8f94;">' . esc_html( $fallback ) . ' <em style="font-size:11px;">(default)</em></span>';
+        }
+    }
+}
+add_action( 'manage_post_posts_custom_column', 'franciscan_render_custom_author_column', 10, 2 );
+
+/**
+ * Helper function to retrieve the author name for a post
+ *
+ * @param int|WP_Post|null $post Post ID or WP_Post object.
+ * @return string
+ */
+if ( ! function_exists( 'franciscan_get_post_author' ) ) {
+    function franciscan_get_post_author( $post = null ) {
+        $post = get_post( $post );
+        if ( ! $post ) {
+            return 'Province of St. Francis of Assisi';
+        }
+        $author = get_post_meta( $post->ID, '_franciscan_author_name', true );
+        if ( empty( $author ) ) {
+            $author = get_post_meta( $post->ID, 'franciscan_author_name', true );
+        }
+        if ( empty( $author ) ) {
+            $author = get_post_meta( $post->ID, 'author_name', true );
+        }
+        if ( ! empty( $author ) && is_string( $author ) && '' !== trim( $author ) ) {
+            return trim( $author );
+        }
+        $wp_author = get_the_author_meta( 'display_name', $post->post_author );
+        if ( ! empty( $wp_author ) && 'admin' !== strtolower( trim( $wp_author ) ) ) {
+            return trim( $wp_author );
+        }
+        return 'Province of St. Francis of Assisi';
+    }
+}
+
+/**
+ * Helper function to retrieve the author avatar URL for a post
+ *
+ * @param int|WP_Post|null $post Post ID or WP_Post object.
+ * @return string
+ */
+if ( ! function_exists( 'franciscan_get_post_author_avatar' ) ) {
+    function franciscan_get_post_author_avatar( $post = null ) {
+        $post = get_post( $post );
+        if ( ! $post ) {
+            return '';
+        }
+        $avatar = get_post_meta( $post->ID, '_franciscan_author_avatar', true );
+        if ( ! empty( $avatar ) ) {
+            return $avatar;
+        }
+        $author_name = franciscan_get_post_author( $post );
+        if ( false !== stripos( $author_name, 'manoj' ) || false !== stripos( $author_name, 'provincial' ) ) {
+            return FRANCISCAN_THEME_URI . '/assets/images/fr-manoj-vengathanam.png';
+        }
+        return '';
+    }
+}
+
 
 /**
  * Register Custom Article Header Banner Image Meta Box for Single Posts
@@ -573,4 +779,18 @@ function franciscan_ensure_provincial_council_photos() {
 }
 add_action( 'init', 'franciscan_ensure_provincial_council_photos', 4 );
 
+/**
+ * Restrict REST API to authenticated users only (Hide API to public users)
+ */
+add_filter( 'rest_authentication_errors', function( $result ) {
+    // If a previous authentication check applied an error, pass it through.
+    if ( ! empty( $result ) ) {
+        return $result;
+    }
+    
+    if ( ! is_user_logged_in() ) {
+        return new WP_Error( 'rest_not_logged_in', 'You are not currently logged in.', array( 'status' => 401 ) );
+    }
 
+    return $result;
+});

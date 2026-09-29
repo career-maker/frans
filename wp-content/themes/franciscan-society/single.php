@@ -45,6 +45,10 @@ if ( ! empty( $custom_banner ) ) {
         $banner_bg = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/hero-banner-aug20.jpeg';
     }
 }
+
+// Author Details
+$author_name   = function_exists( 'franciscan_get_post_author' ) ? franciscan_get_post_author( get_the_ID() ) : 'Province of St. Francis of Assisi';
+$author_avatar = function_exists( 'franciscan_get_post_author_avatar' ) ? franciscan_get_post_author_avatar( get_the_ID() ) : '';
 ?>
 
 <!-- Reading Progress Bar -->
@@ -484,8 +488,17 @@ if ( ! empty( $custom_banner ) ) {
                 <!-- Meta Strip -->
                 <div class="article-meta-strip">
                     <div class="article-author-chip">
-                        <img src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/fr-manoj-vengathanam.png' ); ?>" class="article-author-avatar" alt="Franciscan Provincial">
-                        <span>Province of St. Francis of Assisi</span>
+                        <?php if ( ! empty( $author_avatar ) ) : ?>
+                            <img src="<?php echo esc_url( $author_avatar ); ?>" class="article-author-avatar" alt="<?php echo esc_attr( $author_name ); ?>" onerror="this.style.display='none'; if(this.nextElementSibling) this.nextElementSibling.style.display='inline-flex';">
+                            <span class="article-author-avatar-icon" style="display:none; width:34px; height:34px; border-radius:50%; background:rgba(230,200,136,0.18); border:1px solid #e6c888; align-items:center; justify-content:center; color:#e6c888; flex-shrink:0;">
+                                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                            </span>
+                        <?php else : ?>
+                            <span class="article-author-avatar-icon" style="width:34px; height:34px; border-radius:50%; background:rgba(230,200,136,0.18); border:1px solid #e6c888; display:inline-flex; align-items:center; justify-content:center; color:#e6c888; flex-shrink:0;">
+                                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                            </span>
+                        <?php endif; ?>
+                        <span><?php echo esc_html( $author_name ); ?></span>
                     </div>
                     <span>&bull;</span>
                     <div style="display:inline-flex; align-items:center; gap:0.4rem;">
@@ -594,7 +607,7 @@ if ( ! empty( $custom_banner ) ) {
                                 <div>
                                     <h4 class="sidebar-story-title"><?php the_title(); ?></h4>
                                     <span style="font-size:0.75rem; color:#78716c; font-family:'Instrument Sans', sans-serif; display:block; margin-top:0.3rem;">
-                                        <?php echo get_the_date( 'M j, Y' ); ?>
+                                        <?php echo get_the_date( 'M j, Y' ); ?> &bull; <?php echo esc_html( function_exists( 'franciscan_get_post_author' ) ? franciscan_get_post_author( get_the_ID() ) : 'Province' ); ?>
                                     </span>
                                 </div>
                             </a>

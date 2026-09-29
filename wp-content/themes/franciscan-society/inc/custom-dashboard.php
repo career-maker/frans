@@ -186,16 +186,26 @@ function franciscan_ajax_get_post() {
     $cat = ! empty( $cats ) ? $cats[0] : 'News';
     $thumb_url = has_post_thumbnail( $post_id ) ? get_the_post_thumbnail_url( $post_id, 'full' ) : '';
     $thumb_id = get_post_thumbnail_id( $post_id );
+    $author_name = get_post_meta( $post_id, '_franciscan_author_name', true );
+    if ( empty( $author_name ) ) {
+        $author_name = get_post_meta( $post_id, 'franciscan_author_name', true );
+    }
+    if ( empty( $author_name ) ) {
+        $author_name = get_the_author_meta( 'display_name', $post->post_author );
+    }
+    $author_avatar = get_post_meta( $post_id, '_franciscan_author_avatar', true );
 
     wp_send_json_success( array(
-        'id'        => $post->ID,
-        'title'     => $post->post_title,
-        'content'   => $post->post_content,
-        'excerpt'   => $post->post_excerpt,
-        'category'  => $cat,
-        'date'      => get_the_date( 'Y-m-d', $post_id ),
-        'thumb_url' => $thumb_url,
-        'thumb_id'  => $thumb_id,
+        'id'            => $post->ID,
+        'title'         => $post->post_title,
+        'content'       => $post->post_content,
+        'excerpt'       => $post->post_excerpt,
+        'category'      => $cat,
+        'date'          => get_the_date( 'Y-m-d', $post_id ),
+        'thumb_url'     => $thumb_url,
+        'thumb_id'      => $thumb_id,
+        'author_name'   => $author_name,
+        'author_avatar' => $author_avatar,
     ) );
 }
 add_action( 'wp_ajax_franciscan_get_post', 'franciscan_ajax_get_post' );
@@ -208,13 +218,15 @@ function franciscan_ajax_save_post() {
         wp_send_json_error( array( 'message' => 'Unauthorized access.' ) );
     }
 
-    $post_id   = isset( $_POST['post_id'] ) ? intval( $_POST['post_id'] ) : 0;
-    $title     = isset( $_POST['title'] ) ? sanitize_text_field( $_POST['title'] ) : '';
-    $content   = isset( $_POST['content'] ) ? wp_kses_post( $_POST['content'] ) : '';
-    $excerpt   = isset( $_POST['excerpt'] ) ? sanitize_textarea_field( $_POST['excerpt'] ) : '';
-    $category  = isset( $_POST['category'] ) ? sanitize_text_field( $_POST['category'] ) : 'News';
-    $thumb_id  = isset( $_POST['thumb_id'] ) ? intval( $_POST['thumb_id'] ) : 0;
-    $post_date = isset( $_POST['post_date'] ) ? sanitize_text_field( $_POST['post_date'] ) : '';
+    $post_id       = isset( $_POST['post_id'] ) ? intval( $_POST['post_id'] ) : 0;
+    $title         = isset( $_POST['title'] ) ? sanitize_text_field( $_POST['title'] ) : '';
+    $content       = isset( $_POST['content'] ) ? wp_kses_post( $_POST['content'] ) : '';
+    $excerpt       = isset( $_POST['excerpt'] ) ? sanitize_textarea_field( $_POST['excerpt'] ) : '';
+    $category      = isset( $_POST['category'] ) ? sanitize_text_field( $_POST['category'] ) : 'News';
+    $thumb_id      = isset( $_POST['thumb_id'] ) ? intval( $_POST['thumb_id'] ) : 0;
+    $post_date     = isset( $_POST['post_date'] ) ? sanitize_text_field( $_POST['post_date'] ) : '';
+    $author_name   = isset( $_POST['author_name'] ) ? sanitize_text_field( $_POST['author_name'] ) : '';
+    $author_avatar = isset( $_POST['author_avatar'] ) ? esc_url_raw( trim( $_POST['author_avatar'] ) ) : '';
 
     if ( empty( $title ) ) {
         wp_send_json_error( array( 'message' => 'Post title is required.' ) );
@@ -295,6 +307,15 @@ function franciscan_ajax_save_post() {
     // Set Thumbnail
     if ( $thumb_id > 0 ) {
         set_post_thumbnail( $saved_id, $thumb_id );
+    }
+
+    // Set Author Details
+    update_post_meta( $saved_id, '_franciscan_author_name', $author_name );
+    update_post_meta( $saved_id, 'franciscan_author_name', $author_name );
+    if ( ! empty( $author_avatar ) ) {
+        update_post_meta( $saved_id, '_franciscan_author_avatar', $author_avatar );
+    } else {
+        delete_post_meta( $saved_id, '_franciscan_author_avatar' );
     }
 
     wp_send_json_success( array( 'message' => $msg, 'post_id' => $saved_id ) );
@@ -3876,6 +3897,7 @@ function franciscan_render_dashboard_view() {
                             <tr>
                                 <th>Preview</th>
                                 <th>Title</th>
+                                <th>Author</th>
                                 <th>Category</th>
                                 <th>Date</th>
                                 <th>Actions</th>
@@ -3887,6 +3909,7 @@ function franciscan_render_dashboard_view() {
                                     $cats = wp_get_post_categories( $p->ID, array( 'fields' => 'names' ) );
                                     $cat_name = ! empty( $cats ) ? $cats[0] : 'News';
                                     $thumb = has_post_thumbnail( $p->ID ) ? get_the_post_thumbnail_url( $p->ID, 'thumbnail' ) : ( FRANCISCAN_THEME_URI . '/assets/images/news-blog/IMG20230215103348.jpg.jpeg' );
+                                    $p_author = function_exists( 'franciscan_get_post_author' ) ? franciscan_get_post_author( $p->ID ) : 'Province';
                                 ?>
                                     <tr data-title="<?php echo esc_attr( strtolower( $p->post_title ) ); ?>" data-cat="<?php echo esc_attr( strtolower( $cat_name ) ); ?>" data-timestamp="<?php echo esc_attr( get_the_time( 'U', $p->ID ) ); ?>">
                                         <td>
@@ -3894,6 +3917,11 @@ function franciscan_render_dashboard_view() {
                                         </td>
                                         <td>
                                             <strong><?php echo esc_html( $p->post_title ); ?></strong>
+                                        </td>
+                                        <td>
+                                            <span style="font-size:0.82rem; font-weight:600; color:var(--c-text);">
+                                                <?php echo esc_html( $p_author ); ?>
+                                            </span>
                                         </td>
                                         <td>
                                             <span style="background:rgba(197,169,99,0.15); color:var(--c-gold); padding:0.25rem 0.6rem; border-radius:12px; font-size:0.75rem; font-weight:700;">
@@ -3920,7 +3948,7 @@ function franciscan_render_dashboard_view() {
                                 <?php endforeach; ?>
                             <?php else : ?>
                                 <tr>
-                                    <td colspan="5" style="text-align:center; padding:2rem; color:var(--c-text-muted);">No articles found. Click "+ Create New Article" to publish one!</td>
+                                    <td colspan="6" style="text-align:center; padding:2rem; color:var(--c-text-muted);">No articles found. Click "+ Create New Article" to publish one!</td>
                                 </tr>
                             <?php endif; ?>
                         </tbody>
@@ -4630,6 +4658,25 @@ function franciscan_render_dashboard_view() {
                         <input type="date" name="post_date" id="post_date" class="form-control" value="<?php echo date('Y-m-d'); ?>">
                     </div>
                     <div class="form-group full-width">
+                        <label>Author / Reporter Name</label>
+                        <input type="text" name="author_name" id="post_author_name" class="form-control" placeholder="e.g. Fr. Manoj Vengathanam, TOR / Ranchi Media Cell / Br. Anthony, TOR">
+                        <small style="color:var(--c-text-muted); font-size:0.75rem; margin-top:4px; display:block;">Displayed on News Details banner, News Archive list cards, and Homepage cards. Defaults to "Province of St. Francis of Assisi" if left blank.</small>
+                    </div>
+                    <div class="form-group full-width">
+                        <label>Author Photo / Avatar (Optional)</label>
+                        <div class="image-uploader-box" style="display:flex; align-items:center; gap:1rem;">
+                            <img src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/fr-manoj-vengathanam.png' ); ?>" class="image-preview-thumb" id="preview-post-author-avatar" style="border-radius:50%; width:48px; height:48px; object-fit:cover; border:2px solid var(--c-gold);">
+                            <input type="hidden" name="author_avatar" id="post_author_avatar" value="">
+                            <button type="button" class="btn btn-secondary btn-upload-media" data-target="post_author_avatar">
+                                📁 Choose Author Photo
+                            </button>
+                            <button type="button" class="btn btn-secondary" id="btn-clear-author-avatar" style="display:none; padding:0.4rem 0.8rem; font-size:0.8rem;">
+                                Clear Photo
+                            </button>
+                        </div>
+                        <small style="color:var(--c-text-muted); font-size:0.75rem; margin-top:4px; display:block;">Optional. If empty, an author badge icon is shown (or Provincial portrait if author is Fr. Manoj Vengathanam).</small>
+                    </div>
+                    <div class="form-group full-width">
                         <label>Featured Image</label>
                         <div class="image-uploader-box">
                             <img src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/news-blog/IMG20230215103348.jpg.jpeg' ); ?>" class="image-preview-thumb" id="preview-post-thumb">
@@ -4816,6 +4863,10 @@ function franciscan_render_dashboard_view() {
                 if (targetKey === 'post_thumb') {
                     $('#post_thumb_id').val(attachment.id);
                     $('#preview-post-thumb').attr('src', attachment.url);
+                } else if (targetKey === 'post_author_avatar') {
+                    $('#post_author_avatar').val(attachment.url);
+                    $('#preview-post-author-avatar').attr('src', attachment.url);
+                    $('#btn-clear-author-avatar').show();
                 } else {
                     $('#input-' + targetKey).val(attachment.url);
                     const isVideo = attachment.url.match(/\.(mp4|webm|ogg|mov)(\?.*)?$/i) || attachment.type === 'video';
@@ -4842,6 +4893,14 @@ function franciscan_render_dashboard_view() {
             const defaultUrl = $(this).data('default') || '';
             $('#input-' + targetKey).val('');
             $('#preview-' + targetKey).attr('src', defaultUrl);
+            $(this).hide();
+        });
+
+        // Clear Custom Author Avatar
+        $(document).on('click', '#btn-clear-author-avatar', function(e) {
+            e.preventDefault();
+            $('#post_author_avatar').val('');
+            $('#preview-post-author-avatar').attr('src', defaultThemeUri + '/assets/images/fr-manoj-vengathanam.png');
             $(this).hide();
         });
 
@@ -6496,6 +6555,10 @@ function franciscan_render_dashboard_view() {
             $('#form-save-post')[0].reset();
             $('#post_id').val('0');
             $('#post_thumb_id').val('0');
+            $('#post_author_name').val('');
+            $('#post_author_avatar').val('');
+            $('#preview-post-author-avatar').attr('src', defaultThemeUri + '/assets/images/fr-manoj-vengathanam.png');
+            $('#btn-clear-author-avatar').hide();
             $('#preview-post-thumb').attr('src', defaultThemeUri + '/assets/images/news-blog/IMG20230215103348.jpg.jpeg');
             $('#modal-post-title').text('Create New Article');
             $('#btn-save-post-submit').text('💾 Publish Article');
@@ -6516,6 +6579,15 @@ function franciscan_render_dashboard_view() {
                     $('#post_title').val(data.title);
                     $('#post_category').val(data.category);
                     $('#post_date').val(data.date);
+                    $('#post_author_name').val(data.author_name || '');
+                    $('#post_author_avatar').val(data.author_avatar || '');
+                    if (data.author_avatar) {
+                        $('#preview-post-author-avatar').attr('src', data.author_avatar);
+                        $('#btn-clear-author-avatar').show();
+                    } else {
+                        $('#preview-post-author-avatar').attr('src', defaultThemeUri + '/assets/images/fr-manoj-vengathanam.png');
+                        $('#btn-clear-author-avatar').hide();
+                    }
                     $('#post_excerpt').val(data.excerpt);
                     $('#post_content').val(data.content);
                     $('#post_thumb_id').val(data.thumb_id || 0);
@@ -6549,6 +6621,8 @@ function franciscan_render_dashboard_view() {
                 title: $('#post_title').val(),
                 category: $('#post_category').val(),
                 post_date: $('#post_date').val(),
+                author_name: $('#post_author_name').val(),
+                author_avatar: $('#post_author_avatar').val(),
                 excerpt: $('#post_excerpt').val(),
                 content: $('#post_content').val(),
                 thumb_id: $('#post_thumb_id').val()

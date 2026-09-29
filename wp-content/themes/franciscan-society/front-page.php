@@ -789,6 +789,7 @@ get_header();
                             $thumb_url = has_post_thumbnail() ? get_the_post_thumbnail_url( get_the_ID(), 'large' ) : FRANCISCAN_THEME_URI . '/assets/images/new_uploads/seminar-labour-code.jpeg';
                             $categories = get_the_category();
                             $cat_name = ! empty( $categories ) ? $categories[0]->name : 'Province News';
+                            $card_author = function_exists( 'franciscan_get_post_author' ) ? franciscan_get_post_author( get_the_ID() ) : 'Province of St. Francis of Assisi';
                     ?>
                     <div class="blog-card" style="flex: 0 0 min(540px, 90vw); margin: 0 auto; scroll-snap-align: center; display: flex; flex-direction: column; background: transparent;">
                         <div style="border-radius: 20px; overflow: hidden; height: 300px; margin-bottom: 1.6rem; box-shadow: 0 10px 25px rgba(0,0,0,0.10); background-color: #d6ccc2;">
@@ -796,9 +797,15 @@ get_header();
                                 <img loading="lazy" decoding="async" src="<?php echo esc_url( $thumb_url ); ?>"<?php echo franciscan_responsive_attrs( $thumb_url, '(max-width: 767px) 90vw, 420px' ); // phpcs:ignore ?> style="width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s ease;" alt="<?php the_title_attribute(); ?>" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform='scale(1)'">
                             </a>
                         </div>
-                        <div style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 0.9rem;">
+                        <div style="display: flex; align-items: center; flex-wrap: wrap; gap: 0.6rem 0.8rem; margin-bottom: 0.9rem;">
                             <span style="font-family: 'Instrument Sans', sans-serif; font-size: 0.75rem; color: #8b6f47; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; background: rgba(139,111,71,0.08); padding: 0.25rem 0.7rem; border-radius: 50px;"><?php echo esc_html( $cat_name ); ?></span>
-                            <span style="font-family: 'Instrument Sans', sans-serif; font-size: 0.78rem; color: #a8a29e;">📅 <?php echo esc_html( get_the_date( 'F j, Y' ) ); ?></span>
+                            <span style="font-family: 'Instrument Sans', sans-serif; font-size: 0.78rem; color: #a8a29e; display: inline-flex; align-items: center; gap: 0.25rem;">📅 <?php echo esc_html( get_the_date( 'F j, Y' ) ); ?></span>
+                            <?php if ( ! empty( $card_author ) ) : ?>
+                                <span style="font-family: 'Instrument Sans', sans-serif; font-size: 0.78rem; color: #78716c; display: inline-flex; align-items: center; gap: 0.35rem;">
+                                    <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="#8b6f47" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                                    <span>By <strong style="color: #4A2A18; font-weight: 600;"><?php echo esc_html( $card_author ); ?></strong></span>
+                                </span>
+                            <?php endif; ?>
                         </div>
                         <h3 style="font-family: 'Phudu', sans-serif !important; font-size: 1.25rem !important; font-weight: 600 !important; color: #1c1917 !important; text-transform: uppercase; line-height: 1.35; margin-bottom: 1rem; border-bottom: 1px solid rgba(0,0,0,0.1); padding-bottom: 1rem;">
                             <a href="<?php the_permalink(); ?>" style="color: inherit; text-decoration: none;"><?php the_title(); ?></a>
@@ -822,9 +829,13 @@ get_header();
                         <div style="border-radius: 20px; overflow: hidden; height: 300px; margin-bottom: 1.6rem; box-shadow: 0 10px 25px rgba(0,0,0,0.10); background-color: #d6ccc2;">
                             <img loading="lazy" decoding="async" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/new_uploads/seminar-labour-code.jpeg' ); ?>" style="width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s ease;" alt="Seminar on New Labour Code at Hardag, Ranchi">
                         </div>
-                        <div style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 0.9rem;">
+                        <div style="display: flex; align-items: center; flex-wrap: wrap; gap: 0.6rem 0.8rem; margin-bottom: 0.9rem;">
                             <span style="font-family: 'Instrument Sans', sans-serif; font-size: 0.75rem; color: #8b6f47; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; background: rgba(139,111,71,0.08); padding: 0.25rem 0.7rem; border-radius: 50px;">Province News</span>
-                            <span style="font-family: 'Instrument Sans', sans-serif; font-size: 0.78rem; color: #a8a29e;">📅 August 29, 2026</span>
+                            <span style="font-family: 'Instrument Sans', sans-serif; font-size: 0.78rem; color: #a8a29e; display: inline-flex; align-items: center; gap: 0.25rem;">📅 August 29, 2026</span>
+                            <span style="font-family: 'Instrument Sans', sans-serif; font-size: 0.78rem; color: #78716c; display: inline-flex; align-items: center; gap: 0.35rem;">
+                                <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="#8b6f47" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                                <span>By <strong style="color: #4A2A18; font-weight: 600;">Province Secretariat</strong></span>
+                            </span>
                         </div>
                         <h3 style="font-family: 'Phudu', sans-serif !important; font-size: 1.25rem !important; font-weight: 600 !important; color: #1c1917 !important; text-transform: uppercase; line-height: 1.35; margin-bottom: 1rem; border-bottom: 1px solid rgba(0,0,0,0.1); padding-bottom: 1rem;">
                             Seminar on "New Labour Code" Held at Hardag, Ranchi

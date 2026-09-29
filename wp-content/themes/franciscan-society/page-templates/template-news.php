@@ -262,10 +262,28 @@ $banner_bg = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/hero-banner-aug2
                 </span>
             </div>
             <h1 class="article-headline">Seminar on "New Labour Code"<br>Held at Hardag, Ranchi</h1>
+            <?php
+            $sample_news = get_page_by_path( 'seminar-on-new-labour-code-held-at-hardag-ranchi', OBJECT, 'post' );
+            $detail_author = ( $sample_news && function_exists( 'franciscan_get_post_author' ) ) 
+                ? franciscan_get_post_author( $sample_news->ID ) 
+                : 'Province of St. Francis of Assisi';
+            $detail_avatar = ( $sample_news && function_exists( 'franciscan_get_post_author_avatar' ) ) 
+                ? franciscan_get_post_author_avatar( $sample_news->ID ) 
+                : ( ( false !== stripos( $detail_author, 'manoj' ) || false !== stripos( $detail_author, 'provincial' ) ) ? FRANCISCAN_THEME_URI . '/assets/images/fr-manoj-vengathanam.png' : '' );
+            ?>
             <div class="article-meta-strip">
                 <div class="article-author-chip">
-                    <img src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/fr-manoj-vengathanam.png' ); ?>" class="article-author-avatar" alt="Franciscan Provincial" onerror="this.style.display='none'">
-                    <span>Province of St. Francis of Assisi</span>
+                    <?php if ( ! empty( $detail_avatar ) ) : ?>
+                        <img src="<?php echo esc_url( $detail_avatar ); ?>" class="article-author-avatar" alt="<?php echo esc_attr( $detail_author ); ?>" onerror="this.style.display='none'; if(this.nextElementSibling) this.nextElementSibling.style.display='inline-flex';">
+                        <span class="article-author-avatar-icon" style="display:none; width:34px; height:34px; border-radius:50%; background:rgba(230,200,136,0.18); border:1px solid #e6c888; align-items:center; justify-content:center; color:#e6c888; flex-shrink:0;">
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                        </span>
+                    <?php else : ?>
+                        <span class="article-author-avatar-icon" style="width:34px; height:34px; border-radius:50%; background:rgba(230,200,136,0.18); border:1px solid #e6c888; display:inline-flex; align-items:center; justify-content:center; color:#e6c888; flex-shrink:0;">
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                        </span>
+                    <?php endif; ?>
+                    <span><?php echo esc_html( $detail_author ); ?></span>
                 </div>
                 <span>&bull;</span>
                 <div style="display:inline-flex;align-items:center;gap:0.4rem;">
@@ -361,7 +379,9 @@ $banner_bg = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/hero-banner-aug2
                             <img src="<?php echo esc_url( $r_thumb ); ?>" style="width:78px;height:78px;border-radius:12px;object-fit:cover;flex-shrink:0;border:1px solid rgba(230,200,136,0.25);" alt="<?php the_title_attribute(); ?>">
                             <div>
                                 <h4 style="font-family:'Instrument Sans',sans-serif;font-weight:600;font-size:0.92rem;color:#1c1917;line-height:1.35;"><?php the_title(); ?></h4>
-                                <span style="font-size:0.75rem;color:#78716c;font-family:'Instrument Sans',sans-serif;display:block;margin-top:0.3rem;"><?php echo get_the_date( 'M j, Y' ); ?></span>
+                                <span style="font-size:0.75rem;color:#78716c;font-family:'Instrument Sans',sans-serif;display:block;margin-top:0.3rem;">
+                                    <?php echo get_the_date( 'M j, Y' ); ?> &bull; <?php echo esc_html( function_exists( 'franciscan_get_post_author' ) ? franciscan_get_post_author( get_the_ID() ) : 'Province' ); ?>
+                                </span>
                             </div>
                         </a>
                         <?php
@@ -483,15 +503,22 @@ $banner_bg = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/hero-banner-aug2
                         $cat_name = ! empty( $categories ) ? $categories[0]->name : 'Province News';
                         $post_date = get_the_date( 'M j, Y' );
                         $excerpt = has_excerpt() ? get_the_excerpt() : wp_trim_words( get_the_content(), 28 );
+                        $card_author = function_exists( 'franciscan_get_post_author' ) ? franciscan_get_post_author( get_the_ID() ) : 'Province of St. Francis of Assisi';
                     ?>
                         <article class="news-card">
                             <div class="news-thumb-wrap">
                                 <img loading="lazy" decoding="async" src="<?php echo esc_url( $thumb_url ); ?>" alt="<?php echo esc_attr( get_the_title() ); ?>">
                             </div>
-                            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.6rem;">
+                            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.4rem; margin-bottom:0.45rem;">
                                 <span style="font-family: 'Instrument Sans', sans-serif; font-size: 0.78rem; color: #8b6f47; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;"><?php echo esc_html( $cat_name ); ?></span>
                                 <span style="font-family: 'Instrument Sans', sans-serif; font-size: 0.78rem; color: #a8a29e;">📅 <?php echo esc_html( $post_date ); ?></span>
                             </div>
+                            <?php if ( ! empty( $card_author ) ) : ?>
+                            <div style="display:flex; align-items:center; gap:0.4rem; font-family:'Instrument Sans', sans-serif; font-size:0.8rem; color:#78716c; margin-bottom:0.6rem;">
+                                <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="#C5A963" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                                <span>By <strong style="color:#4A2A18; font-weight:600;"><?php echo esc_html( $card_author ); ?></strong></span>
+                            </div>
+                            <?php endif; ?>
                             <h3 class="news-card-title"><?php the_title(); ?></h3>
                             <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.6; margin-bottom: 1.5rem; flex-grow: 1;">
                                 <?php echo esc_html( $excerpt ); ?>
@@ -525,9 +552,13 @@ $banner_bg = FRANCISCAN_THEME_URI . '/assets/images/new_uploads/hero-banner-aug2
                         <div class="news-thumb-wrap">
                             <img loading="eager" src="<?php echo esc_url( FRANCISCAN_THEME_URI . '/assets/images/new_uploads/seminar-labour-code.jpeg' ); ?>" alt="Seminar on New Labour Code at Hardag, Ranchi">
                         </div>
-                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.6rem;">
+                        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.4rem; margin-bottom:0.45rem;">
                             <span style="font-family: 'Instrument Sans', sans-serif; font-size: 0.78rem; color: #8b6f47; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;">Province News</span>
                             <span style="font-family: 'Instrument Sans', sans-serif; font-size: 0.78rem; color: #a8a29e;">📅 Aug 29, 2026</span>
+                        </div>
+                        <div style="display:flex; align-items:center; gap:0.4rem; font-family:'Instrument Sans', sans-serif; font-size:0.8rem; color:#78716c; margin-bottom:0.6rem;">
+                            <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="#C5A963" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                            <span>By <strong style="color:#4A2A18; font-weight:600;">Province Secretariat</strong></span>
                         </div>
                         <h3 class="news-card-title">Seminar on "New Labour Code" Held at Hardag, Ranchi</h3>
                         <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: #57534e; line-height: 1.6; margin-bottom: 1.5rem; flex-grow: 1;">

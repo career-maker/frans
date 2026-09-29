@@ -116,7 +116,7 @@ get_header();
                         <?php endif; ?>
                         <div class="post-card-body">
                             <span style="font-family:'Instrument Sans', sans-serif; font-size:0.8rem; font-weight:700; color:#8b6f47; margin-bottom:0.4rem; text-transform:uppercase;">
-                                <?php echo get_the_date( 'M j, Y' ); ?>
+                                <?php echo get_the_date( 'M j, Y' ); ?> &bull; <?php echo esc_html( function_exists( 'franciscan_get_post_author' ) ? franciscan_get_post_author( get_the_ID() ) : 'Province of St. Francis of Assisi' ); ?>
                             </span>
                             <h2 class="post-card-title">
                                 <a href="<?php the_permalink(); ?>" style="color:inherit; text-decoration:none;">

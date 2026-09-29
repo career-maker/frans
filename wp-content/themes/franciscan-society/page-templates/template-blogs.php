@@ -79,12 +79,13 @@ if ( ! $blogs_query->have_posts() ) {
                         ? get_the_post_thumbnail_url( get_the_ID(), 'large' ) 
                         : esc_url( FRANCISCAN_THEME_URI . '/assets/images/news-blog/IMG20230215103348.jpg.jpeg' );
                     $excerpt = get_the_excerpt() ? get_the_excerpt() : wp_trim_words( get_the_content(), 18, '...' );
+                    $card_author = function_exists( 'franciscan_get_post_author' ) ? franciscan_get_post_author( get_the_ID() ) : '';
                 ?>
                     <article class="blog-card">
                         <div class="blog-thumb-wrap">
                             <img loading="lazy" src="<?php echo esc_url( $thumb_url ); ?>" alt="<?php the_title_attribute(); ?>">
                         </div>
-                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.6rem;">
+                        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.4rem; margin-bottom:0.45rem;">
                             <span style="font-family: 'Instrument Sans', sans-serif; font-size: 0.78rem; color: #8b6f47; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;">
                                 <?php echo esc_html( $cat_label ); ?>
                             </span>
@@ -92,6 +93,12 @@ if ( ! $blogs_query->have_posts() ) {
                                 📅 <?php echo get_the_date( 'M j, Y' ); ?>
                             </span>
                         </div>
+                        <?php if ( ! empty( $card_author ) ) : ?>
+                        <div style="display:flex; align-items:center; gap:0.4rem; font-family:'Instrument Sans', sans-serif; font-size:0.8rem; color:#78716c; margin-bottom:0.6rem;">
+                            <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="#C5A963" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                            <span>By <strong style="color:#4A2A18; font-weight:600;"><?php echo esc_html( $card_author ); ?></strong></span>
+                        </div>
+                        <?php endif; ?>
                         <h3 class="blog-card-title">
                             <?php the_title(); ?>
                         </h3>
